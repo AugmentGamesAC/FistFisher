@@ -53,15 +53,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\!Magic\Scripts\Custom\EquipableCustom.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Custom\HandCustom.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Custom\Highlighter.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Custom\InitControllerOptions.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Custom\InteractableCustom.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Door.cs" />
+     <Compile Include="Assets\!Magic\Scripts\Pen.cs" />
      <Compile Include="Assets\AirSig\Script\AirSigManager.cs" />
      <Compile Include="Assets\AirSig\Script\Demo\BasedGestureHandle.cs" />
      <Compile Include="Assets\AirSig\Script\Demo\DeveloperDefined.cs" />
      <Compile Include="Assets\AirSig\Script\Demo\PlayerGesture.cs" />
      <Compile Include="Assets\AirSig\Script\Demo\PlayerSignature.cs" />
      <Compile Include="Assets\AirSig\Script\Demo\SmartGesture.cs" />
-     <Compile Include="Assets\Scripts\Equipable.cs" />
-     <Compile Include="Assets\Scripts\Hand.cs" />
-     <Compile Include="Assets\Scripts\Interactable.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -2469,16 +2469,15 @@ namespace AirSig {
                 if (mIsCollectingRightControllerData) {
                     mRightHandStopWatch.Stop();
                     long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
-                    if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
-                        Sample sample = new Sample();
-                        sample.time = timeElapsedMilliseconds;
+					if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
+						Sample sample = new Sample();
+						sample.time = timeElapsedMilliseconds;
 
 						SteamVR_Behaviour_Pose poseb = GameObject.Find("Controller (right)").GetComponent<SteamVR_Behaviour_Pose>();
 						//TrackedDevicePose_t pose = poseb.poseAction[SteamVR_Input_Sources.RightHand].poseActionData.pose;
 						poseb.poseAction[SteamVR_Input_Sources.RightHand].GetPoseAtTimeOffset(0.0f, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime);
 
 						Vector3 posevAv = poseb.poseAction[SteamVR_Input_Sources.RightHand].angularVelocity;
-
 						//SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
 						SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(positionAtTime, rotationAtTime);
 						transform.Inverse();
@@ -2486,13 +2485,15 @@ namespace AirSig {
 						Vector3 transformAngularVelocity = transform * new Vector3(-posevAv.x, -posevAv.y, posevAv.z);
 
 						sample.rotation.x = transformAngularVelocity.x;
-                        sample.rotation.y = transformAngularVelocity.y;
-                        sample.rotation.z = transformAngularVelocity.z;
-                        mCollectedRightHandSamples.Add(sample);
-                        mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
-                    }
-                    mRightHandStopWatch.Start();
-                }
+						sample.rotation.y = transformAngularVelocity.y;
+						sample.rotation.z = transformAngularVelocity.z;
+						mCollectedRightHandSamples.Add(sample);
+						mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
+
+					}
+
+					mRightHandStopWatch.Start();
+				}
             }
 
             int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);

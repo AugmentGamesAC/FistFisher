@@ -40,6 +40,9 @@ namespace Valve.VR.InteractionSystem
 		public bool requireGrabActionToTake = false;
 		public bool requireReleaseActionToReturn = false;
 		public bool showTriggerHint = false;
+		public string grabHint = "Pick Up";
+		public SteamVR_Action_Boolean grabAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+		public bool requireExactGrabType;
 
 		[EnumFlags]
 		public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
@@ -176,7 +179,7 @@ namespace Valve.VR.InteractionSystem
 
 			if (requireGrabActionToTake && showTriggerHint )
 			{
-                hand.ShowGrabHint("PickUp");
+                hand.ShowGrabHint(grabAction, grabHint);
 			}
 		}
 
@@ -233,9 +236,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( requireGrabActionToTake )
 			{
-                GrabTypes startingGrab = hand.GetGrabStarting();
-
-				if (startingGrab != GrabTypes.None)
+				if (requireExactGrabType ? grabAction.GetStateDown(hand.handType) : hand.GetGrabStarting() != GrabTypes.None)
 				{
 					SpawnAndAttachObject( hand, GrabTypes.Scripted);
 				}
@@ -248,7 +249,7 @@ namespace Valve.VR.InteractionSystem
 		{
 			if ( !justPickedUpItem && requireGrabActionToTake && showTriggerHint )
 			{
-                hand.HideGrabHint();
+				hand.HideGrabHint(grabAction);
 			}
 
 			justPickedUpItem = false;
@@ -310,7 +311,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( showTriggerHint )
 			{
-                hand.HideGrabHint();
+                hand.HideGrabHint(grabAction);
 			}
 
 			if ( itemPackage.otherHandItemPrefab != null )

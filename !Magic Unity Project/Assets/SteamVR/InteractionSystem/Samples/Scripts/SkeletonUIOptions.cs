@@ -8,10 +8,10 @@ namespace Valve.VR.InteractionSystem.Sample
 {
     public class SkeletonUIOptions : MonoBehaviour
     {
-
         public void AnimateHandWithController()
         {
-            for (int handIndex = 0; handIndex < Player.instance.hands.Length; handIndex++)
+			print("animatinghandwithcontroller");
+			for (int handIndex = 0; handIndex < Player.instance.hands.Length; handIndex++)
             {
                 Hand hand = Player.instance.hands[handIndex];
                 if (hand != null)
@@ -23,6 +23,7 @@ namespace Valve.VR.InteractionSystem.Sample
 
         public void AnimateHandWithoutController()
         {
+			print("animatinghandwithoutcontroller");
             for (int handIndex = 0; handIndex < Player.instance.hands.Length; handIndex++)
             {
                 Hand hand = Player.instance.hands[handIndex];

@@ -32,7 +32,10 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("The range of motion to set on the skeleton. None for no change.")]
         public SkeletalMotionRangeChange setRangeOfMotionOnPickup = SkeletalMotionRangeChange.None;
 
-        public delegate void OnAttachedToHandDelegate(Hand hand);
+		[Tooltip("If the object keeps its local transform on attach")]
+		public bool keepTransformOnGrab = false;
+
+		public delegate void OnAttachedToHandDelegate(Hand hand);
         public delegate void OnDetachedFromHandDelegate(Hand hand);
 
         public event OnAttachedToHandDelegate onAttachedToHand;
@@ -65,7 +68,9 @@ namespace Valve.VR.InteractionSystem
         protected GameObject highlightHolder;
         protected SkinnedMeshRenderer[] highlightSkinnedRenderers;
         protected SkinnedMeshRenderer[] existingSkinnedRenderers;
-        protected static Material highlightMat;
+		[SerializeField]
+		[Tooltip("The material to overlay onto the object on hover. Default 'SteamVR_HoverHighlight'")]
+		private Material highlightMaterial;
         [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
         public GameObject[] hideHighlight;
 
@@ -88,9 +93,10 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void Start()
         {
-            highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
+			if(!highlightMaterial)
+				highlightMaterial = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
 
-            if (highlightMat == null)
+            if (highlightMaterial == null)
                 Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder");
 
             if (skeletonPoser != null)
@@ -138,7 +144,7 @@ namespace Valve.VR.InteractionSystem
                 Material[] materials = new Material[existingSkinned.sharedMaterials.Length];
                 for (int materialIndex = 0; materialIndex < materials.Length; materialIndex++)
                 {
-                    materials[materialIndex] = highlightMat;
+                    materials[materialIndex] = highlightMaterial;
                 }
 
                 newSkinned.sharedMaterials = materials;
@@ -171,7 +177,7 @@ namespace Valve.VR.InteractionSystem
                 Material[] materials = new Material[existingRenderer.sharedMaterials.Length];
                 for (int materialIndex = 0; materialIndex < materials.Length; materialIndex++)
                 {
-                    materials[materialIndex] = highlightMat;
+                    materials[materialIndex] = highlightMaterial;
                 }
                 newRenderer.sharedMaterials = materials;
 

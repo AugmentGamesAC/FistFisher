@@ -41,6 +41,12 @@
       "requirement": "optional"
     },
     {
+      "name": "/actions/default/in/PointTo",
+      "type": "boolean",
+      "skeleton": "/skeleton/hand/right",
+      "requirement": "suggested"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -142,7 +148,8 @@
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
       "/actions/default/in/Teleport": "Teleport",
       "/actions/default/out/Haptic": "Haptic",
-      "/actions/platformer/in/Jump": "Jump"
+      "/actions/platformer/in/Jump": "Jump",
+      "/actions/default/in/PointTo": "Point To"
     }
   ]
 }
