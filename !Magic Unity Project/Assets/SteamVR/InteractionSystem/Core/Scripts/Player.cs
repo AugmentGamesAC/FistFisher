@@ -42,6 +42,10 @@ namespace Valve.VR.InteractionSystem
 
 		public bool allowToggleTo2D = true;
 
+		public bool isRightHanded = true;
+
+		public SteamVR_Input_Sources GetHandedness() { return isRightHanded ? SteamVR_Input_Sources.RightHand : SteamVR_Input_Sources.LeftHand; }
+
 
 		//-------------------------------------------------
 		// Singleton instance of the Player. Only one can exist at a time.

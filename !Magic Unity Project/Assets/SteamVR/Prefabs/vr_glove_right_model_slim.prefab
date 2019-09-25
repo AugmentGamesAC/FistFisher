@@ -272,9 +272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeletonAction:
     actionPath: 
-    needsReinit: 0
+    needsReinit: 1
   inputSource: 2
-  rangeOfMotion: 0
+  rangeOfMotion: 1
   skeletonRoot: {fileID: 4000011264745556}
   origin: {fileID: 0}
   updatePose: 1
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 0
+  previewPoseSelection: 2
   blendingBehaviours:
   - name: point
     enabled: 1

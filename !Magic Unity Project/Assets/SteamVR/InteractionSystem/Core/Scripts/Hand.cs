@@ -66,7 +66,8 @@ namespace Valve.VR.InteractionSystem
         public Transform hoverSphereTransform;
         public float hoverSphereRadius = 0.05f;
         public LayerMask hoverLayerMask = -1;
-        public float hoverUpdateInterval = 0.1f;
+		public float hoverUpdateInterval = 0.1f;
+		public float inputUpdateInterval = 0.1f;
 
         public bool useControllerHoverComponent = true;
         public string controllerHoverComponent = "tip";
@@ -143,7 +144,9 @@ namespace Valve.VR.InteractionSystem
 
         private SteamVR_Events.Action inputFocusAction;
 
-        public bool isActive
+		public HandEvents handEvents;
+
+		public bool isActive
         {
             get
             {
@@ -589,12 +592,20 @@ namespace Valve.VR.InteractionSystem
 
             attachedObjects.Add(attachedObject);
 
-            UpdateHovering();
+			UpdateHovering();
 
             if (spewDebugText)
                 HandDebugLog("AttachObject " + objectToAttach);
             objectToAttach.SendMessage("OnAttachedToHand", this, SendMessageOptions.DontRequireReceiver);
-        }
+
+			if (handEvents && handEvents.lookingForInput)
+			{
+				if (GetGrabStarting(GrabTypes.Pinch) != GrabTypes.None)
+					handEvents.SendMessage("OnFullHandGrabPinchBegin", this, SendMessageOptions.DontRequireReceiver);
+				if (GetGrabStarting(GrabTypes.Grip) != GrabTypes.None)
+					handEvents.SendMessage("OnFullHandGrabGripBegin", this, SendMessageOptions.DontRequireReceiver);
+			}
+		}
 
         public bool ObjectIsAttached(GameObject go)
         {
@@ -692,7 +703,15 @@ namespace Valve.VR.InteractionSystem
                     attachedObjects[index].attachedObject.SendMessage("OnDetachedFromHand", this, SendMessageOptions.DontRequireReceiver);
                 }
 
-                attachedObjects.RemoveAt(index);
+				if (handEvents && handEvents.lookingForInput)
+				{
+					if (GetGrabEnding(GrabTypes.Pinch) != GrabTypes.None)
+						handEvents.SendMessage("OnFullHandGrabPinchEnd", this, SendMessageOptions.DontRequireReceiver);
+					if (GetGrabEnding(GrabTypes.Grip) != GrabTypes.None)
+						handEvents.SendMessage("OnFullHandGrabGripEnd", this, SendMessageOptions.DontRequireReceiver);
+				}
+
+				attachedObjects.RemoveAt(index);
 
                 CleanUpAttachedObjectStack();
 
@@ -723,7 +742,7 @@ namespace Valve.VR.InteractionSystem
                 }
             }
 
-            CleanUpAttachedObjectStack();
+			CleanUpAttachedObjectStack();
 
             if (mainRenderModel != null)
                 mainRenderModel.MatchHandToTransform(mainRenderModel.transform);
@@ -832,6 +851,15 @@ namespace Valve.VR.InteractionSystem
 					//trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
 					// \GrabScale
 				}
+			}
+
+			if (handEvents == null)
+			{
+				handEvents = GetComponent<CastingHandEvents>();
+				if(handEvents == null)
+					handEvents = GetComponent<MovingHandEvents>();
+				if (handEvents == null)
+					handEvents = GetComponent<HandEvents>();
 			}
         }
 
@@ -1147,7 +1175,34 @@ namespace Valve.VR.InteractionSystem
             {
                 hoveringInteractable.SendMessage("HandHoverUpdate", this, SendMessageOptions.DontRequireReceiver);
             }
-        }
+
+			if (handEvents && handEvents.lookingForInput)
+			{
+				if (currentAttachedObject || (!currentAttachedObject && hoveringInteractable))
+				{
+					if (IsGrabbingWithType(GrabTypes.Pinch))
+						handEvents.SendMessage("OnFullHandGrabPinchUpdate", this, SendMessageOptions.DontRequireReceiver);
+					if (IsGrabbingWithType(GrabTypes.Grip))
+						handEvents.SendMessage("OnFullHandGrabGripUpdate", this, SendMessageOptions.DontRequireReceiver);
+				}
+				else if (!hoveringInteractable && !currentAttachedObject)
+				{
+					if (GetGrabStarting(GrabTypes.Pinch) != GrabTypes.None)
+						handEvents.SendMessage("OnEmptyHandGrabPinchBegin", this, SendMessageOptions.DontRequireReceiver);
+					else if (IsGrabbingWithType(GrabTypes.Pinch))
+						handEvents.SendMessage("OnEmptyHandGrabPinchUpdate", this, SendMessageOptions.DontRequireReceiver);
+					else if (GetGrabEnding(GrabTypes.Pinch) != GrabTypes.None)
+						handEvents.SendMessage("OnEmptyHandGrabPinchEnd", this, SendMessageOptions.DontRequireReceiver);
+
+					if (GetGrabStarting(GrabTypes.Grip) != GrabTypes.None)
+						handEvents.SendMessage("OnEmptyHandGrabGripBegin", this, SendMessageOptions.DontRequireReceiver);
+					else if (IsGrabbingWithType(GrabTypes.Grip))
+						handEvents.SendMessage("OnEmptyHandGrabGripUpdate", this, SendMessageOptions.DontRequireReceiver);
+					else if (GetGrabEnding(GrabTypes.Grip) != GrabTypes.None)
+						handEvents.SendMessage("OnEmptyHandGrabGripEnd", this, SendMessageOptions.DontRequireReceiver);
+				}
+			}
+		}
 
         /// <summary>
         /// Returns true when the hand is currently hovering over the interactable passed in
@@ -1265,7 +1320,7 @@ namespace Valve.VR.InteractionSystem
                     }
                 }
             }
-        }
+		}
 
         protected const float MaxVelocityChange = 10f;
         protected const float VelocityMagic = 6000f;

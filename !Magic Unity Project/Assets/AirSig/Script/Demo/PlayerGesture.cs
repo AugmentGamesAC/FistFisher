@@ -59,6 +59,7 @@ public class PlayerGesture : BasedGestureHandle {
     // result - return a map of all un-set custom gestures and number of gesture collected.
     void HandleOnPlayerGestureAdd(long gestureId, Dictionary<int, int> result) {
         int count = result[currentPlayerGestureTarget];
+		print("GESTURE ID: "+currentPlayerGestureTarget);
         textToUpdate = string.Format("{0}{1}/{2} gesture(s) collected for {3}\nContinue to collect more samples</color>",
             currentPlayerGestureTarget == PLAYER_GESTURE_ONE ? "<color=#FF00FF>" : "<color=yellow>",
             count, MAX_TRAIN_COUNT,

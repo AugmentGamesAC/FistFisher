@@ -6,23 +6,22 @@ namespace Valve.VR.InteractionSystem
 {
 	public class Pen : MonoBehaviour
 	{
-
-		public bool drawing = false;
 		public UnityEvent OnActionDown;
 		public UnityEvent OnActionUp;
+
+		GrabTypes DrawInput = GrabTypes.Pinch;
 
 		// Update is called once per frame the object is attached to a hand
 		void HandAttachedUpdate(Hand hand)
 		{
-			GrabTypes bestGrab = hand.GetBestGrabbingType(GrabTypes.Pinch, true);
-			if (!drawing && bestGrab != GrabTypes.None)
+			GrabTypes grab = hand.GetGrabStarting(DrawInput);
+			GrabTypes release = hand.GetGrabEnding(DrawInput);
+			if (grab != GrabTypes.None)
 			{
-				drawing = true;
 				OnActionDown.Invoke();
 			}
-			else if (drawing && bestGrab == GrabTypes.None)
+			if (release != GrabTypes.None)
 			{
-				drawing = false;
 				OnActionUp.Invoke();
 			}
 		}

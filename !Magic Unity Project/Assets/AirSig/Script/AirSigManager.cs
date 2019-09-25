@@ -12,9 +12,18 @@ using Valve.VR;
 
 namespace AirSig {
     public class AirSigManager : MonoBehaviour {
+		public Valve.VR.InteractionSystem.Player m_Player;
 
-        /// Enable debug logging
-        public static bool DEBUG_LOG_ENABLED = true;
+		public Valve.VR.InteractionSystem.Hand GetCastingHand()
+		{
+			if (m_Player.handCount > 2) return m_Player.GetHand(0);
+			else return m_Player.isRightHanded ? m_Player.rightHand : m_Player.leftHand;
+		}
+		public bool m_QueueHandDataCollection { get; private set; } = false;
+		public void QueueHandDataCollection(bool queue = true) { m_QueueHandDataCollection = queue; }
+
+		/// Enable debug logging
+		public static bool DEBUG_LOG_ENABLED = true;
 
         // Default interval for sensor sampling rate.
         // Increasing this makes less sample for a fixed period of time
@@ -2397,7 +2406,7 @@ namespace AirSig {
         // ====================================================================
 #endif
 
-        void startRightHandCollecting() {
+        public void startRightHandCollecting() {
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] RightHand starts collecting...");
             mIsCollectingRightControllerData = true;
             mRightHandPrevTimeElapsed = 0;
@@ -2405,7 +2414,7 @@ namespace AirSig {
             mRightHandStopWatch.Reset();
         }
 
-        void startLeftHandCollecting() {
+		public void startLeftHandCollecting() {
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] LeftHand starts collecting...");
             mIsCollectingLeftControllerData = true;
             mLeftHandPrevTimeElapsed = 0;
@@ -2413,7 +2422,7 @@ namespace AirSig {
             mLeftHandStopWatch.Reset();
         }
 
-        void stopRightHandCollecting() {
+		public void stopRightHandCollecting() {
             if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] RightHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
             mIsCollectingRightControllerData = false;
 
@@ -2425,9 +2434,11 @@ namespace AirSig {
             mCollectedRightHandSamples.Clear();
             mRightHandStopWatch.Stop();
             mRightHandStopWatch.Reset();
-        }
+			QueueHandDataCollection(false);
 
-        void stopLeftHandCollecting() {
+		}
+
+		public void stopLeftHandCollecting() {
             if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] LeftHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
             mIsCollectingLeftControllerData = false;
 
@@ -2439,96 +2450,134 @@ namespace AirSig {
             mCollectedLeftHandSamples.Clear();
             mLeftHandStopWatch.Stop();
             mLeftHandStopWatch.Reset();
-        }
+			QueueHandDataCollection(false);
+		}
 
         System.Diagnostics.Stopwatch mRightHandStopWatch = new System.Diagnostics.Stopwatch();
         System.Diagnostics.Stopwatch mLeftHandStopWatch = new System.Diagnostics.Stopwatch();
         long mRightHandPrevTimeElapsed = 0;
         long mLeftHandPrevTimeElapsed = 0;
 
-        void Update () {
-            if(mCVRSystem == null) {
-                Debug.LogWarning("Unable to find the VR system");
-                return;
-            }
-            // Determine right hand status
-            int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
-            if(rightHandIndex != -1 && mTriggerController == SteamVR_Input_Sources.RightHand) {
-                SteamVR_Action_Boolean triggerAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>(mTriggerActionName);
-                if (mIsCollectingRightControllerData == false) {
-                    if (triggerAction.GetLastStateDown(SteamVR_Input_Sources.RightHand)) {
-                        startRightHandCollecting();
-                    }
-                }
-                else {
-                    if (triggerAction.GetLastStateUp(SteamVR_Input_Sources.RightHand)) {
-                        stopRightHandCollecting();
-                    }
-                }
-                
-                if (mIsCollectingRightControllerData) {
-                    mRightHandStopWatch.Stop();
-                    long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
-					if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
-						Sample sample = new Sample();
-						sample.time = timeElapsedMilliseconds;
-
-						SteamVR_Behaviour_Pose poseb = GameObject.Find("Controller (right)").GetComponent<SteamVR_Behaviour_Pose>();
-						//TrackedDevicePose_t pose = poseb.poseAction[SteamVR_Input_Sources.RightHand].poseActionData.pose;
-						poseb.poseAction[SteamVR_Input_Sources.RightHand].GetPoseAtTimeOffset(0.0f, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime);
-
-						Vector3 posevAv = poseb.poseAction[SteamVR_Input_Sources.RightHand].angularVelocity;
-						//SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-						SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(positionAtTime, rotationAtTime);
-						transform.Inverse();
-						//Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
-						Vector3 transformAngularVelocity = transform * new Vector3(-posevAv.x, -posevAv.y, posevAv.z);
-
-						sample.rotation.x = transformAngularVelocity.x;
-						sample.rotation.y = transformAngularVelocity.y;
-						sample.rotation.z = transformAngularVelocity.z;
-						mCollectedRightHandSamples.Add(sample);
-						mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
-
-					}
-
-					mRightHandStopWatch.Start();
-				}
-            }
-
-            int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
-            if (leftHandIndex != -1 && mTriggerController == SteamVR_Input_Sources.LeftHand) {
-                SteamVR_Action_Boolean triggerAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>(mTriggerActionName);
-                if (mIsCollectingRightControllerData == false) {
-                    if (triggerAction.GetLastStateDown(SteamVR_Input_Sources.LeftHand)) {
-                        startLeftHandCollecting();
-                    }
-                } else {
-                    if (triggerAction.GetLastStateUp(SteamVR_Input_Sources.LeftHand)) {
-                        stopLeftHandCollecting();
-                    }
-                }
-
-                if (mIsCollectingLeftControllerData) {
-                    mLeftHandStopWatch.Stop();
-                    long timeElapsedMilliseconds = mLeftHandStopWatch.ElapsedMilliseconds;
-                    if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16) {
-                        Sample sample = new Sample();
-                        sample.time = timeElapsedMilliseconds;
-
-                        SteamVR_Behaviour_Pose pose = GameObject.Find("Controller (left)").GetComponent<SteamVR_Behaviour_Pose>();
-                        Vector3 angularVelocity = pose.GetAngularVelocity();
-
-                        sample.rotation.x = -angularVelocity.x;
-                        sample.rotation.y = -angularVelocity.y;
-                        sample.rotation.z = angularVelocity.z;
-                        mCollectedLeftHandSamples.Add(sample);
-                        mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
-                    }
-                    mLeftHandStopWatch.Start();
-                }
-            }
+        void Update ()
+		{
+            if(m_QueueHandDataCollection)
+			{
+				CollectHandData();
+			}
         }
+
+		void CollectHandData()
+		{
+			// Determine right hand status
+			//int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
+			//if (rightHandIndex != -1 && mTriggerController == SteamVR_Input_Sources.RightHand)
+			//{
+			//	if (mIsCollectingRightControllerData)
+			//	{
+			//		mRightHandStopWatch.Stop();
+			//		long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
+			//		if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16)
+			//		{
+			//			Sample sample = new Sample();
+			//			sample.time = timeElapsedMilliseconds;
+
+			//			SteamVR_Behaviour_Pose poseb = GetCastingHand().gameObject.GetComponent<SteamVR_Behaviour_Pose>();
+			//			//TrackedDevicePose_t pose = poseb.poseAction[SteamVR_Input_Sources.RightHand].poseActionData.pose;
+			//			poseb.poseAction[SteamVR_Input_Sources.RightHand].GetPoseAtTimeOffset(0.0f, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime);
+
+			//			Vector3 posevAv = poseb.poseAction[SteamVR_Input_Sources.RightHand].angularVelocity;
+			//			//SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+			//			SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(positionAtTime, new Quaternion(0f, 0f, 0f, 0f));
+			//			transform.Inverse();
+			//			//Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+			//			Vector3 transformAngularVelocity = transform * new Vector3(-posevAv.x, -posevAv.y, posevAv.z);
+
+			//			sample.rotation.x = transformAngularVelocity.x;
+			//			sample.rotation.y = transformAngularVelocity.y;
+			//			sample.rotation.z = transformAngularVelocity.z;
+			//			mCollectedRightHandSamples.Add(sample);
+			//			mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
+
+			//		}
+
+			//		mRightHandStopWatch.Start();
+			//	}
+			//}
+
+			int castingHandID = GetCastingHand().handType == SteamVR_Input_Sources.RightHand ? 1 : 2;
+
+			if (castingHandID == 1 && mIsCollectingRightControllerData || castingHandID == 2 && mIsCollectingLeftControllerData)
+			{
+				if(castingHandID == 1) mRightHandStopWatch.Stop();
+				else if (castingHandID == 2) mLeftHandStopWatch.Stop();
+
+				long timeElapsedMilliseconds = (castingHandID == 1 ? mRightHandStopWatch : mLeftHandStopWatch).ElapsedMilliseconds;
+				if (timeElapsedMilliseconds - (castingHandID == 1 ? mRightHandPrevTimeElapsed : mLeftHandPrevTimeElapsed) >= 16)
+				{
+					Sample sample = new Sample();
+					sample.time = timeElapsedMilliseconds;
+
+					SteamVR_Behaviour_Pose poseb = GetCastingHand().gameObject.GetComponent<SteamVR_Behaviour_Pose>();
+					//TrackedDevicePose_t pose = poseb.poseAction[SteamVR_Input_Sources.RightHand].poseActionData.pose;
+					poseb.poseAction[GetCastingHand().handType].GetPoseAtTimeOffset(0.0f, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime);
+
+					Vector3 posevAv = poseb.poseAction[GetCastingHand().handType].angularVelocity;
+					//SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+					SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(positionAtTime, new Quaternion(0f, 0f, 0f, 0f));
+					transform.Inverse();
+					//Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+					Vector3 transformAngularVelocity = transform * new Vector3(-posevAv.x, -posevAv.y, posevAv.z);
+
+					sample.rotation.x = transformAngularVelocity.x;
+					sample.rotation.y = transformAngularVelocity.y;
+					sample.rotation.z = transformAngularVelocity.z;
+
+					if (castingHandID == 1) mCollectedRightHandSamples.Add(sample);
+					else if (castingHandID == 2) mCollectedLeftHandSamples.Add(sample);
+					if (castingHandID == 1)  mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
+					else if (castingHandID == 2) mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
+
+				}
+
+				if (castingHandID == 1) mRightHandStopWatch.Start();
+				else if (castingHandID == 2) mLeftHandStopWatch.Start();
+			}
+
+			//int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
+			//if (leftHandIndex != -1 && mTriggerController == SteamVR_Input_Sources.LeftHand)
+			//{
+			//	if (mIsCollectingLeftControllerData)
+			//	{
+			//		mLeftHandStopWatch.Stop();
+			//		long timeElapsedMilliseconds = mLeftHandStopWatch.ElapsedMilliseconds;
+			//		if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16)
+			//		{
+			//			Sample sample = new Sample();
+			//			sample.time = timeElapsedMilliseconds;
+
+			//			SteamVR_Behaviour_Pose poseb = GetCastingHand().gameObject.GetComponent<SteamVR_Behaviour_Pose>();
+			//			//TrackedDevicePose_t pose = poseb.poseAction[SteamVR_Input_Sources.LeftHand].poseActionData.pose;
+			//			poseb.poseAction[SteamVR_Input_Sources.LeftHand].GetPoseAtTimeOffset(0.0f, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime);
+
+			//			Vector3 posevAv = poseb.poseAction[SteamVR_Input_Sources.LeftHand].angularVelocity;
+			//			//SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+			//			SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(positionAtTime, new Quaternion(0f, 0f, 0f, 0f));
+			//			transform.Inverse();
+			//			//Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+			//			Vector3 transformAngularVelocity = transform * new Vector3(-posevAv.x, -posevAv.y, posevAv.z);
+
+			//			sample.rotation.x = transformAngularVelocity.x;
+			//			sample.rotation.y = transformAngularVelocity.y;
+			//			sample.rotation.z = transformAngularVelocity.z;
+			//			mCollectedLeftHandSamples.Add(sample);
+			//			mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
+
+			//		}
+
+			//		mLeftHandStopWatch.Start();
+			//	}
+			//}
+		}
 
         
         private Thread thread;
@@ -2911,8 +2960,8 @@ namespace AirSig {
                 if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager][SetTarget] New targets equal to the existing targets so nothing will change...");
                 return;
             }
-            
-            mCurrentTarget = target;
+
+			mCurrentTarget = target;
 
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager][SetTarget] Targets: " + string.Join(",", mCurrentTarget.Select(x => x.ToString()).ToArray()));
 

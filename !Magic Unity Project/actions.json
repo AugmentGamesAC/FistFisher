@@ -41,10 +41,16 @@
       "requirement": "optional"
     },
     {
-      "name": "/actions/default/in/PointTo",
-      "type": "boolean",
-      "skeleton": "/skeleton/hand/right",
-      "requirement": "suggested"
+      "name": "/actions/default/in/Trackpad_Location",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/Trackpad_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Trackpad_Touch",
+      "type": "boolean"
     },
     {
       "name": "/actions/default/out/Haptic",
@@ -149,7 +155,9 @@
       "/actions/default/in/Teleport": "Teleport",
       "/actions/default/out/Haptic": "Haptic",
       "/actions/platformer/in/Jump": "Jump",
-      "/actions/default/in/PointTo": "Point To"
+      "/actions/default/in/Trackpad_Click": "Trackpad Clicked",
+      "/actions/default/in/Trackpad_Touch": "Trackpad Touched",
+      "/actions/default/in/Trackpad_Location": "Trackpad Location"
     }
   ]
 }

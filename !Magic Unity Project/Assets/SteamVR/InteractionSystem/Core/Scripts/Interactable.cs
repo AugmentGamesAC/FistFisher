@@ -305,7 +305,7 @@ namespace Valve.VR.InteractionSystem
                 {
                     activateActionSetOnAttach.Deactivate(hand.handType);
                 }
-            }
+			}
 
             if (onDetachedFromHand != null)
             {
@@ -317,7 +317,10 @@ namespace Valve.VR.InteractionSystem
             {
                 if (hand.skeleton != null)
                     hand.skeleton.BlendToSkeleton(releasePoseBlendTime);
-            }
+
+				if (hand.gameObject.GetComponent<SteamVR_Skeleton_Poser>() != null)
+					hand.skeleton.BlendToPoser(hand.gameObject.GetComponent<SteamVR_Skeleton_Poser>(), blendToPoseTime);
+			}
 
             attachedToHand = null;
         }
