@@ -68,9 +68,31 @@
     <Compile Include="Assets\!Magic\Scripts\Custom\InitControllerOptions.cs" />
     <Compile Include="Assets\!Magic\Scripts\Custom\InteractableCustom.cs" />
     <Compile Include="Assets\!Magic\Scripts\Door.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Enemy.cs" />
     <Compile Include="Assets\!Magic\Scripts\FailParticle.cs" />
+    <Compile Include="Assets\!Magic\Scripts\FloatingObject.cs" />
+    <Compile Include="Assets\!Magic\Scripts\GauntletManaBar.cs" />
     <Compile Include="Assets\!Magic\Scripts\GestureHandle.cs" />
+    <Compile Include="Assets\!Magic\Scripts\HealthBar.cs" />
     <Compile Include="Assets\!Magic\Scripts\Pen.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Respawn.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\DescriptionCrystal.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\GauntletAiming.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\GauntletBase.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\GauntletSlots.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\IAimingDirection.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\ICastingInterface.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\IMagicUser.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\ISlot.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\ISlotable.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\PlayerData.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\SlottableSpellPrism.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\Spell.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\SpellDescription.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\SpellForge.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\SpellInstance.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\SpellManager.cs" />
+    <Compile Include="Assets\!Magic\Scripts\SpellsAndSlottables\Testing\SpellTester.cs" />
     <Compile Include="Assets\!Magic\Scripts\Weave.cs" />
     <Compile Include="Assets\AirSig\Script\AirSigManager.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\BasedGestureHandle.cs" />
@@ -78,10 +100,13 @@
     <Compile Include="Assets\AirSig\Script\Demo\PlayerGesture.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\PlayerSignature.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\SmartGesture.cs" />
+    <None Include="Assets\!Magic\Placeholder\Gauntlet\olde\Materials.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\!Magic\TestingControls.txt" />
+    <None Include="Assets\!Magic\Placeholder\Gauntlet\Materials.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -95,29 +120,23 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
@@ -130,6 +149,12 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>C:/Users/tayl0559/Desktop/!Magic/!Magic Unity Project/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>

@@ -11,6 +11,7 @@ public class Weave : GestureHandle {
 	List<int> m_AllGestureIDs = new List<int>();
 	private int m_QueuedSpell = 0;
 	private Valve.VR.InteractionSystem.Hand m_QueuedWeavingHand;
+    public float m_SpellManaUsage = 35f;
 
 	// How many gesture we need to collect for each gesture type
     int DEFAULT_SAMPLES = 5;
@@ -111,8 +112,8 @@ public class Weave : GestureHandle {
 	// Use this for initialization
 	void Awake()
 	{
-		// Configure AirSig by specifying target 
-		playerGestureAdd = new AirSigManager.OnPlayerGestureAdd(HandleOnPlayerGestureAdd);
+        // Configure AirSig by specifying target 
+        playerGestureAdd = new AirSigManager.OnPlayerGestureAdd(HandleOnPlayerGestureAdd);
 		playerGestureMatch = new AirSigManager.OnPlayerGestureMatch(HandleOnPlayerGestureMatch);
 		airsigManager.onPlayerGestureAdd += playerGestureAdd;
 		airsigManager.onPlayerGestureMatch += playerGestureMatch;
@@ -152,10 +153,13 @@ public class Weave : GestureHandle {
 		m_QueuedSpell = 0;
 		m_QueuedWeavingHand = null;
 
+
 		if (spellID == 0)
 			return;
 
-		if (spellID == -1)
+        airsigManager.m_Player.GetComponent<PlayerData>().UseMana(m_SpellManaUsage);
+
+        if (spellID == -1 || airsigManager.m_Player.GetComponent<PlayerData>().m_mana < m_SpellManaUsage)
 		{
 			print("FAIL!");
 			airsigManager.GetCastingHand().gameObject.GetComponent<FailParticle>().m_FailParticle.gameObject.SetActive(true);
