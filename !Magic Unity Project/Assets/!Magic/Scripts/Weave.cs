@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using AirSig;
 
 public class Weave : GestureHandle {
 
-	// Gesture index to use for training and verifying custom gesture. Valid range is between 1 and 1000
-	// Beware that setting to 100 will overwrite your player signature.
-	List<int> m_GestureIDs = new List<int>();
+    // Gesture index to use for training and verifying custom gesture. Valid range is between 1 and 1000
+    // Beware that setting to 100 will overwrite your player signature.
+    const int STARTING_ID = 101;
+    List<int> m_GestureIDs = new List<int>();
 	List<int> m_AllGestureIDs = new List<int>();
 	private int m_QueuedSpell = 0;
 	private Valve.VR.InteractionSystem.Hand m_QueuedWeavingHand;
@@ -64,10 +64,10 @@ public class Weave : GestureHandle {
 		int count = result[currentPlayerGestureTarget];
 		if (count >= SAMPLES)
 		{
-			currentPlayerGestureTarget++;
 			airsigManager.SetPlayerGesture(m_AllGestureIDs, false);
-            airsigManager.DeletePlayerRecord(m_AllGestureIDs.Last<int>());
+            airsigManager.DeletePlayerRecord(currentPlayerGestureTarget);
             SAMPLES = DEFAULT_SAMPLES;
+            currentPlayerGestureTarget++;
             SwitchToIdentify();
 		}
 		else
@@ -101,10 +101,10 @@ public class Weave : GestureHandle {
 	// Add gesture through sample collection. Begins collecting samples
 	public void AddGesture()
 	{
-		int target = m_AllGestureIDs.Count;
-		m_GestureIDs.Add(target);
+		int target = STARTING_ID + m_AllGestureIDs.Count;
+        m_AllGestureIDs.Add(target);
 		airsigManager.SetMode(AirSigManager.Mode.AddPlayerGesture);
-		airsigManager.SetTarget(new List<int> { target });
+		airsigManager.SetTarget(m_AllGestureIDs);
 		currentPlayerGestureTarget = target;
 	}
 
