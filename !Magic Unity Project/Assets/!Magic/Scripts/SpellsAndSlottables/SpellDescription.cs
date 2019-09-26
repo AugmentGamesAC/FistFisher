@@ -10,12 +10,13 @@ public enum Shape2
     Cone
 };
 
-public class SpellDescription{
+public class SpellDescription {
     public enum Shape
     {
         Cube,
         Sphere,
-        Cone
+        Cone,
+		Grenade
     };
     /// <summary>
     /// How the spell interacts with the world.

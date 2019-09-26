@@ -9,6 +9,7 @@ public class SpellInstance : MonoBehaviour
     public float m_ManaPerTick;
     public Spell m_Spell;
     public bool _IsAiming;
+	public float m_Life;
 
     public bool m_IsAiming
     {
@@ -25,19 +26,29 @@ public class SpellInstance : MonoBehaviour
 
     private void FixedUpdate()
     {
+		m_Life += Time.deltaTime;
         if (m_Spell == null)
             return;
         m_Spell.FixedUpdate();
+		if(!m_IsAiming)
+			resolveDuration();
     }
 
     private void resolveDuration()
     {
-        //TODO destroy the spell if/when apropriate
-    }
+		if(m_Spell.m_Start.m_usage == SpellDescription.Usage.Instant && m_Life >= 1f)
+			Destroy(this.gameObject);
+		//TODO destroy the spell if/when apropriate
+	}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        //TODO determine if it's a object with an IManaUser component, then apply the damage.  
+		IMagicUser otherMagicUser = (IMagicUser)other.gameObject.GetComponent(typeof(IMagicUser));
+
+		if (otherMagicUser == null)
+			return;
+
+		otherMagicUser.TakeDamage(m_BaseSpellDamage);
     }
 
 }

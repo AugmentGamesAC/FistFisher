@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -846,13 +846,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Aiming: 2
   _Effect: 0
-  _Shape: 0
-  _Usage: 0
+  _Shape: 3
+  _Usage: 3
   spellManager: {fileID: 1091910309}
   m_AimingDirection: {fileID: 2072140155}
   m_spellIDTemp: 0
-  m_playerPrefab: {fileID: 0}
-  SpellPrismPrefab: {fileID: 0}
+  m_playerPrefab: {fileID: 1091910306}
+  SpellPrismPrefab: {fileID: 8832171426148933016, guid: 9383816cf6be0ce46881469517d77df4,
+    type: 3}
 --- !u!4 &368495483
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,11 +1296,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b321817557b3548b2f076e33e45b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShapeId: 000000000100000002000000
+  m_ShapeId: 00000000010000000200000003000000
   m_ShapeShape:
   - {fileID: 253323087986853978, guid: fe3cb06945ef7df43bd4b19331801c44, type: 3}
   - {fileID: 3857466273387358510, guid: 72eb817991834b14a83e19aa23caaaaa, type: 3}
   - {fileID: 5223517817040431726, guid: 6faa5b82be8475041bc69b8e3ec9fff8, type: 3}
+  - {fileID: 3857466273387358510, guid: 5608c665496369a4aa61d8b65284a0de, type: 3}
   m_SpellId: 01000000020000000400000008000000
   m_SpellMaterials:
   - {fileID: 2100000, guid: d2f956792c9c90f4f85bb26d7953f031, type: 2}
@@ -1354,12 +1356,18 @@ MonoBehaviour:
   m_setMaxAura: 100
   m_setMaxMana: 100
   m_setManaRegen: 10
+--- !u!4 &1108160708 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 485514, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1526513064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1203577217
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2098446600}
+    m_TransformParent: {fileID: 1108160708}
     m_Modifications:
     - target: {fileID: 8941853942985439495, guid: 815808aae3d631a4d91ea7f6cc48489f,
         type: 3}
@@ -1369,7 +1377,7 @@ PrefabInstance:
     - target: {fileID: 5353795971052751636, guid: 815808aae3d631a4d91ea7f6cc48489f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0308
+      value: 0.030799985
       objectReference: {fileID: 0}
     - target: {fileID: 5353795971052751636, guid: 815808aae3d631a4d91ea7f6cc48489f,
         type: 3}
@@ -2097,12 +2105,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88075a54c7fb1484ba25db394b612917, type: 3}
---- !u!4 &2098446600 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 485514, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1526513064}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1000010257478890
 GameObject:
   m_ObjectHideFlags: 0

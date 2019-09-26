@@ -17,11 +17,11 @@ public class Spell : ICastingInterface
         Aiming = 0x0008, //used for aiming
     };
     public SpellDescription _Start;
-    public SpellDescription m_Start { get { return _Start; }  private set { _Start = value; } }
+    public SpellDescription m_Start { get { return _Start; } protected set { _Start = value; } }
     public SpellDescription _Finish; 
-    public SpellDescription m_Finish { get { return _Finish; } private set { _Finish = value; } }
-    public float m_ManaCost { get; private set; }
-    public Elements m_elementType { get; private set; }
+    public SpellDescription m_Finish { get { return _Finish; } protected set { _Finish = value; } }
+    public float m_ManaCost { get; protected set; }
+    public Elements m_elementType { get; protected set; }
     public IAimingDirection m_AimPoint { get; set; }
 
     public SpellManager m_SpellManager;
@@ -66,7 +66,7 @@ public class Spell : ICastingInterface
         return Elements.Aiming;
     }
 
-    public bool m_isAiming { get; private set; }
+    public bool m_isAiming { get; set; }
 
     public GameObject m_targeting;
     private bool m_targetingNeedsRotation = true;
