@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class DescriptionCrystal : BasicSlottable
 {
-
+    protected SpellDescription m_SpellDescription;
+    public SpellDescription SpellDescription { get { return SpellDescription; } }
 }
