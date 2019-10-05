@@ -63,25 +63,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\!Magic\Scripts\Abstracts\AGrabable.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Abstracts\ANotMagicUser.cs" />
     <Compile Include="Assets\!Magic\Scripts\Abstracts\ASlot.cs" />
     <Compile Include="Assets\!Magic\Scripts\Abstracts\ASlotManager.cs" />
     <Compile Include="Assets\!Magic\Scripts\Abstracts\ASlottable.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Abstracts\ASpellUser.cs" />
     <Compile Include="Assets\!Magic\Scripts\AirSigManager.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Basics\BasicNotMagicCore.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Basics\BasicNotMagicUser.cs" />
     <Compile Include="Assets\!Magic\Scripts\Basics\BasicSlot.cs" />
     <Compile Include="Assets\!Magic\Scripts\Basics\BasicSlotManager.cs" />
     <Compile Include="Assets\!Magic\Scripts\Basics\BasicSlottable.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Basics\BasicSpellCore.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Basics\BasicSpellUser.cs" />
     <Compile Include="Assets\!Magic\Scripts\Basics\Door.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Basics\NotMagic.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Basics\NotMagicChip.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Basics\NotMagicDescription.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Basics\Spell.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Basics\SpellChip.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Basics\SpellDescription.cs" />
     <Compile Include="Assets\!Magic\Scripts\PlayerNotMagicSystem.cs" />
     <Compile Include="Assets\!Magic\Scripts\Spells\DescriptionCrystal.cs" />
     <Compile Include="Assets\!Magic\Scripts\Spells\Forge.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Spells\NotMagicInstance.cs" />
-    <Compile Include="Assets\!Magic\Scripts\Spells\NotMagicList.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Spells\SpellInstance.cs" />
+    <Compile Include="Assets\!Magic\Scripts\Spells\SpellList.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\BasedGestureHandle.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\DeveloperDefined.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\PlayerGesture.cs" />

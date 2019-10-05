@@ -9,11 +9,11 @@ public class Forge : BasicSlotManager
     /// <summary>
     /// prefab to be used to generate new chip
     /// </summary>
-    protected GameObject NotMagicChip;
+    protected GameObject SpellChip;
     protected BasicSlotManager OutputLocation;
 
     public void GenerateChip() { throw new System.NotImplementedException(); }
 
-    private NotMagicDescription AttemptSpellFormation() { throw new System.NotImplementedException(); }
-    private void GenerateChip(NotMagicDescription validatedSpell) { throw new System.NotImplementedException();  }
+    private SpellDescription AttemptSpellFormation() { throw new System.NotImplementedException(); }
+    private void GenerateChip(SpellDescription validatedSpell) { throw new System.NotImplementedException();  }
 }
