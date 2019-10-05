@@ -7,37 +7,40 @@ public abstract class ASlot : MonoBehaviour
 {
     protected bool m_IsHighlighted;
     protected ASlottable.SlotTypes m_SlotFilter;
-    protected SlotRef m_SlotRef;
+    protected ASlotManager m_SlotManager;
+    protected ASlottable m_Slotted;
+    public ASlottable Slotted { get { return Slotted; } }
 
-
+    protected Vector3 m_SlottedOffset;
+    protected Vector3 m_SlottedOrientation;
 
     public void Start()
     {
         m_IsHighlighted = true;
         ToggleHighlighting();
+        RegisterWithManager();
     }
 
-    protected virtual SlotRef DefineSlotRef()
+    /// <summary>
+    /// this code should discover what slotmanager in it's parent chain
+    /// and report to it. 
+    /// </summary>
+    private void RegisterWithManager()
     {
-        if (m_SlotRef != null)
-            return m_SlotRef;
-
-        //TODO: slotref needs implementation
-        throw new NotImplementedException("slotref not implemented");
+        throw new NotImplementedException();
     }
 
-    public virtual SlotRef Accept(ASlottable slottable)
+    public virtual bool Accept(ASlottable slottable)
     {
         if (!CanAccept(slottable))
-            return null;
+            return false;
 
+        throw new NotImplementedException();
         //out with the old
         //InwiththeNew
 
-        return DefineSlotRef();
+        return true;
     }
-
-
     public bool CanAccept(ASlottable slotable)
     {
         return ((slotable.SlotType & m_SlotFilter) > 0);
@@ -50,5 +53,5 @@ public abstract class ASlot : MonoBehaviour
         ToggleHighlighting(m_IsHighlighted);
     }
 
-
+    public abstract void WasEmptied();
 }

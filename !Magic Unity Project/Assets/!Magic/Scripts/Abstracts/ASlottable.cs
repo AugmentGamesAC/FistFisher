@@ -23,7 +23,7 @@ public abstract class ASlottable : AGrabable
     protected bool m_IsSlotted;
     protected float m_TimeToDie = 30;
     protected float m_TimeToDissolve = 30;
-    protected SlotRef m_SlotRef;
+    protected ASlot m_SlotRef;
     //Proposed readonly values
     protected SlotTypes m_SlotType;
     public SlotTypes SlotType { get { return m_SlotType; } }
@@ -32,7 +32,7 @@ public abstract class ASlottable : AGrabable
     public float m_MinDistanceToDetectSlots = 0;
     public float m_MaxDistanceToDetectSlots = 0.1f;
     public string[] m_LayerMask = { "Slot Interaction" };
-    protected SlotRef m_LastSelected;
+    protected ASlot m_LastSelected;
 
     void Start()
     {
@@ -46,13 +46,15 @@ public abstract class ASlottable : AGrabable
         if (m_IsGrabbed)
             ResolveSlot();
     }
-
+    /// <summary>
+    /// Handles the logic for figuring out 
+    /// </summary>
     private void ResolveSlot()
     {
         throw new System.NotImplementedException();
     }
 
-    private SlotRef LookForSlot()
+    private ASlot LookForSlot()
     {
         throw new System.NotImplementedException();
     }
