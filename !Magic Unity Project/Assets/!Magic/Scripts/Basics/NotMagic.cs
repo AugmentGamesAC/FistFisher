@@ -16,4 +16,6 @@ public class NotMagic : MonoBehaviour
         Aiming = 0x0008, //used for aiming
     };
 
+
+
 }
