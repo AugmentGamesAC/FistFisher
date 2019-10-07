@@ -7,11 +7,45 @@ public class Explosion : MonoBehaviour
     public float m_Damage = 33f;
     private float m_Life = 0.5f;
 
+    float cooldown = 2.0f;
+
+    List<float> m_cooldowns;
+    List<GameObject> m_gameObjectsOnCooldown;
+
+    Dictionary<GameObject, float> m_CooldownList;
+
+
+    private void Start()
+    {
+        m_CooldownList = new Dictionary<GameObject, float>();
+    }
+
     private void FixedUpdate()
     {
         m_Life -= Time.deltaTime;
         if (m_Life <= 0f)
             GameObject.Destroy(gameObject);
+
+        List<GameObject> removalQueue = new List<GameObject>();
+        List<GameObject> keys = new List<GameObject>(m_CooldownList.Keys);
+
+        foreach(GameObject key in keys)
+        {
+            m_CooldownList[key] -= Time.deltaTime;
+        }
+
+        foreach (GameObject entry in m_CooldownList.Keys)
+        {
+            if (m_CooldownList[entry] <= 0)
+            {
+                removalQueue.Add(entry);
+            }
+        }
+
+        foreach(GameObject entry in removalQueue)
+        {
+            m_CooldownList.Remove(entry);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -21,6 +55,14 @@ public class Explosion : MonoBehaviour
         if (otherMagicUser == null)
             return;
 
-        otherMagicUser.TakeDamage(m_Damage);
+        GameObject otherEnemy = other.gameObject;
+
+        if (!m_CooldownList.ContainsKey(otherEnemy))
+        {
+            otherMagicUser.TakeDamage(m_Damage);
+            if(otherMagicUser.m_health > 0)
+                m_CooldownList.Add(otherEnemy, cooldown);
+            return;
+        }
     }
 }
