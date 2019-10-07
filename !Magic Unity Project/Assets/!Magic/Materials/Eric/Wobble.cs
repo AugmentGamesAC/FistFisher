@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wobble : MonoBehaviour
 {
-    Renderer rend;
+    public Renderer rend;
     Vector3 lastPos;
     Vector3 velocity;
     Vector3 lastRot;
@@ -12,17 +12,18 @@ public class Wobble : MonoBehaviour
     public float MaxWobble = 0.03f;
     public float WobbleSpeed = 1f;
     public float Recovery = 1f;
-    float wobbleAmountX;
-    float wobbleAmountZ;
-    float wobbleAmountToAddX;
-    float wobbleAmountToAddZ;
+    public float wobbleAmountX;
+    public float wobbleAmountZ;
+    public float wobbleAmountToAddX;
+    public float wobbleAmountToAddZ;
     float pulse;
     float time = 0.5f;
 
     // Use this for initialization
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        //rend = GetComponent<Renderer>();
+        rend = gameObject.GetComponent<Renderer>();
     }
     private void Update()
     {
