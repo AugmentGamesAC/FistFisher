@@ -29,10 +29,11 @@ public class Spell
         Cancel
     };
 
-    public List<SpellDescription> m_Descriptions;
+    public SpellDescription m_Description;
 
     protected float m_ManCost;
     protected Elements m_ElementTypes;
+    public Elements ElementTypes { get { return m_ElementTypes; } }
     /// <summary>
     /// spelluser is updated every time aiming is begun;
     /// </summary>

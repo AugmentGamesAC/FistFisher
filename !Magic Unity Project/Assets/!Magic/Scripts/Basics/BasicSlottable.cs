@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Valve.VR.InteractionSystem.Throwable))]
 public class BasicSlottable : ASlottable
 {
     public override void PlayerDrop()
