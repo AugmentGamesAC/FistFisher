@@ -12,6 +12,10 @@ public class FillLevelTest : MonoBehaviour
 
     Renderer m_renderer;
 
+    public float m_fillRange = 1.0f; //+/- this value
+
+    public Vector3 m_orientation = Vector3.up;
+    public float m_rotateAmount = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +58,14 @@ public class FillLevelTest : MonoBehaviour
 
         if (m_renderer != null)
         {
-            m_renderer.material.SetFloat("_FillAmount", (m_currentMana / (m_maxMana/2.0f)) - 1.0f);
+
+            float manaPercentage = m_currentMana / m_maxMana;
+            float manaSquished = manaPercentage * (m_fillRange) * 2.0f;
+            float manaOffset = manaSquished - m_fillRange;
+
+            m_renderer.material.SetFloat("_FillAmount", manaOffset);
+            m_renderer.material.SetVector("_Orientation", m_orientation);
+            m_renderer.material.SetFloat("_RotateAmount", m_rotateAmount);
         }
 
 
