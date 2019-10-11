@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-[RequireComponent(typeof(Throwable))]
+[RequireComponent(typeof(Valve.VR.InteractionSystem.Throwable))]
 public class BasicSlottable : ASlottable
 {
 
