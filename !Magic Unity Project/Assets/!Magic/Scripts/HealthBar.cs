@@ -39,15 +39,14 @@ public class HealthBar : MonoBehaviour
         //Set Local health percentage before setting the new image fill amount.
         m_InitialHealthPercentage = m_HealthImage.fillAmount;
         //Damage health visually.
-        m_HealthImage.fillAmount = GetComponentInParent<Enemy>().m_HealthPercentage;
-
+        m_HealthImage.fillAmount = GetComponentInParent<ASpellUser>().HealthPercentage;
         //reset interpolator
         m_LostHealthBarInterpolator = 0.0f;
     }
 
     public void OnManaChange()
     {
-        m_ManaImage.fillAmount = GetComponentInParent<Enemy>().m_ManaPercentage;
+        m_ManaImage.fillAmount = GetComponentInParent<ASpellUser>().ManaPercentage;
     }
 
     //Make Orange healthbar catch up to the current health

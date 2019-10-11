@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public float m_Damage = 33f;
+    public float m_Damage = -33f;
     private float m_Life = 0.5f;
 
     float cooldown = 2.0f;
@@ -50,17 +50,17 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        IMagicUser otherMagicUser = (IMagicUser)other.gameObject.GetComponent(typeof(IMagicUser));
+        ASpellUser otherSpellUser = (ASpellUser)other.gameObject.GetComponent(typeof(ASpellUser));
 
-        if (otherMagicUser == null)
+        if (otherSpellUser == null)
             return;
 
         GameObject otherEnemy = other.gameObject;
 
         if (!m_CooldownList.ContainsKey(otherEnemy))
         {
-            otherMagicUser.TakeDamage(m_Damage);
-            if(otherMagicUser.m_health > 0)
+            otherSpellUser.ModifyHealth(m_Damage);
+            if(otherSpellUser.HealthCurrent > 0)
                 m_CooldownList.Add(otherEnemy, cooldown);
             return;
         }
