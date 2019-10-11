@@ -32,7 +32,8 @@ public abstract class ASlot : MonoBehaviour
     private void RegisterWithManager()
     {
         m_SlotManager = gameObject.GetComponentInParent<ASlotManager>();
-        m_SlotManager.RegisterSlot(this);
+        if(m_SlotManager!=null)
+            m_SlotManager.RegisterSlot(this);
     }
 
 
@@ -63,6 +64,17 @@ public abstract class ASlot : MonoBehaviour
         return ((slotable.SlotType & m_SlotFilter) > 0);
     }
 
+
+    public void Eject()
+    {
+        //ToggleHighlighting(false);
+        //Debug.LogWarning("detached from slot");
+        m_Slotted.gameObject.transform.SetParent(null);
+        m_Slotted.SlotDrop();
+        m_Slotted = null;
+        WasEmptied();
+    }
+
     public abstract void ToggleHighlighting(bool toggle);
     public void ToggleHighlighting()
     {
@@ -70,5 +82,9 @@ public abstract class ASlot : MonoBehaviour
         ToggleHighlighting(m_IsHighlighted);
     }
 
-    public abstract void WasEmptied();
+    public void WasEmptied()
+    {
+        if (m_SlotManager != null)
+            m_SlotManager.SlotUpdate(this);
+    }
 }

@@ -51,11 +51,13 @@ public class BasicSlottable : ASlottable
     {
         m_IsGrabbed = true;
         ToggleKinematicAndGravityAndSphereCollider(false);
+        if (m_SlotRef != null)
+            m_SlotRef.Eject();
     }
 
     public override void SlotDrop()
     {
-        m_SlotRef.WasEmptied();
+        //m_SlotRef.Eject();
         m_SlotRef = null;
         ToggleKinematicAndGravityAndSphereCollider(true);
 
@@ -67,14 +69,14 @@ public class BasicSlottable : ASlottable
     /// </summary>
     private void ResolveSlot()
     {
-        if(m_IsSlotted == true) //if slotted, drop it
+        /*if(m_IsSlotted == true) //if slotted, drop it
         {
             m_IsSlotted = false;
             if(m_SlotRef!=null)
             {
-                SlotDrop();
+                m_SlotRef.Eject();
             }
-        }
+        }*/
 
         m_TimeToDie = m_TimeToDissolve; //reset despawn timer if held. should keep it at reset time when detecting and slotting
 
@@ -170,6 +172,7 @@ public class BasicSlottable : ASlottable
         }
         else
         {
+
             if (m_SlotRef == null) //if not held by slot or player
             {
                 m_TimeToDie -= Time.deltaTime;
@@ -186,6 +189,14 @@ public class BasicSlottable : ASlottable
         {
             m_IsGrabbed = !m_IsGrabbed;
             Debug.LogError("grabbed: " + m_IsGrabbed);
+            if(m_IsGrabbed)
+            {
+                PlayerGrab();
+            }
+            else
+            {
+                PlayerDrop();
+            }
 
             ToggleKinematicAndGravityAndSphereCollider(!m_IsGrabbed);
 

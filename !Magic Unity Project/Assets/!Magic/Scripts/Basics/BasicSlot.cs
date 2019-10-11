@@ -10,17 +10,6 @@ public class BasicSlot : ASlot
         //Debug.Log("Toggled Highlighting to " + m_IsHighlighted);
     }
 
-    public override void WasEmptied()
-    {
-        if (m_SlotManager != null)
-            m_SlotManager.SlotUpdate(this);
-
-        ToggleHighlighting(false);
-        //Debug.LogWarning("detached from slot");
-
-        
-        m_Slotted = null;
-    }
 
 
 }
