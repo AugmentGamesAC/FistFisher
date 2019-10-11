@@ -30,13 +30,15 @@ public class Spell
     };
 
     [SerializeField]
-    public SpellDescription m_Description;
+    protected SpellDescription m_Description;
+    public SpellDescription Description { get { return m_Description; } }
+
     [SerializeField]
     protected float m_ManaCost;
     public float ManaCost { get { return m_ManaCost; } }
     [SerializeField]
-    protected Elements m_ElementTypes;
-    public Elements ElementTypes { get { return m_ElementTypes; } }
+    protected Elements m_ElementType;
+    public Elements ElementType { get { return m_ElementType; } }
     /// <summary>
     /// spelluser is updated every time aiming is begun;
     /// </summary>

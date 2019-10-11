@@ -10,7 +10,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{064867D5-D7EE-8D45-13E2-1DFFFB8DFCDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -89,6 +90,7 @@
     <Compile Include="Assets\AirSig\Script\Demo\PlayerGesture.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\PlayerSignature.cs" />
     <Compile Include="Assets\AirSig\Script\Demo\SmartGesture.cs" />
+    <None Include="Assets\ClassDiagram1.cd" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
