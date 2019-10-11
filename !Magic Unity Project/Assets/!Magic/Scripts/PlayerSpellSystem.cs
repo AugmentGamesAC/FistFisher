@@ -8,6 +8,7 @@ public class PlayerSpellSystem : BasicSpellUser
     public enum CastingInteraction
     {
         Empty = 0,
+        Cast
     };
 
 

@@ -61,7 +61,7 @@ public class Spell
     {
         m_Description = spellProperties;
         m_ManaCost = ResolveDescriptionCost(spellProperties);
-        m_ElementTypes = ResolveElements(spellProperties);
+        m_ElementType = ResolveElements(spellProperties);
     }
 
     private Elements ResolveElements(SpellDescription discription)
@@ -75,7 +75,7 @@ public class Spell
     //TODO: oversimplified for now needs discussion
     private float ResolveDescriptionCost(SpellDescription spell)
     {
-        return ((float)m_ElementTypes) * ((float)spell.Shape) * ((float)spell.Usage);
+        return ((float)m_ElementType) * ((float)spell.Shape) * ((float)spell.Usage);
     }
 
     /// <summary>

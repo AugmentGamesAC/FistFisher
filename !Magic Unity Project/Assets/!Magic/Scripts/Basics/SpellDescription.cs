@@ -93,16 +93,16 @@ public class SpellDescription
 
     [SerializeField]
     protected Shapes m_Shape;
-    public Shapes Shape { get { return m_Shape; } }
+    public Shapes Shape { get { return m_Shape; } set { m_Shape = value; } }
     [SerializeField]
     protected Effects m_Effect;
-    public Effects Effect { get { return m_Effect; } }
+    public Effects Effect { get { return m_Effect; } set { m_Effect = value; } }
     [SerializeField]
     protected Usages m_Usage;
-    public Usages Usage { get { return m_Usage; } }
+    public Usages Usage { get { return m_Usage; } set { m_Usage = value; } }
     [SerializeField]
     protected Aimings m_Aiming;
-    public Aimings Aiming { get { return m_Aiming; } }
+    public Aimings Aiming { get { return m_Aiming; } set { m_Aiming = value; } }
 
     public SpellDescription(Shapes shape, Effects effect, Usages usage, Aimings aiming)
     {

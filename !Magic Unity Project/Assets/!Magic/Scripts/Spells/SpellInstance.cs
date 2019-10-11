@@ -15,6 +15,7 @@ public class SpellInstance : MonoBehaviour
         IsActive,
         IsEviromental
     }
+
     [SerializeField]
     protected InstanceStates m_InstanceState;
     public InstanceStates InstantceState { get { return m_InstanceState; } }
@@ -46,3 +47,4 @@ public class SpellInstance : MonoBehaviour
 
 
     }
+}
