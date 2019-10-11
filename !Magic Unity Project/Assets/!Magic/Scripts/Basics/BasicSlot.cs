@@ -7,7 +7,7 @@ public class BasicSlot : ASlot
     public override void ToggleHighlighting(bool toggle)
     {
         m_IsHighlighted = toggle;
-        Debug.Log("Toggled Highlighting to " + m_IsHighlighted);
+        //Debug.Log("Toggled Highlighting to " + m_IsHighlighted);
     }
 
     public override void WasEmptied()

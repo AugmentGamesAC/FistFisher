@@ -107,7 +107,7 @@ public class BasicSlottable : ASlottable
             ASlot hitSlot = hit.collider.gameObject.GetComponentInParent<ASlot>();
             if (hitSlot != null && hitSlot.CanAccept(this))
             {
-                //Debug.Log("hit " + hitSlot.name);
+                Debug.Log("hit " + hitSlot.name);
                 //checks to see if it's closest
                 float dist = Vector3.SqrMagnitude(thisLocation - hit.collider.gameObject.transform.position);
                 if (dist < closestDist)
@@ -142,6 +142,26 @@ public class BasicSlottable : ASlottable
             Color outerColour = new Color(0, 1, 0, 0.25f);
             Gizmos.color = outerColour;
             Gizmos.DrawSphere(transform.position, m_MaxDistanceToDetectSlots);
+        }
+    }
+
+
+    private void PutDroppedObjectIntoSlot()
+    {
+        if (m_LastSelected == null)
+            return;
+
+        float dist = Vector3.SqrMagnitude(gameObject.transform.position - m_LastSelected.gameObject.transform.position);
+        //something in here about distance to connect or whatever. maybe good enough that it's within detection range if it hits this
+        if (m_SlotRef != null && m_SlotRef.Slotted != this)
+            SlotDrop();
+        else if (m_SlotRef == null && m_SlotRef.Slotted != this)
+        {
+            if (m_LastSelected.Accept(this))
+            {
+                m_SlotRef = m_LastSelected;
+                m_IsGrabbed = false;
+            }
         }
     }
 
@@ -180,18 +200,7 @@ public class BasicSlottable : ASlottable
 
         if (m_LastSelected != null && Input.GetKeyDown(KeyCode.L))
         {
-            float dist = Vector3.SqrMagnitude(gameObject.transform.position - m_LastSelected.gameObject.transform.position);
-            //something in here about distance to connect or whatever. maybe good enough that it's within detection range if it hits this
-            if (m_SlotRef != null)
-                SlotDrop();
-            else
-            {
-                if (m_LastSelected.Accept(this))
-                {
-                    m_SlotRef = m_LastSelected;
-                    m_IsGrabbed = false;
-                }
-            }
+            PutDroppedObjectIntoSlot();
         }
     }
           
