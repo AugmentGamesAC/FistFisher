@@ -11,7 +11,7 @@ public abstract class ASlottable : AGrabable
     [Flags]
     public enum SlotTypes
     {
-        Null = 0x0000, //to clear slot type
+        Undefined = 0x0000, //to clear slot type
 
         Shape = 0x0001, //The form the spell takes
         Effect = 0x0002, //The spell's interaction with the world
@@ -27,6 +27,7 @@ public abstract class ASlottable : AGrabable
     protected float m_TimeToDissolve = 30;
     protected ASlot m_SlotRef;
     //Proposed readonly values
+    [SerializeField]
     protected SlotTypes m_SlotType;
     public SlotTypes SlotType { get { return m_SlotType; } }
 

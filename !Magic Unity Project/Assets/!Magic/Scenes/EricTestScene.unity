@@ -457,6 +457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fcefac7f8cde943a818affc74a37b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SlotFilter: 16
+  m_SlottedOffset: {x: 0, y: 2, z: 0}
+  m_SlottedOrientation: {x: 0, y: 0, z: 0}
 --- !u!1 &712862479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e6b3f79582b094ea7f10d63be24686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinDistanceToDetectSlots: 2
+  m_SlotType: 16
+  m_MinDistanceToDetectSlots: 1.5
   m_MaxDistanceToDetectSlots: 0
   m_LayerMask:
   - Slot Interaction

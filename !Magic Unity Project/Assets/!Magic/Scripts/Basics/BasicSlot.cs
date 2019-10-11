@@ -16,11 +16,10 @@ public class BasicSlot : ASlot
             m_SlotManager.SlotUpdate(this);
 
         ToggleHighlighting(false);
-        Debug.LogWarning("detached from slot");
+        //Debug.LogWarning("detached from slot");
 
         
         m_Slotted = null;
-        m_SlotFilter = ASlottable.SlotTypes.Null;
     }
 
 

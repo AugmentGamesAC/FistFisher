@@ -6,12 +6,15 @@ using System;
 public abstract class ASlot : MonoBehaviour
 {
     protected bool m_IsHighlighted;
+    [SerializeField]
     protected ASlottable.SlotTypes m_SlotFilter;
     protected ASlotManager m_SlotManager;
     protected ASlottable m_Slotted;
-    public ASlottable Slotted { get { return Slotted; } }
+    public ASlottable Slotted { get { return m_Slotted; } }
 
+    [SerializeField]
     protected Vector3 m_SlottedOffset;
+    [SerializeField]
     protected Vector3 m_SlottedOrientation;
 
     public void Start()
@@ -19,7 +22,7 @@ public abstract class ASlot : MonoBehaviour
         m_IsHighlighted = true;
         ToggleHighlighting();
         RegisterWithManager();
-        m_SlotFilter = ASlottable.SlotTypes.SpellCrystal;  //TEMPORARY TO MAKE SURE IT WORKS!
+        //m_SlotFilter = ASlottable.SlotTypes.SpellCrystal;  //TEMPORARY TO MAKE SURE IT WORKS!
     }
 
     /// <summary>
@@ -32,20 +35,26 @@ public abstract class ASlot : MonoBehaviour
         m_SlotManager.RegisterSlot(this);
     }
 
+
+    //accept a slottable into slot
     public virtual bool Accept(ASlottable slottable)
     {
         if (!CanAccept(slottable))
             return false;
-        if (slottable != null)
-        {
+        //if (slottable != null)
+        //{
+            if (m_Slotted != null && m_Slotted != slottable) //if it already has something in slot, drop it
+            {
+                m_Slotted.SlotDrop();
+            }
             slottable.ToggleKinematicAndGravityAndSphereCollider(false);
-            Debug.LogWarning("attached to slot");
+            //Debug.LogWarning("attached to slot");
             slottable.gameObject.transform.parent = gameObject.transform;
             slottable.gameObject.transform.position = gameObject.transform.position + m_SlottedOffset;
             slottable.gameObject.transform.rotation = Quaternion.LookRotation(m_SlottedOrientation);
             m_Slotted = slottable;
             m_SlotFilter = slottable.SlotType;
-        }
+        //}
 
         return true;
     }
