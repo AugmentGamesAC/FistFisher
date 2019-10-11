@@ -11,6 +11,8 @@ public abstract class ASlottable : AGrabable
     [Flags]
     public enum SlotTypes
     {
+        Null = 0x0000, //to clear slot type
+
         Shape = 0x0001, //The form the spell takes
         Effect = 0x0002, //The spell's interaction with the world
         Function = 0x0004, //The player's interaction with the spell
@@ -43,8 +45,9 @@ public abstract class ASlottable : AGrabable
     {
         //TODO: resolve TimeToDie if needed
 
-        if (m_IsGrabbed)
-            ResolveSlot();
+        /*if (m_IsGrabbed)
+            ResolveSlot();*/
+        throw new System.NotImplementedException();
     }
     /// <summary>
     /// Handles the logic for figuring out 
@@ -60,4 +63,9 @@ public abstract class ASlottable : AGrabable
     }
 
     public abstract void SlotDrop();
+
+
+
+    public abstract void ToggleKinematicAndGravityAndSphereCollider(bool isOwnObject);
+    public abstract void ToggleKinematicAndGravityAndSphereCollider(bool kinematic, bool gravity, bool sphereCollider);
 }
