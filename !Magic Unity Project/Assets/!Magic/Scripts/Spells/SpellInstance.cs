@@ -15,6 +15,7 @@ public class SpellInstance : MonoBehaviour
         IsActive,
         IsEviromental
     }
+
     [SerializeField]
     protected InstanceStates m_InstanceState;
     public InstanceStates InstantceState { get { return m_InstanceState; } }
@@ -26,6 +27,24 @@ public class SpellInstance : MonoBehaviour
     /// </summary>
     protected Dictionary<ASpellUser, float> DamageTimingResolution;
 
-    public void UpdateMaterial(Spell.Elements elementalEffect) { throw new System.NotImplementedException(); }
-    public void UpdateState(InstanceStates state) { m_InstanceState = state; }
+    public void UpdateMaterial(Spell.Elements elementalEffect)
+    {
+        Material newMaterial;
+        if (SpellManager.SpellBehaviour.SpellInstaceMatLookup.TryGetValue((m_InstanceState == InstanceStates.IsAiming) ? Spell.Elements.Aiming : m_Spell.ElementType, out newMaterial))
+            gameObject.GetComponentInChildren<Renderer>().material = newMaterial;
+    }
+
+    public void UpdateState(InstanceStates state)
+    {
+        m_InstanceState = state;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!((m_InstanceState == InstanceStates.IsAiming) || (m_InstanceState == InstanceStates.IsEviromental)))
+            return;
+
+
+
+    }
 }

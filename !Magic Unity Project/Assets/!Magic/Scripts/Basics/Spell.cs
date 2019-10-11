@@ -30,13 +30,15 @@ public class Spell
     };
 
     [SerializeField]
-    public SpellDescription m_Description;
+    protected SpellDescription m_Description;
+    public SpellDescription Description { get { return m_Description; } }
+
     [SerializeField]
     protected float m_ManaCost;
     public float ManaCost { get { return m_ManaCost; } }
     [SerializeField]
-    protected Elements m_ElementTypes;
-    public Elements ElementTypes { get { return m_ElementTypes; } }
+    protected Elements m_ElementType;
+    public Elements ElementType { get { return m_ElementType; } }
     /// <summary>
     /// spelluser is updated every time aiming is begun;
     /// </summary>
@@ -59,7 +61,7 @@ public class Spell
     {
         m_Description = spellProperties;
         m_ManaCost = ResolveDescriptionCost(spellProperties);
-        m_ElementTypes = ResolveElements(spellProperties);
+        m_ElementType = ResolveElements(spellProperties);
     }
 
     private Elements ResolveElements(SpellDescription discription)
@@ -73,7 +75,7 @@ public class Spell
     //TODO: oversimplified for now needs discussion
     private float ResolveDescriptionCost(SpellDescription spell)
     {
-        return ((float)m_ElementTypes) * ((float)spell.Shape) * ((float)spell.Usage);
+        return ((float)m_ElementType) * ((float)spell.Shape) * ((float)spell.Usage);
     }
 
     /// <summary>

@@ -25,9 +25,9 @@ public class SpellChip : BasicSlottable
         Color col;
         Color col2;
 
-        if (!SpellManager.SpellBehaviour.ElementColorLookup.TryGetValue(m_SpellData.ElementTypes, out col))
+        if (!SpellManager.SpellBehaviour.ElementColorLookup.TryGetValue(m_SpellData.ElementType, out col))
             col = Color.black;
-        if (!SpellManager.SpellBehaviour.ShapeColorLookup.TryGetValue(m_SpellData.m_Description.Shape, out col2))
+        if (!SpellManager.SpellBehaviour.ShapeColorLookup.TryGetValue(m_SpellData.Description.Shape, out col2))
             col2 = Color.black;
 
         mat.color = col2;
