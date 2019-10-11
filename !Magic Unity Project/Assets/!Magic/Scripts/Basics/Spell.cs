@@ -210,7 +210,7 @@ public class Spell
         if (m_SpellUser == null)
             return true;
 
-        m_SpellUser.PredictManaLoss(0);
+        m_SpellUser.PredictManaModify(0);
 
         return true;
     }

@@ -54,7 +54,7 @@ public class SpellDescription
     {
         FromCaster = 0x00000001, //show at center of caster
         FromFinger = 0x00000002, //show at tip of finger
-        FromFingerEndPoint = 0x00000004, //show at collisionPoint
+        FromFingerEndPoint = 0x00000004, //show at collisionPoin
         Hidden = 0x00000008, //displays nothing.
 
         ReverseX = 0x00000010, //Rotate 180 on X
