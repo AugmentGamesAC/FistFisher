@@ -158,7 +158,7 @@ public class Weave : GestureHandle
         if (spellID == 0)
             return;
 
-        PlayerSpellSystem Gauntlet = airsigManager.m_Player.GetComponentInChildren<PlayerSpellSystem>();
+        PlayerSpellSystem Gauntlet = Valve.VR.InteractionSystem.Player.instance.GetComponentInChildren<PlayerSpellSystem>();
         if (Gauntlet == null)
             return;
 
@@ -176,17 +176,17 @@ public class Weave : GestureHandle
         Valve.VR.InteractionSystem.Player player = Valve.VR.InteractionSystem.Player.instance;
 
         // if we are casting a spell we are done
-        PlayerSpellSystem Gauntlet = airsigManager.m_Player.GetComponentInChildren<PlayerSpellSystem>();
+        PlayerSpellSystem Gauntlet = player.GetComponentInChildren<PlayerSpellSystem>();
         if (Gauntlet != null && Gauntlet.InteractWithSpell(PlayerSpellSystem.CastingInteraction.Cast))
             return;
 
         //Resolve Gesture logic
         if (!airsigManager.m_QueueHandDataCollection)
             return;
-        if (airsigManager.m_Player.GetHandedness() != hand.handType)
+        if (player.GetHandedness() != hand.handType)
             return;
 
-        if (airsigManager.m_Player.isRightHanded)
+        if (player.isRightHanded)
             airsigManager.startRightHandCollecting();
         else
             airsigManager.startLeftHandCollecting();
@@ -197,12 +197,13 @@ public class Weave : GestureHandle
     // Stop collecting gesture data
     public void StopWeaving(Valve.VR.InteractionSystem.Hand hand)
     {
+        Valve.VR.InteractionSystem.Player player = Valve.VR.InteractionSystem.Player.instance;
         if (airsigManager.m_QueueHandDataCollection)
         {
-            if (airsigManager.m_Player.GetHandedness() != hand.handType)
+            if (player.GetHandedness() != hand.handType)
                 return;
 
-            if (airsigManager.m_Player.isRightHanded)
+            if (player.isRightHanded)
                 airsigManager.stopRightHandCollecting();
             else
                 airsigManager.stopLeftHandCollecting();
