@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public class SpellDescription
 {
+
     public enum Shapes
     {
         Undefined = 0,

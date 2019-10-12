@@ -6,7 +6,7 @@ public class BasicSlotManager : ASlotManager
 {
     public override void RegisterSlot(ASlot newslot)
     {
-        throw new System.NotImplementedException();
+        //m_Slots.Add(newslot);
     }
 
     public override void SlotUpdate(ASlot changedSlot)
