@@ -17,12 +17,10 @@ public abstract class ASlot : MonoBehaviour
     [SerializeField]
     protected Vector3 m_SlottedOrientation;
 
-    public void Start()
+    public virtual void Start()
     {
-        m_IsHighlighted = true;
-        ToggleHighlighting();
+        ToggleHighlighting(false);
         RegisterWithManager();
-        //m_SlotFilter = ASlottable.SlotTypes.SpellCrystal;  //TEMPORARY TO MAKE SURE IT WORKS!
     }
 
     /// <summary>
@@ -36,7 +34,6 @@ public abstract class ASlot : MonoBehaviour
             m_SlotManager.RegisterSlot(this);
     }
 
-
     //accept a slottable into slot
     public virtual bool Accept(ASlottable slottable)
     {
@@ -48,7 +45,7 @@ public abstract class ASlot : MonoBehaviour
             {
                 m_Slotted.SlotDrop();
             }
-            slottable.ToggleKinematicAndGravityAndSphereCollider(false);
+
             //Debug.LogWarning("attached to slot");
             slottable.gameObject.transform.parent = gameObject.transform;
             slottable.gameObject.transform.position = gameObject.transform.position + m_SlottedOffset;
@@ -64,11 +61,8 @@ public abstract class ASlot : MonoBehaviour
         return ((slotable.SlotType & m_SlotFilter) > 0);
     }
 
-
     public void Eject()
     {
-        //ToggleHighlighting(false);
-        //Debug.LogWarning("detached from slot");
         m_Slotted.gameObject.transform.SetParent(null);
         m_Slotted.SlotDrop();
         m_Slotted = null;

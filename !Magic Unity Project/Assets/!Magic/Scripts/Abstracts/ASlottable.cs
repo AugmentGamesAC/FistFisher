@@ -42,31 +42,5 @@ public abstract class ASlottable : AGrabable
         m_TimeToDie = m_TimeToDissolve;
     }
 
-    private void FixedUpdate()
-    {
-        //TODO: resolve TimeToDie if needed
-
-        /*if (m_IsGrabbed)
-            ResolveSlot();*/
-        throw new System.NotImplementedException();
-    }
-    /// <summary>
-    /// Handles the logic for figuring out 
-    /// </summary>
-    private void ResolveSlot()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private ASlot LookForSlot()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public abstract void SlotDrop();
-
-
-
-    public abstract void ToggleKinematicAndGravityAndSphereCollider(bool isOwnObject);
-    public abstract void ToggleKinematicAndGravityAndSphereCollider(bool kinematic, bool gravity, bool sphereCollider);
 }
