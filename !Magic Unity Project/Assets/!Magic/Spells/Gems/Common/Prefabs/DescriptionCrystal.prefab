@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5816274653173556780}
   - component: {fileID: 1824027747311891689}
   - component: {fileID: 2186405376376560699}
-  - component: {fileID: 673812867470785669}
+  - component: {fileID: 1613321015}
+  - component: {fileID: 1613321009}
   m_Layer: 0
   m_Name: DescriptionCrystal
   m_TagString: Untagged
@@ -141,12 +142,34 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1613321009}
+        m_MethodName: PlayerGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onDetachFromHand:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1613321009}
+        m_MethodName: PlayerDrop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onHeldUpdate:
@@ -155,7 +178,20 @@ MonoBehaviour:
     m_TypeName: Valve.VR.InteractionSystem.HandEvent, SteamVR, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   interactable: {fileID: 0}
---- !u!114 &673812867470785669
+--- !u!135 &1613321015
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3837758822079313387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1613321009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,19 +200,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3837758822079313387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c9151f7b21d614b96101e85607dbec, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a6b997edc8abe048b3315c2a2696a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SlotType: 0
-  m_MinDistanceToDetectSlots: 0
-  m_MaxDistanceToDetectSlots: 0.1
+  m_SlotType: 15
+  m_MinDistanceToDetectSlots: 0.7
+  m_MaxDistanceToDetectSlots: 0
   m_LayerMask:
   - Slot Interaction
   m_showDebugSpheres: 1
-  m_SpellDescription:
-    m_Shape: 0
-    m_Effect: 0
-    m_Usage: 0
 --- !u!1001 &3631669048468601844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,7 +229,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: fb19e35f485268848b0344ffcaaca0b9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: fb19e35f485268848b0344ffcaaca0b9,
         type: 3}
