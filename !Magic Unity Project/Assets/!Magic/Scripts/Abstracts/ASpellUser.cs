@@ -5,16 +5,29 @@ using UnityEngine;
 
 public abstract class ASpellUser : MonoBehaviour
 {
+
+    protected float m_ShieldCurrent;
+    public float ShieldCurrent { get { return m_ShieldCurrent; } }
+    protected float m_ShieldPredicted;
+    public float ShieldPredicted { get { return m_ShieldPredicted; } }
+    protected float m_ShieldMax;
+    public float ShieldMax { get { return m_ShieldMax; } }
+    protected float m_ShieldRegen;
+    public float ShieldRegen { get { return m_ShieldRegen; } }
+    protected float m_ShieldPercentage;
+    public float ShieldPercentage { get { return m_ShieldPercentage; } }
+
+
     protected float m_HealthCurrent;
     public float HealthCurrent { get { return m_HealthCurrent; } }
-    protected float m_HealthPredicted;
-    public float HealthPredicted { get { return m_HealthPredicted; } }
+
     protected float m_HealthMax;
     public float HealthMax { get { return m_HealthMax; } }
-    protected float m_HealthRegen;
-    public float HealthRegen { get { return m_HealthRegen; } }
+
     protected float m_HealthPercentage;
     public float HealthPercentage { get { return m_HealthPercentage; } }
+
+
 
     protected float m_ManaCurrent;
     public float ManaCurrent { get { return m_ManaCurrent; } }
@@ -27,23 +40,45 @@ public abstract class ASpellUser : MonoBehaviour
     protected float m_ManaPercentage;
     public float ManaPercentage { get { return m_ManaPercentage; } }
 
-
-    public bool PredictHealthModify(float change)
+    //use this 
+    public void TakeDamage(float change)
     {
-        m_HealthPredicted = Mathf.Clamp(m_HealthCurrent + change, 0, m_HealthMax);
+        if (m_ShieldPercentage <= 0.0f)
+            ModifyShield(change);
+        else
+            ModifyHealth(change);
+    }
+
+    public void ModifyHealth(float change)
+    {
+        m_HealthCurrent = Mathf.Clamp(m_ManaCurrent + change, 0, m_ManaMax);
+
+        UpdateHealthPercentage();
+    }
+
+    public bool IsDead()
+    {
+        if (m_HealthCurrent <= 0.0f)
+            return true;
+        return false;
+    }
+
+    public bool PredictShieldModify(float change)
+    {
+        m_ShieldPredicted = Mathf.Clamp(m_ShieldCurrent + change, 0, m_ShieldMax);
         return true;
     }
-    public void ApplyHealthPrediction() { m_HealthCurrent = HealthPredicted; }
+    public void ApplyShieldPrediction() { m_ShieldCurrent = ShieldPredicted; }
     /// <summary>
     /// for instant forced drain, no prediction.
     /// </summary>
     /// <param name="manaLoss"></param>
-    public void ModifyHealth(float change)
+    public void ModifyShield(float change)
     {
-        m_HealthPredicted = Mathf.Clamp(m_HealthPredicted + change, 0, m_HealthMax);
-        m_HealthCurrent = Mathf.Clamp(m_HealthCurrent + change, 0, m_HealthMax);
+        m_ShieldPredicted = Mathf.Clamp(m_ShieldPredicted + change, 0, m_ShieldMax);
+        m_ShieldCurrent = Mathf.Clamp(m_ShieldCurrent + change, 0, m_ShieldMax);
 
-        UpdateHealthPercentage();
+        UpdateShieldPercentage();
     }
 
     /// <summary>
@@ -75,14 +110,20 @@ public abstract class ASpellUser : MonoBehaviour
         UpdateManaPercentage();
     }
 
-    private void UpdateHealthPercentage()
+    private void UpdateShieldPercentage()
     {
-        m_HealthPercentage = m_HealthCurrent / m_HealthMax;
+        m_ShieldPercentage = m_ShieldCurrent / m_ShieldMax;
     }
 
     private void UpdateManaPercentage()
     {
         m_ManaPercentage = m_ManaCurrent / m_ManaMax;
+    }
+
+
+    private void UpdateHealthPercentage()
+    {
+        m_HealthPercentage = m_HealthCurrent / m_HealthMax;
     }
 
     public abstract Transform Aiming { get; }
