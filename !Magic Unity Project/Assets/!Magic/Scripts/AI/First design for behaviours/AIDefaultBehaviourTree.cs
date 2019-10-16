@@ -60,7 +60,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
             switch (data.currentBehaviour)
             {
                 case AIData.Behaviour.Follow:
-                    data.state = followScript.FollowFunction;
+                    data.state = followScript.OnBehaviourStart;
                     break;
 
                 //case AIData.Behaviour.Idle:
@@ -97,7 +97,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
 
         //run the functionality for this frame.
         data.state();
-        //update last behaviour. 
+        //update last behaviour.
         data.lastBehaviour = data.currentBehaviour;
     }
 }

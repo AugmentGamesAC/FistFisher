@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIFollow : MonoBehaviour
+public class AIFollow : ABehaviour
 {
-    private AIData data;
-    private float pathUpdateTimer;
-    //delay to only update the follow point after the delay amount.
-    private float pathUpdateDelay = 1.0f;
-    private float minDistanceToPoint = 2f;
-
-    // Start is called before the first frame update
     void Start()
     {
         data = GetComponent<AIData>();
+        //delay to only update the follow point after the delay amount.
+        pathUpdateDelay = 1.0f;
+        minDistanceToPoint = 2f;
     }
 
-    public void OnBehaviourStart()
+    public override void OnBehaviourStart()
     {
-        if(Vector3.SqrMagnitude(data.followObject.position - data.AItransform.position) > data.maxMoveCushion * data.maxMoveCushion)
+        if (Vector3.SqrMagnitude(data.followObject.position - data.AItransform.position) > data.maxMoveCushion * data.maxMoveCushion)
         {
             data.agent.SetDestination(data.followObject.position);
             pathUpdateTimer = 0;
-            data.state = FollowFunction;
+            data.state = OnBehaviourUpdate;
         }
         else
         {
@@ -31,22 +27,23 @@ public class AIFollow : MonoBehaviour
         }
     }
 
-    public void OnBehaviourEnd()
+    public override void OnBehaviourEnd()
     {
         //empty for now.
     }
 
-    public void FollowFunction()
+    public override void OnBehaviourUpdate()
     {
         pathUpdateTimer += Time.deltaTime;
 
         //if too close to me, go to idle, or in the future, go to attack and change min distanceToPoint to the AI's attack range.
-        if(Vector3.SqrMagnitude(data.followObject.position - data.AItransform.position) < minDistanceToPoint * minDistanceToPoint)
+        if (Vector3.SqrMagnitude(data.followObject.position - data.AItransform.position) < minDistanceToPoint * minDistanceToPoint)
         {
             data.state = IdleFunction;
+            //data.currentBehaviour = AIData.Behaviour.Follow;
             //replace with data.IdleScript.OnBehaviourStart();
         }
-        else if(pathUpdateTimer > pathUpdateDelay)
+        else if (pathUpdateTimer > pathUpdateDelay)
         {
             data.agent.SetDestination(data.followObject.position);
             pathUpdateTimer = 0;
@@ -59,7 +56,8 @@ public class AIFollow : MonoBehaviour
         if (Vector3.SqrMagnitude(data.followObject.position - data.AItransform.position) > data.maxMoveCushion * data.maxMoveCushion)
         {
             data.agent.SetDestination(data.followObject.position);
-            data.state = FollowFunction;
+            //this should be in idle script.
+            data.state = OnBehaviourStart;
         }
     }
 }

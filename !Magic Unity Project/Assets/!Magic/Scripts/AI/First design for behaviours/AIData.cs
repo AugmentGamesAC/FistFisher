@@ -29,7 +29,6 @@ public class AIData : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         AItransform = transform;
-
         //Default starting behaviour, could be idle or patrol.
         currentBehaviour = Behaviour.Follow;
         lastBehaviour = Behaviour.Follow;
