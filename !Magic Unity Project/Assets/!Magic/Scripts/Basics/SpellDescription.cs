@@ -53,6 +53,7 @@ public class SpellDescription
     [Flags]
     public enum Aimings
     {
+        Undefined = 0,
         FromCaster = 0x00000001, //show at center of caster
         FromFinger = 0x00000002, //show at tip of finger
         FromFingerEndPoint = 0x00000004, //show at collisionPoin

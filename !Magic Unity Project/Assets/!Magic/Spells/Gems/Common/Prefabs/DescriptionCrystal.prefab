@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1824027747311891689}
   - component: {fileID: 2186405376376560699}
   - component: {fileID: 1613321015}
-  - component: {fileID: 1613321009}
+  - component: {fileID: 4421106049173467976}
   m_Layer: 0
   m_Name: DescriptionCrystal
   m_TagString: Untagged
@@ -143,7 +143,7 @@ MonoBehaviour:
   onPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613321009}
+      - m_Target: {fileID: 0}
         m_MethodName: PlayerGrab
         m_Mode: 1
         m_Arguments:
@@ -159,7 +159,7 @@ MonoBehaviour:
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613321009}
+      - m_Target: {fileID: 0}
         m_MethodName: PlayerDrop
         m_Mode: 1
         m_Arguments:
@@ -191,7 +191,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1613321009
+--- !u!114 &4421106049173467976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,15 +200,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3837758822079313387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6b997edc8abe048b3315c2a2696a45, type: 3}
+  m_Script: {fileID: 11500000, guid: b1c9151f7b21d614b96101e85607dbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SlotType: 15
-  m_MinDistanceToDetectSlots: 0.7
-  m_MaxDistanceToDetectSlots: 0
+  m_SlotType: 0
+  m_MinDistanceToDetectSlots: 0
+  m_MaxDistanceToDetectSlots: 0.1
   m_LayerMask:
   - Slot Interaction
-  m_showDebugSpheres: 1
+  m_SpellDescription:
+    m_Shape: 0
+    m_Effect: 0
+    m_Usage: 0
+    m_Aiming: 0
 --- !u!1001 &3631669048468601844
 PrefabInstance:
   m_ObjectHideFlags: 0
