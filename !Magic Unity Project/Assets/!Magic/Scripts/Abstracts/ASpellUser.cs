@@ -50,9 +50,9 @@ public abstract class ASpellUser : MonoBehaviour
     }
 
     //modifies shield by the negative of this value. redundancy for intuitive use
-    public TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-        ModifyHealth(-change);
+        ModifyHealth(-damage);
     }
 
     //redundant function to modify shield in the event people want to think of it as health in code instead

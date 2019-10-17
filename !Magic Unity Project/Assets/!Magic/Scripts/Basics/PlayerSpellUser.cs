@@ -24,7 +24,7 @@ public class PlayerSpellUser : BasicSpellUser
 
     //regen health at shield percentage in the event that 
     protected float m_RegenHealthAtShieldPercentage = 100.0f;
-    public float m_RegenHealthAtShieldPercentage { get { return m_RegenHealthAtShieldPercentage; } }
+    public float RegenHealthAtShieldPercentage { get { return m_RegenHealthAtShieldPercentage; } }
 
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class PlayerSpellUser : BasicSpellUser
     // Update is called once per frame
     void Update()
     {
-        if(HealthRegen > 0.0f && ShieldPercentage >= (m_RegenHealthAtShieldPercentage / 100.0f)) //if we're regening health
+        if(HealthRegen > 0.0f && ShieldPercentage >= (RegenHealthAtShieldPercentage / 100.0f)) //if we're regening health
         {
             ModifyExtraHealth(m_HealthRegen * Time.deltaTime);
         }
