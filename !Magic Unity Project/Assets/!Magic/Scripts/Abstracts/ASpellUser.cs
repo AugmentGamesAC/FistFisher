@@ -10,22 +10,17 @@ public abstract class ASpellUser : MonoBehaviour
     public float ShieldCurrent { get { return m_ShieldCurrent; } }
     protected float m_ShieldPredicted;
     public float ShieldPredicted { get { return m_ShieldPredicted; } }
+
+    [SerializeField]
     protected float m_ShieldMax;
     public float ShieldMax { get { return m_ShieldMax; } }
-    protected float m_ShieldRegen;
+
+    [SerializeField]
+    protected float m_ShieldRegen = 0.0f; //shield does not regen unles we have a spell or actio for it
     public float ShieldRegen { get { return m_ShieldRegen; } }
     protected float m_ShieldPercentage;
     public float ShieldPercentage { get { return m_ShieldPercentage; } }
 
-
-    protected float m_HealthCurrent;
-    public float HealthCurrent { get { return m_HealthCurrent; } }
-
-    protected float m_HealthMax;
-    public float HealthMax { get { return m_HealthMax; } }
-
-    protected float m_HealthPercentage;
-    public float HealthPercentage { get { return m_HealthPercentage; } }
 
 
 
@@ -33,33 +28,34 @@ public abstract class ASpellUser : MonoBehaviour
     public float ManaCurrent { get { return m_ManaCurrent; } }
     protected float m_ManaPredicted;
     public float ManaPredicted { get { return m_ManaPredicted; } }
+
+    [SerializeField]
     protected float m_ManaMax;
     public float ManaMax { get { return m_ManaMax; } }
+
+    [SerializeField]
     protected float m_ManaRegen;
     public float ManaRegen { get { return m_ManaRegen; } }
     protected float m_ManaPercentage;
     public float ManaPercentage { get { return m_ManaPercentage; } }
 
+
+    void Start()
+    {
+        m_ShieldCurrent = m_ShieldMax;
+        m_ManaCurrent = m_ManaMax;
+        UpdateShieldPercentage();
+        UpdateManaPercentage();
+    }
+
     //use this 
-    public void TakeDamage(float change)
+    public virtual void TakeDamage(float change)
     {
-        if (m_ShieldPercentage <= 0.0f)
-            ModifyShield(change);
-        else
-            ModifyHealth(change);
+        ModifyShield(change);
     }
 
-    public void ModifyHealth(float change)
+    public virtual bool IsDead()
     {
-        m_HealthCurrent = Mathf.Clamp(m_ManaCurrent + change, 0, m_ManaMax);
-
-        UpdateHealthPercentage();
-    }
-
-    public bool IsDead()
-    {
-        if (m_HealthCurrent <= 0.0f)
-            return true;
         return false;
     }
 
@@ -121,10 +117,6 @@ public abstract class ASpellUser : MonoBehaviour
     }
 
 
-    private void UpdateHealthPercentage()
-    {
-        m_HealthPercentage = m_HealthCurrent / m_HealthMax;
-    }
 
     public abstract Transform Aiming { get; }
 }

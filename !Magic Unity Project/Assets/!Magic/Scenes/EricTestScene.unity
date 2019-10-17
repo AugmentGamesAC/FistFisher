@@ -457,8 +457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fcefac7f8cde943a818affc74a37b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SlotFilter: 16
-  m_SlottedOffset: {x: 0, y: 2, z: 0}
+  m_SlotFilter: 0
+  m_SlottedOffset: {x: 0, y: 0, z: 0}
   m_SlottedOrientation: {x: 0, y: 0, z: 0}
 --- !u!1 &712862479
 GameObject:
@@ -881,11 +881,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 712862480}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 68d250c502440a24e9cb3f354db86574,
-        type: 3}
-      propertyPath: m_Name
-      value: SphereGem
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68d250c502440a24e9cb3f354db86574,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -961,6 +956,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e4e1b16badd84af41becab9a7efde403, type: 2}
+    - target: {fileID: -927199367670048503, guid: 68d250c502440a24e9cb3f354db86574,
+        type: 3}
+      propertyPath: m_Name
+      value: SphereGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68d250c502440a24e9cb3f354db86574, type: 3}
 --- !u!1 &1717053359
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e6b3f79582b094ea7f10d63be24686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SlotType: 16
+  m_SlotType: 0
   m_MinDistanceToDetectSlots: 1.5
   m_MaxDistanceToDetectSlots: 0
   m_LayerMask:

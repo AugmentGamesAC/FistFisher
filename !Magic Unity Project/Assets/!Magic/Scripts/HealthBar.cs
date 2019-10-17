@@ -39,7 +39,7 @@ public class HealthBar : MonoBehaviour
         //Set Local health percentage before setting the new image fill amount.
         m_InitialHealthPercentage = m_HealthImage.fillAmount;
         //Damage health visually.
-        m_HealthImage.fillAmount = GetComponentInParent<ASpellUser>().HealthPercentage;
+        m_HealthImage.fillAmount = GetComponentInParent<ASpellUser>().ShieldPercentage;
         //reset interpolator
         m_LostHealthBarInterpolator = 0.0f;
     }

@@ -59,8 +59,8 @@ public class Explosion : MonoBehaviour
 
         if (!m_CooldownList.ContainsKey(otherEnemy))
         {
-            otherSpellUser.ModifyHealth(m_Damage);
-            if(otherSpellUser.HealthCurrent > 0)
+            otherSpellUser.TakeDamage(m_Damage);
+            if(otherSpellUser.ShieldCurrent > 0)
                 m_CooldownList.Add(otherEnemy, cooldown);
             return;
         }
