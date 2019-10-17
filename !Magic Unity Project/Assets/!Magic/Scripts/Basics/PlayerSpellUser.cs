@@ -32,16 +32,16 @@ public class PlayerSpellUser : BasicSpellUser
 
     }
        
-    public override void TakeDamage(float change)
+    public override void ModifyHealth(float change)
     {
         if (m_ShieldPercentage > 0.0f)
             ModifyShield(change);
         else
-            ModifyHealth(change);
+            ModifyExtraHealth(change);
     }
 
 
-    public void ModifyHealth(float change)
+    public void ModifyExtraHealth(float change)
     {
         m_HealthCurrent = Mathf.Clamp(m_HealthCurrent + change, 0, m_HealthMax);
 

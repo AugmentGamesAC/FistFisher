@@ -13,7 +13,7 @@ public class BasicSpellUser : ASpellUser
         return false;
     }
 
-    /*public override void TakeDamage(float change)
+    /*public override void ModifyHealth(float change) //take damage
     {
 
     }*/
@@ -21,6 +21,7 @@ public class BasicSpellUser : ASpellUser
     private void Update()
     {
         ModifyMana(ManaRegen); //mana regen
+        ModifyShield(ShieldRegen); //this should do nothing, but here in the event it does later
     }
 
 

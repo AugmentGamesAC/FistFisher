@@ -49,7 +49,7 @@ public abstract class ASpellUser : MonoBehaviour
     }
 
     //use this 
-    public virtual void TakeDamage(float change)
+    public virtual void ModifyHealth(float change)
     {
         ModifyShield(change);
     }
