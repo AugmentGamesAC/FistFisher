@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ASpellUser : MonoBehaviour
 {
-
+    //health is now called shield
     protected float m_ShieldCurrent;
     public float ShieldCurrent { get { return m_ShieldCurrent; } }
     protected float m_ShieldPredicted;
@@ -23,7 +23,7 @@ public abstract class ASpellUser : MonoBehaviour
 
 
 
-
+    //mana 
     protected float m_ManaCurrent;
     public float ManaCurrent { get { return m_ManaCurrent; } }
     protected float m_ManaPredicted;
@@ -40,6 +40,7 @@ public abstract class ASpellUser : MonoBehaviour
     public float ManaPercentage { get { return m_ManaPercentage; } }
 
 
+    //set values to their max, and update percentage. I suppose we ought to also consider if we should allow spawning at less than full health rather than applying damage at start
     void Start()
     {
         m_ShieldCurrent = m_ShieldMax;
@@ -48,12 +49,19 @@ public abstract class ASpellUser : MonoBehaviour
         UpdateManaPercentage();
     }
 
-    //use this 
+    //modifies shield by the negative of this value. redundancy for intuitive use
+    public TakeDamage(float damage)
+    {
+        ModifyHealth(-change);
+    }
+
+    //redundant function to modify shield in the event people want to think of it as health in code instead
     public virtual void ModifyHealth(float change)
     {
         ModifyShield(change);
     }
 
+    //check if dead. child classes should do this differently. 
     public virtual bool IsDead()
     {
         return false;

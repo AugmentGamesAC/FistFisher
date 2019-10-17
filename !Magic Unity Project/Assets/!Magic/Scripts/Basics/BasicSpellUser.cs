@@ -20,8 +20,8 @@ public class BasicSpellUser : ASpellUser
 
     private void Update()
     {
-        ModifyMana(ManaRegen); //mana regen
-        ModifyShield(ShieldRegen); //this should do nothing, but here in the event it does later
+        ModifyMana(ManaRegen * Time.deltaTime); //mana regen
+        ModifyShield(ShieldRegen * Time.deltaTime); //this should do nothing, but here in the event it does later
     }
 
 
