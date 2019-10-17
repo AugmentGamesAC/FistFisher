@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-
+[RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Valve.VR.InteractionSystem.Throwable))]
 public class BasicSlottable : ASlottable
 {
@@ -15,8 +15,6 @@ public class BasicSlottable : ASlottable
     {
         m_MyRigidbody = gameObject.GetComponent<Rigidbody>();
         m_MyCollider = gameObject.GetComponent<Collider>();
-        if (m_MyCollider == null)
-            throw new System.InvalidOperationException("No Collider was found");
     }
 
     private void ToggleKinematicAndGravityAndSphereCollider(bool isOwnObject)
@@ -99,8 +97,7 @@ public class BasicSlottable : ASlottable
             }
 
         }
-        /*if(closestSlot!=null)
-            Debug.Log("found slot: " + closestSlot.name);*/
+
         return closestSlot;
     }
 
@@ -111,12 +108,19 @@ public class BasicSlottable : ASlottable
             return;
 
         m_LastSelected.ToggleHighlighting(false);
-        m_IsSlotted = m_LastSelected.Accept(this);
+
+        AssignSlot(m_LastSelected);
+
+        m_LastSelected = null;
+    }
+
+    public override void AssignSlot(ASlot targetSlot)
+    {
+        m_IsSlotted = targetSlot.Accept(this);
         if (m_IsSlotted)
-            m_SlotRef = m_LastSelected;
+            m_SlotRef = targetSlot;
 
         ToggleKinematicAndGravityAndSphereCollider(false);
-        m_LastSelected = null;
     }
 
     private void FixedUpdate() 
@@ -130,5 +134,6 @@ public class BasicSlottable : ASlottable
                 Destroy(gameObject);
         }
     }
-          
+
+
 }

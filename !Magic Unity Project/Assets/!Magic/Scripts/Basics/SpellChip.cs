@@ -21,9 +21,14 @@ public class SpellChip : BasicSlottable
     public void AssignSpellData(Spell newSpell)
     {
         Renderer rendererToColor = transform.Find(m_ModelName).GetComponent<Renderer>();
+        if (rendererToColor == null)
+            return;
         Material mat = rendererToColor.material;
         Color col;
         Color col2;
+
+        if (SpellManager.SpellBehaviour == null)
+            return;
 
         if (!SpellManager.SpellBehaviour.ElementColorLookup.TryGetValue(m_SpellData.ElementType, out col))
             col = Color.black;

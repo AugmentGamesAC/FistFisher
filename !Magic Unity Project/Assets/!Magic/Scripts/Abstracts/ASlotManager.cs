@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ASlotManager : MonoBehaviour
 {
+    [SerializeField]
     protected List<ASlot> m_Slots = new List<ASlot>();
 
     /// <summary>

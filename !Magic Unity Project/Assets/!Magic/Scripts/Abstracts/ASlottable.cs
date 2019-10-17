@@ -43,4 +43,5 @@ public abstract class ASlottable : AGrabable
     }
 
     public abstract void SlotDrop();
+    public abstract void AssignSlot(ASlot targetSlot);
 }

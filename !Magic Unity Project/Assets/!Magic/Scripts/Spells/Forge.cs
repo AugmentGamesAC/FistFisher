@@ -12,9 +12,9 @@ public class Forge : BasicSlotManager
     /// prefab to be used to generate new chip
     /// </summary>
     [SerializeField]
-    protected GameObject SpellChip;
+    protected GameObject m_SpellChip;
     [SerializeField]
-    protected BasicSlot OutputLocation;
+    protected BasicSlot m_OutputLocation;
 
     /// <summary>
     /// Creates new slot at the OutputLocation;
@@ -61,13 +61,15 @@ public class Forge : BasicSlotManager
     /// </summary>
     /// <param name="validatedSpell">spell that is validated by AttempSpellFormation</param>
     private void GenerateChip(SpellDescription validatedSpell) {
-        GameObject newChip = Instantiate(SpellChip, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newChip = Instantiate(m_SpellChip, new Vector3(0, 0, 0), Quaternion.identity);
         SpellChip newSpellChip = newChip.GetComponent<SpellChip>();
 
         if (newSpellChip == null)
             return;
 
-        m_GestureId = Valve.VR.InteractionSystem.Player.instance.gameObject.GetComponentInChildren<Weave>().m_AllGestureIDs.Last<int>();
+        //m_GestureId = Valve.VR.InteractionSystem.Player.instance.gameObject.GetComponentInChildren<Weave>().m_AllGestureIDs.Last<int>();
         newSpellChip.GestureId = m_GestureId;//change ID to whatever you get from airsig
+        newSpellChip.AssignSpellData(new Spell(validatedSpell));
+        newSpellChip.AssignSlot(this.m_OutputLocation);
     }
 }
