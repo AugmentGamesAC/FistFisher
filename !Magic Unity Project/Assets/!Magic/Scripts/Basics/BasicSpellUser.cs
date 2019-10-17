@@ -20,7 +20,7 @@ public class BasicSpellUser : ASpellUser
 
     private void Update()
     {
-        ModifyMana(ManaRegen);
+        ModifyMana(ManaRegen); //mana regen
     }
 
 

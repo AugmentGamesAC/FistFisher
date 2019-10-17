@@ -60,7 +60,7 @@ public class Explosion : MonoBehaviour
         if (!m_CooldownList.ContainsKey(otherEnemy))
         {
             otherSpellUser.TakeDamage(m_Damage);
-            if(otherSpellUser.ShieldCurrent > 0)
+            if(!otherSpellUser.IsDead())
                 m_CooldownList.Add(otherEnemy, cooldown);
             return;
         }
