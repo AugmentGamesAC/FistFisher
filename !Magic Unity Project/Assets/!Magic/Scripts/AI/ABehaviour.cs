@@ -16,7 +16,7 @@ public abstract class ABehaviour : MonoBehaviour
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
-        m_data.m_agent.stoppingDistance = m_data.maxDistToPlayer;
+        m_data.m_agent.stoppingDistance = 2.0f;
     }
     protected void Init(AIData aiData, float updateDelay)
     {

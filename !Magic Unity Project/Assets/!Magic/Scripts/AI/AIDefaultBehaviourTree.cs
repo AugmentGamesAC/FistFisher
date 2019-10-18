@@ -93,11 +93,11 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                 default:
                     break;
             }
+        //update last to current behaviour to not run the previous block.
+        data.m_lastBehaviour = data.m_currentBehaviour;
         }
 
         //run the functionality for this frame.
         data.state();
-        //update last to current behaviour to not run the previous block.
-        data.m_lastBehaviour = data.m_currentBehaviour;
     }
 }
