@@ -18,7 +18,6 @@ public class AIData : MonoBehaviour
     public State state;
 
     public NavMeshAgent m_agent;
-    public Transform m_AItransform;//this Enemy's position.
     public Transform followObject;//All enemies get a Ref to Player transform.
 
     //follow script vars for now.
@@ -28,9 +27,8 @@ public class AIData : MonoBehaviour
     void Start()
     {
         m_agent = GetComponent<NavMeshAgent>();
-        m_AItransform = transform;
         //Default starting behaviour, could be idle or patrol.
-        m_currentBehaviour = Behaviour.Follow;
-        m_lastBehaviour = Behaviour.Follow;
+        m_currentBehaviour = Behaviour.Idle;
+        m_lastBehaviour = Behaviour.Idle;
     }
 }
