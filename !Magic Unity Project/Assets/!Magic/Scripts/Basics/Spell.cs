@@ -10,6 +10,7 @@ public class Spell
     [System.Flags]
     public enum Elements
     {
+        Undefined = 0,
         Fire = 0x0001, //Damage Over Time  
         Ice = 0x0002, //Takes up space 
         Lightning = 0x0004, //Instant Damage
@@ -22,6 +23,7 @@ public class Spell
     /// </summary>
     public enum InteractionType
     {
+        Undefined = 0,
         StartCasting,
         StopCasting,
         BeginAiming,

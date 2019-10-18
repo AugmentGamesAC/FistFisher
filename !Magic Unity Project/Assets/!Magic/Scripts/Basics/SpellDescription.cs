@@ -51,8 +51,9 @@ public class SpellDescription
     /// This is about where the spell shows up
     /// </summary>
     [Flags]
-    public enum Aimings : long
+    public enum Aimings
     {
+        Undefined = 0,
         FromCaster = 0x00000001, //show at center of caster
         FromFinger = 0x00000002, //show at tip of finger
         FromFingerEndPoint = 0x00000004, //show at collisionPoin
