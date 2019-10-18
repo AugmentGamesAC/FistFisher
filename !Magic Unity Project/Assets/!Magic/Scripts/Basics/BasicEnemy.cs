@@ -14,7 +14,7 @@ public class BasicEnemy : ASpellUser
     //Call this on Health Change.
     void CheckDeath()
     {
-        if(m_HealthCurrent <= 0)
+        if(IsDead())
         {
             //Destroy 
 
