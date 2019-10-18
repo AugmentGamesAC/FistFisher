@@ -6,7 +6,7 @@ public abstract class ASlotManager : MonoBehaviour
 {
     protected List<ASlot> m_Slots;
     protected ASlot m_LastSelected;
-    protected ASlottable.SlotTypes m_SlotFilter; 
+    //protected ASlottable.SlotTypes m_SlotFilter; 
 
     /// <summary>
     /// Called by a slot object to add itself to m_Slots
