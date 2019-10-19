@@ -460,6 +460,8 @@ MonoBehaviour:
   m_SlotFilter: 0
   m_SlottedOffset: {x: 0, y: 0, z: 0}
   m_SlottedOrientation: {x: 0, y: 0, z: 0}
+  m_DefaultMaterial: {fileID: 0}
+  m_SecondaryMaterial: {fileID: 0}
 --- !u!1 &576964005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1354,6 @@ MonoBehaviour:
   m_MaxDistanceToDetectSlots: 0
   m_LayerMask:
   - Slot Interaction
-  m_showDebugSpheres: 1
 --- !u!114 &1859258522
 MonoBehaviour:
   m_ObjectHideFlags: 0
