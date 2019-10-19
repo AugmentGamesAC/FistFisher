@@ -11,7 +11,7 @@ public class AIFollow : ABehaviour
     {
         Init();
         //if distance between the two is smaller than the max distance.
-        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) < m_data.maxDistToPlayer * m_data.maxDistToPlayer)
+        if (PlayerInLineOfSight())
         {
             m_data.m_agent.SetDestination(m_data.followObject.position);
             m_updateTimer = 0;
@@ -28,12 +28,20 @@ public class AIFollow : ABehaviour
     {
         m_updateTimer += Time.deltaTime;
 
-        //if too close to me, go to idle, or in the future, go to attack and change min distanceToPoint to the AI's attack range.
-        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) > m_data.maxDistToPlayer * m_data.maxDistToPlayer)
+        //if too far from me, go to idle, or in the future, go to attack and change min distanceToPoint to the AI's attack range.
+        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) >
+            m_data.maxDistToPlayer * m_data.maxDistToPlayer)
         {
-            //go into attack behaviour.
+            //go into Idle
+            m_data.m_currentBehaviour = AIData.Behaviour.Idle;
         }
-        else if (m_updateTimer > m_updateDelay)
+        //if in attack range, switch to attack behaviour.
+        else if(Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) <
+            m_data.minDistToPlayer * m_data.minDistToPlayer)
+        {
+            //m_data.m_currentBehaviour = AIData.Behaviour.Attack;
+        }
+        else if (m_updateTimer > m_updateDelay && PlayerInLineOfSight())
         {
             m_data.m_agent.SetDestination(m_data.followObject.position);
             m_updateTimer = 0;
