@@ -9,7 +9,7 @@ public class AIData : MonoBehaviour
     {
         Follow,
         Idle,
-        Look
+        Patrol
     };
     public Behaviour m_currentBehaviour;
     public Behaviour m_lastBehaviour;
@@ -28,7 +28,7 @@ public class AIData : MonoBehaviour
     {
         m_agent = GetComponent<NavMeshAgent>();
         //Default starting behaviour, could be idle or patrol.
-        m_currentBehaviour = Behaviour.Idle;
-        m_lastBehaviour = Behaviour.Idle;
+        m_currentBehaviour = Behaviour.Patrol;
+        m_lastBehaviour = Behaviour.Patrol;
     }
 }

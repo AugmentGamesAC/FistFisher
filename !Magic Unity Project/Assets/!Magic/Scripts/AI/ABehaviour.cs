@@ -51,4 +51,10 @@ public abstract class ABehaviour : MonoBehaviour
         }
         return false;
     }
+
+    protected virtual bool PlayerInAttackRange()
+    {
+        //not implemented yet
+        return false;
+    }
 }
