@@ -12,12 +12,12 @@ using Valve.VR;
 
 namespace AirSig {
     public class AirSigManager : MonoBehaviour {
-		public Valve.VR.InteractionSystem.Player m_Player;
-
 		public Valve.VR.InteractionSystem.Hand GetCastingHand()
 		{
-			if (m_Player.handCount > 2) return m_Player.GetHand(0);
-			else return m_Player.isRightHanded ? m_Player.rightHand : m_Player.leftHand;
+            Valve.VR.InteractionSystem.Player player = Valve.VR.InteractionSystem.Player.instance;
+
+            if (player.handCount > 2) return player.GetHand(0);
+			else return player.isRightHanded ? player.rightHand : player.leftHand;
 		}
 		public bool m_QueueHandDataCollection { get; private set; } = false;
 		public void QueueHandDataCollection(bool queue = true)
@@ -486,7 +486,7 @@ namespace AirSig {
         // ========================================================================
 #endif
 
-        
+
 
 #if UNITY_ANDROID
 		// ====================================================================

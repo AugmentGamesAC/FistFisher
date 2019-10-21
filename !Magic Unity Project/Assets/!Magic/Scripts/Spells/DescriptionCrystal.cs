@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DescriptionCrystal : BasicSlottable
 {
+    [SerializeField]
     protected SpellDescription m_SpellDescription;
-    public SpellDescription SpellDescription { get { return SpellDescription; } }
+    public SpellDescription SpellDescription { get { return m_SpellDescription; } }
 }
