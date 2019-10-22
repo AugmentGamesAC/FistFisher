@@ -20,6 +20,8 @@ public class SpellChip : BasicSlottable
 
     public void AssignSpellData(Spell newSpell)
     {
+        m_SpellData = newSpell;
+
         Renderer rendererToColor = transform.Find(m_ModelName).GetComponent<Renderer>();
         if (rendererToColor == null)
             return;

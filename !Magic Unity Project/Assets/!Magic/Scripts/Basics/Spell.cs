@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Spell
 { 
     /// <summary>
@@ -62,8 +63,9 @@ public class Spell
     public Spell(SpellDescription spellProperties)
     {
         m_Description = spellProperties;
-        m_ManaCost = ResolveDescriptionCost(spellProperties);
         m_ElementType = ResolveElements(spellProperties);
+        m_ManaCost = ResolveDescriptionCost(spellProperties);
+
     }
 
     private Elements ResolveElements(SpellDescription discription)
