@@ -30,7 +30,7 @@ public class SpellInstance : MonoBehaviour
     public void UpdateMaterial(Spell.Elements elementalEffect)
     {
         Material newMaterial;
-        if (SpellManager.SpellBehaviour.SpellInstaceMatLookup.TryGetValue((m_InstanceState == InstanceStates.IsAiming) ? Spell.Elements.Aiming : m_Spell.ElementType, out newMaterial))
+        if (SpellManager.Instance.SpellInstaceMatLookup.TryGetValue((m_InstanceState == InstanceStates.IsAiming) ? Spell.Elements.Aiming : m_Spell.ElementType, out newMaterial))
             gameObject.GetComponentInChildren<Renderer>().material = newMaterial;
     }
 

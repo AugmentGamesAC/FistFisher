@@ -6,7 +6,6 @@
 [System.Serializable]
 public class SpellManager : MonoBehaviour
 {
-
     [System.Serializable]
     public class SpellShapeLookups : InspectorDictionary<SpellDescription.Shapes, GameObject> { }
     [SerializeField]
@@ -52,10 +51,12 @@ public class SpellManager : MonoBehaviour
             m_SpellBehaviour = this;
     }
 
-    public static SpellManager SpellBehaviour
+    public static SpellManager Instance
     {
         get
         {
+            if (m_SpellBehaviour == null)
+                m_SpellBehaviour = GameObject.FindObjectOfType<SpellManager>();
             return m_SpellBehaviour;
         }
     }

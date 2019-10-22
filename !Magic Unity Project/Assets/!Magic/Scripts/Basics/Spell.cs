@@ -113,7 +113,7 @@ public class Spell
         m_SpellUser = spellUser;
 
         GameObject spellTemplate;
-        if (!SpellManager.SpellBehaviour.SpellShapeLookup.TryGetValue(m_Description.Shape, out spellTemplate))
+        if (!SpellManager.Instance.SpellShapeLookup.TryGetValue(m_Description.Shape, out spellTemplate))
             spellTemplate = m_DefaultSpellInstance;
 
         m_SpellState = MonoBehaviour.Instantiate(
