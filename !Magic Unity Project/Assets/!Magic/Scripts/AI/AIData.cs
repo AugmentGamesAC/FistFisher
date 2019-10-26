@@ -9,8 +9,10 @@ public class AIData : MonoBehaviour
     {
         Follow,
         Idle,
-        Patrol
+        Patrol,
+        Attack
     };
+
     public Behaviour m_currentBehaviour;
     public Behaviour m_lastBehaviour;
 
@@ -21,14 +23,20 @@ public class AIData : MonoBehaviour
     public Transform followObject;//All enemies get a Ref to Player transform.
 
     //follow script vars for now.
-    public float minDistToPlayer;
-    public float maxDistToPlayer;
+    public float sightRange;
+    public float attackRange;
+    public float patrolDelay;
 
-    void Start()
+    void Awake()
     {
         m_agent = GetComponent<NavMeshAgent>();
+
         //Default starting behaviour, could be idle or patrol.
         m_currentBehaviour = Behaviour.Patrol;
         m_lastBehaviour = Behaviour.Patrol;
+
+        sightRange = 10.0f;
+        patrolDelay = 3.0f;
+        attackRange = 3.1f;
     }
 }

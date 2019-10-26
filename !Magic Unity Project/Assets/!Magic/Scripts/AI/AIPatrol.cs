@@ -13,8 +13,8 @@ public class AIPatrol : ABehaviour
     {
         Init();
 
-        //m_data.m_currentBehaviour = AIData.Behaviour.Follow; dont forget transitions to these guys.
         //m_data.m_currentBehaviour = AIData.Behaviour.Idle;
+        //add wait at waypoint.
 
         //find all control points in the level if the list is empty.
         if (patrolPoints == null)
@@ -40,15 +40,23 @@ public class AIPatrol : ABehaviour
 
     public override void OnBehaviourUpdate()
     {
+        m_updateTimer += Time.deltaTime;
+
         //transition if player is in line of sight.
-        if(PlayerInLineOfSight())
+        if (PlayerInLineOfSight())
         {
-            m_data.m_currentBehaviour = AIData.Behaviour.Follow;
+            TransitionBehaviour(AIData.Behaviour.Follow);
             return;
         }
 
-        if (!m_data.m_agent.pathPending && m_data.m_agent.remainingDistance < 2.0f)
+        //stall to look around.
+        if (!m_data.m_agent.pathPending && 
+            m_data.m_agent.remainingDistance < 2.0f &&
+            m_updateTimer > m_data.patrolDelay)
+        {
             GoToNextPoint();
+            m_updateTimer = 0;
+        } 
     }
 
     public override void OnBehaviourEnd()

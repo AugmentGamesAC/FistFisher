@@ -9,6 +9,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     private AIFollow m_followScript;
     private Idle m_idleScript;
     private AIPatrol m_patrolScript;
+    private AIAttack m_attackScript;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +24,15 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         if (GetComponent<AIPatrol>() == null)
             gameObject.AddComponent<AIPatrol>();
 
+        if (GetComponent<AIAttack>() == null)
+            gameObject.AddComponent<AIAttack>();
+
         //set our scripts.
         m_data = GetComponent<AIData>();
         m_followScript = GetComponent<AIFollow>();
         m_idleScript = GetComponent<Idle>();
         m_patrolScript = GetComponent<AIPatrol>();
+        m_attackScript = GetComponent<AIAttack>();
 
         //set our current state dependant on the Ai's current behaviour.
         switch (m_data.m_currentBehaviour)
@@ -42,6 +47,10 @@ public class AIDefaultBehaviourTree : MonoBehaviour
 
             case AIData.Behaviour.Patrol:
                 m_data.state = m_patrolScript.OnBehaviourStart;
+                break;
+
+            case AIData.Behaviour.Attack:
+                m_data.state = m_attackScript.OnBehaviourStart;
                 break;
 
             default:
@@ -71,6 +80,10 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     m_data.state = m_patrolScript.OnBehaviourStart;
                     break;
 
+                case AIData.Behaviour.Attack:
+                    m_data.state = m_attackScript.OnBehaviourStart;
+                    break;
+
                 default:
                     break;
             }
@@ -88,6 +101,10 @@ public class AIDefaultBehaviourTree : MonoBehaviour
 
                 case AIData.Behaviour.Patrol:
                     m_patrolScript.OnBehaviourEnd();
+                    break;
+
+                case AIData.Behaviour.Attack:
+                    m_attackScript.OnBehaviourEnd();
                     break;
 
                 default:

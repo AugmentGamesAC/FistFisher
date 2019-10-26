@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AIFollow : ABehaviour
 {
-
-
-    //Initial function.
     public override void OnBehaviourStart()
     {
         Init();
@@ -19,7 +16,7 @@ public class AIFollow : ABehaviour
         }
         else
         {
-            m_data.m_currentBehaviour = AIData.Behaviour.Idle;
+            TransitionBehaviour(AIData.Behaviour.Idle);
         }
     }
 
@@ -28,24 +25,22 @@ public class AIFollow : ABehaviour
     {
         m_updateTimer += Time.deltaTime;
 
-        //if too far from me, go to idle, or in the future, go to attack and change min distanceToPoint to the AI's attack range.
-        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) >
-            m_data.maxDistToPlayer * m_data.maxDistToPlayer)
+        //if too far from me, go to idle.
+        if (!PlayerInLineOfSight())
         {
-            //go into Idle
-            m_data.m_currentBehaviour = AIData.Behaviour.Idle;
+            TransitionBehaviour(AIData.Behaviour.Idle);
         }
-        //if in attack range, switch to attack behaviour.
-        else if(Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) <
-            m_data.minDistToPlayer * m_data.minDistToPlayer)
+        else if(PlayerInAttackRange())
         {
-            //m_data.m_currentBehaviour = AIData.Behaviour.Attack;
+            TransitionBehaviour(AIData.Behaviour.Attack);
         }
         else if (m_updateTimer > m_updateDelay && PlayerInLineOfSight())
         {
             m_data.m_agent.SetDestination(m_data.followObject.position);
             m_updateTimer = 0;
         }
+        
+        //if player is out of line of sight for certain amount of time, go to Idle.
     }
 
     public override void OnBehaviourEnd()
