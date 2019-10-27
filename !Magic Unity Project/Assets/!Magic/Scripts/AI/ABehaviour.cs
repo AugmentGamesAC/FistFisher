@@ -11,6 +11,9 @@ public abstract class ABehaviour : MonoBehaviour
     protected Ray m_Ray;
     protected LineRenderer m_Line;
 
+
+
+
     public abstract void OnBehaviourStart();
     public abstract void OnBehaviourUpdate();
     public abstract void OnBehaviourEnd();
@@ -19,7 +22,10 @@ public abstract class ABehaviour : MonoBehaviour
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
-        m_data.m_agent.stoppingDistance = 2.0f;
+        m_data.m_agent.stoppingDistance = m_data.m_stoppingDistance;
+        m_data.m_agent.speed = m_data.m_movementSpeed;
+        m_data.m_agent.angularSpeed = m_data.m_angularSpeed;
+        m_data.m_agent.acceleration = m_data.m_acceleration;
         m_Line = gameObject.GetComponent<LineRenderer>();
     }
     protected void Init(AIData aiData, float updateDelay)

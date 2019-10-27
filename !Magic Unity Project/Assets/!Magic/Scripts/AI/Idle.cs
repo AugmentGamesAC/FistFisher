@@ -17,7 +17,8 @@ public class Idle : ABehaviour
         m_updateTimer += Time.deltaTime;
 
         if (PlayerInLineOfSight())
-            m_data.m_currentBehaviour = AIData.Behaviour.Follow;
+            //m_data.m_currentBehaviour = AIData.Behaviour.Follow;
+            m_data.m_currentBehaviour = AIData.Behaviour.FlyTo; //need a smarter switch
     }
     public override void OnBehaviourEnd()
     {

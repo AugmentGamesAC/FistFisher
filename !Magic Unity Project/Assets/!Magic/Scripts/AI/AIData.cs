@@ -9,7 +9,8 @@ public class AIData : MonoBehaviour
     {
         Follow,
         Idle,
-        Look
+        Look,
+        FlyTo
     };
     public Behaviour m_currentBehaviour;
     public Behaviour m_lastBehaviour;
@@ -23,6 +24,18 @@ public class AIData : MonoBehaviour
     //follow script vars for now.
     public float minDistToPlayer;
     public float maxDistToPlayer;
+
+    /***********************************NAVMESH DATA RAGARDING MOVEMENT STATS***********************************/
+    [SerializeField]
+    public float m_movementSpeed = 3.5f;
+    [SerializeField]
+    public float m_angularSpeed = 120.0f;
+    [SerializeField]
+    public float m_acceleration = 8.0f;
+    [SerializeField]
+    public float m_stoppingDistance = 2.0f;
+
+    /***********************************************************************************************************/
 
     void Start()
     {

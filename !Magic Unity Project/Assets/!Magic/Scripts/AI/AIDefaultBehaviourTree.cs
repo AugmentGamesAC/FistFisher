@@ -9,6 +9,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     private AIFollow followScript;
     private Idle idleScript;
     private Look lookScript;
+    private AIFlyTo flyScript;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,8 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         //check if behaviour tree has all default behaviours.
         if (GetComponent<AIFollow>() == null)
             gameObject.AddComponent<AIFollow>();
+        if (GetComponent<AIFlyTo>() == null) //for now. make something check if flying or not later
+            gameObject.AddComponent<AIFlyTo>();
 
         if (GetComponent<Idle>() == null)
             gameObject.AddComponent<Idle>();
@@ -28,12 +31,17 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         followScript = GetComponent<AIFollow>();
         idleScript = GetComponent<Idle>();
         lookScript = GetComponent<Look>();
+        flyScript = GetComponent<AIFlyTo>(); //for now
 
         //set our current state dependant on the Ai's current behaviour.
         switch (data.m_currentBehaviour)
         {
             case AIData.Behaviour.Follow:
                 data.state = followScript.OnBehaviourStart;
+                break;
+
+            case AIData.Behaviour.FlyTo:
+                data.state = flyScript.OnBehaviourStart;
                 break;
 
             case AIData.Behaviour.Idle:
@@ -67,6 +75,10 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     data.state = idleScript.OnBehaviourStart;
                     break;
 
+                case AIData.Behaviour.FlyTo:
+                    data.state = flyScript.OnBehaviourStart;
+                    break;
+
                 //case AIData.Behaviour.Look:
                 //    data.state = lookScript.OnBehaviourStart;
                 //    break;
@@ -80,6 +92,10 @@ public class AIDefaultBehaviourTree : MonoBehaviour
             {
                 case AIData.Behaviour.Follow:
                     followScript.OnBehaviourEnd();
+                    break;
+
+                case AIData.Behaviour.FlyTo:
+                    flyScript.OnBehaviourEnd();
                     break;
 
                 case AIData.Behaviour.Idle:
