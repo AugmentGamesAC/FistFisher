@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(AIData))]
 public class AIDefaultBehaviourTree : MonoBehaviour
 {
-    private AIData data;
-    private AIFollow followScript;
-    private Idle idleScript;
-    private Look lookScript;
-    private AIFlyTo flyScript;
+    private AIData m_data;
+    private AIFollow m_followScript;
+    private Idle m_idleScript;
+    private AIPatrol m_patrolScript;
+    private AIAttack m_attackScript;
 
     // Start is called before the first frame update
     void Start()
@@ -23,21 +23,24 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         if (GetComponent<Idle>() == null)
             gameObject.AddComponent<Idle>();
 
-        if (GetComponent<Look>() == null)
-            gameObject.AddComponent<Look>();
+        if (GetComponent<AIPatrol>() == null)
+            gameObject.AddComponent<AIPatrol>();
+
+        if (GetComponent<AIAttack>() == null)
+            gameObject.AddComponent<AIAttack>();
 
         //set our scripts.
-        data = GetComponent<AIData>();
-        followScript = GetComponent<AIFollow>();
-        idleScript = GetComponent<Idle>();
-        lookScript = GetComponent<Look>();
-        flyScript = GetComponent<AIFlyTo>(); //for now
+        m_data = GetComponent<AIData>();
+        m_followScript = GetComponent<AIFollow>();
+        m_idleScript = GetComponent<Idle>();
+        m_patrolScript = GetComponent<AIPatrol>();
+        m_attackScript = GetComponent<AIAttack>();
 
         //set our current state dependant on the Ai's current behaviour.
-        switch (data.m_currentBehaviour)
+        switch (m_data.m_currentBehaviour)
         {
             case AIData.Behaviour.Follow:
-                data.state = followScript.OnBehaviourStart;
+                m_data.state = m_followScript.OnBehaviourStart;
                 break;
 
             case AIData.Behaviour.FlyTo:
@@ -45,12 +48,16 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                 break;
 
             case AIData.Behaviour.Idle:
-                data.state = idleScript.OnBehaviourStart;
+                m_data.state = m_idleScript.OnBehaviourStart;
                 break;
 
-            //case AIData.Behaviour.Look:
-            //    data.state = lookScript.OnBehaviourStart;
-            //    break;
+            case AIData.Behaviour.Patrol:
+                m_data.state = m_patrolScript.OnBehaviourStart;
+                break;
+
+            case AIData.Behaviour.Attack:
+                m_data.state = m_attackScript.OnBehaviourStart;
+                break;
 
             default:
                 break;
@@ -62,36 +69,40 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     {
         //change current behaviour in behaviour scripts and let the scripts update the states.
         //if current behaviour is changed from last frame.
-        if(data.m_currentBehaviour != data.m_lastBehaviour)
+        if (m_data.m_currentBehaviour != m_data.m_lastBehaviour)
         {
             //set the state according to its new behaviour.
-            switch (data.m_currentBehaviour)
+            switch (m_data.m_currentBehaviour)
             {
                 case AIData.Behaviour.Follow:
-                    data.state = followScript.OnBehaviourStart;
+                    m_data.state = m_followScript.OnBehaviourStart;
                     break;
 
                 case AIData.Behaviour.Idle:
-                    data.state = idleScript.OnBehaviourStart;
+                    m_data.state = m_idleScript.OnBehaviourStart;
+                    break;
+
+                case AIData.Behaviour.Patrol:
+                    m_data.state = m_patrolScript.OnBehaviourStart;
                     break;
 
                 case AIData.Behaviour.FlyTo:
                     data.state = flyScript.OnBehaviourStart;
                     break;
 
-                //case AIData.Behaviour.Look:
-                //    data.state = lookScript.OnBehaviourStart;
-                //    break;
+                case AIData.Behaviour.Attack:
+                    m_data.state = m_attackScript.OnBehaviourStart;
+                    break;
 
                 default:
                     break;
             }
 
             //stop the last behaviour.
-            switch (data.m_lastBehaviour)
+            switch (m_data.m_lastBehaviour)
             {
                 case AIData.Behaviour.Follow:
-                    followScript.OnBehaviourEnd();
+                    m_followScript.OnBehaviourEnd();
                     break;
 
                 case AIData.Behaviour.FlyTo:
@@ -99,21 +110,25 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     break;
 
                 case AIData.Behaviour.Idle:
-                    idleScript.OnBehaviourEnd();
+                    m_idleScript.OnBehaviourEnd();
                     break;
 
-                //case AIData.Behaviour.Look:
-                //    lookScript.OnBehaviourEnd();
-                //    break;
+                case AIData.Behaviour.Patrol:
+                    m_patrolScript.OnBehaviourEnd();
+                    break;
+
+                case AIData.Behaviour.Attack:
+                    m_attackScript.OnBehaviourEnd();
+                    break;
 
                 default:
                     break;
             }
-        //update last to current behaviour to not run the previous block.
-        data.m_lastBehaviour = data.m_currentBehaviour;
+            //update last to current behaviour to not run the previous block.
+            m_data.m_lastBehaviour = m_data.m_currentBehaviour;
         }
 
-        //run the functionality for this frame.
-        data.state();
+        //run the currentBehaviour's function for this frame.
+        m_data.state();
     }
 }
