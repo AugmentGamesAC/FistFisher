@@ -29,7 +29,7 @@ public class AIData : MonoBehaviour
     public float attackRange;
     public float patrolDelay;
 
-    /***********************************NAVMESH DATA RAGARDING MOVEMENT STATS***********************************/
+    /***********************************NAVMESH DATA REGARDING MOVEMENT STATS***********************************/
     [SerializeField]
     public float m_movementSpeed = 3.5f;
     [SerializeField]
@@ -38,6 +38,8 @@ public class AIData : MonoBehaviour
     public float m_acceleration = 8.0f;
     [SerializeField]
     public float m_stoppingDistance = 2.0f;
+    [SerializeField]
+    public bool m_isFlying = false;
 
     /***********************************************************************************************************/
 

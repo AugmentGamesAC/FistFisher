@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIFlyTo : ABehaviour
 {
-    public float m_ObstacleDetectRadius = 1.0f;
-    public float m_avoidanceWeight = 0.5f;
+    public float m_ObstacleDetectRadius = 5.0f;
+    public float m_avoidanceWeight = 50.5f;
 
     bool m_isMoving = false;
 
@@ -16,6 +17,9 @@ public class AIFlyTo : ABehaviour
     {
         Init();
         m_moveDirection = Vector3.zero;
+
+        m_data.m_agent = null;
+
         //if distance between the two is smaller than the max distance.
         if (PlayerInLineOfSight())
         {
@@ -25,11 +29,11 @@ public class AIFlyTo : ABehaviour
         }
         else
         {
-            m_data.m_currentBehaviour = AIData.Behaviour.Idle;
+            TransitionBehaviour(AIData.Behaviour.Idle);
         }
     }
 
-    //since we're not doing navmeshyes for this, we need to use lateupdate to actually move and the other update to get direction
+    //since we're not doing navmeshes for this, we need to use lateupdate to actually move and the other update to get direction
     //(Sam is using Update for all AI behaviour, so this should be fine)
     void LateUpdate()
     {
@@ -40,10 +44,10 @@ public class AIFlyTo : ABehaviour
             {
                 gameObject.transform.position = m_data.followObject.transform.position;
             }
-            /*else
+            else
             {
                 gameObject.transform.Translate(0, 0, m_data.m_movementSpeed * Time.deltaTime);
-            }*/
+            }
         }
     }
 
@@ -51,29 +55,24 @@ public class AIFlyTo : ABehaviour
     public override void OnBehaviourUpdate()
     {
         m_updateTimer += Time.deltaTime;
-        m_moveDirection = Vector3.zero;
-        //if too far from me, go to idle, or in the future, go to attack and change min distanceToPoint to the AI's attack range.
-        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) >
-            m_data.maxDistToPlayer * m_data.maxDistToPlayer)
-        {
-            //go into Idle
-            m_data.m_currentBehaviour = AIData.Behaviour.Idle;
-        }
-        //if in attack range, switch to attack behaviour.
-        else if(Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) <
-            m_data.minDistToPlayer * m_data.minDistToPlayer)
-        {
-            //m_data.m_currentBehaviour = AIData.Behaviour.Attack;
-        }
 
-
-        //this is where the actual move code should init
+        //if too far from me, go to idle.
+        if (!PlayerInLineOfSight())
+        {
+            TransitionBehaviour(AIData.Behaviour.Idle);
+        }
+        else if(PlayerInAttackRange())
+        {
+            TransitionBehaviour(AIData.Behaviour.Attack);
+        }
         else if (m_updateTimer > m_updateDelay && PlayerInLineOfSight())
         {
-            //m_data.m_agent.SetDestination(m_data.followObject.position); //this is where Sam had it update navmesh moving. don't.
+            m_isMoving = true;
             m_moveDirection = GetDirectionToMove();
             m_updateTimer = 0;
         }
+
+        //LateUpdate();
     }
 
 
@@ -123,6 +122,6 @@ public class AIFlyTo : ABehaviour
 
     public override void OnBehaviourEnd()
     {
-        //empty for now.
+        m_data.m_agent = GetComponent<NavMeshAgent>();
     }
 }

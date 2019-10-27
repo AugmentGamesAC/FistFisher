@@ -10,6 +10,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     private Idle m_idleScript;
     private AIPatrol m_patrolScript;
     private AIAttack m_attackScript;
+    private AIFlyTo m_flyToScript;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         m_idleScript = GetComponent<Idle>();
         m_patrolScript = GetComponent<AIPatrol>();
         m_attackScript = GetComponent<AIAttack>();
+        m_flyToScript = GetComponent<AIFlyTo>();
 
         //set our current state dependant on the Ai's current behaviour.
         switch (m_data.m_currentBehaviour)
@@ -44,7 +46,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                 break;
 
             case AIData.Behaviour.FlyTo:
-                data.state = flyScript.OnBehaviourStart;
+                m_data.state = m_flyToScript.OnBehaviourStart;
                 break;
 
             case AIData.Behaviour.Idle:
@@ -87,7 +89,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     break;
 
                 case AIData.Behaviour.FlyTo:
-                    data.state = flyScript.OnBehaviourStart;
+                    m_data.state = m_flyToScript.OnBehaviourStart;
                     break;
 
                 case AIData.Behaviour.Attack:
@@ -106,7 +108,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     break;
 
                 case AIData.Behaviour.FlyTo:
-                    flyScript.OnBehaviourEnd();
+                    m_flyToScript.OnBehaviourEnd();
                     break;
 
                 case AIData.Behaviour.Idle:
