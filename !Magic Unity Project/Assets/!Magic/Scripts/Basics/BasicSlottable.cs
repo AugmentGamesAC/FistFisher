@@ -14,7 +14,6 @@ public class BasicSlottable : ASlottable
     public void Start()
     {
         m_MyRigidbody = gameObject.GetComponent<Rigidbody>();
-        m_MyCollider = gameObject.GetComponent<Collider>();
     }
 
     private void ToggleKinematicAndGravityAndSphereCollider(bool isOwnObject)
@@ -24,6 +23,8 @@ public class BasicSlottable : ASlottable
 
     private void ToggleKinematicAndGravityAndSphereCollider(bool kinematic, bool gravity)
     {
+        if (m_MyRigidbody == default(Rigidbody))
+            m_MyRigidbody = gameObject.GetComponent<Rigidbody>();
         m_MyRigidbody.isKinematic = kinematic;
         m_MyRigidbody.useGravity = gravity;
     }
