@@ -29,9 +29,9 @@ public class AIAttack : ABehaviour
         //if player is out of range, go to follow.
         if (!PlayerInAttackRange())
         {
-            if (m_data.m_isFlying)
-                TransitionBehaviour(AIData.Behaviour.FlyTo);
-            else
+            //if (m_data.m_isFlying)
+                //TransitionBehaviour(AIData.Behaviour.FlyTo);
+            //else
                 TransitionBehaviour(AIData.Behaviour.Follow);
         }
         else if(PlayerInAttackRange() && m_updateTimer > m_updateDelay)

@@ -10,7 +10,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     private Idle m_idleScript;
     private AIPatrol m_patrolScript;
     private AIAttack m_attackScript;
-    private AIFlyTo m_flyToScript;
+    //private AIFlyTo m_flyToScript;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +18,8 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         //check if behaviour tree has all default behaviours.
         if (GetComponent<AIFollow>() == null)
             gameObject.AddComponent<AIFollow>();
-        if (GetComponent<AIFlyTo>() == null) //for now. make something check if flying or not later
-            gameObject.AddComponent<AIFlyTo>();
+        //if (GetComponent<AIFlyTo>() == null) //for now. make something check if flying or not later
+            //gameObject.AddComponent<AIFlyTo>();
 
         if (GetComponent<Idle>() == null)
             gameObject.AddComponent<Idle>();
@@ -36,7 +36,7 @@ public class AIDefaultBehaviourTree : MonoBehaviour
         m_idleScript = GetComponent<Idle>();
         m_patrolScript = GetComponent<AIPatrol>();
         m_attackScript = GetComponent<AIAttack>();
-        m_flyToScript = GetComponent<AIFlyTo>();
+        //m_flyToScript = GetComponent<AIFlyTo>();
 
         //set our current state dependant on the Ai's current behaviour.
         switch (m_data.m_currentBehaviour)
@@ -45,9 +45,9 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                 m_data.state = m_followScript.OnBehaviourStart;
                 break;
 
-            case AIData.Behaviour.FlyTo:
+            /*case AIData.Behaviour.FlyTo:
                 m_data.state = m_flyToScript.OnBehaviourStart;
-                break;
+                break;*/
 
             case AIData.Behaviour.Idle:
                 m_data.state = m_idleScript.OnBehaviourStart;
@@ -88,9 +88,9 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     m_data.state = m_patrolScript.OnBehaviourStart;
                     break;
 
-                case AIData.Behaviour.FlyTo:
+                /*case AIData.Behaviour.FlyTo:
                     m_data.state = m_flyToScript.OnBehaviourStart;
-                    break;
+                    break;*/
 
                 case AIData.Behaviour.Attack:
                     m_data.state = m_attackScript.OnBehaviourStart;
@@ -107,9 +107,9 @@ public class AIDefaultBehaviourTree : MonoBehaviour
                     m_followScript.OnBehaviourEnd();
                     break;
 
-                case AIData.Behaviour.FlyTo:
+                /*case AIData.Behaviour.FlyTo:
                     m_flyToScript.OnBehaviourEnd();
-                    break;
+                    break;*/
 
                 case AIData.Behaviour.Idle:
                     m_idleScript.OnBehaviourEnd();

@@ -22,9 +22,9 @@ public class Idle : ABehaviour
         //m_data.m_currentBehaviour = AIData.Behaviour.Follow;
         //m_data.m_currentBehaviour = AIData.Behaviour.FlyTo; //need a smarter switch
         {
-            if (m_data.m_isFlying)
-                TransitionBehaviour(AIData.Behaviour.FlyTo);
-            else
+            //if (m_data.m_isFlying)
+                //TransitionBehaviour(AIData.Behaviour.FlyTo);
+            //else
                 TransitionBehaviour(AIData.Behaviour.Follow);
         }
         //if player if player is out of line of sight for certain amount of time, go to patrol.

@@ -10,7 +10,7 @@ public class AIData : MonoBehaviour
         Follow,
         Idle,
         Look,
-        FlyTo,
+        //FlyTo, //removed for now
         Patrol,
         Attack
     };
@@ -38,8 +38,8 @@ public class AIData : MonoBehaviour
     public float m_acceleration = 8.0f;
     [SerializeField]
     public float m_stoppingDistance = 2.0f;
-    [SerializeField]
-    public bool m_isFlying = false;
+    //[SerializeField]
+    //public bool m_isFlying = false;
 
     /***********************************************************************************************************/
 

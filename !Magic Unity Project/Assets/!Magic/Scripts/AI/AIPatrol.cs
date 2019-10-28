@@ -45,9 +45,9 @@ public class AIPatrol : ABehaviour
         //transition if player is in line of sight.
         if (PlayerInLineOfSight())
         {
-            if (m_data.m_isFlying)
-                TransitionBehaviour(AIData.Behaviour.FlyTo);
-            else
+            //if (m_data.m_isFlying)
+                //TransitionBehaviour(AIData.Behaviour.FlyTo);
+            //else
                 TransitionBehaviour(AIData.Behaviour.Follow);
             return;
         }
