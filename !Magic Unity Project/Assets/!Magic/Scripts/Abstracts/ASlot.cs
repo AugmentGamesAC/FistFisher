@@ -54,6 +54,9 @@ public abstract class ASlot : MonoBehaviour
             m_SlotFilter = slottable.SlotType;
         //}
 
+        if (m_SlotManager != null)
+            m_SlotManager.SlotUpdate(this);
+
         return true;
     }
     public bool CanAccept(ASlottable slotable)

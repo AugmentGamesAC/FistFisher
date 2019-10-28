@@ -34,11 +34,20 @@ public class SpellList : BasicSlotManager
     public delegate void SpellListUpdated(IEnumerable<int> newSpellList);
     public event SpellListUpdated OnSpellListUpdated;
 
+
+    /// <summary>
+    /// This is used to notify when the spell list has possibly changed, it trigger the event based on the 
+    /// slot, no futher details looked at at this point
+    /// </summary>
+    /// <param name="changedSlot">The slot that called this function</param>
     public override void SlotUpdate(ASlot changedSlot)
     {
+        //if event list isn't empty invoke the event sending the list of spells now avaiblable
         OnSpellListUpdated?.Invoke
         (
+            //Linq statement applied to the list of slots, only dealing with slots WHERE chips are in them
             m_Slots.Where(slot => ((slot.Slotted != null) && ((slot.Slotted.GetComponent<SpellChip>() != null))))
+                //and returning the list of gesture ids
                 .Select(slot => slot.Slotted.GetComponent<SpellChip>().GestureId)
         );
     }
