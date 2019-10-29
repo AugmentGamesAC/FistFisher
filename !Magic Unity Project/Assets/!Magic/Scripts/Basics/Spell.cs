@@ -230,6 +230,7 @@ public class Spell
             ((isNegativeDimention) ? -1 : 1 * ((incrementDimention) ? positionDimention : 0));
     }
 
+    //TODO: code requires a mana check before casting and then a using of the mana
     private bool ResolveCasting()
     {
         if ((m_SpellUser == null)|| (m_SpellState == null))
@@ -237,15 +238,17 @@ public class Spell
         if (m_SpellState.InstantceState != SpellInstance.InstanceStates.IsAiming)
             return false;
 
-       if (!m_Description.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
-            m_SpellState.gameObject.transform.parent.SetParent(null);
-        if (m_Description.Effect == SpellDescription.Effects.Summon)
-            m_SpellState.gameObject.transform.parent.gameObject.layer = 0;
+        SpellManager.CastSpell spellToCast = default(SpellManager.CastSpell);
 
-        m_SpellState.UpdateState(SpellInstance.InstanceStates.IsActive);
+        if (!SpellManager.Instance.SpellResolutionLookup.TryGetValue(SpellDescription.TranslateSpellCode(Description), out spellToCast))
+            spellToCast = SpellManager.CastStandardSpell;
 
-        return true;
+        return spellToCast(m_SpellState, m_SpellStateSecond);
     }
+
+
+    
+
 
     private bool Cancel()
     {
