@@ -19,6 +19,7 @@ public class SpellInstance : MonoBehaviour
     public float m_projectileMoveSpeed = 5.0f;
     public float m_maxExplosionScale = 6.0f;
     public Rigidbody m_rigidBody;
+    public int m_growAmount;
 
     [SerializeField]
     protected InstanceStates m_InstanceState;
@@ -58,6 +59,7 @@ public class SpellInstance : MonoBehaviour
         //    if (m_CooldownList[damaged] <= 0)
         //        m_CooldownList.Remove(damaged);
         //}
+        //created inherited class and override function.
 
         ResolveProjectileBehavoir();
     }
@@ -72,18 +74,11 @@ public class SpellInstance : MonoBehaviour
         while (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
         {
             gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
-            m_rigidBody.useGravity = false;
-            m_rigidBody.velocity = new Vector3(0, 0, 0);
         }
+        m_rigidBody.useGravity = false;
+        m_rigidBody.velocity = Vector3.zero;
 
-        StartCoroutine(DelayedDestroy(1));
-    }
-
-    
-    IEnumerator DelayedDestroy(int delayAmount)
-    {
-        yield return new WaitForSeconds(delayAmount);
-        Destroy(gameObject);
+        Destroy(gameObject, m_growAmount);
     }
 
 
