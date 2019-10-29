@@ -30,7 +30,7 @@ public class SpellManager : MonoBehaviour
         };
     public ElementColorLookups ElementColorLookup { get { return m_ElementColorLookup; } }
 
-    //TODO: move final verison into SpellManager
+
     [System.Serializable]
     public class ShapeColorLookups : InspectorDictionary<SpellDescription.Shapes, Color> { }
     [SerializeField]
@@ -44,6 +44,70 @@ public class SpellManager : MonoBehaviour
 
     [SerializeField]
     private static SpellManager m_SpellBehaviour;
+
+
+    public delegate bool CastSpell(SpellInstance firstInstance, SpellInstance secondInstance);
+
+    [System.Serializable]
+    public class SpellResolutionLookups : InspectorDictionary<double, CastSpell> { }
+    [SerializeField]
+    protected SpellResolutionLookups m_SpellResolutionLookup = new SpellResolutionLookups()
+    {
+        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastDoubleSpell }
+    };
+    public SpellResolutionLookups SpellResolutionLookup { get { return m_SpellResolutionLookup; } }
+
+
+
+
+    static public bool CastDoubleSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        SpellDescription spellDescription = firstInstance.m_Spell.Description;
+
+        if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
+            firstInstance.gameObject.transform.parent.SetParent(null);
+        if (spellDescription.Effect == SpellDescription.Effects.Summon)
+            firstInstance.gameObject.transform.parent.gameObject.layer = 0;
+
+        firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
+
+        spellDescription = secondInstance.m_Spell.Description;
+        if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
+            secondInstance.gameObject.transform.parent.SetParent(null);
+        if (spellDescription.Effect == SpellDescription.Effects.Summon)
+            secondInstance.gameObject.transform.parent.gameObject.layer = 0;
+
+        firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
+
+        return true;
+    }
+
+    static public bool CastStandardSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+
+
+        SpellDescription spellDescription = firstInstance.m_Spell.Description;
+
+        if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
+            firstInstance.gameObject.transform.parent.SetParent(null);
+        if (spellDescription.Effect == SpellDescription.Effects.Summon)
+            firstInstance.gameObject.transform.parent.gameObject.layer = 0;
+
+        firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
+
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     private void Awake()
     {
@@ -60,4 +124,8 @@ public class SpellManager : MonoBehaviour
             return m_SpellBehaviour;
         }
     }
+
+
+
+
 }

@@ -26,10 +26,30 @@ public class Gauntlet : BasicSpellUser
     public Spell CurrentSpell {  get { return m_currentSpell; } }
 
 
-
-    public void ResolveInteraction()
+    /// <summary>
+    /// This simple triggering should be called to switch between spell states, spell selection is a different call
+    /// </summary>
+    public void ResolveSimpleTriggering()
     {
-        
+        if (m_currentSpell == default(Spell))
+            throw new System.InvalidOperationException("Gauntlet trying to interact with no spell");
+
+        //right now this should only return false if mana is too low
+        if (!m_currentSpell.Interact(m_currentSpell.NextState, this))
+            ManaFailed();
+    }
+
+    public void PickSpell(int GestureId)
+    {
+        int spellindex = SpellList.GetSpellIndex(GestureId);
+
+        if (spellindex == -1)
+        {
+            SpellNotReconized();
+            return;
+        }
+
+        m_currentSpell = SpellList.ReadSpell(spellindex);
     }
 
     protected void ManaFailed(){ throw new System.NotImplementedException(); }
