@@ -113,4 +113,33 @@ public class SpellDescription
         m_Usage = usage;
         m_Aiming = aiming;
     }
+
+    public double ToSpellCode()
+    {
+        return TranslateSpellCode(this);
+    }
+
+    /// <summary>
+    /// Comes up with a number to use for identifying spells/spellgroups in our spellcasting systems,
+    /// See Spellmanger for usage examples
+    /// </summary>
+    /// <param name="shape">desciption property</param>
+    /// <param name="effect">desciption property</param>
+    /// <param name="usage">desciption property</param>
+    /// <param name="aiming">desciption property</param>
+    /// <returns></returns>
+    public static double TranslateSpellCode(Shapes shape, Effects effect, Usages usage, Aimings aiming)
+    {
+        double calcuatation = (double)aiming;
+        calcuatation += (int)usage * (double)0x00100000; //bigger number than  any Aiming value Usage must be < 16 total
+        calcuatation += (int)effect * (double)0x01000000; //biger number than any Usage value Effect must be < 16 total
+        //shapes are not currently translated into spellcodes
+
+        return default(Double);
+    }
+    public static double TranslateSpellCode(SpellDescription description)
+    {
+        return TranslateSpellCode(description.Shape, description.Effect, description.Usage, description.Aiming);
+    }
+
 }

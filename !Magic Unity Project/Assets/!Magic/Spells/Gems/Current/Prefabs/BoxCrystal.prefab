@@ -59,7 +59,7 @@ MonoBehaviour:
     m_Shape: 0
     m_Effect: 0
     m_Usage: 0
-    m_Aiming: 0
+    m_Aiming: 8196
 --- !u!65 &-6934835884046552364
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221,6 +221,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6010308250916361566}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: a836fecf52f8e9149bccd3d3ad7cfd59,
+        type: 3}
+      propertyPath: m_Name
+      value: BoxGem
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a836fecf52f8e9149bccd3d3ad7cfd59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -290,11 +295,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.124495134
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: a836fecf52f8e9149bccd3d3ad7cfd59,
-        type: 3}
-      propertyPath: m_Name
-      value: BoxGem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a836fecf52f8e9149bccd3d3ad7cfd59, type: 3}
