@@ -16,12 +16,18 @@ public class SpellInstance : MonoBehaviour
         IsEviromental
     }
 
+    public float m_projectileMoveSpeed = 5.0f;
+    public float m_maxExplosionScale = 6.0f;
+    public Rigidbody m_rigidBody;
+
     [SerializeField]
     protected InstanceStates m_InstanceState;
     public InstanceStates InstantceState { get { return m_InstanceState; } }
 
-
-
+    public void Start()
+    {
+        m_rigidBody = GetComponent<Rigidbody>();
+    }
 
     public Spell m_Spell;
     /// <summary>
@@ -43,22 +49,41 @@ public class SpellInstance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ASpellUser[] keys = new List<ASpellUser>(m_CooldownList.Keys).ToArray();
+        //this block stops everything after it from working.
+        //ASpellUser[] keys = new List<ASpellUser>(m_CooldownList.Keys).ToArray();
 
-        foreach (ASpellUser damaged in keys)
-        {
-            m_CooldownList[damaged] -= Time.deltaTime;
-            if (m_CooldownList[damaged] <= 0)
-                m_CooldownList.Remove(damaged);
-        }
+        //foreach (ASpellUser damaged in keys)
+        //{
+        //    m_CooldownList[damaged] -= Time.deltaTime;
+        //    if (m_CooldownList[damaged] <= 0)
+        //        m_CooldownList.Remove(damaged);
+        //}
+
         ResolveProjectileBehavoir();
-        ResolveExplosionBehavoir();
     }
 
     //TODO: some logic for how exploision is to be handled.
     private void ResolveExplosionBehavoir()
     {
-        
+        if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.ImpactGenade))
+            return;
+        //grow speed, stop movement, and dissapear after it's done.
+        //while smaller than maximum explosion size, grow.
+        while (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
+        {
+            gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
+            m_rigidBody.useGravity = false;
+            m_rigidBody.velocity = new Vector3(0, 0, 0);
+        }
+
+        StartCoroutine(DelayedDestroy(1));
+    }
+
+    
+    IEnumerator DelayedDestroy(int delayAmount)
+    {
+        yield return new WaitForSeconds(delayAmount);
+        Destroy(gameObject);
     }
 
 
@@ -67,18 +92,45 @@ public class SpellInstance : MonoBehaviour
     {
         if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
             return;
-        throw new System.NotImplementedException();
+
+        //turn off gravity for projectiles.
+        m_rigidBody.useGravity = false;
+
+        //movement
+        gameObject.transform.position += gameObject.transform.forward * m_projectileMoveSpeed * Time.deltaTime;
+    }
+
+    private void ProjectileOnHit(Collider other)
+    {
+        //cast other to spell user to apply damage to.
+        ASpellUser otherSpellUser = (ASpellUser)other.gameObject.GetComponent(typeof(ASpellUser));
+
+        if (otherSpellUser == null)
+        {
+            Object.Destroy(gameObject);
+            return;
+        }
+
+        //deal damage.
+        otherSpellUser.TakeDamage(m_Spell.Damage);
+        //apply knockback if there is some.
+
+        //apply additional effects.
+
+        //projectile always destroys itself on hit.
+        Object.Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if there is a contact explosion code goes here
-        throw new System.NotImplementedException();
-    }
+        //check effect type, if projectile, deal damage to other, destroy object.
+        if (m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
+            ProjectileOnHit(other);
 
-    private void ResolveExplosion()
-    {
+        if (m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.ImpactGenade))
+            ResolveExplosionBehavoir();
 
+        //conditions for each effect type needed.
     }
 
 
@@ -101,6 +153,5 @@ public class SpellInstance : MonoBehaviour
                 m_CooldownList.Add(otherSpellUser, m_Spell.Cooldown);
             return;
         }
-
     }
 }
