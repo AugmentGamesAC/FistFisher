@@ -7,6 +7,8 @@ public abstract class ASlotManager : MonoBehaviour
     [SerializeField]
     protected List<ASlot> m_Slots = new List<ASlot>();
 
+    public ASlot GetSlot(int slot) { return m_Slots[slot]; }
+
     /// <summary>
     /// Called by a slot object to add itself to m_Slots
     /// </summary>
