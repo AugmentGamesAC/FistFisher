@@ -62,7 +62,7 @@ public class SpellInstance : MonoBehaviour
         //}
         //created inherited class and override function.
 
-        ResolveProjectileBehavoir();
+        ResolveProjectileBehaviour();
 
         if (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
         {
@@ -92,7 +92,7 @@ public class SpellInstance : MonoBehaviour
 
 
     //TODO: MISSING Progectile movement should be call in fixedUpdate
-    private void ResolveProjectileBehavoir()
+    private void ResolveProjectileBehaviour()
     {
         if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
             return;

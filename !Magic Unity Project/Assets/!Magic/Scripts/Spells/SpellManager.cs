@@ -55,7 +55,7 @@ public class SpellManager : MonoBehaviour
     {
         //Needs one for each Spell description combinations. 16 for now.
         {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastDoubleSpell }
-
+        //{SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Projectile,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastBeamSpell }
     };
     public SpellResolutionLookups SpellResolutionLookup { get { return m_SpellResolutionLookup; } }
 

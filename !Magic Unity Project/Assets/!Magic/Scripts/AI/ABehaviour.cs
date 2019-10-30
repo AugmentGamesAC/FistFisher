@@ -28,9 +28,17 @@ public abstract class ABehaviour : MonoBehaviour
         m_Line = gameObject.GetComponent<LineRenderer>();
     }
 
+    protected void InitTurret()
+    {
+        m_data = GetComponent<AIData>();
+        m_updateDelay = 1.0f;
+        m_Line = gameObject.GetComponent<LineRenderer>();
+    }
+
     protected virtual bool PlayerInLineOfSight()
     {
         Vector3 direction = m_data.followObject.position - transform.position;
+        Vector3 Offset = direction * 5;
 
         m_Ray = new Ray(transform.position, direction);
 
@@ -63,6 +71,7 @@ public abstract class ABehaviour : MonoBehaviour
         return false;
     }
 
+    //switch to chosen behaviour.
     protected virtual void TransitionBehaviour(AIData.Behaviour behaviour)
     {
         m_data.m_currentBehaviour = behaviour;

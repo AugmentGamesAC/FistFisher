@@ -32,8 +32,8 @@ public class AIData : MonoBehaviour
         m_agent = GetComponent<NavMeshAgent>();
 
         //Default starting behaviour, could be idle or patrol.
-        m_currentBehaviour = Behaviour.Patrol;
-        m_lastBehaviour = Behaviour.Patrol;
+        m_currentBehaviour = Behaviour.Idle;
+        m_lastBehaviour = Behaviour.Idle;
 
         sightRange = 10.0f;
         patrolDelay = 3.0f;
