@@ -2,76 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KBMSlottableStuff : MonoBehaviour
+
+//this class handles the test cubes to be used as spell chips
+public class KBMSlottableStuff: SpellChip
 {
-    public KBM_GauntletSlotsAndCastingScript m_KBMGauntlet;
-    public BasicSlottable m_SlottableScript;
+    public KBM_GauntletSlotsAndCastingScript m_KBMGauntlet; 
 
-    public float m_distAwayFromHighlightToSetect = 6.0f;
+    Valve.VR.InteractionSystem.Interactable m_MyInteractble; //interactable script
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    //gets the slot relative to slot index given by key press and tells the slot to slot this object
     private void DoSlotThings(int slotIndex)
     {
         ASlot slot = m_KBMGauntlet.m_KBMSpellList.GetSlot(slotIndex);
-        if (slot!=null)
+        if (slot != null)
         {
-            m_SlottableScript.AssignSlot(slot);
+            AssignSlot(slot);
         }
-        //m_KBMGauntlet.m_GauntletScript; //relevent later?
     }
 
-    // Update is called once per frame
+    //if this object is being hovered over, assing to slot of given number
     void Update()
     {
+        if(m_MyInteractble==null)
+            m_MyInteractble = gameObject.GetComponent<Valve.VR.InteractionSystem.Interactable>();
 
-        //Debug.LogWarning(m_KBMGauntlet);
-        //Debug.LogWarning(m_SlottableScript);
-        //Debug.LogWarning(m_KBMGauntlet.m_isHighlightingSomething);
-        //Debug.LogWarning(m_KBMGauntlet.m_highlightedObject);
 
-        if (m_KBMGauntlet != null 
-            && m_SlottableScript!=null 
-            && m_KBMGauntlet.m_isHighlightingSomething
-            && m_KBMGauntlet.m_highlightedObject != null)
+
+        if (m_MyInteractble.isHovering && m_KBMGauntlet != null)
         {
-            //Vector3 distv = (gameObject.transform.position - m_KBMGauntlet.m_highlightedObject.transform.position);
-            Debug.LogWarning("Highlight OBJ: " + gameObject.name);
-            float dist = Vector3.Distance(gameObject.transform.position, m_KBMGauntlet.m_highlightedObject.transform.position);
-            Debug.LogWarning("dist: " + dist);
-            if (dist <= m_distAwayFromHighlightToSetect) //ensure that this is the object highlighted by gauntlet
+            if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot1))
             {
-                //Debug.LogWarning("Highlight OBJ: ");
-
-                //Debug.LogWarning("Slottable Highlighted!");
-                if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot1))
-                {
-                    //Debug.LogWarning("Slottable: Pressed 1");
-                    DoSlotThings(0);
-                }
-                if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot2))
-                {
-                    //Debug.LogWarning("Slottable: Pressed 2");
-                    DoSlotThings(1);
-                }
-                if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot3))
-                {
-                    //Debug.LogWarning("Slottable: Pressed 3");
-                    DoSlotThings(2);
-                }
+                DoSlotThings(0);
+            }
+            if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot2))
+            {
+                DoSlotThings(1);
+            }
+            if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot3))
+            {
+                DoSlotThings(2);
             }
         }
-        else
-        {
-            //Debug.LogError("Slottable: no gauntlet!");
-        }
-
-
-
-
     }
 }

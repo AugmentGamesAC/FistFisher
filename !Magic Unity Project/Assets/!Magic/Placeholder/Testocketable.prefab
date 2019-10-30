@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0ea4a559836e8e49abd410c2db846e7, type: 2}
+  - {fileID: 2100000, guid: dd16e25a8adf28f4d91f054f1825a013, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 2592015400958881548}
   - component: {fileID: 2592015400958881551}
   - component: {fileID: 2592015400958881550}
-  - component: {fileID: 2592015400958881536}
   m_Layer: 0
   m_Name: Testocketable
   m_TagString: Untagged
@@ -140,9 +139,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87729cc58622de4e87e4ae1fdfb0cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SlotType: 16
+  m_MinDistanceToDetectSlots: 0
+  m_MaxDistanceToDetectSlots: 0.1
+  m_LayerMask:
+  - Slot Interaction
+  m_GestureId: 0
+  m_SpellData:
+    m_Description:
+      m_Shape: 0
+      m_Effect: 0
+      m_Usage: 0
+      m_Aiming: 0
+    m_ManaCost: 0
+    m_ElementType: 0
+    SpellUser: {fileID: 0}
+    m_DefaultSpellInstance: {fileID: 0}
+    m_MaxSpellRange: 0
+    m_MaxDistance: 0
+    m_ShowRayTrace: 0
+    m_Damage: 0
+    m_Cooldown: 0
+    m_NextState: 0
+  m_ModelName: 
   m_KBMGauntlet: {fileID: 0}
-  m_SlottableScript: {fileID: 2592015400958881536}
-  m_distAwayFromHighlightToSetect: 3
 --- !u!114 &2592015400958881549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +269,7 @@ MonoBehaviour:
   onPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2592015400958881536}
+      - m_Target: {fileID: 0}
         m_MethodName: PlayerGrab
         m_Mode: 1
         m_Arguments:
@@ -265,7 +285,7 @@ MonoBehaviour:
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2592015400958881536}
+      - m_Target: {fileID: 0}
         m_MethodName: PlayerDrop
         m_Mode: 1
         m_Arguments:
@@ -284,20 +304,3 @@ MonoBehaviour:
     m_TypeName: Valve.VR.InteractionSystem.HandEvent, SteamVR, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   interactable: {fileID: 0}
---- !u!114 &2592015400958881536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592015400958881539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e6b3f79582b094ea7f10d63be24686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SlotType: 16
-  m_MinDistanceToDetectSlots: 0
-  m_MaxDistanceToDetectSlots: 0.1
-  m_LayerMask:
-  - Slot Interaction

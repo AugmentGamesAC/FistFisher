@@ -11,9 +11,6 @@ public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
     public Gauntlet m_GauntletScript;
     public KBMSpellList m_KBMSpellList;
 
-    public GameObject m_highlightedObject = null;
-    public bool m_isHighlightingSomething;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,50 +18,35 @@ public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
     }
 
 
-    void DetermineIfSomethingIsHighlighted()
+    void CastSpell(int index)
     {
-        m_highlightedObject = null;
-        GameObject[] rootObjs = gameObject.scene.GetRootGameObjects();
-        foreach (GameObject g in rootObjs)
-        {
-            if (g.name == "Highlighter")
-            {
-                m_highlightedObject = g;
-                Debug.LogWarning("Found Highlighted: " + g);
-                break;
-            }
-        }
+        if (m_KBMSpellList == null)
+            return;
+        Spell spell = m_KBMSpellList.ReadSpell(index);
+        if (spell == null)
+            return;
 
-        if (m_highlightedObject != null)
-            m_isHighlightingSomething = true;
-        else
-            m_isHighlightingSomething = false;
+        //INSERT THINGS HERE TO CAST THE SPELL
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        DetermineIfSomethingIsHighlighted();
 
-        if(!m_isHighlightingSomething)
+
+        //do stuff here for getting the correct slot
+        if (Input.GetKeyDown(m_castOrAssignToSlot1))
         {
-
-            //do stuff here for getting the correct slot
-            if (Input.GetKeyDown(m_castOrAssignToSlot1))
-            {
-
-            }
-            if (Input.GetKeyDown(m_castOrAssignToSlot2))
-            {
-
-            }
-            if (Input.GetKeyDown(m_castOrAssignToSlot3))
-            {
-
-            }
-
+            CastSpell(0);
         }
-
-
+        if (Input.GetKeyDown(m_castOrAssignToSlot2))
+        {
+            CastSpell(1);
+        }
+        if (Input.GetKeyDown(m_castOrAssignToSlot3))
+        {
+            CastSpell(2);
+        }
     }
 }
