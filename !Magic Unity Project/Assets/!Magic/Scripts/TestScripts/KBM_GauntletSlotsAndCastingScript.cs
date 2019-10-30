@@ -27,6 +27,7 @@ public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
             return;
 
         //INSERT THINGS HERE TO CAST THE SPELL
+        throw new System.NotImplementedException();
     }
 
 
