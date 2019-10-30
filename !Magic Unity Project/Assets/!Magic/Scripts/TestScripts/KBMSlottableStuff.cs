@@ -7,6 +7,8 @@ public class KBMSlottableStuff : MonoBehaviour
     public KBM_GauntletSlotsAndCastingScript m_KBMGauntlet;
     public BasicSlottable m_SlottableScript;
 
+    public float m_distAwayFromHighlightToSetect = 6.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +40,13 @@ public class KBMSlottableStuff : MonoBehaviour
             && m_KBMGauntlet.m_highlightedObject != null)
         {
             //Vector3 distv = (gameObject.transform.position - m_KBMGauntlet.m_highlightedObject.transform.position);
+            Debug.LogWarning("Highlight OBJ: " + gameObject.name);
             float dist = Vector3.Distance(gameObject.transform.position, m_KBMGauntlet.m_highlightedObject.transform.position);
-            //Debug.LogWarning(dist);
-            if (dist <= 5.0f) //ensure that this is the object highlighted by gauntlet
+            Debug.LogWarning("dist: " + dist);
+            if (dist <= m_distAwayFromHighlightToSetect) //ensure that this is the object highlighted by gauntlet
             {
+                //Debug.LogWarning("Highlight OBJ: ");
+
                 //Debug.LogWarning("Slottable Highlighted!");
                 if (Input.GetKeyDown(m_KBMGauntlet.m_castOrAssignToSlot1))
                 {

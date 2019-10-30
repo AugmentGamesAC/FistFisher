@@ -30,7 +30,7 @@ public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
             if (g.name == "Highlighter")
             {
                 m_highlightedObject = g;
-                //Debug.LogWarning("Found Highlighted!");
+                Debug.LogWarning("Found Highlighted: " + g);
                 break;
             }
         }
