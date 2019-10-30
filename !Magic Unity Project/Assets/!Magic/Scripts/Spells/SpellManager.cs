@@ -53,15 +53,17 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     protected SpellResolutionLookups m_SpellResolutionLookup = new SpellResolutionLookups()
     {
+        //Needs one for each Spell description combinations. 16 for now.
         {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastDoubleSpell }
+
     };
     public SpellResolutionLookups SpellResolutionLookup { get { return m_SpellResolutionLookup; } }
 
-
-
-
     static public bool CastDoubleSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
+        throw new System.NotImplementedException();
+
+
         SpellDescription spellDescription = firstInstance.m_Spell.Description;
 
         if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
@@ -84,7 +86,7 @@ public class SpellManager : MonoBehaviour
 
     static public bool CastStandardSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
-
+        throw new System.NotImplementedException();
 
         SpellDescription spellDescription = firstInstance.m_Spell.Description;
 
@@ -98,13 +100,89 @@ public class SpellManager : MonoBehaviour
         return true;
     }
 
+    //selects one area and teleports. like swap but with the player.
+    static public bool CastTeleportSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //fires a growing cylinder projectile. restricts movement?
+    static public bool CastBeamSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //summons a wall
+    static public bool CastWallSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //swaps objects after two area selections.
+    static public bool CastObjectSwapSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //fires projectile from finger point.
+    static public bool CastFingerGunSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //summon damaging pillar from the ground. Similar to Wall.
+    static public bool CastPillarStrikeSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //same physics as grenade but less gravity effect on rigid body. Sticks into objects on contact.
+    static public bool CastHeldLanceSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    //held object to be thrown and explodes on contact.
+    static public bool CastGrenadeSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //same as grenade but drains more mana and deals more damage the longer you hold it.
+    static public bool CastChargingBombSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //Flamethrower type summon, deals damage over time inside of its mesh collider.
+    static public bool CastSprayerSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //select an from finger point, then gain control of the object's transform.
+    static public bool CastTelekenesisSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //applies force to all objects in front of the player.
+    static public bool CastForcePushSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //pick a zone where damage is delt overtime.
+    static public bool CastHailSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //saw type blade projectile, bounces off walls? remote control?
+    static public bool CastDestructorDiscSpell(SpellInstance firstInstance, SpellInstance secondInstance)
+    {
+        throw new System.NotImplementedException();
+    }
 
 
 

@@ -19,7 +19,8 @@ public class SpellInstance : MonoBehaviour
     public float m_projectileMoveSpeed = 5.0f;
     public float m_maxExplosionScale = 6.0f;
     public Rigidbody m_rigidBody;
-    public int m_growAmount;
+    public float m_destroyDelay = 1.0f;
+    public bool m_allowExplodeUpdate = false;
 
     [SerializeField]
     protected InstanceStates m_InstanceState;
@@ -62,6 +63,18 @@ public class SpellInstance : MonoBehaviour
         //created inherited class and override function.
 
         ResolveProjectileBehavoir();
+
+        if (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
+        {
+            if (m_allowExplodeUpdate)
+            {
+                gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
+            }
+        }
+        else
+        {
+            Destroy(gameObject, m_destroyDelay);
+        }
     }
 
     //TODO: some logic for how exploision is to be handled.
@@ -71,14 +84,10 @@ public class SpellInstance : MonoBehaviour
             return;
         //grow speed, stop movement, and dissapear after it's done.
         //while smaller than maximum explosion size, grow.
-        while (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
-        {
-            gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
-        }
+        m_allowExplodeUpdate = true;
+
         m_rigidBody.useGravity = false;
         m_rigidBody.velocity = Vector3.zero;
-
-        Destroy(gameObject, m_growAmount);
     }
 
 
