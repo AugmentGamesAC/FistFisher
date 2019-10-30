@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
+public class KBM_GauntletSlotsAndCastingScript : Gauntlet
 {
     public KeyCode m_castOrAssignToSlot1 = KeyCode.Alpha1;
     public KeyCode m_castOrAssignToSlot2 = KeyCode.Alpha2;
     public KeyCode m_castOrAssignToSlot3 = KeyCode.Alpha3;
 
-    public Gauntlet m_GauntletScript;
     public KBMSpellList m_KBMSpellList;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_GauntletScript = gameObject.GetComponent<Gauntlet>();
     }
 
 
@@ -26,8 +24,9 @@ public class KBM_GauntletSlotsAndCastingScript : MonoBehaviour
         if (spell == null)
             return;
 
-        //INSERT THINGS HERE TO CAST THE SPELL
-        throw new System.NotImplementedException();
+        m_currentSpell = spell;
+
+        ResolveSimpleTriggering();
     }
 
 
