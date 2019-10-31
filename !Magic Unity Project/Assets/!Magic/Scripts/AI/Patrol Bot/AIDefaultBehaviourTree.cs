@@ -15,18 +15,15 @@ public class AIDefaultBehaviourTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //check if behaviour tree has all default behaviours.
+        //check if behaviour tree has all default behaviours and add them.
+        if (GetComponent<AIData>() == null)
+            gameObject.AddComponent<AIData>();
         if (GetComponent<AIFollow>() == null)
             gameObject.AddComponent<AIFollow>();
-        //if (GetComponent<AIFlyTo>() == null) //for now. make something check if flying or not later
-            //gameObject.AddComponent<AIFlyTo>();
-
         if (GetComponent<Idle>() == null)
             gameObject.AddComponent<Idle>();
-
         if (GetComponent<AIPatrol>() == null)
             gameObject.AddComponent<AIPatrol>();
-
         if (GetComponent<AIAttack>() == null)
             gameObject.AddComponent<AIAttack>();
 
