@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class AITurretIdle : ABehaviour
 {
+    Animator m_turretAnimator;
     public override void OnBehaviourStart()
     {
         InitTurret();
+
+        if (m_turretAnimator == null)
+        {
+            m_turretAnimator = GetComponent<Animator>();
+        }
+        m_turretAnimator.SetTrigger("Idle");
+        m_turretAnimator.ApplyBuiltinRootMotion();
 
         m_updateTimer = 0;
 
@@ -17,16 +25,12 @@ public class AITurretIdle : ABehaviour
     {
         m_updateTimer += Time.deltaTime;
 
-        //animate head to "search".
-
-        //raycast should always fire forward.
-
-        //once detected, should lock onto player until out of sight again.
-
-        //look to which state to go from here.
-        if (PlayerInLineOfSight())
+        //if play gets hit by raycast, attack.
+        if (PlayerInTurretSight())
         {
             TransitionBehaviour(AIData.Behaviour.Attack);
+            //exit Idle animation.
+            m_turretAnimator.SetTrigger("Found Player");
         }
     }
 

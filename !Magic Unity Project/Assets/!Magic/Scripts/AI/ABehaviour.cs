@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class ABehaviour : MonoBehaviour
 {
     protected AIData m_data;
@@ -14,6 +15,11 @@ public abstract class ABehaviour : MonoBehaviour
     protected RaycastHit m_Hit;
     protected Ray m_Ray;
     protected LineRenderer m_Line;
+    [SerializeField]
+    protected Transform m_turretMuzzleTransform;
+    public bool m_playerInZone;
+    public Transform m_localTransform;
+
 
     //Must implement these for each new behaviour.
     public abstract void OnBehaviourStart();
@@ -25,14 +31,16 @@ public abstract class ABehaviour : MonoBehaviour
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
         m_data.m_agent.stoppingDistance = 2.0f;
-        m_Line = gameObject.GetComponent<LineRenderer>();
+        //m_Line = gameObject.GetComponent<LineRenderer>();
     }
 
     protected void InitTurret()
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
-        m_Line = gameObject.GetComponent<LineRenderer>();
+        //m_Line = gameObject.GetComponent<LineRenderer>();
+        m_playerInZone = false;
+        m_localTransform = transform;
     }
 
     protected virtual bool PlayerInLineOfSight()
@@ -42,8 +50,9 @@ public abstract class ABehaviour : MonoBehaviour
 
         m_Ray = new Ray(transform.position, direction);
 
-        m_Line.enabled = true;
-        m_Line.SetPosition(0, m_Ray.origin);
+        //m_Line.enabled = true;
+        //m_Line.SetPosition(0, m_Ray.origin);
+        Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
 
         if (Physics.Raycast(m_Ray, out m_Hit, 3000))
         {
@@ -51,8 +60,34 @@ public abstract class ABehaviour : MonoBehaviour
             if (m_Hit.collider.tag == "Player Target" &&
                 (m_Hit.distance < m_data.sightRange))
             {
-                m_Line.SetPosition(1, m_Hit.point);
+                //m_Line.SetPosition(1, m_Hit.point);
+                Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
+                //Set to Follow for now.
+                return true;
+            }
+        }
+        return false;
+    }
 
+    protected virtual bool PlayerInTurretSight()
+    {
+        Vector3 direction = m_turretMuzzleTransform.forward;
+        Vector3 Offset = direction * 5 + transform.position;
+
+        m_Ray = new Ray(m_turretMuzzleTransform.position, direction);
+
+        //m_Line.enabled = true;
+        //m_Line.SetPosition(0, m_Ray.origin);
+        Debug.DrawRay(m_Ray.origin, direction*100f, Color.white);
+
+        if (Physics.Raycast(m_Ray, out m_Hit, 3000))
+        {
+            //if target is player and distance between the two 
+            if (m_Hit.collider.tag == "Player Target" &&
+                (m_Hit.distance < m_data.sightRange))
+            {
+                //m_Line.SetPosition(1, m_Hit.point);
+                Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
                 //Set to Follow for now.
                 return true;
             }
