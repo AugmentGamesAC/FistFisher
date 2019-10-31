@@ -11,7 +11,8 @@ public class AIAttack : ABehaviour
         Init();
 
         //get sword component
-        m_sword = GetComponentInChildren<Sword>();
+        if (m_sword == null)
+            m_sword = GetComponentInChildren<Sword>();
 
         m_updateDelay = 0.0f;
 
@@ -34,9 +35,9 @@ public class AIAttack : ABehaviour
             //else
                 TransitionBehaviour(AIData.Behaviour.Follow);
         }
-        else if(PlayerInAttackRange() && m_updateTimer > m_updateDelay)
+        else if (PlayerInAttackRange() && m_updateTimer > m_updateDelay)
         {
-            m_sword.PerformAttack();
+            //m_sword.PerformAttack();
             m_updateTimer = 0;
             m_updateDelay = 3.0f;
         }
