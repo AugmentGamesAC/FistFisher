@@ -5,13 +5,12 @@ using UnityEngine;
 public class AITurretAttack : ABehaviour
 {
     public Gauntlet m_gauntlet;
-    public Transform from;
-    public Transform to;
 
     private float timeCount = 0.0f;
 
     private void Awake()
     {
+        m_localTransform = transform.localRotation.eulerAngles;
     }
 
     public override void OnBehaviourStart()
@@ -64,14 +63,16 @@ public class AITurretAttack : ABehaviour
             //float yRot = -55.0f;
             //rotate back to default position.
             //transform.eulerAngles = new Vector3(m_localTransform.rotation.x, m_localTransform.rotation.y + yRot, m_localTransform.rotation.z);
-            transform.rotation = Quaternion.Slerp(transform.rotation, m_localTransform.rotation, timeCount);
-            timeCount = timeCount + Time.deltaTime;
+            //transform.rotation = Quaternion.Slerp(transform.rotation, m_localTransform.rotation, timeCount);
+            //timeCount = timeCount + Time.deltaTime;
 
-            if (Mathf.Approximately(transform.rotation.y, m_localTransform.rotation.y))
-            {
+            transform.eulerAngles = m_localTransform;
+
+            //if (Mathf.Approximately(transform.rotation.y, m_localTransform.rotation.y))
+            //{
                 TransitionBehaviour(AIData.Behaviour.Idle);
                 timeCount = 0.0f;
-            }
+            //}
         }
     }
 

@@ -11,7 +11,7 @@ public class AIPatrol : ABehaviour
 
     public override void OnBehaviourStart()
     {
-        Init();
+        InitPatrolBot();
 
         //m_data.m_currentBehaviour = AIData.Behaviour.Idle;
         //add wait at waypoint.
