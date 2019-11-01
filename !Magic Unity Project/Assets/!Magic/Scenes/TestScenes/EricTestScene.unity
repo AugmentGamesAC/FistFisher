@@ -244,7 +244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588790827}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d1c7a6ad61acd4580a5771161e9983, type: 3}
   m_Name: 
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_currentMana: 50
   m_amountChangedPerPress: 10
   m_fillableObject: {fileID: 611294169}
-  m_manaColour: {r: 0, g: 0, b: 1, a: 1}
+  m_manaColour: {r: 0, g: 1, b: 0.10208583, a: 1}
   m_orientation: {x: 0, y: 1, z: 0}
   m_rotateAmount: 0
 --- !u!1001 &630273994
@@ -550,6 +550,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MANACore_Hitbox_V1
       objectReference: {fileID: 0}
+    - target: {fileID: 3516263935119366630, guid: f386422bd9a6a414ba27f6e14c3a2f8e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -9062881910015470103, guid: f386422bd9a6a414ba27f6e14c3a2f8e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -614,11 +619,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516263935119366630, guid: f386422bd9a6a414ba27f6e14c3a2f8e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8653907237041215410, guid: f386422bd9a6a414ba27f6e14c3a2f8e,
         type: 3}
