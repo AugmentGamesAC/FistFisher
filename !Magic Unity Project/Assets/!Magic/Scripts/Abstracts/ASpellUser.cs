@@ -43,9 +43,26 @@ public abstract class ASpellUser : MonoBehaviour
     //set values to their max, and update percentage. I suppose we ought to also consider if we should allow spawning at less than full health rather than applying damage at start
     void Start()
     {
+        ResetShieldAndMana();
+    }
+
+    //resets shield and mana 
+    public void ResetShieldAndMana()
+    {
+        ResetShield();
+        ResetMana();
+    }
+
+    //resets shield
+    public void ResetShield()
+    {
         m_ShieldCurrent = m_ShieldMax;
-        m_ManaCurrent = m_ManaMax;
         UpdateShieldPercentage();
+    }    
+    //resets mana 
+    public void ResetMana()
+    {
+        m_ManaCurrent = m_ManaMax;
         UpdateManaPercentage();
     }
 

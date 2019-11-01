@@ -9,6 +9,8 @@ public class AIData : MonoBehaviour
     {
         Follow,
         Idle,
+        Look,
+        //FlyTo, //removed for now
         Patrol,
         Attack
     };
@@ -27,6 +29,21 @@ public class AIData : MonoBehaviour
     public float attackRange;
     public float patrolDelay;
 
+    /***********************************NAVMESH DATA REGARDING MOVEMENT STATS***********************************/
+    [SerializeField]
+    public float m_movementSpeed = 3.5f;
+    [SerializeField]
+    public float m_angularSpeed = 120.0f;
+    [SerializeField]
+    public float m_acceleration = 8.0f;
+    [SerializeField]
+    public float m_stoppingDistance = 2.0f;
+    //[SerializeField]
+    //public bool m_isFlying = false;
+
+    /***********************************************************************************************************/
+
+    //void Start()
     void Awake()
     {
         m_agent = GetComponent<NavMeshAgent>();
