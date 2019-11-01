@@ -6,7 +6,7 @@ public class Idle : ABehaviour
 {
     public override void OnBehaviourStart()
     {
-        Init();
+        InitPatrolBot();
 
         m_updateTimer = 0;
 

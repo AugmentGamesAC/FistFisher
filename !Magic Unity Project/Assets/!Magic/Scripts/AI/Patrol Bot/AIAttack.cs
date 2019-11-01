@@ -8,7 +8,7 @@ public class AIAttack : ABehaviour
 
     public override void OnBehaviourStart()
     {
-        Init();
+        InitPatrolBot();
 
         //get sword component
         if (m_sword == null)

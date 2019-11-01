@@ -15,7 +15,7 @@ public class AIFlyTo : ABehaviour
     //Initial function.
     public override void OnBehaviourStart()
     {
-        Init();
+        InitPatrolBot();
         m_moveDirection = Vector3.zero;
 
         m_data.m_agent = null;

@@ -18,7 +18,7 @@ public abstract class ABehaviour : MonoBehaviour
     [SerializeField]
     protected Transform m_turretMuzzleTransform;
     public bool m_playerInZone;
-    public Transform m_localTransform;
+    public Vector3 m_localTransform;
 
 
     //Must implement these for each new behaviour.
@@ -26,21 +26,17 @@ public abstract class ABehaviour : MonoBehaviour
     public abstract void OnBehaviourUpdate();
     public abstract void OnBehaviourEnd();
 
-    protected void Init()
+    protected void InitPatrolBot()
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
         m_data.m_agent.stoppingDistance = 2.0f;
-        //m_Line = gameObject.GetComponent<LineRenderer>();
     }
 
     protected void InitTurret()
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
-        //m_Line = gameObject.GetComponent<LineRenderer>();
-        m_playerInZone = false;
-        m_localTransform = transform;
     }
 
     protected virtual bool PlayerInLineOfSight()
@@ -50,8 +46,6 @@ public abstract class ABehaviour : MonoBehaviour
 
         m_Ray = new Ray(transform.position, direction);
 
-        //m_Line.enabled = true;
-        //m_Line.SetPosition(0, m_Ray.origin);
         Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
 
         if (Physics.Raycast(m_Ray, out m_Hit, 3000))
@@ -60,7 +54,6 @@ public abstract class ABehaviour : MonoBehaviour
             if (m_Hit.collider.tag == "Player Target" &&
                 (m_Hit.distance < m_data.sightRange))
             {
-                //m_Line.SetPosition(1, m_Hit.point);
                 Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
                 //Set to Follow for now.
                 return true;
@@ -76,8 +69,6 @@ public abstract class ABehaviour : MonoBehaviour
 
         m_Ray = new Ray(m_turretMuzzleTransform.position, direction);
 
-        //m_Line.enabled = true;
-        //m_Line.SetPosition(0, m_Ray.origin);
         Debug.DrawRay(m_Ray.origin, direction*100f, Color.white);
 
         if (Physics.Raycast(m_Ray, out m_Hit, 3000))
@@ -86,7 +77,6 @@ public abstract class ABehaviour : MonoBehaviour
             if (m_Hit.collider.tag == "Player Target" &&
                 (m_Hit.distance < m_data.sightRange))
             {
-                //m_Line.SetPosition(1, m_Hit.point);
                 Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
                 //Set to Follow for now.
                 return true;

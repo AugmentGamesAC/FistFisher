@@ -454,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749222838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 1.17, z: -0.03}
+  m_LocalPosition: {x: 2.7, y: 1.17, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1071,7 +1071,8 @@ PrefabInstance:
       propertyPath: followObject
       value: 
       objectReference: {fileID: 749222842}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7086464037425604089, guid: 76d3230c1eb7e354d8913749fb5e6ff1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 76d3230c1eb7e354d8913749fb5e6ff1, type: 3}
 --- !u!1 &2101752930
 GameObject:
@@ -1171,13 +1172,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7691443051162431123}
-  m_LocalRotation: {x: -0, y: -0.9204152, z: -0, w: 0.39094228}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 7.57, y: 0.99, z: -5.88}
   m_LocalScale: {x: 1, y: 0.75000083, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: -133.974, z: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!136 &7691443051162431121
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1230,6 +1231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_turretMuzzleTransform: {fileID: 7691443051162431120}
   m_playerInZone: 0
+  m_localTransform: {x: 0, y: 0, z: 0}
   m_gauntlet: {fileID: 0}
 --- !u!114 &7691443051162431125
 MonoBehaviour:
@@ -1245,6 +1247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_turretMuzzleTransform: {fileID: 7691443051162431120}
   m_playerInZone: 0
+  m_localTransform: {x: 0, y: 0, z: 0}
 --- !u!114 &7691443051162431126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,6 +1279,10 @@ MonoBehaviour:
   sightRange: 20
   attackRange: 20
   patrolDelay: 2
+  m_movementSpeed: 3.5
+  m_angularSpeed: 120
+  m_acceleration: 8
+  m_stoppingDistance: 2
 --- !u!95 &7691443051162431128
 Animator:
   serializedVersion: 3

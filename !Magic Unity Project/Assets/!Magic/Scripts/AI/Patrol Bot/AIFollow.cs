@@ -6,7 +6,7 @@ public class AIFollow : ABehaviour
 {
     public override void OnBehaviourStart()
     {
-        Init();
+        InitPatrolBot();
         //if distance between the two is smaller than the max distance.
         if (PlayerInLineOfSight())
         {
