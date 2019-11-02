@@ -16,12 +16,20 @@ public class SpellInstance : MonoBehaviour
         IsEviromental
     }
 
+    public float m_projectileMoveSpeed = 5.0f;
+    public float m_maxExplosionScale = 6.0f;
+    public Rigidbody m_rigidBody;
+    public float m_destroyDelay = 1.0f;
+    public bool m_allowExplodeUpdate = false;
+
     [SerializeField]
     protected InstanceStates m_InstanceState;
     public InstanceStates InstantceState { get { return m_InstanceState; } }
 
-
-
+    public void Start()
+    {
+        m_rigidBody = GetComponent<Rigidbody>();
+    }
 
     public Spell m_Spell;
     /// <summary>
@@ -43,42 +51,90 @@ public class SpellInstance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ASpellUser[] keys = new List<ASpellUser>(m_CooldownList.Keys).ToArray();
+        //this block stops everything after it from working.
+        //ASpellUser[] keys = new List<ASpellUser>(m_CooldownList.Keys).ToArray();
 
-        foreach (ASpellUser damaged in keys)
+        //foreach (ASpellUser damaged in keys)
+        //{
+        //    m_CooldownList[damaged] -= Time.deltaTime;
+        //    if (m_CooldownList[damaged] <= 0)
+        //        m_CooldownList.Remove(damaged);
+        //}
+        //created inherited class and override function.
+
+        ResolveProjectileBehaviour();
+
+        if (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
         {
-            m_CooldownList[damaged] -= Time.deltaTime;
-            if (m_CooldownList[damaged] <= 0)
-                m_CooldownList.Remove(damaged);
+            if (m_allowExplodeUpdate)
+            {
+                gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
+            }
         }
-        ResolveProjectileBehavoir();
-        ResolveExplosionBehavoir();
+        else
+        {
+            Destroy(gameObject, m_destroyDelay);
+        }
     }
 
     //TODO: some logic for how exploision is to be handled.
     private void ResolveExplosionBehavoir()
     {
-        
+        if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.ImpactGenade))
+            return;
+        //grow speed, stop movement, and dissapear after it's done.
+        //while smaller than maximum explosion size, grow.
+        m_allowExplodeUpdate = true;
+
+        m_rigidBody.useGravity = false;
+        m_rigidBody.velocity = Vector3.zero;
     }
 
 
     //TODO: MISSING Progectile movement should be call in fixedUpdate
-    private void ResolveProjectileBehavoir()
+    private void ResolveProjectileBehaviour()
     {
         if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
             return;
-        throw new System.NotImplementedException();
+
+        //turn off gravity for projectiles.
+        m_rigidBody.useGravity = false;
+
+        //movement
+        gameObject.transform.position += gameObject.transform.forward * m_projectileMoveSpeed * Time.deltaTime;
+    }
+
+    private void ProjectileOnHit(Collider other)
+    {
+        //cast other to spell user to apply damage to.
+        ASpellUser otherSpellUser = (ASpellUser)other.gameObject.GetComponent(typeof(ASpellUser));
+
+        if (otherSpellUser == null)
+        {
+            Object.Destroy(gameObject);
+            return;
+        }
+
+        //deal damage.
+        otherSpellUser.TakeDamage(m_Spell.Damage);
+        //apply knockback if there is some.
+
+        //apply additional effects.
+
+        //projectile always destroys itself on hit.
+        Object.Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if there is a contact explosion code goes here
-        throw new System.NotImplementedException();
-    }
+        //check effect type, if projectile, deal damage to other, destroy object.
+        if (m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
+            ProjectileOnHit(other);
 
-    private void ResolveExplosion()
-    {
+        if (m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.ImpactGenade))
+            ResolveExplosionBehavoir();
 
+        //conditions for each effect type needed.
     }
 
 
@@ -101,6 +157,5 @@ public class SpellInstance : MonoBehaviour
                 m_CooldownList.Add(otherSpellUser, m_Spell.Cooldown);
             return;
         }
-
     }
 }

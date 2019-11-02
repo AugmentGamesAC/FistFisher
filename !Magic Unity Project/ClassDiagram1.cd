@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Wobble" Collapsed="true">
+    <Position X="24" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQYBAAAAACBACAAAACAAAAAAAgAAAaAAAEQAAAEAAAA=</HashCode>
+      <FileName>Assets\!Magic\Materials\ManaShader\Wobble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AGrabable" Collapsed="true">
+    <Position X="3" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Abstracts\AGrabable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ASlot" Collapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBAAAAAICAAACAAAAgAAgAACAIAAgAAAIAAAAUAAAI=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Abstracts\ASlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ASlotManager" Collapsed="true">
+    <Position X="9.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Abstracts\ASlotManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ASlottable" Collapsed="true">
+    <Position X="3" Y="12" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="ASlottable.SlotTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\!Magic\Scripts\Abstracts\ASlottable.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACBAAACAAAAAABABCAAQACAIAgAAEAEAAgAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Abstracts\ASlottable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ASpellUser" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAQAAIAAgCAkAAWAACCAmAECSAAEgAAAAAARgQAgJAQ=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Abstracts\ASpellUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABehaviour" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAQAAAAgCAAAAooIAACAIACAAAAAIAAACAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\ABehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIData" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEIIIAAAAAhBAAAAAEAAAAAAAEAAEBAAAAAFA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\AIData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIFlyTo" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAMAAAQAAAAAAIAAAAIAACAQA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\AIFlyTo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIWorldInterface" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\AIWorldInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoverGeometryData" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\CoverGeometryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIAttack" Collapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAEAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\AIAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIDefaultBehaviourTree" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAIAACAACAAAAAAAAAAAAAAAAAkA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\AIDefaultBehaviourTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIFollow" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\AIFollow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIPatrol" Collapsed="true">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAAAAAAAAgBAAAIgAAAAAAAAAAAIAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\AIPatrol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Idle" Collapsed="true">
+    <Position X="14.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\Idle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sword" Collapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Patrol Bot\Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AITurretAttack" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAAAAAAAEAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Turret\AITurretAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AITurretIdle" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Turret\AITurretIdle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TurretBehaviourTree" Collapsed="true">
+    <Position X="22.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAACAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AI\Turret\TurretBehaviourTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicEnemy">
+    <Position X="12.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAICAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSlot">
+    <Position X="0.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAACAAAAAAAEAAAAAAAAgAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicSlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSlotManager" Collapsed="true">
+    <Position X="9.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicSlotManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSlottable" Collapsed="true">
+    <Position X="3" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEKACAAgAiAAIAAAAAEAAAQAAIAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicSlottable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSpellCore" Collapsed="true">
+    <Position X="1" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicSpellCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSpellUser">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAACAEAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\BasicSpellUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Door" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAACAAAAAAAAAIBAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\Door.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemySpellUser" Collapsed="true">
+    <Position X="5.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\EnemySpellUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InspectorDictionary&lt;TKey, TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAIAAAAAAAAAAAAAABAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\InspectorDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PlayerSpellUser" Collapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQCAQAAACABEBAAAAAAEAAAQAABAAAAAIAyAAAAQAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\PlayerSpellUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spell" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AVECBACgZIYhAAAAAA4ACAAAIIIAADCgAAAAAwBCAEA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellChip">
+    <Position X="5.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAEAAAAAAAYAAAAAEAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\SpellChip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellDescription" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAgAAAAAIACAAAAEAAAAGAAAAgBAAAAEAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Basics\SpellDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Explosion" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAAAAAAiAAABAAAAAAAAAAACAAAAAAAAAABQAgAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Explosion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FailParticle" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\FailParticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GestureHandle" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAQAAAAAAAQAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\GestureHandle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthBar" Collapsed="true">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAACAACAAEQAgACAEAAAAAAAAAAAAAAAgAAAggAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSpellSystem" Collapsed="true">
+    <Position X="10" Y="6.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="PlayerSpellSystem.CastingInteraction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\!Magic\Scripts\PlayerSpellSystem.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAE=</HashCode>
+      <FileName>Assets\!Magic\Scripts\PlayerSpellSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DescriptionCrystal">
+    <Position X="3" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\DescriptionCrystal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Forge" Collapsed="true">
+    <Position X="10.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAgAAAAAAMAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\Forge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gauntlet">
+    <Position X="3.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAQAAAAAAIAAAAAAACAAAAAgAAAAQAABAAQAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\Gauntlet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellInstance" Collapsed="true">
+    <Position X="24" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GgAAAAIAAiAIABAAAAAAAAAAAAAACIIAQABEBQgAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\SpellInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellList">
+    <Position X="7" Y="12" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="SpellList.SpellListUpdated" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\!Magic\Scripts\Spells\SpellList.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAgAIAAAAAAEAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\SpellList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellManager" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABEICGAIAAEAAJgBAIEEAhIABVAAYAAAAAAEAsQ=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Spells\SpellManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FillLevelTest" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAADAAAAAAAAAAAAAAABAAkIAAIAAAAQAAIAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\FillLevelTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBM_GauntletSlotsAndCastingScript" Collapsed="true">
+    <Position X="4.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAgEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\KBM_GauntletSlotsAndCastingScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBMSlottableStuff" Collapsed="true">
+    <Position X="5.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAACAAAAIAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\KBMSlottableStuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBMSpellList" Collapsed="true">
+    <Position X="7.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\KBMSpellList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestBasicSlottable">
+    <Position X="0.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\TestBasicSlottable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestForge" Collapsed="true">
+    <Position X="10.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\TestScripts\TestForge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weave" Collapsed="true">
+    <Position X="0.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAIAAABEAAAIAIAAATSABQGQEAAIgAAgkA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\Weave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasedGestureHandle" Collapsed="true">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAGAAIBACAAAQAAAAAEAAAAYCAAAiAIQAAA=</HashCode>
+      <FileName>Assets\AirSig\Script\Demo\BasedGestureHandle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeveloperDefined" Collapsed="true">
+    <Position X="6.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAQAAAAAAAAAAAAAAAAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Assets\AirSig\Script\Demo\DeveloperDefined.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerGesture" Collapsed="true">
+    <Position X="9" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAIAAAAAAAABAABEIQAAAACAAAwCAEAAAAEAAkA=</HashCode>
+      <FileName>Assets\AirSig\Script\Demo\PlayerGesture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSignature" Collapsed="true">
+    <Position X="11.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAgAAAAAwAAgAAAAAACAMACAAAAAAEAAAAAAAEA=</HashCode>
+      <FileName>Assets\AirSig\Script\Demo\PlayerSignature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmartGesture" Collapsed="true">
+    <Position X="13.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQBIgAAAAIAQAAAAAgAAAAAAACAAAAAgAAAAAEAAkA=</HashCode>
+      <FileName>Assets\AirSig\Script\Demo\SmartGesture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirSig.AirSigManager" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ExUFq8SPmYRJkyU0oQAcewLgiyRtAj8klcM8YpEESmM=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AirSigManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirSig.TrainData" Collapsed="true">
+    <Position X="20.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAKAAAIgAAEBAAAAQEAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\!Magic\Scripts\AirSigManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Valve.VR.InteractionSystem.Sample.InitControllerOptions" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAEAgAAAAAAAAAAgAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\!Magic\Scripts\InitControllerOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
