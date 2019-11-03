@@ -165,6 +165,8 @@ public class Spell
             ).GetComponent<SpellInstance>();
         m_SpellState.m_Spell = this;
 
+        m_SpellUser.PredictManaModify(m_ManaCost);
+
 
         //Figure out next state
         m_NextState = (m_Description.Effect.HasFlag(SpellDescription.Effects.Swap)) ? InteractionType.BeginAiming2 : InteractionType.StartCasting;
@@ -238,6 +240,10 @@ public class Spell
         if (m_SpellState.InstantceState != SpellInstance.InstanceStates.IsAiming)
             return false;
 
+        if (!HadTheMana())
+            return false;
+
+
         SpellManager.CastSpell spellToCast = default(SpellManager.CastSpell);
 
         if (!SpellManager.Instance.SpellResolutionLookup.TryGetValue(SpellDescription.TranslateSpellCode(Description), out spellToCast))
@@ -247,7 +253,13 @@ public class Spell
     }
 
 
-    
+    bool HadTheMana()
+    {
+        if (m_SpellUser.ManaCurrent < m_ManaCost)
+            return false;
+        m_SpellUser.ModifyMana(m_ManaCost);
+        return true;
+    }
 
 
     private bool Cancel()
