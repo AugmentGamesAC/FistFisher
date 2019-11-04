@@ -16,12 +16,12 @@ public class BasicSlottable : ASlottable
         m_MyRigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-    private void ToggleKinematicAndGravityAndSphereCollider(bool isOwnObject)
+    private void ToggleBeingHeld(bool isHeld)
     {
-        ToggleKinematicAndGravityAndSphereCollider(!isOwnObject, isOwnObject);
+        ToggleBeingHeld(isHeld, !isHeld);
     }
 
-    private void ToggleKinematicAndGravityAndSphereCollider(bool kinematic, bool gravity)
+    private void ToggleBeingHeld(bool kinematic, bool gravity)
     {
         if (m_MyRigidbody == default(Rigidbody))
             m_MyRigidbody = gameObject.GetComponent<Rigidbody>();
@@ -32,7 +32,7 @@ public class BasicSlottable : ASlottable
     public override void PlayerDrop()
     {
         m_IsGrabbed = false;
-        ToggleKinematicAndGravityAndSphereCollider(true);
+        ToggleBeingHeld(true);
 
         PutDroppedObjectIntoSlot();
         m_TimeToDie = m_TimeToDissolve;
@@ -45,13 +45,13 @@ public class BasicSlottable : ASlottable
         if (m_SlotRef != null)
             m_SlotRef.Eject();
 
-        ToggleKinematicAndGravityAndSphereCollider(false);
+        ToggleBeingHeld(false);
     }
 
     public override void SlotDrop()
     {
         m_SlotRef = null;
-        ToggleKinematicAndGravityAndSphereCollider(true);
+        ToggleBeingHeld(true);
         m_TimeToDie = m_TimeToDissolve;
         m_IsSlotted = false;
     }
@@ -121,7 +121,7 @@ public class BasicSlottable : ASlottable
         if (m_IsSlotted)
             m_SlotRef = targetSlot;
 
-        ToggleKinematicAndGravityAndSphereCollider(false);
+        ToggleBeingHeld(false);
     }
 
     private void FixedUpdate() 
@@ -132,9 +132,12 @@ public class BasicSlottable : ASlottable
         {
             m_TimeToDie -= Time.deltaTime;
             if (m_TimeToDie <= 0)
-                Destroy(gameObject);
+                ResolveCleanup();
         }
     }
 
-
+    protected virtual void ResolveCleanup()
+    {
+        Destroy(gameObject);
+    }
 }

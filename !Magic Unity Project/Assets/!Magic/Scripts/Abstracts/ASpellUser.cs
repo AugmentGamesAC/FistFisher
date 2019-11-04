@@ -125,7 +125,7 @@ public abstract class ASpellUser : MonoBehaviour
     /// <param name="manaLoss"></param>
     public void ModifyMana(float change)
     {
-        m_ManaPredicted = Mathf.Clamp(m_ManaPredicted + change, 0, m_ManaMax);
+        m_ManaPredicted = Mathf.Clamp(m_ManaCurrent + change, 0, m_ManaMax);
         m_ManaCurrent = Mathf.Clamp(m_ManaCurrent + change, 0, m_ManaMax);
 
         UpdateManaPercentage();
