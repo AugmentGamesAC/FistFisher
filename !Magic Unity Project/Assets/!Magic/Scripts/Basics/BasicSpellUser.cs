@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class BasicSpellUser : ASpellUser
 {
-    public override Transform Aiming => throw new System.NotImplementedException();
+    [SerializeField]
+    protected Transform m_AimingPoint;
+    public override Transform Aiming
+    {
+        get
+        {
+            if (m_AimingPoint == default(Transform))
+                m_AimingPoint = transform;
+            return transform;
+        }
+    }
 
     public override bool IsDead() 
     {

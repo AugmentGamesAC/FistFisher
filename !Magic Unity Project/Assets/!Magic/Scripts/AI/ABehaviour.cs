@@ -2,53 +2,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class ABehaviour : MonoBehaviour
 {
     protected AIData m_data;
+
     protected float m_updateTimer;
     protected float m_updateDelay;
+    //searching in place time
+
+    //Line to point at player to see if he's within range.
     protected RaycastHit m_Hit;
     protected Ray m_Ray;
     protected LineRenderer m_Line;
+    [SerializeField]
+    protected Transform m_turretMuzzleTransform;
+    public bool m_playerInZone;
+    public Vector3 m_localTransform;
 
+
+    //Must implement these for each new behaviour.
     public abstract void OnBehaviourStart();
     public abstract void OnBehaviourUpdate();
     public abstract void OnBehaviourEnd();
 
-    protected void Init()
+    protected void InitPatrolBot()
     {
         m_data = GetComponent<AIData>();
         m_updateDelay = 1.0f;
         m_data.m_agent.stoppingDistance = 2.0f;
-        m_Line = gameObject.GetComponent<LineRenderer>();
     }
-    protected void Init(AIData aiData, float updateDelay)
+
+    protected void InitTurret()
     {
-        m_data = aiData;
-        m_updateDelay = updateDelay;
+        m_data = GetComponent<AIData>();
+        m_updateDelay = 1.0f;
     }
 
     protected virtual bool PlayerInLineOfSight()
     {
         Vector3 direction = m_data.followObject.position - transform.position;
+        Vector3 Offset = direction * 5;
 
         m_Ray = new Ray(transform.position, direction);
 
-        m_Line.enabled = true;
-        m_Line.SetPosition(0, m_Ray.origin);
+        Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
 
         if (Physics.Raycast(m_Ray, out m_Hit, 3000))
         {
             //if target is player and distance between the two 
             if (m_Hit.collider.tag == "Player Target" &&
-                (m_Hit.distance < m_data.maxDistToPlayer))
+                (m_Hit.distance < m_data.sightRange))
             {
-                m_Line.SetPosition(1, m_Hit.point);
-
+                Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
                 //Set to Follow for now.
                 return true;
             }
         }
         return false;
+    }
+
+    protected virtual bool PlayerInTurretSight()
+    {
+        Vector3 direction = m_turretMuzzleTransform.forward;
+        Vector3 Offset = direction * 5 + transform.position;
+
+        m_Ray = new Ray(m_turretMuzzleTransform.position, direction);
+
+        Debug.DrawRay(m_Ray.origin, direction*100f, Color.white);
+
+        if (Physics.Raycast(m_Ray, out m_Hit, 3000))
+        {
+            //if target is player and distance between the two 
+            if (m_Hit.collider.tag == "Player Target" &&
+                (m_Hit.distance < m_data.sightRange))
+            {
+                Debug.DrawRay(m_Ray.origin, direction * 100f, Color.white);
+                //Set to Follow for now.
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected virtual bool PlayerInAttackRange()
+    {
+        //if distance to the player is smaller than attack range, return true.
+        if (Vector3.SqrMagnitude(m_data.followObject.position - m_data.transform.position) <
+            m_data.attackRange * m_data.attackRange)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //switch to chosen behaviour.
+    protected virtual void TransitionBehaviour(AIData.Behaviour behaviour)
+    {
+        m_data.m_currentBehaviour = behaviour;
     }
 }

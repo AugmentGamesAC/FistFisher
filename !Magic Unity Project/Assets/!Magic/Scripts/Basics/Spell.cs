@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Spell
 { 
     /// <summary>
@@ -27,9 +28,12 @@ public class Spell
         StartCasting,
         StopCasting,
         BeginAiming,
+        BeginAiming2,
         BypassAiming,
         Cancel
     };
+
+
 
     [SerializeField]
     protected SpellDescription m_Description;
@@ -59,11 +63,24 @@ public class Spell
     [SerializeField]
     protected bool m_ShowRayTrace = true;
 
+    [SerializeField]
+    protected float m_Damage;
+    public float Damage { get { return m_Damage; } }
+    [SerializeField]
+    protected float m_Cooldown = 2.0f;
+    public float Cooldown { get { return m_Cooldown; } }
+
+    [SerializeField]
+    protected InteractionType m_NextState = InteractionType.BeginAiming;
+    public InteractionType NextState { get { return m_NextState; } }
+
+
     public Spell(SpellDescription spellProperties)
     {
         m_Description = spellProperties;
-        m_ManaCost = ResolveDescriptionCost(spellProperties);
         m_ElementType = ResolveElements(spellProperties);
+        m_ManaCost = ResolveDescriptionCost(spellProperties);
+
     }
 
     private Elements ResolveElements(SpellDescription discription)
@@ -94,7 +111,7 @@ public class Spell
             case InteractionType.BeginAiming:
                 return ResolveBeginAiming(spellUser);
             case InteractionType.StartCasting:
-                return BeginCasting();
+                return ResolveCasting();
             case InteractionType.Cancel:
                 return Cancel();
             case InteractionType.StopCasting:
@@ -104,6 +121,31 @@ public class Spell
         }
     }
 
+    private bool ResolveBeginAiming2()
+    {
+        GameObject spellTemplate;
+        if (!SpellManager.Instance.SpellShapeLookup.TryGetValue(m_Description.Shape, out spellTemplate))
+            spellTemplate = m_DefaultSpellInstance;
+
+        m_SpellStateSecond = MonoBehaviour.Instantiate(
+            spellTemplate,
+            Vector3.zero,
+            Quaternion.identity,
+            (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromCaster)) ? throw new System.NotImplementedException() :
+            (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFinger)) ? m_SpellUser.Aiming : null
+            ).GetComponent<SpellInstance>();
+        m_SpellStateSecond.m_Spell = this;
+        //Figure out next state
+        m_NextState = InteractionType.StartCasting;
+
+
+        if (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFingerEndPoint))
+            return true;
+
+        ResolveAimingFormatting(m_SpellStateSecond, m_Description.Aiming);
+        return true;
+    }
+
     private bool ResolveBeginAiming(ASpellUser spellUser)
     {
         if ((spellUser == null) || (spellUser.transform == null))
@@ -111,7 +153,7 @@ public class Spell
         m_SpellUser = spellUser;
 
         GameObject spellTemplate;
-        if (!SpellManager.SpellBehaviour.SpellShapeLookup.TryGetValue(m_Description.Shape, out spellTemplate))
+        if (!SpellManager.Instance.SpellShapeLookup.TryGetValue(m_Description.Shape, out spellTemplate))
             spellTemplate = m_DefaultSpellInstance;
 
         m_SpellState = MonoBehaviour.Instantiate(
@@ -121,6 +163,12 @@ public class Spell
             (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromCaster)) ? throw new System.NotImplementedException() :
             (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFinger)) ? m_SpellUser.Aiming : null
             ).GetComponent<SpellInstance>();
+        m_SpellState.m_Spell = this;
+
+
+        //Figure out next state
+        m_NextState = (m_Description.Effect.HasFlag(SpellDescription.Effects.Swap)) ? InteractionType.BeginAiming2 : InteractionType.StartCasting;
+
 
         if (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFingerEndPoint))
             return true;
@@ -182,22 +230,25 @@ public class Spell
             ((isNegativeDimention) ? -1 : 1 * ((incrementDimention) ? positionDimention : 0));
     }
 
-    private bool BeginCasting()
+    //TODO: code requires a mana check before casting and then a using of the mana
+    private bool ResolveCasting()
     {
         if ((m_SpellUser == null)|| (m_SpellState == null))
             return false;
         if (m_SpellState.InstantceState != SpellInstance.InstanceStates.IsAiming)
             return false;
 
-       if (!m_Description.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
-            m_SpellState.gameObject.transform.parent.SetParent(null);
-        if (m_Description.Effect == SpellDescription.Effects.Summon)
-            m_SpellState.gameObject.transform.parent.gameObject.layer = 0;
+        SpellManager.CastSpell spellToCast = default(SpellManager.CastSpell);
 
-        m_SpellState.UpdateState(SpellInstance.InstanceStates.IsActive);
+        if (!SpellManager.Instance.SpellResolutionLookup.TryGetValue(SpellDescription.TranslateSpellCode(Description), out spellToCast))
+            spellToCast = SpellManager.CastStandardSpell;
 
-        return true;
+        return spellToCast(m_SpellState, m_SpellStateSecond);
     }
+
+
+    
+
 
     private bool Cancel()
     {
