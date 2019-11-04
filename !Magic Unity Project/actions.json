@@ -53,6 +53,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/Touch_example",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -102,6 +106,10 @@
     {
       "name": "/actions/mixedreality",
       "usage": "single"
+    },
+    {
+      "name": "/actions/Default_Controls",
+      "usage": "single"
     }
   ],
   "default_bindings": [
@@ -136,6 +144,10 @@
     {
       "controller_type": "vive_tracker_camera",
       "binding_url": "binding_vive_tracker_camera.json"
+    },
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "application_generated_unity_steamvr_exe_binding_vive_controller.json"
     }
   ],
   "localization": [
@@ -149,11 +161,11 @@
       "/actions/default/in/SkeletonLeftHand": "Skeleton (Left)",
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
       "/actions/default/in/Teleport": "Teleport",
-      "/actions/default/out/Haptic": "Haptic",
-      "/actions/platformer/in/Jump": "Jump",
       "/actions/default/in/Trackpad_Click": "Trackpad Clicked",
+      "/actions/default/in/Trackpad_Location": "Trackpad Location",
       "/actions/default/in/Trackpad_Touch": "Trackpad Touched",
-      "/actions/default/in/Trackpad_Location": "Trackpad Location"
+      "/actions/default/out/Haptic": "Haptic",
+      "/actions/platformer/in/Jump": "Jump"
     }
   ]
 }
