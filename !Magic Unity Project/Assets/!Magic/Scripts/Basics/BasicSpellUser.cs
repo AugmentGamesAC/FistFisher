@@ -12,7 +12,7 @@ public class BasicSpellUser : ASpellUser
         {
             if (m_AimingPoint == default(Transform))
                 m_AimingPoint = transform;
-            return transform;
+            return m_AimingPoint;
         }
     }
 

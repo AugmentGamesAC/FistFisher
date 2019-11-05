@@ -8,19 +8,19 @@ public class KBM_GauntletSlotsAndCastingScript : Gauntlet
     public KeyCode m_castOrAssignToSlot2 = KeyCode.Alpha2;
     public KeyCode m_castOrAssignToSlot3 = KeyCode.Alpha3;
 
-    public KBMSpellList m_KBMSpellList;
-
     // Start is called before the first frame update
     void Start()
     {
+        m_ManaCurrent = m_ManaMax;
+        m_ShieldCurrent = m_ShieldMax;
     }
 
 
     void CastSpell(int index)
     {
-        if (m_KBMSpellList == null)
+        if (m_spellList == null)
             return;
-        Spell spell = m_KBMSpellList.ReadSpell(index);
+        Spell spell = m_spellList.ReadSpell(index);
         if (spell == null)
             return;
 

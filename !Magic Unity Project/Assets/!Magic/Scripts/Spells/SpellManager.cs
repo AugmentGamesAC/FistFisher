@@ -48,14 +48,15 @@ public class SpellManager : MonoBehaviour
 
     public delegate bool CastSpell(SpellInstance firstInstance, SpellInstance secondInstance);
 
-    [System.Serializable]
+    //[System.Serializable]
     public class SpellResolutionLookups : InspectorDictionary<double, CastSpell> { }
-    [SerializeField]
+    //[SerializeField]
     protected SpellResolutionLookups m_SpellResolutionLookup = new SpellResolutionLookups()
     {
         //Needs one for each Spell description combinations. 16 for now.
         {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastObjectSwapSpell },
-        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Summon,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastWallSpell }
+        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Summon,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastWallSpell },
+        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Damage,SpellDescription.Usages.SetTime,SpellDescription.Aimings.FromFingerEndPoint) , CastSprayerSpell }
         //{SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Projectile,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastBeamSpell }
     };
     public SpellResolutionLookups SpellResolutionLookup { get { return m_SpellResolutionLookup; } }
@@ -76,12 +77,10 @@ public class SpellManager : MonoBehaviour
         SpellDescription spellDescription = firstInstance.m_Spell.Description;
 
         if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
-            firstInstance.gameObject.transform.parent.SetParent(null);
-        if (spellDescription.Effect == SpellDescription.Effects.Summon)
-            firstInstance.gameObject.transform.parent.gameObject.layer = 0;
+            firstInstance.gameObject.transform.SetParent(null);
 
         firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
-
+        firstInstance.UpdateMaterial(firstInstance.m_Spell.ElementType);
         return true;
     }
 
@@ -100,7 +99,9 @@ public class SpellManager : MonoBehaviour
     //summons a wall
     static public bool CastWallSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
-        throw new System.NotImplementedException();
+        firstInstance.gameObject.layer = 0;
+
+        return CastStandardSpell(firstInstance, secondInstance);
     }
 
     //swaps objects after two area selections.
@@ -142,7 +143,7 @@ public class SpellManager : MonoBehaviour
     //Flamethrower type summon, deals damage over time inside of its mesh collider.
     static public bool CastSprayerSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
-        throw new System.NotImplementedException();
+        return CastStandardSpell(firstInstance, secondInstance);
     }
 
     //select an from finger point, then gain control of the object's transform.

@@ -23,6 +23,8 @@ public class SpellInstance : MonoBehaviour
     public float m_destroyDelay = 1.0f;
     public bool m_allowExplodeUpdate = false;
 
+    protected float TimeofDeath = float.PositiveInfinity;
+
     [SerializeField]
     protected InstanceStates m_InstanceState;
     public InstanceStates InstantceState { get { return m_InstanceState; } }
@@ -55,6 +57,8 @@ public class SpellInstance : MonoBehaviour
 
         resolveDuration();
 
+
+
         if (m_Spell.Description.Effect != SpellDescription.Effects.Summon)
             return;
     }
@@ -62,14 +66,21 @@ public class SpellInstance : MonoBehaviour
 
     private void resolveDuration()
     {
+        //duration is dependant on the spell useage, but also dependant on if it is a summon
         if (m_Spell.Description.Usage == SpellDescription.Usages.Instant)
-            Destroy(this.gameObject, 0.5f);
+            TimeofDeath = (m_Spell.Description.Effect == SpellDescription.Effects.Summon)? float.PositiveInfinity : Time.time + 1f;
         else if (m_Spell.Description.Usage == SpellDescription.Usages.SetTime)
-            Destroy(this.gameObject, 5f);
+            TimeofDeath = Time.time + 5f;
     }
 
     private void FixedUpdate()
     {
+        if ((m_Spell != default)&&(m_InstanceState == InstanceStates.IsAiming))
+            m_Spell.ResolveFromFingerEndPoint(this);
+
+        if (m_InstanceState == InstanceStates.IsAiming) //while aiming don't do anything else.
+            return;
+
         //this block stops everything after it from working.
         ASpellUser[] keys = m_CooldownList.Keys.ToArray();
 
@@ -80,16 +91,20 @@ public class SpellInstance : MonoBehaviour
                 m_CooldownList.Remove(damaged);
         }
 
+        if (Time.time > TimeofDeath)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         ResolveProjectileBehaviour();
 
         if (!m_allowExplodeUpdate)
             return;
 
-        gameObject.transform.localScale += Vector3.one * m_projectileMoveSpeed * Time.deltaTime;
- 
-        if (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
-            Destroy(gameObject,  m_destroyDelay);
-       
+        if (gameObject.transform.localScale.magnitude > m_maxExplosionScale)
+            gameObject.transform.localScale += Vector3.one * m_projectileMoveSpeed * Time.deltaTime;
+      
     }
 
     //TODO: some logic for how exploision is to be handled.
@@ -105,10 +120,9 @@ public class SpellInstance : MonoBehaviour
         m_rigidBody.velocity = Vector3.zero;
     }
 
-
     private void ResolveProjectileBehaviour()
     {
-        if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
+        if (m_Spell.Description.Effect != SpellDescription.Effects.Projectile)
             return;
 
         //turn off gravity for projectiles.
