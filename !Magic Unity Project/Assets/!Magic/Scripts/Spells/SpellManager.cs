@@ -54,40 +54,25 @@ public class SpellManager : MonoBehaviour
     protected SpellResolutionLookups m_SpellResolutionLookup = new SpellResolutionLookups()
     {
         //Needs one for each Spell description combinations. 16 for now.
-        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastDoubleSpell }
+        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Swap,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastObjectSwapSpell },
+        {SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Summon,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastWallSpell }
         //{SpellDescription.TranslateSpellCode(0,SpellDescription.Effects.Projectile,SpellDescription.Usages.Instant,SpellDescription.Aimings.FromFingerEndPointPlusHalfExtent) , CastBeamSpell }
     };
     public SpellResolutionLookups SpellResolutionLookup { get { return m_SpellResolutionLookup; } }
 
     static public bool CastDoubleSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
-        throw new System.NotImplementedException();
+        if (!CastStandardSpell(firstInstance, secondInstance))
+            return false;
 
-
-        SpellDescription spellDescription = firstInstance.m_Spell.Description;
-
-        if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
-            firstInstance.gameObject.transform.parent.SetParent(null);
-        if (spellDescription.Effect == SpellDescription.Effects.Summon)
-            firstInstance.gameObject.transform.parent.gameObject.layer = 0;
-
-        firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
-
-        spellDescription = secondInstance.m_Spell.Description;
-        if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))
-            secondInstance.gameObject.transform.parent.SetParent(null);
-        if (spellDescription.Effect == SpellDescription.Effects.Summon)
-            secondInstance.gameObject.transform.parent.gameObject.layer = 0;
-
-        firstInstance.UpdateState(SpellInstance.InstanceStates.IsActive);
+        if (!CastStandardSpell(secondInstance, firstInstance))
+            return false;
 
         return true;
     }
 
     static public bool CastStandardSpell(SpellInstance firstInstance, SpellInstance secondInstance)
     {
-        throw new System.NotImplementedException();
-
         SpellDescription spellDescription = firstInstance.m_Spell.Description;
 
         if (!spellDescription.Aiming.HasFlag(SpellDescription.Aimings.CenteredBoxToFingerTip))

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class SpellInstance : MonoBehaviour
@@ -29,6 +30,7 @@ public class SpellInstance : MonoBehaviour
     public void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
+        m_CooldownList = new Dictionary<ASpellUser, float>();
     }
 
     public Spell m_Spell;
@@ -47,34 +49,47 @@ public class SpellInstance : MonoBehaviour
     public void UpdateState(InstanceStates state)
     {
         m_InstanceState = state;
+
+        if (m_InstanceState != InstanceStates.IsActive)
+            return;
+
+        resolveDuration();
+
+        if (m_Spell.Description.Effect != SpellDescription.Effects.Summon)
+            return;
+    }
+
+
+    private void resolveDuration()
+    {
+        if (m_Spell.Description.Usage == SpellDescription.Usages.Instant)
+            Destroy(this.gameObject, 0.5f);
+        else if (m_Spell.Description.Usage == SpellDescription.Usages.SetTime)
+            Destroy(this.gameObject, 5f);
     }
 
     private void FixedUpdate()
     {
         //this block stops everything after it from working.
-        //ASpellUser[] keys = new List<ASpellUser>(m_CooldownList.Keys).ToArray();
+        ASpellUser[] keys = m_CooldownList.Keys.ToArray();
 
-        //foreach (ASpellUser damaged in keys)
-        //{
-        //    m_CooldownList[damaged] -= Time.deltaTime;
-        //    if (m_CooldownList[damaged] <= 0)
-        //        m_CooldownList.Remove(damaged);
-        //}
-        //created inherited class and override function.
+        foreach (ASpellUser damaged in keys)
+        {
+            m_CooldownList[damaged] -= Time.deltaTime;
+            if (m_CooldownList[damaged] <= 0)
+                m_CooldownList.Remove(damaged);
+        }
 
         ResolveProjectileBehaviour();
 
+        if (!m_allowExplodeUpdate)
+            return;
+
+        gameObject.transform.localScale += Vector3.one * m_projectileMoveSpeed * Time.deltaTime;
+ 
         if (gameObject.transform.localScale.magnitude < m_maxExplosionScale)
-        {
-            if (m_allowExplodeUpdate)
-            {
-                gameObject.transform.localScale += new Vector3(1, 1, 1) * m_projectileMoveSpeed * Time.deltaTime;
-            }
-        }
-        else
-        {
-            Destroy(gameObject, m_destroyDelay);
-        }
+            Destroy(gameObject,  m_destroyDelay);
+       
     }
 
     //TODO: some logic for how exploision is to be handled.
@@ -91,7 +106,6 @@ public class SpellInstance : MonoBehaviour
     }
 
 
-    //TODO: MISSING Progectile movement should be call in fixedUpdate
     private void ResolveProjectileBehaviour()
     {
         if (!m_Spell.Description.Effect.HasFlag(SpellDescription.Effects.Projectile))
@@ -107,7 +121,7 @@ public class SpellInstance : MonoBehaviour
     private void ProjectileOnHit(Collider other)
     {
         //cast other to spell user to apply damage to.
-        ASpellUser otherSpellUser = (ASpellUser)other.gameObject.GetComponent(typeof(ASpellUser));
+        ASpellUser otherSpellUser = other.gameObject.GetComponent<ASpellUser>();
 
         if (otherSpellUser == null)
         {
@@ -143,7 +157,7 @@ public class SpellInstance : MonoBehaviour
         if (!((m_InstanceState == InstanceStates.IsAiming) || (m_InstanceState == InstanceStates.IsEviromental)))
             return;
 
-        ASpellUser otherSpellUser = (ASpellUser)other.gameObject.GetComponent(typeof(ASpellUser));
+        ASpellUser otherSpellUser = other.gameObject.GetComponent<ASpellUser>();
 
         if (otherSpellUser == null)
             return;
