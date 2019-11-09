@@ -131,11 +131,11 @@ public class SpellDescription
     public static double TranslateSpellCode(Shapes shape, Effects effect, Usages usage, Aimings aiming)
     {
         double calcuatation = (double)aiming;
-        calcuatation += (int)usage * (double)0x00100000; //bigger number than  any Aiming value Usage must be < 16 total
+        calcuatation += (int)usage *  (double)0x00100000; //bigger number than  any Aiming value Usage must be < 16 total
         calcuatation += (int)effect * (double)0x01000000; //biger number than any Usage value Effect must be < 16 total
         //shapes are not currently translated into spellcodes
 
-        return default(Double);
+        return calcuatation;
     }
     public static double TranslateSpellCode(SpellDescription description)
     {

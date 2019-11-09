@@ -121,7 +121,7 @@ public class BasicSlottable : ASlottable
         if (m_IsSlotted)
             m_SlotRef = targetSlot;
 
-        ToggleBeingHeld(false);
+        ToggleBeingHeld(true);
     }
 
     private void FixedUpdate() 

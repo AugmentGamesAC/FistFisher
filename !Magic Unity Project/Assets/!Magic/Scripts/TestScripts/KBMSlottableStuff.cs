@@ -13,7 +13,7 @@ public class KBMSlottableStuff: SpellChip
     //gets the slot relative to slot index given by key press and tells the slot to slot this object
     private void DoSlotThings(int slotIndex)
     {
-        ASlot slot = m_KBMGauntlet.m_KBMSpellList.GetSlot(slotIndex);
+        ASlot slot = m_KBMGauntlet.SpellList.GetSlot(slotIndex);
         if (slot != null)
         {
             AssignSlot(slot);

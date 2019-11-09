@@ -46,10 +46,14 @@ MonoBehaviour:
   m_SpellShapeLookup:
     keys: 01000000
     values:
-    - {fileID: 0}
+    - {fileID: 3979633746690673513, guid: 89123f7fdff56a5479d8b239ae79d473, type: 3}
   m_SpellInstaceMatLookup:
-    keys: 
-    values: []
+    keys: 08000000010000000200000004000000
+    values:
+    - {fileID: 2100000, guid: 750dcb1495249e946b3e75deb178c822, type: 2}
+    - {fileID: 2100000, guid: dd16e25a8adf28f4d91f054f1825a013, type: 2}
+    - {fileID: 2100000, guid: 80a6841694a7d9c46a385e3bbddd7f97, type: 2}
+    - {fileID: 2100000, guid: 2e2ff3521060cef44abd9cb8aa77cf3f, type: 2}
   m_ElementColorLookup:
     keys: 010000000200000004000000
     values:
@@ -62,3 +66,6 @@ MonoBehaviour:
     - {r: 1, g: 0.1, b: 1, a: 1}
     - {r: 1, g: 0.2, b: 0.2, a: 1}
     - {r: 0.2, g: 1, b: 0.2, a: 1}
+  m_SpellResolutionLookup:
+    keys:
+    - 17833988

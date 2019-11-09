@@ -135,6 +135,8 @@ public class Spell
             (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFinger)) ? m_SpellUser.Aiming : null
             ).GetComponent<SpellInstance>();
         m_SpellStateSecond.m_Spell = this;
+        m_SpellState.UpdateState(SpellInstance.InstanceStates.IsAiming);
+        m_SpellStateSecond.UpdateMaterial(Elements.Aiming);
         //Figure out next state
         m_NextState = InteractionType.StartCasting;
 
@@ -164,7 +166,8 @@ public class Spell
             (m_Description.Aiming.HasFlag(SpellDescription.Aimings.FromFinger)) ? m_SpellUser.Aiming : null
             ).GetComponent<SpellInstance>();
         m_SpellState.m_Spell = this;
-
+        m_SpellState.UpdateState(SpellInstance.InstanceStates.IsAiming);
+        m_SpellState.UpdateMaterial(Elements.Aiming);
         m_SpellUser.PredictManaModify(m_ManaCost);
 
 
@@ -237,19 +240,23 @@ public class Spell
     {
         if ((m_SpellUser == null)|| (m_SpellState == null))
             return false;
-        if (m_SpellState.InstantceState != SpellInstance.InstanceStates.IsAiming)
-            return false;
 
         if (!HadTheMana())
             return false;
-
 
         SpellManager.CastSpell spellToCast = default(SpellManager.CastSpell);
 
         if (!SpellManager.Instance.SpellResolutionLookup.TryGetValue(SpellDescription.TranslateSpellCode(Description), out spellToCast))
             spellToCast = SpellManager.CastStandardSpell;
 
-        return spellToCast(m_SpellState, m_SpellStateSecond);
+        m_NextState = InteractionType.BeginAiming;
+
+        bool returncatch = spellToCast(m_SpellState, m_SpellStateSecond);
+        if (!returncatch)
+            return false;
+        m_SpellState = null;
+        m_SpellStateSecond = null;
+        return true;
     }
 
 
@@ -279,26 +286,32 @@ public class Spell
 
         return true;
     }
-    
+
+    public string[] m_LayerExclusionMask = { "Ignore Raycast" };
+
     public bool ResolveFromFingerEndPoint(SpellInstance instance)
     {
-        if (m_SpellUser == null)
+        if ((m_SpellUser == null) || !Description.Aiming.HasFlag(SpellDescription.Aimings.FromFingerEndPoint))
             return false;
+
+       // int mask = ~LayerMask.GetMask(m_LayerExclusionMask);
+
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (!Physics.Raycast(m_SpellUser.Aiming.position,m_SpellUser.Aiming.forward, out hit, m_MaxSpellRange))
         {
-
             Vector3 pos = m_SpellUser.Aiming.position + m_SpellUser.Aiming.forward.normalized * m_MaxDistance;
             instance.transform.SetPositionAndRotation(pos, Quaternion.Euler(Vector3.zero));
+            return false;
         }
         if (m_ShowRayTrace)
-            Debug.DrawRay(m_SpellUser.Aiming.position, hit.point, Color.yellow);
+            Debug.DrawRay(m_SpellUser.Aiming.position, m_SpellUser.Aiming.forward, Color.yellow);
 
         instance.transform.SetPositionAndRotation(hit.point, Quaternion.FromToRotation(instance.transform.up, hit.normal) * instance.transform.rotation);
+
+        instance.transform.position += instance.transform.TransformDirection(CalculateTransform(instance, m_Description.Aiming));
         ApplyRotation(instance, m_Description.Aiming);
-        instance.transform.position += CalculateTransform(instance, m_Description.Aiming);
         return true;
     }
 }
