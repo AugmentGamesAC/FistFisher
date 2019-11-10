@@ -8,7 +8,7 @@ public class Water : MonoBehaviour
     {
         if (other.name == "First Person Player")
         {
-            other.GetComponent<PlayerMovement>().m_IsSwimming = true;
+            other.GetComponent<PlayerMovement>().m_isSwimming = true;
         }
     }
 
@@ -16,7 +16,7 @@ public class Water : MonoBehaviour
     {
         if (other.name == "First Person Player")
         {
-            other.GetComponent<PlayerMovement>().m_IsSwimming = false;
+            other.GetComponent<PlayerMovement>().m_isSwimming = false;
         }
     }
 }
