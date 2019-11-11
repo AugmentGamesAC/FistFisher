@@ -2,35 +2,27 @@
 
 public class FollowCameraBehaviour : CameraBehaviour
 {
-    public float CameraHorizPosEaseSpeed = 5.0f;
-    public float CameraVertPosEaseSpeed = 4.0f;
-    public float LookPosEaseSpeed = 5.0f;
+    public float m_cameraHorizPosEaseSpeed = 5.0f;
+    public float m_cameraVertPosEaseSpeed = 4.0f;
+    public float m_lookPosEaseSpeed = 5.0f;
 
-    public Vector3 PlayerMaxDistLocalLookPos = Vector3.zero;
-    public Vector3 PlayerMinDistLocalLookPos = Vector3.zero;
+    public Vector3 m_playerMaxDistLocalLookPos = Vector3.zero;
+    public Vector3 m_playerMinDistLocalLookPos = Vector3.zero;
 
-    public Vector3 PlayerLocalPivotPos = Vector3.zero;
+    public Vector3 m_playerLocalPivotPos = Vector3.zero;
 
-    public float YawRotateSpeed = 1.0f;
-    public float PitchRotateSpeed = 1.0f;
-    public float MaxVerticalAngle = 70.0f;
+    public float m_yawRotateSpeed = 1.0f;
+    public float m_pitchRotateSpeed = 1.0f;
+    public float m_maxVerticalAngle = 70.0f;
 
-    public float MaxDistFromPlayer = 6.0f;
-    public float MinHorizDistFromPlayer = 5.0f;
-    public float AutoRotateDelayTime = 1.0f;
-
-    public FollowCameraBehaviour()
-    {
-
-    }
+    public float m_maxDistFromPlayer = 6.0f;
+    public float m_minHorizDistFromPlayer = 5.0f;
 
     public override void Activate()
     {
         base.Activate();
 
-        m_GoalPos = m_Camera.transform.position;
-        m_AllowAutoRotate = false;
-        m_TimeTillAutoRotate = AutoRotateDelayTime;
+        m_goalPos = m_camera.transform.position;
     }
 
     public override void Deactivate()
@@ -40,8 +32,8 @@ public class FollowCameraBehaviour : CameraBehaviour
 
     public override void UpdateRotation(float yawAmount, float pitchAmount)
     {
-        m_YawInput = yawAmount;
-        m_PitchInput = pitchAmount;
+        m_yawInput = yawAmount;
+        m_pitchInput = pitchAmount;
     }
 
     public override void SetFacingDirection(Vector3 direction)
@@ -62,45 +54,19 @@ public class FollowCameraBehaviour : CameraBehaviour
     public override void UpdateCamera()
     {
         //player's pivot point.
-        Vector3 worldPivotPos = m_Player.transform.TransformPoint(PlayerLocalPivotPos);
+        Vector3 worldPivotPos = m_player.transform.TransformPoint(m_playerLocalPivotPos);
 
         //Canmera's desired position is behind the player by OffSetFromPlayer.Magnitude();
-        Vector3 offsetFromPlayer = m_GoalPos - worldPivotPos;
+        Vector3 offsetFromPlayer = m_goalPos - worldPivotPos;
 
         //distance
         float distFromPlayer = offsetFromPlayer.magnitude;
 
         //Get the Camera Rotation based on the input gathered from thirdPersonCamera.
-        Vector3 rotateAmount = new Vector3(m_PitchInput * PitchRotateSpeed, m_YawInput * YawRotateSpeed);
-
-        //don't need this auto rotate stuff.
-        //m_TimeTillAutoRotate -= Time.deltaTime;
-
-        //if(!MathUtils.AlmostEquals(rotateAmount.y, 0.0f))
-        //{
-        //    m_AllowAutoRotate = false;
-        //    m_TimeTillAutoRotate = AutoRotateDelayTime;
-        //}
-        //else if( m_TimeTillAutoRotate <= 0.0f)
-        //{
-        //    m_AllowAutoRotate = true;
-        //}
-
-        //Horizontal Rotation
-
-        //if(m_AllowAutoRotate)
-        //{
-        //    Vector3 anglesFromPlayer = Quaternion.LookRotation(offsetFromPlayer).eulerAngles;
-        //    pivotRotation.y = anglesFromPlayer.y;
-        //}
-        //else
-        //{
-
-        //    Debug.Log(rotateAmount.y);
-        //}
+        Vector3 rotateAmount = new Vector3(m_pitchInput * m_pitchRotateSpeed, m_yawInput * m_yawRotateSpeed);
 
         //get current YRotation:
-        Vector3 pivotRotation = m_Camera.PivotRotation;
+        Vector3 pivotRotation = m_camera.PivotRotation;
 
         //XMouse Movement passed on.
         //GetAmount of degrees rotated by last input call.
@@ -112,13 +78,13 @@ public class FollowCameraBehaviour : CameraBehaviour
         pivotRotation.x -= rotateAmount.x;
 
         //Clamp so you can't spin vertically infinitely.
-        pivotRotation.x = Mathf.Clamp(pivotRotation.x, -MaxVerticalAngle, MaxVerticalAngle);
+        pivotRotation.x = Mathf.Clamp(pivotRotation.x, -m_maxVerticalAngle, m_maxVerticalAngle);
 
         //Set our camera's angles to the values after input.
-        m_Camera.PivotRotation = pivotRotation;
+        m_camera.PivotRotation = pivotRotation;
 
         //Clamp a maximum distance for camera to be. 
-        distFromPlayer = Mathf.Clamp(distFromPlayer, MinHorizDistFromPlayer, MaxDistFromPlayer);
+        distFromPlayer = Mathf.Clamp(distFromPlayer, m_minHorizDistFromPlayer, m_maxDistFromPlayer);
 
         //Set Camera Position with offset and the rotation from input.
         offsetFromPlayer = Quaternion.Euler(pivotRotation.x, pivotRotation.y, 0.0f) * Vector3.forward;
@@ -127,51 +93,60 @@ public class FollowCameraBehaviour : CameraBehaviour
         offsetFromPlayer *= distFromPlayer;
 
         //position for camera to be is in the back of worldPivotPos(Player's pivot point) by offsetFromPlayer
-        m_GoalPos = offsetFromPlayer + worldPivotPos;
+        m_goalPos = offsetFromPlayer + worldPivotPos;
 
         //Keep local variable of old Camera Position to be changed and applied.
-        Vector3 newCameraPosition = m_Camera.transform.position;
+        Vector3 newCameraPosition = m_camera.transform.position;
 
         //Change only x values to move towards m_GoalPos.
         newCameraPosition = MathUtils.SlerpToHoriz(
-            CameraHorizPosEaseSpeed,
+            m_cameraHorizPosEaseSpeed,
             newCameraPosition,
-            m_GoalPos,
+            m_goalPos,
             worldPivotPos,
             Time.deltaTime);
 
         //lerp to GoalPos y position.
         newCameraPosition.y = MathUtils.LerpTo(
-            CameraVertPosEaseSpeed,
+            m_cameraVertPosEaseSpeed,
             newCameraPosition.y,
-            m_GoalPos.y,
+            m_goalPos.y,
             Time.deltaTime);
 
         //Set Camera's current position to new position now having input applied.
-        m_Camera.transform.position = newCameraPosition;
+        m_camera.transform.position = newCameraPosition;
 
-        //Makes camera move infront of obstacle so you can always see the player.
-        HandleObstacles();
+        //Deal with obstacles
+        float moveUpDist = HandleObstacles();
 
-        //Get Camera Rotation to look towards new player position. LookPos(Player's position set in ThirdPersonCamera.SetPlayer(m_player)).
-        m_Camera.LookPos = MathUtils.LerpTo(
-          LookPosEaseSpeed,
-          m_Camera.LookPos,
-          worldPivotPos,
-          Time.deltaTime);
+        //Update Look Position
+        {
+            float lookPosPercent = moveUpDist / m_maxDistFromPlayer;
+            Vector3 localLookPos = Vector3.Lerp(m_playerMinDistLocalLookPos, m_playerMaxDistLocalLookPos, lookPosPercent);
 
-        //Get Vector3 that's between playerPos and Camera Position.
-        Vector3 lookDir = m_Camera.LookPos - m_Camera.transform.position;
+            Vector3 goalLookPos = m_player.transform.TransformPoint(localLookPos);
 
-        //Set the Camera's current rotation to the new found rotation lerped on that frame.
-        m_Camera.transform.rotation = Quaternion.LookRotation(lookDir);
+                //goalLookPos.y = m_Camera.LookPos.y;
+
+            m_camera.LookPos = MathUtils.LerpTo(
+                m_lookPosEaseSpeed,
+                m_camera.LookPos,
+                goalLookPos,
+                Time.deltaTime
+                );
+
+            Vector3 lookDir = m_camera.LookPos - m_camera.transform.position;
+
+
+            m_camera.transform.rotation = Quaternion.LookRotation(lookDir);
+        }
     }
 
-    Vector3 m_GoalPos;
+    Vector3 m_goalPos;
 
-    float m_YawInput;
-    float m_PitchInput;
+    float m_yawInput;
+    float m_pitchInput;
 
-    float m_TimeTillAutoRotate;
-    bool m_AllowAutoRotate;
+    float m_timeTillAutoRotate;
+    bool m_allowAutoRotate;
 }

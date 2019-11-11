@@ -2,13 +2,13 @@
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public FollowCameraBehaviour FollowCameraBehaviour;
+    public FollowCameraBehaviour m_followCameraBehaviour;
 
     void Awake()
     {
         //Create a basic behaviour for our camera if it doesn't have one.
-        if (FollowCameraBehaviour == null)
-            FollowCameraBehaviour = new FollowCameraBehaviour();
+        if (m_followCameraBehaviour == null)
+            m_followCameraBehaviour = new FollowCameraBehaviour();
     }
 
     void Update ()
@@ -18,53 +18,53 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if(m_Player == null)
+        if(m_player == null)
         {
             return;
         }
 
-        if(m_CurrentBehaviour != null)
+        if(m_currentBehaviour != null)
         {
             //update camera on the behaviour does all the logic for following the player.
-            m_CurrentBehaviour.UpdateCamera();
+            m_currentBehaviour.UpdateCamera();
 
             //Get the degrees for each axis and set to control rotation.
-            ControlRotation = m_CurrentBehaviour.GetControlRotation();
+            ControlRotation = m_currentBehaviour.GetControlRotation();
         }
     }
 
     public void SetPlayer(GameObject player)
     {
         //Store the player's position to a lookPosition for camera to look towards.
-        m_Player = player;
+        m_player = player;
 
-        if(m_Player != null)
+        if(m_player != null)
         {
-            LookPos = m_Player.transform.position;
+            LookPos = m_player.transform.position;
         }
 
         //behaviour needs to know about the player for updateCamera Logic.
-        FollowCameraBehaviour.Init(this, m_Player);
+        m_followCameraBehaviour.Init(this, m_player);
 
         //Set our Camera behaviour type. Example: First, third, cinematic...
-        SetCameraBehaviour(FollowCameraBehaviour);
+        SetCameraBehaviour(m_followCameraBehaviour);
     }
 
     //tells behaviour to update rotation based on inputs.
     public void UpdateRotation(float yawAmount, float pitchAmount)
     {
-        if (m_CurrentBehaviour != null)
+        if (m_currentBehaviour != null)
         {
-            m_CurrentBehaviour.UpdateRotation(yawAmount, pitchAmount);
+            m_currentBehaviour.UpdateRotation(yawAmount, pitchAmount);
         }
     }
 
     //Tells Behaviour which direction to look towards.
     public void SetFacingDirection(Vector3 direction)
     {
-        if (m_CurrentBehaviour != null)
+        if (m_currentBehaviour != null)
         {
-            m_CurrentBehaviour.SetFacingDirection(direction);
+            m_currentBehaviour.SetFacingDirection(direction);
         }
     }
 
@@ -75,24 +75,24 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void SetCameraBehaviour(CameraBehaviour behaviour)
     {
-        if (m_CurrentBehaviour == behaviour)
+        if (m_currentBehaviour == behaviour)
         {
             return;
         }
 
-        if (m_CurrentBehaviour != null)
+        if (m_currentBehaviour != null)
         {
-            m_CurrentBehaviour.Deactivate();
+            m_currentBehaviour.Deactivate();
         }
 
-        m_CurrentBehaviour = behaviour;
+        m_currentBehaviour = behaviour;
 
-        if (m_CurrentBehaviour != null)
+        if (m_currentBehaviour != null)
         {
-            m_CurrentBehaviour.Activate();
+            m_currentBehaviour.Activate();
         }
     }
 
-    CameraBehaviour m_CurrentBehaviour;
-    GameObject m_Player;
+    CameraBehaviour m_currentBehaviour;
+    GameObject m_player;
 }

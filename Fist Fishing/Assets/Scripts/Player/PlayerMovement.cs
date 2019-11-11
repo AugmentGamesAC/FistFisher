@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
+        UpdateIsGrounded();
 
         UpdateCamera();
 
@@ -94,6 +94,12 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+    }
+
+    private bool UpdateIsGrounded()
+    {
+        m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
+        return m_isGrounded;
     }
 
     private void UpdateCamera()
