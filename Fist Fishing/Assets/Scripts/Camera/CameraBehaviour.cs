@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class CameraBehaviour
 {
-    public float ObstacleCheckRadius = 0.5f;
-    public Vector3 PlayerLocalObstructionMovePos = Vector3.zero;
+    public float m_obstacleCheckRadius = 0.5f;
+    public Vector3 m_playerLocalObstructionMovePos = Vector3.zero;
     public CameraBehaviour()
     {
 
@@ -13,11 +13,11 @@ public abstract class CameraBehaviour
 
     public virtual void Init(ThirdPersonCamera camera, GameObject player)
     {
-        m_Camera = camera;
-        m_Player = player;
+        m_camera = camera;
+        m_player = player;
 
         //this is important so you don't snap camera pos to player. Set these in inspector.
-        m_RaycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water");
+        m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water");
     }
 
     public virtual void Activate()
@@ -37,7 +37,7 @@ public abstract class CameraBehaviour
     //this is useful to place player in correct rotation.
     public virtual Vector3 GetControlRotation()
     {
-        return m_Camera.transform.rotation.eulerAngles;
+        return m_camera.transform.rotation.eulerAngles;
     }
 
     public virtual bool UsesStandardControlRotation()
@@ -48,8 +48,8 @@ public abstract class CameraBehaviour
     //Raycasts from player pos to camera pos to check for obstacles to obstruct vision.
     protected float HandleObstacles()
     {
-        Vector3 rayStart = m_Player.transform.TransformPoint(PlayerLocalObstructionMovePos);
-        Vector3 rayEnd = m_Camera.transform.position;
+        Vector3 rayStart = m_player.transform.TransformPoint(m_playerLocalObstructionMovePos);
+        Vector3 rayEnd = m_camera.transform.position;
 
         //direction between player and camera.
         Vector3 rayDir = rayEnd - rayStart;
@@ -65,7 +65,7 @@ public abstract class CameraBehaviour
 
         rayDir /= rayDist;
 
-        RaycastHit[] hitInfos = Physics.SphereCastAll(rayStart, ObstacleCheckRadius, rayDir, rayDist, m_RaycastHitMask);
+        RaycastHit[] hitInfos = Physics.SphereCastAll(rayStart, m_obstacleCheckRadius, rayDir, rayDist, m_raycastHitMask);
         if(hitInfos.Length <= 0)
         {
             return rayDist;
@@ -80,7 +80,7 @@ public abstract class CameraBehaviour
         //set camera in front of the closest hit info from sphere cast.
         if(minMoveUpDist < float.MaxValue)
         {
-            m_Camera.transform.position = rayStart + rayDir * minMoveUpDist;
+            m_camera.transform.position = rayStart + rayDir * minMoveUpDist;
         }
 
         Debug.DrawLine(rayStart, rayEnd, Color.red);
@@ -88,9 +88,9 @@ public abstract class CameraBehaviour
         return minMoveUpDist;
     }
 
-    protected ThirdPersonCamera m_Camera;
+    protected ThirdPersonCamera m_camera;
 
-    protected GameObject m_Player;
+    protected GameObject m_player;
 
-    int m_RaycastHitMask;
+    int m_raycastHitMask;
 }
