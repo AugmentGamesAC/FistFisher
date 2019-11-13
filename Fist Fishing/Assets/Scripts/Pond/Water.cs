@@ -6,7 +6,7 @@ public class Water : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "First Person Player")
+        if (other.tag == "Player")
         {
             other.GetComponent<PlayerMovement>().m_isSwimming = true;
         }
@@ -14,7 +14,7 @@ public class Water : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "First Person Player")
+        if (other.tag == "Player")
         {
             other.GetComponent<PlayerMovement>().m_isSwimming = false;
         }
