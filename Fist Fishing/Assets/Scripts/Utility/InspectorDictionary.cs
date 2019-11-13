@@ -15,8 +15,6 @@ public class InspectorDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISeri
     // save the dictionary to lists
     public void OnBeforeSerialize()
     {
-
-
         TKey tempKey = keys.LastOrDefault();
         TValue tempValue = values.LastOrDefault();
         bool keysLonger = keys.Count > values.Count;
