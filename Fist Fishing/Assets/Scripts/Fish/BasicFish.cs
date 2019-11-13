@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BasicFish : AHealthUser
 {
-    protected InspectorDictionary<Collider, float> m_hitBoxModifiers;
+
+    public class FishyPart : InspectorDictionary<Collider, float> { }
+    [SerializeField]
+    protected FishyPart m_hitBoxModifiers;
 
     //behaviour
-    protected Task m_behaviour;
+    protected BehaviorTree m_behaviour;
 
     // Start is called before the first frame update
     void Start()

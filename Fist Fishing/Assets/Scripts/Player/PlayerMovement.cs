@@ -52,23 +52,21 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+        if (m_isSwimming)
+            Swim();
+        else
         {
-            if (m_isSwimming)
-                Swim();
+            ApplyGravity();
+            if (IsSprinting())
+                Sprint();
             else
-            {
-                ApplyGravity();
-                if (IsSprinting())
-                    Sprint();
-                else
-                    Walk();
-            }
+                Walk();
         }
 
         mountCooldown -= Time.deltaTime;
 
-        if (mountCooldown < 0.0f)
+        if (mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
     }
 
@@ -94,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateBoatMountStatus()
     {
+        
+
         //if pressing mount button and allowed to mount.
         if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
         {

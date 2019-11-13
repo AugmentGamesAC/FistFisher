@@ -4,12 +4,14 @@ using UnityEngine;
 
 public abstract class AHealthUser : MonoBehaviour
 {
+    [SerializeField]
     protected float m_currentHealth;
     public float CurrentHealth { get { return m_currentHealth; } }
 
     protected float m_maxHealth = 100.0f;
     public float MaxHealth { get { return m_maxHealth; } }
 
+    [SerializeField]
     protected float m_healthPercentage;
     public float HealthPercentage { get { return m_healthPercentage; } }
 
@@ -25,7 +27,8 @@ public abstract class AHealthUser : MonoBehaviour
 
     public virtual void ModifyHealth(float changeAmount)
     {
-        m_currentHealth += Mathf.Clamp(changeAmount, 0, m_maxHealth);
+        m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
 
         UpdateHealthPercentage();
 

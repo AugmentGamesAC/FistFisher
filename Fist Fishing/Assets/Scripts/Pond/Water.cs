@@ -17,6 +17,7 @@ public class Water : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlayerMovement>().m_isSwimming = false;
+
         }
     }
 }
