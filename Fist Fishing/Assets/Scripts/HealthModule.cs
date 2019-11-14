@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AHealthUser : MonoBehaviour
+public abstract class HealthModule : MonoBehaviour
 {
     [SerializeField]
     protected float m_currentHealth;
