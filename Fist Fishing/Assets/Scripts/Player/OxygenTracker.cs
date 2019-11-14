@@ -20,10 +20,10 @@ public class OxygenTracker : MonoBehaviour
 
     public float m_OxygenRegeneration = 20.0f;
     public float m_OxygenDegeneration = 5.0f;
+    public float m_noOxygenDamage = 5.0f;
 
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
-    public float m_OxygenHealthDamageTimer = 0.0f;
 
     public bool m_isUnderWater = false;
 
@@ -38,8 +38,8 @@ public class OxygenTracker : MonoBehaviour
 
     private void Update()
     {
+        //Regen/degen oxygen process.
         m_OxygenTickTimer += Time.deltaTime;
-
         if (m_OxygenTickTimer > m_OxygenTickFrequency)
         {
             if (m_isUnderWater)
@@ -62,11 +62,13 @@ public class OxygenTracker : MonoBehaviour
         UpdateOxygenPercentage();
     }
 
-    public virtual void ReduceOxygen(float reductionAmount)
+    public virtual bool ReduceOxygen(float reductionAmount)
     {
         ModifyOxygen(-reductionAmount);
 
         NoOxygenCheck();
+
+        return true;
     }
 
     private void UpdateOxygenPercentage()
@@ -79,10 +81,12 @@ public class OxygenTracker : MonoBehaviour
         if (m_currentOxygen > 0.0f)
             return false;
 
-        m_healthComponent.TakeDamage(m_OxygenDegeneration);
+        //start damaging health
+        m_healthComponent.TakeDamage(m_noOxygenDamage);
 
         ResetOxygenTickTimer();
 
+        //trigger anything that needs to happen when we have no oxygen.
         LowOxygen();
 
         return true;
@@ -95,36 +99,13 @@ public class OxygenTracker : MonoBehaviour
 
     protected virtual void LowOxygen()
     {
-        OnLowOxygen.Invoke();
+        Debug.Log("Low Oxygen!!");
+
+        //OnLowOxygen.Invoke();
     }
 
     private void ResetOxygenTickTimer()
     {
         m_OxygenTickTimer = 0.0f;
-    }
-
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Water")
-        {
-            m_isUnderWater = false;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Water")
-        {
-            m_isUnderWater = true;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Water")
-        {
-            m_isUnderWater = true;
-        }
     }
 }
