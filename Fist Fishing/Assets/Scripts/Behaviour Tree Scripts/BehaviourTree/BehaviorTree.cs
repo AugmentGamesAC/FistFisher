@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BehaviorTree : MonoBehaviour {
-    Stack<Node> CallStack;
+    protected Stack<Node> CallStack;
     public Hashtable Blackboard;
     public Node root;
     public GameObject parent;
     // Use this for initialization
-    void Awake()
+    public virtual void Awake()
     {
         parent = gameObject;
         CallStack = new Stack<Node>();

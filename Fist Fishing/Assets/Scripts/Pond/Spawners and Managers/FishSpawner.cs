@@ -31,6 +31,7 @@ public class FishSpawner : MonoBehaviour
         BasicFish fishScript = newFish.GetComponent<BasicFish>();
         if (fishScript == null)
             return null;
+        fishScript.Spawner = this;
 
         LayerMask mask = LayerMask.GetMask("Water");
         //Debug.LogError(mask);

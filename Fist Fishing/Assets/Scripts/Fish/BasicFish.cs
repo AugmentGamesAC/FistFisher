@@ -6,10 +6,11 @@ using UnityEngine;
 public class BasicFish : MonoBehaviour
 {
     public float m_personalSpaceRadius = 1.0f;
-    protected InspectorDictionary<Collider, float> m_hitBoxModifiers;
 
     public float Speed;
     public float TurnSpeed;
+
+    public FishSpawner Spawner;
 
     [SerializeField]
     protected FishArchetype m_fishArchetype;

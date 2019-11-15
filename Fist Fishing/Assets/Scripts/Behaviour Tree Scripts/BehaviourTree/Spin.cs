@@ -8,10 +8,10 @@ public class Spin : Task {
     float currentRotationAmount = 0.0f;
     
 	// Use this for initialization
-    public override void Init () {
+    public override Node Init () {
         TurnSpeed = (float)(m_tree.GetValue(TurnSpeedName));
         currentRotationAmount = 0.0f;
-
+        return this;
     }
 	
 	// Update is called once per frame

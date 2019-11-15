@@ -39,10 +39,10 @@ public class Selector : Node {
         }
     }
 
-    public override void Init()
+    public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        base.Init();
+        return base.Init();
     }
 
     public override bool SetChildResult(NodeResult result)

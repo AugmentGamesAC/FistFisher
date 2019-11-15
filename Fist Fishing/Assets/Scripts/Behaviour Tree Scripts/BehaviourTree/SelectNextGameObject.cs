@@ -22,10 +22,10 @@ public class SelectNextGameObject : Node {
         return NodeResult.SUCCESS;
     }
 
-    public override void Init()
+    public override Node Init()
     {
         GameObject[] goa = (GameObject[])(m_tree.GetValue(ArrayKey));
         m_tree.SetValue(GameObjectKey, goa[0]);
-        base.Init();
+        return base.Init();
     }
 }

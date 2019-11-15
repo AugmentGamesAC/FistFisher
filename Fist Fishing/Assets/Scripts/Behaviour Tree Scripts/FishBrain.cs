@@ -17,6 +17,16 @@ public class FishBrain : BehaviorTree
     public GameObject defaultGoal;
     // Start is called before the first frame update
     protected BasicFish body;
+
+    public override void Awake()
+    {
+        parent = gameObject;
+        CallStack = new Stack<Node>();
+        Blackboard = new Hashtable();
+    }
+
+
+
     void Start()
     {
         defaultGoal = new GameObject();
@@ -28,12 +38,12 @@ public class FishBrain : BehaviorTree
 
         //chose the root behavoir for this tree.
         //does each child
-        root = new Sequence(this,
-        new List<Node>(){
-            new FishMoveTo(),
-            new FishMoveTo()
+        Sequence newRoot = gameObject.AddComponent<Sequence>();
+        newRoot.Init(this, new List<Node>(){
+            gameObject.AddComponent<FishWander>(),
+            gameObject.AddComponent<FishMoveTo>()
         });
-        
+        root = newRoot;
 
     }
 }

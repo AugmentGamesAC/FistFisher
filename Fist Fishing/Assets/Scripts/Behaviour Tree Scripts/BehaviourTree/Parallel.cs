@@ -43,7 +43,7 @@ public class Parallel : Node // can only put tasks under here - anything else is
 
     }
 
-    public override void Init()
+    public override Node Init()
     {
         if (StillRunning  == null)
         {
@@ -57,7 +57,7 @@ public class Parallel : Node // can only put tasks under here - anything else is
             StillRunning.Add(child);
             numberrunning++;
         }
-        base.Init();
+        return base.Init();
     }
 
 

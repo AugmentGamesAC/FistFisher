@@ -5,9 +5,7 @@ using UnityEngine;
 public class Sequence : Node {
     NodeResult childResult;
 
-    public Sequence(BehaviorTree tree, IEnumerable<Node> children): base(tree, children) { }
-
-    public override NodeResult Execute()
+   public override NodeResult Execute()
     {
         if (currentChild == -1)
         {
@@ -41,10 +39,10 @@ public class Sequence : Node {
         }
     }
 
-    public override void Init()
+    public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        base.Init();
+        return base.Init();
     }
 
     public override bool SetChildResult(NodeResult result)

@@ -22,10 +22,10 @@ public class Inverter : Node {
         return NodeResult.FAILURE; // should never get here
     }
 
-    public override void Init()
+    public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        base.Init();
+        return base.Init();
     }
 
     public override bool SetChildResult(NodeResult result)
