@@ -10,22 +10,22 @@ public class SelectNextGameObject : Node {
 
     public override NodeResult Execute()
     {
-        int index = (int)tree.GetValue(IndexKey);
-        GameObject[] goa = (GameObject[])(tree.GetValue(ArrayKey));
+        int index = (int)m_tree.GetValue(IndexKey);
+        GameObject[] goa = (GameObject[])(m_tree.GetValue(ArrayKey));
         index++;
         if (index >= goa.Length)
         {
             index = 0;
         }
-        tree.SetValue(IndexKey, index);
-        tree.SetValue(GameObjectKey, goa[index]);
+        m_tree.SetValue(IndexKey, index);
+        m_tree.SetValue(GameObjectKey, goa[index]);
         return NodeResult.SUCCESS;
     }
 
     public override void Init()
     {
-        GameObject[] goa = (GameObject[])(tree.GetValue(ArrayKey));
-        tree.SetValue(GameObjectKey, goa[0]);
+        GameObject[] goa = (GameObject[])(m_tree.GetValue(ArrayKey));
+        m_tree.SetValue(GameObjectKey, goa[0]);
         base.Init();
     }
 }

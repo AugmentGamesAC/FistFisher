@@ -8,7 +8,7 @@ public class Inverter : Node {
     {
         if (childResult == NodeResult.UNKNOWN)
         {
-            tree.PushNode(children[0]);
+            m_tree.PushNode(m_children[0]);
             return NodeResult.STACKED;
         }
         if (childResult == NodeResult.SUCCESS)

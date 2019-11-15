@@ -15,8 +15,8 @@ public class Parallel : Node // can only put tasks under here - anything else is
             currentChild = i;
             if (StillRunning[i] != null)
             {
-                tree.PushNodeWithOutReset(StillRunning[i]);
-                NodeResult result = tree.RunStack();
+                m_tree.PushNodeWithOutReset(StillRunning[i]);
+                NodeResult result = m_tree.RunStack();
                 if (result == NodeResult.SUCCESS) // will have cleared the top off the tree
                 {
                     StillRunning[i] = null;
@@ -30,7 +30,7 @@ public class Parallel : Node // can only put tasks under here - anything else is
                 else
                 {   // if it's made it here, it's either still working, or tried to put something else on the tree.  Since we only have taks under a parallel, we know it's not that.
                     // so wipe him off the tree to make space fot the next child
-                    tree.PopTop();
+                    m_tree.PopTop();
                 }
             }
         }
@@ -51,7 +51,7 @@ public class Parallel : Node // can only put tasks under here - anything else is
         }
         StillRunning.Clear();
         numberrunning = 0;
-        foreach (Node child in children)
+        foreach (Node child in m_children)
         {
             child.Init();
             StillRunning.Add(child);

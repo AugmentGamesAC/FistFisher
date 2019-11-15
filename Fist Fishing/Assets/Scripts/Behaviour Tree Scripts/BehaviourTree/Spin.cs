@@ -9,7 +9,7 @@ public class Spin : Task {
     
 	// Use this for initialization
     public override void Init () {
-        TurnSpeed = (float)(tree.GetValue(TurnSpeedName));
+        TurnSpeed = (float)(m_tree.GetValue(TurnSpeedName));
         currentRotationAmount = 0.0f;
 
     }
@@ -19,12 +19,12 @@ public class Spin : Task {
         currentRotationAmount += TurnSpeed * Time.deltaTime;
         if (currentRotationAmount > 360)
         {
-            tree.parent.transform.Rotate(Vector3.up, 0, Space.Self);
+            m_tree.parent.transform.Rotate(Vector3.up, 0, Space.Self);
             return NodeResult.SUCCESS;
         }
         else
         {
-            tree.parent.transform.Rotate(Vector3.up, TurnSpeed * Time.deltaTime, Space.Self);
+            m_tree.parent.transform.Rotate(Vector3.up, TurnSpeed * Time.deltaTime, Space.Self);
         }
         return NodeResult.RUNNING;
 	}

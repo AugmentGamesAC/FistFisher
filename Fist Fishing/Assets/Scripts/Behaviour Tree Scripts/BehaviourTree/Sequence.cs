@@ -5,12 +5,14 @@ using UnityEngine;
 public class Sequence : Node {
     NodeResult childResult;
 
+    public Sequence(BehaviorTree tree, IEnumerable<Node> children): base(tree, children) { }
+
     public override NodeResult Execute()
     {
         if (currentChild == -1)
         {
             currentChild++;
-            tree.PushNode(children[currentChild]);
+            m_tree.PushNode(m_children[currentChild]);
             return NodeResult.STACKED;
         }
         // if we've previously pushed a child onto the stack and we're
@@ -26,14 +28,14 @@ public class Sequence : Node {
             // we got a Success.  if we have more children, push the next one.
             // if no more children, report Sucess
             currentChild++;
-            if (currentChild == children.Count)
+            if (currentChild == m_children.Count)
             {
                 Init();
                 return NodeResult.SUCCESS;
             }
             else
             {
-                tree.PushNode(children[currentChild]);
+                m_tree.PushNode(m_children[currentChild]);
                 return NodeResult.STACKED;
             }
         }

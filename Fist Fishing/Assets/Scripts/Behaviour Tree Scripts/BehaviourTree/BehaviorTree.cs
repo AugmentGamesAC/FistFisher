@@ -10,7 +10,7 @@ public class BehaviorTree : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        parent = gameObject.transform.parent.gameObject;
+        parent = gameObject;
         CallStack = new Stack<Node>();
         Blackboard = new Hashtable();
         // build the tree by walking the children and well, building the data structure.
@@ -55,13 +55,13 @@ public class BehaviorTree : MonoBehaviour {
         Debug.Log("Building tree");
         // obj has a node.  find everything under it and connect it up.
         Node n = obj.GetComponent<Node>();
-        n.tree = this;
+        n.m_tree = this;
         foreach (Transform child in obj.transform)
         {
             Node cn = child.gameObject.GetComponent<Node>();
             if (cn != null)
             {
-                n.children.Add(cn);
+                n.m_children.Add(cn);
                 BuildTree(child.gameObject);
             }
         }
@@ -100,13 +100,13 @@ public class BehaviorTree : MonoBehaviour {
     public void PushNode(Node node)
     {
         node.Init();
-        node.tree = this;
+        node.m_tree = this;
         CallStack.Push(node);
     }
 
     public void PushNodeWithOutReset(Node node)
     {
-        node.tree = this;
+        node.m_tree = this;
         CallStack.Push(node);
     }
     public void PopTop()

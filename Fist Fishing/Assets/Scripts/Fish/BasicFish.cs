@@ -6,6 +6,10 @@ public class BasicFish : AHealthUser
 {
     protected InspectorDictionary<Collider, float> m_hitBoxModifiers;
 
+    public float Speed;
+    public float TurnSpeed;
+
+
     //behaviour
     protected Task m_behaviour;
 
