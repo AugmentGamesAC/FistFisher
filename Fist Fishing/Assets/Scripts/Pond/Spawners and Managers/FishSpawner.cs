@@ -40,7 +40,7 @@ public class FishSpawner : MonoBehaviour
         {
             Vector3 pos = (Random.insideUnitSphere * m_spawnRadius) + transform.position;
             newFish.transform.position = pos;
-        } while (Physics.CheckSphere(newFish.transform.position, fishScript.m_personalSpaceRadius, mask));
+        } while (!Physics.CheckSphere(newFish.transform.position, fishScript.m_personalSpaceRadius, mask));
 
             float rot = Random.Range(0.0f, 360.0f);
         Quaternion rotq = Quaternion.Euler(0.0f, rot, 0.0f);
