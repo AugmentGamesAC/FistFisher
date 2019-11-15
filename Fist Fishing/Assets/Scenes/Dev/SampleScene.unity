@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 503760316}
   - component: {fileID: 503760315}
   - component: {fileID: 503760314}
+  - component: {fileID: 503760318}
   m_Layer: 0
   m_Name: Reticle
   m_TagString: Untagged
@@ -731,6 +732,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503760318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503760313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83bd604ba34c2a843ac259c404e39dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_camera: {fileID: 0}
+  m_rotateSpeed: 5
 --- !u!1 &540699756
 GameObject:
   m_ObjectHideFlags: 0
