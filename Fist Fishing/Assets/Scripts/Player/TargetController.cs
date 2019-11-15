@@ -22,6 +22,8 @@ public class TargetController : MonoBehaviour
 
     public int m_currentFishTargetIndex;
 
+    public float m_targetCloseness = 0.9f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class TargetController : MonoBehaviour
         m_closestFishDistance = float.MaxValue;
 
         m_currentFishTargetIndex = -1;
-
+        m_targetPrefab = Instantiate(m_targetPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         m_targetPrefab.SetActive(false);
     }
 
@@ -59,8 +61,14 @@ public class TargetController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(m_targetingIsActive) //please don't spam errors
-            m_targetPrefab.gameObject.transform.position = m_targetedFish.gameObject.transform.position;
+        if (m_targetingIsActive) //please don't spam errors
+        {
+            Vector3 targetPos = m_targetedFish.gameObject.transform.position;
+            Vector3 cameraPos = Camera.main.transform.position;//Camera.current.transform.position;
+            Vector3 newPos = Vector3.Lerp(cameraPos, targetPos, m_targetCloseness);
+
+            m_targetPrefab.gameObject.transform.position = newPos;// m_targetedFish.gameObject.transform.position;
+        }
     }
 
     private void ToggleTargeting(bool targetingIsActive)
