@@ -42,7 +42,10 @@ public class Sequence : Node {
     public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        return base.Init();
+        currentChild = -1;
+        if (m_children == default)
+            m_children = new List<Node>();
+        return this;
     }
 
     public override bool SetChildResult(NodeResult result)
