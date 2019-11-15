@@ -119,13 +119,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fishInViewList: []
   m_targetedFish: {fileID: 0}
-  m_targetPrefab: {fileID: 0}
+  m_targetPrefab: {fileID: 4557104854263916627, guid: 1651eab8719108a45b0d28561f06cfcd,
+    type: 3}
   m_playerRef: {fileID: 1693496948620006886}
   m_camera: {fileID: 0}
   m_targetingIsActive: 0
   m_closestFishDistance: 0
   m_fishInViewCount: 0
   m_currentFishTargetIndex: 0
+  m_targetCloseness: 0.9
 --- !u!114 &676615354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +174,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693496948620006906}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
   m_Name: 

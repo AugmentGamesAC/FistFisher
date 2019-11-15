@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4052155014734363006}
   m_Layer: 2
   m_Name: FishSpawner
-  m_TagString: Untagged
+  m_TagString: FishSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_parentPond: {fileID: 0}
   m_fishPrefab: {fileID: 0}
-  m_normalMaxNumberOfFishForThisSpawnerToSpawn: 10
+  m_normalMaxNumberOfFishForThisSpawnerToSpawn: 2
   m_normalNumberOfSecondsToSpawnFish: 5
   m_spawnRadius: 5
   m_spawnCooldown: 0

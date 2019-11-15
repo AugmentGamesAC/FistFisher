@@ -22,6 +22,8 @@ public class TargetController : MonoBehaviour
 
     public int m_currentFishTargetIndex;
 
+    public float m_targetCloseness = 0.9f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class TargetController : MonoBehaviour
         m_closestFishDistance = float.MaxValue;
 
         m_currentFishTargetIndex = -1;
-
+        m_targetPrefab = Instantiate(m_targetPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         m_targetPrefab.SetActive(false);
     }
 
@@ -47,26 +49,45 @@ public class TargetController : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Target"))
+        if (ALInput.GetKeyDown(ALInput.KeyTarget))
             ToggleTargeting();
 
-        if (Input.GetButtonDown("NextTarget"))
+        if (ALInput.GetKeyDown(ALInput.ForgetTarget))
             SelectNextTarget();
 
-        if (Input.GetButtonDown("LastTarget"))
-            SelectLastTarget();
+        //if (ALInput.GetKeyDown(ALInput.ForgetTarget))
+        //    ForgetCurrentTarget();
+
+        //if (Input.GetButtonDown("LastTarget"))
+        //    SelectLastTarget();
+        m_closestFishDistance = Vector3.Distance(m_targetedFish.transform.position, m_playerRef.transform.position);
     }
 
     private void LateUpdate()
     {
-        if(m_targetingIsActive) //please don't spam errors
-            m_targetPrefab.gameObject.transform.position = m_targetedFish.gameObject.transform.position;
+        if(m_targetedFish == null)
+        {
+            SetTargetedFishToClosest();
+        }
+        if (m_targetingIsActive) //please don't spam errors
+        {
+            Vector3 targetPos = m_targetedFish.gameObject.transform.position;
+            Vector3 cameraPos = Camera.main.transform.position;//Camera.current.transform.position;
+            Vector3 newPos = Vector3.Lerp(cameraPos, targetPos, m_targetCloseness);
+
+            m_targetPrefab.gameObject.transform.position = newPos;// m_targetedFish.gameObject.transform.position;
+        }
     }
 
     private void ToggleTargeting(bool targetingIsActive)
     {
         m_targetingIsActive = targetingIsActive;
         m_targetPrefab.SetActive(m_targetingIsActive);
+    }
+
+    private void ForgetCurrentTarget()
+    {
+        m_targetedFish = null;
     }
 
     private void ToggleTargeting()
@@ -97,6 +118,9 @@ public class TargetController : MonoBehaviour
 
         for (int i = 0; i < m_fishInViewList.Count; i++)
         {
+            if (m_fishInViewList[i] == null)
+                continue;
+
             float tempFishPlayerDist = Vector3.Distance(m_fishInViewList[i].transform.position, m_playerRef.transform.position);
 
             //if fishPlayerDist is bigger than last, replace it and keep

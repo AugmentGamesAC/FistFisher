@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6190493227364955988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5687470312810764934}
+  m_Layer: 0
+  m_Name: LookFrom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5687470312810764934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190493227364955988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.837}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7034852756888158866}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7034852755675563155
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7034852756888158866}
   - component: {fileID: 7034852756888158865}
+  - component: {fileID: 2035967121}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -239,12 +270,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7034852756888158864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.2, y: 0.506, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7034852756102129013}
   - {fileID: 7034852755675563164}
   - {fileID: 7034852757306321275}
+  - {fileID: 5687470312810764934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,9 +293,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_personalSpaceRadius: 1
+  Speed: 1
+  TurnSpeed: 30
+  LookFrom: {fileID: 5687470312810764934}
+  Spawner: {fileID: 0}
   m_fishArchetype: 2
   m_targetController: {fileID: 0}
   m_isListed: 0
+--- !u!114 &2035967121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034852756888158864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f871683ed40c9a46aa45112da813628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 0}
+  parent: {fileID: 0}
+  Accuracy: 1
+  defaultGoal: {fileID: 0}
 --- !u!1 &7034852757306321274
 GameObject:
   m_ObjectHideFlags: 0

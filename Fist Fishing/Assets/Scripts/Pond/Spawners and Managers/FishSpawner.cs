@@ -5,7 +5,7 @@ using System.Linq;
 
 public class FishSpawner : MonoBehaviour
 {
-
+    public TargetController m_targetController; 
     public PondManager m_parentPond;
 
     public GameObject m_fishPrefab;
@@ -31,6 +31,8 @@ public class FishSpawner : MonoBehaviour
         BasicFish fishScript = newFish.GetComponent<BasicFish>();
         if (fishScript == null)
             return null;
+        fishScript.Spawner = this;
+        fishScript.m_targetController = m_targetController;
 
         LayerMask mask = LayerMask.GetMask("Water");
         //Debug.LogError(mask);

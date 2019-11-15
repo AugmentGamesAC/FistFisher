@@ -7,6 +7,12 @@ public class BasicFish : MonoBehaviour
 {
     public float m_personalSpaceRadius = 1.0f;
 
+    public float Speed;
+    public float TurnSpeed;
+
+    public Transform LookFrom;
+    public FishSpawner Spawner;
+
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }

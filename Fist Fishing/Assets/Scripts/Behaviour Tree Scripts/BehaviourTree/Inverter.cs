@@ -8,7 +8,7 @@ public class Inverter : Node {
     {
         if (childResult == NodeResult.UNKNOWN)
         {
-            tree.PushNode(children[0]);
+            m_tree.PushNode(m_children[0]);
             return NodeResult.STACKED;
         }
         if (childResult == NodeResult.SUCCESS)
@@ -22,10 +22,10 @@ public class Inverter : Node {
         return NodeResult.FAILURE; // should never get here
     }
 
-    public override void Init()
+    public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        base.Init();
+        return base.Init();
     }
 
     public override bool SetChildResult(NodeResult result)
