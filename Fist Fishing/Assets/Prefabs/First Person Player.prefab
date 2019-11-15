@@ -100,8 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1c28f071024bd4cb4c70ee564a809f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 100
-  m_healthPercentage: 1
+  m_fishArchetype: 3
 --- !u!114 &741098573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +265,7 @@ MonoBehaviour:
   m_OxygenTickFrequency: 1
   m_OxygenTickTimer: 0
   m_isUnderWater: 0
-  m_healthComponent: {fileID: 1693496948620006886}
+  m_healthComponent: {fileID: 0}
 --- !u!1 &1693496949401556757
 GameObject:
   m_ObjectHideFlags: 0

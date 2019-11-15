@@ -59,7 +59,8 @@ public class TargetController : MonoBehaviour
 
     private void LateUpdate()
     {
-        m_targetPrefab.gameObject.transform.position = m_targetedFish.gameObject.transform.position;
+        if(m_targetingIsActive) //please don't spam errors
+            m_targetPrefab.gameObject.transform.position = m_targetedFish.gameObject.transform.position;
     }
 
     private void ToggleTargeting(bool targetingIsActive)
