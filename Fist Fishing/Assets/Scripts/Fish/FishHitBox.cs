@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class FishHitBox : MonoBehaviour
 {
     public KeyValuePair<Collider, float> m_HitBoxModifier { get; private set; }
@@ -17,3 +17,4 @@ public class FishHitBox : MonoBehaviour
         m_HitBoxModifier = new KeyValuePair<Collider, float>(m_collider, m_percentModifier);
     }
 }
+*/

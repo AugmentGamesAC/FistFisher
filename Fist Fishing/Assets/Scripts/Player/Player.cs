@@ -8,17 +8,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-    protected FishArchetype m_fishArchetype { public get; private set; }
-
-
     [SerializeField]
     protected FishArchetype m_fishArchetype;
-    public FishArchetype CurrentHealth { get { return m_fishArchetype; } }
+    public FishArchetype FishType { get { return m_fishArchetype; } }
 
+    protected void HandleDeath()
+    {
+        //stick stuff here to handle player death
+    }
 
+    private void Init()
+    {
 
+    }
 
-
+    private void Start()
+    {
+        Init();
+    }
 
 }

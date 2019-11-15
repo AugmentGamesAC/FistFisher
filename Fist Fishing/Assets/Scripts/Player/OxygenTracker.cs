@@ -27,7 +27,7 @@ public class OxygenTracker : MonoBehaviour
 
     public bool m_isUnderWater = false;
 
-    public AHealthUser m_healthComponent;
+    public HealthModule m_healthComponent;
 
 
     void Start()

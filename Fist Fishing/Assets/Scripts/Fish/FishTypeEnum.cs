@@ -1,4 +1,4 @@
-﻿enum FishArchetype
+﻿public enum FishArchetype
 {
     PredOrHostile,
     ScarredOrPrey,
