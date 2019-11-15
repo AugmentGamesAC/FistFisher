@@ -20,10 +20,10 @@ public class Wait : Task {
         }
     }
 
-    public override void Init()
+    public override Node Init()
     {
-        TimeToWait = (float)(tree.GetValue(TimeToWaitKey));
+        TimeToWait = (float)(m_tree.GetValue(TimeToWaitKey));
         elapsedTime = 0.0f;
-        base.Init();
+        return base.Init();
     }
 }

@@ -10,7 +10,7 @@ public class Selector : Node {
         if (currentChild == -1)
         {
             currentChild++;
-            tree.PushNode(children[currentChild]);
+            m_tree.PushNode(m_children[currentChild]);
             return NodeResult.STACKED;
         }
         // if we've previously pushed a child onto the stack and we're
@@ -26,23 +26,23 @@ public class Selector : Node {
             // we got a failure.  if we have more children, push the next one.
             // if no more children, report failure
             currentChild++;
-            if (currentChild == children.Count)
+            if (currentChild == m_children.Count)
             {
                 Init();
                 return NodeResult.FAILURE;
             }
             else
             {
-                tree.PushNode(children[currentChild]);
+                m_tree.PushNode(m_children[currentChild]);
                 return NodeResult.STACKED;
             }
         }
     }
 
-    public override void Init()
+    public override Node Init()
     {
         childResult = NodeResult.UNKNOWN;
-        base.Init();
+        return base.Init();
     }
 
     public override bool SetChildResult(NodeResult result)
