@@ -100,6 +100,8 @@ public class ALInput : MonoBehaviour
     public static Vector3 GetDirection(DirectionCode dC)
     {
         System.Tuple<AxisCode, AxisCode, AxisCode> directionInstructions;
+
+        //this breaks and directionInstuctions is null so player cannot receive input yet.
         if (!m_registeredDirections.TryGetValue(dC, out directionInstructions))
             return Vector3.zero;
 
