@@ -52,23 +52,21 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+        if (m_isSwimming)
+            Swim();
+        else
         {
-            if (m_isSwimming)
-                Swim();
+            ApplyGravity();
+            if (IsSprinting())
+                Sprint();
             else
-            {
-                ApplyGravity();
-                if (IsSprinting())
-                    Sprint();
-                else
-                    Walk();
-            }
+                Walk();
         }
 
         mountCooldown -= Time.deltaTime;
 
-        if (mountCooldown < 0.0f)
+        if (mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
     }
 
@@ -195,6 +193,6 @@ public class PlayerMovement : MonoBehaviour
     public bool IsSprinting()
     {
         return ALInput.GetKey(ALInput.Sprint);
-        return Input.GetButton("Sprint");
+        //return Input.GetButton("Sprint");
     }
 }

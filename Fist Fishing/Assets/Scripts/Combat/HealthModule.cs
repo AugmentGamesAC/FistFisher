@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AHealthUser : MonoBehaviour
+public class HealthModule : MonoBehaviour
 {
+    [SerializeField]
     protected float m_currentHealth;
     public float CurrentHealth { get { return m_currentHealth; } }
 
+    [SerializeField]
     protected float m_maxHealth = 100.0f;
     public float MaxHealth { get { return m_maxHealth; } }
 
+    [SerializeField]
     protected float m_healthPercentage;
     public float HealthPercentage { get { return m_healthPercentage; } }
 
@@ -23,16 +26,17 @@ public abstract class AHealthUser : MonoBehaviour
         UpdateHealthPercentage();
     }
 
-    public virtual void ModifyHealth(float changeAmount)
+    public void ModifyHealth(float changeAmount)
     {
-        m_currentHealth += Mathf.Clamp(changeAmount, 0, m_maxHealth);
+        m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
 
         UpdateHealthPercentage();
 
         UpdateDeathStatus();
     }
 
-    public virtual void TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         ModifyHealth(-damageAmount);
     }
@@ -57,9 +61,9 @@ public abstract class AHealthUser : MonoBehaviour
         m_currentHealth = m_maxHealth;
     }
 
-    protected virtual void Death()
+    protected void Death()
     {
-        OnDeath.Invoke();
+        //OnDeath.Invoke(); //get around to actually using
 
         //Disable Object, ObjectPool should Handle fish but not the player.
 
