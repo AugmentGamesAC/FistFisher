@@ -19,14 +19,14 @@ public class CombatModule : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_smallZone.DamageModifier = 1.0f;
-        m_smallZone.Range = 5.0f;
+        //m_smallZone.DamageModifier = 1.0f;
+        //m_smallZone.Range = 5.0f;
 
-        m_mediumZone.DamageModifier = 0.8f;
-        m_mediumZone.Range = 10.0f;
+        //m_mediumZone.DamageModifier = 0.8f;
+        //m_mediumZone.Range = 10.0f;
 
-        m_largeZone.DamageModifier = 0.5f;
-        m_largeZone.Range = 15.0f;
+        //m_largeZone.DamageModifier = 0.5f;
+        //m_largeZone.Range = 15.0f;
 
 
         //get target Controller from player.
