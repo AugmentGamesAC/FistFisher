@@ -52,23 +52,21 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+        if (m_isSwimming)
+            Swim();
+        else
         {
-            if (m_isSwimming)
-                Swim();
+            ApplyGravity();
+            if (IsSprinting())
+                Sprint();
             else
-            {
-                ApplyGravity();
-                if (IsSprinting())
-                    Sprint();
-                else
-                    Walk();
-            }
+                Walk();
         }
 
         mountCooldown -= Time.deltaTime;
 
-        if (mountCooldown < 0.0f)
+        if (mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
     }
 
@@ -167,12 +165,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 GetMoveInput()
     {
-        return new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        return ALInput.GetDirection(ALInput.DirectionCode.MoveInput);
     }
 
     public Vector3 GetLookInput()
     {
-        return new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0.0f);
+        return ALInput.GetDirection(ALInput.DirectionCode.LookInput);
     }
 
     void ApplyGravity()
@@ -183,7 +181,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsJumping()
     {
-        return Input.GetButton("Jump");
+        return ALInput.GetKey(ALInput.Jump);
+        //return Input.GetButton("Jump");
     }
 
     public bool IsPunching()
@@ -193,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return Input.GetButton("Sprint");
+        return ALInput.GetKey(ALInput.Sprint);
+        //return Input.GetButton("Sprint");
     }
 }
