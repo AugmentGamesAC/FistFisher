@@ -33,6 +33,7 @@ public class FishSpawner : MonoBehaviour
             return null;
 
         LayerMask mask = LayerMask.GetMask("Water");
+        //Debug.LogError(mask);
 
         m_currentFishSpawned.Add(newFish);
         do

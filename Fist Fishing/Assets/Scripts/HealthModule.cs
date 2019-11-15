@@ -61,9 +61,9 @@ public class HealthModule : MonoBehaviour
         m_currentHealth = m_maxHealth;
     }
 
-    protected virtual void Death()
+    protected void Death()
     {
-        OnDeath.Invoke(); //get around to actually using
+        //OnDeath.Invoke(); //get around to actually using
 
         //Disable Object, ObjectPool should Handle fish but not the player.
 

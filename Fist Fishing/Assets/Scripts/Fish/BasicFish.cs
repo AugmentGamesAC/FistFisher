@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class BasicFish : MonoBehaviour
 {
-    public float m_personalSpaceRadius = 2.0f;
+    public float m_personalSpaceRadius = 1.0f;
 
     [SerializeField]
     protected FishArchetype m_fishArchetype;

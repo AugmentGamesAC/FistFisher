@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 1693496948620006885}
   - component: {fileID: 1693496948620006886}
   - component: {fileID: 741098573}
+  - component: {fileID: 676615354}
+  - component: {fileID: 1062554482792173783}
+  - component: {fileID: 8619962408912993621}
   m_Layer: 9
   m_Name: First Person Player
   m_TagString: Player
@@ -122,6 +125,45 @@ MonoBehaviour:
   m_closestFishDistance: 0
   m_fishInViewCount: 0
   m_currentFishTargetIndex: 0
+--- !u!114 &676615354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693496948620006906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40890704cb00abd4cb388300a2fb1658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentHealth: 0
+  m_maxHealth: 100
+  m_healthPercentage: 0
+--- !u!114 &1062554482792173783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693496948620006906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c58019adb2c74cb00bb818366e96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8619962408912993621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693496948620006906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ad287cc12eabf418866a85311dfa03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693496949162198675
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +307,7 @@ MonoBehaviour:
   m_OxygenTickFrequency: 1
   m_OxygenTickTimer: 0
   m_isUnderWater: 0
-  m_healthComponent: {fileID: 0}
+  m_healthComponent: {fileID: 676615354}
 --- !u!1 &1693496949401556757
 GameObject:
   m_ObjectHideFlags: 0

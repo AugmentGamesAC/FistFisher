@@ -6,6 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(HealthModule))]
 [RequireComponent(typeof(PlayerMovement))]
 
+
+[RequireComponent(typeof(CombatModule))]
+[RequireComponent(typeof(Inventory))]
+
+//Punchadex
 public class Player : MonoBehaviour
 {
     [SerializeField]
