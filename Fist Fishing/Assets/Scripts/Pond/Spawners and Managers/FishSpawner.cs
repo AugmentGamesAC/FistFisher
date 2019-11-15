@@ -11,8 +11,8 @@ public class FishSpawner : MonoBehaviour
     public GameObject m_fishPrefab;
     public float m_normalMaxNumberOfFishForThisSpawnerToSpawn = 10.0f;
     public float m_normalNumberOfSecondsToSpawnFish = 5.0f;
-    private float m_spawnCooldown;
     public float m_spawnRadius = 5.0f;
+    public float m_spawnCooldown;
 
     List<GameObject> m_currentFishSpawned = new List<GameObject>();
 
@@ -50,10 +50,6 @@ public class FishSpawner : MonoBehaviour
     }
 
 
-    /*[SerializeField]
-    protected FishArchetype m_fishArchetype;
-    public FishArchetype FishType { get { return m_fishArchetype; } }*/
-
     public void ResetSpawningClock()
     {
         m_spawnCooldown = m_normalNumberOfSecondsToSpawnFish;
@@ -71,7 +67,7 @@ public class FishSpawner : MonoBehaviour
     protected void DefaultSpawning()
     {
         m_spawnCooldown -= Time.deltaTime;
-        if(m_spawnCooldown<=0.0f)
+        if(m_spawnCooldown<=0.0f && m_currentFishSpawned.Count <= m_normalMaxNumberOfFishForThisSpawnerToSpawn)
         {
             SpawnFish();
             ResetSpawningClock();
@@ -83,10 +79,6 @@ public class FishSpawner : MonoBehaviour
     {
         if (m_parentPond == null)
             return;
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            SpawnFish();
-        }
 
         switch (m_parentPond.m_behaviour)
         {
@@ -96,6 +88,8 @@ public class FishSpawner : MonoBehaviour
             default:
                 break;
         }
+
+        m_spawnCooldown = Mathf.Clamp(m_spawnCooldown, 0.0f, m_normalNumberOfSecondsToSpawnFish);
     }
 
 
