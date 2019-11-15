@@ -5,7 +5,7 @@ using UnityEngine;
 public class FishMoveTo : FishTask
 {
 
-    protected Vector3 m_direction;
+    public Vector3 m_direction;
 
 
     public override NodeResult Execute()
@@ -28,8 +28,11 @@ public class FishMoveTo : FishTask
     {
         m_direction = m_target.transform.position - m_me.transform.position;
         // not run into stuff is top priority
+
+        int mask = ~LayerMask.GetMask("Ignore Raycast", "Water");
+
         RaycastHit hit;
-        if (!Physics.Raycast(m_me.transform.position, m_me.transform.forward * m_speed * 2, out hit))
+        if (!Physics.Raycast(m_me.transform.position, transform.TransformDirection(Vector3.forward), out hit, (m_speed * 2.0f), mask))
             return;
 
         m_direction = Vector3.Reflect(m_me.transform.forward, hit.normal);

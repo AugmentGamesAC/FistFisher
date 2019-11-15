@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1729,10 +1729,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 741098573, guid: 924f8b4eaa4d03b47bf234a0da780b50, type: 3}
-      propertyPath: m_targetPrefab
-      value: 
-      objectReference: {fileID: 1322907301}
-    - target: {fileID: 741098573, guid: 924f8b4eaa4d03b47bf234a0da780b50, type: 3}
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 963194229}
@@ -1796,11 +1792,6 @@ PrefabInstance:
       propertyPath: m_baitPrefab
       value: 
       objectReference: {fileID: 614822432}
-    - target: {fileID: 302647809149579127, guid: 924f8b4eaa4d03b47bf234a0da780b50,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 924f8b4eaa4d03b47bf234a0da780b50, type: 3}
 --- !u!1 &1322907301
@@ -2917,11 +2908,6 @@ PrefabInstance:
       propertyPath: m_fishPrefab
       value: 
       objectReference: {fileID: 2035967118}
-    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
-        type: 3}
-      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
 --- !u!1001 &4317289871298040800
@@ -3059,10 +3045,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1832632729, guid: f88fdbde4d7dd7d459a0ba3e16771474, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f88fdbde4d7dd7d459a0ba3e16771474, type: 3}
