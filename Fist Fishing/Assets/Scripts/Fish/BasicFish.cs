@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BasicFish : AHealthUser/*ATargetable*/
+public class BasicFish : MonoBehaviour
 {
+    public float m_personalSpaceRadius = 1.0f;
+
+    [SerializeField]
+    protected FishArchetype m_fishArchetype;
+    public FishArchetype FishType { get { return m_fishArchetype; } }
 
     public class FishyPart : InspectorDictionary<Collider, float> { }
     [SerializeField]

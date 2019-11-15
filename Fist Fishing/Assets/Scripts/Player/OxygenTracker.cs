@@ -15,8 +15,8 @@ public class OxygenTracker : MonoBehaviour
     protected float m_OxygenPercentage;
     public float OxygenPercentage { get { return m_OxygenPercentage; } }
 
-    public delegate void OnLowOxygenEvent();
-    public event OnLowOxygenEvent OnLowOxygen;
+    /*public delegate void OnLowOxygenEvent();
+    public event OnLowOxygenEvent OnLowOxygen;*/
 
     public float m_OxygenRegeneration = 20.0f;
     public float m_OxygenDegeneration = 5.0f;
@@ -27,7 +27,7 @@ public class OxygenTracker : MonoBehaviour
 
     public bool m_isUnderWater = false;
 
-    public AHealthUser m_healthComponent;
+    public HealthModule m_healthComponent;
 
 
     void Start()
