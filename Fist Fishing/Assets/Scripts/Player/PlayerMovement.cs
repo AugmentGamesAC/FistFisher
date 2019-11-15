@@ -165,12 +165,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 GetMoveInput()
     {
-        return new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        return ALInput.GetDirection(ALInput.DirectionCode.MoveInput);
     }
 
     public Vector3 GetLookInput()
     {
-        return new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0.0f);
+        return ALInput.GetDirection(ALInput.DirectionCode.LookInput);
     }
 
     void ApplyGravity()
@@ -181,7 +181,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsJumping()
     {
-        return Input.GetButton("Jump");
+        return ALInput.GetKey(ALInput.Jump);
+        //return Input.GetButton("Jump");
     }
 
     public bool IsPunching()
@@ -191,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
+        return ALInput.GetKey(ALInput.Sprint);
         return Input.GetButton("Sprint");
     }
 }
