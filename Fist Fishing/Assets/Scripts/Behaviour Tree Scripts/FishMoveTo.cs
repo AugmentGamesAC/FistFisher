@@ -32,7 +32,11 @@ public class FishMoveTo : FishTask
         int mask = ~LayerMask.GetMask("Ignore Raycast", "Water");
 
         RaycastHit hit;
-        if (!Physics.Raycast(m_me.transform.position, transform.TransformDirection(Vector3.forward), out hit, (m_speed * 2.0f), mask))
+
+        BasicFish myfish = m_me.GetComponent<BasicFish>();
+
+
+        if (!Physics.Raycast(myfish.LookFrom.position, m_me.transform.forward, out hit, m_speed * 2))
             return;
 
         m_direction = Vector3.Reflect(m_me.transform.forward, hit.normal);
