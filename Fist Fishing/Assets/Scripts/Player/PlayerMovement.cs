@@ -92,8 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateBoatMountStatus()
     {
-        
-
         //if pressing mount button and allowed to mount.
         if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
         {

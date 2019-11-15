@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1693496948620006907}
   - component: {fileID: 1693496948620006885}
   - component: {fileID: 1693496948620006886}
+  - component: {fileID: 741098573}
   m_Layer: 9
   m_Name: First Person Player
   m_TagString: Player
@@ -101,6 +102,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_currentHealth: 100
   m_healthPercentage: 1
+--- !u!114 &741098573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693496948620006906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c317ffdaeb03ca4c92d1f2f73e53166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fishInViewList: []
+  m_targetedFish: {fileID: 0}
+  m_targetPrefab: {fileID: 0}
+  m_playerRef: {fileID: 1693496948620006886}
+  m_camera: {fileID: 0}
+  m_targetingIsActive: 0
+  m_closestFishDistance: 0
+  m_fishInViewCount: 0
+  m_currentFishTargetIndex: 0
 --- !u!1 &1693496949162198675
 GameObject:
   m_ObjectHideFlags: 0
