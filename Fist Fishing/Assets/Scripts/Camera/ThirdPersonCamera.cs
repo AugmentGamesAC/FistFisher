@@ -11,11 +11,6 @@ public class ThirdPersonCamera : MonoBehaviour
             m_followCameraBehaviour = new FollowCameraBehaviour();
     }
 
-    void Update ()
-    {
-		
-	}
-
     void LateUpdate()
     {
         if(m_player == null)
