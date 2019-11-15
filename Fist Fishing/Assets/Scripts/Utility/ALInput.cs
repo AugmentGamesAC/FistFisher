@@ -30,7 +30,13 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
-    
+    [SerializeField]
+    KeyCode m_keyTarget;
+    public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
+    [SerializeField]
+    KeyCode m_forgetTarget;
+    public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
+
 
 
     /// <summary>
@@ -136,10 +142,9 @@ public class ALInput : MonoBehaviour
         m_goRight = KeyCode.D;
         m_jump = KeyCode.Space;
         m_sprint = KeyCode.LeftShift;
+        m_keyTarget = KeyCode.Z;
+        m_forgetTarget = KeyCode.X;
 
         m_playerLateralMovement = AxisCode.Horizontal;
-
     }
-
-
 }
