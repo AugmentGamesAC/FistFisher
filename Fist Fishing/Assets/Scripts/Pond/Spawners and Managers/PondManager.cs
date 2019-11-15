@@ -18,6 +18,9 @@ public class PondManager : MonoBehaviour
     public PondBehaviour m_behaviour = PondBehaviour.Default;
 
     private Dictionary<FishSpawner, FishArchetype> m_spawners = new Dictionary<FishSpawner, FishArchetype>();
+    public Dictionary<FishSpawner, FishArchetype> Spawners { get { return m_spawners; } }
+
+
     public int SpawnerCount = 0;
     public float m_radius;
 
@@ -53,12 +56,6 @@ public class PondManager : MonoBehaviour
     {
         SpawnerCount = m_spawners.Count;
 
-        if (Input.GetKeyDown(KeyCode.G)) //force-spawn fish. remove this.
-        {
-            foreach(var g in m_spawners)
-            {
-                g.Key.SpawnFish();
-            }
-        }
+
     }
 }

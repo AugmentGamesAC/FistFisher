@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 676615354}
   - component: {fileID: 1062554482792173783}
   - component: {fileID: 8619962408912993621}
+  - component: {fileID: 302647809149579127}
   m_Layer: 9
   m_Name: First Person Player
   m_TagString: Player
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1c28f071024bd4cb4c70ee564a809f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fishArchetype: 3
+  m_fishArchetype: 4
 --- !u!114 &741098573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +165,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad287cc12eabf418866a85311dfa03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &302647809149579127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693496948620006906}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baitPrefab: {fileID: 0}
 --- !u!1 &1693496949162198675
 GameObject:
   m_ObjectHideFlags: 0

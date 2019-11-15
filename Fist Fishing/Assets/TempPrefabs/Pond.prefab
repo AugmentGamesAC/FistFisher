@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6250691248373757601}
   - component: {fileID: 6250691248373757600}
   - component: {fileID: 3977831832385146322}
+  - component: {fileID: 1832632729}
   m_Layer: 10
   m_Name: Pond
   m_TagString: Untagged
@@ -45,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_behaviour: 0
+  SpawnerCount: 0
+  m_radius: 0
 --- !u!135 &3977831832385146322
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -58,3 +61,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1832632729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250691248373757603}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c63e4b58133cb6489c4d9bc36773bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pond: {fileID: 6250691248373757600}

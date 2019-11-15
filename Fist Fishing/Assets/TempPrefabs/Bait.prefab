@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3658615132695361165}
   - component: {fileID: 7255036422863643336}
   - component: {fileID: 1410362627327498551}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: tempmesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ BoxCollider:
   m_GameObject: {fileID: 1839585269799227856}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -102,7 +102,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2042107119239635113}
   - component: {fileID: 8670692056014323045}
-  m_Layer: 0
+  - component: {fileID: 3137025455851056669}
+  m_Layer: 13
   m_Name: Bait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,3 +137,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b8a90e34a56984083e766456a3a87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &3137025455851056669
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8069754680616958458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
