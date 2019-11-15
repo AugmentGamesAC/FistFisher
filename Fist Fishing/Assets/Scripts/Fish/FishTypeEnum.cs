@@ -2,7 +2,7 @@
 {
     NotSet,
     PredOrHostile,
-    ScarredOrPrey,
+    PreyOrScared,
     ApatheticOrArmoured,
     Player,
     //God,
