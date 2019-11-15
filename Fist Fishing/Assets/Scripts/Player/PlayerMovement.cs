@@ -144,6 +144,6 @@ public class PlayerMovement : MonoBehaviour
     public bool IsSprinting()
     {
         return ALInput.GetKey(ALInput.Sprint);
-        //return Input.GetButton("Sprint");
+        return Input.GetButton("Sprint");
     }
 }
