@@ -7,7 +7,7 @@ public class FishWander : FishTask
     public override NodeResult Execute()
     {
         ReadInfo();
-
+        ChooseRandomLocation();
 
         return NodeResult.SUCCESS;
     }
@@ -20,6 +20,6 @@ public class FishWander : FishTask
             m_target.transform.position = Vector3.zero;
             return;
         }
-        m_target.transform.position = Random.insideUnitCircle * me.Spawner.m_spawnRadius;
+        m_target.transform.position = me.Spawner.transform.position + Random.insideUnitSphere * me.Spawner.m_spawnRadius;
     }
 }

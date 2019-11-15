@@ -10,6 +10,7 @@ public class BasicFish : MonoBehaviour
     public float Speed;
     public float TurnSpeed;
 
+    public Transform LookFrom;
     public FishSpawner Spawner;
 
     [SerializeField]
