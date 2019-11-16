@@ -36,7 +36,9 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_forgetTarget;
     public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
-
+    [SerializeField]
+    KeyCode m_punch;
+    public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
 
 
     /// <summary>
@@ -144,6 +146,7 @@ public class ALInput : MonoBehaviour
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
+        m_punch = KeyCode.Q;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }

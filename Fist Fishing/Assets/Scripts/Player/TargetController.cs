@@ -55,11 +55,9 @@ public class TargetController : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.ForgetTarget))
             SelectNextTarget();
 
-        //if (ALInput.GetKeyDown(ALInput.ForgetTarget))
-        //    ForgetCurrentTarget();
+        if (m_targetedFish == null)
+            return;
 
-        //if (Input.GetButtonDown("LastTarget"))
-        //    SelectLastTarget();
         m_closestFishDistance = Vector3.Distance(m_targetedFish.transform.position, m_playerRef.transform.position);
     }
 
