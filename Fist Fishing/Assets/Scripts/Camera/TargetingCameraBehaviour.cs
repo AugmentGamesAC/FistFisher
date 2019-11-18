@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class FollowCameraBehaviour : CameraBehaviour
+public class TargetingCameraBehaviour : CameraBehaviour
 {
     public float m_cameraHorizPosEaseSpeed = 5.0f;
     public float m_cameraVertPosEaseSpeed = 4.0f;
@@ -51,8 +53,49 @@ public class FollowCameraBehaviour : CameraBehaviour
         return false;
     }
 
+    public void SetTargetingController(TargetController targetingController)
+    {
+        m_targetingController = targetingController;
+    }
+
+    
+
+    //should return where the camera should go every frame to keep two objects inside viewPort.
+    private Vector3 CalcCameraPos()
+    {
+
+
+
+
+        return Vector3.zero;
+    }
+
+    //finds point between player and targeted object.
+    private Vector3 CalcTargetPosition()
+    {
+        Vector3 TowardsFish = m_targetingController.m_targetedFish.transform.position - m_player.transform.position;
+        Vector3 dir = TowardsFish.normalized;
+        float Halfdistance = TowardsFish.magnitude * 0.5f; //change 0.5f to Camera Aim or something and not hardcode.
+        Vector3 posBetweenPlayerFish = dir * Halfdistance;
+
+        //get direction vector3 between camera and newPoint.
+        Vector3 TowardsBetweenPos = posBetweenPlayerFish - m_camera.transform.position;
+        Vector3 NewCameraDir = TowardsBetweenPos.normalized;
+
+        return Vector3.zero;
+    }
+
     public override void UpdateCamera()
     {
+        //need to initalize targetubgController before this hits.
+        //if (m_targetingController == null)
+        //    return;
+
+        //Vector3 TowardsFish = m_targetingController.m_targetedFish.transform.position - m_player.transform.position;
+        //TowardsFish.Normalize();
+
+        //need TowardsFish
+
         //player's pivot point.
         Vector3 worldPivotPos = m_player.transform.TransformPoint(m_playerLocalPivotPos);
 
@@ -62,8 +105,11 @@ public class FollowCameraBehaviour : CameraBehaviour
         //distance
         float distFromPlayer = offsetFromPlayer.magnitude;
 
-        //Get the Camera Rotation based on the input gathered from thirdPersonCamera.
-        Vector3 rotateAmount = new Vector3(m_pitchInput * m_pitchRotateSpeed, m_yawInput * m_yawRotateSpeed);
+        //rotate amount is a fraction of the full desired rotation.
+        //
+
+        //changed this back to zero so you have no control when you lock on.
+        Vector3 rotateAmount = Vector3.zero;
 
         //get current YRotation:
         Vector3 pivotRotation = m_camera.PivotRotation;
@@ -124,9 +170,9 @@ public class FollowCameraBehaviour : CameraBehaviour
             float lookPosPercent = moveUpDist / m_maxDistFromPlayer;
             Vector3 localLookPos = Vector3.Lerp(m_playerMinDistLocalLookPos, m_playerMaxDistLocalLookPos, lookPosPercent);
 
-            Vector3 goalLookPos = m_player.transform.TransformPoint(localLookPos);
+            Vector3 goalLookPos = m_targetingController.m_targetedFish.transform.position;
 
-                //goalLookPos.y = m_Camera.LookPos.y;
+            //goalLookPos.y = m_Camera.LookPos.y;
 
             m_camera.LookPos = MathUtils.LerpTo(
                 m_lookPosEaseSpeed,
@@ -142,6 +188,7 @@ public class FollowCameraBehaviour : CameraBehaviour
     }
 
     Vector3 m_goalPos;
+    TargetController m_targetingController;
 
     float m_yawInput;
     float m_pitchInput;
