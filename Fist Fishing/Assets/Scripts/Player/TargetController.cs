@@ -16,11 +16,11 @@ public class TargetController : MonoBehaviour
 
     public bool m_targetingIsActive;
 
-    public float m_closestFishDistance;
-
     public int m_fishInViewCount;
 
     public int m_currentFishTargetIndex;
+
+    public float m_closestFishDistance;
 
     public float m_targetCloseness = 0.9f;
 
@@ -45,7 +45,7 @@ public class TargetController : MonoBehaviour
         //List is empty, don't update and deactivate targeting.
         if (m_fishInViewList.Count == 0)
         {
-            ToggleTargeting(false);
+            ToggleTargetingReticle(false);
             return;
         }
 
@@ -59,6 +59,8 @@ public class TargetController : MonoBehaviour
             return;
 
         m_closestFishDistance = Vector3.Distance(m_targetedFish.transform.position, m_playerRef.transform.position);
+
+        LockOn();
     }
 
     private void LateUpdate()
@@ -75,9 +77,21 @@ public class TargetController : MonoBehaviour
 
             m_targetPrefab.gameObject.transform.position = newPos;// m_targetedFish.gameObject.transform.position;
         }
+
+        //if targeting is off, return.
+        if (!m_targetingIsActive)
+            return;
+
+        //Get a point between player and target.
+
+
+        //Lerp camera direction towards NewCameraDir.
+        //m_camera.SetFacingDirection(NewCameraDir);
+
+        //m_camera.transform.rotation = Quaternion.LookRotation(dir);
     }
 
-    private void ToggleTargeting(bool targetingIsActive)
+    private void ToggleTargetingReticle(bool targetingIsActive)
     {
         m_targetingIsActive = targetingIsActive;
         m_targetPrefab.SetActive(m_targetingIsActive);
@@ -86,6 +100,7 @@ public class TargetController : MonoBehaviour
     private void ForgetCurrentTarget()
     {
         m_targetedFish = null;
+        ToggleTargetingReticle(false);
     }
 
     private void ToggleTargeting()
@@ -94,7 +109,7 @@ public class TargetController : MonoBehaviour
         if (m_targetingIsActive)
         {
             //turn off targeting.
-            ToggleTargeting(false);
+            ToggleTargetingReticle(false);
         }
         //when targeting is off, check for closest fish and set targeting to true.
         else
@@ -102,7 +117,7 @@ public class TargetController : MonoBehaviour
             SetTargetedFishToClosest();
 
             //turn on targeting.
-            ToggleTargeting(true);
+            ToggleTargetingReticle(true);
         }
     }
 

@@ -36,6 +36,9 @@ public class CombatModule : MonoBehaviour
         //get targetedfish from targeting system.
         m_targetedFish = m_targetController.m_targetedFish;
 
+        if (m_targetedFish == null)
+            return;
+
         //Set current closest shoulder to the target.
         SetCurrentShoulder();
 
