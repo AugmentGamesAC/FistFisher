@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject m_player;
     public GameObject m_playerBody;
+    public Vector3 m_boatMountPosition;
+    public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
 
@@ -18,9 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float m_gravity = -9.81f;
     public float m_terminalVelocity = 50.0f;
+    public float mountCooldown = 0.0f;
 
     public bool m_isSwimming = false;
     public bool m_isGrounded = false;
+    public bool m_isMounted = false;
+    public bool m_canMount = false;
 
     Vector3 m_velocity = Vector3.zero;
 
@@ -47,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
+
         if (m_isSwimming)
             Swim();
         else
@@ -56,6 +62,49 @@ public class PlayerMovement : MonoBehaviour
                 Sprint();
             else
                 Walk();
+        }
+
+        mountCooldown -= Time.deltaTime;
+
+        if (mountCooldown <= 0.0f)
+            UpdateBoatMountStatus();
+    }
+
+    private void Mount()
+    {
+        //teleport to boat seat.
+        transform.position = m_boatMountPosition;
+
+        //player is now mounted and shouldn't be able to move until dismount.
+        m_isMounted = true;
+
+        m_canMount = false;
+    }
+
+    private void Dismount()
+    {
+        //go to diving position
+        transform.position = m_boatDismountPosition;
+
+        //no longer mounted on the boat.
+        m_isMounted = false;
+    }
+
+    private void UpdateBoatMountStatus()
+    {
+        //if pressing mount button and allowed to mount.
+        if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
+        {
+            Mount();
+
+            mountCooldown = 2.0f;
+        }
+        //if i am mounted and pressing the mount button.
+        else if (!m_canMount && Input.GetButton("Mount") && m_isMounted)
+        {
+            Dismount();
+
+            mountCooldown = 2.0f;
         }
     }
 
@@ -116,12 +165,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 GetMoveInput()
     {
-        return new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        return ALInput.GetDirection(ALInput.DirectionCode.MoveInput);
     }
 
     public Vector3 GetLookInput()
     {
-        return new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0.0f);
+        return ALInput.GetDirection(ALInput.DirectionCode.LookInput);
     }
 
     void ApplyGravity()
@@ -132,7 +181,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsJumping()
     {
-        return Input.GetButton("Jump");
+        return ALInput.GetKey(ALInput.Jump);
+        //return Input.GetButton("Jump");
     }
 
     public bool IsPunching()
@@ -142,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return Input.GetButton("Sprint");
+        return ALInput.GetKey(ALInput.Sprint);
+        //return Input.GetButton("Sprint");
     }
 }
