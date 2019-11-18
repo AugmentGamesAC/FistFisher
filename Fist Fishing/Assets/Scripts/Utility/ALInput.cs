@@ -41,6 +41,22 @@ public class ALInput : MonoBehaviour
     public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
 
 
+    [SerializeField]
+    KeyCode m_mountBoat;
+    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
+    [SerializeField]
+    KeyCode m_dismountBoat;
+    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
+
+    [SerializeField]
+    KeyCode m_harvest;
+    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
+
+    [SerializeField]
+    KeyCode m_throwBait;
+    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
+
+
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
     /// </summary>

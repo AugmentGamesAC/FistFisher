@@ -93,14 +93,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateBoatMountStatus()
     {
         //if pressing mount button and allowed to mount.
-        if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
+        if (m_canMount && ALInput.GetKeyDown(ALInput.MountBoat) && !m_isMounted)
         {
             Mount();
 
             mountCooldown = 2.0f;
         }
         //if i am mounted and pressing the mount button.
-        else if (!m_canMount && Input.GetButton("Mount") && m_isMounted)
+        else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
