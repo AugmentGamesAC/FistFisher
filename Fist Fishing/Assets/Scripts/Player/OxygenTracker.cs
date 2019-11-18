@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OxygenTracker : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class OxygenTracker : MonoBehaviour
     public bool m_isUnderWater = false;
 
     public HealthModule m_healthComponent;
+
+    public Slider m_OxygenSlider;
 
 
     void Start()
@@ -74,6 +77,8 @@ public class OxygenTracker : MonoBehaviour
     private void UpdateOxygenPercentage()
     {
         m_OxygenPercentage = m_currentOxygen / m_maxOxygen;
+
+        m_OxygenSlider.value = m_OxygenPercentage;
     }
 
     private bool NoOxygenCheck()

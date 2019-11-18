@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthModule : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class HealthModule : MonoBehaviour
 
     public delegate void OnDeathEvent();
     public event OnDeathEvent OnDeath;
+
+    public Slider m_HealthSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,11 @@ public class HealthModule : MonoBehaviour
     private void UpdateHealthPercentage()
     {
         m_healthPercentage = m_currentHealth / m_maxHealth;
+
+        //Health Canvas Value = m_healthPercentage;
+        //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, 0.5f);
+
+        m_HealthSlider.value = m_healthPercentage;
     }
 
     private bool UpdateDeathStatus()

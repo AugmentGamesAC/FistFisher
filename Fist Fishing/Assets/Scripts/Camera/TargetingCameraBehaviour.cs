@@ -87,6 +87,10 @@ public class TargetingCameraBehaviour : CameraBehaviour
 
     public override void UpdateCamera()
     {
+        //need to initalize targetubgController before this hits.
+        //if (m_targetingController == null)
+        //    return;
+
         //Vector3 TowardsFish = m_targetingController.m_targetedFish.transform.position - m_player.transform.position;
         //TowardsFish.Normalize();
 
