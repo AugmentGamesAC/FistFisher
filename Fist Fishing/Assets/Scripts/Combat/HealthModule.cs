@@ -20,12 +20,37 @@ public class HealthModule : MonoBehaviour
     public delegate void OnDeathEvent();
     public event OnDeathEvent OnDeath;
 
+    public float m_regenTimer = 0.0f;
+    public float m_regenDelay = 3.0f;
+    public float m_regenRate = 5.0f;
+
     public Slider m_HealthSlider;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_HealthSlider = GetComponentInChildren<Slider>();
+
         ResetHealth();
+        UpdateHealthPercentage();
+    }
+
+    private void Update()
+    {
+        m_regenTimer += Time.deltaTime;
+        if (m_regenTimer > m_regenDelay)
+        {
+            RegenHealth(m_regenRate);
+        }
+    }
+
+    public void RegenHealth(float changeAmount)
+    {
+        m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
+
+        m_regenTimer = 0.0f;
+
         UpdateHealthPercentage();
     }
 
@@ -49,7 +74,7 @@ public class HealthModule : MonoBehaviour
         m_healthPercentage = m_currentHealth / m_maxHealth;
 
         //Health Canvas Value = m_healthPercentage;
-        //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, 0.5f);
+        //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, .1f);
 
         m_HealthSlider.value = m_healthPercentage;
     }
@@ -71,7 +96,7 @@ public class HealthModule : MonoBehaviour
 
     protected void Death()
     {
-        //OnDeath.Invoke(); //get around to actually using
+        OnDeath.Invoke(); //get around to actually using
 
         //Disable Object, ObjectPool should Handle fish but not the player.
 
