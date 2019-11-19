@@ -16,7 +16,7 @@ public class ThirdPersonCamera : MonoBehaviour
         if (m_targetingCameraBehaviour == null)
             m_targetingCameraBehaviour = new TargetingCameraBehaviour();
 
-        m_targetingCameraBehaviour.SetTargetingController(m_targetController);
+        
     }
 
     //this overrides every camera change in any other class even in lateUpdate.
@@ -63,6 +63,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
         if (m_targetController == null)
             m_targetController = m_player.GetComponent<TargetController>();
+
+        m_targetingCameraBehaviour.SetTargetingController(m_targetController);
     }
 
     //tells behaviour to update rotation based on inputs.

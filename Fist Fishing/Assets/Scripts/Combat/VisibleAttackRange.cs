@@ -8,6 +8,8 @@ public class VisibleAttackRange : MonoBehaviour
 
     public GameObject m_player;
 
+    public bool Toggle = false;
+
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
@@ -21,7 +23,7 @@ public class VisibleAttackRange : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if (m_currentShoulder == null)
+        if (m_currentShoulder == null || !Toggle)
             return;
 
         Gizmos.color = Color.blue;
