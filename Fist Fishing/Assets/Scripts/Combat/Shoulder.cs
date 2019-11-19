@@ -17,6 +17,8 @@ public class Shoulder : MonoBehaviour
     public CombatZone m_mediumZone;
     public CombatZone m_largeZone;
 
+    public CombatZone m_currentCombatZone;
+
     private void Start()
     {
         m_smallZone = new CombatZone();
@@ -46,11 +48,20 @@ public class Shoulder : MonoBehaviour
 
         //prioritize small zones.
         if (distFromFish < m_smallZone.Range)
-            return m_smallZone;
+        {
+            m_currentCombatZone = m_smallZone;
+            return m_currentCombatZone;
+        }
         else if (distFromFish < m_mediumZone.Range)
-            return m_mediumZone;
+        {
+            m_currentCombatZone = m_mediumZone;
+            return m_currentCombatZone;
+        }
         else if (distFromFish <= m_largeZone.Range)
-            return m_largeZone;
+        {
+            m_currentCombatZone = m_largeZone;
+            return m_currentCombatZone;
+        }
 
         return null;
     }

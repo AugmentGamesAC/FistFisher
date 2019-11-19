@@ -37,27 +37,22 @@ public class HealthModule : MonoBehaviour
 
     private void Update()
     {
+        if (m_healthPercentage >= 1.0f)
+            return;
+
         m_regenTimer += Time.deltaTime;
         if (m_regenTimer > m_regenDelay)
         {
-            RegenHealth(m_regenRate);
+            ModifyHealth(m_regenRate);
         }
-    }
-
-    public void RegenHealth(float changeAmount)
-    {
-        m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
-        m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
-
-        m_regenTimer = 0.0f;
-
-        UpdateHealthPercentage();
     }
 
     public void ModifyHealth(float changeAmount)
     {
         m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
         m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
+
+        m_regenTimer = 0.0f;
 
         UpdateHealthPercentage();
 
