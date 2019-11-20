@@ -776,8 +776,8 @@ GameObject:
   - component: {fileID: 8935615362561680181}
   - component: {fileID: 369048172756602551}
   - component: {fileID: 8542314659082509461}
-  - component: {fileID: 4925323513883639627}
   - component: {fileID: 295444867762836901}
+  - component: {fileID: 7002809324863039487}
   m_Layer: 9
   m_Name: Third Person Player (1)
   m_TagString: Player
@@ -906,8 +906,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_punchDamage: 30
-  m_rightShoulder: {fileID: 2966363381740398312}
-  m_leftShoulder: {fileID: 7825967736836742638}
+  m_rightShoulder: {fileID: 6400242733478366530}
+  m_leftShoulder: {fileID: 4302908215076497007}
   m_currentShoulder: {fileID: 0}
   m_targetController: {fileID: 8268430212035573679}
 --- !u!114 &369048172756602551
@@ -924,6 +924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_currentCurrency: 0
   m_storedObjects: []
+  m_storedBait: []
 --- !u!114 &8542314659082509461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,27 +939,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
     type: 3}
---- !u!114 &4925323513883639627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7295796181784110616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d80862728951a4083e395cf158678e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_targetPrefab: {fileID: 7357203004094782232, guid: 3440cdcad5955e74a9175f6b190be4b5,
-    type: 3}
-  m_targetCloseness: 0.9
-  m_angleToHarvest: 30
-  m_rangeToView: 20
-  m_rangeToHarvest: 10
-  m_harvestablesInView: []
-  m_targetingIsActive: 0
-  m_toHarvest: {fileID: 0}
 --- !u!114 &295444867762836901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +952,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fishArchetype: 4
+--- !u!114 &7002809324863039487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295796181784110616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5a25a9753a61d4c89f295bdc756f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_targetPrefab: {fileID: 8447996714878858378, guid: d80eb65570f84ae4a96792d16384144b,
+    type: 3}
+  m_targetCloseness: 0.9
+  m_angleToHarvest: 30
+  m_rangeToView: 20
+  m_rangeToHarvest: 10
+  m_harvestablesInView: []
+  m_targetingIsActive: 0
+  m_toHarvest: {fileID: 0}
 --- !u!1 &7652071231167031652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,7 +1086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8268430210970101490}
-  - component: {fileID: 7825967736836742638}
+  - component: {fileID: 4302908215076497007}
   m_Layer: 0
   m_Name: Left Shoulder
   m_TagString: Untagged
@@ -1107,7 +1108,7 @@ Transform:
   m_Father: {fileID: 7295796180478928116}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7825967736836742638
+--- !u!114 &4302908215076497007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1116,7 +1117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8268430210970101485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7769865493190e04fa05835dd2671d54, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ae25d9571c8e8f4bb5cf461561bd7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_smallZoneRange: 5
@@ -1310,7 +1311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8268430211858753953}
-  - component: {fileID: 2966363381740398312}
+  - component: {fileID: 6400242733478366530}
   m_Layer: 0
   m_Name: Right Shoulder
   m_TagString: Untagged
@@ -1332,7 +1333,7 @@ Transform:
   m_Father: {fileID: 7295796180478928116}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2966363381740398312
+--- !u!114 &6400242733478366530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1341,7 +1342,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8268430211858753952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7769865493190e04fa05835dd2671d54, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ae25d9571c8e8f4bb5cf461561bd7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_smallZoneRange: 5
