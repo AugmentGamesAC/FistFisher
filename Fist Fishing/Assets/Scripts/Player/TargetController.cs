@@ -72,10 +72,10 @@ public class TargetController : MonoBehaviour
         if (m_targetingIsActive) //please don't spam errors
         {
             Vector3 targetPos = m_targetedFish.gameObject.transform.position;
-            Vector3 cameraPos = Camera.main.transform.position;//Camera.current.transform.position;
+            Vector3 cameraPos = Camera.main.transform.position;
             Vector3 newPos = Vector3.Lerp(cameraPos, targetPos, m_targetCloseness);
 
-            m_targetPrefab.gameObject.transform.position = newPos;// m_targetedFish.gameObject.transform.position;
+            m_targetPrefab.gameObject.transform.position = newPos;
         }
 
         //if targeting is off, return.

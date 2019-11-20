@@ -30,6 +30,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
+
     [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
@@ -165,6 +166,13 @@ public class ALInput : MonoBehaviour
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
         m_punch = KeyCode.Q;
+
+
+        m_mountBoat = KeyCode.M;
+        m_dismountBoat = KeyCode.N;
+        m_harvest = KeyCode.E;
+        m_throwBait = KeyCode.P;
+
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }
