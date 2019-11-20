@@ -91,8 +91,9 @@ public class OxygenTracker : MonoBehaviour
 
         ResetOxygenTickTimer();
 
-        //trigger anything that needs to happen when we have no oxygen.
-        OnLowOxygen.Invoke();
+        //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
+        if (OnLowOxygen != null)
+            OnLowOxygen.Invoke();
 
         return true;
     }

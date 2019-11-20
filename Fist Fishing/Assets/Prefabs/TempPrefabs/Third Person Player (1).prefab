@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1606899951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606899952}
+  - component: {fileID: 1606899954}
+  - component: {fileID: 1606899953}
+  m_Layer: 9
+  m_Name: Waist
+  m_TagString: Waist
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606899952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606899951}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7295796180478928116}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1606899954
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606899951}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1606899953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606899951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.98, y: 0.1, z: 1}
+  m_Center: {x: 0, y: -0.21, z: 0}
 --- !u!1 &324239089845097383
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +605,7 @@ Transform:
   - {fileID: 212648526062425506}
   - {fileID: 8268430211858753953}
   - {fileID: 8268430210970101490}
+  - {fileID: 1606899952}
   m_Father: {fileID: 7295796181784110598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -723,8 +777,8 @@ MonoBehaviour:
   m_currentOxygen: 0
   m_OxygenPercentage: 0
   m_OxygenRegeneration: 20
-  m_OxygenDegeneration: 5
-  m_noOxygenDamage: 5
+  m_OxygenDegeneration: 20
+  m_noOxygenDamage: 20
   m_OxygenTickFrequency: 1
   m_OxygenTickTimer: 0
   m_isUnderWater: 0
@@ -778,6 +832,7 @@ GameObject:
   - component: {fileID: 8542314659082509461}
   - component: {fileID: 295444867762836901}
   - component: {fileID: 7002809324863039487}
+  - component: {fileID: 929672413}
   m_Layer: 9
   m_Name: Third Person Player (1)
   m_TagString: Player
@@ -892,6 +947,9 @@ MonoBehaviour:
   m_currentHealth: 0
   m_maxHealth: 100
   m_healthPercentage: 0
+  m_regenTimer: 0
+  m_regenDelay: 3
+  m_regenRate: 5
   m_HealthSlider: {fileID: 8268430211792164908}
 --- !u!114 &8935615362561680181
 MonoBehaviour:
@@ -951,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1c28f071024bd4cb4c70ee564a809f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_respawnLocation: {fileID: 0}
   m_fishArchetype: 4
 --- !u!114 &7002809324863039487
 MonoBehaviour:
@@ -973,6 +1032,21 @@ MonoBehaviour:
   m_harvestablesInView: []
   m_targetingIsActive: 0
   m_toHarvest: {fileID: 0}
+--- !u!114 &929672413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295796181784110616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8c81be45cd58146b9394c00792e16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentShoulder: {fileID: 0}
+  m_player: {fileID: 7295796181784110616}
+  Toggle: 0
 --- !u!1 &7652071231167031652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,11 +1194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae25d9571c8e8f4bb5cf461561bd7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_smallZoneRange: 5
+  m_smallZoneRange: 2
   m_smallZoneModifier: 1
-  m_mediumZoneRange: 10
+  m_mediumZoneRange: 5
   m_mediumZoneModifier: 0.8
-  m_largeZoneRange: 15
+  m_largeZoneRange: 8
   m_largeZoneModifier: 0.5
 --- !u!1 &8268430211364823887
 GameObject:
@@ -1345,11 +1419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae25d9571c8e8f4bb5cf461561bd7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_smallZoneRange: 5
+  m_smallZoneRange: 2
   m_smallZoneModifier: 1
-  m_mediumZoneRange: 10
+  m_mediumZoneRange: 5
   m_mediumZoneModifier: 0.8
-  m_largeZoneRange: 15
+  m_largeZoneRange: 8
   m_largeZoneModifier: 0.5
 --- !u!1 &8268430212226833258
 GameObject:
