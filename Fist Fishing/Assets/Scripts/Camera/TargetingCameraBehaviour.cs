@@ -87,6 +87,9 @@ public class TargetingCameraBehaviour : CameraBehaviour
 
     public override void UpdateCamera()
     {
+        if (m_targetingController == null)
+            return;
+
         //need to initalize targetubgController before this hits.
         //if (m_targetingController == null)
         //    return;

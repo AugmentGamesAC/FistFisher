@@ -16,8 +16,8 @@ public class OxygenTracker : MonoBehaviour
     protected float m_OxygenPercentage;
     public float OxygenPercentage { get { return m_OxygenPercentage; } }
 
-    /*public delegate void OnLowOxygenEvent();
-    public event OnLowOxygenEvent OnLowOxygen;*/
+    public delegate void OnLowOxygenEvent();
+    public event OnLowOxygenEvent OnLowOxygen;
 
     public float m_OxygenRegeneration = 20.0f;
     public float m_OxygenDegeneration = 5.0f;
@@ -35,7 +35,7 @@ public class OxygenTracker : MonoBehaviour
 
     void Start()
     {
-        ResetHealth();
+        ResetOxygen();
         UpdateOxygenPercentage();
     }
 
@@ -92,21 +92,15 @@ public class OxygenTracker : MonoBehaviour
         ResetOxygenTickTimer();
 
         //trigger anything that needs to happen when we have no oxygen.
-        LowOxygen();
+        OnLowOxygen.Invoke();
 
         return true;
     }
 
-    public void ResetHealth()
+    public void ResetOxygen()
     {
         m_currentOxygen = m_maxOxygen;
-    }
-
-    protected virtual void LowOxygen()
-    {
-        Debug.Log("Low Oxygen!!");
-
-        //OnLowOxygen.Invoke();
+        UpdateOxygenPercentage();
     }
 
     private void ResetOxygenTickTimer()
