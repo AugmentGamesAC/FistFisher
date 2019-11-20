@@ -9,7 +9,7 @@ public class FollowCameraBehaviour : CameraBehaviour
     public Vector3 m_playerMaxDistLocalLookPos = Vector3.zero;
     public Vector3 m_playerMinDistLocalLookPos = Vector3.zero;
 
-    public Vector3 m_playerLocalPivotPos = Vector3.zero;
+    public Vector3 m_playerLocalPivotPos = new Vector3(0.0f, 3.0f, 0.0f);
 
     public float m_yawRotateSpeed = 1.0f;
     public float m_pitchRotateSpeed = 1.0f;
@@ -136,7 +136,6 @@ public class FollowCameraBehaviour : CameraBehaviour
                 );
 
             Vector3 lookDir = m_camera.LookPos - m_camera.transform.position;
-
 
             m_camera.transform.rotation = Quaternion.LookRotation(lookDir);
         }
