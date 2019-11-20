@@ -79,7 +79,7 @@ public class HealthModule : MonoBehaviour
         if (m_currentHealth > 0.0f)
             return false;
 
-        Death();
+        OnDeath.Invoke();
 
         return true;
     }
@@ -87,16 +87,6 @@ public class HealthModule : MonoBehaviour
     public void ResetHealth()
     {
         m_currentHealth = m_maxHealth;
-    }
-
-    protected void Death()
-    {
-        OnDeath.Invoke(); //get around to actually using
-
-        //Disable Object, ObjectPool should Handle fish but not the player.
-
-        //player should be sent to respawn. 
-
-        //Fish Type and Player should override this function if it does something special.
+        UpdateHealthPercentage();
     }
 }
