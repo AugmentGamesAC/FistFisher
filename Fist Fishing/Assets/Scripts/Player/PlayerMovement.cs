@@ -52,23 +52,23 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+        if (m_isSwimming)
+            Swim();
+        else
         {
-            if (m_isSwimming)
-                Swim();
+            ApplyGravity();
+            if (IsSprinting())
+                Sprint();
             else
-            {
-                ApplyGravity();
-                if (IsSprinting())
-                    Sprint();
-                else
-                    Walk();
-            }
+                Walk();
+            if (IsJumping() && m_isGrounded)
+                Jump();
         }
 
         mountCooldown -= Time.deltaTime;
 
-        if (mountCooldown < 0.0f)
+        if (mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
     }
 
@@ -95,14 +95,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateBoatMountStatus()
     {
         //if pressing mount button and allowed to mount.
-        if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
+        if (m_canMount && ALInput.GetKeyDown(ALInput.MountBoat) && !m_isMounted)
         {
             Mount();
 
             mountCooldown = 2.0f;
         }
         //if i am mounted and pressing the mount button.
-        else if (!m_canMount && Input.GetButton("Mount") && m_isMounted)
+        else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
@@ -131,6 +131,21 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
+    }
+
+
+    //Quick jump funtion. WIP - will change
+    void Jump()
+    {
+     
+            Debug.Log("Jump");
+            //Assign jump power.
+
+            Vector3 power = transform.up * 10;
+
+            //apply movement to controller.
+            m_characterController.Move(power * Time.deltaTime * m_walkSpeed);
+        
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.
@@ -167,12 +182,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 GetMoveInput()
     {
-        return new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        return ALInput.GetDirection(ALInput.DirectionCode.MoveInput);
     }
 
     public Vector3 GetLookInput()
     {
-        return new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0.0f);
+        return ALInput.GetDirection(ALInput.DirectionCode.LookInput);
     }
 
     void ApplyGravity()
@@ -183,7 +198,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsJumping()
     {
-        return Input.GetButton("Jump");
+        return ALInput.GetKey(ALInput.Jump);
+        //return Input.GetButton("Jump");
     }
 
     public bool IsPunching()
@@ -193,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return Input.GetButton("Sprint");
+        return ALInput.GetKey(ALInput.Sprint);
+        //return Input.GetButton("Sprint");
     }
 }

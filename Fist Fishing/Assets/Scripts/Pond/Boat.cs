@@ -25,6 +25,7 @@ public class Boat : MonoBehaviour
             PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
 
             PlayerController.m_canMount = false;
+            PlayerController.m_isMounted = false;
         }
     }
 }
