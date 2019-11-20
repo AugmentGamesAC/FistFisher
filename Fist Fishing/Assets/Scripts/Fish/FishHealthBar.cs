@@ -13,7 +13,7 @@ public class FishHealthBar : MonoBehaviour
     private float m_timer = 0.0f;
 
     //if health percentage == 1, isActive = false after a float m_delay.
-    // Update is called once per frame
+    //Update is called once per frame.
 
     private void Awake()
     {
