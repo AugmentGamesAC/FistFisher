@@ -6,7 +6,7 @@ using System;
 public class Inventory : MonoBehaviour
 {
 
-#region Currency
+    #region Currency
     //currency has to be an unsigned long. I need to imagine people are insane enough to 
     [SerializeField]
     protected ulong m_currentCurrency = 0;
@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
     }
     #endregion Currency
 
-#region HarvestableTracking
+    #region HarvestableTracking
 
     [SerializeField]
     protected List<GameObject> m_storedObjects = new List<GameObject>();
@@ -123,6 +123,70 @@ public class Inventory : MonoBehaviour
 
 
     #endregion HarvestableTracking
+
+    #region BaitTracking
+
+    [SerializeField]
+    protected List<GameObject> m_storedBait = new List<GameObject>();
+    public List<GameObject> StoredBait { get { return m_storedBait; } }
+
+    /// <summary>
+    /// tries to put the object into inventory. 
+    /// Fails if it isn't a harvestable or already somehow in inventory
+    /// </summary>
+    public bool AddToBaitInventory(GameObject obj)
+    {
+        if (!IsABait(obj))
+            return false;
+
+        if (m_storedBait.Contains(obj))
+            return false;
+
+        m_storedBait.Add(obj);
+        //obj.SetActive(false); //wait, I can't just set not active, or the object pooling messes with this. argh.
+
+        /*******************************************************************************************************************************/
+        //TEMPORARY MEASURE TILL WE FIGURE OUT UI
+        /*******************************************************************************************************************************/
+
+        Vector3 pos = obj.transform.position;
+        pos.y = -999.9f;
+        obj.transform.position = pos;
+
+        /*******************************************************************************************************************************/
+        /*******************************************************************************************************************************/
+        /*******************************************************************************************************************************/
+
+        return true;
+    }
+
+    /// <summary>
+    /// removes a given gameobject from inventory
+    /// fails if object is not valid or not in inventory
+    /// </summary>
+    public bool RemoveBaitFromInventory(GameObject obj)
+    {
+        if (!IsABait(obj))
+            return false;
+
+        if (!m_storedBait.Contains(obj))
+            return false;
+
+        m_storedBait.Remove(obj);
+
+        return true;
+    }
+
+    private bool IsABait(GameObject obj)
+    {
+        Bait test = obj.GetComponent<Bait>();
+        if (test == null)
+            return false;
+        return true;
+    }
+
+
+    #endregion BaitTracking
 
 
     // Start is called before the first frame update
