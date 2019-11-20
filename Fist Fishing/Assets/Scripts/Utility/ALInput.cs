@@ -30,6 +30,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
+
     [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
@@ -39,6 +40,22 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_punch;
     public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
+
+
+    [SerializeField]
+    KeyCode m_mountBoat;
+    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
+    [SerializeField]
+    KeyCode m_dismountBoat;
+    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
+
+    [SerializeField]
+    KeyCode m_harvest;
+    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
+
+    [SerializeField]
+    KeyCode m_throwBait;
+    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
 
 
     /// <summary>
@@ -108,6 +125,8 @@ public class ALInput : MonoBehaviour
     public static Vector3 GetDirection(DirectionCode dC)
     {
         System.Tuple<AxisCode, AxisCode, AxisCode> directionInstructions;
+
+        //this breaks and directionInstuctions is null so player cannot receive input yet.
         if (!m_registeredDirections.TryGetValue(dC, out directionInstructions))
             return Vector3.zero;
 
@@ -147,6 +166,13 @@ public class ALInput : MonoBehaviour
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
         m_punch = KeyCode.Q;
+
+
+        m_mountBoat = KeyCode.M;
+        m_dismountBoat = KeyCode.N;
+        m_harvest = KeyCode.E;
+        m_throwBait = KeyCode.P;
+
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }

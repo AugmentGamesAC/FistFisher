@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
                 Sprint();
             else
                 Walk();
+            if (IsJumping() && m_isGrounded)
+                Jump();
         }
 
         mountCooldown -= Time.deltaTime;
@@ -93,14 +95,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateBoatMountStatus()
     {
         //if pressing mount button and allowed to mount.
-        if (m_canMount && Input.GetButton("Mount") && !m_isMounted)
+        if (m_canMount && ALInput.GetKeyDown(ALInput.MountBoat) && !m_isMounted)
         {
             Mount();
 
             mountCooldown = 2.0f;
         }
         //if i am mounted and pressing the mount button.
-        else if (!m_canMount && Input.GetButton("Mount") && m_isMounted)
+        else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
@@ -129,6 +131,21 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
+    }
+
+
+    //Quick jump funtion. WIP - will change
+    void Jump()
+    {
+     
+            Debug.Log("Jump");
+            //Assign jump power.
+
+            Vector3 power = transform.up * 10;
+
+            //apply movement to controller.
+            m_characterController.Move(power * Time.deltaTime * m_walkSpeed);
+        
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.

@@ -24,6 +24,15 @@ public class PondManager : MonoBehaviour
     public int SpawnerCount = 0;
     public float m_radius;
 
+
+    [SerializeField]
+    protected bool m_isBaited;
+    public bool IsBaited { get { return m_isBaited; } }
+
+    [SerializeField]
+    protected List<GameObject> m_activeBait = new List<GameObject>();
+    public List<GameObject> ActiveBait { get { return m_activeBait; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +58,32 @@ public class PondManager : MonoBehaviour
             }
             i++;
         }
+    }
+
+    /// <summary>
+    /// informed by bait if it exists in this pond
+    /// updates list of active bait and sets bool of if baited
+    /// baited does nothing at this point, but will change behaviour later
+    /// </summary>
+    public void ChangeBaitPresenceInThisPond(GameObject bait, bool alive)
+    {
+        Bait bobj = bait.GetComponent<Bait>();
+        if (bobj == null)
+            return;
+
+        if(alive)
+        {
+            m_activeBait.Add(bait);
+        }
+        else
+        {
+            m_activeBait.Remove(bait);
+        }
+
+        if (m_activeBait.Count > 0)
+            m_isBaited = true;
+        else
+            m_isBaited = false;
     }
 
     // Update is called once per frame

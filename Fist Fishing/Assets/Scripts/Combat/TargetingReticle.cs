@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TargetingReticle : MonoBehaviour
 {
-    public Camera m_camera;
+    private Camera m_camera;
 
-    public float m_rotateSpeed = 250.0f;
+    public float m_rotateSpeed = 3.0f;
 
     private Vector3 m_zRotate = Vector3.zero;
 

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[RequireComponent(typeof(Harvester))]
 [RequireComponent(typeof(HealthModule))]
 [RequireComponent(typeof(PlayerMovement))]
-
-
 [RequireComponent(typeof(CombatModule))]
 [RequireComponent(typeof(Inventory))]
+//eventually require punchadex
 
-//Punchadex
 public class Player : MonoBehaviour
 {
     public HealthModule m_healthModule;
