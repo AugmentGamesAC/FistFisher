@@ -50,7 +50,7 @@ public class HealthModule : MonoBehaviour
     public void ModifyHealth(float changeAmount)
     {
         m_currentHealth += Mathf.Clamp(changeAmount, -m_maxHealth, m_maxHealth);
-        m_currentHealth = Mathf.Clamp(m_currentHealth, 0.0f, m_maxHealth);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, -1.0f, m_maxHealth);
 
         m_regenTimer = 0.0f;
 
@@ -76,7 +76,7 @@ public class HealthModule : MonoBehaviour
 
     private bool UpdateDeathStatus()
     {
-        if (m_currentHealth > 0.0f)
+        if (m_currentHealth >= 0)
             return false;
 
         OnDeath.Invoke();
