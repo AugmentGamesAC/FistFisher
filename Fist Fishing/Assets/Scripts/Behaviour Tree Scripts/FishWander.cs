@@ -20,6 +20,8 @@ public class FishWander : FishTask
             m_target.transform.position = Vector3.zero;
             return;
         }
+
+
         m_target.transform.position = me.Spawner.transform.position + Random.insideUnitSphere * me.Spawner.m_spawnRadius;
     }
 }

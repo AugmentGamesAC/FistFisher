@@ -30,13 +30,32 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
+
     [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
     [SerializeField]
     KeyCode m_forgetTarget;
     public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
+    [SerializeField]
+    KeyCode m_punch;
+    public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
 
+
+    [SerializeField]
+    KeyCode m_mountBoat;
+    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
+    [SerializeField]
+    KeyCode m_dismountBoat;
+    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
+
+    [SerializeField]
+    KeyCode m_harvest;
+    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
+
+    [SerializeField]
+    KeyCode m_throwBait;
+    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
 
 
     /// <summary>
@@ -146,6 +165,14 @@ public class ALInput : MonoBehaviour
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
+        m_punch = KeyCode.Q;
+
+
+        m_mountBoat = KeyCode.M;
+        m_dismountBoat = KeyCode.N;
+        m_harvest = KeyCode.E;
+        m_throwBait = KeyCode.P;
+
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }

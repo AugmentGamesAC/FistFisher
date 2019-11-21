@@ -16,11 +16,11 @@ public class TargetController : MonoBehaviour
 
     public bool m_targetingIsActive;
 
-    public float m_closestFishDistance;
-
     public int m_fishInViewCount;
 
     public int m_currentFishTargetIndex;
+
+    public float m_closestFishDistance;
 
     public float m_targetCloseness = 0.9f;
 
@@ -28,6 +28,8 @@ public class TargetController : MonoBehaviour
     void Start()
     {
         m_fishInViewList = new List<GameObject>();
+
+        m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
         m_closestFishDistance = float.MaxValue;
 
@@ -45,7 +47,7 @@ public class TargetController : MonoBehaviour
         //List is empty, don't update and deactivate targeting.
         if (m_fishInViewList.Count == 0)
         {
-            ToggleTargeting(false);
+            ToggleTargetingReticle(false);
             return;
         }
 
@@ -55,12 +57,12 @@ public class TargetController : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.ForgetTarget))
             SelectNextTarget();
 
-        //if (ALInput.GetKeyDown(ALInput.ForgetTarget))
-        //    ForgetCurrentTarget();
+        if (m_targetedFish == null)
+            return;
 
-        //if (Input.GetButtonDown("LastTarget"))
-        //    SelectLastTarget();
         m_closestFishDistance = Vector3.Distance(m_targetedFish.transform.position, m_playerRef.transform.position);
+
+        LockOn();
     }
 
     private void LateUpdate()
@@ -72,14 +74,26 @@ public class TargetController : MonoBehaviour
         if (m_targetingIsActive) //please don't spam errors
         {
             Vector3 targetPos = m_targetedFish.gameObject.transform.position;
-            Vector3 cameraPos = Camera.main.transform.position;//Camera.current.transform.position;
+            Vector3 cameraPos = Camera.main.transform.position;
             Vector3 newPos = Vector3.Lerp(cameraPos, targetPos, m_targetCloseness);
 
-            m_targetPrefab.gameObject.transform.position = newPos;// m_targetedFish.gameObject.transform.position;
+            m_targetPrefab.gameObject.transform.position = newPos;
         }
+
+        //if targeting is off, return.
+        if (!m_targetingIsActive)
+            return;
+
+        //Get a point between player and target.
+
+
+        //Lerp camera direction towards NewCameraDir.
+        //m_camera.SetFacingDirection(NewCameraDir);
+
+        //m_camera.transform.rotation = Quaternion.LookRotation(dir);
     }
 
-    private void ToggleTargeting(bool targetingIsActive)
+    private void ToggleTargetingReticle(bool targetingIsActive)
     {
         m_targetingIsActive = targetingIsActive;
         m_targetPrefab.SetActive(m_targetingIsActive);
@@ -88,6 +102,7 @@ public class TargetController : MonoBehaviour
     private void ForgetCurrentTarget()
     {
         m_targetedFish = null;
+        ToggleTargetingReticle(false);
     }
 
     private void ToggleTargeting()
@@ -96,7 +111,7 @@ public class TargetController : MonoBehaviour
         if (m_targetingIsActive)
         {
             //turn off targeting.
-            ToggleTargeting(false);
+            ToggleTargetingReticle(false);
         }
         //when targeting is off, check for closest fish and set targeting to true.
         else
@@ -104,7 +119,7 @@ public class TargetController : MonoBehaviour
             SetTargetedFishToClosest();
 
             //turn on targeting.
-            ToggleTargeting(true);
+            ToggleTargetingReticle(true);
         }
     }
 
@@ -138,7 +153,7 @@ public class TargetController : MonoBehaviour
     private void LockOn()
     {
         //change look direction to a point in between the target and the player. Trying to keep the player in sight.
-        m_camera.gameObject.transform.LookAt(m_targetedFish.gameObject.transform.position);
+        //m_camera.gameObject.transform.LookAt(m_targetedFish.gameObject.transform.position);
     }
 
     private void LockOff()
