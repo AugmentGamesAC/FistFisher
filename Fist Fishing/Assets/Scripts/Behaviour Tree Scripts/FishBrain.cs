@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class FishBrain : BehaviorTree
 {
-    static public string TargetName  = "defaultGoa";
+    static public string TargetName  = "defaultGoal";
     static public string SpeedName = "speed" ;
     static public string TurnSpeedName = "turningSpeed";
     static public string AccuracyName = "accuracy";
@@ -25,8 +25,9 @@ public class FishBrain : BehaviorTree
         Blackboard = new Hashtable();
     }
 
-
-
+    /// <summary>
+    /// This is the start of a very simple fish brain that picks a point to wander to then swims to it
+    /// </summary>
     void Start()
     {
         defaultGoal = new GameObject();

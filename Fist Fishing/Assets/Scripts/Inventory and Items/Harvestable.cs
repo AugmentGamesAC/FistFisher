@@ -11,15 +11,24 @@ public enum HarvestableType
 }
 public class Harvestable : MonoBehaviour
 {
+
+    [SerializeField]
+    protected HarvestableType m_harvestableType;
+    public HarvestableType HarvestableType { get { return m_harvestableType; } }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (HarvestableType == HarvestableType.NotSet)
+            Destroy(gameObject);
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void LateUpdate()
     {
-        
+
     }
+
 }

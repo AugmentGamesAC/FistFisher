@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OxygenTracker : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class OxygenTracker : MonoBehaviour
     protected float m_OxygenPercentage;
     public float OxygenPercentage { get { return m_OxygenPercentage; } }
 
-    /*public delegate void OnLowOxygenEvent();
-    public event OnLowOxygenEvent OnLowOxygen;*/
+    public delegate void OnLowOxygenEvent();
+    public event OnLowOxygenEvent OnLowOxygen;
 
     public float m_OxygenRegeneration = 20.0f;
     public float m_OxygenDegeneration = 5.0f;
@@ -29,10 +30,12 @@ public class OxygenTracker : MonoBehaviour
 
     public HealthModule m_healthComponent;
 
+    public Slider m_OxygenSlider;
+
 
     void Start()
     {
-        ResetHealth();
+        ResetOxygen();
         UpdateOxygenPercentage();
     }
 
@@ -74,6 +77,8 @@ public class OxygenTracker : MonoBehaviour
     private void UpdateOxygenPercentage()
     {
         m_OxygenPercentage = m_currentOxygen / m_maxOxygen;
+
+        m_OxygenSlider.value = m_OxygenPercentage;
     }
 
     private bool NoOxygenCheck()
@@ -86,22 +91,17 @@ public class OxygenTracker : MonoBehaviour
 
         ResetOxygenTickTimer();
 
-        //trigger anything that needs to happen when we have no oxygen.
-        LowOxygen();
+        //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
+        if (OnLowOxygen != null)
+            OnLowOxygen.Invoke();
 
         return true;
     }
 
-    public void ResetHealth()
+    public void ResetOxygen()
     {
         m_currentOxygen = m_maxOxygen;
-    }
-
-    protected virtual void LowOxygen()
-    {
-        Debug.Log("Low Oxygen!!");
-
-        //OnLowOxygen.Invoke();
+        UpdateOxygenPercentage();
     }
 
     private void ResetOxygenTickTimer()

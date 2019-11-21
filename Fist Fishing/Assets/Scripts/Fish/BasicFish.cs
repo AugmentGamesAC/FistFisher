@@ -28,11 +28,19 @@ public class BasicFish : MonoBehaviour
     //behaviour
     protected BehaviorTree m_behaviour;
 
+    protected HealthModule m_healthModule;
+
     // Start is called before the first frame update
     void Start()
     {
+        m_healthModule = GetComponent<HealthModule>();
+
+        if (m_healthModule != null)
+            m_healthModule.OnDeath += HandleDeath;
+
         m_camera = Camera.main;
         m_isListed = false;
+        m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponent<TargetController>();
 
         //Get all hitboxes from each fish compound colliders.
         FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();
@@ -71,5 +79,12 @@ public class BasicFish : MonoBehaviour
 
             m_isListed = false;
         }
+    }
+
+    private void HandleDeath()
+    {
+        //ObjectPool should Handle fish.
+
+        //Fish turns into a harvestable.
     }
 }
