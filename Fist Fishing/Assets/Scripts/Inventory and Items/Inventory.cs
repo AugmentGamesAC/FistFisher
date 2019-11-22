@@ -118,7 +118,6 @@ public class Inventory : MonoBehaviour
                     break;
                 case HarvestableType.NotSet:
                     return false;
-                    break;
             }
 
         }
@@ -184,7 +183,6 @@ public class Inventory : MonoBehaviour
                     break;
                 case HarvestableType.NotSet:
                     return false;
-                    break;
             }
 
         }
@@ -196,6 +194,37 @@ public class Inventory : MonoBehaviour
         m_storedObjects.Remove(obj);
 
         return true;
+    }
+
+    public GameObject GetReferenceToStoredObjectOfHarvestableType(HarvestableType hType)
+    {
+        if (m_storedObjects.Count == 0)
+            return null;
+
+        foreach (GameObject g in m_storedObjects)
+        {
+            if (IsAHarvestable(g) == true)
+            {
+                HarvestableType objtype = g.GetComponent<Harvestable>().HarvestableType;
+                if (objtype == hType)
+                    return g;
+            }
+        }
+        return null;
+    }
+    public GameObject GetReferenceToStoredBait()
+    {
+        if (m_storedObjects.Count == 0 || m_BaitCount ==0)
+            return null;
+
+        foreach (GameObject g in m_storedObjects)
+        {
+            if (IsABait(g) == true)
+            {
+                return g;
+            }
+        }
+        return null;
     }
 
     private bool IsAHarvestable(GameObject obj)

@@ -6,6 +6,7 @@ public class Bait : MonoBehaviour
 {
     public float m_maxDuration = 200.0f;
     private float m_currentDuration;
+    public bool m_activeInWorld = false;
 
     [SerializeField]
     protected PondManager m_pond;
@@ -16,12 +17,12 @@ public class Bait : MonoBehaviour
     {
 
 
+        gameObject.SetActive(true);
     }
 
     public void Init()
     {
-
-        gameObject.SetActive(true);
+        m_activeInWorld = true;
         m_currentDuration = m_maxDuration;
 
         float m_radius = gameObject.GetComponent<SphereCollider>().radius; //hacky way to get radius for sphere overlap as opposed to collisions
@@ -45,18 +46,20 @@ public class Bait : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_currentDuration <= 0)
+        if (m_currentDuration <= 0 && m_activeInWorld)
             BaitDespawn();
-        if(m_pond==null)
+        /*if(m_pond!=null)
         {
 
-        }
-        m_currentDuration -= Time.deltaTime;
+        }*/
+        if(m_activeInWorld)
+            m_currentDuration -= Time.deltaTime;
     }
 
     void NotifyPond(bool alive)
     {
-        m_pond.ChangeBaitPresenceInThisPond(gameObject, alive);
+        if(m_pond!=null)
+            m_pond.ChangeBaitPresenceInThisPond(gameObject, alive);
     }
 
     void BaitDespawn()
