@@ -56,17 +56,18 @@ public class HarvestableSpawner : MonoBehaviour
             GameObject value;
             m_budGameObjectsOnCoral.TryGetValue(spawns, out value);
 
-            if (value == null)
-            {
-                //fill slot
-                m_budGameObjectsOnCoral[spawns] = newHarvestable;
-                m_currentHarvestableSpawned.Add(newHarvestable);
+            if (value != null)
+                continue;
 
-                var myKey = m_budGameObjectsOnCoral.FirstOrDefault(x => x.Value == newHarvestable).Key;
-                newHarvestable.gameObject.transform.position = myKey.transform.position;
-                break;
-            }
+            //fill slot
+            m_budGameObjectsOnCoral[spawns] = newHarvestable;
+            m_currentHarvestableSpawned.Add(newHarvestable);
+
+            newHarvestable.gameObject.transform.position = spawns.transform.position;
+            break;
+
         }
+
 
         float rot = Random.Range(0.0f, 360.0f);
         Quaternion rotq = Quaternion.Euler(0.0f, rot, 0.0f);
