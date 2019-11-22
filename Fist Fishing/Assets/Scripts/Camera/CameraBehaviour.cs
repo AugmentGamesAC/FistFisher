@@ -6,6 +6,8 @@ public abstract class CameraBehaviour
 {
     public float m_obstacleCheckRadius = 0.5f;
     public Vector3 m_playerLocalObstructionMovePos = Vector3.zero;
+
+    public TargetController m_targetController;
     public CameraBehaviour()
     {
 
@@ -15,6 +17,8 @@ public abstract class CameraBehaviour
     {
         m_camera = camera;
         m_player = player;
+
+        m_targetController = m_player.GetComponent<TargetController>();
 
         //this is important so you don't snap camera pos to player. Set these in inspector.
         m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water");
