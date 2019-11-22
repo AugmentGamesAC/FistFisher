@@ -17,6 +17,8 @@ public class BasicFish : MonoBehaviour
     public Transform LookFrom;
     public FishSpawner Spawner;
 
+    public bool m_inBaitZone = false;
+
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishArcheType { get { return m_fishArchetype; } }
@@ -87,5 +89,7 @@ public class BasicFish : MonoBehaviour
         //ObjectPool should Handle fish.
 
         //Fish turns into a harvestable.
+        gameObject.AddComponent<Harvestable>();
+        tag = "Harvestable";
     }
 }

@@ -7,6 +7,7 @@ public class FishTask : Node
     protected float m_speed;
     protected float m_turnSpeed;
     protected float m_accuracy;
+    [SerializeField]
     protected GameObject m_target;
     protected GameObject m_me;
 
