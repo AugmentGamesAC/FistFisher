@@ -6,6 +6,11 @@ using System;
 public class Inventory : MonoBehaviour
 {
 
+    public int m_fishCount = 0;
+    public int m_coral1Count = 0;
+    public int m_coral2Count = 0;
+    public int m_BaitCount = 0;
+
     #region Currency
     //currency has to be an unsigned long. I need to imagine people are insane enough to 
     [SerializeField]
@@ -60,7 +65,7 @@ public class Inventory : MonoBehaviour
     }
     #endregion Currency
 
-    #region HarvestableTracking
+    #region ObjectTracking
 
     [SerializeField]
     protected List<GameObject> m_storedObjects = new List<GameObject>();
@@ -72,14 +77,65 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public bool AddToInventory(GameObject obj)
     {
-        if (!IsAHarvestable(obj))
+        /*if (!IsAHarvestable(obj))
             return false;
 
         if (m_storedObjects.Contains(obj))
             return false;
 
         m_storedObjects.Add(obj);
-        //obj.SetActive(false); //wait, I can't just set not active, or the object pooling messes with this. argh.
+
+        SetNewInventoryObjectPosition(obj);
+
+        return true;*/
+
+
+        /*if (!IsAHarvestable(obj) && !IsABait(obj))
+    return false;*/
+
+        if (m_storedObjects.Contains(obj))
+            return false;
+
+        if (IsABait(obj))
+        {
+            m_BaitCount++;
+        }
+        else if (IsAHarvestable(obj))
+        {
+            Harvestable test = obj.GetComponent<Harvestable>();
+
+            HarvestableType hType = test.HarvestableType;
+            switch (hType)
+            {
+                case HarvestableType.DeadFish:
+                    m_fishCount++;
+                    break;
+                case HarvestableType.Coral1:
+                    m_coral1Count++;
+                    break;
+                case HarvestableType.Coral2:
+                    m_coral2Count++;
+                    break;
+                case HarvestableType.NotSet:
+                    return false;
+                    break;
+            }
+
+        }
+        else
+        {
+            return false;
+        }
+
+        m_storedObjects.Add(obj);
+
+        SetNewInventoryObjectPosition(obj);
+
+        return true;
+    }
+
+    void SetNewInventoryObjectPosition(GameObject obj)
+    {
 
         /*******************************************************************************************************************************/
         //TEMPORARY MEASURE TILL WE FIGURE OUT UI
@@ -92,8 +148,6 @@ public class Inventory : MonoBehaviour
         /*******************************************************************************************************************************/
         /*******************************************************************************************************************************/
         /*******************************************************************************************************************************/
-
-        return true;
     }
 
     /// <summary>
@@ -102,11 +156,42 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public bool RemoveFromInventory(GameObject obj)
     {
-        if (!IsAHarvestable(obj))
-            return false;
+        /*if (!IsAHarvestable(obj) && !IsABait(obj))
+            return false;*/
 
         if (!m_storedObjects.Contains(obj))
             return false;
+
+        if (IsABait(obj))
+        {
+            m_BaitCount--;
+        }
+        else if (IsAHarvestable(obj))
+        {
+            Harvestable test = obj.GetComponent<Harvestable>();
+
+            HarvestableType hType = test.HarvestableType;
+            switch (hType)
+            {
+                case HarvestableType.DeadFish:
+                    m_fishCount--;
+                    break;
+                case HarvestableType.Coral1:
+                    m_coral1Count--;
+                    break;
+                case HarvestableType.Coral2:
+                    m_coral2Count--;
+                    break;
+                case HarvestableType.NotSet:
+                    return false;
+                    break;
+            }
+
+        }
+        else
+        {
+            return false;
+        }
 
         m_storedObjects.Remove(obj);
 
@@ -120,63 +205,6 @@ public class Inventory : MonoBehaviour
             return false;
         return true;
     }
-
-
-    #endregion HarvestableTracking
-
-    #region BaitTracking
-
-    [SerializeField]
-    protected List<GameObject> m_storedBait = new List<GameObject>();
-    public List<GameObject> StoredBait { get { return m_storedBait; } }
-
-    /// <summary>
-    /// tries to put the object into inventory. 
-    /// Fails if it isn't a harvestable or already somehow in inventory
-    /// </summary>
-    public bool AddToBaitInventory(GameObject obj)
-    {
-        if (!IsABait(obj))
-            return false;
-
-        if (m_storedBait.Contains(obj))
-            return false;
-
-        m_storedBait.Add(obj);
-        //obj.SetActive(false); //wait, I can't just set not active, or the object pooling messes with this. argh.
-
-        /*******************************************************************************************************************************/
-        //TEMPORARY MEASURE TILL WE FIGURE OUT UI
-        /*******************************************************************************************************************************/
-
-        Vector3 pos = obj.transform.position;
-        pos.y = -999.9f;
-        obj.transform.position = pos;
-
-        /*******************************************************************************************************************************/
-        /*******************************************************************************************************************************/
-        /*******************************************************************************************************************************/
-
-        return true;
-    }
-
-    /// <summary>
-    /// removes a given gameobject from inventory
-    /// fails if object is not valid or not in inventory
-    /// </summary>
-    public bool RemoveBaitFromInventory(GameObject obj)
-    {
-        if (!IsABait(obj))
-            return false;
-
-        if (!m_storedBait.Contains(obj))
-            return false;
-
-        m_storedBait.Remove(obj);
-
-        return true;
-    }
-
     private bool IsABait(GameObject obj)
     {
         Bait test = obj.GetComponent<Bait>();
@@ -186,7 +214,8 @@ public class Inventory : MonoBehaviour
     }
 
 
-    #endregion BaitTracking
+    #endregion ObjectTracking
+
 
 
     // Start is called before the first frame update
