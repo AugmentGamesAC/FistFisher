@@ -60,6 +60,10 @@ public class ALInput : MonoBehaviour
     KeyCode m_throwBait;
     public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
 
+    [SerializeField]
+    KeyCode m_craftBait;
+    public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -177,6 +181,7 @@ public class ALInput : MonoBehaviour
         m_harvest = KeyCode.E;
         m_throwBait = KeyCode.P;
 
+        m_craftBait = KeyCode.B;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }

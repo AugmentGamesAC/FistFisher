@@ -52,31 +52,33 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-
-        if (m_isSwimming)
+        if (!m_isMounted)
         {
-            
-            Swim();
-            //For ascending using Spacebar
-            if (IsJumping())
-                Jump();
-            //For descending using LeftControl
-            else if (IsDescending())
+            if (m_isSwimming)
             {
-                Descend();
-            }
-            //For Sprinting when in the water
-            if (IsSprinting())
-                Sprint();
-        }
-        else
-        {
-            ApplyGravity();
-            if (IsSprinting())
-                Sprint();
-            else
-                Walk();
 
+                Swim();
+                //For ascending using Spacebar
+                if (IsJumping())
+                    Jump();
+                //For descending using LeftControl
+                else if (IsDescending())
+                {
+                    Descend();
+                }
+                //For Sprinting when in the water
+                if (IsSprinting())
+                    Sprint();
+            }
+            else
+            {
+                ApplyGravity();
+                if (IsSprinting())
+                    Sprint();
+                else
+                    Walk();
+
+            }
         }
 
         mountCooldown -= Time.deltaTime;
