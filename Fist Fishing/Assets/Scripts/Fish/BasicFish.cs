@@ -86,6 +86,5 @@ public class BasicFish : MonoBehaviour
         //ObjectPool should Handle fish.
 
         //Fish turns into a harvestable.
-
     }
 }
