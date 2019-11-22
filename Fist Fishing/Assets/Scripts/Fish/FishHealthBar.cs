@@ -39,6 +39,6 @@ public class FishHealthBar : MonoBehaviour
             HUD.gameObject.SetActive(true);
         }
 
-        this.gameObject.transform.LookAt(Camera.main.transform);
+        HUD.gameObject.transform.LookAt(Camera.main.transform);
     }
 }

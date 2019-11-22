@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
+[System.Serializable]
 public class FishMoveTo : FishTask
 {
-
-    public Vector3 m_direction;
-
+    protected Vector3 m_direction;
+    [SerializeField]
+    protected float m_forgetfulness = 0.25f;
 
     public override NodeResult Execute()
     {
@@ -15,29 +17,76 @@ public class FishMoveTo : FishTask
         if (Vector3.Distance(m_me.transform.position, m_target.transform.position) < m_accuracy)
             return NodeResult.SUCCESS;
 
-        DetermineNextDirection();
+        ResolveAwareness();
+        CollisionAvoidance();
         MoveToward();
 
         return NodeResult.RUNNING;
     }
 
+    protected Dictionary<GameObject, FishReaction> RemeberHistory()
+    {
+        Dictionary<GameObject, FishReaction> myHistory = (Dictionary<GameObject, FishReaction>)m_tree.GetValue(FishBrain.MoodName);
+
+        myHistory.Keys.ToList<GameObject>().ForEach(
+            rememberedObject =>
+            {
+                FishReaction nextReaction = myHistory[rememberedObject];
+                //forgets /reduces intensity 
+                nextReaction.m_intensity *= 1 - (m_forgetfulness * Time.deltaTime); 
+
+                if (Mathf.Abs(nextReaction.m_intensity) < 0.00007)
+                    myHistory.Remove(rememberedObject);
+            });
 
 
 
-    protected void DetermineNextDirection()
+        return myHistory;
+    }
+
+    protected void ResolveAwareness()
     {
         m_direction = m_target.transform.position - m_me.transform.position;
-        // not run into stuff is top priority
 
+        IEnumerable<Vector3> pointsOfIntrest = RemeberHistory()
+            .Select(remembered => remembered.Key.transform.position);
+    }
+    public static Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>> awayReactionDirection =
+        new Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>>()
+        {
+            {//simple fish behavior
+                FishBrain.FishClassification.Fearful|FishBrain.FishClassification.BaitSensitive1,
+                new Dictionary<FishBrain.FishClassification, bool>()
+                {
+                    { FishBrain.FishClassification.BaitSensitive1, false },
+                    { FishBrain.FishClassification.Player, true }
+                }
+            }
+        };
+
+    protected Vector3 CalculateDirectionWeight(Vector3 pointOfIntrest, FishReaction reaction)
+    {
+        BasicFish myfish = m_me.GetComponent<BasicFish>();
+        Vector3 directionOfIntrest = pointOfIntrest - m_me.transform.position;
+        Dictionary<FishBrain.FishClassification, bool> myMood;
+        bool runaway;
+        if (awayReactionDirection.TryGetValue(myfish.FishClass, out myMood))
+            if (myMood.TryGetValue(reaction.m_fishReconition, out runaway))
+                if (runaway)
+                    directionOfIntrest = Vector3.Reflect(directionOfIntrest, m_direction);
+
+        return directionOfIntrest * reaction.m_intensity; 
+    }
+
+    protected void CollisionAvoidance()
+    {
         RaycastHit hit;
-
         BasicFish myfish = m_me.GetComponent<BasicFish>();
 
-
-        if (!Physics.Raycast(myfish.LookFrom.position, m_me.transform.forward, out hit, m_speed * 2))
+        if (!Physics.Raycast(myfish.LookFrom.position, m_direction, out hit, m_speed * 2))
             return;
 
-        m_direction = Vector3.Reflect(m_me.transform.forward, hit.normal);
+        m_direction = Vector3.Reflect(m_direction, hit.normal);
     }
 
     protected void MoveToward()
