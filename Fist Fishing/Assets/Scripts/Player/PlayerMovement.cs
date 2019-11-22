@@ -54,7 +54,21 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (m_isSwimming)
+        {
+            
             Swim();
+            //For ascending using Spacebar
+            if (IsJumping())
+                Jump();
+            //For descending using LeftControl
+            else if (IsDescending())
+            {
+                Descend();
+            }
+            //For Sprinting when in the water
+            if (IsSprinting())
+                Sprint();
+        }
         else
         {
             ApplyGravity();
@@ -62,8 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 Sprint();
             else
                 Walk();
-            if (IsJumping() && m_isGrounded)
-                Jump();
+
         }
 
         mountCooldown -= Time.deltaTime;
@@ -134,18 +147,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //Quick jump funtion. WIP - will change
+    //This is used for ascending when in the water.
+    //Can be removed if it doesn't fit design
     void Jump()
     {
      
-            Debug.Log("Jump");
-            //Assign jump power.
+          
+            //Assign ascend speed.
 
-            Vector3 power = transform.up * 10;
+            Vector3 speed = transform.up * 10;
 
             //apply movement to controller.
-            m_characterController.Move(power * Time.deltaTime * m_walkSpeed);
+            m_characterController.Move(speed * Time.deltaTime);
         
+    }
+
+    //For descending when in the water.
+    void Descend()
+    {  
+        //Assign descend speed.
+        Vector3 speed = -transform.up * 10;
+
+        //apply movement to controller.
+        m_characterController.Move(speed * Time.deltaTime);
+
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.
@@ -155,11 +180,24 @@ public class PlayerMovement : MonoBehaviour
         if (m_isGrounded && m_velocity.y < 0.0f)
             m_velocity.y = -3.0f;
 
-        //Key apply movement.
-        Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
+        if (m_isGrounded)
+        {
+            //Key apply movement.
+            Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
 
-        //apply movement to controller.
-        m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+            //apply movement to controller.
+            m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+        }
+        //If in the water sprint is locked to forward and backwards movement
+        //based on the cameras forward direction
+        else if (m_isSwimming)
+        {
+            //Key apply movement.
+            Vector3 move = m_camera.transform.forward * GetMoveInput().z;
+
+            //apply movement to controller.
+            m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+        }
     }
 
     private bool UpdateIsGrounded()
@@ -201,7 +239,11 @@ public class PlayerMovement : MonoBehaviour
         return ALInput.GetKey(ALInput.Jump);
         //return Input.GetButton("Jump");
     }
-
+    public bool IsDescending()
+    {
+        return ALInput.GetKey(ALInput.Descend);
+        //return Input.GetButton("Descend");
+    }
     public bool IsPunching()
     {
         return false;
