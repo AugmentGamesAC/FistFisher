@@ -11,6 +11,13 @@ public enum HarvestableType
 }
 public class Harvestable : MonoBehaviour
 {
+    public HarvestableSpawner m_spawner;
+    public TargetController m_targetController;
+
+
+    //[SerializeField]
+    //protected HarvestableSpawner m_spawner;
+    //public HarvestableSpawner Spawner { get { return m_spawner; } }
 
     [SerializeField]
     protected HarvestableType m_harvestableType;
