@@ -8,14 +8,17 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(CombatModule))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(CraftingModule))]
 //eventually require punchadex
 
 public class Player : MonoBehaviour
 {
-    public HealthModule m_healthModule;
-    public OxygenTracker m_oxygenTracker;
+    private HealthModule m_healthModule;
+    private OxygenTracker m_oxygenTracker;
 
-    public Vector3 m_spawnLocation;
+    private CharacterController m_characterController;
+
+    public Transform m_respawnLocation;
 
 
     [SerializeField]
@@ -37,7 +40,12 @@ public class Player : MonoBehaviour
         if (m_oxygenTracker != null)
             m_oxygenTracker.ResetOxygen();
 
-        gameObject.transform.position = m_spawnLocation;
+        //gameObject.transform.position = m_spawnLocation.position;
+        //GEt Vector between boat spawn and player.
+
+        Vector3 MoveVector = m_respawnLocation.position - gameObject.transform.position;
+
+        m_characterController.Move(MoveVector);
 
         //player should be sent to respawn. 
     }
@@ -45,6 +53,10 @@ public class Player : MonoBehaviour
     private void Init()
     {
         m_healthModule = GetComponent<HealthModule>();
+
+        m_characterController = GetComponent<CharacterController>();
+
+        m_oxygenTracker = GetComponentInChildren<OxygenTracker>();
 
         m_healthModule.OnDeath += HandleDeath;
     }

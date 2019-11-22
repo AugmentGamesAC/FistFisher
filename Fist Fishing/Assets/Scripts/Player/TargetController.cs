@@ -29,6 +29,8 @@ public class TargetController : MonoBehaviour
     {
         m_fishInViewList = new List<GameObject>();
 
+        m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
+
         m_closestFishDistance = float.MaxValue;
 
         m_currentFishTargetIndex = -1;
@@ -151,7 +153,7 @@ public class TargetController : MonoBehaviour
     private void LockOn()
     {
         //change look direction to a point in between the target and the player. Trying to keep the player in sight.
-        m_camera.gameObject.transform.LookAt(m_targetedFish.gameObject.transform.position);
+        //m_camera.gameObject.transform.LookAt(m_targetedFish.gameObject.transform.position);
     }
 
     private void LockOff()

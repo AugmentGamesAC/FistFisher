@@ -28,6 +28,9 @@ public class ALInput : MonoBehaviour
     KeyCode m_jump;
     public static KeyCode Jump { get { hasInstance(); return Instance.m_jump; } }
     [SerializeField]
+    KeyCode m_descend;
+    public static KeyCode Descend { get { hasInstance(); return Instance.m_descend; } }
+    [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
 
@@ -56,6 +59,10 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_throwBait;
     public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
+
+    [SerializeField]
+    KeyCode m_craftBait;
+    public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
 
 
     /// <summary>
@@ -162,6 +169,7 @@ public class ALInput : MonoBehaviour
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
         m_jump = KeyCode.Space;
+        m_descend = KeyCode.LeftControl;
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
@@ -173,6 +181,7 @@ public class ALInput : MonoBehaviour
         m_harvest = KeyCode.E;
         m_throwBait = KeyCode.P;
 
+        m_craftBait = KeyCode.B;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }
