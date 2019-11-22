@@ -86,5 +86,7 @@ public class BasicFish : MonoBehaviour
         //ObjectPool should Handle fish.
 
         //Fish turns into a harvestable.
+        gameObject.AddComponent<Harvestable>();
+        tag = "Harvestable";
     }
 }
