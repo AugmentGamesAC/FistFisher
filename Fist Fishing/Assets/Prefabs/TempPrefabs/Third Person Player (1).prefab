@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 85932e62272dcdc459e5b30949f648b4, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3fe534b832556bb4bb1bae8037e4d448, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 4c26be895b64a9b47bd661244eee02bc, type: 3}
+  m_Texture: {fileID: 2800000, guid: 97b55ba6ef95fef4ab1d78704f8a5c28, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: aab7446a3912ab1468a7647cbcf3b690, type: 3}
+  m_Texture: {fileID: 2800000, guid: a4268e3d68baeda45808596c9d2dcf9e, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1103,6 +1103,7 @@ GameObject:
   - component: {fileID: 929672413}
   - component: {fileID: 9041238057392381960}
   - component: {fileID: 6157781141010856212}
+  - component: {fileID: 8542314659082509461}
   m_Layer: 9
   m_Name: Third Person Player (1)
   m_TagString: Player
@@ -1169,7 +1170,10 @@ MonoBehaviour:
   m_swimSpeed: 5
   m_gravity: -9.81
   m_terminalVelocity: 50
-  mountCooldown: 0
+  m_mountCooldownMax: 2
+  m_mountCooldown: 0
+  m_baitThrowCooldownMax: 2
+  m_baitThrowCooldown: 0
   m_isSwimming: 0
   m_isGrounded: 0
   m_isMounted: 0
@@ -1256,20 +1260,6 @@ MonoBehaviour:
   m_BaitCount: 999
   m_currentCurrency: 0
   m_storedObjects: []
---- !u!114 &8542314659082509461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7295796181784110616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
-    type: 3}
 --- !u!114 &295444867762836901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,6 +1339,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443c804af226ab3458a4da6d65560ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_startingCurrency: 1337
+  m_startingBaitAmount: 5
+--- !u!114 &8542314659082509461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295796181784110616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
+    type: 3}
 --- !u!1 &8268430210894152414
 GameObject:
   m_ObjectHideFlags: 0

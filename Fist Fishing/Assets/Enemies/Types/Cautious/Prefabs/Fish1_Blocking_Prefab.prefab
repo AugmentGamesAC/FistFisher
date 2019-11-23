@@ -241,7 +241,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -741,13 +741,14 @@ GameObject:
   - component: {fileID: 7027024320410773115}
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
+  - component: {fileID: 3955263237117310163}
   m_Layer: 0
-  m_Name: Fish
+  m_Name: Fish1_Blocking_Prefab
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4896005792019608336
 Transform:
   m_ObjectHideFlags: 0
@@ -838,6 +839,19 @@ MonoBehaviour:
   m_regenDelay: 3
   m_regenRate: 5
   m_HealthSlider: {fileID: 0}
+--- !u!135 &3955263237117310163
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424311146307238979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.125
+  m_Center: {x: 0.000000059604645, y: 0, z: 0}
 --- !u!1 &8567224104664165731
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,11 +971,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fish1_Model_FBX_V16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8763382423602186583, guid: b6c056b7a507a21438a865f71ddd888e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5748440556021955396, guid: b6c056b7a507a21438a865f71ddd888e,
         type: 3}
