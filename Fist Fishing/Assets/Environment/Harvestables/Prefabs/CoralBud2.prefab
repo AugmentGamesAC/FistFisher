@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 652956787090628665}
   - component: {fileID: 4538928384124012004}
   m_Layer: 0
-  m_Name: CoralBud
+  m_Name: CoralBud2
   m_TagString: Harvestable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spawner: {fileID: 0}
   m_targetController: {fileID: 0}
-  m_harvestableType: 2
+  m_harvestableType: 3
 --- !u!135 &4538928384124012004
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 393f45c1832256249846d8e84297a52a, type: 2}
+  - {fileID: 2100000, guid: 114e002a9815c0c4ea3c6ce1ae2ab043, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
