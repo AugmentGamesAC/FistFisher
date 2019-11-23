@@ -19,16 +19,17 @@ public class Harvestable : MonoBehaviour
     //protected HarvestableSpawner m_spawner;
     //public HarvestableSpawner Spawner { get { return m_spawner; } }
 
-    [SerializeField]
-    protected HarvestableType m_harvestableType;
-    public HarvestableType HarvestableType { get { return m_harvestableType; } }
+    public HarvestableType m_harvestableType;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (HarvestableType == HarvestableType.NotSet)
-            Destroy(gameObject);
+        if (m_harvestableType == HarvestableType.NotSet)
+            gameObject.SetActive(false);
+        //Destroy(gameObject);
 
     }
 

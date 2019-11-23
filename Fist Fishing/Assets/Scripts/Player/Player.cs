@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }
 
+    public void SetNewCheckpoint(Transform point)
+    {
+        m_respawnLocation = point;
+    }
+
     protected void HandleDeath()
     {
         //stick stuff here to handle player death
@@ -46,6 +51,11 @@ public class Player : MonoBehaviour
         Vector3 MoveVector = m_respawnLocation.position - gameObject.transform.position;
 
         m_characterController.Move(MoveVector);
+
+
+        /*PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
+        move.m_isMounted = true;
+        move.m_canMount = false;*/
 
         //player should be sent to respawn. 
     }

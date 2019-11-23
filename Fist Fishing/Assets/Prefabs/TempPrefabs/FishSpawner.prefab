@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73244ac1fc32ded448529726e1d715d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_targetController: {fileID: 0}
   m_parentPond: {fileID: 0}
-  m_fishPrefab: {fileID: 0}
+  m_fishPrefab: {fileID: 7424311146307238979, guid: 51aeb52013552844baf999ead266b62c,
+    type: 3}
   m_normalMaxNumberOfFishForThisSpawnerToSpawn: 2
   m_normalNumberOfSecondsToSpawnFish: 5
   m_spawnRadius: 5
