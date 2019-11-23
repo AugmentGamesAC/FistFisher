@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(CombatModule))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(CraftingModule))]
 //eventually require punchadex
 
 public class Player : MonoBehaviour

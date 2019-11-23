@@ -53,7 +53,7 @@ public class PondManager : MonoBehaviour
             FishSpawner f = hits[i].GetComponent<FishSpawner>();
             if (f!=null)
             {
-                m_spawners.Add(f, f.m_fishPrefab.GetComponent<BasicFish>().FishType);
+                m_spawners.Add(f, f.m_fishPrefab.GetComponent<BasicFish>().FishArcheType);
                 f.m_parentPond = this;
             }
             i++;
