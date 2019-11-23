@@ -276,6 +276,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8268430212276855326, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8268430212035573679, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
       propertyPath: m_camera
@@ -286,11 +291,6 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1779776065}
-    - target: {fileID: 8268430212276855326, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &349861492
@@ -463,12 +463,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
-        type: 3}
-      propertyPath: m_fishPrefab
-      value: 
-      objectReference: {fileID: 7424311146307238979, guid: e841bd2f51572234b80f6a8a97a1e303,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
 --- !u!1001 &1022036585
