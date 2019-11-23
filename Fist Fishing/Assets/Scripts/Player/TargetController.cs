@@ -51,6 +51,11 @@ public class TargetController : MonoBehaviour
             return;
         }
 
+        if (!m_targetedFish.activeSelf)
+        {
+            ToggleTargetingReticle(false);
+        }
+
         if (ALInput.GetKeyDown(ALInput.KeyTarget))
             ToggleTargeting();
 
