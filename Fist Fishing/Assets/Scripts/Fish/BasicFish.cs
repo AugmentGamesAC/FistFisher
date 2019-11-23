@@ -39,6 +39,7 @@ public class BasicFish : MonoBehaviour
     void Start()
     {
         m_healthModule = GetComponent<HealthModule>();
+        m_behaviour = GetComponent<BehaviorTree>();
 
         if (m_healthModule != null)
             m_healthModule.OnDeath += HandleDeath;
@@ -62,6 +63,14 @@ public class BasicFish : MonoBehaviour
 
     private void Update()
     {
+
+        if(m_healthModule.CurrentHealth<=0.0f)
+        {
+            m_targetController.m_fishInViewList.Remove(gameObject);
+            m_isListed = false;
+            return;
+        }
+
         //move all this stuff to a targetable class.
         Vector3 fishPosition = m_camera.WorldToViewportPoint(gameObject.transform.position);
 
@@ -89,9 +98,14 @@ public class BasicFish : MonoBehaviour
         //ObjectPool should Handle fish.
 
         //Fish turns into a harvestable.
-        gameObject.AddComponent<Harvestable>();
+        Harvestable h = gameObject.AddComponent<Harvestable>();
+        h.m_harvestableType = HarvestableType.DeadFish;
+        h.m_targetController = m_targetController;
         tag = "Harvestable";
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        m_behaviour.enabled = false;
+        m_healthModule.ResetHealth();
+        m_healthModule.enabled = false;
     }
 }
