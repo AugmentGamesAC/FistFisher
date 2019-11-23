@@ -104,7 +104,7 @@ public class Inventory : MonoBehaviour
         {
             Harvestable test = obj.GetComponent<Harvestable>();
 
-            HarvestableType hType = test.HarvestableType;
+            HarvestableType hType = test.m_harvestableType;
             switch (hType)
             {
                 case HarvestableType.DeadFish:
@@ -169,7 +169,7 @@ public class Inventory : MonoBehaviour
         {
             Harvestable test = obj.GetComponent<Harvestable>();
 
-            HarvestableType hType = test.HarvestableType;
+            HarvestableType hType = test.m_harvestableType;
             switch (hType)
             {
                 case HarvestableType.DeadFish:
@@ -205,7 +205,7 @@ public class Inventory : MonoBehaviour
         {
             if (IsAHarvestable(g) == true)
             {
-                HarvestableType objtype = g.GetComponent<Harvestable>().HarvestableType;
+                HarvestableType objtype = g.GetComponent<Harvestable>().m_harvestableType;
                 if (objtype == hType)
                     return g;
             }

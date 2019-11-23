@@ -10,6 +10,10 @@ public class BasicFish : MonoBehaviour
     public float Speed;
     public float TurnSpeed;
 
+    [SerializeField]
+    protected FishBrain.FishClassification m_fishClass = FishBrain.FishClassification.Fearful;
+    public FishBrain.FishClassification FishClass {  get { return m_fishClass; } }
+
     public Transform LookFrom;
     public FishSpawner Spawner;
 
@@ -17,7 +21,7 @@ public class BasicFish : MonoBehaviour
 
     [SerializeField]
     protected FishArchetype m_fishArchetype;
-    public FishArchetype FishType { get { return m_fishArchetype; } }
+    public FishArchetype FishArcheType { get { return m_fishArchetype; } }
 
     public class FishyPart : InspectorDictionary<Collider, float> { }
     [SerializeField]
@@ -29,13 +33,13 @@ public class BasicFish : MonoBehaviour
 
     //behaviour
     protected BehaviorTree m_behaviour;
-
     protected HealthModule m_healthModule;
 
     // Start is called before the first frame update
     void Start()
     {
         m_healthModule = GetComponent<HealthModule>();
+        m_behaviour = GetComponent<BehaviorTree>();
 
         if (m_healthModule != null)
             m_healthModule.OnDeath += HandleDeath;
@@ -59,6 +63,14 @@ public class BasicFish : MonoBehaviour
 
     private void Update()
     {
+
+        if(m_healthModule.CurrentHealth<=0.0f)
+        {
+            m_targetController.m_fishInViewList.Remove(gameObject);
+            m_isListed = false;
+            return;
+        }
+
         //move all this stuff to a targetable class.
         Vector3 fishPosition = m_camera.WorldToViewportPoint(gameObject.transform.position);
 
@@ -72,13 +84,11 @@ public class BasicFish : MonoBehaviour
         if (onScreen && !m_isListed)
         {
             m_targetController.m_fishInViewList.Add(gameObject);
-
             m_isListed = true;
         }
         else if(!onScreen && m_isListed)
         {
             m_targetController.m_fishInViewList.Remove(gameObject);
-
             m_isListed = false;
         }
     }
@@ -88,7 +98,14 @@ public class BasicFish : MonoBehaviour
         //ObjectPool should Handle fish.
 
         //Fish turns into a harvestable.
-        gameObject.AddComponent<Harvestable>();
+        Harvestable h = gameObject.AddComponent<Harvestable>();
+        h.m_harvestableType = HarvestableType.DeadFish;
+        h.m_targetController = m_targetController;
         tag = "Harvestable";
+
+        //gameObject.SetActive(false);
+        m_behaviour.enabled = false;
+        m_healthModule.ResetHealth();
+        m_healthModule.enabled = false;
     }
 }
