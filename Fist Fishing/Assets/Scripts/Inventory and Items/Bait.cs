@@ -68,21 +68,24 @@ public class Bait : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Fish")
-        {
-            other.GetComponentInParent<BasicFish>().m_inBaitZone = true;
-        }
+        InfluenceFish(other);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Fish")
-        {
-            other.GetComponentInParent<BasicFish>().m_inBaitZone = false;
-        }
+        InfluenceFish(other);
+    }
+
+    protected void InfluenceFish(Collider other)
+    {
+        FishBrain fb = other.GetComponentInParent<FishBrain>();
+        if (fb == default)
+            return;
+
+        fb.ApplyImpulse(gameObject, 0.1f, FishBrain.FishClassification.BaitSensitive1);
     }
 }
+
+

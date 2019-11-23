@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -49,8 +49,20 @@ public class FishMoveTo : FishTask
     {
         m_direction = m_target.transform.position - m_me.transform.position;
 
-        IEnumerable<Vector3> pointsOfIntrest = RemeberHistory()
-            .Select(remembered => remembered.Key.transform.position);
+        var pointsOfIntrest = RemeberHistory();
+        int numberOfIntrests = pointsOfIntrest.Count;
+        if (numberOfIntrests == 0)
+            return;
+
+        Vector3 averageGoal = (
+                m_target.transform.position
+                + pointsOfIntrest.Select(kvp => CalculateDirectionWeight(kvp.Key.transform.position, kvp.Value))
+                    .Aggregate((subtotal, pointOfIntrest) => subtotal += pointOfIntrest)
+                    ) / (
+                    pointsOfIntrest.Select(kvp => kvp.Value.m_intensity).Sum() + 1
+                    );
+
+        m_direction = averageGoal - m_me.transform.position;
     }
     public static Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>> awayReactionDirection =
         new Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>>()
@@ -68,7 +80,7 @@ public class FishMoveTo : FishTask
     protected Vector3 CalculateDirectionWeight(Vector3 pointOfIntrest, FishReaction reaction)
     {
         BasicFish myfish = m_me.GetComponent<BasicFish>();
-        Vector3 directionOfIntrest = pointOfIntrest - m_me.transform.position;
+        Vector3 directionOfIntrest = pointOfIntrest;
         Dictionary<FishBrain.FishClassification, bool> myMood;
         bool runaway;
         if (awayReactionDirection.TryGetValue(myfish.FishClass, out myMood))
