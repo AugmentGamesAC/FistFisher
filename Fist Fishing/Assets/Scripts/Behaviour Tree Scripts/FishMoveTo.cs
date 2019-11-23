@@ -6,6 +6,7 @@ using System.Linq;
 [System.Serializable]
 public class FishMoveTo : FishTask
 {
+    [SerializeField]
     protected Vector3 m_direction;
     [SerializeField]
     protected float m_forgetfulness = 0.25f;
