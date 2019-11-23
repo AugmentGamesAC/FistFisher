@@ -90,5 +90,7 @@ public class BasicFish : MonoBehaviour
         //Fish turns into a harvestable.
         gameObject.AddComponent<Harvestable>();
         tag = "Harvestable";
+
+        gameObject.SetActive(false);
     }
 }
