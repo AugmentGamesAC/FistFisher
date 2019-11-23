@@ -103,9 +103,18 @@ public class BasicFish : MonoBehaviour
         h.m_targetController = m_targetController;
         tag = "Harvestable";
 
+        Collider[] fishyParts = GetComponents<Collider>();
+
+        foreach(Collider fp in fishyParts)
+        {
+            fp.tag = "Harvestable";
+        }
+
         //gameObject.SetActive(false);
         m_behaviour.enabled = false;
-        m_healthModule.ResetHealth();
+        //m_healthModule.ResetHealth();
         m_healthModule.enabled = false;
+
+
     }
 }
