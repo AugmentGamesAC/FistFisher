@@ -76,6 +76,7 @@ public class TargetController : MonoBehaviour
         {
             SetTargetedFishToClosest();
         }
+
         if (m_targetingIsActive) //please don't spam errors
         {
             Vector3 targetPos = m_targetedFish.gameObject.transform.position;
