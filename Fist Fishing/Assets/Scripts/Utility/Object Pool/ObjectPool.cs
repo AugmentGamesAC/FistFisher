@@ -22,7 +22,7 @@ public class ObjectPool
         GameObject retrievedObject = null;
         var disabledObjects = m_PoolGameObjects.Where(x => x.activeSelf == false);
 
-        if(disabledObjects.Any())
+        if (disabledObjects.Any())
         {
             retrievedObject = disabledObjects.First();
         }

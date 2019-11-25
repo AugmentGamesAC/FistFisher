@@ -51,6 +51,11 @@ public class TargetController : MonoBehaviour
             return;
         }
 
+        if (!m_targetedFish.activeSelf)
+        {
+            ToggleTargetingReticle(false);
+        }
+
         if (ALInput.GetKeyDown(ALInput.KeyTarget))
             ToggleTargeting();
 
@@ -71,6 +76,7 @@ public class TargetController : MonoBehaviour
         {
             SetTargetedFishToClosest();
         }
+
         if (m_targetingIsActive) //please don't spam errors
         {
             Vector3 targetPos = m_targetedFish.gameObject.transform.position;
