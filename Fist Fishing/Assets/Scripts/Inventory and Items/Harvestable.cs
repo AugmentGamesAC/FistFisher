@@ -11,17 +11,25 @@ public enum HarvestableType
 }
 public class Harvestable : MonoBehaviour
 {
+    public HarvestableSpawner m_spawner;
+    public TargetController m_targetController;
 
-    [SerializeField]
-    protected HarvestableType m_harvestableType;
-    public HarvestableType HarvestableType { get { return m_harvestableType; } }
+
+    //[SerializeField]
+    //protected HarvestableSpawner m_spawner;
+    //public HarvestableSpawner Spawner { get { return m_spawner; } }
+
+    public HarvestableType m_harvestableType;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (HarvestableType == HarvestableType.NotSet)
-            Destroy(gameObject);
+        if (m_harvestableType == HarvestableType.NotSet)
+            gameObject.SetActive(false);
+        //Destroy(gameObject);
 
     }
 

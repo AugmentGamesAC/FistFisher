@@ -20,7 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float m_gravity = -9.81f;
     public float m_terminalVelocity = 50.0f;
-    public float mountCooldown = 0.0f;
+
+    public float m_mountCooldownMax = 2.0f;
+    public float m_mountCooldown = 0.0f;
+
+    public float m_baitThrowCooldownMax = 2.0f;
+    public float m_baitThrowCooldown = 0.0f;
 
     public bool m_isSwimming = false;
     public bool m_isGrounded = false;
@@ -43,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
             m_player = gameObject;
 
         m_camera.SetPlayer(m_player);
+
+        m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
     // Update is called once per frame
@@ -52,30 +59,65 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-
-        if (m_isSwimming)
-            Swim();
-        else
+        if (!m_isMounted)
         {
-            ApplyGravity();
-            if (IsSprinting())
-                Sprint();
+            if (m_isSwimming)
+            {
+
+                Swim();
+                //For ascending using Spacebar
+                if (IsJumping())
+                    Jump();
+                //For descending using LeftControl
+                else if (IsDescending())
+                {
+                    Descend();
+                }
+                //For Sprinting when in the water
+                if (IsSprinting())
+                    Sprint();
+            }
             else
-                Walk();
-            if (IsJumping() && m_isGrounded)
-                Jump();
+            {
+                ApplyGravity();
+                if (IsSprinting())
+                    Sprint();
+                else
+                    Walk();
+
+            }
         }
 
-        mountCooldown -= Time.deltaTime;
+        m_mountCooldown -= Time.deltaTime;
+        m_baitThrowCooldown -= Time.deltaTime;
+        m_baitThrowCooldown = Mathf.Clamp(m_baitThrowCooldown, 0.0f, m_baitThrowCooldownMax);
 
-        if (mountCooldown <= 0.0f)
+        if (m_mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
-    }
 
+
+        if(m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
+        {
+            GameObject bait = gameObject.GetComponent<Inventory>().GetReferenceToStoredBait();
+            if (bait != null)
+            {
+                if (gameObject.GetComponent<Inventory>().RemoveFromInventory(bait))
+                {
+                    bait.GetComponent<Bait>().Init();
+                    bait.transform.position = gameObject.transform.position + gameObject.transform.forward * 5.0f;
+
+                    m_baitThrowCooldown = m_baitThrowCooldownMax;
+                }
+            }
+        }
+    }
+    
     private void Mount()
     {
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
+
+        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -99,14 +141,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Mount();
 
-            mountCooldown = 2.0f;
+            m_mountCooldown = m_mountCooldownMax;
         }
         //if i am mounted and pressing the mount button.
         else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
-            mountCooldown = 2.0f;
+            m_mountCooldown = m_mountCooldownMax;
         }
     }
 
@@ -134,18 +176,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //Quick jump funtion. WIP - will change
+    //This is used for ascending when in the water.
+    //Can be removed if it doesn't fit design
     void Jump()
     {
      
-            Debug.Log("Jump");
-            //Assign jump power.
+          
+            //Assign ascend speed.
 
-            Vector3 power = transform.up * 10;
+            Vector3 speed = transform.up * 10;
 
             //apply movement to controller.
-            m_characterController.Move(power * Time.deltaTime * m_walkSpeed);
+            m_characterController.Move(speed * Time.deltaTime);
         
+    }
+
+    //For descending when in the water.
+    void Descend()
+    {  
+        //Assign descend speed.
+        Vector3 speed = -transform.up * 10;
+
+        //apply movement to controller.
+        m_characterController.Move(speed * Time.deltaTime);
+
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.
@@ -155,11 +209,24 @@ public class PlayerMovement : MonoBehaviour
         if (m_isGrounded && m_velocity.y < 0.0f)
             m_velocity.y = -3.0f;
 
-        //Key apply movement.
-        Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
+        if (m_isGrounded)
+        {
+            //Key apply movement.
+            Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
 
-        //apply movement to controller.
-        m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+            //apply movement to controller.
+            m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+        }
+        //If in the water sprint is locked to forward and backwards movement
+        //based on the cameras forward direction
+        else if (m_isSwimming)
+        {
+            //Key apply movement.
+            Vector3 move = m_camera.transform.forward * GetMoveInput().z;
+
+            //apply movement to controller.
+            m_characterController.Move(move * Time.deltaTime * m_sprintSpeed);
+        }
     }
 
     private bool UpdateIsGrounded()
@@ -201,7 +268,11 @@ public class PlayerMovement : MonoBehaviour
         return ALInput.GetKey(ALInput.Jump);
         //return Input.GetButton("Jump");
     }
-
+    public bool IsDescending()
+    {
+        return ALInput.GetKey(ALInput.Descend);
+        //return Input.GetButton("Descend");
+    }
     public bool IsPunching()
     {
         return false;
@@ -211,5 +282,9 @@ public class PlayerMovement : MonoBehaviour
     {
         return ALInput.GetKey(ALInput.Sprint);
         //return Input.GetButton("Sprint");
+    }
+    public bool IsThrowBait()
+    {
+        return ALInput.GetKey(ALInput.ThrowBait);
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(CombatModule))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(CraftingModule))]
 //eventually require punchadex
 
 public class Player : MonoBehaviour
@@ -23,6 +24,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }
+
+    public void SetNewCheckpoint(Transform point)
+    {
+        m_respawnLocation = point;
+    }
 
     protected void HandleDeath()
     {
@@ -45,6 +51,11 @@ public class Player : MonoBehaviour
         Vector3 MoveVector = m_respawnLocation.position - gameObject.transform.position;
 
         m_characterController.Move(MoveVector);
+
+
+        /*PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
+        move.m_isMounted = true;
+        move.m_canMount = false;*/
 
         //player should be sent to respawn. 
     }
