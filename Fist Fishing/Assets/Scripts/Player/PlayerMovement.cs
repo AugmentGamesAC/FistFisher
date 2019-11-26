@@ -42,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
-        //Cursor.lockState = CursorLockMode.Locked;
+        //unlock this once the player hits inventory button.
+        Cursor.lockState = CursorLockMode.Locked;
 
         if (m_player == null)
             m_player = gameObject;

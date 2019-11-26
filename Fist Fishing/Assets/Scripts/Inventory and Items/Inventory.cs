@@ -11,6 +11,11 @@ public class Inventory : MonoBehaviour
     public int m_coral2Count = 0;
     public int m_BaitCount = 0;
 
+    public InventoryObject m_InventoryObject;
+
+    public FishItem m_fishScriptableObject;
+    public BaitItem m_baitScriptableObject;
+
     #region Currency
     //currency has to be an unsigned long. I need to imagine people are insane enough to 
     [SerializeField]
@@ -99,6 +104,7 @@ public class Inventory : MonoBehaviour
         if (IsABait(obj))
         {
             m_BaitCount++;
+            m_InventoryObject.AddItem(m_baitScriptableObject, 1);//Use delegate and event in future for every time a inventory item gets changed.
         }
         else if (IsAHarvestable(obj))
         {
@@ -109,6 +115,7 @@ public class Inventory : MonoBehaviour
             {
                 case HarvestableType.DeadFish:
                     m_fishCount++;
+                    m_InventoryObject.AddItem(m_fishScriptableObject, 1);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count++;
@@ -246,16 +253,8 @@ public class Inventory : MonoBehaviour
     #endregion ObjectTracking
 
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnApplicationQuit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_InventoryObject.m_itemContainer.Clear();
     }
 }

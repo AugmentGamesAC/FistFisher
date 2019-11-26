@@ -5,22 +5,36 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
 {
-    public List<InventorySlot> ItemContainer = new List<InventorySlot>();
+    public List<InventorySlot> m_itemContainer = new List<InventorySlot>();
     public void AddItem(AItem item, int amount)
     {
         bool hasItem = false;
-        for (int i = 0; i < ItemContainer.Count; i++)
+        for (int i = 0; i < m_itemContainer.Count; i++)
         {
-            if(ItemContainer[i].m_item == item)
+            if(m_itemContainer[i].m_item == item)
             {
-                ItemContainer[i].AddAmount(amount);
+                m_itemContainer[i].AddAmount(amount);
                 hasItem = true;
                 break;
             }
         }
         if(!hasItem)
         {
-            ItemContainer.Add(new InventorySlot(item, amount));
+            m_itemContainer.Add(new InventorySlot(item, amount));
+        }
+    }
+
+    public void RemoveItem(AItem item, int amount)
+    {
+        bool hasItem = false;
+        for (int i = 0; i < m_itemContainer.Count; i++)
+        {
+            if (m_itemContainer[i].m_item == item)
+            {
+                m_itemContainer[i].AddAmount(-amount);
+                hasItem = true;
+                break;
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ public enum ItemType
     Harvestable,
     Fish,
     Equipment,
+    Coral1,
+    Coral2,
     Default
 }
 

@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0272cf061592c46a10c14ba11b1cee, type: 3}
-  m_Name: Player Inventory
+  m_Script: {fileID: 11500000, guid: 85d7821f92a94114783f07ab73525b02, type: 3}
+  m_Name: DefaultItem
   m_EditorClassIdentifier: 
-  ItemContainer: []
+  prefab: {fileID: 1220055635541960009, guid: 258c45d73fa5b494582b83887fb39290, type: 3}
+  type: 5
+  description: This can be anything like a rock.
