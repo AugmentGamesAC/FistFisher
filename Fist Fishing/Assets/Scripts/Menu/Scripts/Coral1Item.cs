@@ -7,7 +7,6 @@ public class Coral1Item : AItem
 {
     private void Awake()
     {
-        type = ItemType.Coral1;
-        ID = (int)ItemType.Coral1;
+        Init(ItemType.Coral1);
     }
 }

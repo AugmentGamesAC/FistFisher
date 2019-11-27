@@ -7,6 +7,6 @@ public class DefaultItemObject : AItem
 {
     private void Awake()
     {
-        type = ItemType.Default;
+        Init(ItemType.Default);
     }
 }

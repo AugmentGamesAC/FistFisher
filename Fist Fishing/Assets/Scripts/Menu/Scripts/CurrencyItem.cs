@@ -7,7 +7,6 @@ public class CurrencyItem : AItem
 {
     private void Awake()
     {
-        type = ItemType.Currency;
-        ID = (int)ItemType.Currency;
+        Init(ItemType.Currency);
     }
 }

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
+    public DisplayInventory m_displayInventory;
 
     public float m_walkSpeed = 10.0f;
     public float m_sprintSpeed = 15.0f;
@@ -43,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
+        m_displayInventory = GetComponentInChildren<DisplayInventory>();
+
         Cursor.lockState = CursorLockMode.Locked;
+        m_displayInventory.gameObject.SetActive(false);
 
         if (m_player == null)
             m_player = gameObject;
@@ -70,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!m_isMounted)
         {
-            
             if (m_isSwimming)
             {
                 Swim();
@@ -129,10 +132,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
+            m_displayInventory.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
+            m_displayInventory.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
@@ -223,8 +228,6 @@ public class PlayerMovement : MonoBehaviour
     //Can be removed if it doesn't fit design
     void Jump()
     {
-
-
         //Assign ascend speed.
 
         Vector3 speed = transform.up * 10;

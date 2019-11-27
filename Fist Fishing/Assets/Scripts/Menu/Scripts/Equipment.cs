@@ -9,7 +9,6 @@ public class Equipment : AItem
     public float DefenseModifier;
     private void Awake()
     {
-        type = ItemType.Equipment;
-        ID = (int)ItemType.Equipment;
+        Init(ItemType.Equipment);
     }
 }

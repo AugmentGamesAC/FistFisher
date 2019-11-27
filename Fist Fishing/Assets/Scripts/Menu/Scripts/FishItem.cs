@@ -9,7 +9,6 @@ public class FishItem : AItem
     public float weight;
     private void Awake()
     {
-        type = ItemType.Fish;
-        ID = (int)ItemType.Fish;
+        Init(ItemType.Fish);
     }
 }

@@ -22,4 +22,10 @@ public abstract class AItem : ScriptableObject
     public ItemType type;
     [TextArea(15, 20)]
     public string description;
+
+    protected virtual void Init(ItemType _type)
+    {
+        type = _type;
+        ID = (int)type;
+    }
 }
