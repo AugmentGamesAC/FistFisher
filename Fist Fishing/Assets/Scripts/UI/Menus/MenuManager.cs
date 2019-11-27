@@ -12,8 +12,16 @@ public enum Menus
 [System.Serializable]
 public class MenuManager : MonoBehaviour
 {
+
+    public GameObject m_mainMenu;
+
+
+
+
     [SerializeField]
-    public InspectorDictionary<Menus, List<BasicMenu>> m_menuList = new InspectorDictionary<Menus, List<BasicMenu>> { };
+    public InspectorDictionary<Menus, List<GameObject>> m_menuList = new InspectorDictionary<Menus, List<GameObject>> {
+        { Menus.MainMenu, new List<GameObject>() }
+    };
 
 
 
