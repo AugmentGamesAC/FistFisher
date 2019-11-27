@@ -107,20 +107,24 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     public static Menus m_currentMenus = Menus.NotSet;
 
+
+    [SerializeField]
+    public static MenuListForInspectorDictionary m_Mylist= new MenuListForInspectorDictionary();
+
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
     /// </summary>
     public static void ActivateMenu(Menus m)
     {
-        if (m == Menus.NotSet)
+        if (m_currentMenus == m)
             return;
 
-        if(m_currentMenus!=Menus.NotSet)
-            SetActiveSatusOncurrentMenuOption(false);
-
+        SetActiveSatusOncurrentMenuOption(false);
         m_currentMenus = m;
 
-        SetActiveSatusOncurrentMenuOption(true);
+        if (Instance.MenuList.TryGetValue(m, out m_Mylist))
+            SetActiveSatusOncurrentMenuOption(true);
+
     }
 
     /// <summary>
@@ -128,11 +132,15 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     static void SetActiveSatusOncurrentMenuOption(bool active)
     {
-        List<BasicMenu> lm = Instance.MenuList[m_currentMenus].m_list;
-        foreach (BasicMenu bm in lm)
-        {
+        // different code based on using list
+        if (m_Mylist == null)
+            return;
+        if (m_Mylist.m_list == null)
+            return;
+
+            //Why doesn't bm have a ShowHUD(bool)?
+        foreach (BasicMenu bm in m_Mylist.m_list)
             bm.HUD.SetActive(active);
-        }
     }
 
     // Start is called before the first frame update
