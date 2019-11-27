@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         m_canMount = false;
 
+        m_boat.transform.forward = transform.forward;
         m_boat.transform.SetParent(this.transform);
     }
 
