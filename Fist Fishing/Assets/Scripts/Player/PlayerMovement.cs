@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject m_player;
     public GameObject m_playerBody;
+    public GameObject m_boat;
     public Vector3 m_boatMountPosition;
     public Vector3 m_boatDismountPosition;
 
@@ -42,14 +43,14 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
-        //unlock this once the player hits inventory button.
-
         Cursor.lockState = CursorLockMode.Locked;
 
         if (m_player == null)
             m_player = gameObject;
 
         m_camera.SetPlayer(m_player);
+
+        m_boat = GameObject.FindGameObjectWithTag("Boat");
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
@@ -61,11 +62,17 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+
+        if (m_isMounted)
         {
+            DriveBoat();
+        }
+        else if (!m_isMounted)
+        {
+            
             if (m_isSwimming)
             {
-
                 Swim();
                 //For ascending using Spacebar
                 if (IsJumping())
@@ -86,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
                     Sprint();
                 else
                     Walk();
-
             }
         }
 
@@ -131,6 +137,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void DriveBoat()
+    {
+        //if your on the ground, don't increase Velocity;
+        if (m_isGrounded && m_velocity.y < 0.0f)
+            m_velocity.y = -1.0f;
+
+        //Key apply movement.
+        Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
+        move.y = 0;
+        //apply movement to controller.
+        m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
+    }
+
     private void Mount()
     {
         //teleport to boat seat.
@@ -142,10 +161,14 @@ public class PlayerMovement : MonoBehaviour
         m_isMounted = true;
 
         m_canMount = false;
+
+        m_boat.transform.SetParent(this.transform);
     }
 
     private void Dismount()
     {
+        m_boat.transform.SetParent(null);
+
         //go to diving position
         transform.position = m_boatDismountPosition;
 
@@ -162,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
             m_mountCooldown = m_mountCooldownMax;
         }
-        //if i am mounted and pressing the mount button.
+        //if i am mounted and pressing the dismount button.
         else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
