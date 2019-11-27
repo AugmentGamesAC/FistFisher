@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// test script to allow user to pres 1 or 2 to how placeholder menu items
+/// </summary>
 public class ShowMenus : MonoBehaviour
 {
 
@@ -15,7 +18,7 @@ public class ShowMenus : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.MainMenu); };
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { MenuManager.ActivateMenu(Menus.Test2); };
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { MenuManager.ActivateMenu(Menus.OptionsMenu); };
 
     }
 }

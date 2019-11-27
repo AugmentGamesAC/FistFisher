@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base class for all menu items
+/// presently just gets a ref to attached gameobject, and deactivates after instantiated
+/// </summary>
 [System.Serializable]
 public class BasicMenu : MonoBehaviour
 {
