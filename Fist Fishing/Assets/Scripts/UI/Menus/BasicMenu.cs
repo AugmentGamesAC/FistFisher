@@ -13,8 +13,13 @@ public class BasicMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    void Awake()
+    {
         if (m_HUD == null)
             m_HUD = gameObject;
+        m_HUD.SetActive(false);
     }
 
     // Update is called once per frame

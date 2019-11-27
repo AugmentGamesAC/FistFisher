@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveThePlayerStartingBaitAndCurrency : MonoBehaviour
+public class GiveThePlayerStartingBaitAndCurrencyFix : MonoBehaviour
 {
 
     public int m_startingCurrency = 1337;
