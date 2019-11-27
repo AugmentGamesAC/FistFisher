@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1990969796264009377}
   - component: {fileID: 1990969796264009376}
   m_Layer: 5
-  m_Name: Inventory Canvas
+  m_Name: EmptyInventorySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,8 +134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 27}
-  m_SizeDelta: {x: -800.4, y: -257.7}
+  m_AnchoredPosition: {x: -38.8, y: 0}
+  m_SizeDelta: {x: -989.5, y: -218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1990969797250425326
 CanvasRenderer:
@@ -186,8 +186,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_inventory: {fileID: 11400000, guid: e46d06de81e39304fb211dfe714bc189, type: 2}
-  m_xStartPos: -150
-  m_yStartPos: 115
+  m_inventoryPrefab: {fileID: 5459825935528552993, guid: a06eb35563a94a848873988547545ffb,
+    type: 3}
+  m_xStartPos: -60
+  m_yStartPos: 140
   m_xSpaceBetweenItems: 40
   m_ySpaceBetweenItems: 40
-  m_numberOfColumns: 2
+  m_numberOfColumns: 4

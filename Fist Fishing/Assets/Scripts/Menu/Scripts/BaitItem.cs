@@ -10,5 +10,6 @@ public class BaitItem : AItem
     private void Awake()
     {
         type = ItemType.Bait;
+        ID = (int)ItemType.Bait;
     }
 }

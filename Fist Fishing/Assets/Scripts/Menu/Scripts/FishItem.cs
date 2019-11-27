@@ -10,5 +10,6 @@ public class FishItem : AItem
     private void Awake()
     {
         type = ItemType.Fish;
+        ID = (int)ItemType.Fish;
     }
 }

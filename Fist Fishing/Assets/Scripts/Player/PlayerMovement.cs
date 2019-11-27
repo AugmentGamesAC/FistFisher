@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
         //unlock this once the player hits inventory button.
+
         Cursor.lockState = CursorLockMode.Locked;
 
         if (m_player == null)
@@ -97,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
             UpdateBoatMountStatus();
 
 
-        if(m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
+        if (m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
         {
             GameObject bait = gameObject.GetComponent<Inventory>().GetReferenceToStoredBait();
             if (bait != null)
@@ -111,8 +112,25 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        {
+            ToggleMouseLock();
+        }
     }
-    
+
+    private void ToggleMouseLock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     private void Mount()
     {
         //teleport to boat seat.
@@ -181,20 +199,20 @@ public class PlayerMovement : MonoBehaviour
     //Can be removed if it doesn't fit design
     void Jump()
     {
-     
-          
-            //Assign ascend speed.
 
-            Vector3 speed = transform.up * 10;
 
-            //apply movement to controller.
-            m_characterController.Move(speed * Time.deltaTime);
-        
+        //Assign ascend speed.
+
+        Vector3 speed = transform.up * 10;
+
+        //apply movement to controller.
+        m_characterController.Move(speed * Time.deltaTime);
+
     }
 
     //For descending when in the water.
     void Descend()
-    {  
+    {
         //Assign descend speed.
         Vector3 speed = -transform.up * 10;
 

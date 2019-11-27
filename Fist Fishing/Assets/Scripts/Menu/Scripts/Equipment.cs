@@ -10,5 +10,6 @@ public class Equipment : AItem
     private void Awake()
     {
         type = ItemType.Equipment;
+        ID = (int)ItemType.Equipment;
     }
 }

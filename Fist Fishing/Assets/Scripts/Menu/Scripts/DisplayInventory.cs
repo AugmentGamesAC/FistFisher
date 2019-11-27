@@ -2,35 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DisplayInventory : MonoBehaviour
 {
+    //item that follows after you click.
+    public MouseItem m_mouseItem = new MouseItem();
+
     public InventoryObject m_inventory;
+    public GameObject m_inventoryPrefab;
 
     public int m_xStartPos;
     public int m_yStartPos;
     public int m_xSpaceBetweenItems;
     public int m_ySpaceBetweenItems;
     public int m_numberOfColumns;
-    Dictionary<InventorySlot, GameObject> m_itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     void Start()
     {
-        CreateDisplay();
+        CreateSlots();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateDisplay();
+        UpdateSlots();
     }
 
-    private void CreateDisplay()
+    private void CreateSlots()
     {
-        for (int i = 0; i < m_inventory.m_itemContainer.Count; i++)
+        for (int i = 0; i < m_inventory.m_inventorySlots.Length; i++)
         {
-            var obj = Instantiate(m_inventory.m_itemContainer[i].m_item.prefab, Vector3.zero, Quaternion.identity, transform);
+            var obj = Instantiate(m_inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetGridPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = m_inventory.m_itemContainer[i].m_amount.ToString("n0");//n0 formats with comas when you get to high numbers.
+
+            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
+            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
+            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
+            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); }); 
+
+            m_itemsDisplayed.Add(obj, m_inventory.m_inventorySlots[i]);
         }
     }
 
@@ -40,30 +54,89 @@ public class DisplayInventory : MonoBehaviour
         return new Vector3(m_xStartPos + (m_xSpaceBetweenItems * (i % m_numberOfColumns)), m_yStartPos + (-m_ySpaceBetweenItems * (i / m_numberOfColumns)), 0f);
     }
 
-    private void UpdateDisplay()
+    private void UpdateSlots()
     {
-        for (int i = 0; i < m_inventory.m_itemContainer.Count; i++)
+        foreach(KeyValuePair<GameObject, InventorySlot> slot in m_itemsDisplayed)
         {
-            //if it's in the inventory 
-            if (m_itemsDisplayed.ContainsKey(m_inventory.m_itemContainer[i]))
+            if(slot.Value.m_ID >= 0)
             {
-                if (m_inventory.m_itemContainer[i].m_amount <= 0)
-                {
-                    //remove from display
-                    m_inventory.m_itemContainer.RemoveAt(i);
-                    m_itemsDisplayed.Remove(m_inventory.m_itemContainer[i]);
-                    //return
-                    return;
-                }
-                m_itemsDisplayed[m_inventory.m_itemContainer[i]].GetComponentInChildren<TextMeshProUGUI>().text = m_inventory.m_itemContainer[i].m_amount.ToString("n0");
+                //change sprite instead of changing color for future reference.
+                slot.Key.GetComponent<Image>().color = slot.Value.m_item.prefab.GetComponent<Image>().color;
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.m_amount.ToString("n0");
             }
             else
             {
-                var obj = Instantiate(m_inventory.m_itemContainer[i].m_item.prefab, Vector3.zero, Quaternion.identity, transform);
-                obj.GetComponent<RectTransform>().localPosition = GetGridPosition(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = m_inventory.m_itemContainer[i].m_amount.ToString("n0");//n0 formats with comas when you get to high numbers.
-                m_itemsDisplayed.Add(m_inventory.m_itemContainer[i], obj);
+                slot.Key.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
         }
     }
+
+    private void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = obj.GetComponent<EventTrigger>();
+        var eventTrigger = new EventTrigger.Entry();
+        eventTrigger.eventID = type;
+        eventTrigger.callback.AddListener(action);
+        trigger.triggers.Add(eventTrigger);
+    }
+
+    //check which obj we are hovering over.
+    public void OnEnter(GameObject obj)
+    {
+        m_mouseItem.hoverObj = obj;
+        if (m_itemsDisplayed.ContainsKey(obj))
+            m_mouseItem.hoverSlot = m_itemsDisplayed[obj];
+    }
+    public void OnExit(GameObject obj)
+    {
+        m_mouseItem.hoverObj = null;
+        m_mouseItem.hoverSlot = null;
+    }
+    //grab a copy of whatever you clicked and set it to m_mouseItem's stats.
+    public void OnDragStart(GameObject obj)
+    {
+        var mouseObject = new GameObject();
+        var rt = mouseObject.AddComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(32, 32);
+        mouseObject.transform.SetParent(transform.parent);
+        if(m_itemsDisplayed[obj].m_ID >= 0)
+        {
+            var img = mouseObject.AddComponent<Image>();
+            img.color = m_itemsDisplayed[obj].m_item.prefab.GetComponent<Image>().color; //change sprite instead of changing color for future reference.
+            img.raycastTarget = false;
+        }
+        m_mouseItem.obj = mouseObject;
+        m_mouseItem.item = m_itemsDisplayed[obj];
+    }
+    public void OnDragEnd(GameObject obj)
+    {
+        if(m_mouseItem.hoverObj)
+        {
+            m_inventory.MoveItem(m_itemsDisplayed[obj], m_itemsDisplayed[m_mouseItem.hoverObj]);
+        }
+        else
+        {
+            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
+        }
+        Destroy(m_mouseItem.obj);
+        m_mouseItem.item = null;
+    }
+    public void OnDrag(GameObject obj)
+    {
+        if(m_mouseItem.obj != null)
+        {
+            m_mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
+        }
+    }
+}
+
+
+public class MouseItem
+{
+    public GameObject obj;
+    public InventorySlot item;
+
+    public GameObject hoverObj;
+    public InventorySlot hoverSlot;
 }
