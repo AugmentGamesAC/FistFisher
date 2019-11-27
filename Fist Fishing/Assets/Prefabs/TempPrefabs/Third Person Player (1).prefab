@@ -1102,6 +1102,8 @@ GameObject:
   - component: {fileID: 7002809324863039487}
   - component: {fileID: 929672413}
   - component: {fileID: 9041238057392381960}
+  - component: {fileID: 799564680}
+  - component: {fileID: 4848386287147835878}
   m_Layer: 9
   m_Name: Third Person Player (1)
   m_TagString: Player
@@ -1338,6 +1340,32 @@ MonoBehaviour:
   m_playerMovementRef: {fileID: 0}
   m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
     type: 3}
+--- !u!114 &799564680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295796181784110616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80161838022eb9498cdffb5a999c667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4848386287147835878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295796181784110616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443c804af226ab3458a4da6d65560ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_startingCurrency: 1337
+  m_startingBaitAmount: 5
 --- !u!1 &8268430210894152414
 GameObject:
   m_ObjectHideFlags: 0
