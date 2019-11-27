@@ -90,7 +90,7 @@ public class DisplayInventory : MonoBehaviour
 
         //Display InventorySlot.item Description.
         GUI.Label(new Rect(10, 10, 200, 30), m_mouseItem.hoverSlot.m_item.description);
-        int bp = 1;
+        //int bp = 1;
     }
     public void OnExit(GameObject obj)
     {
