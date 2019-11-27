@@ -87,6 +87,10 @@ public class DisplayInventory : MonoBehaviour
         m_mouseItem.hoverObj = obj;
         if (m_itemsDisplayed.ContainsKey(obj))
             m_mouseItem.hoverSlot = m_itemsDisplayed[obj];
+
+        //Display InventorySlot.item Description.
+        GUI.Label(new Rect(10, 10, 200, 30), m_mouseItem.hoverSlot.m_item.description);
+        int bp = 1;
     }
     public void OnExit(GameObject obj)
     {
@@ -128,6 +132,21 @@ public class DisplayInventory : MonoBehaviour
         {
             m_mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
+    }
+
+    void OnGUI()
+    {
+        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot == null)
+            return;
+        //create position Vector2 for box.
+        Vector2 DescriptionBoxPos = new Vector2(275, 40);
+        //create offset that is Vector2 + offset for Label position.
+        Vector2 DescriptionTextPos = DescriptionBoxPos + new Vector2(20, 40);
+
+        // Make a background box
+        GUI.Box(new Rect(DescriptionBoxPos.x, DescriptionBoxPos.y, 250, 250), "Description");
+
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 100, 1500), m_mouseItem.hoverSlot.m_item.description);
     }
 }
 
