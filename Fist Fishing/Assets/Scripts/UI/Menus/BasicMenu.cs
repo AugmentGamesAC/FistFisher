@@ -31,4 +31,17 @@ public class BasicMenu : MonoBehaviour
     {
         
     }
+
+
+    public bool CloseMenu()
+    {
+        m_HUD.SetActive(false);
+        return true;
+    }
+    public bool OpenMenu()
+    {
+        m_HUD.SetActive(true);
+        return true;
+    }
+
 }

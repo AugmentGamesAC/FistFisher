@@ -140,7 +140,13 @@ public class MenuManager : MonoBehaviour
 
             //Why doesn't bm have a ShowHUD(bool)?
         foreach (BasicMenu bm in m_Mylist.m_list)
-            bm.HUD.SetActive(active);
+        // bm.HUD.SetActive(active);
+        {
+            if (active)
+                bm.OpenMenu();
+            else
+                bm.CloseMenu();
+        }
     }
 
     // Start is called before the first frame update
