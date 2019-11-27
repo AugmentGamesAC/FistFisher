@@ -5,11 +5,18 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
-
     public int m_fishCount = 0;
     public int m_coral1Count = 0;
     public int m_coral2Count = 0;
     public int m_BaitCount = 0;
+
+    public InventoryObject m_displayInventoryObject;
+
+    public FishItem m_fishScriptableObject;
+    public BaitItem m_baitScriptableObject;
+    public Coral1Item m_coral1ScriptableObject;
+    public Coral2Item m_coral2ScriptableObject;
+    //public CurrencyItem m_currencyScriptableObject
 
     #region Currency
     //currency has to be an unsigned long. I need to imagine people are insane enough to 
@@ -61,6 +68,8 @@ public class Inventory : MonoBehaviour
         else
             m_currentCurrency = sum;
 
+        //m_displayInventoryObject.AddItem(m_currencyScriptableObject, 1);
+
         return true;
     }
     #endregion Currency
@@ -99,6 +108,7 @@ public class Inventory : MonoBehaviour
         if (IsABait(obj))
         {
             m_BaitCount++;
+            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1);//Use delegate and event in future for every time a inventory item gets changed.
         }
         else if (IsAHarvestable(obj))
         {
@@ -109,17 +119,20 @@ public class Inventory : MonoBehaviour
             {
                 case HarvestableType.DeadFish:
                     m_fishCount++;
+                    m_displayInventoryObject.AddItem(m_fishScriptableObject, 1);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count++;
+                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1);
+                    //InventoryChange = m_InventoryObject.AddItem(m_coralScriptableObject, 1);
                     break;
                 case HarvestableType.Coral2:
                     m_coral2Count++;
+                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1);
                     break;
                 case HarvestableType.NotSet:
                     return false;
             }
-
         }
         else
         {
@@ -129,6 +142,8 @@ public class Inventory : MonoBehaviour
         m_storedObjects.Add(obj);
 
         SetNewInventoryObjectPosition(obj);
+
+        //InventoryChange.Invoke();
 
         return true;
     }
@@ -246,16 +261,8 @@ public class Inventory : MonoBehaviour
     #endregion ObjectTracking
 
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnApplicationQuit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_displayInventoryObject.m_inventorySlots = new InventorySlot[32];
     }
 }

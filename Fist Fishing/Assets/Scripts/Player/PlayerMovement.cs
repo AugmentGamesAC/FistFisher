@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject m_player;
     public GameObject m_playerBody;
+    public GameObject m_boat;
     public Vector3 m_boatMountPosition;
     public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
+    public DisplayInventory m_displayInventory;
 
     public float m_walkSpeed = 10.0f;
     public float m_sprintSpeed = 15.0f;
@@ -42,12 +44,17 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
+        m_displayInventory = GetComponentInChildren<DisplayInventory>();
+
         Cursor.lockState = CursorLockMode.Locked;
+        m_displayInventory.gameObject.SetActive(false);
 
         if (m_player == null)
             m_player = gameObject;
 
         m_camera.SetPlayer(m_player);
+
+        m_boat = GameObject.FindGameObjectWithTag("Boat");
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
@@ -59,11 +66,16 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        if (!m_isMounted)
+
+
+        if (m_isMounted)
+        {
+            DriveBoat();
+        }
+        else if (!m_isMounted)
         {
             if (m_isSwimming)
             {
-
                 Swim();
                 //For ascending using Spacebar
                 if (IsJumping())
@@ -84,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
                     Sprint();
                 else
                     Walk();
-
             }
         }
 
@@ -96,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             UpdateBoatMountStatus();
 
 
-        if(m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
+        if (m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
         {
             GameObject bait = gameObject.GetComponent<Inventory>().GetReferenceToStoredBait();
             if (bait != null)
@@ -110,8 +121,40 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        {
+            ToggleMouseLock();
+        }
     }
-    
+
+    private void ToggleMouseLock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            m_displayInventory.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            m_displayInventory.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void DriveBoat()
+    {
+        //if your on the ground, don't increase Velocity;
+        if (m_isGrounded && m_velocity.y < 0.0f)
+            m_velocity.y = -1.0f;
+
+        //Key apply movement.
+        Vector3 move = transform.right * GetMoveInput().x + transform.forward * GetMoveInput().z;
+        move.y = 0;
+        //apply movement to controller.
+        m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
+    }
+
     private void Mount()
     {
         //teleport to boat seat.
@@ -123,10 +166,15 @@ public class PlayerMovement : MonoBehaviour
         m_isMounted = true;
 
         m_canMount = false;
+
+        m_boat.transform.forward = transform.forward;
+        m_boat.transform.SetParent(this.transform);
     }
 
     private void Dismount()
     {
+        m_boat.transform.SetParent(null);
+
         //go to diving position
         transform.position = m_boatDismountPosition;
 
@@ -143,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
 
             m_mountCooldown = m_mountCooldownMax;
         }
-        //if i am mounted and pressing the mount button.
+        //if i am mounted and pressing the dismount button.
         else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
@@ -180,20 +228,18 @@ public class PlayerMovement : MonoBehaviour
     //Can be removed if it doesn't fit design
     void Jump()
     {
-     
-          
-            //Assign ascend speed.
+        //Assign ascend speed.
 
-            Vector3 speed = transform.up * 10;
+        Vector3 speed = transform.up * 10;
 
-            //apply movement to controller.
-            m_characterController.Move(speed * Time.deltaTime);
-        
+        //apply movement to controller.
+        m_characterController.Move(speed * Time.deltaTime);
+
     }
 
     //For descending when in the water.
     void Descend()
-    {  
+    {
         //Assign descend speed.
         Vector3 speed = -transform.up * 10;
 
