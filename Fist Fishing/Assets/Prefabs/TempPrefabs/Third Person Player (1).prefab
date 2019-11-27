@@ -1103,7 +1103,6 @@ GameObject:
   - component: {fileID: 929672413}
   - component: {fileID: 9041238057392381960}
   - component: {fileID: 6157781141010856212}
-  - component: {fileID: 8542314659082509461}
   m_Layer: 9
   m_Name: Third Person Player (1)
   m_TagString: Player
@@ -1254,26 +1253,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad287cc12eabf418866a85311dfa03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fishCount: 999
-  m_coral1Count: 999
-  m_coral2Count: 999
-  m_BaitCount: 999
+  m_fishCount: 0
+  m_coral1Count: 0
+  m_coral2Count: 0
+  m_BaitCount: 0
   m_currentCurrency: 0
   m_storedObjects: []
---- !u!114 &8542314659082509461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7295796181784110616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
-    type: 3}
 --- !u!114 &295444867762836901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,20 +1340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_startingCurrency: 1337
   m_startingBaitAmount: 5
---- !u!114 &8542314659082509461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7295796181784110616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c5247be8a8bf04e943f67e959fec7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
-    type: 3}
 --- !u!1 &8268430210894152414
 GameObject:
   m_ObjectHideFlags: 0
