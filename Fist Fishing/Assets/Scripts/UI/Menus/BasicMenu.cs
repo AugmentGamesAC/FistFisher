@@ -13,7 +13,8 @@ public class BasicMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (m_HUD == null)
+            m_HUD = gameObject;
     }
 
     // Update is called once per frame

@@ -12,16 +12,18 @@ public enum Menus
 [System.Serializable]
 public class MenuManager : MonoBehaviour
 {
-
-    public GameObject m_mainMenu;
-
-
-
+    #region working inspector dictionary
+    [System.Serializable]
+    public class MenuListForInspectorDictionary { public List<BasicMenu> m_list; }
+    [System.Serializable]
+    public class ListOfMenuConfigurations : InspectorDictionary<Menus, MenuListForInspectorDictionary> { }
+    [SerializeField]
+    protected ListOfMenuConfigurations m_menuList = new ListOfMenuConfigurations();
+    public ListOfMenuConfigurations MenuList { get { return m_menuList; } }
 
     [SerializeField]
-    public InspectorDictionary<Menus, List<GameObject>> m_menuList = new InspectorDictionary<Menus, List<GameObject>> {
-        { Menus.MainMenu, new List<GameObject>() }
-    };
+    public List<BasicMenu> test;
+    #endregion working inspector dictionary
 
 
 
