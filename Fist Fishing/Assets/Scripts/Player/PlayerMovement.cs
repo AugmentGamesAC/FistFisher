@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ToggleMouseLock()
+    public void ToggleMouseLock()
     {
         m_displayInventory.gameObject.SetActive(Cursor.lockState == CursorLockMode.Locked);
 

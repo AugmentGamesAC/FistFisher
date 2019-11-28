@@ -749,7 +749,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1651513921}
   - component: {fileID: 1651513922}
-  - component: {fileID: 6096079974428237674}
   m_Layer: 5
   m_Name: InventoryCounter
   m_TagString: Untagged
@@ -798,19 +797,6 @@ MonoBehaviour:
   m_BaitCount: {fileID: 1580729807}
   m_BudType1: {fileID: 1228006659}
   m_BudType2: {fileID: 882864431}
---- !u!114 &6096079974428237674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651513920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HUD: {fileID: 0}
 --- !u!1 &1874209799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1072,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8652159668124048738}
-  - component: {fileID: 2357542071918100447}
   m_Layer: 0
   m_Name: basic HUD icons
   m_TagString: Untagged
@@ -1114,19 +1099,6 @@ Transform:
   m_Father: {fileID: 8268430212276855326}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2357542071918100447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6722372279111841122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HUD: {fileID: 0}
 --- !u!1 &7295796180478928119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterController: {fileID: 7295796181784110617}
+  m_turnSpeed: 25
   m_player: {fileID: 7295796181784110616}
   m_playerBody: {fileID: 7295796180478928119}
   m_boat: {fileID: 0}
@@ -1698,7 +1671,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8268430210946798881}
-  - component: {fileID: 3405307900859053035}
   m_Layer: 5
   m_Name: HealthOxygenUI
   m_TagString: Untagged
@@ -1727,19 +1699,6 @@ RectTransform:
   m_AnchoredPosition: {x: 763, y: 373}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3405307900859053035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268430210946798880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HUD: {fileID: 0}
 --- !u!1 &8268430210970101485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,6 +2022,7 @@ GameObject:
   - component: {fileID: 8268430212276855320}
   - component: {fileID: 8268430212276855323}
   - component: {fileID: 8268430212276855322}
+  - component: {fileID: 228140996}
   m_Layer: 5
   m_Name: HUDCanvas
   m_TagString: Untagged
@@ -2164,6 +2124,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &228140996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8268430212276855317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HUD: {fileID: 0}
 --- !u!1 &8268430212385986507
 GameObject:
   m_ObjectHideFlags: 0
