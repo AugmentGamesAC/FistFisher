@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317289871407033274}
   - component: {fileID: 4317289871407033273}
+  - component: {fileID: 1058732942}
   m_Layer: 0
   m_Name: SingletonObjects
   m_TagString: Untagged
@@ -57,4 +58,31 @@ MonoBehaviour:
   m_harvest: 101
   m_throwBait: 112
   m_craftBait: 98
+  m_toggleInventory: 0
   m_playerLateralMovement: 1
+--- !u!114 &1058732942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317289871407033272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a21e6624c3acf45ba235fd7cf61794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_menuList:
+    keys: 090000000800000006000000
+    values:
+    - m_list:
+      - {fileID: 0}
+    - m_list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - m_list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
