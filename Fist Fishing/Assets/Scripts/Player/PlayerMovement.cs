@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController m_characterController;
-
+    public float m_turnSpeed = 25; 
     public GameObject m_player;
     public GameObject m_playerBody;
     public GameObject m_boat;
@@ -59,6 +59,23 @@ public class PlayerMovement : MonoBehaviour
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
+    void ResolveMovement()
+    {
+        if (m_isMounted)
+        {
+            DriveBoat();
+            return;
+        }
+        if (m_isSwimming)
+        {
+            Swim();
+            return;
+        }
+        ApplyGravity();
+        Walk();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -66,38 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
+        ResolveMovement();
 
 
-        if (m_isMounted)
-        {
-            DriveBoat();
-        }
-        else if (!m_isMounted)
-        {
-            if (m_isSwimming)
-            {
-                Swim();
-                //For ascending using Spacebar
-                if (IsJumping())
-                    Jump();
-                //For descending using LeftControl
-                else if (IsDescending())
-                {
-                    Descend();
-                }
-                //For Sprinting when in the water
-                if (IsSprinting())
-                    Sprint();
-            }
-            else
-            {
-                ApplyGravity();
-                if (IsSprinting())
-                    Sprint();
-                else
-                    Walk();
-            }
-        }
 
         m_mountCooldown -= Time.deltaTime;
         m_baitThrowCooldown -= Time.deltaTime;
@@ -130,16 +118,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void ToggleMouseLock()
     {
+        m_displayInventory.gameObject.SetActive(Cursor.lockState == CursorLockMode.Locked);
+
         if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            m_displayInventory.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-        }
         else
-        {
-            m_displayInventory.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 
     private void DriveBoat()
@@ -203,11 +187,16 @@ public class PlayerMovement : MonoBehaviour
     private void Swim()
     {
         m_isGrounded = false;
+        
+        Vector3 desiredDirection = transform.up
+            + transform.right * ALInput.GetAxis(ALInput.AxisCode.Horizontal)
+            + transform.forward * ALInput.GetAxis(ALInput.AxisCode.Vertical);      
 
-        //Setup move direction based on input and follow camera forward direction if swimming.
-        Vector3 move = transform.right * GetMoveInput().x + m_camera.transform.forward * GetMoveInput().z;
+        Quaternion turnDirection = Quaternion.FromToRotation(Vector3.forward, desiredDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, turnDirection, Time.deltaTime * m_turnSpeed);
+        // then move
 
-        m_characterController.Move(move * Time.deltaTime * m_swimSpeed);
+        m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
     }
 
     private void Walk()
