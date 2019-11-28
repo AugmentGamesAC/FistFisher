@@ -63,11 +63,11 @@ public enum Menus
 [System.Serializable]
 public class MenuManager : MonoBehaviour
 {
+    #region working inspector dictionary
     /// <summary>
     /// this is the mess reuired to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
-    #region working inspector dictionary
     [System.Serializable]
     public class MenuListForInspectorDictionary { public List<BasicMenu> m_list; }
     [System.Serializable]
@@ -75,13 +75,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     protected ListOfMenuConfigurations m_menuList = new ListOfMenuConfigurations();
     public ListOfMenuConfigurations MenuList { get { return m_menuList; } }
+
+
+    [SerializeField]
+    public static MenuListForInspectorDictionary m_Mylist = new MenuListForInspectorDictionary();
     #endregion working inspector dictionary
 
 
+
+    #region singletonification
     /// <summary>
     /// we only need one of these
     /// </summary>
-    #region singletonification
     private static MenuManager Instance;
     void Awake()
     {
@@ -106,10 +111,6 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField]
     public static Menus m_currentMenus = Menus.NotSet;
-
-
-    [SerializeField]
-    public static MenuListForInspectorDictionary m_Mylist= new MenuListForInspectorDictionary();
 
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
@@ -140,7 +141,13 @@ public class MenuManager : MonoBehaviour
 
             //Why doesn't bm have a ShowHUD(bool)?
         foreach (BasicMenu bm in m_Mylist.m_list)
-            bm.HUD.SetActive(active);
+        // bm.HUD.SetActive(active);
+        {
+            if (active)
+                bm.OpenMenu();
+            else
+                bm.CloseMenu();
+        }
     }
 
     // Start is called before the first frame update

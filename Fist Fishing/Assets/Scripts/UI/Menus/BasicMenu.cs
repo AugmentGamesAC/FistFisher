@@ -14,11 +14,6 @@ public class BasicMenu : MonoBehaviour
     protected GameObject m_HUD;
     public GameObject HUD { get { return m_HUD; } }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     void Awake()
     {
         if (m_HUD == null)
@@ -26,9 +21,14 @@ public class BasicMenu : MonoBehaviour
         m_HUD.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CloseMenu()
     {
-        
+        m_HUD.SetActive(false);
+        return true;
+    }
+    public bool OpenMenu()
+    {
+        m_HUD.SetActive(true);
+        return true;
     }
 }

@@ -44,6 +44,7 @@ public class Inventory : MonoBehaviour
         if (amountConverted > CurrentCurrency) //if you're spending more than you have, fail
             return false;
         m_currentCurrency -= amountConverted; //otherwise, spend monies
+        //RemoveAmount(AItem item, int amount);
         return true;
     }
 
@@ -179,6 +180,7 @@ public class Inventory : MonoBehaviour
         if (IsABait(obj))
         {
             m_BaitCount--;
+            m_displayInventoryObject.RemoveAmount(m_baitScriptableObject, 1);
         }
         else if (IsAHarvestable(obj))
         {
@@ -189,12 +191,15 @@ public class Inventory : MonoBehaviour
             {
                 case HarvestableType.DeadFish:
                     m_fishCount--;
+                    m_displayInventoryObject.RemoveAmount(m_fishScriptableObject, 1);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count--;
+                    m_displayInventoryObject.RemoveAmount(m_coral1ScriptableObject, 1);
                     break;
                 case HarvestableType.Coral2:
                     m_coral2Count--;
+                    m_displayInventoryObject.RemoveAmount(m_coral2ScriptableObject, 1);
                     break;
                 case HarvestableType.NotSet:
                     return false;

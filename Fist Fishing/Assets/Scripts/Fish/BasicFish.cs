@@ -5,6 +5,35 @@ using UnityEngine;
 [System.Serializable]
 public class BasicFish : MonoBehaviour
 {
+
+
+
+    #region working inspector dictionary
+    /// <summary>
+    /// this is the mess reuired to make dictionaries with  list as a value work in inspector
+    /// used in this case to pair enum of menu enum with a list of menu objects
+    /// </summary>
+    [System.Serializable]
+    public class ListOfFishHitboxes : InspectorDictionary<Collider, float> { }
+    [SerializeField]
+    protected ListOfFishHitboxes m_fishHitboxList = new ListOfFishHitboxes();
+    public ListOfFishHitboxes FishHitboxList { get { return m_fishHitboxList; } }
+
+
+    #endregion working inspector dictionary
+
+
+
+
+
+
+
+
+
+
+
+
+
     public float m_personalSpaceRadius = 1.0f;
 
     public float Speed;
@@ -23,9 +52,9 @@ public class BasicFish : MonoBehaviour
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishArcheType { get { return m_fishArchetype; } }
 
-    public class FishyPart : InspectorDictionary<Collider, float> { }
+    /*public class FishyPart : InspectorDictionary<Collider, float> { }
     [SerializeField]
-    protected FishyPart m_hitBoxModifiers;
+    protected FishyPart m_hitBoxModifiers;*/
 
     private Camera m_camera;
     public TargetController m_targetController;//don't set this manually.
@@ -49,7 +78,7 @@ public class BasicFish : MonoBehaviour
         m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponent<TargetController>();
 
         //Get all hitboxes from each fish compound colliders.
-        FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();
+        /*FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();
 
         if (m_hitBoxes != null)
         {
@@ -58,7 +87,7 @@ public class BasicFish : MonoBehaviour
             {
                 //m_hitBoxModifiers.Add(hitBox.m_HitBoxModifier.Key, hitBox.m_HitBoxModifier.Value);
             }
-        }
+        }*/
     }
 
     private void Update()

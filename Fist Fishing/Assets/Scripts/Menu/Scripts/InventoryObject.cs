@@ -55,6 +55,17 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
+
+    public void RemoveAmount(AItem item, int amount)
+    {
+        for (int i = 0; i < m_inventorySlots.Length; i++)
+        {
+            if (m_inventorySlots[i].m_item == item)
+            {
+                m_inventorySlots[i].AddAmount(-amount);
+            }
+        }
+    }
 }
 
 [System.Serializable]
