@@ -111,11 +111,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    
     private void Mount()
     {
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
+
+        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
