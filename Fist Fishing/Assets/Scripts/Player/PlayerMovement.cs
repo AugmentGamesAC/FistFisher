@@ -188,15 +188,21 @@ public class PlayerMovement : MonoBehaviour
     {
         m_isGrounded = false;
         
-        Vector3 desiredDirection = transform.up
-            + transform.right * ALInput.GetAxis(ALInput.AxisCode.Horizontal)
-            + transform.forward * ALInput.GetAxis(ALInput.AxisCode.Vertical);      
+        Vector3 desiredDirection = 
+            transform.forward * Time.deltaTime* m_turnSpeed * ALInput.GetAxis(ALInput.AxisCode.MouseX)
+            + transform.right * Time.deltaTime * m_turnSpeed * ALInput.GetAxis(ALInput.AxisCode.MouseY);
 
-        Quaternion turnDirection = Quaternion.FromToRotation(Vector3.forward, desiredDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, turnDirection, Time.deltaTime * m_turnSpeed);
-        // then move
+        transform.Rotate(desiredDirection, Space.Self);
 
-        m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
+        //if (desiredDirection.sqrMagnitude > 0.000001)
+        //{
+        //    Quaternion turnDirection = Quaternion.FromToRotation(transform.up, desiredDirection);
+        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, turnDirection, Time.deltaTime * m_turnSpeed);
+        //}
+            // then move
+
+        if (ALInput.GetKey(ALInput.Forward))
+            m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
     }
 
     private void Walk()
@@ -272,6 +278,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCamera()
     {
+        if (!ALInput.GetKey(ALInput.ManualCamera))
+            return;
+
         m_camera.UpdateRotation(GetLookInput().x, GetLookInput().y);
 
         //get only forward and ignore Y. 
@@ -279,7 +288,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetDirection = m_camera.transform.forward;
         targetDirection.y = 0;
 
-        m_player.transform.rotation = Quaternion.LookRotation(targetDirection);
+        //m_player.transform.rotation = Quaternion.LookRotation(targetDirection);
     }
 
     Vector3 GetMoveInput()
