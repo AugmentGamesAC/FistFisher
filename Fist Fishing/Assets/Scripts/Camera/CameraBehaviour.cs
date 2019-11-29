@@ -78,7 +78,8 @@ public abstract class CameraBehaviour
         float minMoveUpDist = float.MaxValue;
         foreach (RaycastHit hitInfo in hitInfos)
         {
-            minMoveUpDist = Mathf.Min(minMoveUpDist, hitInfo.distance);
+            if(hitInfo.collider.isTrigger==false)
+                minMoveUpDist = Mathf.Min(minMoveUpDist, hitInfo.distance);
         }
 
         //set camera in front of the closest hit info from sphere cast.

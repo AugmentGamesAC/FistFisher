@@ -20,7 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float m_gravity = -9.81f;
     public float m_terminalVelocity = 50.0f;
-    public float mountCooldown = 0.0f;
+
+    public float m_mountCooldownMax = 2.0f;
+    public float m_mountCooldown = 0.0f;
+
+    public float m_baitThrowCooldownMax = 2.0f;
+    public float m_baitThrowCooldown = 0.0f;
 
     public bool m_isSwimming = false;
     public bool m_isGrounded = false;
@@ -43,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
             m_player = gameObject;
 
         m_camera.SetPlayer(m_player);
+
+        m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
     // Update is called once per frame
@@ -81,16 +88,36 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        mountCooldown -= Time.deltaTime;
+        m_mountCooldown -= Time.deltaTime;
+        m_baitThrowCooldown -= Time.deltaTime;
+        m_baitThrowCooldown = Mathf.Clamp(m_baitThrowCooldown, 0.0f, m_baitThrowCooldownMax);
 
-        if (mountCooldown <= 0.0f)
+        if (m_mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
-    }
 
+
+        if(m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
+        {
+            GameObject bait = gameObject.GetComponent<Inventory>().GetReferenceToStoredBait();
+            if (bait != null)
+            {
+                if (gameObject.GetComponent<Inventory>().RemoveFromInventory(bait))
+                {
+                    bait.GetComponent<Bait>().Init();
+                    bait.transform.position = gameObject.transform.position + gameObject.transform.forward * 5.0f;
+
+                    m_baitThrowCooldown = m_baitThrowCooldownMax;
+                }
+            }
+        }
+    }
+    
     private void Mount()
     {
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
+
+        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -114,14 +141,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Mount();
 
-            mountCooldown = 2.0f;
+            m_mountCooldown = m_mountCooldownMax;
         }
         //if i am mounted and pressing the mount button.
         else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
-            mountCooldown = 2.0f;
+            m_mountCooldown = m_mountCooldownMax;
         }
     }
 
@@ -255,5 +282,9 @@ public class PlayerMovement : MonoBehaviour
     {
         return ALInput.GetKey(ALInput.Sprint);
         //return Input.GetButton("Sprint");
+    }
+    public bool IsThrowBait()
+    {
+        return ALInput.GetKey(ALInput.ThrowBait);
     }
 }
