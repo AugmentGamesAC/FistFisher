@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishTask : Task
+public class FishTask : Node
 {
     protected float m_speed;
     protected float m_turnSpeed;
     protected float m_accuracy;
+    [SerializeField]
     protected GameObject m_target;
     protected GameObject m_me;
+
+
 
     protected void ReadInfo()
     {

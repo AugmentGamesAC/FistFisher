@@ -19,6 +19,7 @@ public class SpawnBaitFromBag : MonoBehaviour
             if (m_baitPrefab == null)
                 return;
             GameObject bait = ObjectPoolManager.Get(m_baitPrefab);
+            bait.GetComponent<Bait>().Init();
             bait.transform.position = gameObject.transform.position + gameObject.transform.forward * 5.0f;
         }
     }
