@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_coral1Count: 0
   m_coral2Count: 0
   m_BaitCount: 0
-  m_displayInventoryObject: {fileID: 11400000, guid: e46d06de81e39304fb211dfe714bc189,
+  m_displayInventoryObject: {fileID: 11400000, guid: c1e4fc64eaa248c4baadfe370e430aee,
     type: 2}
   m_fishScriptableObject: {fileID: 11400000, guid: 2a7e223e901684f45b92d2b798a4afd8,
     type: 2}
@@ -1335,9 +1335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d3f18fc7a8554b86d3a2c4b69711a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerRef: {fileID: 0}
-  m_inventoryRef: {fileID: 0}
-  m_playerMovementRef: {fileID: 0}
+  m_playerRef: {fileID: 295444867762836901}
+  m_inventoryRef: {fileID: 369048172756602551}
+  m_playerMovementRef: {fileID: 7295796181784110599}
   m_baitPrefab: {fileID: 8069754680616958458, guid: bf78af9ae6c681348b56d0373d959f83,
     type: 3}
 --- !u!114 &799564680
@@ -2343,11 +2343,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7295796181784110598}
     m_Modifications:
-    - target: {fileID: 1990969796264009383, guid: b0325b51857ae1c4f8a16d4a83cac765,
-        type: 3}
-      propertyPath: m_Name
-      value: Inventory Screen Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 1990969796264009379, guid: b0325b51857ae1c4f8a16d4a83cac765,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2453,6 +2448,23 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1990969796264009383, guid: b0325b51857ae1c4f8a16d4a83cac765,
+        type: 3}
+      propertyPath: m_Name
+      value: Inventory Screen Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990969797250425327, guid: b0325b51857ae1c4f8a16d4a83cac765,
+        type: 3}
+      propertyPath: m_inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: c1e4fc64eaa248c4baadfe370e430aee,
+        type: 2}
+    - target: {fileID: 1990969797250425327, guid: b0325b51857ae1c4f8a16d4a83cac765,
+        type: 3}
+      propertyPath: m_otherInventory
+      value: 
+      objectReference: {fileID: 11400000, guid: a2d8f9a279702d640a8cf1f78c83bf9b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0325b51857ae1c4f8a16d4a83cac765, type: 3}
 --- !u!224 &315196894 stripped
