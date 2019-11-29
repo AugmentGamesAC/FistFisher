@@ -28,4 +28,17 @@ public class Boat : MonoBehaviour
             PlayerController.m_isMounted = false;
         }
     }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
+
+    //        PlayerController.m_canMount = false;
+    //        PlayerController.m_isMounted = true;
+    //    }
+    //}
+
+    //needs to be on a smaller collider 
 }
