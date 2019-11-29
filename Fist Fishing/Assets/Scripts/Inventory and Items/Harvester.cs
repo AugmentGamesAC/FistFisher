@@ -119,30 +119,25 @@ public class Harvester : MonoBehaviour
 
             m_targetPrefab.gameObject.transform.position = newPos;
         }
-
-
-
-
-
-
-
+        
 
         if (m_toHarvest!=null && ALInput.GetKeyDown(ALInput.Harvest))
         {
-
-            Vector3 offsetCam = m_toHarvest.transform.position - Camera.main.transform.position;
-            Vector3 offsetPlayer = m_toHarvest.transform.position - gameObject.transform.position;
-            Vector3 targetDir = offsetCam.normalized;
-            float diffAngle = Mathf.Acos(Vector3.Dot(targetDir, Camera.main.transform.forward)) * Mathf.Rad2Deg;
-
-            float sqrLen = offsetPlayer.sqrMagnitude;
-
-
-            //Debug.LogError("angle:"+diffAngle);
-            //Debug.LogError("distSqrd:"+sqrLen);
-
-            if (diffAngle<=m_angleToHarvest && sqrLen < (m_rangeToHarvest* m_rangeToHarvest))
-                m_invRef.AddToInventory(m_toHarvest);
+            Harvest();
         }
     }
+
+    void Harvest()
+    {
+        Vector3 offsetCam = m_toHarvest.transform.position - Camera.main.transform.position;
+        Vector3 offsetPlayer = m_toHarvest.transform.position - gameObject.transform.position;
+        Vector3 targetDir = offsetCam.normalized;
+        float diffAngle = Mathf.Acos(Vector3.Dot(targetDir, Camera.main.transform.forward)) * Mathf.Rad2Deg;
+
+        float sqrLen = offsetPlayer.sqrMagnitude;
+
+        if (diffAngle <= m_angleToHarvest && sqrLen < (m_rangeToHarvest * m_rangeToHarvest))
+            m_invRef.AddToInventory(m_toHarvest);
+    }
+
 }
