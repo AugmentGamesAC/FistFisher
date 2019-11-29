@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public float m_groundDistance = 0.4f;
     public LayerMask m_groundMask;
 
+
+
     private void Start()
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -58,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -164,7 +168,8 @@ public class PlayerMovement : MonoBehaviour
 
         m_groundCheck.gameObject.SetActive(false);
 
-        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
+        Player p = m_player.GetComponent<Player>();
+        p.SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -175,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
         m_boat.transform.SetParent(this.transform);
     }
 
-    private void Dismount()
+    public void Dismount()
     {
         m_boat.transform.SetParent(null);
         m_groundCheck.gameObject.SetActive(true);
