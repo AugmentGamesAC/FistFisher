@@ -7,7 +7,6 @@ public class InventoryObject : ScriptableObject
 {
     public int m_InventorySize = 32;
     public InventorySlot[] m_inventorySlots = new InventorySlot[32];
-    public InventorySlot[] m_otherInventorySlots;
 
     public void Awake()
     {
@@ -40,10 +39,12 @@ public class InventoryObject : ScriptableObject
         if (item.ID == -1)
             return;
 
+        //find the hoverSlot on this inventory list.
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
             if (m_inventorySlots[i] == slot)
             {
+                //update that slot with info from dragged slot.
                 m_inventorySlots[i].UpdateSlot(item.ID, item, amount, slot.m_inventory);
                 return;
             }

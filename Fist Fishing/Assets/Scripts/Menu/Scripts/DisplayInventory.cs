@@ -12,7 +12,6 @@ public class DisplayInventory : MonoBehaviour
     public MouseItem m_mouseItem;
 
     public InventoryObject m_inventory;
-    public InventoryObject m_otherInventory;
 
     public GameObject m_inventoryPrefab;
 
@@ -95,11 +94,14 @@ public class DisplayInventory : MonoBehaviour
         m_mouseItem.hoverObj = obj;
         if (m_itemsDisplayed.ContainsKey(obj))
             m_mouseItem.hoverSlot = m_itemsDisplayed[obj];
+
+        m_mouseItem.hoverSlot.m_inventory = m_inventory;
     }
     public void OnExit(GameObject obj)
     {
         m_mouseItem.hoverObj = null;
         m_mouseItem.hoverSlot = null;
+
     }
     //grab a copy of whatever you clicked and set it to m_mouseItem's stats.
     public void OnDragStart(GameObject obj)
@@ -119,19 +121,16 @@ public class DisplayInventory : MonoBehaviour
     }
     public void OnDragEnd(GameObject obj)
     {
-        if (m_mouseItem.hoverObj)
+        //if you're shuffling things in your own inventory use these functions.
+        if (m_mouseItem.hoverObj && m_mouseItem.hoverSlot.m_inventory == m_inventory)
         {
             m_inventory.MoveItem(m_itemsDisplayed[obj], m_itemsDisplayed[m_mouseItem.hoverObj]);
-            Destroy(m_mouseItem.obj);
-            m_mouseItem.item = null;
-            return;
         }
-
-        //if (m_mouseItem.hoverSlot != null)//if it's dropped in another inventory, remove from current and add to new one in the empty slot's position.
-        //{
-        //    m_inventory.RemoveItem(m_itemsDisplayed[m_mouseItem.hoverObj].m_item);
-        //    m_mouseItem.hoverSlot.m_inventory.AddItem(m_mouseItem.hoverSlot.m_inventory.m_itemsDisplayed[obj].m_item, m_itemsDisplayed[obj].m_amount);
-        //}
+        else if (m_mouseItem.hoverSlot != null)//if it's dropped in another inventory, remove from current and add to new one in the empty slot's position.
+        {
+            m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
+        }
         else
         {
             m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
