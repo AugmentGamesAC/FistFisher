@@ -62,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateIsGrounded();
+        if (m_groundCheck.gameObject.activeSelf)
+            UpdateIsGrounded();
 
         UpdateCamera();
 
@@ -161,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
 
+        m_groundCheck.gameObject.SetActive(false);
+
         m_player.GetComponent<Player>().SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
@@ -175,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
     private void Dismount()
     {
         m_boat.transform.SetParent(null);
+        m_groundCheck.gameObject.SetActive(true);
 
         //go to diving position
         transform.position = m_boatDismountPosition;
