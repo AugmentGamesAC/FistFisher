@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 7027024320410773115}
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
-  - component: {fileID: 3955263237117310163}
+  - component: {fileID: 2110840545424256968}
   m_Layer: 0
   m_Name: Fish1_Model_Prefab
   m_TagString: Fish
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_regenDelay: 3
   m_regenRate: 5
   m_HealthSlider: {fileID: 0}
---- !u!135 &3955263237117310163
+--- !u!135 &2110840545424256968
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -860,7 +860,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.125
-  m_Center: {x: 0.000000059604645, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.2}
 --- !u!1 &8567224104664165731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +1040,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c747125d1567a56469386b1e051b6997, type: 2}
+      objectReference: {fileID: 2100000, guid: e47d5a3adedf38d4bab82b581a719fbf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c90e0b7a343d5154bb77e588e91ffca7, type: 3}
 --- !u!4 &5020762215965183718 stripped

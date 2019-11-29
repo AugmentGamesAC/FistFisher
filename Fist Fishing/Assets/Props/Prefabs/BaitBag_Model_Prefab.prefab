@@ -105,7 +105,7 @@ Transform:
   m_GameObject: {fileID: 3237883663481680853}
   m_LocalRotation: {x: 0.000000043711392, y: 0.0000000754979, z: 0.00000004371138,
     w: 1}
-  m_LocalPosition: {x: -0.007928237, y: -0.0000000012968572, z: -0.007960052}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.116611, y: 0.116611, z: 0.116611}
   m_Children:
   - {fileID: 3558522836098045853}
@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 1891e695317f6d54784804371fc426e8, type: 3}
+  - {fileID: 2100000, guid: 240ce03eb17efaa4d9faee385f7fcc0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -187,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3383632013988250695}
   m_LocalRotation: {x: 0.00000006657903, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.189229, y: -6.876358, z: 17.138}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8936029051973021245}
@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6573266387129811127}
   m_Layer: 0
-  m_Name: BaitBag
+  m_Name: BaitBag_Model_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
