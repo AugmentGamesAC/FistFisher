@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
 
     public Transform m_respawnLocation;
 
-
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }

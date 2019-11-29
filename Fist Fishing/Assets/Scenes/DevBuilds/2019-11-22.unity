@@ -360,6 +360,11 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1779776065}
+    - target: {fileID: 8268430212276855326, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &349861492
@@ -1276,11 +1281,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boat
-      objectReference: {fileID: 0}
-    - target: {fileID: 2558557226751230865, guid: 42e0ff611b504da42aebe9c65ecde31f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
