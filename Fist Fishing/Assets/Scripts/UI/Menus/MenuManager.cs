@@ -97,6 +97,7 @@ public class MenuManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
+
     }
 
     private static void hasInstance()
@@ -149,6 +150,8 @@ public class MenuManager : MonoBehaviour
                 bm.CloseMenu();
         }
     }
+
+
 
     // Start is called before the first frame update
     void Start()

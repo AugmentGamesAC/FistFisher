@@ -21,9 +21,9 @@ public class BasicMenu : MonoBehaviour
     {
         if (m_HUD == null)
             m_HUD = gameObject;
-        //m_HUD.SetActive(false);
-        m_canvas = m_HUD.GetComponent<Canvas>();
-        CloseMenu();
+        if (m_canvas == null)
+            m_canvas = m_HUD.GetComponent<Canvas>();
+        //CloseMenu();
     }
 
     public bool CloseMenu()

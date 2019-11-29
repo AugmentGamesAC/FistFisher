@@ -23,7 +23,8 @@ public class ShowMenus : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.NormalHUD); };
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             MenuManager.ActivateMenu(Menus.SwimmingInventory);
             gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
         };
