@@ -396,6 +396,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -408
       objectReference: {fileID: 0}
+    - target: {fileID: 7002809324863039487, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_rangeToHarvest
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002809324863039487, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_rangeToView
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!114 &228140994 stripped
@@ -534,7 +544,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1336,10 +1346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2360937b4c830aa45a33a5d91dbdc672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WaterLevel: -0.76
+  m_WaterLevel: -0.74
   m_WaterPlane: {fileID: 4380623137660079062}
   m_UnderwaterColor: {fileID: 2100000, guid: 62fd5140cb16a1b45bc1f366afefc141, type: 2}
-  isUnderwater: 0
+  isUnderwater: 1
 --- !u!1 &1734631614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1384,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

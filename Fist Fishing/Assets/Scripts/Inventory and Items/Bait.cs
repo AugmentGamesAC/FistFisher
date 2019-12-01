@@ -70,21 +70,25 @@ public class Bait : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        InfluenceFish(other);
+        InfluenceFish(other.gameObject);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        InfluenceFish(other);
+        InfluenceFish(other.gameObject);
     }
 
-    protected void InfluenceFish(Collider other)
+    [SerializeField]
+    protected FishBrain.FishClassification m_classification = FishBrain.FishClassification.BaitSensitive1;
+    [SerializeField]
+    protected float m_influence = 0.1f;
+    public void InfluenceFish(GameObject other, float Influencefactor = 1)
     {
         FishBrain fb = other.GetComponentInParent<FishBrain>();
         if (fb == default)
             return;
 
-        fb.ApplyImpulse(gameObject, 0.1f, FishBrain.FishClassification.BaitSensitive1);
+        fb.ApplyImpulse(gameObject, m_influence, m_classification);
     }
 }
 
