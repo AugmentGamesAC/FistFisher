@@ -16,7 +16,7 @@ public class UnderwaterScript : MonoBehaviour
         m_WaterLevel = m_WaterPlane.transform.position.y;
         //Color m_FogColor = m_UnderwaterColor.color;
         Color m_FogColor = new Vector4(0.4f, 0.7f, 1.0f, 0.5f); // hard set values as the material method of setting color lacked too much documentation to figure out a solution
-        RenderSettings.fogDensity = 0.002f;
+        RenderSettings.fogDensity = 0.05f;
         RenderSettings.fogColor = m_FogColor;
         //RenderSettings.fog = true; // Code for quick color testing purposes
         RenderSettings.fog = false;

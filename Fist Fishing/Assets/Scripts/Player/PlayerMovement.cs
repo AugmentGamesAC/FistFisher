@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public float m_groundDistance = 0.4f;
     public LayerMask m_groundMask;
 
+
+
     private void Start()
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -59,10 +61,13 @@ public class PlayerMovement : MonoBehaviour
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-        UpdateIsGrounded();
+        if (m_groundCheck.gameObject.activeSelf)
+            UpdateIsGrounded();
 
         UpdateCamera();
 
@@ -161,7 +166,10 @@ public class PlayerMovement : MonoBehaviour
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
 
-        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
+        m_groundCheck.gameObject.SetActive(false);
+
+        Player p = m_player.GetComponent<Player>();
+        p.SetNewCheckpoint(transform);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -172,9 +180,10 @@ public class PlayerMovement : MonoBehaviour
         m_boat.transform.SetParent(this.transform);
     }
 
-    private void Dismount()
+    public void Dismount()
     {
         m_boat.transform.SetParent(null);
+        m_groundCheck.gameObject.SetActive(true);
 
         //go to diving position
         transform.position = m_boatDismountPosition;
