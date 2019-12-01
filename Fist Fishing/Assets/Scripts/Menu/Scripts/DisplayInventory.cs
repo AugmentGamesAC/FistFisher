@@ -9,9 +9,10 @@ using UnityEngine.Events;
 public class DisplayInventory : MonoBehaviour
 {
     //item that follows after you click.
-    public MouseItem m_mouseItem = new MouseItem();
+    public MouseItem m_mouseItem;
 
     public InventoryObject m_inventory;
+
     public GameObject m_inventoryPrefab;
 
     public int m_xStartPos;
@@ -42,7 +43,7 @@ public class DisplayInventory : MonoBehaviour
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
-            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); }); 
+            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
 
             m_itemsDisplayed.Add(obj, m_inventory.m_inventorySlots[i]);
         }
@@ -56,13 +57,19 @@ public class DisplayInventory : MonoBehaviour
 
     private void UpdateSlots()
     {
-        foreach(KeyValuePair<GameObject, InventorySlot> slot in m_itemsDisplayed)
+        foreach (KeyValuePair<GameObject, InventorySlot> slot in m_itemsDisplayed)
         {
-            if(slot.Value.m_ID >= 0)
+            if (slot.Value.m_ID >= 0)
             {
+                slot.Key.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
                 //change sprite instead of changing color for future reference.
                 slot.Key.GetComponent<Image>().color = slot.Value.m_item.prefab.GetComponent<Image>().color;
-                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.m_amount.ToString("n0");
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.m_amount <= 0 ? "" : slot.Value.m_amount.ToString("n0");
+
+                if (slot.Value.m_amount <= 0)
+                {
+                    slot.Value.UpdateSlot(-1, null, 0, null);
+                }
             }
             else
             {
@@ -88,14 +95,13 @@ public class DisplayInventory : MonoBehaviour
         if (m_itemsDisplayed.ContainsKey(obj))
             m_mouseItem.hoverSlot = m_itemsDisplayed[obj];
 
-        //Display InventorySlot.item Description.
-        GUI.Label(new Rect(10, 10, 200, 30), m_mouseItem.hoverSlot.m_item.description);
-        //int bp = 1;
+        m_mouseItem.hoverSlot.m_inventory = m_inventory;
     }
     public void OnExit(GameObject obj)
     {
         m_mouseItem.hoverObj = null;
         m_mouseItem.hoverSlot = null;
+
     }
     //grab a copy of whatever you clicked and set it to m_mouseItem's stats.
     public void OnDragStart(GameObject obj)
@@ -104,7 +110,7 @@ public class DisplayInventory : MonoBehaviour
         var rt = mouseObject.AddComponent<RectTransform>();
         rt.sizeDelta = new Vector2(32, 32);
         mouseObject.transform.SetParent(transform.parent);
-        if(m_itemsDisplayed[obj].m_ID >= 0)
+        if (m_itemsDisplayed[obj].m_ID >= 0)
         {
             var img = mouseObject.AddComponent<Image>();
             img.color = m_itemsDisplayed[obj].m_item.prefab.GetComponent<Image>().color; //change sprite instead of changing color for future reference.
@@ -115,9 +121,15 @@ public class DisplayInventory : MonoBehaviour
     }
     public void OnDragEnd(GameObject obj)
     {
-        if(m_mouseItem.hoverObj)
+        //if you're shuffling things in your own inventory use these functions.
+        if (m_mouseItem.hoverObj && m_mouseItem.hoverSlot.m_inventory == m_inventory)
         {
             m_inventory.MoveItem(m_itemsDisplayed[obj], m_itemsDisplayed[m_mouseItem.hoverObj]);
+        }
+        else if (m_mouseItem.hoverSlot != null)//if it's dropped in another inventory, remove from current and add to new one in the empty slot's position.
+        {
+            m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
         }
         else
         {
@@ -128,7 +140,7 @@ public class DisplayInventory : MonoBehaviour
     }
     public void OnDrag(GameObject obj)
     {
-        if(m_mouseItem.obj != null)
+        if (m_mouseItem.obj != null)
         {
             m_mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
@@ -136,7 +148,7 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot == null)
+        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot.m_item == null)
             return;
         //create position Vector2 for box.
         Vector2 DescriptionBoxPos = new Vector2(275, 40);
@@ -146,16 +158,9 @@ public class DisplayInventory : MonoBehaviour
         // Make a background box
         GUI.Box(new Rect(DescriptionBoxPos.x, DescriptionBoxPos.y, 250, 250), "Description");
 
-        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 100, 1500), m_mouseItem.hoverSlot.m_item.description);
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), m_mouseItem.hoverSlot.m_item.description);
     }
 }
 
 
-public class MouseItem
-{
-    public GameObject obj;
-    public InventorySlot item;
 
-    public GameObject hoverObj;
-    public InventorySlot hoverSlot;
-}
