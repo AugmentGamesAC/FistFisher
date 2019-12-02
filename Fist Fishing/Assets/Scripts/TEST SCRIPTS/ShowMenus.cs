@@ -14,11 +14,21 @@ public class ShowMenus : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        MenuManager.ActivateMenu(Menus.NormalHUD);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.MainMenu); };
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { MenuManager.ActivateMenu(Menus.OptionsMenu); };
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.NormalHUD); };
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            //MenuManager.ActivateMenu(Menus.SwimmingInventory);
+            gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+        };
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { MenuManager.ActivateMenu(Menus.BoatTravel); };
 
     }
 }

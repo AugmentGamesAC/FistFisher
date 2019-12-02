@@ -97,6 +97,7 @@ public class MenuManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
+
     }
 
     private static void hasInstance()
@@ -110,18 +111,18 @@ public class MenuManager : MonoBehaviour
 
 
     [SerializeField]
-    public static Menus m_currentMenus = Menus.NotSet;
+    public Menus m_currentMenus = Menus.NotSet;
 
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
     /// </summary>
     public static void ActivateMenu(Menus m)
     {
-        if (m_currentMenus == m)
+        if (Instance.m_currentMenus == m)
             return;
 
         SetActiveSatusOncurrentMenuOption(false);
-        m_currentMenus = m;
+        Instance.m_currentMenus = m;
 
         if (Instance.MenuList.TryGetValue(m, out m_Mylist))
             SetActiveSatusOncurrentMenuOption(true);
@@ -149,6 +150,8 @@ public class MenuManager : MonoBehaviour
                 bm.CloseMenu();
         }
     }
+
+
 
     // Start is called before the first frame update
     void Start()

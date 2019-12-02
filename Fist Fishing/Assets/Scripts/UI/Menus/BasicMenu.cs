@@ -13,22 +13,29 @@ public class BasicMenu : MonoBehaviour
     [SerializeField]
     protected GameObject m_HUD;
     public GameObject HUD { get { return m_HUD; } }
+    [SerializeField]
+    protected Canvas m_canvas;
+    public Canvas Canvas { get { return m_canvas; } }
 
     void Awake()
     {
         if (m_HUD == null)
             m_HUD = gameObject;
-        m_HUD.SetActive(false);
+        if (m_canvas == null)
+            m_canvas = m_HUD.GetComponent<Canvas>();
+        //CloseMenu();
     }
 
     public bool CloseMenu()
     {
-        m_HUD.SetActive(false);
+        //m_HUD.SetActive(false);
+        m_canvas.enabled = false;
         return true;
     }
     public bool OpenMenu()
     {
-        m_HUD.SetActive(true);
+        //m_HUD.SetActive(true);
+        m_canvas.enabled = true;
         return true;
     }
 }
