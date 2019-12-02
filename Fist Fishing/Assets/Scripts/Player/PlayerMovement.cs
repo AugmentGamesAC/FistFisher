@@ -187,23 +187,25 @@ public class PlayerMovement : MonoBehaviour
     private void Swim()
     {
         m_isGrounded = false;
-        
-        Vector3 desiredDirection = 
-            transform.forward * Time.deltaTime* m_turnSpeed * ALInput.GetAxis(ALInput.AxisCode.MouseX)
-            + transform.right * Time.deltaTime * m_turnSpeed * ALInput.GetAxis(ALInput.AxisCode.MouseY);
 
-        transform.Rotate(desiredDirection, Space.Self);
-
-        //if (desiredDirection.sqrMagnitude > 0.000001)
-        //{
-        //    Quaternion turnDirection = Quaternion.FromToRotation(transform.up, desiredDirection);
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, turnDirection, Time.deltaTime * m_turnSpeed);
-        //}
-            // then move
+        if (!ALInput.GetKey(ALInput.ManualCamera))
+            ResolveSwimRotation();
 
         if (ALInput.GetKey(ALInput.Forward))
             m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
     }
+
+    void ResolveSwimRotation()
+    {
+        Vector3 desiredDirection = (
+            transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+            + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        ) * m_turnSpeed * Time.deltaTime;
+
+        if (desiredDirection.sqrMagnitude > 0.000001)
+            transform.Rotate(desiredDirection, Space.Self);
+    }
+
 
     private void Walk()
     {

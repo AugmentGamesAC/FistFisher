@@ -36,7 +36,7 @@ public class ALInput : MonoBehaviour
 
     [SerializeField]
     KeyCode m_manualCamera;
-    public static KeyCode ManualCamera { get { hasInstance(); return Instance.m_sprint; } }
+    public static KeyCode ManualCamera { get { hasInstance(); return Instance.m_manualCamera; } }
 
 
     [SerializeField]
