@@ -150,18 +150,4 @@ public class MenuManager : MonoBehaviour
                 bm.CloseMenu();
         }
     }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

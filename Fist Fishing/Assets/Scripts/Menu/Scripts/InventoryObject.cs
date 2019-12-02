@@ -16,10 +16,12 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    public void AddItem(AItem item, int amount)
+    public void AddItem(AItem item, int amount, ItemWorth worth)
     {
         if (item.ID == -1)
             return;
+        if (worth != null)
+            item.m_worthInCurrency = worth.Worth;
 
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
@@ -49,7 +51,7 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-        
+
         SetFirstEmptySlot(item, amount);
     }
 
@@ -66,7 +68,7 @@ public class InventoryObject : ScriptableObject
         //come back to this to set up full inventory.
         return null;
     }
-   
+
     public void MoveItem(InventorySlot item1, InventorySlot item2)
     {
         InventorySlot tempSlot = new InventorySlot(item2.m_ID, item2.m_item, item2.m_amount, this);
@@ -78,7 +80,7 @@ public class InventoryObject : ScriptableObject
     {
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
-            if(m_inventorySlots[i].m_item == item)
+            if (m_inventorySlots[i].m_item == item)
             {
                 m_inventorySlots[i].UpdateSlot(-1, null, 0, this);
             }
@@ -107,6 +109,7 @@ public class InventorySlot
 
     public InventorySlot()
     {
+        //should have list instead for later.
         m_ID = -1;
         m_item = null;
         m_amount = 0;
@@ -130,5 +133,16 @@ public class InventorySlot
         m_item = item;
         m_amount = amount;
         m_inventory = inventory;
+
+        ////if we're emptying the slot, set the sum to 0;
+        //if (id <= -1)
+        //{
+        //    m_worthSum = 0;
+        //    return;
+        //}
+        //else
+        //{
+        //    m_worthSum += item.m_worthInCurrency;
+        //}
     }
 }
