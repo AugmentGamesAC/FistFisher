@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float m_sprintSpeed = 15.0f;
     public float m_fastSwimSpeed = 8.0f;
     public float m_swimSpeed = 5.0f;
+    public float m_turnSpeed = 60.0f;
 
     public float m_gravity = -9.81f;
     public float m_terminalVelocity = 50.0f;
