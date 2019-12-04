@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4317289871407033274}
   - component: {fileID: 4317289871407033273}
   - component: {fileID: 1058732942}
+  - component: {fileID: 4835056176850711149}
   m_Layer: 0
   m_Name: SingletonObjects
   m_TagString: Untagged
@@ -82,3 +83,28 @@ MonoBehaviour:
     - m_list:
       - {fileID: 0}
       - {fileID: 0}
+  m_currentMenus: 0
+--- !u!114 &4835056176850711149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317289871407033272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d38089fbead5bc4d80a34709886c9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 0}
+  item:
+    m_ID: -1
+    m_item: {fileID: 0}
+    m_amount: 0
+    m_inventory: {fileID: 0}
+  hoverObj: {fileID: 0}
+  hoverSlot:
+    m_ID: -1
+    m_item: {fileID: 0}
+    m_amount: 0
+    m_inventory: {fileID: 0}
