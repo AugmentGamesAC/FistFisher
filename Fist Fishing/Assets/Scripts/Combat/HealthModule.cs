@@ -29,7 +29,7 @@ public class HealthModule : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_HealthSlider = GetComponentInChildren<Slider>();
+        //m_HealthSlider = GetComponentInChildren<Slider>();
 
         ResetHealth();
         UpdateHealthPercentage();
@@ -70,7 +70,7 @@ public class HealthModule : MonoBehaviour
 
         //Health Canvas Value = m_healthPercentage;
         //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, .1f);
-            m_HealthSlider.value = m_healthPercentage;
+        m_HealthSlider.value = m_healthPercentage;
     }
 
     private bool UpdateDeathStatus()

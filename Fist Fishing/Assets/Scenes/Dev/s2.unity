@@ -214,7 +214,7 @@ PrefabInstance:
     - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
       propertyPath: m_menuList.values.Array.data[2].m_list.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 705080216}
     - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
       propertyPath: m_menuList.values.Array.data[3].m_list.Array.data[0]
       value: 
@@ -534,6 +534,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8494059171992567174, guid: cee6ac136d049ac418d16dc07d343388,
+        type: 3}
+      propertyPath: m_Name
+      value: Minimap
+      objectReference: {fileID: 0}
     - target: {fileID: 3858970453553817728, guid: cee6ac136d049ac418d16dc07d343388,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -638,11 +643,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8494059171992567174, guid: cee6ac136d049ac418d16dc07d343388,
-        type: 3}
-      propertyPath: m_Name
-      value: Minimap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cee6ac136d049ac418d16dc07d343388, type: 3}
@@ -999,6 +999,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c1e4fc64eaa248c4baadfe370e430aee,
         type: 2}
+    - target: {fileID: 1990969797250425327, guid: b0325b51857ae1c4f8a16d4a83cac765,
+        type: 3}
+      propertyPath: m_mouseItem
+      value: 
+      objectReference: {fileID: 707713082}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0325b51857ae1c4f8a16d4a83cac765, type: 3}
 --- !u!1001 &1245846940
