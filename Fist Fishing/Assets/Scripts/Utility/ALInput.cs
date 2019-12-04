@@ -35,6 +35,11 @@ public class ALInput : MonoBehaviour
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
 
     [SerializeField]
+    KeyCode m_manualCamera;
+    public static KeyCode ManualCamera { get { hasInstance(); return Instance.m_manualCamera; } }
+
+
+    [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
     [SerializeField]
@@ -178,7 +183,7 @@ public class ALInput : MonoBehaviour
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
         m_punch = KeyCode.Q;
-
+        m_manualCamera = KeyCode.Mouse1;
 
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
