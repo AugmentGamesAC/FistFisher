@@ -27,6 +27,9 @@ public class InventoryObject : ScriptableObject
         {
             if (m_inventorySlots[i].m_ID == item.ID)
             {
+                if (m_inventorySlots[i].m_amount + amount > item.StackSize)
+                    continue;
+
                 m_inventorySlots[i].AddAmount(amount);
                 return;
             }
@@ -76,13 +79,14 @@ public class InventoryObject : ScriptableObject
         item1.UpdateSlot(tempSlot.m_ID, tempSlot.m_item, tempSlot.m_amount, tempSlot.m_inventory);
     }
 
-    public void RemoveItem(AItem item)
+    public void RemoveItem(InventorySlot Slot)
     {
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
-            if (m_inventorySlots[i].m_item == item)
+            if (m_inventorySlots[i].m_item == Slot.m_item)
             {
-                m_inventorySlots[i].UpdateSlot(-1, null, 0, this);
+                Slot.UpdateSlot(-1, null, 0, this);
+                break;
             }
         }
     }
