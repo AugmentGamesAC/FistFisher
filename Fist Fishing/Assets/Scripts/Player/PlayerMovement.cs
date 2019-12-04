@@ -134,21 +134,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //forcing this to be public for the build until I can properly sort it out
-    public void ToggleMouseLock()
+   /* public void ToggleMouseLock()
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             //m_displayInventory.gameObject.SetActive(true);
-            MenuManager.ActivateMenu(Menus.SwimmingInventory);
+            //MenuManager.ActivateMenu(Menus.SwimmingInventory);
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             //m_displayInventory.gameObject.SetActive(false);
-            MenuManager.ActivateMenu(Menus.NormalHUD);
+            //MenuManager.ActivateMenu(Menus.NormalHUD);
             Cursor.lockState = CursorLockMode.Locked;
         }
-    }
+    }*/
 
     private void DriveBoat()
     {

@@ -156,18 +156,49 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    bool m_startup = true;
 
 
     void Update()
     {
+        if (m_startup)
+        {
+            m_startup = false;
+            ActivateMenu(Menus.MainMenu);
+            //ActivateMenu(Menus.MainMenu);
+            //ActivateMenu(Menus.MainMenu);
+        }
         //as a fllback on closing a menu, we can always set the current menu to not et, and let this deal with choosing the correct one
-        if(m_currentMenus == Menus.NotSet)
+        if (m_currentMenus == Menus.NotSet)
         {
             Menus m = Menus.NotSet;
             //do stuff
             ActivateMenu(Menus.NormalHUD);
         }
         HandleMenuRelatedInputs();
+
+
+        if (m_currentMenus == Menus.ShopMenu || m_currentMenus == Menus.SwimmingInventory)
+        {
+            ToggleMouseLock(true);
+        }
+        else
+        {
+            ToggleMouseLock(false);
+        }
+    }
+
+    //forcing this to be public for the build until I can properly sort it out
+    public void ToggleMouseLock(bool on)
+    {
+        if (on)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     private void HandleMenuRelatedInputs()
@@ -177,14 +208,46 @@ public class MenuManager : MonoBehaviour
         if (m_player == null)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory)) { m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock(); };
-        if (ALInput.GetKeyDown(ALInput.ToggleShop))
+        if (m_currentMenus == Menus.MainMenu)
         {
-            if(!(m_currentMenus == Menus.ShopMenu))
-                ActivateMenu(Menus.ShopMenu);
-            else
+            if (ALInput.GetKeyDown(ALInput.Start))
+            {
+
+                /*if (!(m_currentMenus == Menus.MainMenu))
+                    ActivateMenu(Menus.ShopMenu);
+                else
+                    ActivateMenu(Menus.NotSet);*/
                 ActivateMenu(Menus.NotSet);
-        };
+            }
+        }
+        else
+        {
+            if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            {
+                if (!(m_currentMenus == Menus.SwimmingInventory))
+                {
+                    ActivateMenu(Menus.SwimmingInventory);
+                    //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+                }
+                else
+                    ActivateMenu(Menus.NotSet);
+            }
+
+            if (ALInput.GetKeyDown(ALInput.ToggleShop))
+            {
+                if (!(m_currentMenus == Menus.ShopMenu))
+                {
+                    ActivateMenu(Menus.ShopMenu);
+                    //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+                }
+                else
+                    ActivateMenu(Menus.NotSet);
+            };
+
+        }
+
+
+
     }
 
 
