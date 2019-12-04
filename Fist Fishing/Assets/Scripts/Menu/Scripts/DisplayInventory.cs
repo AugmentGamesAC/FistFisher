@@ -137,11 +137,11 @@ public class DisplayInventory : MonoBehaviour
             {
                 m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
             }
-            m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
         }
         else
         {
-            m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
         }
         Destroy(m_mouseItem.obj);
         m_mouseItem.item = null;

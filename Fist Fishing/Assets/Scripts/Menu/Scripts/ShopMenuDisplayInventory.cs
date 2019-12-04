@@ -25,11 +25,4 @@ public class ShopMenuDisplayInventory : InventoryObject
 
         m_playerInventory.GainMoney(m_sellAmount);
     }
-
-    //public override void OnDragEnd(GameObject obj)
-    //{
-    //    //take money from player.
-
-    //    //drop object : mouse.HoverSlot.m_inventory.AddItemAtSlot(AItem item, int amount, InventorySlot slot);
-    //}
 }
