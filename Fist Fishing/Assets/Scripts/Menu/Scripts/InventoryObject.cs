@@ -8,12 +8,15 @@ public class InventoryObject : ScriptableObject
     public int m_InventorySize = 32;
     public InventorySlot[] m_inventorySlots = new InventorySlot[32];
 
+
     public void Awake()
     {
         for (int i = 0; i < m_InventorySize; i++)
         {
             m_inventorySlots[i] = new InventorySlot(-1, null, 0, this);
         }
+
+        
     }
 
     public void AddItem(AItem item, int amount, ItemWorth worth)
@@ -81,6 +84,8 @@ public class InventoryObject : ScriptableObject
 
     public void RemoveItem(InventorySlot Slot)
     {
+        
+
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
             if (m_inventorySlots[i].m_item == Slot.m_item)
