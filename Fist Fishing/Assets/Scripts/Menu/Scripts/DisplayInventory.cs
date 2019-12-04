@@ -156,7 +156,13 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot.m_item == null)
+        if (!this.gameObject.activeSelf)
+            return;
+        if (m_mouseItem == null)
+            return;
+        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot == null)
+            return;
+        if (m_mouseItem.hoverSlot.m_item == null)
             return;
         //create position Vector2 for box.
         Vector2 DescriptionBoxPos = new Vector2(275, 40);

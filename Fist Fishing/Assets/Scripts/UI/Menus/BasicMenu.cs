@@ -28,14 +28,14 @@ public class BasicMenu : MonoBehaviour
 
     public bool CloseMenu()
     {
-        //m_HUD.SetActive(false);
-        m_canvas.enabled = false;
+        m_HUD.SetActive(false);
+        //m_canvas.enabled = false;
         return true;
     }
     public bool OpenMenu()
     {
-        //m_HUD.SetActive(true);
-        m_canvas.enabled = true;
+        m_HUD.SetActive(true);
+        //m_canvas.enabled = true;
         return true;
     }
 }

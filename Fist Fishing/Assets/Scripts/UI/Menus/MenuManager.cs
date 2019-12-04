@@ -113,6 +113,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     public Menus m_currentMenus = Menus.NotSet;
 
+    [SerializeField]
+    GameObject m_player;
+
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
     /// </summary>
@@ -150,4 +153,33 @@ public class MenuManager : MonoBehaviour
                 bm.CloseMenu();
         }
     }
+
+
+
+    void Update()
+    {
+        //as a fllback on closing a menu, we can always set the current menu to not et, and let this deal with choosing the correct one
+        if(m_currentMenus == Menus.NotSet)
+        {
+            Menus m = Menus.NotSet;
+            //do stuff
+            ActivateMenu(Menus.NormalHUD);
+        }
+        HandleMenuRelatedInputs();
+    }
+
+    private void HandleMenuRelatedInputs()
+    {
+        if(m_player==null)
+            m_player = GameObject.FindGameObjectWithTag("Player");
+        if (m_player == null)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.NormalHUD); };
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory)) { m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock(); };
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { MenuManager.ActivateMenu(Menus.BoatTravel); };
+    }
+
+
+
 }
