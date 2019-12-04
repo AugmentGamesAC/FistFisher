@@ -113,6 +113,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     public Menus m_currentMenus = Menus.NotSet;
 
+    [SerializeField]
+    GameObject m_player;
+
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
     /// </summary>
@@ -124,6 +127,8 @@ public class MenuManager : MonoBehaviour
         SetActiveSatusOncurrentMenuOption(false);
         Instance.m_currentMenus = m;
 
+        if (m == Menus.NotSet)
+            return;
         if (Instance.MenuList.TryGetValue(m, out m_Mylist))
             SetActiveSatusOncurrentMenuOption(true);
 
@@ -150,4 +155,38 @@ public class MenuManager : MonoBehaviour
                 bm.CloseMenu();
         }
     }
+
+
+
+    void Update()
+    {
+        //as a fllback on closing a menu, we can always set the current menu to not et, and let this deal with choosing the correct one
+        if(m_currentMenus == Menus.NotSet)
+        {
+            Menus m = Menus.NotSet;
+            //do stuff
+            ActivateMenu(Menus.NormalHUD);
+        }
+        HandleMenuRelatedInputs();
+    }
+
+    private void HandleMenuRelatedInputs()
+    {
+        if(m_player==null)
+            m_player = GameObject.FindGameObjectWithTag("Player");
+        if (m_player == null)
+            return;
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory)) { m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock(); };
+        if (ALInput.GetKeyDown(ALInput.ToggleShop))
+        {
+            if(!(m_currentMenus == Menus.ShopMenu))
+                ActivateMenu(Menus.ShopMenu);
+            else
+                ActivateMenu(Menus.NotSet);
+        };
+    }
+
+
+
 }

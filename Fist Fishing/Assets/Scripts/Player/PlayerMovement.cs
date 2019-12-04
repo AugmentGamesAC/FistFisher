@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        m_displayInventory.gameObject.SetActive(false);
+        //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
 
         if (m_player == null)
             m_player = gameObject;
@@ -127,10 +127,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        /*if (ALInput.GetKeyDown(ALInput.ToggleInventory))
         {
             ToggleMouseLock();
-        }
+        }*/
     }
 
     //forcing this to be public for the build until I can properly sort it out
@@ -138,12 +138,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            m_displayInventory.gameObject.SetActive(true);
+            //m_displayInventory.gameObject.SetActive(true);
+            MenuManager.ActivateMenu(Menus.SwimmingInventory);
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            m_displayInventory.gameObject.SetActive(false);
+            //m_displayInventory.gameObject.SetActive(false);
+            MenuManager.ActivateMenu(Menus.NormalHUD);
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
