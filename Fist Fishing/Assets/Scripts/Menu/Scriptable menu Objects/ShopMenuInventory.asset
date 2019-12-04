@@ -14,10 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InventorySize: 54
   m_inventorySlots:
-  - m_ID: 1
-    m_item: {fileID: 11400000, guid: 825e51bf9e2ac1c46ac3cdb4d8e43504, type: 2}
-    m_amount: 5
-    m_inventory: {fileID: 11400000}
   - m_ID: -1
     m_item: {fileID: 0}
     m_amount: 0
@@ -49,6 +45,10 @@ MonoBehaviour:
   - m_ID: -1
     m_item: {fileID: 0}
     m_amount: 0
+    m_inventory: {fileID: 11400000}
+  - m_ID: 4
+    m_item: {fileID: 11400000, guid: bbdfc42d617877a48a5b53e4511c1f52, type: 2}
+    m_amount: 1
     m_inventory: {fileID: 11400000}
   - m_ID: -1
     m_item: {fileID: 0}
@@ -231,4 +231,5 @@ MonoBehaviour:
     m_amount: 0
     m_inventory: {fileID: 11400000}
   m_sellAmount: 0
+  m_spendAmount: 500
   m_playerInventory: {fileID: 0}
