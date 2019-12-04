@@ -60,6 +60,7 @@ MonoBehaviour:
   m_throwBait: 112
   m_craftBait: 98
   m_toggleInventory: 0
+  m_toggleShop: 0
   m_playerLateralMovement: 1
 --- !u!114 &1058732942
 MonoBehaviour:
@@ -74,13 +75,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_menuList:
-    keys: 090000000800000006000000
+    keys: 09000000080000000600000005000000
     values:
     - m_list:
       - {fileID: 0}
     - m_list:
       - {fileID: 0}
     - m_list:
+      - {fileID: 0}
+      - {fileID: 0}
+    - m_list:
+      - {fileID: 0}
       - {fileID: 0}
       - {fileID: 0}
   m_currentMenus: 0

@@ -127,6 +127,8 @@ public class MenuManager : MonoBehaviour
         SetActiveSatusOncurrentMenuOption(false);
         Instance.m_currentMenus = m;
 
+        if (m == Menus.NotSet)
+            return;
         if (Instance.MenuList.TryGetValue(m, out m_Mylist))
             SetActiveSatusOncurrentMenuOption(true);
 
@@ -175,9 +177,14 @@ public class MenuManager : MonoBehaviour
         if (m_player == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { MenuManager.ActivateMenu(Menus.NormalHUD); };
         if (ALInput.GetKeyDown(ALInput.ToggleInventory)) { m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock(); };
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { MenuManager.ActivateMenu(Menus.BoatTravel); };
+        if (ALInput.GetKeyDown(ALInput.ToggleShop))
+        {
+            if(!(m_currentMenus == Menus.ShopMenu))
+                ActivateMenu(Menus.ShopMenu);
+            else
+                ActivateMenu(Menus.NotSet);
+        };
     }
 
 

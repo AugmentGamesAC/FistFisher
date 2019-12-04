@@ -203,6 +203,18 @@ PrefabInstance:
       propertyPath: m_menuList.values.Array.data[2].m_list.Array.data[1]
       value: 
       objectReference: {fileID: 126498634}
+    - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_menuList.values.Array.data[3].m_list.Array.data[0]
+      value: 
+      objectReference: {fileID: 2136317895}
+    - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_menuList.values.Array.data[3].m_list.Array.data[1]
+      value: 
+      objectReference: {fileID: 126498634}
+    - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_menuList.values.Array.data[3].m_list.Array.data[2]
+      value: 
+      objectReference: {fileID: 1396897237}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
 --- !u!114 &126498634 stripped
@@ -833,6 +845,18 @@ PrefabInstance:
       objectReference: {fileID: 1245846941}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a812880c9d0704c4b92cda9f39ea6411, type: 3}
+--- !u!114 &1396897237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 632042937248924838, guid: 79ee761726c202041b9e0966ded9777e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5758115767889527099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1681906281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1755,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shop Menu Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5758115767510758829, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}

@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
+        //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
 
         if (m_player == null)
             m_player = gameObject;
