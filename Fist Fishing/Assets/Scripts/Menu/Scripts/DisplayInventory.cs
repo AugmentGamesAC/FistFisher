@@ -20,7 +20,7 @@ public class DisplayInventory : MonoBehaviour
     public int m_xSpaceBetweenItems;
     public int m_ySpaceBetweenItems;
     public int m_numberOfColumns;
-    Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
+    protected Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     void Start()
     {
         CreateSlots();
@@ -119,16 +119,24 @@ public class DisplayInventory : MonoBehaviour
         m_mouseItem.obj = mouseObject;
         m_mouseItem.item = m_itemsDisplayed[obj];
     }
-    public void OnDragEnd(GameObject obj)
+    public virtual void OnDragEnd(GameObject obj)
     {
         //if you're shuffling things in your own inventory use these functions.
         if (m_mouseItem.hoverObj && m_mouseItem.hoverSlot.m_inventory == m_inventory)
         {
             m_inventory.MoveItem(m_itemsDisplayed[obj], m_itemsDisplayed[m_mouseItem.hoverObj]);
         }
+
         else if (m_mouseItem.hoverSlot != null)//if it's dropped in another inventory, remove from current and add to new one in the empty slot's position.
         {
-            m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+            if (m_mouseItem.hoverSlot.m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
+            {
+                ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
+            }
+            else
+            {
+                m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+            }
             m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
         }
         else
