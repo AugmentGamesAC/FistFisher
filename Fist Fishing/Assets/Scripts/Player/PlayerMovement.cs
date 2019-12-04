@@ -71,8 +71,11 @@ public class PlayerMovement : MonoBehaviour
             Swim();
             return;
         }
-        ApplyGravity();
-        Walk();
+        else
+        {
+            ApplyGravity();
+            Walk();
+        }
     }
 
 
@@ -240,7 +243,6 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(speed * Time.deltaTime);
-
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.

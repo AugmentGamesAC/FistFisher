@@ -212,7 +212,6 @@ public class MenuManager : MonoBehaviour
         {
             if (ALInput.GetKeyDown(ALInput.Start))
             {
-
                 /*if (!(m_currentMenus == Menus.MainMenu))
                     ActivateMenu(Menus.ShopMenu);
                 else
@@ -231,6 +230,21 @@ public class MenuManager : MonoBehaviour
                 }
                 else
                     ActivateMenu(Menus.NotSet);
+            }
+
+            if (ALInput.GetKeyDown(ALInput.MountBoat))
+            {
+                if (m_player.GetComponent<PlayerMovement>().m_isMounted)
+                {
+                    if (!(m_currentMenus == Menus.BoatTravel))
+                    {
+                        ActivateMenu(Menus.BoatTravel);
+                        //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+                    }
+
+                    else
+                        ActivateMenu(Menus.NotSet);
+                }
             }
 
             if (ALInput.GetKeyDown(ALInput.ToggleShop))
