@@ -70,7 +70,8 @@ public class HealthModule : MonoBehaviour
 
         //Health Canvas Value = m_healthPercentage;
         //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, .1f);
-        m_HealthSlider.value = m_healthPercentage;
+        if(m_HealthSlider!=null)
+            m_HealthSlider.value = m_healthPercentage;
     }
 
     private bool UpdateDeathStatus()

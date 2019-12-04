@@ -72,6 +72,10 @@ public class ALInput : MonoBehaviour
     KeyCode m_toggleShop;
     public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
 
+    [SerializeField]
+    KeyCode m_start;
+    public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -193,6 +197,8 @@ public class ALInput : MonoBehaviour
 
         m_toggleInventory = KeyCode.I;
         m_toggleShop = KeyCode.O;
+
+        m_start = KeyCode.Space;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }
