@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class FishWander : FishTask
 {
+    public void Start()
+    {
+        ReadInfo();
+        ChooseRandomLocation();
+    }
+
     public override NodeResult Execute()
     {
         ReadInfo();
