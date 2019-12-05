@@ -76,12 +76,14 @@ public class Bait : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        m_influenceFish.ImpressFish(other.gameObject);
+        if (m_influenceFish != null)
+            m_influenceFish.ImpressFish(other.gameObject);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        m_influenceFish.ImpressFish(other.gameObject);
+        if (m_influenceFish != null)
+            m_influenceFish.ImpressFish(other.gameObject);
     }
 
 

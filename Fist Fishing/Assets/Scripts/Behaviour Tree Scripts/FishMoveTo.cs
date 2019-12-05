@@ -15,14 +15,11 @@ public class FishMoveTo : FishTask
     {
         ReadInfo();
 
-        if (Vector3.Distance(m_me.transform.position, m_target.transform.position) < m_accuracy)
-            return NodeResult.SUCCESS;
-
         ResolveAwareness();
         CollisionAvoidance();
         MoveToward();
 
-        return NodeResult.RUNNING;
+        return NodeResult.SUCCESS;
     }
 
     protected Dictionary<GameObject, FishReaction> RemeberHistory()

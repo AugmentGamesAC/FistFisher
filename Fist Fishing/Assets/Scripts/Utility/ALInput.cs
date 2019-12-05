@@ -40,6 +40,22 @@ public class ALInput : MonoBehaviour
 
 
     [SerializeField]
+    KeyCode m_rotateForward;
+    public static KeyCode RotateForward { get { hasInstance(); return Instance.m_rotateForward; } }
+    [SerializeField]
+    KeyCode m_rotateBackwards;
+    public static KeyCode RotateBackwards { get { hasInstance(); return Instance.m_rotateBackwards; } }
+    [SerializeField]
+    KeyCode m_rotateRight;
+    public static KeyCode RotateRight { get { hasInstance(); return Instance.m_rotateRight; } }
+    [SerializeField]
+    KeyCode m_rotateLeft;
+    public static KeyCode RotateLeft { get { hasInstance(); return Instance.m_rotateLeft; } }
+
+
+
+
+    [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
     [SerializeField]
@@ -72,6 +88,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_toggleInventory;
     public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
+
 
 
     /// <summary>
@@ -185,7 +202,16 @@ public class ALInput : MonoBehaviour
         m_punch = KeyCode.Q;
         m_manualCamera = KeyCode.Mouse1;
 
-        m_mountBoat = KeyCode.M;
+
+        m_rotateForward = KeyCode.Keypad8;
+        m_rotateBackwards = KeyCode.Keypad2;
+        m_rotateRight = KeyCode.Keypad4;
+        m_rotateLeft = KeyCode.Keypad6;
+
+
+
+
+    m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
         m_harvest = KeyCode.E;
         m_throwBait = KeyCode.P;
