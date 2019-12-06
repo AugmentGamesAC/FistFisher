@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -212,35 +212,6 @@ PrefabInstance:
       propertyPath: m_PlayerInventory
       value: 
       objectReference: {fileID: 1153492274}
-    - target: {fileID: 425190850, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 136204561885037710, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975193530641801, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3858970454119154645, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508687230158649859, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4793803398228744690, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
 --- !u!1001 &228140993
@@ -315,16 +286,16 @@ PrefabInstance:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 1708827369}
-    - target: {fileID: 8268430211960596312, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_HealthSlider
-      value: 
-      objectReference: {fileID: 1669199578}
     - target: {fileID: 7295796181223495115, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
       propertyPath: m_OxygenSlider
       value: 
       objectReference: {fileID: 1300698609}
+    - target: {fileID: 8268430211960596312, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_HealthSlider
+      value: 
+      objectReference: {fileID: 1669199578}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &567411253

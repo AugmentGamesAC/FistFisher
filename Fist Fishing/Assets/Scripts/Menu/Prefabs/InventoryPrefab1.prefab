@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1990969796264009378}
   - component: {fileID: 1990969796264009377}
   - component: {fileID: 1990969796264009376}
+  - component: {fileID: 729159918786320074}
   m_Layer: 5
-  m_Name: InventoryPrefab
+  m_Name: InventoryPrefab1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &1990969796264009377
 MonoBehaviour:
@@ -99,6 +100,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &729159918786320074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990969796264009383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HUD: {fileID: 1990969796264009383}
+  m_canvas: {fileID: 1990969796264009378}
 --- !u!1 &1990969797250425331
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95291a0e2afa1fd4d908b55d8c2aa708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inventory: {fileID: 11400000, guid: e46d06de81e39304fb211dfe714bc189, type: 2}
+  m_mouseItem: {fileID: 0}
+  m_inventory: {fileID: 11400000, guid: c1e4fc64eaa248c4baadfe370e430aee, type: 2}
   m_inventoryPrefab: {fileID: 5459825935528552993, guid: a06eb35563a94a848873988547545ffb,
     type: 3}
   m_xStartPos: -60
