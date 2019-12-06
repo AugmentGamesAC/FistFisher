@@ -51,19 +51,20 @@ public class TargetController : MonoBehaviour
             return;
         }
 
-        if (!m_targetedFish.activeSelf)
-        {
-            ToggleTargetingReticle(false);
-        }
-
         if (ALInput.GetKeyDown(ALInput.KeyTarget))
             ToggleTargeting();
 
         if (ALInput.GetKeyDown(ALInput.ForgetTarget))
             SelectNextTarget();
 
+
         if (m_targetedFish == null)
             return;
+
+        if (!m_targetedFish.activeSelf)
+        {
+            ToggleTargetingReticle(false);
+        }
 
         m_closestFishDistance = Vector3.Distance(m_targetedFish.transform.position, m_playerRef.transform.position);
 

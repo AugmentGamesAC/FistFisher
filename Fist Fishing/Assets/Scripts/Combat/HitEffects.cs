@@ -12,7 +12,7 @@ public class HitEffects : MonoBehaviour
     public float m_timeToShowHitEffect = 0.5f;
     float m_timeToStopShowing = 0.0f;
 
-
+    Quaternion m_startRot;
 
     public void Hit()
     {
@@ -40,6 +40,7 @@ public class HitEffects : MonoBehaviour
     void Awake()
     {
         m_effectPlane.SetActive(false);
+        m_startRot = m_effectPlane.transform.rotation;
     }
 
     // Update is called once per frame
@@ -49,5 +50,7 @@ public class HitEffects : MonoBehaviour
             m_timeToStopShowing -= Time.deltaTime;
         else
             m_effectPlane.SetActive(false);
+
+        m_effectPlane.transform.rotation = m_startRot;
     }
 }

@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
         m_camera.SetPlayer(m_player);
 
         m_boat = GameObject.FindGameObjectWithTag("Boat");
-
-        m_boatMovement = m_boat.GetComponent<BoatMovement>();
+        if(m_boat!=null)
+            m_boatMovement = m_boat.GetComponent<BoatMovement>();
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
