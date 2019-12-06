@@ -9,6 +9,10 @@ public class BiteManager : MonoBehaviour
     public float BiteDamage { get { return m_biteDamage; } }
 
     [SerializeField]
+    protected float m_timeBetweenBites = 1.5f;
+    public float TimeBeteenBites { get { return m_timeBetweenBites; } }
+
+    [SerializeField]
     protected int m_Bitables = 0;
 
     protected HashSet<Collider> m_inMouth = new HashSet<Collider>();
