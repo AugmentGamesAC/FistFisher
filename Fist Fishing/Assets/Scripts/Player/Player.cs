@@ -13,7 +13,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private HealthModule m_healthModule;
+    [SerializeField]
+    protected HealthModule m_healthModule;
+    public HealthModule HealthModule {get { return m_healthModule; } }
     private OxygenTracker m_oxygenTracker;
 
     private CharacterController m_characterController;

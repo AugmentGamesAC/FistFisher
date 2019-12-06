@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 8562901438202665574}
   - component: {fileID: -6225508407773902923}
   m_Layer: 0
-  m_Name: Fish1_Model_Prefab
+  m_Name: Fish-Cautious1
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,6 +1176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Damaged
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c90e0b7a343d5154bb77e588e91ffca7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c90e0b7a343d5154bb77e588e91ffca7,
         type: 3}
