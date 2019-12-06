@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterController: {fileID: 7295796181784110617}
-  m_turnSpeed: 25
+  m_turnSpeed: 60
   m_player: {fileID: 7295796181784110616}
   m_playerBody: {fileID: 7295796180478928119}
   m_boat: {fileID: 0}
@@ -396,6 +396,7 @@ MonoBehaviour:
   m_groundMask:
     serializedVersion: 2
     m_Bits: 256
+  m_boatMovement: {fileID: 0}
 --- !u!114 &8268430212035573679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,8 +514,8 @@ MonoBehaviour:
     type: 3}
   m_targetCloseness: 0.9
   m_angleToHarvest: 30
-  m_rangeToView: 20
-  m_rangeToHarvest: 10
+  m_rangeToView: 10
+  m_rangeToHarvest: 4
   m_harvestablesInView: []
   m_targetingIsActive: 0
   m_toHarvest: {fileID: 0}
@@ -540,7 +541,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7295796181784110616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b06d3f18fc7a8554b86d3a2c4b69711a, type: 3}
   m_Name: 

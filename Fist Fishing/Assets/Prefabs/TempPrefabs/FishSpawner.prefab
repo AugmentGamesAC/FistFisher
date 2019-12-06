@@ -53,7 +53,7 @@ MonoBehaviour:
     type: 3}
   m_normalMaxNumberOfFishForThisSpawnerToSpawn: 2
   m_normalNumberOfSecondsToSpawnFish: 5
-  m_spawnRadius: 5
+  m_spawnRadius: 15
   m_spawnCooldown: 0
 --- !u!135 &6808544051830478241
 SphereCollider:
@@ -66,7 +66,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4052155014734363006
 Rigidbody:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_boatMapMaterial: {fileID: 2100000, guid: 393f45c1832256249846d8e84297a52a, type: 2}
   m_radiusWeAreUsingForThisObject: {fileID: 6808544051830478241}
-  m_Text: {fileID: 0}
+  m_Text: {fileID: 1655391851192011573}
 --- !u!1 &4161626821112480524
 GameObject:
   m_ObjectHideFlags: 0

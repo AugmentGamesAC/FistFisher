@@ -26,13 +26,18 @@ public class FishSpawnerMapVisibility : MonoBehaviour
 
         if(m_boatMapMaterial!=null)
             gameObject.GetComponent<Renderer>().material = m_boatMapMaterial;
-        /*if(m_Text!=null)
+        if(m_Text!=null)
         {
-            FishSpawner fsp = GetComponentInParent<FishSpawner>();
+            /*FishSpawner fsp = GetComponentInParent<FishSpawner>();
             if(fsp!=null)
-                m_Text.text = 
+                m_Text.text = */
+            //Vector3 v = gameObject.transform.position + gameObject.transform.up * m_radiusWeAreUsingForThisObject.radius;
+            Vector3 v = gameObject.transform.position;
+            v.y = 30.0f;
+            m_Text.gameObject.transform.position = v;
+            m_Text.gameObject.transform.localScale = Vector3.one * 3.0f;
         }
-        */
+        
     }
 
     // Update is called once per frame
