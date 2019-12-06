@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
         m_camera.SetPlayer(m_player);
 
         m_boat = GameObject.FindGameObjectWithTag("Boat");
-
-        m_boatMovement = m_boat.GetComponent<BoatMovement>();
+        if(m_boat!=null)
+            m_boatMovement = m_boat.GetComponent<BoatMovement>();
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
@@ -204,9 +204,17 @@ public class PlayerMovement : MonoBehaviour
 
     void ResolveSwimRotation()
     {
-        Vector3 desiredDirection = (
-            transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
-            + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //Vector3 desiredDirection = (
+        //    transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //    + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //) * m_turnSpeed * Time.deltaTime;
+        Vector3 desiredDirection = new Vector3
+        (
+            (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
+            ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+            0, // no touch Y
+            (ALInput.GetKey(ALInput.RotateLeft)) ? 1 : 0 +
+            ((ALInput.GetKey(ALInput.RotateRight)) ? -1 : 0)
         ) * m_turnSpeed * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)

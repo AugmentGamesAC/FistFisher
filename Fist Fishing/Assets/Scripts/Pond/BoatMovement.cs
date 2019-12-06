@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoatMovement : MonoBehaviour
 {
     public Vector3 m_centerOfMass;
-
+    public float m_collisionRange = 2.5f;
     public float m_speed = 1.0f;
     public float m_steerSpeed = 10.0f;
 
@@ -15,6 +15,7 @@ public class BoatMovement : MonoBehaviour
     public bool m_allowUpdate = false;
 
     Transform m_COM;
+    public Transform m_boatFront;
 
     float m_verticalInput;
     float m_horizontalInput;
@@ -49,7 +50,17 @@ public class BoatMovement : MonoBehaviour
         //ALInput.GetDirection(ALInput.DirectionCode.MoveInput).y;
 
         m_movementFactor = Mathf.Lerp(m_movementFactor, m_verticalInput, Time.deltaTime / m_movementThreshold);
-        transform.Translate(0.0f, 0.0f, m_movementFactor * m_speed);
+        RaycastHit hit;
+        Physics.Raycast(m_boatFront.position, Vector3.forward, out hit, m_collisionRange);
+        if (hit.collider == null || hit.collider.isTrigger)
+        {
+            transform.Translate(0.0f, 0.0f, m_movementFactor * m_speed);
+        }
+        else
+        {
+            //Debug.LogError(hit.collider.gameObject.name);
+            transform.Translate(0.0f, 0.0f, -m_movementFactor * m_speed);
+        }
     }
 
     void Steer()
