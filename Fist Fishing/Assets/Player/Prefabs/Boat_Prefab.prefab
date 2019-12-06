@@ -24,11 +24,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3862380958569132418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8606452, y: 0, z: -0.26907435}
+  m_LocalPosition: {x: -1.8606452, y: 0, z: -6.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8593285672788413126}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4933493244571855984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7164482799746384780}
+  m_Layer: 0
+  m_Name: forward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7164482799746384780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933493244571855984}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.97, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8463207306440590998}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6402087367955184299
 GameObject:
@@ -54,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6402087367955184299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5499998, z: 0}
+  m_LocalPosition: {x: 0, y: 2.6, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8593285672788413126}
@@ -69,9 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463207306440590998}
+  - component: {fileID: 5122104800718471064}
   m_Layer: 0
   m_Name: Boat_Prefab
-  m_TagString: Untagged
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,9 +119,30 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9212625222002947611}
+  - {fileID: 7164482799746384780}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5122104800718471064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264625814240377294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482c2f1eccd693488a283377acb223b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_centerOfMass: {x: 0, y: 0, z: 0}
+  m_collisionRange: 2.5
+  m_speed: 0.2
+  m_steerSpeed: 1
+  m_movementThreshold: 10
+  m_steerThreshold: 10
+  m_allowUpdate: 0
+  m_boatFront: {fileID: 7164482799746384780}
 --- !u!1 &8072168258052855882
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 8072168258052855882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1.5, z: 1.5000018}
+  m_LocalScale: {x: 18.35, y: 3.54, z: 4.08}
   m_Children: []
   m_Father: {fileID: 8593285672788413126}
   m_RootOrder: 1
@@ -165,12 +217,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 94285d7410515984cbba82b9b3358702,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.021442302
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 94285d7410515984cbba82b9b3358702,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.31206313
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 94285d7410515984cbba82b9b3358702,
         type: 3}
@@ -215,6 +267,21 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 94285d7410515984cbba82b9b3358702,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3611290068673472569, guid: 94285d7410515984cbba82b9b3358702,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3611290068673472569, guid: 94285d7410515984cbba82b9b3358702,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3611290068673472569, guid: 94285d7410515984cbba82b9b3358702,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
