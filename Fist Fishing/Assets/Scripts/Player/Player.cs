@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         m_respawnLocation = point;
     }
 
-    protected void HandleDeath()
+    public void HandleDeath()
     {
         //stick stuff here to handle player death
 
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
 
         PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
         move.Mount();
+
     }
 
     private void Init()
