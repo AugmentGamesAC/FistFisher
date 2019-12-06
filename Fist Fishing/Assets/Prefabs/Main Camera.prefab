@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2167131274534524105}
   - component: {fileID: 2167131274534524104}
   - component: {fileID: 2167131274534524111}
+  - component: {fileID: 5860884434843427857}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -97,3 +98,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_targetController: {fileID: 0}
+--- !u!114 &5860884434843427857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167131274534524107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2360937b4c830aa45a33a5d91dbdc672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WaterLevel: -0.74
+  m_WaterPlane: {fileID: 0}
+  m_UnderwaterColor: {fileID: 2100000, guid: 62fd5140cb16a1b45bc1f366afefc141, type: 2}
+  isUnderwater: 1
