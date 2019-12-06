@@ -15,7 +15,7 @@ public class HealthModule : MonoBehaviour
 
     [SerializeField]
     protected float m_healthPercentage;
-    public float HealthPercentage { get { return m_healthPercentage; } }
+    public float HealthPercentage { get { return UpdateHealthPercentage(); } }
 
     public delegate void OnDeathEvent();
     public event OnDeathEvent OnDeath;
@@ -64,7 +64,7 @@ public class HealthModule : MonoBehaviour
         ModifyHealth(-damageAmount);
     }
 
-    private void UpdateHealthPercentage()
+    private float UpdateHealthPercentage()
     {
         m_healthPercentage = m_currentHealth / m_maxHealth;
 
@@ -72,6 +72,8 @@ public class HealthModule : MonoBehaviour
         //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, .1f);
         if(m_HealthSlider!=null)
             m_HealthSlider.value = m_healthPercentage;
+
+        return m_healthPercentage;
     }
 
     private bool UpdateDeathStatus()

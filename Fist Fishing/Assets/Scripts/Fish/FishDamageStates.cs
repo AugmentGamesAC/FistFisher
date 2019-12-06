@@ -27,6 +27,12 @@ public class FishDamageStates : MonoBehaviour
         
     }
 
+    void Awake()
+    {
+
+        m_currentModel = DamageStates[1.0f];
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -36,8 +42,9 @@ public class FishDamageStates : MonoBehaviour
         foreach(float flt in DamageStates.Keys)
         {
             //Debug.Log(flt + DamageStates[flt].name);
-            if(flt < curhp)
+            if(curhp < flt)
             {
+                //Debug.LogWarning(curhp + ": Switching States to " + DamageStates[flt]);
                 m_currentModel = DamageStates[flt];
             }
             DamageStates[flt].SetActive(false);
