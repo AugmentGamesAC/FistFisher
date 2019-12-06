@@ -15,7 +15,7 @@ public class HealthModule : MonoBehaviour
 
     [SerializeField]
     protected float m_healthPercentage;
-    public float HealthPercentage { get { return m_healthPercentage; } }
+    public float HealthPercentage { get { return UpdateHealthPercentage(); } }
 
     public delegate void OnDeathEvent();
     public event OnDeathEvent OnDeath;
@@ -29,7 +29,7 @@ public class HealthModule : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_HealthSlider = GetComponentInChildren<Slider>();
+        //m_HealthSlider = GetComponentInChildren<Slider>();
 
         ResetHealth();
         UpdateHealthPercentage();
@@ -64,14 +64,16 @@ public class HealthModule : MonoBehaviour
         ModifyHealth(-damageAmount);
     }
 
-    private void UpdateHealthPercentage()
+    private float UpdateHealthPercentage()
     {
         m_healthPercentage = m_currentHealth / m_maxHealth;
 
         //Health Canvas Value = m_healthPercentage;
         //m_HealthSlider.value = Mathf.Lerp(m_HealthSlider.value, m_healthPercentage, .1f);
+        if(m_HealthSlider!=null)
+            m_HealthSlider.value = m_healthPercentage;
 
-        m_HealthSlider.value = m_healthPercentage;
+        return m_healthPercentage;
     }
 
     private bool UpdateDeathStatus()
