@@ -171,7 +171,7 @@ public class MenuManager : MonoBehaviour
         //as a fllback on closing a menu, we can always set the current menu to not et, and let this deal with choosing the correct one
         if (m_currentMenus == Menus.NotSet)
         {
-            Menus m = Menus.NotSet;
+            //Menus m = Menus.NotSet;
             //do stuff
             ActivateMenu(Menus.NormalHUD);
         }
