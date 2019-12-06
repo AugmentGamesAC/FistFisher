@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public float m_groundDistance = 0.4f;
     public LayerMask m_groundMask;
 
+    public BoatMovement m_boatMovement;
+
     private void Start()
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -56,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         m_boat = GameObject.FindGameObjectWithTag("Boat");
 
+        m_boatMovement = m_boat.GetComponent<BoatMovement>();
+
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
@@ -63,16 +67,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (m_isMounted)
         {
-            DriveBoat();
-            return;
+            if (m_boatMovement != null)
+                m_boatMovement.m_allowUpdate = m_isMounted;
         }
-        if (m_isSwimming)
+        else
         {
-            Swim();
-            return;
+            if (m_isSwimming)
+            {
+                Swim();
+                return;
+            }
+            else
+            {
+                ApplyGravity();
+                Walk();
+            }
         }
-        ApplyGravity();
-        Walk();
     }
 
 
@@ -84,8 +94,6 @@ public class PlayerMovement : MonoBehaviour
         UpdateCamera();
 
         ResolveMovement();
-
-
 
         m_mountCooldown -= Time.deltaTime;
         m_baitThrowCooldown -= Time.deltaTime;
@@ -149,13 +157,14 @@ public class PlayerMovement : MonoBehaviour
 
         m_canMount = false;
 
-        m_boat.transform.forward = transform.forward;
-        m_boat.transform.SetParent(this.transform);
+
+        transform.forward = m_boat.transform.forward;
+        transform.SetParent(m_boat.transform);
     }
 
     private void Dismount()
     {
-        m_boat.transform.SetParent(null);
+        transform.SetParent(null);
 
         //go to diving position
         transform.position = m_boatDismountPosition;
@@ -248,7 +257,6 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(speed * Time.deltaTime);
-
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.
