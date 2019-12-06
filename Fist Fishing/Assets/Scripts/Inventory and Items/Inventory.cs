@@ -87,21 +87,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public bool AddToInventory(GameObject obj)
     {
-        /*if (!IsAHarvestable(obj))
-            return false;
-
-        if (m_storedObjects.Contains(obj))
-            return false;
-
-        m_storedObjects.Add(obj);
-
-        SetNewInventoryObjectPosition(obj);
-
-        return true;*/
-
-
-        /*if (!IsAHarvestable(obj) && !IsABait(obj))
-    return false;*/
+        ItemWorth iw = obj.GetComponent<ItemWorth>();
 
         if (m_storedObjects.Contains(obj))
             return false;
@@ -109,7 +95,7 @@ public class Inventory : MonoBehaviour
         if (IsABait(obj))
         {
             m_BaitCount++;
-            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1);//Use delegate and event in future for every time a inventory item gets changed.
+            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1, iw);//Use delegate and event in future for every time a inventory item gets changed.
         }
         else if (IsAHarvestable(obj))
         {
@@ -120,16 +106,15 @@ public class Inventory : MonoBehaviour
             {
                 case HarvestableType.DeadFish:
                     m_fishCount++;
-                    m_displayInventoryObject.AddItem(m_fishScriptableObject, 1);
+                    m_displayInventoryObject.AddItem(m_fishScriptableObject, 1, iw);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count++;
-                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1);
-                    //InventoryChange = m_InventoryObject.AddItem(m_coralScriptableObject, 1);
+                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1, iw);
                     break;
                 case HarvestableType.Coral2:
                     m_coral2Count++;
-                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1);
+                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1, iw);
                     break;
                 case HarvestableType.NotSet:
                     return false;
@@ -142,27 +127,9 @@ public class Inventory : MonoBehaviour
 
         m_storedObjects.Add(obj);
 
-        SetNewInventoryObjectPosition(obj);
-
-        //InventoryChange.Invoke();
+        obj.SetActive(false);
 
         return true;
-    }
-
-    void SetNewInventoryObjectPosition(GameObject obj)
-    {
-
-        /*******************************************************************************************************************************/
-        //TEMPORARY MEASURE TILL WE FIGURE OUT UI
-        /*******************************************************************************************************************************/
-
-        Vector3 pos = obj.transform.position;
-        pos.y = -999.9f;
-        obj.transform.position = pos;
-
-        /*******************************************************************************************************************************/
-        /*******************************************************************************************************************************/
-        /*******************************************************************************************************************************/
     }
 
     /// <summary>
