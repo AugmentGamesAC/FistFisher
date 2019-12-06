@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public float m_groundDistance = 0.4f;
     public LayerMask m_groundMask;
 
+    public BoatMovement m_boatMovement;
+
     private void Start()
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        m_displayInventory.gameObject.SetActive(false);
+        //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
 
         if (m_player == null)
             m_player = gameObject;
@@ -55,24 +57,30 @@ public class PlayerMovement : MonoBehaviour
         m_camera.SetPlayer(m_player);
 
         m_boat = GameObject.FindGameObjectWithTag("Boat");
+        if(m_boat!=null)
+            m_boatMovement = m_boat.GetComponent<BoatMovement>();
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
     }
 
     void ResolveMovement()
     {
+        if (m_boatMovement != null)
+            m_boatMovement.m_allowUpdate = m_isMounted;
+
         if (m_isMounted)
-        {
-            DriveBoat();
             return;
-        }
-        if (m_isSwimming)
-        {
-            Swim();
-            return;
-        }
-        ApplyGravity();
-        Walk();
+
+            if (m_isSwimming)
+            {
+                Swim();
+                return;
+            }
+            else
+            {
+                ApplyGravity();
+                Walk();
+            }
     }
 
 
@@ -84,8 +92,6 @@ public class PlayerMovement : MonoBehaviour
         UpdateCamera();
 
         ResolveMovement();
-
-
 
         m_mountCooldown -= Time.deltaTime;
         m_baitThrowCooldown -= Time.deltaTime;
@@ -110,10 +116,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        
+
+        /*if (ALInput.GetKeyDown(ALInput.ToggleInventory))
         {
             ToggleMouseLock();
-        }
+        }*/
     }
 
     public void ToggleMouseLock()
@@ -149,19 +157,21 @@ public class PlayerMovement : MonoBehaviour
 
         m_canMount = false;
 
-        m_boat.transform.forward = transform.forward;
-        m_boat.transform.SetParent(this.transform);
+
+        transform.forward = m_boat.transform.forward;
+        transform.SetParent(m_boat.transform);
     }
 
     private void Dismount()
     {
-        m_boat.transform.SetParent(null);
+        transform.SetParent(null);
 
         //go to diving position
         transform.position = m_boatDismountPosition;
 
         //no longer mounted on the boat.
         m_isMounted = false;
+        m_canMount = true;
     }
 
     private void UpdateBoatMountStatus()
@@ -195,9 +205,17 @@ public class PlayerMovement : MonoBehaviour
 
     void ResolveSwimRotation()
     {
-        Vector3 desiredDirection = (
-            transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
-            + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //Vector3 desiredDirection = (
+        //    transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //    + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
+        //) * m_turnSpeed * Time.deltaTime;
+        Vector3 desiredDirection = new Vector3
+        (
+            (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
+            ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+            0, // no touch Y
+            (ALInput.GetKey(ALInput.RotateLeft)) ? 1 : 0 +
+            ((ALInput.GetKey(ALInput.RotateRight)) ? -1 : 0)
         ) * m_turnSpeed * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)
@@ -240,7 +258,6 @@ public class PlayerMovement : MonoBehaviour
 
         //apply movement to controller.
         m_characterController.Move(speed * Time.deltaTime);
-
     }
 
     //Same logic as walk but higher Speed and less turning speed on camera.
