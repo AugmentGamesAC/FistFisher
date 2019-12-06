@@ -61,9 +61,9 @@ public class DisplayInventory : MonoBehaviour
         {
             if (slot.Value.m_ID >= 0)
             {
-                slot.Key.GetComponent<RawImage>().color = new Color(1, 1, 1, .5f);
+                slot.Key.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
                 //change sprite instead of changing color for future reference.
-                slot.Key.GetComponent<RawImage>().color = slot.Value.m_item.prefab.GetComponent<Image>().color;
+                slot.Key.GetComponent<Image>().color = slot.Value.m_item.prefab.GetComponent<Image>().color;
                 slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.m_amount <= 0 ? "" : slot.Value.m_amount.ToString("n0");
 
                 if (slot.Value.m_amount <= 0)
@@ -73,7 +73,7 @@ public class DisplayInventory : MonoBehaviour
             }
             else
             {
-                slot.Key.GetComponent<RawImage>().color = new Color(1, 1, 1, .5f);
+                slot.Key.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
                 slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
         }
