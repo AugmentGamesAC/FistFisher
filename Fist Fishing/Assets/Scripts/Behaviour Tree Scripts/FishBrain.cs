@@ -80,7 +80,8 @@ public class FishBrain : BehaviorTree
         Sequence newRoot = gameObject.AddComponent<Sequence>();
         newRoot.Init(this, new List<Node>(){
             gameObject.AddComponent<FishWander>(),
-            gameObject.AddComponent<FishMoveTo>()
+            gameObject.AddComponent<FishMoveTo>(),
+            gameObject.AddComponent<FishAttack>()
         });
         root = newRoot;
 
