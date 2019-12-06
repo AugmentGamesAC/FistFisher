@@ -633,16 +633,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7138719833323160056}
     m_Modifications:
-    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
-        type: 3}
-      propertyPath: m_Name
-      value: Shark_Model_FBX_V1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 653360865323999148, guid: 169253062427bc04cbb34ab5bef9156a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -708,6 +698,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
+        type: 3}
+      propertyPath: m_Name
+      value: Shark_Model_FBX_V1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4035277908495328079, guid: 169253062427bc04cbb34ab5bef9156a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -765,16 +765,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7138719833323160056}
     m_Modifications:
-    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
-        type: 3}
-      propertyPath: m_Name
-      value: SharkDamageState_Model_FBX_V02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8363268637242111752, guid: f30be31b1b67a7c44a656943cac2b081,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -838,6 +828,16 @@ PrefabInstance:
     - target: {fileID: 8363268637242111752, guid: f30be31b1b67a7c44a656943cac2b081,
         type: 3}
       propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
+        type: 3}
+      propertyPath: m_Name
+      value: SharkDamageState_Model_FBX_V02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
