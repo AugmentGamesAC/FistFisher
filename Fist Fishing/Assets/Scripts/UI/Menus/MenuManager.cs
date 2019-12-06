@@ -131,7 +131,6 @@ public class MenuManager : MonoBehaviour
             return;
         if (Instance.MenuList.TryGetValue(m, out m_Mylist))
             SetActiveSatusOncurrentMenuOption(true);
-
     }
 
     /// <summary>

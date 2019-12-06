@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        ResolveMovement();
+        
 
         m_mountCooldown -= Time.deltaTime;
         m_baitThrowCooldown -= Time.deltaTime;
@@ -99,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (m_mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
+
+        
 
 
         if (m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
@@ -124,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
         }*/
     }
 
+    private void LateUpdate()
+    {
+        ResolveMovement();
+    }
+
     public void ToggleMouseLock()
     {
         bool setToNone = Cursor.lockState == CursorLockMode.Locked;
@@ -145,12 +152,12 @@ public class PlayerMovement : MonoBehaviour
         m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
     }
 
-    private void Mount()
+    public void Mount()
     {
         //teleport to boat seat.
         transform.position = m_boatMountPosition;
 
-        m_player.GetComponent<Player>().SetNewCheckpoint(transform);
+        m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -184,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
             m_mountCooldown = m_mountCooldownMax;
         }
         //if i am mounted and pressing the dismount button.
-        else if (!m_canMount && ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
+        else if (ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
         {
             Dismount();
 
