@@ -13,6 +13,8 @@ public class DisplayInventory : MonoBehaviour
 
     public InventoryObject m_inventory;
 
+    public Inventory m_playerInventory;
+
     public GameObject m_inventoryPrefab;
 
     public int m_xStartPos;
@@ -133,13 +135,13 @@ public class DisplayInventory : MonoBehaviour
             {
                 ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
             }
-            else 
+            else
             {
                 if (m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
                 {
                     ((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item);
                 }
-                    m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+                m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
             }
             m_inventory.RemoveItem(m_itemsDisplayed[obj]);
         }
@@ -160,6 +162,12 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
+        if (m_playerInventory != null)
+        {
+            Vector2 boxpos = new Vector2(325, 50);
+            GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
+        }
+
         if (!this.gameObject.activeSelf)
             return;
         if (m_mouseItem == null)

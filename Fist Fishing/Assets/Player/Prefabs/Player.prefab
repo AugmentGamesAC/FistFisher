@@ -551,15 +551,19 @@ MonoBehaviour:
   m_coral1Count: 0
   m_coral2Count: 0
   m_BaitCount: 0
-  m_displayInventoryObject: {fileID: 11400000, guid: c1e4fc64eaa248c4baadfe370e430aee,
+  m_displayInventoryObject: {fileID: 11400000, guid: 0cb1c6bfef3ed5a499bdcad3704823da,
     type: 2}
-  m_fishScriptableObject: {fileID: 11400000, guid: 2a7e223e901684f45b92d2b798a4afd8,
+  m_AntEaterScriptableObject: {fileID: 11400000, guid: a7332158e0403064bb82399ff2ddd7bc,
     type: 2}
-  m_baitScriptableObject: {fileID: 11400000, guid: 825e51bf9e2ac1c46ac3cdb4d8e43504,
+  m_YellowScriptableObject: {fileID: 11400000, guid: 81aa902c714102d45b2a4a8d49350401,
     type: 2}
-  m_coral1ScriptableObject: {fileID: 11400000, guid: 7379373f0cac57c41bf3493f59d5e0d8,
+  m_RhynoScriptableObject: {fileID: 11400000, guid: 198171bdcff1e34428960ca63e6a9709,
     type: 2}
-  m_coral2ScriptableObject: {fileID: 11400000, guid: 04763a2754dee3a488ba7302080dbca8,
+  m_baitScriptableObject: {fileID: 11400000, guid: 8375c0803689a0d45818ee5fe131e716,
+    type: 2}
+  m_coral1ScriptableObject: {fileID: 11400000, guid: fa3d08fcf6707b14c9f89ec2bf165733,
+    type: 2}
+  m_coral2ScriptableObject: {fileID: 11400000, guid: dc3557802b5d1d4438d7358303252e61,
     type: 2}
   m_currentCurrency: 0
   m_storedObjects: []
@@ -575,6 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1c28f071024bd4cb4c70ee564a809f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_healthModule: {fileID: 0}
   m_respawnLocation: {x: 0, y: 0, z: 0}
   m_fishArchetype: 4
 --- !u!114 &7002809324863039487

@@ -207,23 +207,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6875267135694476757, guid: 1d4f36990d37c694483b78360225b68b,
+    - target: {fileID: 8508687229210559823, guid: 1d4f36990d37c694483b78360225b68b,
         type: 3}
-      propertyPath: m_PlayerInventory
+      propertyPath: m_playerInventory
       value: 
       objectReference: {fileID: 937495273}
     - target: {fileID: 8508687229210559823, guid: 1d4f36990d37c694483b78360225b68b,
         type: 3}
       propertyPath: m_inventory
       value: 
-      objectReference: {fileID: 11400000, guid: 0cb1c6bfef3ed5a499bdcad3704823da,
+      objectReference: {fileID: 11400000, guid: 786473835561dcc46b6bd3b2b4f16326,
         type: 2}
-    - target: {fileID: 8508687229210559823, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_inventoryPrefab
-      value: 
-      objectReference: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
-        type: 3}
     - target: {fileID: 1058732942, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
       propertyPath: m_player
       value: 
@@ -256,6 +250,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 619306566820756073, guid: 1d4f36990d37c694483b78360225b68b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.9000244
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115788529, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115788528, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_inventoryPrefab
+      value: 
+      objectReference: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
+        type: 3}
+    - target: {fileID: 2115788528, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_playerInventory
+      value: 
+      objectReference: {fileID: 937495273}
+    - target: {fileID: 2115788528, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_ySpaceBetweenItems
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115788528, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_xSpaceBetweenItems
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
@@ -353,45 +373,9 @@ PrefabInstance:
       objectReference: {fileID: 1054216991}
     - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
-      propertyPath: m_YellowScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 81aa902c714102d45b2a4a8d49350401,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_coral2ScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: dc3557802b5d1d4438d7358303252e61,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_coral1ScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: fa3d08fcf6707b14c9f89ec2bf165733,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_baitScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 8375c0803689a0d45818ee5fe131e716,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_RhynoScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 198171bdcff1e34428960ca63e6a9709,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_AntEaterScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: a7332158e0403064bb82399ff2ddd7bc,
-        type: 2}
-    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
       propertyPath: m_displayInventoryObject
       value: 
-      objectReference: {fileID: 11400000, guid: 0cb1c6bfef3ed5a499bdcad3704823da,
+      objectReference: {fileID: 11400000, guid: 786473835561dcc46b6bd3b2b4f16326,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
