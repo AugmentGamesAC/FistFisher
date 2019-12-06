@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class FishWander : FishTask
 {
-    public override NodeResult Execute()
+    public void Start()
     {
         ReadInfo();
         ChooseRandomLocation();
+    }
+
+    public override NodeResult Execute()
+    {
+        ReadInfo();
+
+        if (Vector3.Distance(m_me.transform.position, m_target.transform.position) < m_accuracy)
+            ChooseRandomLocation();
 
         return NodeResult.SUCCESS;
     }
@@ -20,7 +28,6 @@ public class FishWander : FishTask
             m_target.transform.position = Vector3.zero;
             return;
         }
-
 
         m_target.transform.position = me.Spawner.transform.position + Random.insideUnitSphere * me.Spawner.m_spawnRadius;
     }
