@@ -207,11 +207,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6875267135694476757, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_PlayerInventory
-      value: 
-      objectReference: {fileID: 937495273}
     - target: {fileID: 425190850, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -241,6 +236,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6875267135694476757, guid: 1d4f36990d37c694483b78360225b68b,
+        type: 3}
+      propertyPath: m_PlayerInventory
+      value: 
+      objectReference: {fileID: 937495273}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
 --- !u!1001 &228140993
@@ -320,11 +320,6 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1779776065}
-    - target: {fileID: 8268430211960596312, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_HealthSlider
-      value: 
-      objectReference: {fileID: 1054216991}
     - target: {fileID: 7295796181223495115, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
       propertyPath: m_OxygenSlider
@@ -335,6 +330,11 @@ PrefabInstance:
       propertyPath: m_displayInventory
       value: 
       objectReference: {fileID: 1251582815}
+    - target: {fileID: 8268430211960596312, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_HealthSlider
+      value: 
+      objectReference: {fileID: 1054216991}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &325435183 stripped
@@ -1188,7 +1188,7 @@ PrefabInstance:
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.07
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
@@ -1198,7 +1198,7 @@ PrefabInstance:
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.73
+      value: 8.57
       objectReference: {fileID: 0}
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
@@ -1239,6 +1239,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223181578, guid: 42e0ff611b504da42aebe9c65ecde31f, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42e0ff611b504da42aebe9c65ecde31f, type: 3}

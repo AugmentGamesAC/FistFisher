@@ -239,13 +239,24 @@ public class MenuManager : MonoBehaviour
                     if (!(m_currentMenus == Menus.BoatTravel))
                     {
                         ActivateMenu(Menus.BoatTravel);
-                        //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
                     }
-
                     else
                         ActivateMenu(Menus.NotSet);
                 }
             }
+            else if (ALInput.GetKeyDown(ALInput.DismountBoat))
+            {
+                if (!m_player.GetComponent<PlayerMovement>().m_isMounted)
+                {
+                    if (!(m_currentMenus == Menus.NormalHUD))
+                    {
+                        ActivateMenu(Menus.NormalHUD);
+                    }
+                    else
+                        ActivateMenu(Menus.NotSet);
+                }
+            }
+
 
             if (ALInput.GetKeyDown(ALInput.ToggleShop))
             {

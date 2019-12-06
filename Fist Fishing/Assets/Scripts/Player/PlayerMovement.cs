@@ -65,13 +65,12 @@ public class PlayerMovement : MonoBehaviour
 
     void ResolveMovement()
     {
+        if (m_boatMovement != null)
+            m_boatMovement.m_allowUpdate = m_isMounted;
+
         if (m_isMounted)
-        {
-            if (m_boatMovement != null)
-                m_boatMovement.m_allowUpdate = m_isMounted;
-        }
-        else
-        {
+            return;
+
             if (m_isSwimming)
             {
                 Swim();
@@ -82,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
                 ApplyGravity();
                 Walk();
             }
-        }
     }
 
 
@@ -117,6 +115,8 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        
 
         /*if (ALInput.GetKeyDown(ALInput.ToggleInventory))
         {
@@ -171,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
 
         //no longer mounted on the boat.
         m_isMounted = false;
+        m_canMount = true;
     }
 
     private void UpdateBoatMountStatus()
