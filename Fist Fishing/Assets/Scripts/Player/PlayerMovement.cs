@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = (setToNone) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    private void DriveBoat()
+    /*private void DriveBoat()
     {
         //if your on the ground, don't increase Velocity;
         if (m_isGrounded && m_velocity.y < 0.0f)
@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         move.y = 0;
         //apply movement to controller.
         m_characterController.Move(move * Time.deltaTime * m_walkSpeed);
-    }
+    }*/
 
     private void Mount()
     {
@@ -159,7 +159,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         transform.forward = m_boat.transform.forward;
-        transform.SetParent(m_boat.transform);
+        Transform t = m_boat.gameObject.GetComponent<BoatMovement>().m_BoatBody.transform;
+        transform.SetParent(t);
     }
 
     private void Dismount()

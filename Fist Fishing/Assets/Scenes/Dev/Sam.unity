@@ -187,6 +187,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 425190850, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136204561885037710, guid: 1d4f36990d37c694483b78360225b68b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302975193530641801, guid: 1d4f36990d37c694483b78360225b68b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3302975194437437816, guid: 1d4f36990d37c694483b78360225b68b,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -212,20 +226,6 @@ PrefabInstance:
       propertyPath: m_PlayerInventory
       value: 
       objectReference: {fileID: 937495273}
-    - target: {fileID: 425190850, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 136204561885037710, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975193530641801, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3858970454119154645, guid: 1d4f36990d37c694483b78360225b68b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -236,11 +236,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8508687230158649858, guid: 1d4f36990d37c694483b78360225b68b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4793803398228744690, guid: 1d4f36990d37c694483b78360225b68b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -250,6 +245,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508687230158649858, guid: 1d4f36990d37c694483b78360225b68b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d4f36990d37c694483b78360225b68b, type: 3}
@@ -709,11 +709,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_centerOfMass: {x: 0, y: 0, z: 0}
-  m_speed: 1
-  m_steerSpeed: 20
+  m_speed: 0.2
+  m_steerSpeed: 2.5
   m_movementThreshold: 10
-  m_steerThreshold: 20
+  m_steerThreshold: 10
   m_allowUpdate: 0
+  m_BoatBody: {fileID: 1424865155}
 --- !u!54 &1223181578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -905,6 +906,28 @@ PrefabInstance:
       objectReference: {fileID: 1245846941}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a812880c9d0704c4b92cda9f39ea6411, type: 3}
+--- !u!1 &1424865154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 889020248418021943, guid: 42e0ff611b504da42aebe9c65ecde31f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1435191624987340282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1424865155
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424865154}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!1 &1681906281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,6 +1592,23 @@ PrefabInstance:
     - target: {fileID: 8463207306440590998, guid: 42e0ff611b504da42aebe9c65ecde31f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 889020248418021943, guid: 42e0ff611b504da42aebe9c65ecde31f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550394347, guid: 42e0ff611b504da42aebe9c65ecde31f, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550394347, guid: 42e0ff611b504da42aebe9c65ecde31f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550394347, guid: 42e0ff611b504da42aebe9c65ecde31f, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
