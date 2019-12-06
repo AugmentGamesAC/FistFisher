@@ -18,13 +18,13 @@ public class Player : MonoBehaviour
 
     private CharacterController m_characterController;
 
-    public Transform m_respawnLocation;
+    public Vector3 m_respawnLocation;
 
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }
 
-    public void SetNewCheckpoint(Transform point)
+    public void SetNewCheckpoint(Vector3 point)
     {
         m_respawnLocation = point;
     }
@@ -47,16 +47,12 @@ public class Player : MonoBehaviour
         //gameObject.transform.position = m_spawnLocation.position;
         //GEt Vector between boat spawn and player.
 
-        Vector3 MoveVector = m_respawnLocation.position - gameObject.transform.position;
+        Vector3 MoveVector = m_respawnLocation - gameObject.transform.position;
 
         m_characterController.Move(MoveVector);
 
-
-        /*PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
-        move.m_isMounted = true;
-        move.m_canMount = false;*/
-
-        //player should be sent to respawn. 
+        PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
+        move.Mount();
     }
 
     private void Init()

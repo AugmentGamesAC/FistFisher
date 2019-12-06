@@ -575,7 +575,7 @@ PrefabInstance:
     - target: {fileID: 4944756916024716238, guid: cee6ac136d049ac418d16dc07d343388,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 746
+      value: 751
       objectReference: {fileID: 0}
     - target: {fileID: 8736576207553631202, guid: cee6ac136d049ac418d16dc07d343388,
         type: 3}
@@ -994,11 +994,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: background canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8565329524879920886, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 899394153335271916, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1127,7 +1122,12 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 746
+      value: 751
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565329524879920886, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
@@ -1156,6 +1156,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871407033274}
     m_Modifications:
+    - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop Menu Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 5758115767510758829, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1260,11 +1265,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_Name
-      value: Shop Menu Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
