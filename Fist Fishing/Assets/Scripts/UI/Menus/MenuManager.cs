@@ -65,7 +65,7 @@ public class MenuManager : MonoBehaviour
 {
     #region working inspector dictionary
     /// <summary>
-    /// this is the mess reuired to make dictionaries with  list as a value work in inspector
+    /// this is the mess required to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
     [System.Serializable]

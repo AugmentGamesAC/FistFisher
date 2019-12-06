@@ -81,5 +81,7 @@ public class CombatModule : MonoBehaviour
             return;
 
         tempHealthModule.TakeDamage(m_currentCombatZone.DamageModifier * m_punchDamage);
+
+        m_targetController.m_targetPrefab.GetComponent<HitEffects>().Hit();
     }
 }
