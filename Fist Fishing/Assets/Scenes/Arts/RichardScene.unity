@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2271,10 +2271,55 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -2355,10 +2400,55 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -3795,10 +3885,56 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a99e42eb789b2fb4c97488544691457b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -4454,10 +4590,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -5245,10 +5432,55 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -6042,10 +6274,55 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -6683,10 +6960,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -7484,10 +7812,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 5182441579550052011, guid: 1a470e7ac6a9ce346bbfc41ad8381bdf,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: dc5402ad137a46a4a886f813d357acb2, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Agressive Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -8831,10 +9210,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 5182441579550052011, guid: 1a470e7ac6a9ce346bbfc41ad8381bdf,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: dc5402ad137a46a4a886f813d357acb2, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Aggressive Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -9080,10 +9510,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -9704,6 +10185,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -10918,9 +11444,54 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11163,10 +11734,56 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -12082,10 +12699,61 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -12166,10 +12834,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 5182441579550052011, guid: 1a470e7ac6a9ce346bbfc41ad8381bdf,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: dc5402ad137a46a4a886f813d357acb2, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Aggressive Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -14000,10 +14719,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -14161,10 +14931,55 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ab0712ac2d88e4cb2e3d8c7b0a529b, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Cautious Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -15047,10 +15862,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -15779,10 +16645,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -15863,10 +16780,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 7668380556320006104, guid: 7d33d26c84ff3234db680bd85af40a19,
+        type: 3}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 392fd5768f9cf9142a060a62b49970d8, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Indifferent Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
@@ -16024,10 +16992,61 @@ PrefabInstance:
       propertyPath: m_spawnRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_fishPrefab
+      value: 
+      objectReference: {fileID: 5182441579550052011, guid: 1a470e7ac6a9ce346bbfc41ad8381bdf,
+        type: 3}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalMaxNumberOfFishForThisSpawnerToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618891424285693851, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_normalNumberOfSecondsToSpawnFish
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6808544051830478241, guid: a9da2936977b94d4580cf056c1f399ce,
         type: 3}
       propertyPath: m_Radius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256984204216701234, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_boatMapMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: dc5402ad137a46a4a886f813d357acb2, type: 2}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_text
+      value: Aggressive Fish Territory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655391851192011573, guid: a9da2936977b94d4580cf056c1f399ce,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da2936977b94d4580cf056c1f399ce, type: 3}
