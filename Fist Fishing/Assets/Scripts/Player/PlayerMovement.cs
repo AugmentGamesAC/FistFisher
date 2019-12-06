@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateCamera();
 
-        ResolveMovement();
+        
 
         m_mountCooldown -= Time.deltaTime;
         m_baitThrowCooldown -= Time.deltaTime;
@@ -99,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (m_mountCooldown <= 0.0f)
             UpdateBoatMountStatus();
+
+        
 
 
         if (m_baitThrowCooldown <= 0.0f && !m_isMounted && IsThrowBait())
@@ -122,6 +124,11 @@ public class PlayerMovement : MonoBehaviour
         {
             ToggleMouseLock();
         }*/
+    }
+
+    private void LateUpdate()
+    {
+        ResolveMovement();
     }
 
     public void ToggleMouseLock()

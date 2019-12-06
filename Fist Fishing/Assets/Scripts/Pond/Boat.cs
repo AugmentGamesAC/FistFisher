@@ -35,23 +35,13 @@ public class Boat : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        /*if (other.tag == "Player")
+        if (other.tag == "Player")
         {
             PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
-            PlayerController.Dismount();
-        }*/
+
+            PlayerController.m_canMount = false;
+            PlayerController.m_boatMountPosition = m_mountTransform.position;
+            PlayerController.m_boatDismountPosition = m_dismountTransform.position;
+        }
     }
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
-
-    //        PlayerController.m_canMount = false;
-    //        PlayerController.m_isMounted = true;
-    //    }
-    //}
-
-    //needs to be on a smaller collider 
 }
