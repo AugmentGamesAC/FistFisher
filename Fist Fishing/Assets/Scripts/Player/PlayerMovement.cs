@@ -208,14 +208,22 @@ public class PlayerMovement : MonoBehaviour
         //    transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
         //    + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
         //) * m_turnSpeed * Time.deltaTime;
+        //Vector3 desiredDirection = new Vector3
+        //(
+        //    (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
+        //    ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+        //    0, // no touch Y
+        //    (ALInput.GetKey(ALInput.RotateRight)) ? 1 : 0 +
+        //    ((ALInput.GetKey(ALInput.RotateLeft)) ? -1 : 0)
+        //) * m_turnSpeed * Time.deltaTime;
+
         Vector3 desiredDirection = new Vector3
         (
-            (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
-            ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+            ALInput.GetAxis(ALInput.AxisCode.MouseY),
             0, // no touch Y
-            (ALInput.GetKey(ALInput.RotateLeft)) ? 1 : 0 +
-            ((ALInput.GetKey(ALInput.RotateRight)) ? -1 : 0)
+            ALInput.GetAxis(ALInput.AxisCode.MouseX)
         ) * m_turnSpeed * Time.deltaTime;
+
 
         if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);
