@@ -93,7 +93,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4317289871407033272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.432652, y: 20.201687, z: 19.420855}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 425190850}
@@ -587,26 +587,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3302975192921536070, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192921536070, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192813168481, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192813168481, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e1a4bacf77a7664b888cc9bb2313204, type: 3}
 --- !u!224 &3302975193530641801 stripped
@@ -634,11 +614,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871407033274}
     m_Modifications:
-    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
-        type: 3}
-      propertyPath: m_Name
-      value: background canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 899394153335271916, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -744,6 +719,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_Name
+      value: background canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1526
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 751
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
 --- !u!224 &4793803398228744690 stripped
@@ -771,11 +761,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871407033274}
     m_Modifications:
-    - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_Name
-      value: Shop Menu Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 5758115767510758829, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -880,6 +865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop Menu Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
