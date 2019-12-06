@@ -31,6 +31,11 @@ public class HitEffects : MonoBehaviour
     {
         
     }
+    void OnDisable()
+    {
+        m_timeToStopShowing = 0.0f;
+        m_effectPlane.SetActive(false);
+    }
 
     void Awake()
     {
