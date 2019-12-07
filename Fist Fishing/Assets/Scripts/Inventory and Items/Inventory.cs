@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
         if (IsABait(obj))
         {
             m_BaitCount++;
-            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1, iw);//Use delegate and event in future for every time a inventory item gets changed.
+            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1);//Use delegate and event in future for every time a inventory item gets changed.
         }
         else if (IsAHarvestable(obj))
         {
@@ -110,26 +110,26 @@ public class Inventory : MonoBehaviour
                         FishBrain.FishClassification FishClass = test.gameObject.GetComponentInChildren<BasicFish>().FishClass;
                         if (FishClass == FishBrain.FishClassification.Fearful)
                         {
-                            m_displayInventoryObject.AddItem(m_YellowScriptableObject, 1, iw);
+                            m_displayInventoryObject.AddItem(m_YellowScriptableObject, 1);
                         }
                         else if (FishClass == FishBrain.FishClassification.Agressive)
                         {
-                            m_displayInventoryObject.AddItem(m_RhynoScriptableObject, 1, iw);
+                            m_displayInventoryObject.AddItem(m_RhynoScriptableObject, 1);
                         }
                         else if (FishClass == FishBrain.FishClassification.Passive)
                         {
-                            m_displayInventoryObject.AddItem(m_AntEaterScriptableObject, 1, iw);
+                            m_displayInventoryObject.AddItem(m_AntEaterScriptableObject, 1);
                         }
                     }
                     m_fishCount++;
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count++;
-                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1, iw);
+                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1);
                     break;
                 case HarvestableType.Coral2:
                     m_coral2Count++;
-                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1, iw);
+                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1);
                     break;
                 case HarvestableType.NotSet:
                     return false;

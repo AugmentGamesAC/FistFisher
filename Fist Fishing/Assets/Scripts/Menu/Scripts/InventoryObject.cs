@@ -17,12 +17,10 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    public void AddItem(AItem item, int amount, ItemWorth worth)
+    public void AddItem(AItem item, int amount)
     {
         if (item.ID == -1)
             return;
-        if (worth != null)
-            item.m_worthInCurrency = worth.Worth;
 
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {

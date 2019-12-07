@@ -27,7 +27,7 @@ public class ShopMenuDisplayInventory : InventoryObject
         m_playerInventory.GainMoney(m_sellAmount);
     }
 
-    public void OnBuy(InventorySlot Slot)
+    public bool OnBuy(InventorySlot Slot)
     {
         //using this twice, do it on awake or something.
         if (m_playerInventory == null)
@@ -37,12 +37,20 @@ public class ShopMenuDisplayInventory : InventoryObject
         }
 
         if (m_playerInventory == null)
-            return;
+            return false;
 
         m_spendAmount = 0;
 
         m_spendAmount += Slot.m_item.m_worthInCurrency * Slot.m_amount;//bad later
 
-        m_playerInventory.SpendMoney(m_spendAmount);
+        return m_playerInventory.SpendMoney(m_spendAmount);
+    }
+
+    void OnApplicationQuit()
+    {
+        for (int i = 0; i < m_inventorySlots.Length; i++)
+        {
+            m_inventorySlots[i].UpdateSlot(-1, null, 0, null);
+        }
     }
 }

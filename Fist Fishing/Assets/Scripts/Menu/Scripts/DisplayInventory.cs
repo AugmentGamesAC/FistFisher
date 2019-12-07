@@ -134,16 +134,19 @@ public class DisplayInventory : MonoBehaviour
             if (m_mouseItem.hoverSlot.m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
             {
                 ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
+                m_inventory.RemoveItem(m_itemsDisplayed[obj]);
             }
             else
             {
                 if (m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
                 {
-                    ((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item);
+                    if (((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item))
+                    {
+                        m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+                        m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+                    }
                 }
-                m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
             }
-            m_inventory.RemoveItem(m_itemsDisplayed[obj]);
         }
         else
         {
