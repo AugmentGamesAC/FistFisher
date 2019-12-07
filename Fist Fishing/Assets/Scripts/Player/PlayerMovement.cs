@@ -57,10 +57,26 @@ public class PlayerMovement : MonoBehaviour
         m_camera.SetPlayer(m_player);
 
         m_boat = GameObject.FindGameObjectWithTag("Boat");
-        if(m_boat!=null)
+        if (m_boat != null)
+        {
             m_boatMovement = m_boat.GetComponent<BoatMovement>();
+            Boat b = m_boat.GetComponentInChildren<Boat>();
+            m_boatMountPosition = b.m_mountTransform.position;
+            m_boatDismountPosition = b.m_dismountTransform.position;
+
+            Vector3 MoveVector = b.m_mountTransform.position - gameObject.transform.position;
+            m_characterController.Move(MoveVector);
+            m_player.GetComponent<Player>().SetNewCheckpoint(b.m_mountTransform.position);
+            m_player.GetComponent<Player>().HandleDeath();
+        }
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
+    }
+
+    private void Awake()
+    {
+        
+
     }
 
     void ResolveMovement()
@@ -155,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     public void Mount()
     {
         //teleport to boat seat.
-        transform.position = m_boatMountPosition;
+        m_characterController.gameObject.transform.position = m_boatMountPosition;
 
         m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
 
@@ -165,16 +181,16 @@ public class PlayerMovement : MonoBehaviour
         m_canMount = false;
 
 
-        transform.forward = m_boat.transform.forward;
-        transform.SetParent(m_boat.transform);
+        m_characterController.gameObject.transform.forward = m_boat.transform.forward;
+        m_characterController.gameObject.transform.SetParent(m_boat.transform);
     }
 
     private void Dismount()
     {
-        transform.SetParent(null);
-
+        /*m_player.GetComponent<Player>().m_InfluenceSphereObject.*/
+        m_characterController.gameObject.transform.SetParent(null);
         //go to diving position
-        transform.position = m_boatDismountPosition;
+        m_characterController.gameObject.transform.position = m_boatDismountPosition;
 
         //no longer mounted on the boat.
         m_isMounted = false;
@@ -216,14 +232,22 @@ public class PlayerMovement : MonoBehaviour
         //    transform.right * ALInput.GetAxis(ALInput.AxisCode.MouseY)
         //    + transform.forward * ALInput.GetAxis(ALInput.AxisCode.MouseY)
         //) * m_turnSpeed * Time.deltaTime;
+        //Vector3 desiredDirection = new Vector3
+        //(
+        //    (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
+        //    ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+        //    0, // no touch Y
+        //    (ALInput.GetKey(ALInput.RotateRight)) ? 1 : 0 +
+        //    ((ALInput.GetKey(ALInput.RotateLeft)) ? -1 : 0)
+        //) * m_turnSpeed * Time.deltaTime;
+
         Vector3 desiredDirection = new Vector3
         (
-            (ALInput.GetKey(ALInput.RotateForward)) ? 1 : 0 +
-            ((ALInput.GetKey(ALInput.RotateBackwards)) ? -1 : 0),
+            ALInput.GetAxis(ALInput.AxisCode.MouseY),
             0, // no touch Y
-            (ALInput.GetKey(ALInput.RotateLeft)) ? 1 : 0 +
-            ((ALInput.GetKey(ALInput.RotateRight)) ? -1 : 0)
+            ALInput.GetAxis(ALInput.AxisCode.MouseX)
         ) * m_turnSpeed * Time.deltaTime;
+
 
         if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);

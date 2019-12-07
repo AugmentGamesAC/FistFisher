@@ -28,6 +28,9 @@ public class CombatModule : MonoBehaviour
 
         //get targeted fish.
         m_targetedFish = m_targetController.m_targetedFish;
+
+
+        m_influenceFish = GetComponent<InfluenceFish>();
     }
 
     // Update is called once per frame
@@ -72,10 +75,16 @@ public class CombatModule : MonoBehaviour
         }
     }
 
+    protected InfluenceFish m_influenceFish;
+
     //apply damage to targeted fish health component based on zone modifiers and m_damage.
     private void Punch()
     {
         HealthModule tempHealthModule = m_targetedFish.GetComponent<HealthModule>();
+
+
+        if (m_influenceFish != null)
+            m_influenceFish.ImpressFish(m_targetedFish);
 
         if (tempHealthModule == null)
             return;
