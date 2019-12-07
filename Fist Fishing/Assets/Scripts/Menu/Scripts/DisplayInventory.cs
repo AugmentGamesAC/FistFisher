@@ -17,6 +17,8 @@ public class DisplayInventory : MonoBehaviour
 
     public GameObject m_inventoryPrefab;
 
+    public Text m_text;
+
     public int m_xStartPos;
     public int m_yStartPos;
     public int m_xSpaceBetweenItems;
@@ -26,6 +28,9 @@ public class DisplayInventory : MonoBehaviour
     void Start()
     {
         CreateSlots();
+
+        if (m_playerInventory != null)
+            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
     }
 
     // Update is called once per frame
@@ -135,6 +140,9 @@ public class DisplayInventory : MonoBehaviour
             {
                 ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
                 m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                if (m_playerInventory != null)
+                    m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
             }
             else
             {
@@ -144,6 +152,9 @@ public class DisplayInventory : MonoBehaviour
                     {
                         m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
                         m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                        if (m_playerInventory != null)
+                            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
                     }
                 }
             }
@@ -165,11 +176,11 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        if (m_playerInventory != null)
-        {
-            Vector2 boxpos = new Vector2(325, 50);
-            GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
-        }
+        //if (m_playerInventory != null)
+        //{
+        //    Vector2 boxpos = new Vector2(325, 100);
+        //    GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
+        //}
 
         if (!this.gameObject.activeSelf)
             return;
