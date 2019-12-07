@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
 
         PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
         move.Mount();
-
     }
 
     private void Init()
@@ -75,12 +74,10 @@ public class Player : MonoBehaviour
         m_oxygenTracker = GetComponentInChildren<OxygenTracker>();
 
         m_healthModule.OnDeath += HandleDeath;
-
     }
 
     private void Start()
     {
         Init();
     }
-
 }
