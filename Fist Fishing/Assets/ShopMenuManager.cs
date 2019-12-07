@@ -19,10 +19,26 @@ public class ShopMenuManager : MonoBehaviour
         ShopItems.Add(bait);
         ShopItems.Add(bait);
         ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
+        ShopItems.Add(bait);
 
         foreach (var item in ShopItems)
         {
-            m_shopMenuDisplayInventory.AddItem(item, 10);
+            m_shopMenuDisplayInventory.AddItem(bait, 10);
         }
     }
 
