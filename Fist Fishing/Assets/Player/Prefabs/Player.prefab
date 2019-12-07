@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443c804af226ab3458a4da6d65560ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startingCurrency: 15
+  m_startingCurrency: 0
   m_startingBaitAmount: 5
 --- !u!1 &8268430210970101485
 GameObject:
@@ -754,11 +754,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7295796180478928116}
     m_Modifications:
-    - target: {fileID: 6757009309849047391, guid: 308e3c1baa6a5164b9783df7414c815d,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerCharacter_Model_FBX_V01
-      objectReference: {fileID: 0}
     - target: {fileID: 7754884038516122444, guid: 308e3c1baa6a5164b9783df7414c815d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -813,6 +808,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757009309849047391, guid: 308e3c1baa6a5164b9783df7414c815d,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCharacter_Model_FBX_V01
       objectReference: {fileID: 0}
     - target: {fileID: 1043969601477243560, guid: 308e3c1baa6a5164b9783df7414c815d,
         type: 3}
