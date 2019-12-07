@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 4317289871407033273}
   - component: {fileID: 1058732942}
   - component: {fileID: 4835056176850711149}
+  - component: {fileID: 665857085}
   m_Layer: 0
   m_Name: SingletonObjects
   m_TagString: Untagged
@@ -196,6 +197,21 @@ MonoBehaviour:
     m_item: {fileID: 0}
     m_amount: 0
     m_inventory: {fileID: 0}
+--- !u!114 &665857085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317289871407033272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541d1fcca0a3aeb448400ca0cdf5dc4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shopMenuDisplayInventory: {fileID: 11400000, guid: 9b7e89fc483219d479df7bb23892c26f,
+    type: 2}
+  bait: {fileID: 11400000, guid: 8375c0803689a0d45818ee5fe131e716, type: 2}
 --- !u!114 &420019778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.899994
+      value: -6.9000397
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
@@ -896,6 +912,38 @@ PrefabInstance:
       propertyPath: m_mouseItem
       value: 
       objectReference: {fileID: 4835056176850711149}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_inventoryPrefab
+      value: 
+      objectReference: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
+        type: 3}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_xSpaceBetweenItems
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_ySpaceBetweenItems
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ab486b0c062976642b015e5fc8876db4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79ee761726c202041b9e0966ded9777e, type: 3}
 --- !u!224 &425190850 stripped
@@ -1042,7 +1090,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_inventory
       value: 
-      objectReference: {fileID: 11400000, guid: 0cb1c6bfef3ed5a499bdcad3704823da,
+      objectReference: {fileID: 11400000, guid: 786473835561dcc46b6bd3b2b4f16326,
         type: 2}
     - target: {fileID: 1990969797250425327, guid: 7553e4ea89084da4eb83d73374a4f15c,
         type: 3}
