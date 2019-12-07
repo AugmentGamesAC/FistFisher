@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     public void Mount()
     {
         //teleport to boat seat.
-        transform.position = m_boatMountPosition;
+        m_characterController.gameObject.transform.position = m_boatMountPosition;
 
         m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
 
@@ -181,16 +181,16 @@ public class PlayerMovement : MonoBehaviour
         m_canMount = false;
 
 
-        transform.forward = m_boat.transform.forward;
-        transform.SetParent(m_boat.transform);
+        m_characterController.gameObject.transform.forward = m_boat.transform.forward;
+        m_characterController.gameObject.transform.SetParent(m_boat.transform);
     }
 
     private void Dismount()
     {
-        transform.SetParent(null);
-
+        /*m_player.GetComponent<Player>().m_InfluenceSphereObject.*/
+        m_characterController.gameObject.transform.SetParent(null);
         //go to diving position
-        transform.position = m_boatDismountPosition;
+        m_characterController.gameObject.transform.position = m_boatDismountPosition;
 
         //no longer mounted on the boat.
         m_isMounted = false;
