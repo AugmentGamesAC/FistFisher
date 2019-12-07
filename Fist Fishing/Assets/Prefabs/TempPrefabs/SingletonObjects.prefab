@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95291a0e2afa1fd4d908b55d8c2aa708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mouseItem: {fileID: 0}
+  m_mouseItem: {fileID: 4835056176850711149}
   m_inventory: {fileID: 11400000, guid: 9b7e89fc483219d479df7bb23892c26f, type: 2}
   m_playerInventory: {fileID: 0}
   m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95291a0e2afa1fd4d908b55d8c2aa708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mouseItem: {fileID: 0}
+  m_mouseItem: {fileID: 4835056176850711149}
   m_inventory: {fileID: 11400000, guid: 786473835561dcc46b6bd3b2b4f16326, type: 2}
   m_playerInventory: {fileID: 0}
   m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
@@ -2246,6 +2246,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871407033274}
     m_Modifications:
+    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_Name
+      value: background canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 899394153335271916, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2350,11 +2355,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
-        type: 3}
-      propertyPath: m_Name
-      value: background canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
