@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 3991995813725322242}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4933493244571855984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7164482799746384780}
+  m_Layer: 0
+  m_Name: forward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7164482799746384780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933493244571855984}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.97, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8463207306440590998}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6402087367955184299
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,9 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463207306440590998}
+  - component: {fileID: 5122104800718471064}
   m_Layer: 0
   m_Name: Boat_Prefab
-  m_TagString: Untagged
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +122,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5122104800718471064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264625814240377294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482c2f1eccd693488a283377acb223b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_centerOfMass: {x: 0, y: 0, z: 0}
+  m_collisionRange: 2.5
+  m_speed: 0.2
+  m_steerSpeed: 1
+  m_movementThreshold: 10
+  m_steerThreshold: 10
+  m_allowUpdate: 0
+  m_boatFront: {fileID: 7164482799746384780}
 --- !u!1 &8072168258052855882
 GameObject:
   m_ObjectHideFlags: 0

@@ -136,8 +136,8 @@ public class FollowCameraBehaviour : CameraBehaviour
                 );
 
             Vector3 lookDir = m_camera.LookPos - m_camera.transform.position;
-
-            m_camera.transform.rotation = Quaternion.LookRotation(lookDir);
+            if(lookDir!= Vector3.zero)
+                m_camera.transform.rotation = Quaternion.LookRotation(lookDir);
         }
     }
 
