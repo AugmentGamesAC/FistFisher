@@ -1196,11 +1196,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
-      propertyPath: m_playerInventory
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
       propertyPath: m_mouseItem
       value: 
       objectReference: {fileID: 905206826204380161}
@@ -1279,11 +1274,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
-    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
-        type: 3}
-      propertyPath: m_Name
-      value: background canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 899394153335271916, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1389,10 +1379,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+    - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -6.900009
+      propertyPath: m_Name
+      value: background canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
@@ -1530,11 +1520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1990969797250425327, guid: 7553e4ea89084da4eb83d73374a4f15c,
-        type: 3}
-      propertyPath: m_playerInventory
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1990969797250425327, guid: 7553e4ea89084da4eb83d73374a4f15c,
         type: 3}
@@ -1862,26 +1847,6 @@ PrefabInstance:
     - target: {fileID: 3302975193047270288, guid: 0e1a4bacf77a7664b888cc9bb2313204,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192813168481, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192813168481, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192921536070, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3302975192921536070, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

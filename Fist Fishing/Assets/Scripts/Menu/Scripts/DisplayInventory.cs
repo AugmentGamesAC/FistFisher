@@ -29,7 +29,7 @@ public class DisplayInventory : MonoBehaviour
     {
         CreateSlots();
 
-        if (m_playerInventory != null)
+        if (m_playerInventory != null && m_text != null)
             m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
     }
 
