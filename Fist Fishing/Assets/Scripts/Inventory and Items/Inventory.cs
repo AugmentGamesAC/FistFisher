@@ -93,6 +93,19 @@ public class Inventory : MonoBehaviour
         if (m_storedObjects.Contains(obj))
             return false;
 
+
+        if (m_displayInventoryObject != null)
+            ResolveCountUpdates(obj);
+
+        m_storedObjects.Add(obj);
+
+        obj.SetActive(false);
+
+        return true;
+    }
+
+    protected void ResolveCountUpdates(GameObject obj)
+    {
         if (IsABait(obj))
         {
             m_BaitCount++;
@@ -132,20 +145,16 @@ public class Inventory : MonoBehaviour
                     m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1);
                     break;
                 case HarvestableType.NotSet:
-                    return false;
+                    return ;
             }
         }
         else
         {
-            return false;
+            return ;
         }
 
-        m_storedObjects.Add(obj);
-
-        obj.SetActive(false);
-
-        return true;
     }
+
 
     /// <summary>
     /// removes a given gameobject from inventory
