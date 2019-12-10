@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1feb40dec8e444bbd65ec4b7653f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerPosition: {x: 0, y: 0, z: 0}
+  m_playerRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!143 &8049769806892807408
 CharacterController:
   m_ObjectHideFlags: 0
@@ -203,7 +205,8 @@ PrefabInstance:
       propertyPath: m_OxygenDegeneration
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7295796181784110617, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &2487089621031590220 stripped
 GameObject:
