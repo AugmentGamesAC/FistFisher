@@ -6,7 +6,8 @@ public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehav
 {
     protected InfluenceFish m_influenceFish;
     private Player m_player;
-    private Transform m_playerTransform;
+    public Vector3 m_playerPosition;
+    public Quaternion m_playerRotation;
 
     private bool m_playerHasMovedThisUpdate = false;
 
@@ -17,19 +18,19 @@ public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehav
 
         if (m_player == null)
             m_player = gameObject.GetComponentInChildren<Player>();
-        if (m_playerTransform == null)
-            m_playerTransform = m_player.gameObject.transform;
+        if (m_playerPosition == null)
+            m_playerPosition = m_player.gameObject.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         Transform testAgainst = m_player.gameObject.transform;
-        float f = (testAgainst.position - m_playerTransform.position).sqrMagnitude;
+        float f = (testAgainst.position - m_playerPosition).sqrMagnitude;
         if (f > 0.00007f) //the Brian number
         {
             m_playerHasMovedThisUpdate = true;
-            Debug.LogError("Payer Moved");
+         //   Debug.LogError("Player Moved");
         }
         else
             m_playerHasMovedThisUpdate = false;
@@ -37,7 +38,7 @@ public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehav
     //runs before usually update
     void FixedUpdate()
     {
-        m_playerTransform = m_player.gameObject.transform;
+        m_playerPosition = m_player.gameObject.transform.position;
     }
     private void OnTriggerEnter(Collider other)
     {
