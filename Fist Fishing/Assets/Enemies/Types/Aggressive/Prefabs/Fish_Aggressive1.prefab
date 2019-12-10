@@ -645,7 +645,7 @@ MonoBehaviour:
     - 1
     - 0.5
     values:
-    - {fileID: 0}
+    - {fileID: 8180580019777557713}
     - {fileID: 1918309360492955868}
 --- !u!114 &682653337991771485
 MonoBehaviour:
@@ -697,11 +697,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7138719833323160056}
     m_Modifications:
-    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
-        type: 3}
-      propertyPath: m_Name
-      value: Shark_Prefab
-      objectReference: {fileID: 0}
     - target: {fileID: 653360865323999148, guid: 169253062427bc04cbb34ab5bef9156a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -757,8 +752,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
+        type: 3}
+      propertyPath: m_Name
+      value: Shark_Prefab
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 169253062427bc04cbb34ab5bef9156a, type: 3}
+--- !u!1 &8180580019777557713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4560578407818177983, guid: 169253062427bc04cbb34ab5bef9156a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5678247246981658990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5178044421805516482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 653360865323999148, guid: 169253062427bc04cbb34ab5bef9156a,
