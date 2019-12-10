@@ -27,7 +27,8 @@ public class DisplayInventory : MonoBehaviour
     protected Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     void Start()
     {
-        CreateSlots();
+        if (m_inventory != null)
+            CreateSlots();
 
         if (m_playerInventory != null && m_text != null)
             m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
