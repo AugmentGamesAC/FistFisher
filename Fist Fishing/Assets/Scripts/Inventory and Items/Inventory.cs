@@ -273,6 +273,6 @@ public class Inventory : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        m_displayInventoryObject.m_inventorySlots = new InventorySlot[32];
+        m_displayInventoryObject.m_inventorySlots = new InventorySlot[30];
     }
 }
