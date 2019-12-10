@@ -64,10 +64,10 @@ public class PlayerMovement : MonoBehaviour
             m_boatMountPosition = b.m_mountTransform.position;
             m_boatDismountPosition = b.m_dismountTransform.position;
 
-            Vector3 MoveVector = b.m_mountTransform.position - gameObject.transform.position;
-            m_characterController.Move(MoveVector);
-            m_player.GetComponent<Player>().SetNewCheckpoint(b.m_mountTransform.position);
-            m_player.GetComponent<Player>().HandleDeath();
+            //Vector3 MoveVector = b.m_mountTransform.position - gameObject.transform.position;
+            //m_characterController.Move(MoveVector);
+            //m_player.GetComponent<Player>().SetNewCheckpoint(b.m_mountTransform.position);
+            //m_player.GetComponent<Player>().HandleDeath();
         }
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
