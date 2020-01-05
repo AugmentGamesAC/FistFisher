@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
-    public DisplayInventory m_displayInventory;
 
     public float m_walkSpeed = 10.0f;
     public float m_sprintSpeed = 15.0f;
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
-        m_displayInventory = GetComponentInChildren<DisplayInventory>();
+        //m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
         //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
@@ -151,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool setToNone = Cursor.lockState == CursorLockMode.Locked;
 
-        m_displayInventory.gameObject.SetActive(setToNone);
+        //m_displayInventory.gameObject.SetActive(setToNone);
         Cursor.lockState = (setToNone) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
