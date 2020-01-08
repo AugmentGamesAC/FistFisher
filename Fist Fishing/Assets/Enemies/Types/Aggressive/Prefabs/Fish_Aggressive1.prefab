@@ -463,7 +463,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1426086151300292755
 Rigidbody:
@@ -784,6 +784,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7138719833323160056}
     m_Modifications:
+    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
+        type: 3}
+      propertyPath: m_Name
+      value: SharkDamageState_Model_FBX_V02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5294821870882021751, guid: f30be31b1b67a7c44a656943cac2b081,
         type: 3}
       propertyPath: m_RootOrder
@@ -852,16 +862,6 @@ PrefabInstance:
     - target: {fileID: 8363268637242111752, guid: f30be31b1b67a7c44a656943cac2b081,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
-        type: 3}
-      propertyPath: m_Name
-      value: SharkDamageState_Model_FBX_V02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776935311222359323, guid: f30be31b1b67a7c44a656943cac2b081,
-        type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
