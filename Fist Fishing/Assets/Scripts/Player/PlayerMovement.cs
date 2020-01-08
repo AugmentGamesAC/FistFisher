@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
-    public DisplayInventory m_displayInventory;
 
     public float m_walkSpeed = 10.0f;
     public float m_sprintSpeed = 15.0f;
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
-        m_displayInventory = GetComponentInChildren<DisplayInventory>();
+        //m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
         //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
@@ -64,10 +63,10 @@ public class PlayerMovement : MonoBehaviour
             m_boatMountPosition = b.m_mountTransform.position;
             m_boatDismountPosition = b.m_dismountTransform.position;
 
-            Vector3 MoveVector = b.m_mountTransform.position - gameObject.transform.position;
-            m_characterController.Move(MoveVector);
-            m_player.GetComponent<Player>().SetNewCheckpoint(b.m_mountTransform.position);
-            m_player.GetComponent<Player>().HandleDeath();
+            //Vector3 MoveVector = b.m_mountTransform.position - gameObject.transform.position;
+            //m_characterController.Move(MoveVector);
+            //m_player.GetComponent<Player>().SetNewCheckpoint(b.m_mountTransform.position);
+            //m_player.GetComponent<Player>().HandleDeath();
         }
 
         m_baitThrowCooldown = m_baitThrowCooldownMax;
@@ -151,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool setToNone = Cursor.lockState == CursorLockMode.Locked;
 
-        m_displayInventory.gameObject.SetActive(setToNone);
+        //m_displayInventory.gameObject.SetActive(setToNone);
         Cursor.lockState = (setToNone) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 

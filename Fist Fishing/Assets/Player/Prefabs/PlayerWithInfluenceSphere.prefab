@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8307406037054773404}
   - component: {fileID: 7732944433089916808}
   - component: {fileID: 8049769806892807408}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerWithInfluenceSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1feb40dec8e444bbd65ec4b7653f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerPosition: {x: 0, y: 0, z: 0}
+  m_playerRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!143 &8049769806892807408
 CharacterController:
   m_ObjectHideFlags: 0
@@ -178,6 +180,16 @@ PrefabInstance:
       propertyPath: m_characterController
       value: 
       objectReference: {fileID: 8049769806892807408}
+    - target: {fileID: 7295796181784110599, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_fastSwimSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295796181784110599, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_swimSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 295444867762836901, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
       propertyPath: m_healthModule
@@ -188,7 +200,13 @@ PrefabInstance:
       propertyPath: m_InfluenceSphereObject
       value: 
       objectReference: {fileID: 1191271668255745293}
-    m_RemovedComponents: []
+    - target: {fileID: 7295796181223495115, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_OxygenDegeneration
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7295796181784110617, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &2487089621031590220 stripped
 GameObject:

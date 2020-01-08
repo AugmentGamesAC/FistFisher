@@ -56,7 +56,7 @@ public class FishMoveTo : FishTask
                 + pointsOfIntrest.Select(kvp => CalculateDirectionWeight(kvp.Key.transform.position, kvp.Value))
                     .Aggregate((subtotal, pointOfIntrest) => subtotal += pointOfIntrest)
                     ) / (
-                    pointsOfIntrest.Select(kvp => kvp.Value.m_intensity).Sum() + 1
+                    pointsOfIntrest.Select(kvp => CalculateDirectionIntensity(kvp.Value)).Sum() + 1
                     );
 
         m_direction = averageGoal - m_me.transform.position;

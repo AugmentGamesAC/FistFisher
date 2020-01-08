@@ -84,7 +84,7 @@ public class CombatModule : MonoBehaviour
 
 
         if (m_influenceFish != null)
-            m_influenceFish.ImpressFish(m_targetedFish);
+            m_influenceFish.ImpressFish(m_targetedFish,1000);
 
         if (tempHealthModule == null)
             return;
