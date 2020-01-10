@@ -47,38 +47,6 @@ public class FollowCameraBehaviour : CameraBehaviour
         return base.GetControlRotation();
     }
 
-
-
-    class dummyCamera : MonoBehaviour
-    {
-        orbitpoint MyPoint;
-        orbitpoint LookatPoint;
-
-        GameObject PivotPoit;
-
-        float m_RotationSpeed;
-        /// <summary>
-        /// update mypoint and lookatpoint when needed
-        /// set the transform of the camera to the location and rotation for those point
-        /// </summary>
-        /// <param name="n"></param>
-        /// <param name="nn"></param>
-        void update(float n, float nn)
-        {
-
-        }
-    }
-
-    class orbitpoint
-    {
-        float YawRotationAroundPivit;
-        float PitchRotationAroundPivit;
-        float distanceFromPivot;
-
-        void Increment(float n, float nn) { }
-        Vector3 ReturnTargetPoint() { return default; }
-    }
-
     public override void UpdateCamera()
     {
         //player's pivot point.

@@ -133,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
 
-        /*if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
         {
             ToggleMouseLock();
-        }*/
+        }
     }
 
     private void LateUpdate()

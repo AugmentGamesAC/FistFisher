@@ -31,13 +31,10 @@ public class LockedCameraBehaviour : CameraBehaviour
         }
 
         //Set Pitch - Clamp Pitch to 89 degrees
-             = Mathf.Clamp(m_pitch - (pitchInput * m_angleSpeed), -m_maxVerticalAngle, m_maxVerticalAngle);
-        //Set Yaw
+        m_pitch = Mathf.Clamp(m_pitch - (pitchInput * m_angleSpeed), -m_maxVerticalAngle, m_maxVerticalAngle);
 
+        //Set Yaw.
         m_yaw += yawInput * m_angleSpeed;
-
-
-
     }
 
     public void SetOffset()
