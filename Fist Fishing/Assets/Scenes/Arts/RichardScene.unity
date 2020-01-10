@@ -9205,27 +9205,47 @@ PrefabInstance:
     - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_followCameraBehaviour.m_lookAtPoint.m_distanceFromPivot
-      value: 5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_followCameraBehaviour.m_orbitPoint.m_maxPitch
-      value: 70
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_followCameraBehaviour.m_orbitPoint.m_minPitch
-      value: -70
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_followCameraBehaviour.m_orbitPoint.m_maxYaw
-      value: 70
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_followCameraBehaviour.m_orbitPoint.m_minYaw
-      value: -70
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
+        type: 3}
+      propertyPath: m_followCameraBehaviour.m_lookAtPoint.m_maxPitch
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
+        type: 3}
+      propertyPath: m_followCameraBehaviour.m_lookAtPoint.m_minPitch
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
+        type: 3}
+      propertyPath: m_followCameraBehaviour.m_lookAtPoint.m_maxYaw
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167131274534524111, guid: 1832ebb68dcb3874782014bd9eef49ed,
+        type: 3}
+      propertyPath: m_followCameraBehaviour.m_lookAtPoint.m_minYaw
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 5860884434843427857, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}

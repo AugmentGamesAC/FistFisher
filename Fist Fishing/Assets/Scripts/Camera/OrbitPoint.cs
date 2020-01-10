@@ -28,6 +28,6 @@ public class OrbitPoint
 
     public Vector3 ReturnTargetPoint()
     {
-        return Quaternion.Euler(m_yawRotationAroundPivit, m_pitchRotationAroundPivit, 0.0f) * Vector3.forward * m_distanceFromPivot;
+        return Quaternion.Euler(m_pitchRotationAroundPivit, m_yawRotationAroundPivit, 0.0f) * Vector3.forward * m_distanceFromPivot;
     }
 }
