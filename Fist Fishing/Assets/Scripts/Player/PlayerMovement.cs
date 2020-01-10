@@ -170,9 +170,9 @@ public class PlayerMovement : MonoBehaviour
     public void Mount()
     {
         //teleport to boat seat.
-        m_characterController.gameObject.transform.position = m_boatMountPosition;
+       // m_characterController.gameObject.transform.position = m_boatMountPosition;
 
-        m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
+//        m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -180,8 +180,11 @@ public class PlayerMovement : MonoBehaviour
         m_canMount = false;
 
 
-        m_characterController.gameObject.transform.forward = m_boat.transform.forward;
-        m_characterController.gameObject.transform.SetParent(m_boat.transform);
+        m_boat.GetComponent<BoatMovement>().MountObject(m_characterController.gameObject);
+
+        //m_characterController.gameObject.transform.forward = m_boat.transform.forward;
+        //m_characterController.gameObject.transform.SetParent(m_boat.transform);
+        //m_characterController.gameObject.transform.localPosition = m_boatMountPosition;
     }
 
     private void Dismount()
