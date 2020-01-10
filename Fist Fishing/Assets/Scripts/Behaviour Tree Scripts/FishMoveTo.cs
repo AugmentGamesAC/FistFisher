@@ -15,14 +15,11 @@ public class FishMoveTo : FishTask
     {
         ReadInfo();
 
-        if (Vector3.Distance(m_me.transform.position, m_target.transform.position) < m_accuracy)
-            return NodeResult.SUCCESS;
-
         ResolveAwareness();
         CollisionAvoidance();
         MoveToward();
 
-        return NodeResult.RUNNING;
+        return NodeResult.SUCCESS;
     }
 
     protected Dictionary<GameObject, FishReaction> RemeberHistory()
@@ -59,44 +56,106 @@ public class FishMoveTo : FishTask
                 + pointsOfIntrest.Select(kvp => CalculateDirectionWeight(kvp.Key.transform.position, kvp.Value))
                     .Aggregate((subtotal, pointOfIntrest) => subtotal += pointOfIntrest)
                     ) / (
-                    pointsOfIntrest.Select(kvp => kvp.Value.m_intensity).Sum() + 1
+                    pointsOfIntrest.Select(kvp => CalculateDirectionIntensity(kvp.Value)).Sum() + 1
                     );
 
         m_direction = averageGoal - m_me.transform.position;
     }
-    public static Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>> awayReactionDirection =
-        new Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, bool>>()
+    public enum FishResponse
+    {
+        /// <summary>
+        /// move away
+        /// </summary>
+        Avoid,
+        /// <summary>
+        /// move towards
+        /// </summary>
+        Attracted,
+        /// <summary>
+        /// No influence
+        /// </summary>
+        Indifferent
+    }
+
+    public static Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, FishResponse>> awayReactionDirection =
+        new Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, FishResponse>>()
         {
-            {//simple fish behavior
+            {//fearful fish influence resolution
                 FishBrain.FishClassification.Fearful|FishBrain.FishClassification.BaitSensitive1,
-                new Dictionary<FishBrain.FishClassification, bool>()
+                new Dictionary<FishBrain.FishClassification, FishResponse>()
                 {
-                    { FishBrain.FishClassification.BaitSensitive1, false },
-                    { FishBrain.FishClassification.Player, true }
+                    { FishBrain.FishClassification.BaitSensitive1, FishResponse.Attracted },
+                    { FishBrain.FishClassification.Player, FishResponse.Avoid }
+                }
+            },
+            {//meh fish behavoir
+                FishBrain.FishClassification.Passive,
+                new Dictionary<FishBrain.FishClassification, FishResponse>()
+                {
+                    { FishBrain.FishClassification.BaitSensitive1, FishResponse.Indifferent },
+                    { FishBrain.FishClassification.Player, FishResponse.Indifferent }
+                }
+            },
+            {//Attacked meh fish behavoir
+                FishBrain.FishClassification.Passive| FishBrain.FishClassification.Agressive,
+                new Dictionary<FishBrain.FishClassification, FishResponse>()
+                {
+                    { FishBrain.FishClassification.BaitSensitive1, FishResponse.Indifferent },
+                    { FishBrain.FishClassification.Player, FishResponse.Attracted }
+                }
+            },
+            {//Agressive fish behavoir
+                FishBrain.FishClassification.Agressive,
+                new Dictionary<FishBrain.FishClassification, FishResponse>()
+                {
+                    { FishBrain.FishClassification.BaitSensitive1, FishResponse.Indifferent },
+                    { FishBrain.FishClassification.Player, FishResponse.Attracted }
                 }
             }
         };
+    /// <summary>
+    /// for averaging it should ignore indifferent intensities
+    /// </summary>
+    /// <param name="reaction"> the reaaction involved</param>
+    /// <returns>returns 0 if the fish is indiffernt otherwise returns intensity</returns>
+    protected float CalculateDirectionIntensity(FishReaction reaction)
+    {
+        BasicFish myfish = m_me.GetComponent<BasicFish>();
+        Dictionary<FishBrain.FishClassification, FishResponse> myMood;
+        FishResponse response;
+        if ((awayReactionDirection.TryGetValue(myfish.FishClass, out myMood)) &&
+           (myMood.TryGetValue(reaction.m_fishReconition, out response)) &&
+            (response == FishResponse.Indifferent))
+        {
+            return 0;
+        }
+        return reaction.m_intensity;
+    }
 
     protected Vector3 CalculateDirectionWeight(Vector3 pointOfIntrest, FishReaction reaction)
     {
         BasicFish myfish = m_me.GetComponent<BasicFish>();
         Vector3 directionOfIntrest = pointOfIntrest;
-        Dictionary<FishBrain.FishClassification, bool> myMood;
-        bool runaway;
-        if (awayReactionDirection.TryGetValue(myfish.FishClass, out myMood))
-            if (myMood.TryGetValue(reaction.m_fishReconition, out runaway))
-                if (runaway)
-                    directionOfIntrest = Vector3.Reflect(directionOfIntrest, m_direction);
-
+        Dictionary<FishBrain.FishClassification, FishResponse> myMood;
+        FishResponse response;
+        if ((awayReactionDirection.TryGetValue(myfish.FishClass, out myMood))&&
+           (myMood.TryGetValue(reaction.m_fishReconition, out response)))
+        {
+            if (response == FishResponse.Avoid)
+                directionOfIntrest = Vector3.Reflect(directionOfIntrest, m_direction);
+            if (response == FishResponse.Indifferent)
+                directionOfIntrest = Vector3.zero;
+        }
         return directionOfIntrest * reaction.m_intensity; 
     }
 
     protected void CollisionAvoidance()
     {
+
         RaycastHit hit;
         BasicFish myfish = m_me.GetComponent<BasicFish>();
 
-        if (!Physics.Raycast(myfish.LookFrom.position, m_direction, out hit, m_speed * 2))
+        if (!Physics.Raycast(myfish.LookFrom.position, m_direction, out hit, m_speed * 2, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water")))
             return;
 
         m_direction = Vector3.Reflect(m_direction, hit.normal);

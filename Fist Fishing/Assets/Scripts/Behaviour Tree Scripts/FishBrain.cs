@@ -28,6 +28,7 @@ public class FishBrain : BehaviorTree
     static public string TurnSpeedName = "turningSpeed";
     static public string AccuracyName = "accuracy";
     static public string MoodName = "mood";
+    static public string BiteCooldownName = "biteCool";
     public float Accuracy = 1.0f;
 
     //this is a dummygame object that will be repositioned when NewFishPoint is used
@@ -74,13 +75,15 @@ public class FishBrain : BehaviorTree
         SetValue(AccuracyName, Accuracy);
         SetValue(MoodName, new Dictionary<GameObject, FishReaction>());
         SetValue(DirectionName, defaultGoal.transform.position - body.transform.position);
+        SetValue(BiteCooldownName, 0.0f);
 
         //chose the root behavoir for this tree.
         //does each child
         Sequence newRoot = gameObject.AddComponent<Sequence>();
         newRoot.Init(this, new List<Node>(){
             gameObject.AddComponent<FishWander>(),
-            gameObject.AddComponent<FishMoveTo>()
+            gameObject.AddComponent<FishMoveTo>(),
+            gameObject.AddComponent<FishAttack>()
         });
         root = newRoot;
 
