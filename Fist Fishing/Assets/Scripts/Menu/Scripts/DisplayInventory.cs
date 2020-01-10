@@ -13,7 +13,11 @@ public class DisplayInventory : MonoBehaviour
 
     public InventoryObject m_inventory;
 
+    public Inventory m_playerInventory;
+
     public GameObject m_inventoryPrefab;
+
+    public Text m_text;
 
     public int m_xStartPos;
     public int m_yStartPos;
@@ -23,7 +27,17 @@ public class DisplayInventory : MonoBehaviour
     protected Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     void Start()
     {
-        CreateSlots();
+        if (m_inventory != null)
+            CreateSlots();
+
+        GameObject m_player = GameObject.FindGameObjectWithTag("Player");
+        m_playerInventory = m_player.GetComponentInChildren<Inventory>();
+
+        if (m_playerInventory == null)
+            throw new System.InvalidOperationException("Display Inventory is not working");
+
+        if (m_text != null)
+            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
     }
 
     // Update is called once per frame
@@ -132,16 +146,25 @@ public class DisplayInventory : MonoBehaviour
             if (m_mouseItem.hoverSlot.m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
             {
                 ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
+                m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                if (m_playerInventory != null)
+                    m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
             }
-            else 
+            else
             {
                 if (m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
                 {
-                    ((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item);
+                    if (((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item))
+                    {
+                        m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+                        m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                        if (m_playerInventory != null)
+                            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
+                    }
                 }
-                    m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
             }
-            m_inventory.RemoveItem(m_itemsDisplayed[obj]);
         }
         else
         {
@@ -160,6 +183,12 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
+        //if (m_playerInventory != null)
+        //{
+        //    Vector2 boxpos = new Vector2(325, 100);
+        //    GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
+        //}
+
         if (!this.gameObject.activeSelf)
             return;
         if (m_mouseItem == null)

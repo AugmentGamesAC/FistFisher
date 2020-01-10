@@ -24,17 +24,18 @@ public class BasicMenu : MonoBehaviour
         if (m_canvas == null)
             m_canvas = m_HUD.GetComponent<Canvas>();
         //CloseMenu();
+        if (m_startup)
+        {
+            CloseMenu();
+            m_startup = false;
+        }
     }
 
     bool m_startup = true;
 
     private void Update()
     {
-        if (m_startup)
-        {
-            CloseMenu();
-            m_startup = false;
-        }
+
     }
 
     public bool CloseMenu()

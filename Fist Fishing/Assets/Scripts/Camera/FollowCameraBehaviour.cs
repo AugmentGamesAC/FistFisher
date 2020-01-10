@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class FollowCameraBehaviour : CameraBehaviour
 {
     public float m_cameraHorizPosEaseSpeed = 5.0f;
@@ -46,9 +47,36 @@ public class FollowCameraBehaviour : CameraBehaviour
         return base.GetControlRotation();
     }
 
-    public override bool UsesStandardControlRotation()
+
+
+    class dummyCamera : MonoBehaviour
     {
-        return false;
+        orbitpoint MyPoint;
+        orbitpoint LookatPoint;
+
+        GameObject PivotPoit;
+
+        float m_RotationSpeed;
+        /// <summary>
+        /// update mypoint and lookatpoint when needed
+        /// set the transform of the camera to the location and rotation for those point
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="nn"></param>
+        void update(float n, float nn)
+        {
+
+        }
+    }
+
+    class orbitpoint
+    {
+        float YawRotationAroundPivit;
+        float PitchRotationAroundPivit;
+        float distanceFromPivot;
+
+        void Increment(float n, float nn) { }
+        Vector3 ReturnTargetPoint() { return default; }
     }
 
     public override void UpdateCamera()
@@ -56,65 +84,61 @@ public class FollowCameraBehaviour : CameraBehaviour
         //player's pivot point.
         Vector3 worldPivotPos = m_player.transform.TransformPoint(m_playerLocalPivotPos);
 
-        //Canmera's desired position is behind the player by OffSetFromPlayer.Magnitude();
-        Vector3 offsetFromPlayer = m_goalPos - worldPivotPos;
 
-        //distance
-        float distFromPlayer = offsetFromPlayer.magnitude;
+     { // new camera rotation point based on increment 
+        //incrcement rotation
+        m_camera.PivotRotation.y += m_yawInput * m_yawRotateSpeed;
 
-        //Get the Camera Rotation based on the input gathered from thirdPersonCamera.
-        Vector3 rotateAmount = new Vector3(m_pitchInput * m_pitchRotateSpeed, m_yawInput * m_yawRotateSpeed);
+        //increment rotation & clamp
+        m_camera.PivotRotation.x = Mathf.Clamp(m_camera.PivotRotation.x - (m_pitchInput * m_pitchRotateSpeed), -m_maxVerticalAngle, m_maxVerticalAngle);
+    }
 
-        //get current YRotation:
-        Vector3 pivotRotation = m_camera.PivotRotation;
+    Vector3 offsetFromPlayer;
+        float distFromPlayer;
+        { // maintaing distance from player
 
-        //XMouse Movement passed on.
-        //GetAmount of degrees rotated by last input call.
-        pivotRotation.y += rotateAmount.y;
+            //Canmera's desired position is behind the player by OffSetFromPlayer.Magnitude();
+            offsetFromPlayer = m_goalPos - worldPivotPos;
+            //distance
+            distFromPlayer = offsetFromPlayer.magnitude;
 
-        //pivotRotation.y += m_Player.GroundAngularVelocity.y * Time.deltaTime;
-
-        //Change rotation for YMouse MOvement
-        pivotRotation.x -= rotateAmount.x;
-
-        //Clamp so you can't spin vertically infinitely.
-        pivotRotation.x = Mathf.Clamp(pivotRotation.x, -m_maxVerticalAngle, m_maxVerticalAngle);
-
-        //Set our camera's angles to the values after input.
-        m_camera.PivotRotation = pivotRotation;
-
-        //Clamp a maximum distance for camera to be. 
-        distFromPlayer = Mathf.Clamp(distFromPlayer, m_minHorizDistFromPlayer, m_maxDistFromPlayer);
-
+            //Clamp a maximum distance for camera to be. 
+            distFromPlayer = Mathf.Clamp(distFromPlayer, m_minHorizDistFromPlayer, m_maxDistFromPlayer);
+        }
         //Set Camera Position with offset and the rotation from input.
-        offsetFromPlayer = Quaternion.Euler(pivotRotation.x, pivotRotation.y, 0.0f) * Vector3.forward;
+         offsetFromPlayer = Quaternion.Euler(m_camera.PivotRotation.x, m_camera.PivotRotation.y, 0.0f) * Vector3.forward;
 
         //Bring camera out by distance given. this can be modified for different camera behaviours.
         offsetFromPlayer *= distFromPlayer;
 
-        //position for camera to be is in the back of worldPivotPos(Player's pivot point) by offsetFromPlayer
-        m_goalPos = offsetFromPlayer + worldPivotPos;
+        m_camera.transform.position = offsetFromPlayer + worldPivotPos;
 
-        //Keep local variable of old Camera Position to be changed and applied.
-        Vector3 newCameraPosition = m_camera.transform.position;
 
-        //Change only x values to move towards m_GoalPos.
-        newCameraPosition = MathUtils.SlerpToHoriz(
-            m_cameraHorizPosEaseSpeed,
-            newCameraPosition,
-            m_goalPos,
-            worldPivotPos,
-            Time.deltaTime);
+        ////position for camera to be is in the back of worldPivotPos(Player's pivot point) by offsetFromPlayer
+        //m_goalPos = offsetFromPlayer + worldPivotPos;
+        //{
+        //    //Keep local variable of old Camera Position to be changed and applied.
+        //    Vector3 newCameraPosition = m_camera.transform.position;
 
-        //lerp to GoalPos y position.
-        newCameraPosition.y = MathUtils.LerpTo(
-            m_cameraVertPosEaseSpeed,
-            newCameraPosition.y,
-            m_goalPos.y,
-            Time.deltaTime);
+        //    //Change only x values to move towards m_GoalPos.
+        //    newCameraPosition = MathUtils.SlerpToHoriz(
+        //        m_cameraHorizPosEaseSpeed,
+        //        newCameraPosition,
+        //        m_goalPos,
+        //        worldPivotPos,
+        //        Time.deltaTime);
 
-        //Set Camera's current position to new position now having input applied.
-        m_camera.transform.position = newCameraPosition;
+        //    //lerp to GoalPos y position.
+        //    newCameraPosition.y = MathUtils.LerpTo(
+        //        m_cameraVertPosEaseSpeed,
+        //        newCameraPosition.y,
+        //        m_goalPos.y,
+        //        Time.deltaTime);
+
+        //    //Set Camera's current position to new position now having input applied.
+        //    m_camera.transform.position = newCameraPosition;
+        //}
+
 
         //Deal with obstacles
         float moveUpDist = HandleObstacles();

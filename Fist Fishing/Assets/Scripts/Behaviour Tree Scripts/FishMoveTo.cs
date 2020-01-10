@@ -56,7 +56,7 @@ public class FishMoveTo : FishTask
                 + pointsOfIntrest.Select(kvp => CalculateDirectionWeight(kvp.Key.transform.position, kvp.Value))
                     .Aggregate((subtotal, pointOfIntrest) => subtotal += pointOfIntrest)
                     ) / (
-                    pointsOfIntrest.Select(kvp => kvp.Value.m_intensity).Sum() + 1
+                    pointsOfIntrest.Select(kvp => CalculateDirectionIntensity(kvp.Value)).Sum() + 1
                     );
 
         m_direction = averageGoal - m_me.transform.position;
@@ -151,10 +151,11 @@ public class FishMoveTo : FishTask
 
     protected void CollisionAvoidance()
     {
+
         RaycastHit hit;
         BasicFish myfish = m_me.GetComponent<BasicFish>();
 
-        if (!Physics.Raycast(myfish.LookFrom.position, m_direction, out hit, m_speed * 2))
+        if (!Physics.Raycast(myfish.LookFrom.position, m_direction, out hit, m_speed * 2, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water")))
             return;
 
         m_direction = Vector3.Reflect(m_direction, hit.normal);

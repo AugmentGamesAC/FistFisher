@@ -88,7 +88,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public Vector3 ControlRotation { get; private set; }
     public Vector3 LookPos { get; set; }
 
-    public Vector3 PivotRotation { get; set; }
+    public Vector3 PivotRotation;
 
     void SetCameraBehaviour(CameraBehaviour behaviour)
     {
