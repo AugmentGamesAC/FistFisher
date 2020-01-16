@@ -4,7 +4,7 @@
 public class ThirdPersonCamera : MonoBehaviour
 {
     [SerializeField]
-    public LockedCameraBehaviour m_followCameraBehaviour;
+    public OldLockedCameraBehaviour m_followCameraBehaviour;
     public TargetingCameraBehaviour m_targetingCameraBehaviour;
 
     public TargetController m_targetController;
@@ -13,7 +13,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         //Create a basic behaviour for our camera if it doesn't have one.
         if (m_followCameraBehaviour == null)
-            m_followCameraBehaviour = new LockedCameraBehaviour();
+            m_followCameraBehaviour = new OldLockedCameraBehaviour();
 
         if (m_targetingCameraBehaviour == null)
             m_targetingCameraBehaviour = new TargetingCameraBehaviour();

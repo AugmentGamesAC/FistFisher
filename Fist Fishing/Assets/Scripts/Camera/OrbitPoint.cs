@@ -26,6 +26,10 @@ public class OrbitPoint
         m_pitchRotationAroundPivit = Mathf.Clamp(m_pitchRotationAroundPivit + pitch, m_minPitch, m_maxPitch);
     }
 
+    /// <summary>
+    /// the purpose of return target point it to calcuate the desired location of an object based on a rotation given a pitch and yaw and a distance
+    /// </summary>
+    /// <returns>returns a direction from a point in the rotation which is a unit vector distance * distance away  </returns>
     public Vector3 ReturnTargetPoint()
     {
         return Quaternion.Euler(m_pitchRotationAroundPivit, m_yawRotationAroundPivit, 0.0f) * Vector3.forward * m_distanceFromPivot;
