@@ -19,7 +19,6 @@ public class CameraManager : MonoBehaviour
 
     protected CameraState _currentState;
     protected CameraBehavoir currentBehavoir;
-    protected CameraBehaviour defaultBehave;
 
     Dictionary<CameraState, CameraBehavoir> StateHolder = new Dictionary<CameraState, CameraBehavoir>()
     {

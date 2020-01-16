@@ -21,26 +21,26 @@ public class CameraBehavoir
     }
 
     //Move camera towards new pos.
-    protected void MoveCameraTowards(Vector3 CameraNewPos)
+    protected void MoveCameraTowards(Vector3 cameraNewPos)
     {
         //Do lerping towards pos in future.
 
-        m_camera.transform.position = CameraNewPos;
+        m_camera.transform.position = cameraNewPos;
     }
 
     //turns camera towards where it needs to.
-    protected void CameraLooksTowards(Vector3 LookAtPos)
+    protected void CameraLooksTowards(Vector3 lookAtPos)
     {
         //Do lerping towards pos in future.
 
-        m_camera.transform.LookAt(LookAtPos);
+        m_camera.transform.LookAt(lookAtPos);
     }
 
-    protected void FollowObjectLooksTowards(Vector3 LookAtPos)
+    protected void FollowObjectLooksTowards(Vector3 lookAtPos)
     {
         //Do lerping towards pos in future.
 
-        m_followObject.transform.LookAt(LookAtPos);
+        m_followObject.transform.LookAt(lookAtPos);
     }
 }
 
