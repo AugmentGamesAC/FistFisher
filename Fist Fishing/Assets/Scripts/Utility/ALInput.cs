@@ -128,11 +128,6 @@ public class ALInput : MonoBehaviour
         MouseY,
         Horizontal,
         Vertical,
-        //futhere axis will be needed for a controler.
-        CameraYaw,
-        CameraPitch,
-        CameraLookHorizontal,
-        CameraLookVertical,
     };
 
     public enum DirectionCode

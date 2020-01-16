@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AbzuCameraBehaviour : CameraBehavoir
 {
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)

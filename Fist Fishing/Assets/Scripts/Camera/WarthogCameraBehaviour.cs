@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class WarthogCameraBehaviour : CameraBehavoir
 {
     //Same as abzu but the camera rotates following object

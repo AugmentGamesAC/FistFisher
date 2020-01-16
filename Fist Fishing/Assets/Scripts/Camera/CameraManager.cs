@@ -7,6 +7,7 @@ using UnityEngine;
 /// Camera manage is to have a list of behaviors
 /// we are using input controls to switch states
 /// </summary>
+[System.Serializable]
 public class CameraManager : MonoBehaviour
 {
     protected enum CameraState
@@ -17,7 +18,13 @@ public class CameraManager : MonoBehaviour
         FirstPerson
     }
 
+    [SerializeField]
+    protected GameObject FollowObject;
+    [SerializeField]
+    protected GameObject CameraObject;
+
     protected CameraState _currentState;
+    [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
     Dictionary<CameraState, CameraBehavoir> StateHolder = new Dictionary<CameraState, CameraBehavoir>()
@@ -37,6 +44,11 @@ public class CameraManager : MonoBehaviour
     public void Start()
     {
         SwitchState(CameraState.Abzu);
+
+        foreach (KeyValuePair< CameraState, CameraBehavoir > stateHolderVals in StateHolder)
+        {
+            stateHolderVals.Value.SetOrbitObjects(FollowObject, CameraObject);
+        }
     }
 
     public void Update()
@@ -50,10 +62,12 @@ public class CameraManager : MonoBehaviour
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
             SwitchState(CameraState.FirstPerson);
 
+        Vector3 LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
+
         currentBehavoir.ResolveInput
-            (ALInput.GetAxis(ALInput.AxisCode.CameraYaw),
-            ALInput.GetAxis(ALInput.AxisCode.CameraPitch),
-            ALInput.GetAxis(ALInput.AxisCode.CameraLookHorizontal),
-            ALInput.GetAxis(ALInput.AxisCode.CameraLookVertical));
+            (LookInputVec.x,
+            LookInputVec.y,
+            LookInputVec.x,
+           LookInputVec.y);
     }
 }

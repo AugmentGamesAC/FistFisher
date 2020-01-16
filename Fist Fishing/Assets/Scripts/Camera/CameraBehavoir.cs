@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CameraBehavoir
 {
     //these values set in inspector
     [SerializeField]
-    protected OrbitPoint m_lookAtPoint;
+    protected OrbitPoint m_lookAtPoint = new OrbitPoint();
     [SerializeField]
-    protected OrbitPoint m_cameraPoint;
+    protected OrbitPoint m_cameraPoint = new OrbitPoint();
 
 
     protected GameObject m_camera;
@@ -18,6 +19,12 @@ public class CameraBehavoir
     {
         m_cameraPoint.Increment(orbitX, orbitY);
         m_lookAtPoint.Increment(lookatX, lookatY);
+    }
+
+    public void SetOrbitObjects(GameObject followObject, GameObject camera)
+    {
+        m_followObject = followObject;
+        m_camera = camera;
     }
 
     //Move camera towards new pos.
