@@ -7,6 +7,9 @@ public class FirstPersonCameraBehaviour : CameraBehavoir
 {
     //Same as Warthog but the cameraPoint Distance is right in front of followObject(Set in the inspector)
     //camera also does not need to take input, but only needs to looktowards lookatpoint if camera is at 0 distance.
+
+    public FirstPersonCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) { }
+
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
         //apply input values to orbit points

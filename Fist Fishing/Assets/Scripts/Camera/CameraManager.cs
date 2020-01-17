@@ -8,7 +8,7 @@ using UnityEngine;
 /// we are using input controls to switch states
 /// </summary>
 [System.Serializable]
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 {
     protected enum CameraState
     {
@@ -22,18 +22,31 @@ public class CameraManager : MonoBehaviour
     protected GameObject FollowObject;
     [SerializeField]
     protected GameObject CameraObject;
-
+    [SerializeField]
     protected CameraState _currentState;
     [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
+       
     Dictionary<CameraState, CameraBehavoir> StateHolder = new Dictionary<CameraState, CameraBehavoir>()
     {
-        {CameraState.Abzu, new AbzuCameraBehaviour() },
-        {CameraState.Locked, new LockedCameraBehaviour() },
-        {CameraState.Warthog, new WarthogCameraBehaviour() },
-        {CameraState.FirstPerson, new FirstPersonCameraBehaviour() }
+        {CameraState.Abzu, new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
+        {CameraState.Locked, new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
+        {CameraState.Warthog, new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
+        {CameraState.FirstPerson, new FirstPersonCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) }
     };
+
+
+    public void OnBeforeSerialize()
+    {
+        SwitchState(_currentState);
+    }
+
+    public void OnAfterDeserialize() { }
+
+
+
+
     protected void SwitchState(CameraState newState)
     {
         _currentState = newState;
@@ -41,13 +54,14 @@ public class CameraManager : MonoBehaviour
             throw new System.InvalidOperationException("state not found in StateHolder ");
     }
 
-    public void Start()
+
+    public void Awake()
     {
         SwitchState(CameraState.Abzu);
 
         foreach (KeyValuePair< CameraState, CameraBehavoir > stateHolderVals in StateHolder)
         {
-            stateHolderVals.Value.SetOrbitObjects(FollowObject, CameraObject);
+            stateHolderVals.Value.SetCamBehavObjects(FollowObject, CameraObject);
         }
     }
 
@@ -70,4 +84,5 @@ public class CameraManager : MonoBehaviour
             LookInputVec.x,
            LookInputVec.y);
     }
+
 }

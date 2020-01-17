@@ -5,6 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class OrbitPoint
 {
+    public OrbitPoint(float yawRotationAroundPivit, float pitchRotationAroundPivit, float distanceFromPivot, float maxPitch, float minPitch, float maxYaw, float minYaw)
+    {
+        m_yawRotationAroundPivit = yawRotationAroundPivit;
+        m_pitchRotationAroundPivit = pitchRotationAroundPivit;
+        m_distanceFromPivot = distanceFromPivot;
+        m_maxPitch = maxPitch;
+        m_minPitch = minPitch;
+        m_maxYaw = maxYaw;
+        m_minYaw = minYaw;
+    }
+
     [SerializeField]
     protected float m_yawRotationAroundPivit;
     [SerializeField]
@@ -22,6 +33,8 @@ public class OrbitPoint
 
     public void Increment(float yaw, float pitch)
     {
+        m_yawRotationAroundPivit %= 360;
+
         m_yawRotationAroundPivit = Mathf.Clamp(m_yawRotationAroundPivit + yaw, m_minYaw, m_maxYaw);
         m_pitchRotationAroundPivit = Mathf.Clamp(m_pitchRotationAroundPivit + pitch, m_minPitch, m_maxPitch);
     }

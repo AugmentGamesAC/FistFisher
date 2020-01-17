@@ -7,13 +7,20 @@ public class CameraBehavoir
 {
     //these values set in inspector
     [SerializeField]
-    protected OrbitPoint m_lookAtPoint = new OrbitPoint();
+    protected OrbitPoint m_lookAtPoint;
     [SerializeField]
-    protected OrbitPoint m_cameraPoint = new OrbitPoint();
-
+    protected OrbitPoint m_cameraPoint;
 
     protected GameObject m_camera;
     protected GameObject m_followObject;
+
+    //made to initialize the orbit point values since new up above cancels inspector values.
+    public CameraBehavoir(OrbitPoint lookAtPoint, OrbitPoint cameraPoint)
+    {
+        m_lookAtPoint = lookAtPoint;
+        m_cameraPoint = cameraPoint;
+    }
+
 
     public virtual void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
@@ -21,7 +28,7 @@ public class CameraBehavoir
         m_lookAtPoint.Increment(lookatX, lookatY);
     }
 
-    public void SetOrbitObjects(GameObject followObject, GameObject camera)
+    public void SetCamBehavObjects(GameObject followObject, GameObject camera)
     {
         m_followObject = followObject;
         m_camera = camera;

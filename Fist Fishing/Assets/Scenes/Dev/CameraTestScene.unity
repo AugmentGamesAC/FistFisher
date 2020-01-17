@@ -338,21 +338,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a691aaaaec911a4d939e531951723ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowObject: {fileID: 1735777555}
-  CameraObject: {fileID: 823547342}
+  FollowObject: {fileID: 0}
+  CameraObject: {fileID: 0}
+  _currentState: 0
   currentBehavoir:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 5
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+    m_cameraPoint:
+      m_yawRotationAroundPivit: 26546
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+  m_Abzu:
+    m_lookAtPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
       m_maxPitch: 0
       m_minPitch: 0
       m_maxYaw: 0
       m_minYaw: 0
     m_cameraPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 90
-      m_distanceFromPivot: 5
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+  m_Locked:
+    m_lookAtPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+    m_cameraPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+  m_Warthog:
+    m_lookAtPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+    m_cameraPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+  m_FirstPerson:
+    m_lookAtPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
+      m_maxPitch: 0
+      m_minPitch: 0
+      m_maxYaw: 0
+      m_minYaw: 0
+    m_cameraPoint:
+      m_yawRotationAroundPivit: 26546
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 0
       m_maxPitch: 0
       m_minPitch: 0
       m_maxYaw: 0
@@ -797,13 +866,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735777555}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919221980
 GameObject:
   m_ObjectHideFlags: 0

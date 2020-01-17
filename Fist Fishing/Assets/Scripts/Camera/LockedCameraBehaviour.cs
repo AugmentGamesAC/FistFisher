@@ -7,6 +7,8 @@ public class LockedCameraBehaviour : CameraBehavoir
     //LookAt Point doesn't move
     //camera rotates around followObject by a restricted amount of degrees.
 
+    public LockedCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) { }
+
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
         //apply input values to orbit points

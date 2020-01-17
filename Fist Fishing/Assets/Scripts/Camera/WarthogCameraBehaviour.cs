@@ -6,6 +6,7 @@ using UnityEngine;
 public class WarthogCameraBehaviour : CameraBehavoir
 {
     //Same as abzu but the camera rotates following object
+    public WarthogCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) { }
 
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {

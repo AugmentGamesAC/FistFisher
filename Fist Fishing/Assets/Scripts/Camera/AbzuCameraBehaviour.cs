@@ -5,13 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class AbzuCameraBehaviour : CameraBehavoir
 {
+    public AbzuCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) {}
+
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
         //apply input values to orbit points
         m_cameraPoint.Increment(orbitX, orbitY);
-        m_lookAtPoint.Increment(lookatX, lookatY);
+        //m_lookAtPoint.Increment(lookatX, lookatY);
 
-        base.ResolveInput(orbitX, orbitY, lookatX, lookatY);
+        //base.ResolveInput(orbitX, orbitY, lookatX, lookatY);
 
         //offset and position camera around followObject(Player)
         Vector3 CameraWantsToMoveHere = m_followObject.transform.position + (Vector3)(m_followObject.transform.localToWorldMatrix * m_cameraPoint.ReturnTargetPoint());
