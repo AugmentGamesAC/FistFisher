@@ -27,20 +27,41 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
-       
-    Dictionary<CameraState, CameraBehavoir> StateHolder = new Dictionary<CameraState, CameraBehavoir>()
-    {
-        {CameraState.Abzu, new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
-        {CameraState.Locked, new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
-        {CameraState.Warthog, new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) },
-        {CameraState.FirstPerson, new FirstPersonCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f)) }
-    };
+    [SerializeField]
+    protected CameraBehavoir m_abzu = new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    [SerializeField]
+    protected CameraBehavoir m_locked = new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    [SerializeField]
+    protected CameraBehavoir m_warthog = new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    [SerializeField]
+    protected CameraBehavoir m_firstPerson = new FirstPersonCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
 
+
+    Dictionary<CameraState, CameraBehavoir> StateHolder; 
 
     public void OnBeforeSerialize()
     {
+        InitStateHolderIfNeeded();
+
         SwitchState(_currentState);
     }
+
+
+    protected void InitStateHolderIfNeeded()
+    {
+        if (StateHolder != null)
+            return;
+
+        //Setup Dictionary while setting their values
+        StateHolder = new Dictionary<CameraState, CameraBehavoir>()
+        {
+            {CameraState.Abzu, m_abzu.SetCamBehavObjects(FollowObject, CameraObject) },
+            {CameraState.Locked, m_locked.SetCamBehavObjects(FollowObject, CameraObject) },
+            {CameraState.Warthog, m_warthog.SetCamBehavObjects(FollowObject, CameraObject) },
+            {CameraState.FirstPerson, m_firstPerson.SetCamBehavObjects(FollowObject, CameraObject) }
+        };
+    }
+
 
     public void OnAfterDeserialize() { }
 
@@ -49,6 +70,9 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     protected void SwitchState(CameraState newState)
     {
+        if (StateHolder == default)
+            return;
+
         _currentState = newState;
         if (!StateHolder.TryGetValue(_currentState, out currentBehavoir))
             throw new System.InvalidOperationException("state not found in StateHolder ");
@@ -57,12 +81,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void Awake()
     {
+        InitStateHolderIfNeeded();
         SwitchState(CameraState.Abzu);
-
-        foreach (KeyValuePair< CameraState, CameraBehavoir > stateHolderVals in StateHolder)
-        {
-            stateHolderVals.Value.SetCamBehavObjects(FollowObject, CameraObject);
-        }
     }
 
     public void Update()

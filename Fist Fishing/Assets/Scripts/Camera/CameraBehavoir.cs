@@ -28,10 +28,13 @@ public class CameraBehavoir
         m_lookAtPoint.Increment(lookatX, lookatY);
     }
 
-    public void SetCamBehavObjects(GameObject followObject, GameObject camera)
+    //set GameObjects to work with and return this behaviour.
+    public CameraBehavoir SetCamBehavObjects(GameObject followObject, GameObject camera)
     {
         m_followObject = followObject;
         m_camera = camera;
+
+        return this;
     }
 
     //Move camera towards new pos.

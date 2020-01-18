@@ -121,99 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &16542968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 16542972}
-  - component: {fileID: 16542971}
-  - component: {fileID: 16542970}
-  - component: {fileID: 16542969}
-  m_Layer: 0
-  m_Name: LookAtObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!135 &16542969
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16542968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &16542970
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16542968}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &16542971
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16542968}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &16542972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16542968}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.3100004, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326190723
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,94 +245,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a691aaaaec911a4d939e531951723ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowObject: {fileID: 0}
-  CameraObject: {fileID: 0}
+  FollowObject: {fileID: 1735777555}
+  CameraObject: {fileID: 823547342}
   _currentState: 0
   currentBehavoir:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
+      m_pitchRotationAroundPivit: 50
+      m_distanceFromPivot: -7
+      m_maxPitch: 50
+      m_minPitch: 50
+      m_maxYaw: 360
+      m_minYaw: -360
     m_cameraPoint:
-      m_yawRotationAroundPivit: 26546
+      m_yawRotationAroundPivit: 0
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
-  m_Abzu:
+      m_distanceFromPivot: 10
+      m_maxPitch: 60
+      m_minPitch: -60
+      m_maxYaw: 360
+      m_minYaw: -360
+  m_abzu:
+    m_lookAtPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 50
+      m_distanceFromPivot: -7
+      m_maxPitch: 50
+      m_minPitch: 50
+      m_maxYaw: 360
+      m_minYaw: -360
+    m_cameraPoint:
+      m_yawRotationAroundPivit: 0
+      m_pitchRotationAroundPivit: 0
+      m_distanceFromPivot: 10
+      m_maxPitch: 60
+      m_minPitch: -60
+      m_maxYaw: 360
+      m_minYaw: -360
+  m_locked:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
+      m_distanceFromPivot: 10
+      m_maxPitch: 85
+      m_minPitch: -85
+      m_maxYaw: 180
+      m_minYaw: -180
     m_cameraPoint:
-      m_yawRotationAroundPivit: 0
+      m_yawRotationAroundPivit: 30
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
-  m_Locked:
+      m_distanceFromPivot: 10
+      m_maxPitch: 180
+      m_minPitch: -180
+      m_maxYaw: 360
+      m_minYaw: -360
+  m_warthog:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
+      m_pitchRotationAroundPivit: -90
+      m_distanceFromPivot: 10
+      m_maxPitch: 180
+      m_minPitch: -180
+      m_maxYaw: 180
+      m_minYaw: -180
     m_cameraPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
-  m_Warthog:
+      m_pitchRotationAroundPivit: 110
+      m_distanceFromPivot: 10
+      m_maxPitch: 180
+      m_minPitch: -180
+      m_maxYaw: 360
+      m_minYaw: -360
+  m_firstPerson:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
+      m_pitchRotationAroundPivit: -90
+      m_distanceFromPivot: 10
+      m_maxPitch: 180
+      m_minPitch: -180
+      m_maxYaw: 180
+      m_minYaw: -180
     m_cameraPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
-  m_FirstPerson:
-    m_lookAtPoint:
-      m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
-    m_cameraPoint:
-      m_yawRotationAroundPivit: 26546
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 0
-      m_maxPitch: 0
-      m_minPitch: 0
-      m_maxYaw: 0
-      m_minYaw: 0
+      m_pitchRotationAroundPivit: 110
+      m_distanceFromPivot: 10
+      m_maxPitch: 180
+      m_minPitch: -180
+      m_maxYaw: 360
+      m_minYaw: -360
 --- !u!114 &823547344
 MonoBehaviour:
   m_ObjectHideFlags: 0
