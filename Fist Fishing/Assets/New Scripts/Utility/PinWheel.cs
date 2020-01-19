@@ -18,7 +18,7 @@ using UnityEngine;
 /// <typeparam name="T"></typeparam>
 public class PinWheel<T>
 {
-    Dictionary<int, T> Slots;
+    Dictionary<int, T> Slots = new Dictionary<int, T>();
     int SelectedSlot;
 
     public T GetSelectedOption()
