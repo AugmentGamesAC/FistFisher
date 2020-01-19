@@ -27,9 +27,12 @@ public class CombatManager : MonoBehaviour
 
     FishCombatInfo m_selectedFish = new FishCombatInfo();
 
+    int m_fishSelection = 0;
+
+    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
+
     public void StartCombat(bool didPlayerStartIt)
     {
-
         m_currentCombatState = (didPlayerStartIt) ? CombatStates.AwaitingPlayerRound : CombatStates.AwaitingFishRound;
 
         if (didPlayerStartIt)
@@ -55,7 +58,6 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //listen to combat during AwaitingPlayerRound.
 
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
@@ -80,8 +82,6 @@ public class CombatManager : MonoBehaviour
         }
 
         changeselectedfish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
-
-
     }
 
     public void ResolvePlayerRound()
@@ -165,38 +165,16 @@ public class CombatManager : MonoBehaviour
     public bool changeselectedfish(float leftRight)
     {
         //no axis input? do nothing.
-        if (leftRight == 0)
+        if ((leftRight == 0) ||( m_fishInCombatInfo.Count == 0))
             return false;
 
-        if(leftRight > 0)
-        {
-            for (int i = 0; i < m_fishInCombatInfo.Count; i++)
-            {
-                if(m_fishInCombatInfo[i] == m_selectedFish)
-                {
-                    m_selectedFish = m_fishInCombatInfo[(i + 1) % m_fishInCombatInfo.Count];
-                }
-            }
-            return true;
-        }
-        
-        if(leftRight < 0)
-        {
-            for (int i = 0; i < m_fishInCombatInfo.Count; i++)
-            {
-                if (m_fishInCombatInfo[i] == m_selectedFish)
-                {
-                    if ((i - 1) < 0)
-                        m_selectedFish = m_fishInCombatInfo[m_fishInCombatInfo.Count - 1];
-                    else
-                        m_selectedFish = m_fishInCombatInfo[(i + 1) % m_fishInCombatInfo.Count];
-                }
-            }
+        m_fishSelection += (int)leftRight;
+        m_fishSelection %= m_fishInCombatInfo.Count;
 
-            return true;
-        }
+        if (m_fishSelection < 0)
+            m_fishSelection += m_fishInCombatInfo.Count;
 
-        return false;
+        return true;
     }
 
     public void AwaitPlayerAnimation()
