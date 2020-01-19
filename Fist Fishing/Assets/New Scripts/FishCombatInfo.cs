@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishCombatInfo : MonoBehaviour
+public class FishCombatInfo : CombatInfo
 {
     //data needed for combat
     // not included in a fish instance
 
-    public float m_slowEffect;
-    public float m_speed;
-    public float m_distance;
+    public float SlowEffect;
+    public float Speed;
+    public float Distance;
 
-    public float m_fishInstance;
+    /// <summary>
+    /// Need a fish instance class.
+    /// </summary>
+    public FishInstance FishInstance = new FishInstance();
 }

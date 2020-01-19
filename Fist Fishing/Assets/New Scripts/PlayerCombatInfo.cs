@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCombatInfo : CombatInfo
 {
-    Player PlayerInstance;
+    public PlayerInstance m_playerInstance = new PlayerInstance();
 
-    PinWheel<CombatMoveInfo> Attack;
+    public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>();
 }

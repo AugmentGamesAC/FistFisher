@@ -98,6 +98,20 @@ public class ALInput : MonoBehaviour
     public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
 
 
+    //Encounter Combat Buttons.
+    [SerializeField]
+    KeyCode m_attack;
+    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+
+    [SerializeField]
+    KeyCode m_item;
+    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+
+    [SerializeField]
+    KeyCode m_flee;
+    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
+
+
     //camera states
     [SerializeField]
     KeyCode m_abzu;
@@ -114,6 +128,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_firstPerson;
     public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -225,6 +240,10 @@ public class ALInput : MonoBehaviour
         m_punch = KeyCode.Q;
         m_manualCamera = KeyCode.Mouse1;
 
+        //Default Combat buttons
+        m_attack = KeyCode.Mouse0;
+        m_item = KeyCode.Mouse1;
+        m_flee = KeyCode.Mouse2;
 
         m_rotateForward = KeyCode.Keypad8;
         m_rotateBackwards = KeyCode.Keypad2;
