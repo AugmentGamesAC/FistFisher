@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,28 +22,29 @@ public class CombatManager : MonoBehaviour
 
     List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
 
-    PlayerCombatInfo m_player = new PlayerCombatInfo();
+    PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
 
     CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
     FishCombatInfo m_selectedFish = new FishCombatInfo();
 
+    //gets controlled by left right inputs.
     int m_fishSelection = 0;
 
-    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
+    public FishCombatInfo SelectedFish {  get { return m_fishInCombatInfo[m_fishSelection]; } }
 
     public void StartCombat(bool didPlayerStartIt)
     {
         m_currentCombatState = (didPlayerStartIt) ? CombatStates.AwaitingPlayerRound : CombatStates.AwaitingFishRound;
 
         if (didPlayerStartIt)
-            m_roundQueue.Enqueue(m_player);
+            m_roundQueue.Enqueue(m_playerCombatInfo);
 
         AddFishToQueue();
 
         if (!didPlayerStartIt)
         {
-            m_roundQueue.Enqueue(m_player);
+            m_roundQueue.Enqueue(m_playerCombatInfo);
             ResolveFishCombatant(m_roundQueue.Dequeue() as FishCombatInfo);
         }
     }
@@ -58,14 +60,15 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //listen to combat during AwaitingPlayerRound.
+        //can switch targets even when fish are attacking.
+        ChangeSelectedFish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
 
+        //listen to inputs only during AwaitingPlayerRound.
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
-        //listen to input cases.
+        //listen for input cases.
         //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping.
-
         if (ALInput.GetKeyDown(ALInput.Attack))
         {
             PlayerAttack();
@@ -80,29 +83,21 @@ public class CombatManager : MonoBehaviour
         {
             PlayerFlee();
         }
-
-        changeselectedfish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
-    }
-
-    public void ResolvePlayerRound()
-    {
-
-
-
-
-
-
-
-        //move has happened so resolve round.
-
-
-
     }
 
 
     public void PlayerFlee()
     {
+        //Take away player's oxygen.
 
+        //remove last caught fish from inventory.
+
+        //Transition from AwaitingPlayerRound to outOfCombat
+        m_currentCombatState = CombatStates.CombatFinished;
+
+        throw new System.NotImplementedException("No End Combat situation");
+
+        ResolveRound();
     }
 
     /// <summary>
@@ -111,12 +106,30 @@ public class CombatManager : MonoBehaviour
     public void PlayerAttack()
     {
         //Get the player's current pinwheel choice.
+        CombatMoveInfo move = m_playerCombatInfo.m_attackPinwheel.GetSelectedOption();
 
-        //apply stat changes to selected and the player.
+        StartCoroutine("StartPlayerAttackAnimation", move);
 
-        //apply stat changes to the player. eg. oxygen, position on the field.
+        //reduce distance from selected fish.
+        SelectedFish.Distance -= move.MoveDistance;
+        //Increase distance to other fish.
+        foreach (var fishCombatInfo in m_fishInCombatInfo)
+        {
+            if (fishCombatInfo == SelectedFish)
+                continue;
+            fishCombatInfo.Distance += move.MoveDistance;
+        }
+        
+
+        throw new System.NotImplementedException(" dependant on fish Instance.");
+
+        //apply stat changes to the player. eg. oxygen.
 
 
+        //apply damage from the player's move to the selected fish.
+
+
+        ResolveRound();
     }
 
     /// <summary>
@@ -124,7 +137,16 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void PlayerItem()
     {
+        throw new System.NotImplementedException("dependency items implementation.");
 
+        //Get the player's current pinwheel choice.
+
+        //Apply effect to the combat.
+
+        m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
+
+        //this happens after stat and State changes.
+        ResolveRound();
     }
 
     /// <summary>
@@ -133,39 +155,33 @@ public class CombatManager : MonoBehaviour
     /// <param name=""></param>
     public void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
+        throw new System.NotImplementedException("dependency on combat position and fish Instance.");
+
+        StartCoroutine("StartFishAnimation");
+
         //check fishCombatInfo.FishInstance for Health, position.
-
-        //if health is below 0, add to the player's inventory.
-
-        //if position is out of combat
-
-        //enqueue fish.
     }
 
     /// <summary>
     /// Update the round Queue.
     /// </summary>
-    public void ResolveRound() //fish disapear etc, reload roundqueue
+    private void ResolveRound() //fish disapear etc, reload if empty
     {
+        throw new System.NotImplementedException("Dependant on fish stats.");
+
         //checks combat State.
-        //AwaitingPlayerRound: call ResolvePlayerRound();
-        //AwaitingFishRound: call ResolveFishCombatant(currentQueued);
 
+        //determine next turn.
 
-
-        //evaluate the fish list's stats, and the player's stats.
-        //ResolveFishCombatant(/*Selected fish*/);
     }
 
     /// <summary>
     /// return true if selected fish is successful.
     /// </summary>
-    /// <param name="leftRight">-1 or +1 is left or right</param>
-    /// <returns></returns>
-    public bool changeselectedfish(float leftRight)
+    private bool ChangeSelectedFish(float leftRight)
     {
         //no axis input? do nothing.
-        if ((leftRight == 0) ||( m_fishInCombatInfo.Count == 0))
+        if ((leftRight == 0) || (m_fishInCombatInfo.Count == 0))
             return false;
 
         m_fishSelection += (int)leftRight;
@@ -177,13 +193,26 @@ public class CombatManager : MonoBehaviour
         return true;
     }
 
-    public void AwaitPlayerAnimation()
+    //Plays aninmation
+    private IEnumerable StartPlayerAttackAnimation(CombatMoveInfo move)
     {
+        m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
 
+        //Play animation
+        //wait for animation length
+        //change combat state to next.
+
+        yield return null;
     }
 
-    public void AwaitFishAnimation()
+    private IEnumerable StartFishAnimation()
     {
+        m_currentCombatState = CombatStates.AwaitingFishAnimation;
 
+        //Play animation
+        //wait for animation length
+        //change combat state to next.
+
+        yield return null;
     }
 }
