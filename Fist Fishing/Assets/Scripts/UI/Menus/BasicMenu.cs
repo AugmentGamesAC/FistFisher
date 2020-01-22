@@ -24,18 +24,32 @@ public class BasicMenu : MonoBehaviour
         if (m_canvas == null)
             m_canvas = m_HUD.GetComponent<Canvas>();
         //CloseMenu();
+        if (m_startup)
+        {
+            CloseMenu();
+            m_startup = false;
+        }
+    }
+
+    bool m_startup = true;
+
+    private void Update()
+    {
+
     }
 
     public bool CloseMenu()
     {
-        //m_HUD.SetActive(false);
-        m_canvas.enabled = false;
+        //Debug.Log("Closing: " + this.name);
+        m_HUD.SetActive(false);
+        //m_canvas.enabled = false;
         return true;
     }
     public bool OpenMenu()
     {
-        //m_HUD.SetActive(true);
-        m_canvas.enabled = true;
+        //Debug.Log("Openning: " + this.name);
+        m_HUD.SetActive(true);
+        //m_canvas.enabled = true;
         return true;
     }
 }

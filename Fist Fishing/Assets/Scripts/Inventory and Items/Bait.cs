@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InfluenceFish))]
 public class Bait : MonoBehaviour
 {
-    public float m_maxDuration = 200.0f;
-    private float m_currentDuration;
-    public bool m_activeInWorld = false;
+    [SerializeField]
+    protected float m_maxDuration = 200.0f;
+    protected float m_currentDuration;
+    [SerializeField]
+    protected bool m_activeInWorld = false;
+
+    protected InfluenceFish m_influenceFish;
+
 
     [SerializeField]
     protected PondManager m_pond;
@@ -15,7 +21,7 @@ public class Bait : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        m_influenceFish = GetComponent<InfluenceFish>();
 
         gameObject.SetActive(true);
     }
@@ -70,26 +76,17 @@ public class Bait : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        InfluenceFish(other.gameObject);
+        if (m_influenceFish != null)
+            m_influenceFish.ImpressFish(other.gameObject);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        InfluenceFish(other.gameObject);
+        if (m_influenceFish != null)
+            m_influenceFish.ImpressFish(other.gameObject);
     }
 
-    [SerializeField]
-    protected FishBrain.FishClassification m_classification = FishBrain.FishClassification.BaitSensitive1;
-    [SerializeField]
-    protected float m_influence = 0.1f;
-    public void InfluenceFish(GameObject other, float Influencefactor = 1)
-    {
-        FishBrain fb = other.GetComponentInParent<FishBrain>();
-        if (fb == default)
-            return;
 
-        fb.ApplyImpulse(gameObject, m_influence, m_classification);
-    }
 }
 
 

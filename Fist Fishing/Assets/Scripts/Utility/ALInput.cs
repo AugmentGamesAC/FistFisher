@@ -35,6 +35,27 @@ public class ALInput : MonoBehaviour
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
 
     [SerializeField]
+    KeyCode m_manualCamera;
+    public static KeyCode ManualCamera { get { hasInstance(); return Instance.m_manualCamera; } }
+
+
+    [SerializeField]
+    KeyCode m_rotateForward;
+    public static KeyCode RotateForward { get { hasInstance(); return Instance.m_rotateForward; } }
+    [SerializeField]
+    KeyCode m_rotateBackwards;
+    public static KeyCode RotateBackwards { get { hasInstance(); return Instance.m_rotateBackwards; } }
+    [SerializeField]
+    KeyCode m_rotateRight;
+    public static KeyCode RotateRight { get { hasInstance(); return Instance.m_rotateRight; } }
+    [SerializeField]
+    KeyCode m_rotateLeft;
+    public static KeyCode RotateLeft { get { hasInstance(); return Instance.m_rotateLeft; } }
+
+
+
+
+    [SerializeField]
     KeyCode m_keyTarget;
     public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
     [SerializeField]
@@ -68,6 +89,46 @@ public class ALInput : MonoBehaviour
     KeyCode m_toggleInventory;
     public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
 
+    [SerializeField]
+    KeyCode m_toggleShop;
+    public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
+
+    [SerializeField]
+    KeyCode m_start;
+    public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
+
+
+    //Encounter Combat Buttons.
+    [SerializeField]
+    KeyCode m_attack;
+    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+
+    [SerializeField]
+    KeyCode m_item;
+    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+
+    [SerializeField]
+    KeyCode m_flee;
+    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
+
+
+    //camera states
+    [SerializeField]
+    KeyCode m_abzu;
+    public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
+
+    [SerializeField]
+    KeyCode m_locked;
+    public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }
+
+    [SerializeField]
+    KeyCode m_warthog;
+    public static KeyCode Warthog { get { hasInstance(); return Instance.m_warthog; } }
+
+    [SerializeField]
+    KeyCode m_firstPerson;
+    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -81,8 +142,7 @@ public class ALInput : MonoBehaviour
         MouseX,
         MouseY,
         Horizontal,
-        Vertical
-        //futhere axis will be needed for a controler. 
+        Vertical,
     };
 
     public enum DirectionCode
@@ -178,7 +238,22 @@ public class ALInput : MonoBehaviour
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
         m_punch = KeyCode.Q;
+        m_manualCamera = KeyCode.Mouse1;
 
+        //Default Combat buttons
+        m_attack = KeyCode.Mouse0;
+        m_item = KeyCode.Mouse1;
+        m_flee = KeyCode.Mouse2;
+
+        m_rotateForward = KeyCode.Keypad8;
+        m_rotateBackwards = KeyCode.Keypad2;
+        m_rotateRight = KeyCode.Keypad4;
+        m_rotateLeft = KeyCode.Keypad6;
+
+        m_abzu = KeyCode.F1;
+        m_locked = KeyCode.F2;
+        m_warthog = KeyCode.F3;
+        m_firstPerson = KeyCode.F4;
 
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
@@ -188,6 +263,9 @@ public class ALInput : MonoBehaviour
         m_craftBait = KeyCode.B;
 
         m_toggleInventory = KeyCode.I;
+        m_toggleShop = KeyCode.O;
+
+        m_start = KeyCode.Space;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }
