@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Responsibilities
+last activated MenuList
+function to deactivate prior MenuList when new one is activated
+Needs to be access from multiple code locations, Singleton or other solutions to house desirable. 
+
+can get from menu list if it needs to pause or show mouse
+
+When boat, player, or combat need to do something with menus, it calls this
+
+*/
+
+
 /// <summary>
 /// A list of all menu/HUD configurations, which are linked with a list of menus in the menu manager
 /// </summary>
@@ -64,6 +77,7 @@ public enum MenuScreens
 public class NewMenuManager : MonoBehaviour
 {
 
+    protected Dictionary<MenuScreens, MenuList> m_menuLists;
     #region working inspector dictionary
     /// <summary>
     /// this is the mess required to make dictionaries with  list as a value work in inspector
@@ -72,17 +86,16 @@ public class NewMenuManager : MonoBehaviour
     [System.Serializable]
     public class MenuListForInspectorDictionary { public List<MenuList> m_listsOfMenu; }
     [System.Serializable]
-    public class ListOfMenuConfigurations : InspectorDictionary<MenuScreens, MenuListForInspectorDictionary> { }
+    public class MenuConfigurations : InspectorDictionary<MenuScreens, MenuListForInspectorDictionary> { }
     [SerializeField]
-    protected ListOfMenuConfigurations m_listOfConfigurations = new ListOfMenuConfigurations();
-    public ListOfMenuConfigurations MenuList { get { return m_listOfConfigurations; } }
+    protected MenuConfigurations m_menuConfigurations = new MenuConfigurations();
+    public MenuConfigurations MenuConfigs { get { return m_menuConfigurations; } }
+   // public MenuList ListsOfMenu 
 
 
     [SerializeField]
     public static MenuListForInspectorDictionary m_Mylist = new MenuListForInspectorDictionary();
     #endregion working inspector dictionary
-
-
 
     #region singletonification
     /// <summary>
@@ -108,60 +121,56 @@ public class NewMenuManager : MonoBehaviour
     }
     #endregion singletonification
 
-
-
-
     [SerializeField]
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
-    /// Need help with this because im not sure how to get the MenuList's List of Menus
+    /// Set the current menu  
+    /// Display the current menu from the menulist
     /// </summary>
-    /// <param name="currentlySelcetedMenuScreen"></param>
-    public static void DisplayMenuScreen(MenuScreens currentlySelcetedMenuScreen)
+    /// <param name="currentlySelectedMenuScreen"></param>
+    public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
-        List<Menu> menuList = new List<Menu>();
-        if (Instance.m_currentSelectedMenu == currentlySelcetedMenuScreen)
+        //Check if current menus is the same as the passed in menu
+        if (Instance.m_currentSelectedMenu == NewSelectedMenuScreen)
             return;
 
-        SetMenuListVisibility(default, false);
-        Instance.m_currentSelectedMenu = currentlySelcetedMenuScreen;
+        //If it is not then deactivate current menu
+        SetMenuListActiveState(Instance.m_menuLists[Instance.m_currentSelectedMenu], false);
+        //Set Current menu to the passed in menu
+        Instance.m_currentSelectedMenu = NewSelectedMenuScreen;
 
-        if (Instance.m_currentSelectedMenu == MenuScreens.NotSet)
-            return;
-        if (Instance.MenuList.TryGetValue(currentlySelcetedMenuScreen, out m_Mylist))
+        if (Instance.MenuConfigs.TryGetValue(NewSelectedMenuScreen, out m_Mylist))
         {
-            SetMenuListVisibility(m_Mylist,true);
+            SetMenuListActiveState(Instance.m_menuLists[NewSelectedMenuScreen], true);
         }
     }
 
-    protected static void SetMenuListVisibility(List<Menu> list, bool visibility)
+    /// <summary>
+    /// Set the visibility of the menu items within a menu
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="visibility"></param>
+    protected static void SetMenuListActiveState(MenuList list, bool activeState)
     {
-        // different code based on using list
-        if (m_Mylist == null)
-            return;
-        if (m_Mylist.m_listsOfMenu == null)
-            return;
         if (list == null)
             return;
-
-        //Why doesn't bm have a ShowHUD(bool)?
-        foreach (Menu bm in list)
-        // bm.HUD.SetActive(active);
-        {
-                bm.Show(visibility);
-           
-        }
+        list.ShowActive(activeState);
     }
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Helper to get current menu's mouse active state
+    /// </summary>
+    /// <returns></returns>
+    protected bool GetCurrentMouseActive()
     {
-        
+        return m_menuLists[m_currentSelectedMenu].MouseActive;
     }
-
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Helper to get current menu's game paused state
+    /// </summary>
+    /// <returns></returns>
+    protected bool GetCurrentGamePause()
     {
-        
+        return m_menuLists[m_currentSelectedMenu].Paused;
     }
 }

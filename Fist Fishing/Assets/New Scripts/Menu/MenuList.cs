@@ -2,38 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuList : MonoBehaviour
+
+/*Responsibilities
+Shows and hides.
+knows if mouse is available
+knows if menu pauses game
+*/
+[System.Serializable]
+public class MenuList
 {
+    [SerializeField]
     protected List<Menu> m_menuList;
-
-    bool m_pausesGameIfActive;
-    bool m_allowMouseToBeActive;
-
+    [SerializeField]
+    protected bool m_gamePaused;
+    [SerializeField]
+    protected bool m_mouseActive;
+    public bool Paused { get { return m_gamePaused; } }
+    public bool MouseActive { get { return m_mouseActive; } }
     /// <summary>
-    /// Sets each item in the list to not show
+    /// Sets each menu in the list that is active to the bool parameter
     /// Still need to setup the canvas' to make them show/not show
     /// </summary>
     /// <param name="activeState"></param>
     public void ShowActive(bool activeState)
     {
         if (activeState)
-        {
-            m_pausesGameIfActive = true;
-            m_allowMouseToBeActive = true;
-
-            foreach (Menu item in m_menuList)
+        {            
+            foreach (Menu menu in m_menuList)
             {
-                item.Show(true);
+                menu.Show(activeState);
             }
         }
         else
-        {
-            m_allowMouseToBeActive = false;
-            m_pausesGameIfActive = false;
-
-            foreach (Menu item in m_menuList)
+        {         
+            foreach (Menu menu in m_menuList)
             {
-                item.Show(false);
+                menu.Show(activeState);
             }
         }
     }
