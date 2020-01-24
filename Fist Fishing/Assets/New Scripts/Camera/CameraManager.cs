@@ -10,12 +10,12 @@ using UnityEngine;
 [System.Serializable]
 public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 {
-    protected enum CameraState
+    public enum CameraState
     {
         Abzu,
         Locked,
         Warthog,
-        FirstPerson
+        FirstPerson,
     }
 
     [SerializeField]
@@ -24,6 +24,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     protected GameObject CameraObject;
     [SerializeField]
     protected CameraState _currentState;
+    public CameraState CurrentState { get { return _currentState; } }
+
     [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
@@ -41,10 +43,11 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
-        InitStateHolderIfNeeded();
-
         SwitchState(_currentState);
     }
+
+    public Vector3 LookAtWorldTransform { get { return currentBehavoir.GetCameraLookatPos; } }
+    public Vector3 CameraPos { get { return currentBehavoir.GetCameraPos; } }
 
 
     protected void InitStateHolderIfNeeded()
@@ -65,13 +68,9 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize() { }
 
-
-
-
     protected void SwitchState(CameraState newState)
     {
-        if (StateHolder == default)
-            return;
+        InitStateHolderIfNeeded();
 
         _currentState = newState;
         if (!StateHolder.TryGetValue(_currentState, out currentBehavoir))
