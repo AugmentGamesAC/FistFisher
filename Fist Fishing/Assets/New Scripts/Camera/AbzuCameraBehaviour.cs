@@ -18,7 +18,7 @@ public class AbzuCameraBehaviour : CameraBehavoir
         //offset and position camera around followObject(Player)
         Vector3 CameraWantsToMoveHere = m_followObject.transform.position + (m_cameraPoint.ReturnTargetPoint());
 
-        Vector3 CameraWantsToLookAtThis = m_lookAtPoint.ReturnTargetPoint();
+        Vector3 CameraWantsToLookAtThis = m_followObject.transform.position + m_lookAtPoint.ReturnTargetPoint();
 
         MoveCameraTowards(CameraWantsToMoveHere);
 
