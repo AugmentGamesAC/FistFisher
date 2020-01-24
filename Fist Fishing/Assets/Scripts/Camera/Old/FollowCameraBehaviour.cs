@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class FollowCameraBehaviour : CameraBehaviour
@@ -47,53 +48,21 @@ public class FollowCameraBehaviour : CameraBehaviour
         return base.GetControlRotation();
     }
 
-
-
-    class dummyCamera : MonoBehaviour
-    {
-        orbitpoint MyPoint;
-        orbitpoint LookatPoint;
-
-        GameObject PivotPoit;
-
-        float m_RotationSpeed;
-        /// <summary>
-        /// update mypoint and lookatpoint when needed
-        /// set the transform of the camera to the location and rotation for those point
-        /// </summary>
-        /// <param name="n"></param>
-        /// <param name="nn"></param>
-        void update(float n, float nn)
-        {
-
-        }
-    }
-
-    class orbitpoint
-    {
-        float YawRotationAroundPivit;
-        float PitchRotationAroundPivit;
-        float distanceFromPivot;
-
-        void Increment(float n, float nn) { }
-        Vector3 ReturnTargetPoint() { return default; }
-    }
-
     public override void UpdateCamera()
     {
         //player's pivot point.
         Vector3 worldPivotPos = m_player.transform.TransformPoint(m_playerLocalPivotPos);
 
 
-     { // new camera rotation point based on increment 
-        //incrcement rotation
-        m_camera.PivotRotation.y += m_yawInput * m_yawRotateSpeed;
+        { // new camera rotation point based on increment 
+          //incrcement rotation
+            m_camera.PivotRotation.y += m_yawInput * m_yawRotateSpeed;
 
-        //increment rotation & clamp
-        m_camera.PivotRotation.x = Mathf.Clamp(m_camera.PivotRotation.x - (m_pitchInput * m_pitchRotateSpeed), -m_maxVerticalAngle, m_maxVerticalAngle);
-    }
+            //increment rotation & clamp
+            m_camera.PivotRotation.x = Mathf.Clamp(m_camera.PivotRotation.x - (m_pitchInput * m_pitchRotateSpeed), -m_maxVerticalAngle, m_maxVerticalAngle);
+        }
 
-    Vector3 offsetFromPlayer;
+        Vector3 offsetFromPlayer;
         float distFromPlayer;
         { // maintaing distance from player
 
@@ -106,7 +75,7 @@ public class FollowCameraBehaviour : CameraBehaviour
             distFromPlayer = Mathf.Clamp(distFromPlayer, m_minHorizDistFromPlayer, m_maxDistFromPlayer);
         }
         //Set Camera Position with offset and the rotation from input.
-         offsetFromPlayer = Quaternion.Euler(m_camera.PivotRotation.x, m_camera.PivotRotation.y, 0.0f) * Vector3.forward;
+        offsetFromPlayer = Quaternion.Euler(m_camera.PivotRotation.x, m_camera.PivotRotation.y, 0.0f) * Vector3.forward;
 
         //Bring camera out by distance given. this can be modified for different camera behaviours.
         offsetFromPlayer *= distFromPlayer;
@@ -150,7 +119,7 @@ public class FollowCameraBehaviour : CameraBehaviour
 
             Vector3 goalLookPos = m_player.transform.TransformPoint(localLookPos);
 
-                //goalLookPos.y = m_Camera.LookPos.y;
+            //goalLookPos.y = m_Camera.LookPos.y;
 
             m_camera.LookPos = MathUtils.LerpTo(
                 m_lookPosEaseSpeed,
@@ -160,7 +129,7 @@ public class FollowCameraBehaviour : CameraBehaviour
                 );
 
             Vector3 lookDir = m_camera.LookPos - m_camera.transform.position;
-            if(lookDir!= Vector3.zero)
+            if (lookDir != Vector3.zero)
                 m_camera.transform.rotation = Quaternion.LookRotation(lookDir);
         }
     }
