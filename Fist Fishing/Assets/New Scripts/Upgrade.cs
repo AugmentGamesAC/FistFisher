@@ -24,9 +24,13 @@ public class Upgrade
 
     Dictionary<PlayerStatManager.Stats, float> statsModifier;
 
-    public void UpdateCost(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> func)
+    /// <summary>
+    /// takes function as argument that returns a float.
+    /// </summary>
+    /// <param name="func"></param>
+    public void UpdateCost(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> calculateNewCost)
     {
-
+        cost = calculateNewCost(statsModifier);
     }
 
     public void ApplyUpgrade()

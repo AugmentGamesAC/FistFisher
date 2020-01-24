@@ -41,7 +41,12 @@ public class StatTracker
 
     public void Change(float changeAmount)
     {
-        m_currentAmount += Mathf.Clamp(changeAmount, -m_max, m_max);
-        m_currentAmount = Mathf.Clamp(m_currentAmount, -1.0f, m_max);
+        m_currentAmount = Mathf.Clamp(m_currentAmount + changeAmount, m_min, m_max);
+
+        if (OnCurrentAmountChanged != null)
+            OnCurrentAmountChanged.Invoke();
+
+        if (CurrentAmount == m_min && OnMinimumAmountReached != null)
+            OnMinimumAmountReached.Invoke();
     }
 }

@@ -32,7 +32,7 @@ Responsibilities
     }
 
     
-    Dictionary<Stats, StatTracker> StatTrackerContainer;
+    Dictionary<Stats, StatTracker> StatTrackerContainer = new Dictionary<Stats, StatTracker>();
 
     /// <summary>
     /// Sets StatTrackerContainer.

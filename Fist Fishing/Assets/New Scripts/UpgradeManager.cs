@@ -20,6 +20,8 @@ public class UpgradeManager : MonoBehaviour
     //- AppliedUpgradeChange passes in a float based on number of appliedUpgrades.
     //this calls updateCost on Upgrades.
 
+
+
     public enum UpgradeTypes
     {
         Arms,
@@ -27,11 +29,11 @@ public class UpgradeManager : MonoBehaviour
         Torso
     }
 
+    protected int m_appliedUpgrades;
+
     PlayerStatManager statManager;
 
     Dictionary<UpgradeTypes, int> UpgradeCosts;
-
-    public delegate void AppliedUpgradeChange();
 
     /// <summary>
     /// Creates an Upgrade with RNG.
@@ -55,10 +57,17 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     void UpdateAppliedUpgrade()
     {
-
+        m_appliedUpgrades++;
+        //if (OnRecaluclateCosts != default)
+        //    OnRecaluclateCosts.Invoke(RecalculateCost);
     }
 
-    float RecalculateCost(Dictionary<PlayerStatManager.Stats, float> statsModifier)
+
+    public delegate void RecaluclateCosts(Dictionary<PlayerStatManager.Stats, float> statsModifier);
+    public event RecaluclateCosts OnRecaluclateCosts;
+
+
+    public float RecalculateCost(Dictionary<PlayerStatManager.Stats, float> statsModifier)
     {
         return 100.0f;
     }
