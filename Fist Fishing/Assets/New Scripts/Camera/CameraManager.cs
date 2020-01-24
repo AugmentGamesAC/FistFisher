@@ -4,12 +4,15 @@ using UnityEngine;
 
 
 /// <summary>
-/// Camera manage is to have a list of behaviors
+/// Camera manager is to have a list of behaviors
 /// we are using input controls to switch states
 /// </summary>
 [System.Serializable]
 public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 {
+    /// <summary>
+    /// used to determine both camera behaviour and player motion behaviour
+    /// </summary>
     public enum CameraState
     {
         Abzu,

@@ -85,6 +85,7 @@ public class BoatPlayer : MonoBehaviour
     protected void ToggleMapInventoryDisplays()
     {
         m_wasMapLast = !m_wasMapLast;
+        //should be calling swapUI (future)
     }
 
     /// <summary>
