@@ -60,7 +60,7 @@ Responsibilities
     }
 
     /// <summary>
-    /// add amount to the stat tracker fpr statType
+    /// add amount to the stat tracker for statType
     /// </summary>
     /// <param name="trackerType"></param>
     /// <param name="amount"></param>
