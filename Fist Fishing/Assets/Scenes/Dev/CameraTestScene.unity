@@ -251,20 +251,20 @@ MonoBehaviour:
   currentBehavoir:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 10
-      m_maxPitch: 85
-      m_minPitch: -85
-      m_maxYaw: 180
-      m_minYaw: -180
+      m_pitchRotationAroundPivit: 90
+      m_distanceFromPivot: -5
+      m_maxPitch: 90
+      m_minPitch: -90
+      m_maxYaw: 360
+      m_minYaw: -360
     m_cameraPoint:
       m_yawRotationAroundPivit: 30
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 10
-      m_maxPitch: 180
-      m_minPitch: -180
-      m_maxYaw: 360
-      m_minYaw: -360
+      m_distanceFromPivot: 5
+      m_maxPitch: 60
+      m_minPitch: 0
+      m_maxYaw: 30
+      m_minYaw: -30
   m_abzu:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
@@ -285,20 +285,20 @@ MonoBehaviour:
   m_locked:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
-      m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 10
-      m_maxPitch: 85
-      m_minPitch: -85
-      m_maxYaw: 180
-      m_minYaw: -180
+      m_pitchRotationAroundPivit: 90
+      m_distanceFromPivot: -5
+      m_maxPitch: 90
+      m_minPitch: -90
+      m_maxYaw: 360
+      m_minYaw: -360
     m_cameraPoint:
       m_yawRotationAroundPivit: 30
       m_pitchRotationAroundPivit: 0
-      m_distanceFromPivot: 10
-      m_maxPitch: 180
-      m_minPitch: -180
-      m_maxYaw: 360
-      m_minYaw: -360
+      m_distanceFromPivot: 5
+      m_maxPitch: 60
+      m_minPitch: 0
+      m_maxYaw: 30
+      m_minYaw: -30
   m_warthog:
     m_lookAtPoint:
       m_yawRotationAroundPivit: 0
@@ -648,6 +648,9 @@ MonoBehaviour:
   m_toggleInventory: 0
   m_toggleShop: 0
   m_start: 0
+  m_attack: 0
+  m_item: 0
+  m_flee: 0
   m_abzu: 0
   m_locked: 0
   m_warthog: 0

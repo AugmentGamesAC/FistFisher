@@ -42,7 +42,7 @@ public class PlayerMotion : MonoBehaviour
            {CameraManager.CameraState.Warthog, AbzuMovement },
         };
         m_rigidbody = GetComponent<Rigidbody>();
-
+        turningSpeedRef.Value = 180.0f;
     }
        
     public void FixedUpdate()
