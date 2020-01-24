@@ -2,52 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// PinwheelInfo<T>
-//--
-//Dictionary<int, T> PossibleOptions
-//intSelectedOption;
-//--
-//T GetSelectedOption()
-//T ChooseSelectedOption(int)
-//bool SetSelectedOption(int, T, bool override);
-////override will allow use to set the option, if it is false the return will 
-//return false if the int is already assigned to an object
-//--
-/// </summary>
-/// <typeparam name="T"></typeparam>
 public class PinWheel<T>
 {
-    Dictionary<int, T> Slots;
-    int SelectedSlot;
+    [SerializeField]
+    protected Dictionary<int, T> m_slots = new Dictionary<int, T>();
+    public Dictionary<int, T> Slots { get { return m_slots; } }
 
-    public T GetSelectedOption()
+    [SerializeField]
+    protected int m_selectedSlot;
+    public int SelectedSlot { get { return m_selectedSlot; } }
+
+    /// <summary>
+    /// Creates a pinwheel with an Enumerable(List, etc.)
+    /// </summary>
+    /// <param name="startingNumber"></param>
+    /// <param name="objects"></param>
+    public PinWheel(int startingNumber, IEnumerable<T> objects)
     {
-        return Slots[SelectedSlot];
+        foreach (T curObject in objects)
+            m_slots.Add(startingNumber++, curObject);
     }
 
-    public T ChooseSelectedOption(int index)
+    /// <summary>
+    /// Creates a pinwheel (the list is Empty!)
+    /// </summary>
+    public PinWheel() { }
+
+    /// <summary>
+    /// Returns currently selected
+    /// </summary>
+    /// <returns></returns>
+    public T GetSelectedOption()
     {
         T option;
 
-        if (!Slots.TryGetValue(index, out option))
+        if (!m_slots.TryGetValue(m_selectedSlot, out option))
             return default;
-
-        SelectedSlot = index;
 
         return option;
     }
 
-    public bool RemoveSelectedOption(int index)
+    /// <summary>
+    /// Set the member index "SelectedSlot"
+    /// returns the value for "index" key.
+    /// </summary>
+    public T SetSelectedOption(int index)
     {
-        return Slots.Remove(index);
+        T option;
+
+        if (!m_slots.TryGetValue(index, out option))
+            return default;
+
+        m_selectedSlot = index;
+
+        return option;
     }
 
-    public bool SetSelectedOption(int index, T newOption, bool overwrite)
+    /// <summary>
+    /// Sets value to null. (does not reduce container size)
+    /// Returns true if successful.
+    /// </summary>
+    public bool RemoveSelectedOption(int index)
     {
-        if(Slots[index] == default || overwrite)
+        return m_slots.Remove(index);
+    }
+
+    /// <summary>
+    /// Creates a new <T> Option 
+    /// </summary>
+    public bool SetNewOption(int index, T newOption, bool overwrite)
+    {
+        if (!m_slots.ContainsKey(index) || overwrite)
         {
-            Slots[index] = newOption;
+            m_slots[index] = newOption;
             return true;
         }
 
