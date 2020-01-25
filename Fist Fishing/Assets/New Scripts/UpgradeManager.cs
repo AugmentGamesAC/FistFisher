@@ -40,7 +40,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     void GenerateUpgrade()
     {
-        
+
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class UpgradeManager : MonoBehaviour
     /// <param name="type"></param>
     void GenerateUpgrade(UpgradeTypes type)
     {
-        
+
     }
 
     /// <summary>
@@ -57,17 +57,15 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     void UpdateAppliedUpgrade()
     {
+        //this needs to be first.
         m_appliedUpgrades++;
-        //if (OnRecaluclateCosts != default)
-        //    OnRecaluclateCosts.Invoke();
+        UpdateCosts?.Invoke(RecalculateCost);
     }
 
+    public delegate void CostChangeListener(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> updatefunction);
+    public static CostChangeListener UpdateCosts;
 
-    public delegate void RecaluclateCosts(Dictionary<PlayerStatManager.Stats, float> statsModifier);
-    public event RecaluclateCosts OnRecaluclateCosts;
-
-
-    public float RecalculateCost(Dictionary<PlayerStatManager.Stats, float> statsModifier)
+    float RecalculateCost(Dictionary<PlayerStatManager.Stats, float> statsModifier)
     {
         return 100.0f;
     }

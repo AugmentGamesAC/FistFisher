@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// this class appears to be a placeholder to store a float value and get it.
+/// thing replacing this has more functionality that gives reason for it to exist
+/// </summary>
 public class statclassPlaceholder
 {
     public float Value = 30;
@@ -12,7 +15,7 @@ public class statclassPlaceholder
     }
 }
 /// <summary>
-/// Camera manage is to have a list of behaviors
+/// Camera manager is to have a list of behaviors
 /// we are using input controls to switch states
 /// </summary>
 [System.Serializable,RequireComponent(typeof(Rigidbody))]
@@ -30,7 +33,9 @@ public class PlayerMotion : MonoBehaviour
     protected Rigidbody m_rigidbody;
 
 
-
+    /// <summary>
+    /// gets the camera manager on the main camera, then sets up a dictionary of all the possible camera states paired to movement resolution functions
+    /// </summary>
     public void Start()
     {
         m_vision = Camera.main.GetComponent<CameraManager>();
@@ -44,7 +49,11 @@ public class PlayerMotion : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         turningSpeedRef.Value = 180.0f;
     }
-       
+       /// <summary>
+       /// creates a system.action (essentiually function with no in/out - funct ptr) 
+       /// sets it to the movement resolution associated to the current camera state if valid
+       /// runs the move resloution funct found
+       /// </summary>
     public void FixedUpdate()
     {
         if (!m_CanMove)
@@ -56,6 +65,7 @@ public class PlayerMotion : MonoBehaviour
 
         MoveResolution();
     }
+
     #region common Actions
     protected void CommonActions()
     {
