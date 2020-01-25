@@ -30,7 +30,7 @@ public class Upgrade
     /// <param name="func"></param>
     public void UpdateCost(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> calculateNewCost)
     {
-        cost = func(statsModifier);
+        cost = calculateNewCost(statsModifier);
     }
 
     public Upgrade()

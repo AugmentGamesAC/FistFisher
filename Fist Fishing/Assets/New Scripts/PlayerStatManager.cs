@@ -11,8 +11,6 @@ Responsibilities
 - fetch statTrackers with StatTrackerContainer[Stats]
 */
 
-
-
     public enum Stats
     {
         Health,

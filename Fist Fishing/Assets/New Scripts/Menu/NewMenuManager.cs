@@ -74,7 +74,7 @@ public enum MenuScreens
 /// singleton that handles all active menus
 /// </summary>
 [System.Serializable]
-public class NewMenuManager : MonoBehaviour
+public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 {
     #region working inspector dictionary
     /// <summary>
@@ -108,14 +108,14 @@ public class NewMenuManager : MonoBehaviour
         }
     }
 
-//Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
+    //Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
 
     #region singletonification
     /// <summary>
     /// we only need one of these
     /// </summary>
-    private static NewMenuManager Instance;
-    void Awake()
+    protected static NewMenuManager Instance;
+    protected void Awake()
     {
         if (Instance != null)
         {
@@ -124,7 +124,6 @@ public class NewMenuManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
-
     }
 
     private static void HasInstance()
@@ -136,6 +135,8 @@ public class NewMenuManager : MonoBehaviour
 
     [SerializeField]
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
+    [SerializeField]
+    MenuScreens controlMenu = MenuScreens.MainMenu;
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
     /// Set the current menu  
@@ -144,20 +145,28 @@ public class NewMenuManager : MonoBehaviour
     /// <param name="currentlySelectedMenuScreen"></param>
     public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
+        Instance.DisplayMenu(NewSelectedMenuScreen);
+    }
+
+    protected void DisplayMenu(MenuScreens newMenu)
+    {
         //Don't change if argument is same as current.
-        if (Instance.m_currentSelectedMenu == NewSelectedMenuScreen)
+        if (Instance.m_currentSelectedMenu == newMenu)
             return;
 
-        //deactivate current menu
-        SetMenuListActiveState(Instance.m_menuConfigurations[Instance.m_currentSelectedMenu], false);
-        //Set Current menu to the passed in menu
-        Instance.m_currentSelectedMenu = NewSelectedMenuScreen;
 
-        if (Instance.m_menuConfigurations.ContainsKey(NewSelectedMenuScreen))
-        {
-            SetMenuListActiveState(Instance.m_menuConfigurations[NewSelectedMenuScreen], true);
-        }
+        MenuList resultList;
+
+        //deactivate current menu
+        if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
+                SetMenuListActiveState(resultList, false);
+        //Set Current menu to the passed in menu
+        Instance.m_currentSelectedMenu = newMenu;
+
+        if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
+            SetMenuListActiveState(resultList, true);
     }
+
 
     /// <summary>
     /// Set the visibility of the menu items within a menu
@@ -170,5 +179,18 @@ public class NewMenuManager : MonoBehaviour
             return;
 
         list.ShowActive(activeState);
+    }
+
+    public void OnBeforeSerialize()
+    {
+        if (Instance == default)
+            Instance = this;
+        // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
+
+        DisplayMenuScreen(controlMenu);
+    }
+
+    public void OnAfterDeserialize()
+    {
     }
 }
