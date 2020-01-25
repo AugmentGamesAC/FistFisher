@@ -26,7 +26,16 @@ public class Upgrade
 
     public void UpdateCost(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> func)
     {
+        cost = func(statsModifier);
+    }
 
+    public Upgrade()
+    {
+        UpgradeManager.UpdateCosts += UpdateCost;
+    }
+    ~Upgrade()
+    {
+        UpgradeManager.UpdateCosts -= UpdateCost;
     }
 
     public void ApplyUpgrade()
