@@ -76,26 +76,39 @@ public enum MenuScreens
 [System.Serializable]
 public class NewMenuManager : MonoBehaviour
 {
-
-    protected Dictionary<MenuScreens, MenuList> m_menuLists;
     #region working inspector dictionary
     /// <summary>
     /// this is the mess required to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
+    /// 
     [System.Serializable]
-    public class MenuListForInspectorDictionary { public List<MenuList> m_listsOfMenu; }
-    [System.Serializable]
-    public class MenuConfigurations : InspectorDictionary<MenuScreens, MenuListForInspectorDictionary> { }
+    public class MenuConfigurations : InspectorDictionary<MenuScreens, MenuList> { }
     [SerializeField]
     protected MenuConfigurations m_menuConfigurations = new MenuConfigurations();
-    public MenuConfigurations MenuConfigs { get { return m_menuConfigurations; } }
-   // public MenuList ListsOfMenu 
-
-
-    [SerializeField]
-    public static MenuListForInspectorDictionary m_Mylist = new MenuListForInspectorDictionary();
+    public MenuConfigurations MenuConfigs => m_menuConfigurations;
     #endregion working inspector dictionary
+
+    public static bool MouseActiveState
+    {
+        get
+        {
+            if (!Instance.m_menuConfigurations.ContainsKey(Instance.m_currentSelectedMenu))
+                return true;
+            return Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].MouseActive;
+        }
+    }
+    public static bool PausedActiveState
+    {
+        get
+        {
+            if (!Instance.m_menuConfigurations.ContainsKey(Instance.m_currentSelectedMenu))
+                return true;
+            return Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
+        }
+    }
+
+//Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
 
     #region singletonification
     /// <summary>
@@ -131,18 +144,18 @@ public class NewMenuManager : MonoBehaviour
     /// <param name="currentlySelectedMenuScreen"></param>
     public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
-        //Check if current menus is the same as the passed in menu
+        //Don't change if argument is same as current.
         if (Instance.m_currentSelectedMenu == NewSelectedMenuScreen)
             return;
 
-        //If it is not then deactivate current menu
-        SetMenuListActiveState(Instance.m_menuLists[Instance.m_currentSelectedMenu], false);
+        //deactivate current menu
+        SetMenuListActiveState(Instance.m_menuConfigurations[Instance.m_currentSelectedMenu], false);
         //Set Current menu to the passed in menu
         Instance.m_currentSelectedMenu = NewSelectedMenuScreen;
 
-        if (Instance.MenuConfigs.TryGetValue(NewSelectedMenuScreen, out m_Mylist))
+        if (Instance.m_menuConfigurations.ContainsKey(NewSelectedMenuScreen))
         {
-            SetMenuListActiveState(Instance.m_menuLists[NewSelectedMenuScreen], true);
+            SetMenuListActiveState(Instance.m_menuConfigurations[NewSelectedMenuScreen], true);
         }
     }
 
@@ -155,22 +168,7 @@ public class NewMenuManager : MonoBehaviour
     {
         if (list == null)
             return;
+
         list.ShowActive(activeState);
-    }
-    /// <summary>
-    /// Helper to get current menu's mouse active state
-    /// </summary>
-    /// <returns></returns>
-    protected bool GetCurrentMouseActive()
-    {
-        return m_menuLists[m_currentSelectedMenu].MouseActive;
-    }
-    /// <summary>
-    /// Helper to get current menu's game paused state
-    /// </summary>
-    /// <returns></returns>
-    protected bool GetCurrentGamePause()
-    {
-        return m_menuLists[m_currentSelectedMenu].Paused;
     }
 }
