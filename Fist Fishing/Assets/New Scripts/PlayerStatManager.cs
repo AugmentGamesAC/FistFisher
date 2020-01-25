@@ -5,12 +5,7 @@ using UnityEngine;
 
 public class PlayerStatManager
 {
-    /*enum Stats;
-    Dictionary<Stats, StatTracker> StatTrackerContainer;
---
-AddStat();//for dictionary adding new objects.
-    UpdateStat(Stats trackerType, float amount);//change tracker values.
---
+    /*
 Responsibilities
 - keeps track of StatTrackers
 - fetch statTrackers with StatTrackerContainer[Stats]
