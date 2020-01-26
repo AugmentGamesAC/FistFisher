@@ -15,14 +15,14 @@ public class Upgrade
  UpdateCost(Func<Dictionary<Stats, float>, float>);
  ApplyUpgrade();
  */
-    PlayerStatManager statManager;
+    protected PlayerStatManager statManager;
 
-    float cost;
+    protected float cost;
 
     public delegate void wasUpdated();
     public event wasUpdated OnUpdated;
 
-    Dictionary<Stats, float> statsModifier;
+    protected Dictionary<Stats, float> statsModifier;
 
     /// <summary>
     /// takes function as argument that returns a float.
@@ -33,13 +33,13 @@ public class Upgrade
         cost = calculateNewCost(statsModifier);
     }
 
-    public Upgrade()
-    {
-        UpgradeManager.UpdateCosts += UpdateCost;
+    public Upgrade()
+    {
+        UpgradeManager.UpdateCosts += UpdateCost;
     }
     ~Upgrade()
-    {
-        UpgradeManager.UpdateCosts -= UpdateCost;
+    {
+        UpgradeManager.UpdateCosts -= UpdateCost;
     }
 
     public void ApplyUpgrade()
