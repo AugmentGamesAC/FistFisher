@@ -143,6 +143,11 @@ public class ALInput : MonoBehaviour
         MouseY,
         Horizontal,
         Vertical,
+        MHorizontal,
+        MUp,
+        MForward,
+        LHorizontal,
+        LVertical
     };
 
     public enum DirectionCode

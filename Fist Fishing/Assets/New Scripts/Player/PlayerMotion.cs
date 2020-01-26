@@ -32,6 +32,10 @@ public class PlayerMotion : MonoBehaviour
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
     protected Rigidbody m_rigidbody;
 
+    [SerializeField]
+    protected 
+
+
 
     /// <summary>
     /// gets the camera manager on the main camera, then sets up a dictionary of all the possible camera states paired to movement resolution functions
@@ -56,8 +60,12 @@ public class PlayerMotion : MonoBehaviour
        /// </summary>
     public void FixedUpdate()
     {
+
+
         if (!m_CanMove)
             return;
+
+
 
         System.Action MoveResolution;
         if (!m_movementResoultion.TryGetValue(m_vision.CurrentState, out MoveResolution))
@@ -72,7 +80,7 @@ public class PlayerMotion : MonoBehaviour
 
     }
 
-    protected void ThrowBait()
+    protected void SwapUI()
     {
 
     }
@@ -97,19 +105,26 @@ public class PlayerMotion : MonoBehaviour
     }
     protected void WarthogMovement()
     {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
+        //hopefully will rotate the frog to be looking facedown towards object
+        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.forward);
 
-        if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef);
+        m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef *
+            ALInput.GetAxis(ALInput.AxisCode.Vertical));
     }
+
+    protected void XZDirectional()
+    {
+
+    }
+
+
     protected void FirstPersonMovement()
     {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
+        //hopefully will rotate the frog to be looking facedown towards object
+        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.forward);
 
         if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef);
+            m_rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * movementSpeedRef);
     }
 
     void ResolveSwimRotation()
