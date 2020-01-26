@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stats
+{
+    MaxHealth,
+    Stealth,
+    Power,
+    MaxAir,
+    AirConsumption,
+    AirRestoration,
+    MovementSpeed,
+    TurnSpeed
+}
 public class PlayerStatManager
 {
     /*
@@ -11,21 +22,11 @@ Responsibilities
 - fetch statTrackers with StatTrackerContainer[Stats]
 */
 
-    public enum Stats
-    {
-        Health,
-        Location,
-        Stealth,
-        Power,
-        AirCapacity,
-        AirConsumption,
-        AirRestoration,
-        MovementSpeed,
-        TurnSpeed
-    }
 
-    
-    Dictionary<Stats, StatTracker> StatTrackerContainer = new Dictionary<Stats, StatTracker>();
+    [SerializeField]
+    protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
+
+    public StatTracker this[Stats value] {  get { return m_statTrackerContainer[value]; } }
 
     /// <summary>
     /// Sets StatTrackerContainer.
@@ -46,10 +47,10 @@ Responsibilities
     /// <param name="statTracker"></param>
     public void AddStat(Stats statType, StatTracker statTracker)
     {
-        if (StatTrackerContainer.ContainsKey(statType))
+        if (m_statTrackerContainer.ContainsKey(statType))
             return;
 
-        StatTrackerContainer.Add(statType, statTracker);
+        m_statTrackerContainer.Add(statType, statTracker);
     }
 
     /// <summary>
@@ -59,11 +60,12 @@ Responsibilities
     /// <param name="amount"></param>
     public bool UpdateStat(Stats statType, float amount)
     {
-        if (!StatTrackerContainer.ContainsKey(statType))
+        if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        StatTrackerContainer[statType].Change(amount);
+        m_statTrackerContainer[statType].Change(amount);
 
         return true;
     }
+
 }

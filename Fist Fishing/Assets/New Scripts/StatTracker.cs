@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatTracker 
+public class StatTracker
 {
     //    Responsibilities
     //- keeps track of an amount
@@ -13,21 +13,8 @@ public class StatTracker
     protected float m_currentAmount;
     public float CurrentAmount { get { return m_currentAmount; } }
 
-    [SerializeField]
-    protected float m_max = 100.0f;
-    public float Max { get { return m_max; } }
-
-    [SerializeField]
-    protected float m_min = 0.0f;
-    public float Min { get { return m_min; } }
-
-    public float Percentage { get { return m_currentAmount / m_max; } }
-
     public delegate void CurrentAmountChanged();
-    public event CurrentAmountChanged OnCurrentAmountChanged;
-
-    public delegate void MinimumAmountReached();
-    public event MinimumAmountReached OnMinimumAmountReached;
+    public CurrentAmountChanged OnCurrentAmountChanged;
 
     /// <summary>
     /// Can consider StatTracker as a float with this.
@@ -39,14 +26,15 @@ public class StatTracker
         return reference.CurrentAmount;
     }
 
+    /// <summary>
+    /// Adds changeAmount to current amount.
+    /// Invokes OnChanged delegates.
+    /// </summary>
+    /// <param name="changeAmount"></param>
     public void Change(float changeAmount)
     {
-        m_currentAmount = Mathf.Clamp(m_currentAmount + changeAmount, m_min, m_max);
+        m_currentAmount += changeAmount;
 
-        if (OnCurrentAmountChanged != null)
-            OnCurrentAmountChanged.Invoke();
-
-        if (CurrentAmount == m_min && OnMinimumAmountReached != null)
-            OnMinimumAmountReached.Invoke();
+        OnCurrentAmountChanged?.Invoke();
     }
 }

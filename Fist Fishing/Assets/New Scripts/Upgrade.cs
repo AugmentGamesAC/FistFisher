@@ -22,13 +22,13 @@ public class Upgrade
     public delegate void wasUpdated();
     public event wasUpdated OnUpdated;
 
-    Dictionary<PlayerStatManager.Stats, float> statsModifier;
+    Dictionary<Stats, float> statsModifier;
 
     /// <summary>
     /// takes function as argument that returns a float.
     /// </summary>
     /// <param name="func"></param>
-    public void UpdateCost(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> calculateNewCost)
+    public void UpdateCost(System.Func<Dictionary<Stats, float>, float> calculateNewCost)
     {
         cost = calculateNewCost(statsModifier);
     }

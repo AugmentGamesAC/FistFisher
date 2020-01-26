@@ -62,10 +62,10 @@ public class UpgradeManager : MonoBehaviour
         UpdateCosts?.Invoke(RecalculateCost);
     }
 
-    public delegate void CostChangeListener(System.Func<Dictionary<PlayerStatManager.Stats, float>, float> updatefunction);
+    public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, float> updatefunction);
     public static CostChangeListener UpdateCosts;
 
-    float RecalculateCost(Dictionary<PlayerStatManager.Stats, float> statsModifier)
+    float RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
         return 100.0f;
     }
