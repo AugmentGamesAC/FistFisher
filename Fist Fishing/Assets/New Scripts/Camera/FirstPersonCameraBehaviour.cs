@@ -19,14 +19,12 @@ public class FirstPersonCameraBehaviour : CameraBehavoir
         //offset and position camera around followObject(Player)
         Vector3 CameraWantsToMoveHere = m_followObject.transform.position + (Vector3)(m_followObject.transform.localToWorldMatrix * m_cameraPoint.ReturnTargetPoint());
 
-        Vector3 CameraWantsToLookAtThis = m_followObject.transform.localToWorldMatrix * m_lookAtPoint.ReturnTargetPoint();
+        Vector3 CameraWantsToLookAtThis = m_followObject.transform.position + (Vector3)(m_followObject.transform.localToWorldMatrix * m_lookAtPoint.ReturnTargetPoint());
 
 
         MoveCameraTowards(CameraWantsToMoveHere);
 
         CameraLooksTowards(CameraWantsToLookAtThis);
 
-        //rotate follow object to camera's direction vector
-        FollowObjectLooksTowards(CameraWantsToLookAtThis);
     }
 }

@@ -25,11 +25,12 @@ public class ALInput : MonoBehaviour
     KeyCode m_goLeft;
     public static KeyCode GoLeft { get { hasInstance(); return Instance.m_goLeft; } }
     [SerializeField]
-    KeyCode m_jump;
-    public static KeyCode Jump { get { hasInstance(); return Instance.m_jump; } }
-    [SerializeField]
     KeyCode m_descend;
     public static KeyCode Descend { get { hasInstance(); return Instance.m_descend; } }
+    [SerializeField]
+    KeyCode m_ascend;
+    public static KeyCode Ascend { get { hasInstance(); return Instance.m_ascend; } }
+
     [SerializeField]
     KeyCode m_sprint;
     public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
@@ -237,12 +238,12 @@ public class ALInput : MonoBehaviour
         m_forward = KeyCode.W;
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
-        m_jump = KeyCode.Space;
-        m_descend = KeyCode.LeftControl;
+        m_descend = KeyCode.E;
+        m_ascend = KeyCode.Q;
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.Q;
+        m_punch = KeyCode.Space;
         m_manualCamera = KeyCode.Mouse1;
 
         //Default Combat buttons
@@ -262,7 +263,7 @@ public class ALInput : MonoBehaviour
 
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
-        m_harvest = KeyCode.E;
+        m_harvest = KeyCode.R;
         m_throwBait = KeyCode.P;
 
         m_craftBait = KeyCode.B;
