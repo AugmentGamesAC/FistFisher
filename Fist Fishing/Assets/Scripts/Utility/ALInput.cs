@@ -19,6 +19,9 @@ public class ALInput : MonoBehaviour
     protected KeyCode m_forward;
     public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
     [SerializeField]
+    protected KeyCode m_backward;
+    public static KeyCode Backward { get { hasInstance(); return Instance.m_backward; } }
+    [SerializeField]
     KeyCode m_goRight;
     public static KeyCode GoRight { get { hasInstance(); return Instance.m_goRight; } }
     [SerializeField]
@@ -245,6 +248,7 @@ public class ALInput : MonoBehaviour
         m_forgetTarget = KeyCode.X;
         m_punch = KeyCode.Space;
         m_manualCamera = KeyCode.Mouse1;
+        m_backward = KeyCode.S;
 
         //Default Combat buttons
         m_attack = KeyCode.Mouse0;

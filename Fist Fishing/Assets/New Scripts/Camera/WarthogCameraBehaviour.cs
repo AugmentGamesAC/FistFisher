@@ -11,8 +11,8 @@ public class WarthogCameraBehaviour : CameraBehavoir
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
         //apply input values to orbit points
-        m_cameraPoint.Increment(orbitX, orbitY);
-        m_lookAtPoint.Increment(lookatX, lookatY);
+        m_cameraPoint.Increment(orbitX, -orbitY);
+        m_lookAtPoint.Increment(lookatX, -lookatY);
 
         //offset and position camera around followObject(Player)
         Vector3 CameraWantsToMoveHere = m_followObject.transform.position + m_cameraPoint.ReturnTargetPoint();

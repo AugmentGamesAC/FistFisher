@@ -82,12 +82,20 @@ public class PlayerMotion : MonoBehaviour
 
 
     protected void AbzuMovement()
-    {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
+    { 
+        Vector3 desiredDirection = new Vector3
+        (
+             ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
+            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)), 
+            0            
+        ) * turningSpeedRef * Time.deltaTime;
 
-        if (ALInput.GetKey(ALInput.Forward))
-            transform.position += transform.up * Time.deltaTime * movementSpeedRef;
+
+        if (desiredDirection.sqrMagnitude > 0.000001)
+            transform.Rotate(desiredDirection, Space.Self);
+
+        //motion
+        transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
     }
     protected void LockedMovement()
     {
@@ -95,17 +103,13 @@ public class PlayerMotion : MonoBehaviour
             ResolveSwimRotation();
 
         if (ALInput.GetKey(ALInput.Forward))
-            transform.position += transform.up * Time.deltaTime * movementSpeedRef;
+            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
-
-    [SerializeField]
-    Vector3 warthogCorrection;
 
     protected void WarthogMovement() 
     {
         //hopefully will rotate the frog to be looking facedown towards object
         transform.LookAt(m_vision.LookAtWorldTransform, Vector3.up);
-        transform.Rotate(warthogCorrection);
 
         XZDirectional();
     }
@@ -113,7 +117,7 @@ public class PlayerMotion : MonoBehaviour
     protected void FirstPersonMovement()
     {
         //hopefully will rotate the frog to be looking facedown towards object
-        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.forward);
+        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.up);
 
         XZDirectional();
     }
@@ -122,13 +126,13 @@ public class PlayerMotion : MonoBehaviour
     protected void XZDirectional()
     {
         //Forward movement
-        Vector3 desiredMovement = transform.up * Time.deltaTime * movementSpeedRef * (ALInput.GetKey(ALInput.Forward) ? 1:0 ) ;
+        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0)) ;
 
         //Left Right
-        desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0));
+        desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
 
         //ascend descend.
-        desiredMovement += Vector3.up * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 1 : 0) - (ALInput.GetKey(ALInput.Descend) ? 1 : 0));
+        desiredMovement += Vector3.up * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
 
         //apply movement vector
 
@@ -142,8 +146,8 @@ public class PlayerMotion : MonoBehaviour
         Vector3 desiredDirection = new Vector3
         (
             ALInput.GetAxis(ALInput.AxisCode.MouseY),
-            0, // no touch Y
-            ALInput.GetAxis(ALInput.AxisCode.MouseX)
+            ALInput.GetAxis(ALInput.AxisCode.MouseX),
+            0
         ) * turningSpeedRef * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)
