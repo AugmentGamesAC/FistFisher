@@ -44,7 +44,7 @@ public class BoatPlayer : MonoBehaviour
     }
     #endregion
 
-    public void FixedUpdate()
+    public void Update()
     {
         if ((ALInput.GetKeyDown(ALInput.Start)) && (MenuManager.Currentsetting == Menus.MainMenu))
             MenuManager.ActivateMenu(Menus.BoatTravel);
@@ -58,6 +58,12 @@ public class BoatPlayer : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
             MountAction();
 
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            ToggleMapInventoryDisplays();
+    }
+
+    private void FixedUpdate()
+    {
         if (!m_isMounted) //not mounted can't move
             return;
 
@@ -66,9 +72,6 @@ public class BoatPlayer : MonoBehaviour
 
         if (ALInput.GetKey(ALInput.Forward))
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
-
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
-            ToggleMapInventoryDisplays();
     }
 
 
@@ -101,6 +104,8 @@ public class BoatPlayer : MonoBehaviour
     {
         if (!m_isMounted)
             MenuManager.ActivateMenu(Menus.NormalHUD);
+        if (m_isMounted)
+            MenuManager.ActivateMenu(Menus.BoatTravel);
     }
 
     protected void MountAction()
