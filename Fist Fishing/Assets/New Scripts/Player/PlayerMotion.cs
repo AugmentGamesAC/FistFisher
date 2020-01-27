@@ -18,7 +18,7 @@ public class statclassPlaceholder
 /// Camera manager is to have a list of behaviors
 /// we are using input controls to switch states
 /// </summary>
-[System.Serializable,RequireComponent(typeof(Rigidbody))]
+[System.Serializable]
 public class PlayerMotion : MonoBehaviour
 {
     CameraManager m_vision;
@@ -30,11 +30,6 @@ public class PlayerMotion : MonoBehaviour
     protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
-    protected Rigidbody m_rigidbody;
-
-    [SerializeField]
-    protected 
-
 
 
     /// <summary>
@@ -48,16 +43,15 @@ public class PlayerMotion : MonoBehaviour
            {CameraManager.CameraState.Abzu, AbzuMovement },
            {CameraManager.CameraState.FirstPerson, FirstPersonMovement },
            {CameraManager.CameraState.Locked, LockedMovement },
-           {CameraManager.CameraState.Warthog, AbzuMovement },
+           {CameraManager.CameraState.Warthog, WarthogMovement },
         };
-        m_rigidbody = GetComponent<Rigidbody>();
-
+        turningSpeedRef.Value = 180.0f;
     }
-       /// <summary>
-       /// creates a system.action (essentiually function with no in/out - funct ptr) 
-       /// sets it to the movement resolution associated to the current camera state if valid
-       /// runs the move resloution funct found
-       /// </summary>
+    /// <summary>
+    /// creates a system.action (essentiually function with no in/out - funct ptr) 
+    /// sets it to the movement resolution associated to the current camera state if valid
+    /// runs the move resloution funct found
+    /// </summary>
     public void FixedUpdate()
     {
 
@@ -88,12 +82,20 @@ public class PlayerMotion : MonoBehaviour
 
 
     protected void AbzuMovement()
-    {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
+    { 
+        Vector3 desiredDirection = new Vector3
+        (
+             ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
+            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)), 
+            0            
+        ) * turningSpeedRef * Time.deltaTime;
 
-        if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef);
+
+        if (desiredDirection.sqrMagnitude > 0.000001)
+            transform.Rotate(desiredDirection, Space.Self);
+
+        //motion
+        transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
     }
     protected void LockedMovement()
     {
@@ -101,39 +103,51 @@ public class PlayerMotion : MonoBehaviour
             ResolveSwimRotation();
 
         if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef);
+            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
-    protected void WarthogMovement()
+
+    protected void WarthogMovement() 
     {
         //hopefully will rotate the frog to be looking facedown towards object
-        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.forward);
+        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.up);
 
-        m_rigidbody.MovePosition(transform.position + transform.up * Time.deltaTime * movementSpeedRef *
-            ALInput.GetAxis(ALInput.AxisCode.Vertical));
+        XZDirectional();
     }
-
-    protected void XZDirectional()
-    {
-
-    }
-
 
     protected void FirstPersonMovement()
     {
         //hopefully will rotate the frog to be looking facedown towards object
-        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.forward);
+        transform.LookAt(m_vision.LookAtWorldTransform, Vector3.up);
 
-        if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * movementSpeedRef);
+        XZDirectional();
     }
+
+
+    protected void XZDirectional()
+    {
+        //Forward movement
+        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0)) ;
+
+        //Left Right
+        desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
+
+        //ascend descend.
+        desiredMovement += Vector3.up * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
+
+        //apply movement vector
+
+        transform.position += desiredMovement;
+    }
+
+
 
     void ResolveSwimRotation()
     {
         Vector3 desiredDirection = new Vector3
         (
             ALInput.GetAxis(ALInput.AxisCode.MouseY),
-            0, // no touch Y
-            ALInput.GetAxis(ALInput.AxisCode.MouseX)
+            ALInput.GetAxis(ALInput.AxisCode.MouseX),
+            0
         ) * turningSpeedRef * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)

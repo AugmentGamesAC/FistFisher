@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable, RequireComponent(typeof(Rigidbody))]
+[System.Serializable]
 public class BoatPlayer : MonoBehaviour
 {
     [SerializeField]
@@ -13,12 +13,12 @@ public class BoatPlayer : MonoBehaviour
 
     [SerializeField]
     public bool m_CanMove;
-    protected Rigidbody m_rigidbody;
     protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
     protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
 
     [SerializeField]
     protected bool m_isMounted;
+    [SerializeField]
     protected PlayerMotion m_validPlayer;
 
     #region controlsValidPlayerRef;
@@ -44,14 +44,26 @@ public class BoatPlayer : MonoBehaviour
     }
     #endregion
 
-    public void FixedUpdate()
+    public void Update()
     {
+        if ((ALInput.GetKeyDown(ALInput.Start)) && (MenuManager.Currentsetting == Menus.MainMenu))
+            MenuManager.ActivateMenu(Menus.BoatTravel);
+
+        if (MenuManager.Currentsetting == Menus.MainMenu)
+            return;
+
         if (m_validPlayer == default) // no player around no action
             return;
 
         if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
             MountAction();
 
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            ToggleMapInventoryDisplays();
+    }
+
+    private void FixedUpdate()
+    {
         if (!m_isMounted) //not mounted can't move
             return;
 
@@ -59,10 +71,7 @@ public class BoatPlayer : MonoBehaviour
         ResolveRotation();
 
         if (ALInput.GetKey(ALInput.Forward))
-            m_rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * movementSpeedRef);
-
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
-            ToggleMapInventoryDisplays();
+            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
 
@@ -77,7 +86,7 @@ public class BoatPlayer : MonoBehaviour
             0
         ) * turningSpeedRef * Time.deltaTime;
 
-        if (horizontalWeight > 0.000001)
+        if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);
     }
 
@@ -93,12 +102,16 @@ public class BoatPlayer : MonoBehaviour
     /// </summary>
     protected void SwapUI()
     {
-        throw new System.NotImplementedException();
+        if (!m_isMounted)
+            MenuManager.ActivateMenu(Menus.NormalHUD);
+        if (m_isMounted)
+            MenuManager.ActivateMenu(Menus.BoatTravel);
     }
 
     protected void MountAction()
     {
         m_isMounted = !m_isMounted;
+        SwapUI();
         ToggleControls();
         PositionPlayer();
     }

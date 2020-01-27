@@ -49,8 +49,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         SwitchState(_currentState);
     }
 
-    public Vector3 LookAtWorldTransform { get { return currentBehavoir.GetCameraLookatPos; } }
-    public Vector3 CameraPos { get { return currentBehavoir.GetCameraPos; } }
+    public Vector3 LookAtWorldTransform { get { return FollowObject.transform.position +  currentBehavoir.GetCameraLookatPos; } }
+    public Vector3 CameraPos { get { return FollowObject.transform.position + currentBehavoir.GetCameraPos; } }
 
 
     protected void InitStateHolderIfNeeded()

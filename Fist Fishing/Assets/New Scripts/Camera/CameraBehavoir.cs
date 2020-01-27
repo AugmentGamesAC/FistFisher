@@ -55,11 +55,5 @@ public class CameraBehavoir
         m_camera.transform.LookAt(lookAtPos);
     }
 
-    protected void FollowObjectLooksTowards(Vector3 lookAtPos)
-    {
-        //Do lerping towards pos in future.
-
-        m_followObject.transform.LookAt(lookAtPos);
-    }
 }
 

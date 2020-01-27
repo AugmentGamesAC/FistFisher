@@ -113,6 +113,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     public Menus m_currentMenus = Menus.NotSet;
 
+    public static Menus Currentsetting => (Instance == default)? Menus.NotSet: Instance.m_currentMenus;
+
+
+
     [SerializeField]
     GameObject m_player;
 
@@ -174,7 +178,7 @@ public class MenuManager : MonoBehaviour
             //do stuff
             ActivateMenu(Menus.NormalHUD);
         }
-        HandleMenuRelatedInputs();
+        //HandleMenuRelatedInputs();
 
 
         if (m_currentMenus == Menus.ShopMenu || m_currentMenus == Menus.SwimmingInventory)
