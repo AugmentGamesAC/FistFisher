@@ -21,6 +21,8 @@ public class CameraBehavoir
         m_cameraPoint = cameraPoint;
     }
 
+    public Vector3 GetCameraPos { get { return m_camera.transform.position; } }
+    public Vector3 GetCameraLookatPos { get { return m_lookAtPoint.ReturnTargetPoint(); } }
 
     public virtual void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
@@ -53,11 +55,5 @@ public class CameraBehavoir
         m_camera.transform.LookAt(lookAtPos);
     }
 
-    protected void FollowObjectLooksTowards(Vector3 lookAtPos)
-    {
-        //Do lerping towards pos in future.
-
-        m_followObject.transform.LookAt(lookAtPos);
-    }
 }
 

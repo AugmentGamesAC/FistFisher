@@ -6,6 +6,9 @@ public class PlayerInstance : MonoBehaviour
 {
     PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
 
+    //should have core game stats health, oxygen. 
+    //Reference to PlayerStatManager.
+
     private void Start()
     {
         

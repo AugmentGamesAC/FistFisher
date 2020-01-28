@@ -357,12 +357,7 @@ public class PlayerMovement : MonoBehaviour
         m_characterController.Move(m_velocity * Time.deltaTime);
     }
 
-    public bool IsJumping()
-    {
-        return ALInput.GetKey(ALInput.Jump);
-        //return Input.GetButton("Jump");
-    }
-    public bool IsDescending()
+   public bool IsDescending()
     {
         return ALInput.GetKey(ALInput.Descend);
         //return Input.GetButton("Descend");
