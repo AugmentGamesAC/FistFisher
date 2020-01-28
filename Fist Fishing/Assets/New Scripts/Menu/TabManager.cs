@@ -8,7 +8,8 @@ public class TabManager : MonoBehaviour
 
     public void NewActivation(Tab currentSelected)
     {
-        m_currentSelectedTab.SetIsSelected(false);
+        if (m_currentSelectedTab != null)
+            m_currentSelectedTab.SetIsSelected(false);
 
         m_currentSelectedTab = currentSelected;
 

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
-    protected bool m_isSelected;
-    protected bool m_isHovered;
+    protected bool m_isSelected = false;
+    protected bool m_isHovered = false;
 
     [SerializeField]
     protected Sprite m_selectedSprite;
@@ -43,6 +43,7 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
         m_parentTabManager = GetComponentInParent<TabManager>();
 
         m_image = GetComponent<Image>();
+        SwapSprite();
     }
 
     /// <summary>
