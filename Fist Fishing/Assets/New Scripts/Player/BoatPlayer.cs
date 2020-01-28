@@ -58,6 +58,9 @@ public class BoatPlayer : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
             MountAction();
 
+        if (!m_isMounted)
+            return;
+
         if (ALInput.GetKeyDown(ALInput.ToggleInventory))
             ToggleMapInventoryDisplays();
     }
@@ -90,11 +93,11 @@ public class BoatPlayer : MonoBehaviour
             transform.Rotate(desiredDirection, Space.Self);
     }
 
-    protected bool m_wasMapLast;
+    protected bool m_displayMap;
     protected void ToggleMapInventoryDisplays()
     {
-        m_wasMapLast = !m_wasMapLast;
-        //should be calling swapUI (future)
+        m_displayMap = !m_displayMap;
+        SwapUI();
     }
 
     /// <summary>
@@ -102,10 +105,8 @@ public class BoatPlayer : MonoBehaviour
     /// </summary>
     protected void SwapUI()
     {
-        if (!m_isMounted)
-            MenuManager.ActivateMenu(Menus.NormalHUD);
-        if (m_isMounted)
-            MenuManager.ActivateMenu(Menus.BoatTravel);
+        Menus desiredMenu = (!m_isMounted) ? Menus.NormalHUD :  (m_displayMap) ? Menus.BoatTravel : Menus.ShopMenu;
+        MenuManager.ActivateMenu(desiredMenu);
     }
 
     protected void MountAction()

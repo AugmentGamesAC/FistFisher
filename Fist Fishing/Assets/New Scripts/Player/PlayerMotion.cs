@@ -55,11 +55,8 @@ public class PlayerMotion : MonoBehaviour
     public void FixedUpdate()
     {
 
-
         if (!m_CanMove)
             return;
-
-
 
         System.Action MoveResolution;
         if (!m_movementResoultion.TryGetValue(m_vision.CurrentState, out MoveResolution))
@@ -68,19 +65,28 @@ public class PlayerMotion : MonoBehaviour
         MoveResolution();
     }
 
-    #region common Actions
-    protected void CommonActions()
-    {
 
+    public void Update()
+    {
+        if (!m_CanMove)
+            return;
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            ToggleInventoryDisplay();
     }
 
+    protected bool m_displayInventory;
+
+    protected void ToggleInventoryDisplay()
+    {
+        m_displayInventory = !m_displayInventory;
+        SwapUI();
+    }
     protected void SwapUI()
     {
-
+        Menus desiredMenu = (m_displayInventory) ? Menus.SwimmingInventory : Menus.NormalHUD;
+        MenuManager.ActivateMenu(desiredMenu);
     }
-    #endregion
-
-
     protected void AbzuMovement()
     { 
         Vector3 desiredDirection = new Vector3
