@@ -88,8 +88,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mouseItem: {fileID: 0}
   m_inventory: {fileID: 11400000, guid: 9b7e89fc483219d479df7bb23892c26f, type: 2}
+  m_playerInventory: {fileID: 0}
   m_inventoryPrefab: {fileID: 5459825935528552993, guid: a06eb35563a94a848873988547545ffb,
     type: 3}
+  m_text: {fileID: 0}
   m_xStartPos: -210
   m_yStartPos: 140
   m_xSpaceBetweenItems: 35
@@ -108,6 +110,7 @@ GameObject:
   - component: {fileID: 5758115767510758831}
   - component: {fileID: 5758115767510758824}
   - component: {fileID: 632042937248924838}
+  - component: {fileID: 3157294906104814087}
   m_Layer: 5
   m_Name: Shop Menu Canvas
   m_TagString: Untagged
@@ -209,3 +212,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HUD: {fileID: 5758115767510758825}
   m_canvas: {fileID: 5758115767510758830}
+--- !u!114 &3157294906104814087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758115767510758825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b729e228e8140b14eaf16b570d8bca76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
