@@ -3,36 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stats
+{
+    MaxHealth,
+    Stealth,
+    Power,
+    MaxAir,
+    AirConsumption,
+    AirRestoration,
+    MovementSpeed,
+    TurnSpeed
+}
 public class PlayerStatManager
 {
-    /*enum Stats;
-    Dictionary<Stats, StatTracker> StatTrackerContainer;
---
-AddStat();//for dictionary adding new objects.
-    UpdateStat(Stats trackerType, float amount);//change tracker values.
---
+    /*
 Responsibilities
 - keeps track of StatTrackers
 - fetch statTrackers with StatTrackerContainer[Stats]
 */
 
 
+    [SerializeField]
+    protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
-    public enum Stats
-    {
-        Health,
-        Location,
-        Stealth,
-        Power,
-        AirCapacity,
-        AirConsumption,
-        AirRestoration,
-        MovementSpeed,
-        TurnSpeed
-    }
-
-    
-    Dictionary<Stats, StatTracker> StatTrackerContainer;
+    public StatTracker this[Stats value] {  get { return m_statTrackerContainer[value]; } }
 
     /// <summary>
     /// Sets StatTrackerContainer.
@@ -53,24 +47,25 @@ Responsibilities
     /// <param name="statTracker"></param>
     public void AddStat(Stats statType, StatTracker statTracker)
     {
-        if (StatTrackerContainer.ContainsKey(statType))
+        if (m_statTrackerContainer.ContainsKey(statType))
             return;
 
-        StatTrackerContainer.Add(statType, statTracker);
+        m_statTrackerContainer.Add(statType, statTracker);
     }
 
     /// <summary>
-    /// add amount to the stat tracker fpr statType
+    /// add amount to the stat tracker for statType
     /// </summary>
     /// <param name="trackerType"></param>
     /// <param name="amount"></param>
     public bool UpdateStat(Stats statType, float amount)
     {
-        if (!StatTrackerContainer.ContainsKey(statType))
+        if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        StatTrackerContainer[statType].Change(amount);
+        m_statTrackerContainer[statType].Change(amount);
 
         return true;
     }
+
 }

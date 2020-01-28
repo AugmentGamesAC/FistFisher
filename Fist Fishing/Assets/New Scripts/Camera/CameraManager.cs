@@ -4,18 +4,21 @@ using UnityEngine;
 
 
 /// <summary>
-/// Camera manage is to have a list of behaviors
+/// Camera manager is to have a list of behaviors
 /// we are using input controls to switch states
 /// </summary>
 [System.Serializable]
 public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 {
-    protected enum CameraState
+    /// <summary>
+    /// used to determine both camera behaviour and player motion behaviour
+    /// </summary>
+    public enum CameraState
     {
         Abzu,
         Locked,
         Warthog,
-        FirstPerson
+        FirstPerson,
     }
 
     [SerializeField]
@@ -24,6 +27,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     protected GameObject CameraObject;
     [SerializeField]
     protected CameraState _currentState;
+    public CameraState CurrentState { get { return _currentState; } }
+
     [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
@@ -41,10 +46,11 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
-        InitStateHolderIfNeeded();
-
         SwitchState(_currentState);
     }
+
+    public Vector3 LookAtWorldTransform { get { return FollowObject.transform.position +  currentBehavoir.GetCameraLookatPos; } }
+    public Vector3 CameraPos { get { return FollowObject.transform.position + currentBehavoir.GetCameraPos; } }
 
 
     protected void InitStateHolderIfNeeded()
@@ -65,13 +71,9 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize() { }
 
-
-
-
     protected void SwitchState(CameraState newState)
     {
-        if (StateHolder == default)
-            return;
+        InitStateHolderIfNeeded();
 
         _currentState = newState;
         if (!StateHolder.TryGetValue(_currentState, out currentBehavoir))

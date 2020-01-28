@@ -74,35 +74,48 @@ public enum MenuScreens
 /// singleton that handles all active menus
 /// </summary>
 [System.Serializable]
-public class NewMenuManager : MonoBehaviour
+public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 {
-
-    protected Dictionary<MenuScreens, MenuList> m_menuLists;
     #region working inspector dictionary
     /// <summary>
     /// this is the mess required to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
+    /// 
     [System.Serializable]
-    public class MenuListForInspectorDictionary { public List<MenuList> m_listsOfMenu; }
-    [System.Serializable]
-    public class MenuConfigurations : InspectorDictionary<MenuScreens, MenuListForInspectorDictionary> { }
+    public class MenuConfigurations : InspectorDictionary<MenuScreens, MenuList> { }
     [SerializeField]
     protected MenuConfigurations m_menuConfigurations = new MenuConfigurations();
-    public MenuConfigurations MenuConfigs { get { return m_menuConfigurations; } }
-   // public MenuList ListsOfMenu 
-
-
-    [SerializeField]
-    public static MenuListForInspectorDictionary m_Mylist = new MenuListForInspectorDictionary();
+    public MenuConfigurations MenuConfigs => m_menuConfigurations;
     #endregion working inspector dictionary
+
+    public static bool MouseActiveState
+    {
+        get
+        {
+            if (!Instance.m_menuConfigurations.ContainsKey(Instance.m_currentSelectedMenu))
+                return true;
+            return Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].MouseActive;
+        }
+    }
+    public static bool PausedActiveState
+    {
+        get
+        {
+            if (!Instance.m_menuConfigurations.ContainsKey(Instance.m_currentSelectedMenu))
+                return true;
+            return Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
+        }
+    }
+
+    //Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
 
     #region singletonification
     /// <summary>
     /// we only need one of these
     /// </summary>
-    private static NewMenuManager Instance;
-    void Awake()
+    protected static NewMenuManager Instance;
+    protected void Awake()
     {
         if (Instance != null)
         {
@@ -111,7 +124,6 @@ public class NewMenuManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
-
     }
 
     private static void HasInstance()
@@ -123,6 +135,8 @@ public class NewMenuManager : MonoBehaviour
 
     [SerializeField]
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
+    [SerializeField]
+    MenuScreens controlMenu = MenuScreens.MainMenu;
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
     /// Set the current menu  
@@ -131,20 +145,28 @@ public class NewMenuManager : MonoBehaviour
     /// <param name="currentlySelectedMenuScreen"></param>
     public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
-        //Check if current menus is the same as the passed in menu
-        if (Instance.m_currentSelectedMenu == NewSelectedMenuScreen)
+        Instance.DisplayMenu(NewSelectedMenuScreen);
+    }
+
+    protected void DisplayMenu(MenuScreens newMenu)
+    {
+        //Don't change if argument is same as current.
+        if (Instance.m_currentSelectedMenu == newMenu)
             return;
 
-        //If it is not then deactivate current menu
-        SetMenuListActiveState(Instance.m_menuLists[Instance.m_currentSelectedMenu], false);
-        //Set Current menu to the passed in menu
-        Instance.m_currentSelectedMenu = NewSelectedMenuScreen;
 
-        if (Instance.MenuConfigs.TryGetValue(NewSelectedMenuScreen, out m_Mylist))
-        {
-            SetMenuListActiveState(Instance.m_menuLists[NewSelectedMenuScreen], true);
-        }
+        MenuList resultList;
+
+        //deactivate current menu
+        if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
+                SetMenuListActiveState(resultList, false);
+        //Set Current menu to the passed in menu
+        Instance.m_currentSelectedMenu = newMenu;
+
+        if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
+            SetMenuListActiveState(resultList, true);
     }
+
 
     /// <summary>
     /// Set the visibility of the menu items within a menu
@@ -155,22 +177,20 @@ public class NewMenuManager : MonoBehaviour
     {
         if (list == null)
             return;
+
         list.ShowActive(activeState);
     }
-    /// <summary>
-    /// Helper to get current menu's mouse active state
-    /// </summary>
-    /// <returns></returns>
-    protected bool GetCurrentMouseActive()
+
+    public void OnBeforeSerialize()
     {
-        return m_menuLists[m_currentSelectedMenu].MouseActive;
+        if (Instance == default)
+            Instance = this;
+        // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
+
+        DisplayMenuScreen(controlMenu);
     }
-    /// <summary>
-    /// Helper to get current menu's game paused state
-    /// </summary>
-    /// <returns></returns>
-    protected bool GetCurrentGamePause()
+
+    public void OnAfterDeserialize()
     {
-        return m_menuLists[m_currentSelectedMenu].Paused;
     }
 }

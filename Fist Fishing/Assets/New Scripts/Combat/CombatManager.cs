@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Should be Singleton
+/// handles list of combatants and resolves moves/move order
 /// </summary>
 public class CombatManager : MonoBehaviour
 {
@@ -68,7 +69,7 @@ public class CombatManager : MonoBehaviour
             return;
 
         //listen for input cases.
-        //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping.
+        //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
         if (ALInput.GetKeyDown(ALInput.Attack))
         {
             PlayerAttack();

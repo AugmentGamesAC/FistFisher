@@ -23,12 +23,6 @@ public class CombatModule : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get target Controller from player.
-        m_targetController = GetComponentInParent<TargetController>();
-
-        //get targeted fish.
-        m_targetedFish = m_targetController.m_targetedFish;
-
 
         m_influenceFish = GetComponent<InfluenceFish>();
     }
@@ -37,7 +31,7 @@ public class CombatModule : MonoBehaviour
     void Update()
     {
         //get targetedfish from targeting system.
-        m_targetedFish = m_targetController.m_targetedFish;
+        m_targetedFish = null;
 
         if (m_targetedFish == null)
             return;

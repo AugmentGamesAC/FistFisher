@@ -17,8 +17,8 @@ public class MenuList
     protected bool m_gamePaused;
     [SerializeField]
     protected bool m_mouseActive;
-    public bool Paused { get { return m_gamePaused; } }
-    public bool MouseActive { get { return m_mouseActive; } }
+    public bool Paused => m_gamePaused;//return m_gamePaused if Paused referenced.
+    public bool MouseActive => m_mouseActive;
     /// <summary>
     /// Sets each menu in the list that is active to the bool parameter
     /// Still need to setup the canvas' to make them show/not show
@@ -26,19 +26,9 @@ public class MenuList
     /// <param name="activeState"></param>
     public void ShowActive(bool activeState)
     {
-        if (activeState)
-        {            
-            foreach (Menu menu in m_menuList)
-            {
-                menu.Show(activeState);
-            }
-        }
-        else
-        {         
-            foreach (Menu menu in m_menuList)
-            {
-                menu.Show(activeState);
-            }
+        foreach (Menu menu in m_menuList)
+        {
+            menu.Show(activeState);
         }
     }
 }
