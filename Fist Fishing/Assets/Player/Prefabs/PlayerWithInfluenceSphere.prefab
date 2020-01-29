@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8049769806892807408}
   m_Layer: 2
   m_Name: PlayerWithInfluenceSphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,10 +115,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 477693507089624922}
     m_Modifications:
-    - target: {fileID: 7295796181784110616, guid: 2d45297892e4340489bb4592ecdb53f6,
+    - target: {fileID: 295444867762836901, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
-      propertyPath: m_Name
-      value: player
+      propertyPath: m_healthModule
+      value: 
+      objectReference: {fileID: 3820011627261351948}
+    - target: {fileID: 295444867762836901, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_InfluenceSphereObject
+      value: 
+      objectReference: {fileID: 1191271668255745293}
+    - target: {fileID: 369048172756602551, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_displayInventoryObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 229457186cefde7498ee986d6c53ec04,
+        type: 2}
+    - target: {fileID: 7295796181223495115, guid: 2d45297892e4340489bb4592ecdb53f6,
+        type: 3}
+      propertyPath: m_OxygenDegeneration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7295796181784110598, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
@@ -190,23 +206,12 @@ PrefabInstance:
       propertyPath: m_swimSpeed
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 295444867762836901, guid: 2d45297892e4340489bb4592ecdb53f6,
+    - target: {fileID: 7295796181784110616, guid: 2d45297892e4340489bb4592ecdb53f6,
         type: 3}
-      propertyPath: m_healthModule
-      value: 
-      objectReference: {fileID: 3820011627261351948}
-    - target: {fileID: 295444867762836901, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_InfluenceSphereObject
-      value: 
-      objectReference: {fileID: 1191271668255745293}
-    - target: {fileID: 7295796181223495115, guid: 2d45297892e4340489bb4592ecdb53f6,
-        type: 3}
-      propertyPath: m_OxygenDegeneration
-      value: 1
+      propertyPath: m_Name
+      value: player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7295796181784110617, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45297892e4340489bb4592ecdb53f6, type: 3}
 --- !u!1 &2487089621031590220 stripped
 GameObject:

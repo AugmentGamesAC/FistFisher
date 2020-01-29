@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 1990969796264009377}
   - component: {fileID: 1990969796264009376}
   - component: {fileID: 729159918786320074}
+  - component: {fileID: -8935852283935875635}
   m_Layer: 5
   m_Name: InventoryPrefab1
   m_TagString: Untagged
@@ -261,6 +262,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HUD: {fileID: 1990969796264009383}
   m_canvas: {fileID: 1990969796264009378}
+--- !u!114 &-8935852283935875635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990969796264009383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b729e228e8140b14eaf16b570d8bca76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1990969797250425331
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mouseItem: {fileID: 0}
-  m_inventory: {fileID: 11400000, guid: 786473835561dcc46b6bd3b2b4f16326, type: 2}
+  m_inventory: {fileID: 11400000, guid: 229457186cefde7498ee986d6c53ec04, type: 2}
   m_playerInventory: {fileID: 0}
   m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
     type: 3}
