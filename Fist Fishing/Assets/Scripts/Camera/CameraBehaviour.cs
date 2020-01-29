@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public abstract class CameraBehaviour
 {
     public float m_obstacleCheckRadius = 0.5f;

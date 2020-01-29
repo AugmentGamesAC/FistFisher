@@ -271,8 +271,8 @@ public class Inventory : MonoBehaviour
     #endregion ObjectTracking
 
 
-    //private void OnApplicationQuit()
-    //{
-    //    m_displayInventoryObject.m_inventorySlots = new InventorySlot[30];
-    //}
+    private void OnApplicationQuit()
+    {
+        m_displayInventoryObject.m_inventorySlots = new InventorySlot[30];
+    }
 }

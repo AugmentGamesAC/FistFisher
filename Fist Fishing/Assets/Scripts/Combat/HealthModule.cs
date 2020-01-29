@@ -40,16 +40,11 @@ public class HealthModule : MonoBehaviour
         if (m_healthPercentage >= 1.0f)
             return;
 
-        //if there is no delay no sweat
-        if (m_regenTimer < 0)
-            return;
-        m_regenTimer -= Time.deltaTime;
-
-        // if the delay is 0 or less you can heal
-        if (m_regenTimer > 0)
-            return;
-        ModifyHealth(m_regenRate);
-        m_regenTimer = m_regenDelay;
+        m_regenTimer += Time.deltaTime;
+        if (m_regenTimer > m_regenDelay)
+        {
+            ModifyHealth(m_regenRate);
+        }
     }
 
     public void ModifyHealth(float changeAmount)
