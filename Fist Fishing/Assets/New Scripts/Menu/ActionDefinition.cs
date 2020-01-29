@@ -46,31 +46,10 @@ public class ActionDefinition : MonoBehaviour
     public enum ActionID
     {
         /// <summary>
-        /// rotates player 
-        /// 2 axis
-        /// </summary>
-        PlayerRotationPitchYaw,
-        /// <summary>
-        /// rotates player forwards/backwards
-        /// 1 axis
-        /// </summary>
-        PlayerRotationForwardBack, 
-        /// <summary>
         /// rotates camera around player
         /// 2 axis
         /// </summary>
-        CameraRotationPitchYaw, 
-        /// <summary>
-        /// zooms the camers in and out if applicable
-        /// 1 axis
-        /// </summary>
-        CameraRotationZoom, 
-        /// <summary>
-        /// moves the player up or down if applicable
-        /// 1 axis
-        /// </summary>
-        PlayerMovementUpDown, 
-
+        CameraRotation, 
         /// <summary>
         /// while swimming or steering boat. 
         /// or while selecting inventory slots
@@ -149,10 +128,9 @@ public class ActionDefinition : MonoBehaviour
     {
         BoatTravel = 0x0001,
         InventoryShop = 0x0002,
-        //SwimInventory = 0x0004,
-        Battle = 0x0010,
-        Swimming = 0x0020,
-        MenuNavigation = 0x0040,
+        Battle = 0x0004,
+        MenuNavigation = 0x0008,
+        Swimming = 0x0010,
     }
 
     [SerializeField]
