@@ -12,7 +12,7 @@ public class FloatTextUpdater : MonoBehaviour
 
 
     [SerializeField]
-    protected string m_textChange;
+    protected string m_textInput;
     protected Text m_text;
     
     // Start is called before the first frame update
@@ -21,10 +21,10 @@ public class FloatTextUpdater : MonoBehaviour
         m_text = GetComponent<Text>();
         m_tracker.OnStateChange += UpdateState;
     }
-
+    
   protected void UpdateState(float value)
     {
 
-        m_text.text = string.Format(m_textChange, value);
+        m_text.text = string.Format(m_textInput + " {0}", value);
     }
 }
