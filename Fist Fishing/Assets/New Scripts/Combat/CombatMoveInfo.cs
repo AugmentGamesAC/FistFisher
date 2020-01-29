@@ -7,14 +7,14 @@ using UnityEngine;
 /// </summary>
 public class CombatMoveInfo
 {
-    public float Damage;
-    public float Slow;
-    public float Noise;
-    public float MoveDistance;
-    public float Oxygen;
+    public float m_damage;
+    public float m_slow;
+    public float m_noise;
+    public float m_moveDistance;
+    public float m_oxygenConsumption;
 
     /// <summary>
     /// probably RangeZone enum instead of float.
     /// </summary>
-    public float SweetSpot;
+    public float m_sweetSpot;
 }

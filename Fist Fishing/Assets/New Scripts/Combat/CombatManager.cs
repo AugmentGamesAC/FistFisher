@@ -112,20 +112,20 @@ public class CombatManager : MonoBehaviour
         StartCoroutine("StartPlayerAttackAnimation", move);
 
         //reduce distance from selected fish.
-        SelectedFish.Distance -= move.MoveDistance;
+        SelectedFish.Distance -= move.m_moveDistance;
         //Increase distance to other fish.
         foreach (var fishCombatInfo in m_fishInCombatInfo)
         {
             if (fishCombatInfo == SelectedFish)
                 continue;
-            fishCombatInfo.Distance += move.MoveDistance;
+            fishCombatInfo.Distance += move.m_moveDistance;
         }
         
 
         throw new System.NotImplementedException(" dependant on fish Instance.");
 
         //apply stat changes to the player. eg. oxygen.
-
+            
 
         //apply damage from the player's move to the selected fish.
 

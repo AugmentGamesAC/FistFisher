@@ -28,7 +28,8 @@ public class MenuList
     {
         foreach (Menu menu in m_menuList)
         {
-            menu.Show(activeState);
+            if (menu != null)
+                menu.Show(activeState);
         }
     }
 }

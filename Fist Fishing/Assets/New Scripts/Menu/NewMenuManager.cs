@@ -152,7 +152,7 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Start()
     {
-        DisplayMenu(MenuScreens.MainMenu);
+        Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)

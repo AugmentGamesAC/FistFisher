@@ -7,6 +7,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
+    [SerializeField]
+    protected bool IsSelectedOnInit = false;
+
     protected bool m_isSelected = false;
     protected bool m_isHovered = false;
 
@@ -17,11 +20,13 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     [SerializeField]
     protected Sprite m_HoverSprite;
 
-    
+
     protected Image m_image;
 
     protected TabManager m_parentTabManager;
     protected string m_description;
+
+    [SerializeField]
     protected MenuList m_menuList;
 
     protected void SwapSprite()
@@ -33,7 +38,7 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     /// Tells the menuList to show or hide when tab is Selected or not.
     /// </summary>
     /// <param name="activeState"></param>
-    protected void ShowMenuList()
+    protected void SwapMenuList()
     {
         m_menuList.ShowActive(m_isSelected);
     }
@@ -44,6 +49,9 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
 
         m_image = GetComponent<Image>();
         SwapSprite();
+
+        if (IsSelectedOnInit)
+            m_parentTabManager.NewActivation(this);
     }
 
     /// <summary>
@@ -55,6 +63,7 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     {
         m_isSelected = selected;
         SwapSprite();
+        SwapMenuList();
     }
 
     public void OnPointerClick(PointerEventData eventData)
