@@ -5,14 +5,13 @@ using UnityEngine;
 public class FishCombatInfo : CombatInfo
 {
     //data needed for combat
-    // not included in a fish instance
+    //Health
+    //UI image
+    //Move Speed
+    //Behaviour type.
+    public void TakeDamage(float damage) { }
 
-    public float SlowEffect;
-    public float Speed;
-    public float Distance;
-
-    /// <summary>
-    /// Need a fish instance class.
-    /// </summary>
-    public FishInstance FishInstance = new FishInstance();
+    public float m_damage;
+    public float m_moveSpeed;
+    public float m_combatDistance;
 }

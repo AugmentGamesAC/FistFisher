@@ -7,7 +7,16 @@ using UnityEngine;
 /// </summary>
 public class PlayerCombatInfo : CombatInfo
 {
-    public PlayerInstance m_playerInstance = new PlayerInstance();
+    //Things we need access to 
+    //current oxgen
+    //current health/changing health
+    //players bait inventory
 
+    public void UpdateOxygen(float change) { }
+    public void ConsumeItem() { }
+    public void TakeDamage(float damage) { }
+
+
+    public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
     public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>();
 }
