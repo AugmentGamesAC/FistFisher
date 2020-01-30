@@ -20,7 +20,7 @@ public class ProgressBarUpdater : MonoBehaviour
     void Start()
     {
         //Get image with fill amount
-        m_fillImage = transform.GetChild(0).GetComponent<Image>();
+        m_fillImage = transform.GetComponent<Image>();
         //On a change occuring use UpdateState
         m_tracker.OnStateChange += UpdateState;
     }
