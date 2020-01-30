@@ -7,6 +7,17 @@ using UnityEngine;
 /// </summary>
 public class CombatMoveInfo
 {
+    public CombatMoveInfo(float damage, float slow, float noise, float moveDistance, float oxygenConsumption)
+    {
+        m_damage = damage;
+        m_slow = slow;
+        m_noise = noise;
+        m_moveDistance = moveDistance;
+        m_oxygenConsumption = oxygenConsumption;
+    }
+
+    public CombatMoveInfo() { }
+
     public float m_damage;
     public float m_slow;
     public float m_noise;

@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class FishCombatInfo : CombatInfo
 {
-    //data needed for combat
-    //Health
-    //UI image
-    //Move Speed
-    //Behaviour type.
-
-        [SerializeField]
-    protected IFishData m_fishData;
+    [SerializeField]
+    protected IFishData m_fishData = new TestingFish();
     public IFishData FishData => m_fishData;
 
     public void TakeDamage(float damage)
@@ -29,6 +23,7 @@ public class FishCombatInfo : CombatInfo
     {
         //slow* movespeed;
     }
+
 
     public float m_combatDistance;
 }

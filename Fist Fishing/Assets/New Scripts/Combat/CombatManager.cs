@@ -19,23 +19,23 @@ public class CombatManager : MonoBehaviour
         CombatFinished
     }
 
-    Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
+    protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
-    List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
+    protected List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
 
-    PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
+    protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
 
-    CombatStates m_currentCombatState = CombatStates.OutofCombat;
+    protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
     //gets controlled by left right inputs.
-    int m_fishSelection = 0;
+    protected int m_fishSelection = 0;
 
-    public FishCombatInfo SelectedFish {  get { return m_fishInCombatInfo[m_fishSelection]; } }
+    protected float m_combatZone = 30.0f;
+
+    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
 
     public void StartCombat(bool didPlayerStartIt)
     {
-        m_currentCombatState = (didPlayerStartIt) ? CombatStates.AwaitingPlayerRound : CombatStates.AwaitingFishRound;
-
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);
 
@@ -48,7 +48,7 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
-    void AddFishToQueue()
+    protected void AddFishToQueue()
     {
         foreach (var fishInfo in m_fishInCombatInfo)
         {
@@ -85,7 +85,7 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    public void PlayerFlee()
+    protected void PlayerFlee()
     {
         //Take away player's oxygen.
         m_playerCombatInfo.UpdateOxygen(-30);
@@ -98,17 +98,14 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// Grabs selected Move from the player's attackPinwheel.
     /// </summary>
-    public void PlayerAttack()
+    protected void PlayerAttack()
     {
         //Get the player's current pinwheel choice.
         CombatMoveInfo move = m_playerCombatInfo.m_attackPinwheel.GetSelectedOption();
 
-        StartCoroutine("StartPlayerAttackAnimation", move);
-
-        //apply stat changes to the player. eg. oxygen.
-        // oxegen
+        //apply stat changes to the player.
+        //Oxygen
         // noise - don't worry about this one yet.
-
         m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
 
 
@@ -125,7 +122,7 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// Grabs selected item from the player's itemPinwheel.
     /// </summary>
-    public void PlayerItem()
+    protected void PlayerItem()
     {
         throw new System.NotImplementedException("dependency items implementation.");
 
@@ -150,21 +147,42 @@ public class CombatManager : MonoBehaviour
     /// Determines whether the fish is alive or out of combat.
     /// </summary>
     /// <param name=""></param>
-    public void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
+    protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        if (ResolveDeadFish(fishCombatInfo))
-            return;
 
         fishCombatInfo.m_combatDistance += ResolveFishDirection(fishCombatInfo);
         ResolveFishAttack(fishCombatInfo);
 
-        m_roundQueue.Enqueue(fishCombatInfo);
+        //if the fish doesn't leave the battle, enqueue for next turn.
+        if (!ResolveLeaveCombat(fishCombatInfo))
+            m_roundQueue.Enqueue(fishCombatInfo);
+
+
         ResolveRound();
     }
 
-    public bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
+    ///returns true if out of range or dead.
+    protected bool ResolveLeaveCombat(FishCombatInfo fish)
     {
-        return (fishCombatInfo.FishData.Health.CurrentAmount > 0);
+        if (fish.m_combatDistance > m_combatZone)
+            return true;
+
+        if (ResolveDeadFish(fish))
+            return true;
+
+        return false;
+    }
+
+
+    /// <summary>
+    /// needs new work with inventory.
+    /// returns true if fish's health is 0 or below.
+    /// </summary>
+    /// <param name="fishCombatInfo"></param>
+    /// <returns></returns>
+    protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
+    {
+        return (fishCombatInfo.FishData.Health.CurrentAmount <= 0);
     }
 
     protected void ResolveFishAttack(FishCombatInfo fish)
@@ -174,16 +192,16 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    public float ResolveFishDirection(FishCombatInfo fish)
+    protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) )? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed; 
+        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed;
     }
 
 
     /// <summary>
     /// Update the round Queue.
     /// </summary>
-    private void ResolveRound() 
+    protected void ResolveRound()
     {
         //player wins if he's the only one in the queue
         if (m_roundQueue.Count == 1)
@@ -191,10 +209,11 @@ public class CombatManager : MonoBehaviour
             EndCombat();
             return;
         }
-        
 
+        //get current combabant and remove from queue.
         CombatInfo nextCombatant = m_roundQueue.Dequeue();
 
+        //check for next combatant type and change the state.
         if (nextCombatant as PlayerCombatInfo != null)
         {
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
@@ -213,7 +232,7 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// return true if selected fish is successful.
     /// </summary>
-    private bool ChangeSelectedFish(float leftRight)
+    protected bool ChangeSelectedFish(float leftRight)
     {
         //no axis input? do nothing.
         if ((leftRight == 0) || (m_fishInCombatInfo.Count == 0))
@@ -229,7 +248,7 @@ public class CombatManager : MonoBehaviour
     }
 
     //Plays aninmation
-    private IEnumerable StartPlayerAttackAnimation(CombatMoveInfo move)
+    protected IEnumerable StartPlayerAttackAnimation(CombatMoveInfo move)
     {
         m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
 
@@ -240,7 +259,7 @@ public class CombatManager : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerable StartFishAnimation()
+    protected IEnumerable StartFishAnimation()
     {
         m_currentCombatState = CombatStates.AwaitingFishAnimation;
 
