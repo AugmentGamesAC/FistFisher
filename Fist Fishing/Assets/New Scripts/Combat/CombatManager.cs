@@ -27,8 +27,6 @@ public class CombatManager : MonoBehaviour
 
     CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
-    FishCombatInfo m_selectedFish = new FishCombatInfo();
-
     //gets controlled by left right inputs.
     int m_fishSelection = 0;
 
@@ -111,21 +109,14 @@ public class CombatManager : MonoBehaviour
 
         StartCoroutine("StartPlayerAttackAnimation", move);
 
-        //reduce distance from selected fish.
-        SelectedFish.Distance -= move.m_moveDistance;
-        //Increase distance to other fish.
-        foreach (var fishCombatInfo in m_fishInCombatInfo)
-        {
-            if (fishCombatInfo == SelectedFish)
-                continue;
-            fishCombatInfo.Distance += move.m_moveDistance;
-        }
-        
+
+        MoveFishes(move.MoveDistance);
 
         throw new System.NotImplementedException(" dependant on fish Instance.");
 
         //apply stat changes to the player. eg. oxygen.
-            
+            // oxegen
+            // noise
 
         //apply damage from the player's move to the selected fish.
 
@@ -150,6 +141,19 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
+
+    protected void MoveFishes(float distance)
+    {
+        //reduce distance from selected fish.
+        SelectedFish.m_combatDistance -= distance;
+        //Increase distance to other fish.
+        foreach (var fishCombatInfo in m_fishInCombatInfo)
+        {
+            if (fishCombatInfo == SelectedFish)
+                continue;
+            fishCombatInfo.m_combatDistance += distance;
+        }
+    }
     /// <summary>
     /// Determines whether the fish is alive or out of combat.
     /// </summary>
