@@ -46,10 +46,10 @@ public class BoatPlayer : MonoBehaviour
 
     public void Update()
     {
-        if ((ALInput.GetKeyDown(ALInput.Start)) && (MenuManager.Currentsetting == Menus.MainMenu))
-            MenuManager.ActivateMenu(Menus.BoatTravel);
+        if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
+            NewMenuManager.DisplayMenuScreen(MenuScreens.BoatTravel);
 
-        if (MenuManager.Currentsetting == Menus.MainMenu)
+        if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
 
         if (m_validPlayer == default) // no player around no action
@@ -105,8 +105,8 @@ public class BoatPlayer : MonoBehaviour
     /// </summary>
     protected void SwapUI()
     {
-        Menus desiredMenu = (!m_isMounted) ? Menus.NormalHUD :  (m_displayMap) ? Menus.BoatTravel : Menus.ShopMenu;
-        MenuManager.ActivateMenu(desiredMenu);
+        MenuScreens desiredMenu = (!m_isMounted) ? MenuScreens.NormalHUD :  (m_displayMap) ? MenuScreens.BoatTravel : MenuScreens.ShopMenu;
+        NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
 
     protected void MountAction()

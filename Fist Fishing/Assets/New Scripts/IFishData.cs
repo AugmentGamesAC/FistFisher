@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public interface IFishData 
 {
-    //data needed for combat
-    //Health
-    //UI image
-    //Behaviour type.
+    float Damage { get; }
+    float CombatSpeed { get;}
+    float AttackRange { get; }
 
-    HealthModule HealthModule { get; set; }
+    FishHealth Health { get;}
 
     Sprite Sprite { get; }
 
-
+    FishBrain.FishClassification FishClassification { get; }
 }

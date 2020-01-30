@@ -54,7 +54,6 @@ public class PlayerMotion : MonoBehaviour
     /// </summary>
     public void FixedUpdate()
     {
-
         if (!m_CanMove)
             return;
 
@@ -84,8 +83,8 @@ public class PlayerMotion : MonoBehaviour
     }
     protected void SwapUI()
     {
-        Menus desiredMenu = (m_displayInventory) ? Menus.SwimmingInventory : Menus.NormalHUD;
-        MenuManager.ActivateMenu(desiredMenu);
+        MenuScreens desiredMenu = (m_displayInventory) ? MenuScreens.SwimmingInventory : MenuScreens.NormalHUD;
+        NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
     protected void AbzuMovement()
     { 
