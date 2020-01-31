@@ -145,6 +145,10 @@ public class ActionDefinition : MonoBehaviour
     protected ContextGroup m_contextGroups;
     public ContextGroup ContextGroups => m_contextGroups;
 
+    [SerializeField]
+    protected ActionType m_actionType;
+    public ActionType InputActionType => m_actionType;
+
 
 
     // Start is called before the first frame update
