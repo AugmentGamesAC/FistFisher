@@ -12,10 +12,27 @@ public class PlayerCombatInfo : CombatInfo
     //current health/changing health
     //players bait inventory
 
-    public void UpdateOxygen(float change) { }
-    public void ConsumeItem() { }
-    public void TakeDamage(float damage) { }
+    public void UpdateOxygen(float change)
+    {
+        //Oxygen module.Change(change);
+    }
+    public void ConsumeItem()
+    {
+        
+    }
+    public void TakeDamage(float damage)
+    {
+        //health module.Change(damage);
+    }
+    public void UpdateNoise(float change)
+    {
+        m_noiseTracker.Change(change);
+    }
 
+    //this or get these values from player.
+    public NoiseTracker m_noiseTracker;
+    public PlayerHealth m_playerHealth;
+    public OxygenTracker m_oxygenTracker;
 
     public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
     public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>();

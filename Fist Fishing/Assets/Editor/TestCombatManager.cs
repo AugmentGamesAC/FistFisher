@@ -6,7 +6,7 @@ using NUnit.Framework;
 public class TestCombatManager : CombatManager
 {
     [Test]
-    public void CombatManagerStart()
+    public void A_CombatManagerStart()
     {
         m_fishInCombatInfo.Add(new FishCombatInfo());
         m_fishInCombatInfo.Add(new FishCombatInfo());
@@ -20,12 +20,12 @@ public class TestCombatManager : CombatManager
 
 
     [Test]
-    public void PlayerStartedCombat_Test()
+    public void B_PlayerStartedCombat_Test()
     {
         StartCombat(true);
 
         //doesn't contain after startCombat() since he gets dequeued once it's his turn.
-        Assert.That(!m_roundQueue.Contains(m_playerCombatInfo));
+        Assert.AreEqual(false, m_roundQueue.Contains(m_playerCombatInfo));
 
         //should contain all fish still until the fish turn has started.
         foreach (var fish in m_fishInCombatInfo)
@@ -33,14 +33,14 @@ public class TestCombatManager : CombatManager
             Assert.That(m_roundQueue.Contains(fish));
         }
 
+        Assert.That(m_roundQueue.Count > 1, string.Format("this was the real item was {0}", m_roundQueue.Count.ToString()));
         //The CombatManager should be awaiting player input...
-        Assert.That(m_currentCombatState == CombatStates.AwaitingPlayerRound);
-        //this kind of thing works too. (as long as return type is bool)
-        //Assert.That(ResolvePlayerMove_Test()); 
+        Assert.That(m_currentCombatState == CombatStates.AwaitingPlayerRound, string.Format("this was the real item was {0}" , m_currentCombatState.ToString()));
+        Assert.AreEqual(3, m_roundQueue.Count);//3 fish in q.
     }
 
     [Test]
-    public void ResolvePlayerAttack_Test()
+    public void C_ResolvePlayerAttack_Test()
     {
 
         //ARRANGE
@@ -65,14 +65,14 @@ public class TestCombatManager : CombatManager
         m_fishSelection = 0;
         SelectedFish.m_combatDistance = 10;
 
-        float distanceAfterAttack = SelectedFish.m_combatDistance 
+        float distanceAfterAttack = SelectedFish.m_combatDistance
             - m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_moveDistance //this works
             + SelectedFish.FishData.CombatSpeed; //this doesn't work
 
         //ACT
         PlayerAttack();
 
-        
+
         //All fish should have finished their turn within one frame.
 
 
@@ -92,11 +92,49 @@ public class TestCombatManager : CombatManager
 
         //check that the queue is what expected.
         //the player turn is dequeued when awaiting input so 3 fish is in queue.
-        Assert.AreEqual(3, m_roundQueue.Count); 
+        Assert.AreEqual(3, m_roundQueue.Count);
         //Should be awaiting player input...
-        Assert.AreEqual(m_currentCombatState,CombatStates.AwaitingPlayerRound);
+        Assert.AreEqual(m_currentCombatState, CombatStates.AwaitingPlayerRound);
     }
 
+    [Test]
+    public void D_ChangeSelectedFish_Test()
+    {
+        m_fishSelection = 0;
 
+        //ie. went around the list forwards once.
+        for (int i = 0; i < m_fishInCombatInfo.Count; i++)
+        {
+            Assert.AreEqual(i, m_fishSelection);
+            Assert.AreEqual(SelectedFish, m_fishInCombatInfo[i]);
+
+            ChangeSelectedFish(1);
+        }
+
+        Assert.AreEqual(0, m_fishSelection);
+        Assert.AreEqual(SelectedFish, m_fishInCombatInfo[0]);
+
+        //ie. went around the list backwards once.
+        for (int i = 0; i < m_fishInCombatInfo.Count; i--)
+        {
+            
+
+            if (i < 0)
+                i = m_fishInCombatInfo.Count - 1;
+
+            Assert.AreEqual(i, m_fishSelection);
+            Assert.AreEqual(SelectedFish, m_fishInCombatInfo[i]);
+
+            ChangeSelectedFish(-1);
+
+            
+            if (m_fishSelection == 0)
+                break;
+        }
+
+        Assert.AreEqual(0, m_fishSelection);
+        Assert.AreEqual(SelectedFish, m_fishInCombatInfo[0]);
+
+    }
 
 }

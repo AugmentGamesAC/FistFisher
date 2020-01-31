@@ -19,6 +19,15 @@ public class CombatManager : MonoBehaviour
         CombatFinished
     }
 
+    public enum noiseThreshold
+    {
+        Quiet,
+        Medium,
+        Loud
+    }
+
+    protected Dictionary<noiseThreshold, float> m_noiseThresholds;
+
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
     protected List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
@@ -40,6 +49,8 @@ public class CombatManager : MonoBehaviour
             m_roundQueue.Enqueue(m_playerCombatInfo);
 
         AddFishToQueue();
+
+        m_playerCombatInfo.m_noiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
 
         if (!didPlayerStartIt)
         {
@@ -105,8 +116,9 @@ public class CombatManager : MonoBehaviour
 
         //apply stat changes to the player.
         //Oxygen
-        // noise - don't worry about this one yet.
+        // noise .
         m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
+        m_playerCombatInfo.UpdateNoise(move.m_noise);
 
 
         //apply damage from the player's move to the selected fish.
@@ -197,6 +209,12 @@ public class CombatManager : MonoBehaviour
         return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed;
     }
 
+    //Spawns aggressive fish depending on noise amount.
+    protected void ResolveNoiseChange()
+    {
+        //check noise threshold dictionary to compare noise tracker values.
+        //Enqueue new fish in depending on threshold.
+    }
 
     /// <summary>
     /// Update the round Queue.
