@@ -15,6 +15,8 @@ public class ALInput : MonoBehaviour
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
+
+    #region keycodes keycodes
     [SerializeField]
     protected KeyCode m_forward;
     public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
@@ -132,6 +134,8 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_firstPerson;
     public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+
+    #endregion keycodes
 
 
     /// <summary>
