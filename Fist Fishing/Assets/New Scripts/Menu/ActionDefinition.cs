@@ -42,6 +42,7 @@ public class ActionDefinition : MonoBehaviour
 
     /// <summary>
     /// all of the inputs, generally context sensitive but sharing keys/inputs
+    /// Need to playtest to ensure these are not too condensed
     /// </summary>
     public enum ActionID
     {
@@ -99,9 +100,10 @@ public class ActionDefinition : MonoBehaviour
         MenuAndShopMenuNavigationPageSelect,
         /// <summary>
         /// in combat, flees
+        /// out of combat, toggles between 3rd person or 1st person camera modes (f3-f4) 
         /// button
         /// </summary>
-        Flee, 
+        FleeOrCameraModeSwap, 
         /// <summary>
         /// cycles through targets in list
         /// 1 axis
@@ -137,9 +139,14 @@ public class ActionDefinition : MonoBehaviour
     protected ActionID m_internalID;
     public ActionID InternalID => m_internalID;
 
-    public string m_humanReadableID;
 
-    public string m_detailedDescription;
+    [SerializeField]
+    protected string m_humanReadableID;
+    public string HumandReadableID => m_humanReadableID;
+
+    [SerializeField]
+    protected string m_detailedDescription;
+    public string DetailedDescription => m_detailedDescription;
 
     [SerializeField]
     protected ContextGroup m_contextGroups;
