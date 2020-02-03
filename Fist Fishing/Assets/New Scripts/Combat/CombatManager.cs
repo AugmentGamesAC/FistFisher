@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 /// <summary>
 /// Should be Singleton
@@ -22,11 +24,27 @@ public class CombatManager : MonoBehaviour
     public enum noiseThreshold
     {
         Quiet,
+        Small,
         Medium,
-        Loud
+        Large
     }
 
-    protected Dictionary<noiseThreshold, float> m_noiseThresholds;
+
+    [System.Serializable]
+    public class NoiseThresholdsDict : InspectorDictionary<float, noiseThreshold> { }
+    [SerializeField]
+    protected NoiseThresholdsDict m_noiseThresholds = new NoiseThresholdsDict();
+    public NoiseThresholdsDict NoiseThresholds => m_noiseThresholds;
+
+    [SerializeField]
+    protected noiseThreshold m_currentNoiseState = noiseThreshold.Quiet;
+    public noiseThreshold CurrentNoiseState => m_currentNoiseState;
+
+    [SerializeField]
+    protected List<FishCombatInfo> m_aggressiveFishToSpawn = new List<FishCombatInfo>();
+
+    protected float m_maxSpawnChance = 0;
+    public float MaxSpawnChance => m_maxSpawnChance;
 
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
@@ -43,14 +61,25 @@ public class CombatManager : MonoBehaviour
 
     public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
 
+    private void Start()
+    {
+        m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+
+        foreach (var fish in m_aggressiveFishToSpawn)
+        {
+            m_maxSpawnChance += fish.SpawnChance;
+        }
+    }
+    
     public void StartCombat(bool didPlayerStartIt)
     {
+        //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
+        //ResolveAggressiveFishes(Biome biomeType)
+
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);
 
         AddFishToQueue();
-
-        m_playerCombatInfo.m_noiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
 
         if (!didPlayerStartIt)
         {
@@ -209,11 +238,72 @@ public class CombatManager : MonoBehaviour
         return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed;
     }
 
-    //Spawns aggressive fish depending on noise amount.
+    /// <summary>
+    /// Gets called before player's turn. 
+    /// Spawns fish if RNG allows it.
+    /// </summary>
+    protected bool ResolveAggressiveFishSpawn()
+    {
+        if (CurrentNoiseState == noiseThreshold.Quiet)
+            return false;
+
+        //check spawn chances of each aggressive fish. combatfishinfo needs spawn chance for this to work.
+        //spawn one fish if the RNG says so.
+
+        //do we span a fish at all
+        float RNGNumber = Random.Range(0.0f, 5);
+
+        float spawnThreshold = Mathf.Log(5, m_playerCombatInfo.NoiseTracker);
+
+        if (RNGNumber < spawnThreshold)
+            return false;
+
+        //a fish spawns
+
+        float whichfish = Random.Range(0, MaxSpawnChance);  //
+
+        foreach (var fish in m_aggressiveFishToSpawn)
+        {
+            whichfish -= fish.SpawnChance;
+            if (whichfish < 0)
+            {
+                m_roundQueue.Enqueue(fish);
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    /// <summary>
+    /// Spawns aggressive fish depending on noise amount.
+    /// Gets called when noise change delegate gets invoked.
+    /// </summary>
     protected void ResolveNoiseChange()
     {
-        //check noise threshold dictionary to compare noise tracker values.
-        //Enqueue new fish in depending on threshold.
+        foreach (var threshold in m_noiseThresholds)
+        {
+            if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Key)
+            {
+                m_currentNoiseState = threshold.Value;
+                ResolveSpawnChances(m_playerCombatInfo.NoiseTracker.CurrentAmount);
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// higher amount of noise, increase spawn chance.
+    /// </summary>
+    /// <param name="noiseAmount"></param>
+    protected void ResolveSpawnChances(float noiseAmount)
+    {
+        //this could be logarithmic change depending on noiseTracker's currentAmount.
+        foreach (var fish in m_aggressiveFishToSpawn)
+        {
+            fish.ChangeSpawnChance(noiseAmount);
+        }
     }
 
     /// <summary>

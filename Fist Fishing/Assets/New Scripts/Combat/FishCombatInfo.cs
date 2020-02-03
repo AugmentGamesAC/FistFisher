@@ -24,6 +24,13 @@ public class FishCombatInfo : CombatInfo
         //slow* movespeed;
     }
 
+    public void ChangeSpawnChance(float change)
+    {
+        m_spawnChance.Change(change);
+    }
+    
+    protected StatTracker m_spawnChance;
+    public StatTracker SpawnChance => m_spawnChance;
 
     public float m_combatDistance;
 }
