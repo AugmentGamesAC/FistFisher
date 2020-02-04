@@ -45,6 +45,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
 
+    public delegate void OnFishChange(FishCombatInfo fish);
+    public OnFishChange OnSelected;
+
 
     protected float m_maxSpawnChance = 0;
     public float MaxSpawnChance => m_maxSpawnChance;
@@ -191,7 +194,7 @@ public class CombatManager : MonoBehaviour
     {
         //Increase distance to other fish.
         foreach (var fishCombatInfo in m_fishInCombatInfo)
-            fishCombatInfo.m_combatDistance += (fishCombatInfo == SelectedFish) ? -distance : distance;
+            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == SelectedFish) ? -distance : distance));
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -199,7 +202,7 @@ public class CombatManager : MonoBehaviour
     /// <param name=""></param>
     protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        fishCombatInfo.m_combatDistance += ResolveFishDirection(fishCombatInfo);
+        fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo));
         ResolveFishAttack(fishCombatInfo);
 
         //if the fish doesn't leave the battle, enqueue for next turn.
@@ -218,7 +221,7 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveLeaveCombat(FishCombatInfo fish)
     {
-        if (fish.m_combatDistance > m_combatZone)
+        if (fish.CombatDistance > m_combatZone)
             return true;
 
         if (ResolveDeadFish(fish))
@@ -247,14 +250,14 @@ public class CombatManager : MonoBehaviour
 
     protected void ResolveFishAttack(FishCombatInfo fish)
     {
-        if (fish.FishData.AttackRange > fish.m_combatDistance)
+        if (fish.FishData.AttackRange > fish.CombatDistance)
             m_playerCombatInfo.TakeDamage(fish.FishData.Damage);
     }
 
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed;
+        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
     }
 
     /// <summary>
@@ -358,6 +361,8 @@ public class CombatManager : MonoBehaviour
 
         if (m_fishSelection < 0)
             m_fishSelection += m_fishInCombatInfo.Count;
+
+        OnSelected.Invoke(SelectedFish);
 
         return true;
     }

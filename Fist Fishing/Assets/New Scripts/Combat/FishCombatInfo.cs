@@ -21,17 +21,19 @@ public class FishCombatInfo : CombatInfo
     public void SlowDown(float slowAmount)
     {
         ResetMoveSpeed();
-        m_speed *= slowAmount;
+        Speed.SetValue(Speed * slowAmount);
     }
 
     public void ResetMoveSpeed()
     {
-        m_speed = m_fishData.CombatSpeed;
+        Speed.SetValue(m_fishData.CombatSpeed);
     }
 
-    protected StatTracker m_spawnChance;
-    public StatTracker SpawnChance => m_spawnChance;
+    protected FloatTracker m_spawnChance;
+    public FloatTracker SpawnChance => m_spawnChance;
 
-    public float m_speed; 
-    public float m_combatDistance;
+    public FloatTracker Speed; 
+    public FloatTracker CombatDistance;
+
+    public FloatTracker Direction;
 }

@@ -63,9 +63,9 @@ public class TestCombatManager : CombatManager
         //This call will come from the User's selection.
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
         m_fishSelection = 0;
-        SelectedFish.m_combatDistance = 10;
+        SelectedFish.CombatDistance.SetValue(10);
 
-        float distanceAfterAttack = SelectedFish.m_combatDistance
+        float distanceAfterAttack = SelectedFish.CombatDistance
             - m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_moveDistance //this works
             + SelectedFish.FishData.CombatSpeed; //this doesn't work
 
@@ -81,8 +81,8 @@ public class TestCombatManager : CombatManager
         //should be 10 - 2(move.distance) + 4(fish.moveSpeed.)
 
         //test this elswhere.
-        Assert.AreEqual(m_fishInCombatInfo[0].m_combatDistance, SelectedFish.m_combatDistance);
-        Assert.AreEqual(distanceAfterAttack, SelectedFish.m_combatDistance);
+        Assert.AreEqual(m_fishInCombatInfo[0].CombatDistance, SelectedFish.CombatDistance);
+        Assert.AreEqual(distanceAfterAttack, SelectedFish.CombatDistance);
         //Assert.AreEqual(m_fishInCombatInfo[1].m_combatDistance, SelectedFish.m_combatDistance);
 
 

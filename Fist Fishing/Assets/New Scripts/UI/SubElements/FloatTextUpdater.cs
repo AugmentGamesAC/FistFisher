@@ -33,6 +33,6 @@ public class FloatTextUpdater : MonoBehaviour
   protected void UpdateState(float value)
     {
 
-        m_text.text = string.Format(m_textInput + " {0}", value);
+        m_text.text = string.Format(m_textInput, value);
     }
 }

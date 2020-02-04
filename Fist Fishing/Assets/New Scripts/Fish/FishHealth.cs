@@ -6,8 +6,8 @@ public class FishHealth : MonoBehaviour
 {
 
     [SerializeField]
-    protected float m_currentAmount;
-    public float CurrentAmount { get { return m_currentAmount; } }
+    protected FloatTracker m_currentAmount;
+    public FloatTracker CurrentAmount { get { return m_currentAmount; } }
 
     [SerializeField]
     protected float m_max = 100.0f;
@@ -18,9 +18,6 @@ public class FishHealth : MonoBehaviour
     public float Min { get { return m_min; } }
 
     public float Percentage { get { return m_currentAmount / m_max; } }
-
-    public delegate void CurrentAmountChanged();
-    public event CurrentAmountChanged OnCurrentAmountChanged;
 
     public FishHealth()
     {
@@ -44,10 +41,7 @@ public class FishHealth : MonoBehaviour
 
     public void Change(float changeAmount)
     {
-        m_currentAmount = Mathf.Clamp(m_currentAmount + changeAmount, m_min, m_max);
-
-        if (OnCurrentAmountChanged != null)
-            OnCurrentAmountChanged.Invoke();
+        m_currentAmount.SetValue( Mathf.Clamp(m_currentAmount + changeAmount, m_min, m_max));
     }
 
     public void ResetCurrentAmount()
