@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class FloatTracker : MonoUITracker<float>
+public class FloatTracker : UITracker<float>
 {
     private void Start()
     {

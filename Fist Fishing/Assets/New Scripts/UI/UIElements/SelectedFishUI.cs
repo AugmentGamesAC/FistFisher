@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class SelectedFishUI : MonoBehaviour
 {
     [SerializeField]
-    protected PsudoFishUIData MyPsudoData;
+    protected FishCombatInfo newInfo
+
+    [SerializeField]
+    protected CombatManager m_combatManager;
+
 
     [SerializeField]
     protected FloatTextUpdater EnemyDistanceDisplay;
@@ -25,14 +29,10 @@ public class SelectedFishUI : MonoBehaviour
     [ContextMenu("SwapData")]
     public void newPsudoData()
     {
-        //Create new fish data
-        PsudoFishUIData newPsudoFishData = new PsudoFishUIData(this.gameObject);
-
-        UpdateUI(newPsudoFishData);
 
     }
 
-    public void UpdateUI(PsudoFishUIData newData)
+    public void UpdateUI(FishCombatInfo newData)
     {
         //out with old
         MyPsudoData = newData;
@@ -42,45 +42,6 @@ public class SelectedFishUI : MonoBehaviour
         EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
         EnemyHealthNumberDisplay.UpdateTracker(MyPsudoData.HealthText);
         EnemySwimSpeedDisplay.UpdateTracker(MyPsudoData.SwimSpeed);
-        //
-
-
     }
 }
 
-[System.Serializable]
-public class PsudoFishUIData
-{
-    [SerializeField]
-    protected FloatTracker m_distance;
-    public FloatTracker Distance => m_distance;
-    [SerializeField]
-    protected TextTracker m_name;
-    public TextTracker Name => m_name;
-    [SerializeField]
-    protected ImageTracker m_typeImage;
-    public ImageTracker TypeImage => m_typeImage;
-    [SerializeField]
-    protected ImageTracker m_iconImage;
-    public ImageTracker IconImage => m_iconImage;
-    [SerializeField]
-    protected FloatTracker m_healthNumber;
-    public FloatTracker HealthText => m_healthNumber;
-    [SerializeField]
-    protected FloatTracker m_swimSpeed;
-    public FloatTracker SwimSpeed => m_swimSpeed;
-
-
-    public PsudoFishUIData(GameObject obj)
-    {
-        m_distance = obj.AddComponent<FloatTracker>();
-        m_name = obj.AddComponent<TextTracker>();
-        m_typeImage = obj.AddComponent<ImageTracker>();
-        m_iconImage = obj.AddComponent<ImageTracker>();
-        m_healthNumber = obj.AddComponent<FloatTracker>();
-        m_swimSpeed = obj.AddComponent<FloatTracker>();
-
-
-
-    }
-}

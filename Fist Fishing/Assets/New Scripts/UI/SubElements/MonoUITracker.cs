@@ -26,6 +26,7 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     }
 }
 
+
 public class UITracker<T> : ISerializationCallbackReceiver
 {
     [SerializeField]
@@ -46,5 +47,21 @@ public class UITracker<T> : ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
+    }
+
+    /// <summary>
+    /// Can consider StatTracker as a float with this.
+    /// returns ref to currentAmount.
+    /// </summary>
+    /// <param name="reference"></param>
+    public static implicit operator T(UITracker<T> reference)
+    {
+        return reference.m_value;
+    }
+
+    public void SetValue(T newValue)
+    {
+        m_value = newValue;
+        UpdateState();
     }
 }
