@@ -5,14 +5,30 @@ using UnityEngine;
 public class FishCombatInfo : CombatInfo
 {
     //data needed for combat
-    // not included in a fish instance
+    //Health
+    //UI image
+    //Move Speed
+    //Behaviour type.
 
-    public float SlowEffect;
-    public float Speed;
-    public float Distance;
+        [SerializeField]
+    protected IFishData m_fishData;
+    public IFishData FishData => m_fishData;
+
+    public void TakeDamage(float damage)
+    {
+        //Health module.Change(-damage);\
+        m_fishData.Health.Change(-damage);
+    }
 
     /// <summary>
-    /// Need a fish instance class.
+    /// Slow is a percent modifier, slow * movespeed
+    /// We only want this to happen for a specific amount of turns.
     /// </summary>
-    public FishInstance FishInstance = new FishInstance();
+    /// <param name="slowAmount"></param>
+    public void SlowDown(float slowAmount)
+    {
+        //slow* movespeed;
+    }
+
+    public float m_combatDistance;
 }

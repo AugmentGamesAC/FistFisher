@@ -27,8 +27,6 @@ public class CombatManager : MonoBehaviour
 
     CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
-    FishCombatInfo m_selectedFish = new FishCombatInfo();
-
     //gets controlled by left right inputs.
     int m_fishSelection = 0;
 
@@ -46,8 +44,8 @@ public class CombatManager : MonoBehaviour
         if (!didPlayerStartIt)
         {
             m_roundQueue.Enqueue(m_playerCombatInfo);
-            ResolveFishCombatant(m_roundQueue.Dequeue() as FishCombatInfo);
         }
+        ResolveRound();
     }
 
     void AddFishToQueue()
@@ -90,15 +88,11 @@ public class CombatManager : MonoBehaviour
     public void PlayerFlee()
     {
         //Take away player's oxygen.
-
+        m_playerCombatInfo.UpdateOxygen(-30);
         //remove last caught fish from inventory.
 
-        //Transition from AwaitingPlayerRound to outOfCombat
-        m_currentCombatState = CombatStates.CombatFinished;
 
-        throw new System.NotImplementedException("No End Combat situation");
-
-        ResolveRound();
+        EndCombat();
     }
 
     /// <summary>
@@ -111,24 +105,19 @@ public class CombatManager : MonoBehaviour
 
         StartCoroutine("StartPlayerAttackAnimation", move);
 
-        //reduce distance from selected fish.
-        SelectedFish.Distance -= move.MoveDistance;
-        //Increase distance to other fish.
-        foreach (var fishCombatInfo in m_fishInCombatInfo)
-        {
-            if (fishCombatInfo == SelectedFish)
-                continue;
-            fishCombatInfo.Distance += move.MoveDistance;
-        }
-        
-
-        throw new System.NotImplementedException(" dependant on fish Instance.");
-
         //apply stat changes to the player. eg. oxygen.
+        // oxegen
+        // noise - don't worry about this one yet.
+
+        m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
 
 
         //apply damage from the player's move to the selected fish.
+        MoveFishes(move.m_moveDistance);
+        SelectedFish.TakeDamage(move.m_damage);
+        SelectedFish.SlowDown(move.m_slow);
 
+        m_roundQueue.Enqueue(m_playerCombatInfo);
 
         ResolveRound();
     }
@@ -150,30 +139,75 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
+
+    protected void MoveFishes(float distance)
+    {
+        //Increase distance to other fish.
+        foreach (var fishCombatInfo in m_fishInCombatInfo)
+            fishCombatInfo.m_combatDistance += (fishCombatInfo == SelectedFish) ? -distance : distance;
+    }
     /// <summary>
     /// Determines whether the fish is alive or out of combat.
     /// </summary>
     /// <param name=""></param>
     public void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        throw new System.NotImplementedException("dependency on combat position and fish Instance.");
+        if (ResolveDeadFish(fishCombatInfo))
+            return;
 
-        StartCoroutine("StartFishAnimation");
+        fishCombatInfo.m_combatDistance += ResolveFishDirection(fishCombatInfo);
+        ResolveFishAttack(fishCombatInfo);
 
-        //check fishCombatInfo.FishInstance for Health, position.
+        m_roundQueue.Enqueue(fishCombatInfo);
+        ResolveRound();
     }
+
+    public bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
+    {
+        return (fishCombatInfo.FishData.Health.CurrentAmount > 0);
+    }
+
+    protected void ResolveFishAttack(FishCombatInfo fish)
+    {
+        if (fish.FishData.AttackRange > fish.m_combatDistance)
+            m_playerCombatInfo.TakeDamage(fish.FishData.Damage);
+    }
+
+
+    public float ResolveFishDirection(FishCombatInfo fish)
+    {
+        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) )? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed; 
+    }
+
 
     /// <summary>
     /// Update the round Queue.
     /// </summary>
-    private void ResolveRound() //fish disapear etc, reload if empty
+    private void ResolveRound() 
     {
-        throw new System.NotImplementedException("Dependant on fish stats.");
+        //player wins if he's the only one in the queue
+        if (m_roundQueue.Count == 1)
+        {
+            EndCombat();
+            return;
+        }
+        
 
-        //checks combat State.
+        CombatInfo nextCombatant = m_roundQueue.Dequeue();
 
-        //determine next turn.
+        if (nextCombatant as PlayerCombatInfo != null)
+        {
+            m_currentCombatState = CombatStates.AwaitingPlayerRound;
+            return;
+        }
 
+        m_currentCombatState = CombatStates.AwaitingFishRound;
+        ResolveFishCombatant(nextCombatant as FishCombatInfo);
+    }
+
+    protected void EndCombat()
+    {
+        m_currentCombatState = CombatStates.CombatFinished;
     }
 
     /// <summary>

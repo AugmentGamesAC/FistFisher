@@ -135,8 +135,10 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField]
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
+    public static MenuScreens CurrentMenu => Instance.m_currentSelectedMenu;
+
     [SerializeField]
-    MenuScreens controlMenu = MenuScreens.MainMenu;
+    MenuScreens controlMenu = MenuScreens.NotSet;
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
     /// Set the current menu  
@@ -146,6 +148,11 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
     public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
         Instance.DisplayMenu(NewSelectedMenuScreen);
+    }
+
+    private void Start()
+    {
+        Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)
@@ -187,7 +194,7 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
             Instance = this;
         // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
 
-        DisplayMenuScreen(controlMenu);
+        DisplayMenuScreen(m_currentSelectedMenu);
     }
 
     public void OnAfterDeserialize()
