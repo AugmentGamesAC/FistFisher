@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SelectedFishUI : MonoBehaviour
 {
     [SerializeField]
-    protected FishCombatInfo newInfo
+    protected FishCombatInfo Info;
 
     [SerializeField]
     protected CombatManager m_combatManager;
@@ -29,19 +29,29 @@ public class SelectedFishUI : MonoBehaviour
     [ContextMenu("SwapData")]
     public void newPsudoData()
     {
-
+        UpdateUI(new PsudoCombatFish());
     }
 
     public void UpdateUI(FishCombatInfo newData)
     {
-        //out with old
-        MyPsudoData = newData;
-        EnemyDistanceDisplay.UpdateTracker(MyPsudoData.Distance);
-        EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
-        EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
-        EnemyHealthNumberDisplay.UpdateTracker(MyPsudoData.HealthText);
-        EnemySwimSpeedDisplay.UpdateTracker(MyPsudoData.SwimSpeed);
+        Info = newData;
+
+        EnemyDistanceDisplay.UpdateTracker(Info.CombatDistance);
+        //EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
+        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
+        //EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
+        EnemyHealthNumberDisplay.UpdateTracker(Info.FishData.Health.CurrentAmount);
+        EnemySwimSpeedDisplay.UpdateTracker(Info.Speed);
     }
 }
 
+
+[System.Serializable]
+public class PsudoCombatFish : FishCombatInfo
+{
+    public PsudoCombatFish()
+    {
+        Speed.SetValue(5);
+        CombatDistance.SetValue(14);
+    }
+}

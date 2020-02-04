@@ -163,7 +163,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 858777772}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246829845
 GameObject:
@@ -293,7 +293,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270657424}
   m_LocalRotation: {x: -0, y: 0.13995305, z: -0, w: 0.9901582}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 350024960}
@@ -301,8 +301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 16.09, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -101.65002, y: 88.52996}
-  m_SizeDelta: {x: -389.18002, y: -291.48}
+  m_AnchoredPosition: {x: -79, y: 89.61}
+  m_SizeDelta: {x: -298.45, y: -337.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270657426
 MonoBehaviour:
@@ -388,8 +388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 129.34998}
-  m_SizeDelta: {x: -372.66, y: -296.39}
+  m_AnchoredPosition: {x: 0.000030517578, y: 142.3}
+  m_SizeDelta: {x: -251.03, y: -296.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &301781719
 MonoBehaviour:
@@ -443,7 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tracker: {fileID: 1584754571}
+  m_tracker:
+    m_value: 0
   m_textInput: 
 --- !u!1 &350024959
 GameObject:
@@ -539,13 +540,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850d781aafe6d454895537eab77c3e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPsudoData:
-    m_distance: {fileID: 0}
-    m_name: {fileID: 0}
-    m_typeImage: {fileID: 0}
-    m_iconImage: {fileID: 0}
-    m_healthNumber: {fileID: 0}
-    m_swimSpeed: {fileID: 0}
+  Info:
+    m_spawnChance:
+      m_value: 0
+    Speed:
+      m_value: 0
+    CombatDistance:
+      m_value: 0
+    Direction:
+      m_value: 0
+  m_combatManager: {fileID: 0}
   EnemyDistanceDisplay: {fileID: 1653088920}
   EnemyNameDisplay: {fileID: 1266807472}
   EnemyTypeImageDisplay: {fileID: 270657428}
@@ -593,8 +597,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.800049, y: -117.350006}
-  m_SizeDelta: {x: -383.72, y: -291.02002}
+  m_AnchoredPosition: {x: 3.776, y: -132.23}
+  m_SizeDelta: {x: -268.48, y: -320.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &393698543
 MonoBehaviour:
@@ -760,7 +764,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 858777772}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &612025349
 GameObject:
@@ -946,6 +950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858777772}
+  - component: {fileID: 858777773}
   m_Layer: 0
   m_Name: Trackers
   m_TagString: Untagged
@@ -964,12 +969,25 @@ Transform:
   m_LocalPosition: {x: 263.3871, y: 75.18965, z: 18.49414}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1584754572}
   - {fileID: 416606435}
   - {fileID: 99184091}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858777773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858777771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437eaa3d6bd7d2a4fabac5a33f65d85a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_floatTracker:
+    m_value: 0
 --- !u!1 &1161582961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,50 +1292,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480558655}
   m_CullTransparentMesh: 0
---- !u!1 &1584754570
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1584754572}
-  - component: {fileID: 1584754571}
-  m_Layer: 0
-  m_Name: FloatUITracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1584754571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584754570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0c03c2792262249b2f76efd697fe52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_value: 5
---- !u!4 &1584754572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584754570}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -242.10071, y: -61.095535, z: 50.17784}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 858777772}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653088916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,8 +1327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 118.7, y: -86.5}
-  m_SizeDelta: {x: -386.58002, y: -296.39}
+  m_AnchoredPosition: {x: 107, y: -108.8}
+  m_SizeDelta: {x: -305.98, y: -338.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1653088918
 MonoBehaviour:
@@ -1408,7 +1382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tracker: {fileID: 1584754571}
+  m_tracker:
+    m_value: 0
   m_textInput: '{0}'
 --- !u!1 &1871139862 stripped
 GameObject:
@@ -1581,8 +1556,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -118, y: -90}
-  m_SizeDelta: {x: -386.6, y: -282.6}
+  m_AnchoredPosition: {x: -95.9, y: -86.5}
+  m_SizeDelta: {x: -262.43, y: -332.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095283545
 MonoBehaviour:
@@ -1638,8 +1613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tracker: {fileID: 1584754571}
-  m_textInput: 
+  m_tracker:
+    m_value: 0
+  m_textInput: '{0}m/ turn'
 --- !u!1001 &5265456097070161462
 PrefabInstance:
   m_ObjectHideFlags: 0
