@@ -9,10 +9,19 @@ public class SelectedFishUI : MonoBehaviour
     protected PsudoFishUIData MyPsudoData;
 
     [SerializeField]
-    protected FloatTextUpdater DistanceDisplay;
+    protected FloatTextUpdater EnemyDistanceDisplay;
+    [SerializeField]
+    protected TextUpdater EnemyNameDisplay;
+    [SerializeField]
+    protected ImageUpdater EnemyTypeImageDisplay;
+    [SerializeField]
+    protected ImageUpdater EnemyIconDisplay;
+    [SerializeField]
+    protected FloatTextUpdater EnemyHealthNumberDisplay;
+    [SerializeField]
+    protected FloatTextUpdater EnemySwimSpeedDisplay;
 
-
-
+    
     [ContextMenu("SwapData")]
     public void newPsudoData()
     {
@@ -27,11 +36,15 @@ public class SelectedFishUI : MonoBehaviour
     {
         //out with old
         MyPsudoData = newData;
-        DistanceDisplay.UpdateTracker(MyPsudoData.Distance);
-
+        EnemyDistanceDisplay.UpdateTracker(MyPsudoData.Distance);
+        EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
+        EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
+        EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
+        EnemyHealthNumberDisplay.UpdateTracker(MyPsudoData.HealthText);
+        EnemySwimSpeedDisplay.UpdateTracker(MyPsudoData.SwimSpeed);
         //
 
-        
+
     }
 }
 
@@ -41,9 +54,33 @@ public class PsudoFishUIData
     [SerializeField]
     protected FloatTracker m_distance;
     public FloatTracker Distance => m_distance;
+    [SerializeField]
+    protected TextTracker m_name;
+    public TextTracker Name => m_name;
+    [SerializeField]
+    protected ImageTracker m_typeImage;
+    public ImageTracker TypeImage => m_typeImage;
+    [SerializeField]
+    protected ImageTracker m_iconImage;
+    public ImageTracker IconImage => m_iconImage;
+    [SerializeField]
+    protected FloatTracker m_healthNumber;
+    public FloatTracker HealthText => m_healthNumber;
+    [SerializeField]
+    protected FloatTracker m_swimSpeed;
+    public FloatTracker SwimSpeed => m_swimSpeed;
+
 
     public PsudoFishUIData(GameObject obj)
     {
         m_distance = obj.AddComponent<FloatTracker>();
+        m_name = obj.AddComponent<TextTracker>();
+        m_typeImage = obj.AddComponent<ImageTracker>();
+        m_iconImage = obj.AddComponent<ImageTracker>();
+        m_healthNumber = obj.AddComponent<FloatTracker>();
+        m_swimSpeed = obj.AddComponent<FloatTracker>();
+
+
+
     }
 }
