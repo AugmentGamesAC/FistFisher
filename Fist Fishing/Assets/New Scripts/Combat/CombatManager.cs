@@ -389,4 +389,13 @@ public class CombatManager : MonoBehaviour
 
         yield return null;
     }
+
+    [ContextMenu("Create Test Fish")]
+    public void newFish()
+    {
+        //Create new fish data
+        FishCombatInfo NewFish = new FishCombatInfo();
+
+        m_roundQueue.Enqueue(NewFish);
+    }
 }
