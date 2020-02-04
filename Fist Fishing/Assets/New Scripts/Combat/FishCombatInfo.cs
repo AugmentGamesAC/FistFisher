@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class FishCombatInfo : CombatInfo
 {
-    //data needed for combat
-    //Health
-    //UI image
-    //Move Speed
-    //Behaviour type.
-
-        [SerializeField]
-    protected IFishData m_fishData;
+    [SerializeField]
+    protected IFishData m_fishData = new TestingFish();
     public IFishData FishData => m_fishData;
 
     public void TakeDamage(float damage)
     {
-        //Health module.Change(-damage);\
         m_fishData.Health.Change(-damage);
     }
 
@@ -27,8 +20,18 @@ public class FishCombatInfo : CombatInfo
     /// <param name="slowAmount"></param>
     public void SlowDown(float slowAmount)
     {
-        //slow* movespeed;
+        ResetMoveSpeed();
+        m_speed *= slowAmount;
     }
 
+    public void ResetMoveSpeed()
+    {
+        m_speed = m_fishData.CombatSpeed;
+    }
+
+    protected StatTracker m_spawnChance;
+    public StatTracker SpawnChance => m_spawnChance;
+
+    public float m_speed; 
     public float m_combatDistance;
 }

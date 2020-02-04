@@ -22,6 +22,11 @@ public class FishHealth : MonoBehaviour
     public delegate void CurrentAmountChanged();
     public event CurrentAmountChanged OnCurrentAmountChanged;
 
+    public FishHealth()
+    {
+        ResetCurrentAmount();
+    }
+
     private void Start()
     {
         ResetCurrentAmount();
