@@ -10,7 +10,6 @@ public class FishCombatInfo : CombatInfo
 
     public void TakeDamage(float damage)
     {
-        //Health module.Change(-damage);\
         m_fishData.Health.Change(-damage);
     }
 
@@ -21,16 +20,18 @@ public class FishCombatInfo : CombatInfo
     /// <param name="slowAmount"></param>
     public void SlowDown(float slowAmount)
     {
-        //slow* movespeed;
+        ResetMoveSpeed();
+        m_speed *= slowAmount;
     }
 
-    public void ChangeSpawnChance(float change)
+    public void ResetMoveSpeed()
     {
-        m_spawnChance.Change(change);
+        m_speed = m_fishData.CombatSpeed;
     }
-    
+
     protected StatTracker m_spawnChance;
     public StatTracker SpawnChance => m_spawnChance;
 
+    public float m_speed; 
     public float m_combatDistance;
 }

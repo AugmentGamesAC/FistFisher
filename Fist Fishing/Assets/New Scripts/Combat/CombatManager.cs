@@ -29,12 +29,12 @@ public class CombatManager : MonoBehaviour
         Large
     }
 
-
     [System.Serializable]
-    public class NoiseThresholdsDict : InspectorDictionary<float, noiseThreshold> { }
+    public class NoiseThresholdsDict : InspectorDictionary<noiseThreshold,float> { }
     [SerializeField]
     protected NoiseThresholdsDict m_noiseThresholds = new NoiseThresholdsDict();
     public NoiseThresholdsDict NoiseThresholds => m_noiseThresholds;
+    
 
     [SerializeField]
     protected noiseThreshold m_currentNoiseState = noiseThreshold.Quiet;
@@ -42,6 +42,9 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField]
     protected List<FishCombatInfo> m_aggressiveFishToSpawn = new List<FishCombatInfo>();
+    [SerializeField]
+    protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
+
 
     protected float m_maxSpawnChance = 0;
     public float MaxSpawnChance => m_maxSpawnChance;
@@ -75,6 +78,9 @@ public class CombatManager : MonoBehaviour
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
+
+        //Clear the list from previous battles just in case player didn't grab em all.
+        m_deadFishPile.Clear();
 
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);
@@ -177,7 +183,10 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
-
+    /// <summary>
+    /// moves selected fish closer and others further by distance amount.
+    /// </summary>
+    /// <param name="distance"></param>
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
@@ -185,12 +194,11 @@ public class CombatManager : MonoBehaviour
             fishCombatInfo.m_combatDistance += (fishCombatInfo == SelectedFish) ? -distance : distance;
     }
     /// <summary>
-    /// Determines whether the fish is alive or out of combat.
+    /// Attacks, Moves or and checks if it left combat.
     /// </summary>
     /// <param name=""></param>
     protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-
         fishCombatInfo.m_combatDistance += ResolveFishDirection(fishCombatInfo);
         ResolveFishAttack(fishCombatInfo);
 
@@ -198,11 +206,16 @@ public class CombatManager : MonoBehaviour
         if (!ResolveLeaveCombat(fishCombatInfo))
             m_roundQueue.Enqueue(fishCombatInfo);
 
+        fishCombatInfo.ResetMoveSpeed();
 
         ResolveRound();
     }
 
-    ///returns true if out of range or dead.
+    /// <summary>
+    /// returns true if fish is out of range or dead.
+    /// </summary>
+    /// <param name="fish"></param>
+    /// <returns></returns>
     protected bool ResolveLeaveCombat(FishCombatInfo fish)
     {
         if (fish.m_combatDistance > m_combatZone)
@@ -223,7 +236,13 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
     {
-        return (fishCombatInfo.FishData.Health.CurrentAmount <= 0);
+        if (fishCombatInfo.FishData.Health.CurrentAmount <= 0)
+        {
+            m_deadFishPile.Add(fishCombatInfo);
+            return true;
+        }
+
+        return false;
     }
 
     protected void ResolveFishAttack(FishCombatInfo fish)
@@ -284,25 +303,11 @@ public class CombatManager : MonoBehaviour
     {
         foreach (var threshold in m_noiseThresholds)
         {
-            if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Key)
+            if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Value)
             {
-                m_currentNoiseState = threshold.Value;
-                ResolveSpawnChances(m_playerCombatInfo.NoiseTracker.CurrentAmount);
+                m_currentNoiseState = threshold.Key;
                 break;
             }
-        }
-    }
-
-    /// <summary>
-    /// higher amount of noise, increase spawn chance.
-    /// </summary>
-    /// <param name="noiseAmount"></param>
-    protected void ResolveSpawnChances(float noiseAmount)
-    {
-        //this could be logarithmic change depending on noiseTracker's currentAmount.
-        foreach (var fish in m_aggressiveFishToSpawn)
-        {
-            fish.ChangeSpawnChance(noiseAmount);
         }
     }
 
@@ -321,14 +326,16 @@ public class CombatManager : MonoBehaviour
         //get current combabant and remove from queue.
         CombatInfo nextCombatant = m_roundQueue.Dequeue();
 
-        //check for next combatant type and change the state.
+        //check for next combatant type and change the state. check if a fish will spawn.
         if (nextCombatant as PlayerCombatInfo != null)
         {
+            ResolveAggressiveFishSpawn();
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
             return;
         }
 
         m_currentCombatState = CombatStates.AwaitingFishRound;
+        
         ResolveFishCombatant(nextCombatant as FishCombatInfo);
     }
 

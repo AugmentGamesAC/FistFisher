@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public interface IFishData 
 {
     float Damage { get; }
-    float CombatSpeed { get;}
+    float CombatSpeed { get;  }
     float AttackRange { get; }
 
     FishHealth Health { get;}
