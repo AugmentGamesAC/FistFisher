@@ -25,3 +25,26 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     {
     }
 }
+
+public class UITracker<T> : ISerializationCallbackReceiver
+{
+    [SerializeField]
+    protected T m_value;
+
+    public delegate void UIUpdateListner(T type);
+    public UIUpdateListner OnStateChange;
+
+    protected void UpdateState()
+    {
+        OnStateChange?.Invoke(m_value);
+    }
+
+    public void OnBeforeSerialize()
+    {
+        UpdateState();
+    }
+
+    public void OnAfterDeserialize()
+    {
+    }
+}

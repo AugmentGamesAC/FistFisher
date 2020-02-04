@@ -22,6 +22,14 @@ public class FloatTextUpdater : MonoBehaviour
         m_tracker.OnStateChange += UpdateState;
     }
     
+    public void UpdateTracker (FloatTracker newTracker)
+    {
+        m_tracker.OnStateChange -= UpdateState;
+        m_tracker = newTracker;
+        m_tracker.OnStateChange += UpdateState;
+    }
+
+
   protected void UpdateState(float value)
     {
 
