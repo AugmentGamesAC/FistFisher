@@ -9,7 +9,7 @@ public class TestCombatFish : FishCombatInfo
     public static Sprite sprite;
     public static FishBrain.FishClassification fishType;
    
-    public new IFishData m_fishData = new TestingFish(health,sprite,fishType);
+    public new IFishData m_fishData = new TestingFish();
 
 
 }

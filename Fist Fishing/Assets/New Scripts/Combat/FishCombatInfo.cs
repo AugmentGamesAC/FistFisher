@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishCombatInfo : CombatInfo
+public class FishCombatInfo : MonoBehaviour, CombatInfo
 {
+
     [SerializeField]
-    protected IFishData m_fishData = new TestingFish();
+    protected TestingFish m_fishData = new TestingFish();
+
     public IFishData FishData => m_fishData;
 
     public void TakeDamage(float damage)

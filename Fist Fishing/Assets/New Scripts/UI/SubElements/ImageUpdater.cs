@@ -9,6 +9,7 @@ public class ImageUpdater : MonoBehaviour
 
     [SerializeField]
     protected ImageTracker m_tracker;
+    public ImageTracker Tracker => m_tracker;
     //Switched to a RawImage for texture use
     protected RawImage m_image;
     
@@ -32,5 +33,12 @@ public class ImageUpdater : MonoBehaviour
         m_image.enabled = (value != default);
         if (m_image.enabled)
             m_image.texture = value;
+    }
+
+    public void UpdateTracker(ImageTracker newTracker)
+    {
+        m_tracker.OnStateChange -= UpdateState;
+        m_tracker = newTracker;
+        m_tracker.OnStateChange += UpdateState;
     }
 }

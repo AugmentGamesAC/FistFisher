@@ -26,7 +26,7 @@ public class PlayerCombatInfo : CombatInfo
 
     public void UpdateOxygen(float change)
     {
-        //Oxygen module.Change(change);
+        m_oxygenTracker.ModifyOxygen(change);
     }
     public void ConsumeItem()
     {

@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 51591017}
   - component: {fileID: 51591019}
   - component: {fileID: 51591018}
-  - component: {fileID: 51591020}
   m_Layer: 5
   m_Name: TextwithFloatToTrack
   m_TagString: Untagged
@@ -199,18 +198,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51591016}
   m_CullTransparentMesh: 0
---- !u!114 &51591020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51591016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c13526590441a546a03600035d79fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &99184089
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +528,7 @@ GameObject:
   - component: {fileID: 301781718}
   - component: {fileID: 301781720}
   - component: {fileID: 301781719}
+  - component: {fileID: 301781721}
   m_Layer: 5
   m_Name: Text_Enemy Health Number
   m_TagString: Untagged
@@ -607,6 +595,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301781717}
   m_CullTransparentMesh: 0
+--- !u!114 &301781721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301781717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 0
+  m_textInput: 
 --- !u!1 &350024959
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +622,7 @@ GameObject:
   - component: {fileID: 350024962}
   - component: {fileID: 350024961}
   - component: {fileID: 350024963}
+  - component: {fileID: 350024964}
   m_Layer: 5
   m_Name: Image_Targeted Enemy Info
   m_TagString: Untagged
@@ -701,8 +705,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850d781aafe6d454895537eab77c3e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistanceDisplay: {fileID: 1653088920}
-  m_combatManager: {fileID: 0}
+  m_distanceDisplay: {fileID: 1653088920}
+  m_speedDisplay: {fileID: 2095283547}
+  m_healthDisplay: {fileID: 301781721}
+  m_imageDisplay: {fileID: 1415692712}
+  m_combatManager: {fileID: 1713849443}
+--- !u!114 &350024964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350024959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757a7726b36321245a5b42eb5bbc663a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedFishUI: {fileID: 350024963}
+  fish: {fileID: 1389302482}
 --- !u!224 &391405198 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
@@ -1189,6 +1210,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &979041765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979041767}
+  - component: {fileID: 979041766}
+  m_Layer: 0
+  m_Name: AlInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &979041766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979041765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c4032c4df22eb44a51bc53cb227a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_forward: 0
+  m_backward: 0
+  m_goRight: 0
+  m_goLeft: 0
+  m_descend: 0
+  m_ascend: 0
+  m_sprint: 0
+  m_manualCamera: 0
+  m_rotateForward: 0
+  m_rotateBackwards: 0
+  m_rotateRight: 0
+  m_rotateLeft: 0
+  m_keyTarget: 0
+  m_forgetTarget: 0
+  m_punch: 0
+  m_mountBoat: 0
+  m_dismountBoat: 0
+  m_harvest: 0
+  m_throwBait: 0
+  m_craftBait: 0
+  m_toggleInventory: 0
+  m_toggleShop: 0
+  m_start: 0
+  m_attack: 0
+  m_item: 0
+  m_flee: 0
+  m_abzu: 0
+  m_locked: 0
+  m_warthog: 0
+  m_firstPerson: 0
+  m_playerLateralMovement: 0
+--- !u!4 &979041767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979041765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 450.06482, y: 101.08372, z: -60.9375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1161582961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1517,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327855403}
   m_CullTransparentMesh: 0
+--- !u!1 &1389302481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389302483}
+  - component: {fileID: 1389302482}
+  m_Layer: 0
+  m_Name: fish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1389302482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389302481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18efffaf4979dc40b2f272943e89bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fishData:
+    damage: 20
+    _Health: {fileID: 0}
+    _FishSprite: {fileID: 0}
+    _FishClassification: 4
+  Speed:
+    m_value: 10
+  CombatDistance:
+    m_value: 15
+  Direction:
+    m_value: -2
+--- !u!4 &1389302483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389302481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 361.6442, y: 227.75768, z: -114.97738}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1415692708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1582,7 @@ GameObject:
   - component: {fileID: 1415692709}
   - component: {fileID: 1415692711}
   - component: {fileID: 1415692710}
+  - component: {fileID: 1415692712}
   m_Layer: 5
   m_Name: Image_Fish Model Goes Here
   m_TagString: Untagged
@@ -1495,6 +1645,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415692708}
   m_CullTransparentMesh: 0
+--- !u!114 &1415692712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415692708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tracker: {fileID: 0}
 --- !u!1 &1480558655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,7 +1741,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1584754572}
-  - component: {fileID: 1584754571}
   m_Layer: 0
   m_Name: FloatUITracker
   m_TagString: Untagged
@@ -1586,19 +1748,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1584754571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584754570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0c03c2792262249b2f76efd697fe52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_value: 5
 --- !u!4 &1584754572
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,6 +1892,8 @@ MonoBehaviour:
     - 50
     - 80
   m_currentNoiseState: 0
+  m_aggressiveFishToSpawn: []
+  m_deadFishPile: []
 --- !u!4 &1713849444
 Transform:
   m_ObjectHideFlags: 0
@@ -1990,6 +2141,7 @@ GameObject:
   - component: {fileID: 2095283544}
   - component: {fileID: 2095283546}
   - component: {fileID: 2095283545}
+  - component: {fileID: 2095283547}
   m_Layer: 5
   m_Name: Text_Enemy Swim Speed
   m_TagString: Untagged
@@ -2058,6 +2210,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095283543}
   m_CullTransparentMesh: 0
+--- !u!114 &2095283547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095283543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 0
+  m_textInput: 
 --- !u!1001 &5265456097070161462
 PrefabInstance:
   m_ObjectHideFlags: 0
