@@ -4,34 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class FloatTextUpdater : MonoBehaviour
+public class FloatTextUpdater : CoreUIUpdater<FloatTracker,Text,float>
 {
     [SerializeField]
-    protected FloatTracker m_tracker;
-    public FloatTracker Tracker => m_tracker;
-
-
-    [SerializeField]
     protected string m_textInput;
-    protected Text m_text;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_text = GetComponent<Text>();
-        m_tracker.OnStateChange += UpdateState;
-    }
-    
-    public void UpdateTracker (FloatTracker newTracker)
-    {
-        m_tracker.OnStateChange -= UpdateState;
-        m_tracker = newTracker;
-        m_tracker.OnStateChange += UpdateState;
-    }
 
-
-  protected void UpdateState(float value)
+    protected override void UpdateState(float value)
     {
-        m_text.text = string.Format(m_textInput, value);
+        m_UIElement.text = string.Format(m_textInput, value);
     }
 }

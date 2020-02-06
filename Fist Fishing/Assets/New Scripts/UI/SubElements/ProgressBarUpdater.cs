@@ -4,33 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBarUpdater : MonoBehaviour
+public class ProgressBarUpdater : CoreUIUpdater<FloatTracker,Image,float>
 {
-    
     [SerializeField]
     protected int m_minFillAmount;
     [SerializeField]
     protected int m_maxFillAmount;
-    protected Image m_fillImage;
 
-    [SerializeField]
-    protected FloatTracker m_tracker;
-   
-    // Start is called before the first frame update
-    void Start()
+    public void ConfigureBar(int min, int max)
     {
-        //Get image with fill amount
-        m_fillImage = transform.GetComponent<Image>();
-        //On a change occuring use UpdateState
-        m_tracker.OnStateChange += UpdateState;
+        m_minFillAmount = min;
+        m_maxFillAmount = max;
     }
 
-    protected void UpdateState(float fillValue)
+    protected override void UpdateState(float fillValue)
     {
         //Use offsets set in editor to dynamically change bar fill size
         float fillAmount = (fillValue - m_minFillAmount) / (m_maxFillAmount - m_minFillAmount);
         //Set the fill amount based on what is changed in the tracker
-        m_fillImage.fillAmount = fillAmount;
+        m_UIElement.fillAmount = fillAmount;
     }
-
 }

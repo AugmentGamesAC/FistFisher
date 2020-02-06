@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class FishHealth
 {
+    public FishHealth(float min, float max)
+    {
+        m_min = min;
+        m_max = max;
+        ResetCurrentAmount();
+    }
+
 
     [SerializeField]
     protected FloatTracker m_currentAmount = new FloatTracker();

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,27 +18,36 @@ public class FishHealthBar : MonoBehaviour
     private void Awake()
     {
         m_healthModule = GetComponent<HealthModule>();
+        
     }
     void Update()
     {
         if (HUD == null)
             return;
-
-        if (m_healthModule.HealthPercentage == 1.0f)
-        {
-            m_timer += Time.deltaTime;
-            if (m_deactivateDelay < m_timer)
-            {
-                HUD.gameObject.SetActive(false);
-                m_timer = 0.0f;
-            }
-        }
-        else
-        {
-            m_timer = 0.0f;
-            HUD.gameObject.SetActive(true);
-        }
+        if (m_healthModule == null)
+            return;
 
         HUD.gameObject.transform.LookAt(Camera.main.transform);
+
+        if (ResolveLowHealth())
+            return;
+
+        m_timer -= Time.deltaTime;
+
+        if (m_timer < 0)
+            HUD.gameObject.SetActive(false);
+    }
+
+    protected bool ResolveLowHealth()
+    {
+        if (m_healthModule.HealthPercentage == 1.0f)
+            return false;
+
+        if (m_timer != m_deactivateDelay)
+        {
+            m_timer = m_deactivateDelay;
+            HUD.gameObject.SetActive(true);
+        }
+        return true;
     }
 }
