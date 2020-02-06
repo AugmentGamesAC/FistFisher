@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.Serialization;
+using System.IO;
 
 /// <summary>
 /// this class stores, saves, and loads all global configuration data
@@ -28,15 +30,23 @@ public class Configurations : MonoBehaviour
     }
     #endregion
 
-
-    protected Vector2 m_screenResolution; 
+    [SerializeField]
+    protected Vector2 m_screenResolution;
+    [SerializeField]
     protected int m_qualityLevel;
+    [SerializeField]
     protected float m_gamma;
+    [SerializeField]
     protected float m_sfxVolume;
+    [SerializeField]
     protected float m_musicVolume;
+    [SerializeField]
     protected float m_sensitivity;
+    [SerializeField]
     protected bool m_invertXAxis;
+    [SerializeField]
     protected bool m_invertYAxis;
+    //[SerializeField]
     //protected List<KeyConfiguration> keyConfigurations; //(in the future, for customizable controls)
 
 
@@ -72,6 +82,8 @@ public class Configurations : MonoBehaviour
     protected void SaveAllSettingsToFile()
     {
         throw new System.NotImplementedException("Not Implemented");
+
+
     }
 
     /// <summary>
