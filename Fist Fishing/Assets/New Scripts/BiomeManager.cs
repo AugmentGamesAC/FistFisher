@@ -13,6 +13,7 @@ public class BiomeDefinition
 /// <summary>
 /// This class exists to handle all the biomes in scene
 /// </summary>
+[System.Serializable]
 public class BiomeManager : MonoBehaviour
 {
 
@@ -35,6 +36,7 @@ public class BiomeManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
     protected List<BiomeDefinition> m_biomes;
 
 
@@ -49,7 +51,7 @@ public class BiomeManager : MonoBehaviour
         }
         foreach(BiomeDefinition bd in m_biomes)
         {
-            SpawnClutter(bd);
+            //SpawnClutter(bd);
         }
     }
 
