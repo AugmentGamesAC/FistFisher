@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class FloatTracker : MonoUITracker<float>
+[System.Serializable]
+public class FloatTracker : UITracker<float>
 {
 
 }

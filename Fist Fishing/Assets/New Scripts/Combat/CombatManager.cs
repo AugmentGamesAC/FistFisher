@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 /// <summary>
 /// Should be Singleton
@@ -19,22 +21,70 @@ public class CombatManager : MonoBehaviour
         CombatFinished
     }
 
-    Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
+    public enum noiseThreshold
+    {
+        Quiet,
+        Small,
+        Medium,
+        Large
+    }
 
-    List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
+    [System.Serializable]
+    public class NoiseThresholdsDict : InspectorDictionary<noiseThreshold,float> { }
+    [SerializeField]
+    protected NoiseThresholdsDict m_noiseThresholds = new NoiseThresholdsDict();
+    public NoiseThresholdsDict NoiseThresholds => m_noiseThresholds;
+    
 
-    PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
+    [SerializeField]
+    protected noiseThreshold m_currentNoiseState = noiseThreshold.Quiet;
+    public noiseThreshold CurrentNoiseState => m_currentNoiseState;
 
-    CombatStates m_currentCombatState = CombatStates.OutofCombat;
+    [SerializeField]
+    protected List<FishCombatInfo> m_aggressiveFishToSpawn = new List<FishCombatInfo>();
+    [SerializeField]
+    protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
+
+    public delegate void OnFishChange(FishCombatInfo fish);
+    public OnFishChange OnSelected;
+
+
+    protected float m_maxSpawnChance = 0;
+    public float MaxSpawnChance => m_maxSpawnChance;
+
+    protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
+
+    protected List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
+
+    protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
+
+    [SerializeField]
+    protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
     //gets controlled by left right inputs.
-    int m_fishSelection = 0;
+    protected int m_fishSelection = 0;
 
-    public FishCombatInfo SelectedFish {  get { return m_fishInCombatInfo[m_fishSelection]; } }
+    protected float m_combatZone = 30.0f;
 
+    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
+
+    private void Start()
+    {
+        m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+
+        foreach (var fish in m_aggressiveFishToSpawn)
+        {
+            m_maxSpawnChance += fish.SpawnChance;
+        }
+    }
+    
     public void StartCombat(bool didPlayerStartIt)
     {
-        m_currentCombatState = (didPlayerStartIt) ? CombatStates.AwaitingPlayerRound : CombatStates.AwaitingFishRound;
+        //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
+        //ResolveAggressiveFishes(Biome biomeType)
+
+        //Clear the list from previous battles just in case player didn't grab em all.
+        m_deadFishPile.Clear();
 
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);
@@ -48,7 +98,7 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
-    void AddFishToQueue()
+    protected void AddFishToQueue()
     {
         foreach (var fishInfo in m_fishInCombatInfo)
         {
@@ -85,7 +135,7 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    public void PlayerFlee()
+    protected void PlayerFlee()
     {
         //Take away player's oxygen.
         m_playerCombatInfo.UpdateOxygen(-30);
@@ -98,18 +148,16 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// Grabs selected Move from the player's attackPinwheel.
     /// </summary>
-    public void PlayerAttack()
+    protected void PlayerAttack()
     {
         //Get the player's current pinwheel choice.
         CombatMoveInfo move = m_playerCombatInfo.m_attackPinwheel.GetSelectedOption();
 
-        StartCoroutine("StartPlayerAttackAnimation", move);
-
-        //apply stat changes to the player. eg. oxygen.
-        // oxegen
-        // noise - don't worry about this one yet.
-
-        m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
+        //apply stat changes to the player.
+        //Oxygen
+        // noise .
+        //m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
+        //m_playerCombatInfo.UpdateNoise(move.m_noise);
 
 
         //apply damage from the player's move to the selected fish.
@@ -125,7 +173,7 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// Grabs selected item from the player's itemPinwheel.
     /// </summary>
-    public void PlayerItem()
+    protected void PlayerItem()
     {
         throw new System.NotImplementedException("dependency items implementation.");
 
@@ -139,51 +187,138 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
-
+    /// <summary>
+    /// moves selected fish closer and others further by distance amount.
+    /// </summary>
+    /// <param name="distance"></param>
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
         foreach (var fishCombatInfo in m_fishInCombatInfo)
-            fishCombatInfo.m_combatDistance += (fishCombatInfo == SelectedFish) ? -distance : distance;
+            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == SelectedFish) ? -distance : distance));
     }
     /// <summary>
-    /// Determines whether the fish is alive or out of combat.
+    /// Attacks, Moves or and checks if it left combat.
     /// </summary>
     /// <param name=""></param>
-    public void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
+    protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        if (ResolveDeadFish(fishCombatInfo))
-            return;
-
-        fishCombatInfo.m_combatDistance += ResolveFishDirection(fishCombatInfo);
+        fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo));
         ResolveFishAttack(fishCombatInfo);
 
-        m_roundQueue.Enqueue(fishCombatInfo);
+        //if the fish doesn't leave the battle, enqueue for next turn.
+        if (!ResolveLeaveCombat(fishCombatInfo))
+            m_roundQueue.Enqueue(fishCombatInfo);
+
+        fishCombatInfo.ResetMoveSpeed();
+
         ResolveRound();
     }
 
-    public bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
+    /// <summary>
+    /// returns true if fish is out of range or dead.
+    /// </summary>
+    /// <param name="fish"></param>
+    /// <returns></returns>
+    protected bool ResolveLeaveCombat(FishCombatInfo fish)
     {
-        return (fishCombatInfo.FishData.Health.CurrentAmount > 0);
+        if (fish.CombatDistance > m_combatZone)
+            return true;
+
+        if (ResolveDeadFish(fish))
+            return true;
+
+        return false;
+    }
+
+
+    /// <summary>
+    /// needs new work with inventory.
+    /// returns true if fish's health is 0 or below.
+    /// </summary>
+    /// <param name="fishCombatInfo"></param>
+    /// <returns></returns>
+    protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
+    {
+        if (fishCombatInfo.FishData.Health.CurrentAmount <= 0)
+        {
+            m_deadFishPile.Add(fishCombatInfo);
+            return true;
+        }
+
+        return false;
     }
 
     protected void ResolveFishAttack(FishCombatInfo fish)
     {
-        if (fish.FishData.AttackRange > fish.m_combatDistance)
+        if (fish.FishData.AttackRange > fish.CombatDistance)
             m_playerCombatInfo.TakeDamage(fish.FishData.Damage);
     }
 
 
-    public float ResolveFishDirection(FishCombatInfo fish)
+    protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) )? -fish.FishData.CombatSpeed : fish.FishData.CombatSpeed; 
+        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
     }
 
+    /// <summary>
+    /// Gets called before player's turn. 
+    /// Spawns fish if RNG allows it.
+    /// </summary>
+    protected bool ResolveAggressiveFishSpawn()
+    {
+        if (CurrentNoiseState == noiseThreshold.Quiet)
+            return false;
+
+        //check spawn chances of each aggressive fish. combatfishinfo needs spawn chance for this to work.
+        //spawn one fish if the RNG says so.
+
+        //do we span a fish at all
+        float RNGNumber = Random.Range(0.0f, 5);
+
+        float spawnThreshold = Mathf.Log(5, m_playerCombatInfo.NoiseTracker);
+
+        if (RNGNumber < spawnThreshold)
+            return false;
+
+        //a fish spawns
+
+        float whichfish = Random.Range(0, MaxSpawnChance);  //
+
+        foreach (var fish in m_aggressiveFishToSpawn)
+        {
+            whichfish -= fish.SpawnChance;
+            if (whichfish < 0)
+            {
+                m_roundQueue.Enqueue(fish);
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    /// <summary>
+    /// Spawns aggressive fish depending on noise amount.
+    /// Gets called when noise change delegate gets invoked.
+    /// </summary>
+    protected void ResolveNoiseChange()
+    {
+        foreach (var threshold in m_noiseThresholds)
+        {
+            if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Value)
+            {
+                m_currentNoiseState = threshold.Key;
+                break;
+            }
+        }
+    }
 
     /// <summary>
     /// Update the round Queue.
     /// </summary>
-    private void ResolveRound() 
+    protected void ResolveRound()
     {
         //player wins if he's the only one in the queue
         if (m_roundQueue.Count == 1)
@@ -191,17 +326,20 @@ public class CombatManager : MonoBehaviour
             EndCombat();
             return;
         }
-        
 
+        //get current combabant and remove from queue.
         CombatInfo nextCombatant = m_roundQueue.Dequeue();
 
+        //check for next combatant type and change the state. check if a fish will spawn.
         if (nextCombatant as PlayerCombatInfo != null)
         {
+            ResolveAggressiveFishSpawn();
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
             return;
         }
 
         m_currentCombatState = CombatStates.AwaitingFishRound;
+        
         ResolveFishCombatant(nextCombatant as FishCombatInfo);
     }
 
@@ -213,7 +351,7 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// return true if selected fish is successful.
     /// </summary>
-    private bool ChangeSelectedFish(float leftRight)
+    protected bool ChangeSelectedFish(float leftRight)
     {
         //no axis input? do nothing.
         if ((leftRight == 0) || (m_fishInCombatInfo.Count == 0))
@@ -225,11 +363,13 @@ public class CombatManager : MonoBehaviour
         if (m_fishSelection < 0)
             m_fishSelection += m_fishInCombatInfo.Count;
 
+        OnSelected.Invoke(SelectedFish);
+
         return true;
     }
 
     //Plays aninmation
-    private IEnumerable StartPlayerAttackAnimation(CombatMoveInfo move)
+    protected IEnumerable StartPlayerAttackAnimation(CombatMoveInfo move)
     {
         m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
 
@@ -240,7 +380,7 @@ public class CombatManager : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerable StartFishAnimation()
+    protected IEnumerable StartFishAnimation()
     {
         m_currentCombatState = CombatStates.AwaitingFishAnimation;
 
@@ -249,5 +389,14 @@ public class CombatManager : MonoBehaviour
         //change combat state to next.
 
         yield return null;
+    }
+
+    [ContextMenu("Create Test Fish")]
+    public void newFish()
+    {
+        //Create new fish data
+        FishCombatInfo NewFish = new FishCombatInfo();
+
+        m_roundQueue.Enqueue(NewFish);
     }
 }

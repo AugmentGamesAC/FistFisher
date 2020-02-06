@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishCombatInfo : CombatInfo
+public class FishCombatInfo : MonoBehaviour, CombatInfo
 {
-    //data needed for combat
-    //Health
-    //UI image
-    //Move Speed
-    //Behaviour type.
 
-        [SerializeField]
-    protected IFishData m_fishData;
+    [SerializeField]
+    protected TestingFish m_fishData = new TestingFish();
+
     public IFishData FishData => m_fishData;
 
     public void TakeDamage(float damage)
     {
-        //Health module.Change(-damage);\
         m_fishData.Health.Change(-damage);
     }
 
@@ -27,8 +22,20 @@ public class FishCombatInfo : CombatInfo
     /// <param name="slowAmount"></param>
     public void SlowDown(float slowAmount)
     {
-        //slow* movespeed;
+        ResetMoveSpeed();
+        Speed.SetValue(Speed * slowAmount);
     }
 
-    public float m_combatDistance;
+    public void ResetMoveSpeed()
+    {
+        Speed.SetValue(m_fishData.CombatSpeed);
+    }
+
+    protected FloatTracker m_spawnChance;
+    public FloatTracker SpawnChance => m_spawnChance;
+
+    public FloatTracker Speed; 
+    public FloatTracker CombatDistance;
+
+    public FloatTracker Direction;
 }

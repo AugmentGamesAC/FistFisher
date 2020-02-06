@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [System.Serializable]
 public class FloatTextUpdater : MonoBehaviour
 {
-
     [SerializeField]
     protected FloatTracker m_tracker;
+    public FloatTracker Tracker => m_tracker;
 
 
     [SerializeField]
@@ -22,9 +22,16 @@ public class FloatTextUpdater : MonoBehaviour
         m_tracker.OnStateChange += UpdateState;
     }
     
+    public void UpdateTracker (FloatTracker newTracker)
+    {
+        m_tracker.OnStateChange -= UpdateState;
+        m_tracker = newTracker;
+        m_tracker.OnStateChange += UpdateState;
+    }
+
+
   protected void UpdateState(float value)
     {
-
-        m_text.text = string.Format(m_textInput + " {0}", value);
+        m_text.text = string.Format(m_textInput, value);
     }
 }
