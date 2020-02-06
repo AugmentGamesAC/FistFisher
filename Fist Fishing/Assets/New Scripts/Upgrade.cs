@@ -19,9 +19,6 @@ public class Upgrade
 
     protected float cost;
 
-    public delegate void wasUpdated();
-    public event wasUpdated OnUpdated;
-
     protected Dictionary<Stats, float> statsModifier;
 
     /// <summary>
@@ -51,5 +48,7 @@ public class Upgrade
         {
             statManager.UpdateStat(item.Key, item.Value);
         }
+
+        UpgradeManager.UpdateAppliedUpgrade();
     }
 }

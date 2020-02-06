@@ -74,7 +74,7 @@ public enum MenuScreens
 /// singleton that handles all active menus
 /// </summary>
 [System.Serializable]
-public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
+public class NewMenuManager : MonoBehaviour
 {
     #region working inspector dictionary
     /// <summary>
@@ -135,8 +135,9 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField]
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
-    [SerializeField]
-    MenuScreens controlMenu = MenuScreens.MainMenu;
+    public static MenuScreens CurrentMenu => Instance.m_currentSelectedMenu;
+
+
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
     /// Set the current menu  
@@ -146,6 +147,11 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
     public static void DisplayMenuScreen(MenuScreens NewSelectedMenuScreen)
     {
         Instance.DisplayMenu(NewSelectedMenuScreen);
+    }
+
+    private void Start()
+    {
+        Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)
@@ -181,16 +187,5 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
         list.ShowActive(activeState);
     }
 
-    public void OnBeforeSerialize()
-    {
-        if (Instance == default)
-            Instance = this;
-        // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
 
-        DisplayMenuScreen(controlMenu);
-    }
-
-    public void OnAfterDeserialize()
-    {
-    }
 }
