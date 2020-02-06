@@ -35,7 +35,7 @@ public class BiomeManager : MonoBehaviour
     }
     #endregion
 
-    protected List<BiomeDefinition> Biomes;
+    protected List<BiomeDefinition> m_biomes;
 
 
     /// <summary>
@@ -43,7 +43,14 @@ public class BiomeManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        if(m_biomes==default)
+        {
+            Destroy(this);
+        }
+        foreach(BiomeDefinition bd in m_biomes)
+        {
+            SpawnClutter(bd);
+        }
     }
 
     /// <summary>
@@ -53,6 +60,10 @@ public class BiomeManager : MonoBehaviour
     {
         
     }
+
+
+
+
     /// <summary>
     /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
     /// </summary>
@@ -61,6 +72,8 @@ public class BiomeManager : MonoBehaviour
     {
         throw new System.NotImplementedException("Not Implemented");
     }
+
+
     /// <summary>
     /// this takes the biome, finds out how many things are in it and what the max number of things it should have is, and says if it is allowed to spawn more
     /// </summary>
@@ -71,6 +84,8 @@ public class BiomeManager : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
 
     }
+
+
     /// <summary>
     /// this picks a random fish from the biome definition and spawns it in a random valid location
     /// </summary>
@@ -81,6 +96,8 @@ public class BiomeManager : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
 
     }
+
+
     /// <summary>
     /// this picks a random collectable from within the biome definition, picks a random location for it to spawn
     /// </summary>
@@ -91,6 +108,8 @@ public class BiomeManager : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
 
     }
+
+
     /// <summary>
     /// this picks a random position within a given mesh
     /// </summary>
@@ -101,6 +120,8 @@ public class BiomeManager : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
 
     }
+
+
     /// <summary>
     /// this takes the size of the fist and position it is trying to span in to ensure it has room
     /// </summary>
@@ -112,6 +133,8 @@ public class BiomeManager : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
 
     }
+
+
 
     /// <summary>
     /// this takes in a position in world and raycasts down and returns where it hit the floor
