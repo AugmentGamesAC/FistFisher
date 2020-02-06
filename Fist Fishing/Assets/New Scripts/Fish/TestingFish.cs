@@ -20,8 +20,8 @@ public class TestingFish : IFishData
 
 
     [SerializeField]
-    protected ImageTracker _FishSprite;
-    public ImageTracker Sprite => _FishSprite;
+    protected Sprite _FishSprite;
+    public Sprite IconDisplay => _FishSprite;
 
     [SerializeField]
     protected FishBrain.FishClassification _FishClassification;

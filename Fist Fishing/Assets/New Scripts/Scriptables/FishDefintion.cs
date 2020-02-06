@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FishDefintion : ScriptableObject, IFishData, IItem
 {
+
+    #region IFishData
     [SerializeField]
     protected float m_damage;
     public float Damage => m_damage;
@@ -21,7 +23,12 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
 
 
     public FishBrain.FishClassification FishClassification => throw new System.NotImplementedException();
+    #endregion
+    #region IFishData IItem Overlap
 
+    public Sprite IconDisplay => throw new System.NotImplementedException();
+    #endregion
+    #region IItem
     public int StackSize => throw new System.NotImplementedException();
 
     public int ID => throw new System.NotImplementedException();
@@ -31,9 +38,5 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     public ItemType Type => throw new System.NotImplementedException();
 
     public string Description => throw new System.NotImplementedException();
-
-
-
-    public Sprite Sprite => throw new System.NotImplementedException();
-    public Sprite IconDisplay => throw new System.NotImplementedException();
+    #endregion
 }

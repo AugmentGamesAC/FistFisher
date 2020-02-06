@@ -175,16 +175,18 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     protected void PlayerItem()
     {
+
+
         throw new System.NotImplementedException("dependency items implementation.");
 
         //Get the player's current pinwheel choice.
 
         //Apply effect to the combat.
 
-        m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
+        //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
 
         //this happens after stat and State changes.
-        ResolveRound();
+        //ResolveRound();
     }
 
     /// <summary>

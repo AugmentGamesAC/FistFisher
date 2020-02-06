@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishCombatInfo : MonoBehaviour, CombatInfo
+[System.Serializable]
+public class FishCombatInfo : CombatInfo
 {
 
     [SerializeField]
@@ -31,11 +32,13 @@ public class FishCombatInfo : MonoBehaviour, CombatInfo
         Speed.SetValue(m_fishData.CombatSpeed);
     }
 
-    protected FloatTracker m_spawnChance;
+    [SerializeField]
+    protected FloatTracker m_spawnChance = new FloatTracker();
     public FloatTracker SpawnChance => m_spawnChance;
-
-    public FloatTracker Speed; 
-    public FloatTracker CombatDistance;
-
-    public FloatTracker Direction;
+    [SerializeField]
+    public FloatTracker Speed = new FloatTracker();
+    [SerializeField]
+    public FloatTracker CombatDistance = new FloatTracker();
+    [SerializeField]
+    public FloatTracker Direction = new FloatTracker();
 }

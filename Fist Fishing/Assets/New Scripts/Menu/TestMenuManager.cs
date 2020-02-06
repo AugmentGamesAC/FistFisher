@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMenuManager : NewMenuManager
+public class TestMenuManager : NewMenuManager, ISerializationCallbackReceiver
 {
     [SerializeField]
     MenuScreens controlMenu = MenuScreens.MainMenu;
@@ -19,17 +19,16 @@ public class TestMenuManager : NewMenuManager
         base.DisplayMenu(newMenu);
     }
 
+    public void OnBeforeSerialize()
+    {
+        if (Instance == default)
+            Instance = this;
+        // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
 
-    //public void OnBeforeSerialize()
-    //{
-    //    if (Instance == default)
-    //        Instance = this;
-    //    // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
+        DisplayMenuScreen(controlMenu);
+    }
 
-    //    DisplayMenuScreen(controlMenu);
-    //}
-
-    //public void OnAfterDeserialize()
-    //{
-    //}
+    public void OnAfterDeserialize()
+    {
+    }
 }

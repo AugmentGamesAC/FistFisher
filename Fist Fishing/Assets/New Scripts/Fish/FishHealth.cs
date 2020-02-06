@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishHealth : MonoBehaviour
+public class FishHealth
 {
 
     [SerializeField]
-    protected FloatTracker m_currentAmount;
+    protected FloatTracker m_currentAmount = new FloatTracker();
     public FloatTracker CurrentAmount { get { return m_currentAmount; } }
 
     [SerializeField]
@@ -20,11 +20,6 @@ public class FishHealth : MonoBehaviour
     public float Percentage { get { return m_currentAmount / m_max; } }
 
     public FishHealth()
-    {
-        ResetCurrentAmount();
-    }
-
-    private void Start()
     {
         ResetCurrentAmount();
     }

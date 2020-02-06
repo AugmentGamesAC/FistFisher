@@ -11,7 +11,7 @@ public interface IFishData
 
     FishHealth Health { get;}
 
-    ImageTracker Sprite { get; }
+    Sprite IconDisplay { get; }
 
     FishBrain.FishClassification FishClassification { get; }
 }

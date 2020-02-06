@@ -6,28 +6,23 @@ using UnityEngine.UI;
 public class SelectedFishUI : MonoBehaviour
 {
     [SerializeField]
-    protected FloatTextUpdater m_distanceDisplay;
-    public FloatTextUpdater DistanceDisplay => m_distanceDisplay;
-
+    protected FloatTextUpdater EnemyDistanceDisplay;
     [SerializeField]
-    protected FloatTextUpdater m_speedDisplay;
-    public FloatTextUpdater SpeedDisplay => m_speedDisplay;
-
+    protected TextUpdater EnemyNameDisplay;
     [SerializeField]
-    protected FloatTextUpdater m_healthDisplay;
-    public FloatTextUpdater HealthDisplay => m_healthDisplay;
-
+    protected ImageUpdater EnemyTypeImageDisplay;
     [SerializeField]
-    protected ImageUpdater m_imageDisplay;
-    public ImageUpdater ImageDisplay => m_imageDisplay;
-
-
+    protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
-    protected CombatManager m_combatManager;
+    protected FloatTextUpdater EnemyHealthNumberDisplay;
+    [SerializeField]
+    protected FloatTextUpdater EnemySwimSpeedDisplay;
 
-    private void Start()
+    
+    [ContextMenu("DummyInit")]
+    public void newPsudoData()
     {
-        m_combatManager.OnSelected += UpdateUI;
+        UpdateUI(new PsudoCombatFish());
     }
 
     /// <summary>
@@ -37,11 +32,28 @@ public class SelectedFishUI : MonoBehaviour
     public void UpdateUI(FishCombatInfo newData)
     {
         if (newData == null)
+        {
+            gameObject.SetActive(false);
             return;
+        }
 
-        DistanceDisplay.UpdateTracker(newData.CombatDistance);
-        SpeedDisplay.UpdateTracker(newData.Speed);
-        //HealthDisplay.UpdateTracker(newData.FishData.Health.CurrentAmount);
-        //ImageDisplay.UpdateTracker(newData.FishData.Sprite);
+        EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
+        //EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
+        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
+        //EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
+        EnemyHealthNumberDisplay.UpdateTracker(newData.FishData.Health.CurrentAmount);
+        EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
+
+    }
+}
+
+
+[System.Serializable]
+public class PsudoCombatFish : FishCombatInfo
+{
+    public PsudoCombatFish()
+    {
+        Speed.SetValue(5);
+        CombatDistance.SetValue(14);
     }
 }

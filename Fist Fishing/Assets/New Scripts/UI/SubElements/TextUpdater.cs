@@ -15,6 +15,12 @@ public class TextUpdater : MonoBehaviour
         m_text = GetComponent<Text>();
         m_tracker.OnStateChange += UpdateState;
     }
+    public void UpdateTracker(TextTracker newTracker)
+    {
+        m_tracker.OnStateChange -= UpdateState;
+        m_tracker = newTracker;
+        m_tracker.OnStateChange += UpdateState;
+    }
 
     protected void UpdateState(string value)
     {
