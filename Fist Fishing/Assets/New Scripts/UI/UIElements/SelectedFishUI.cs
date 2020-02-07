@@ -18,13 +18,6 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
     [SerializeField]
     protected FloatTextUpdater EnemySwimSpeedDisplay;
 
-    
-    [ContextMenu("DummyInit")]
-    public void newPsudoData()
-    {
-        UpdateUI(new PsudoCombatFish());
-    }
-
     /// <summary>
     /// Gets selected fish from combat manager.
     /// </summary>
@@ -45,13 +38,3 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
     }
 }
 
-
-[System.Serializable]
-public class PsudoCombatFish : FishCombatInfo
-{
-    public PsudoCombatFish()
-    {
-        Speed.SetValue(5);
-        CombatDistance.SetValue(14);
-    }
-}
