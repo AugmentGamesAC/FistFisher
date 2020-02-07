@@ -26,7 +26,7 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     }
 }
 
-
+[System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
 {
     [SerializeField]

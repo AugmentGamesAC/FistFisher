@@ -3,28 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public class TextUpdater : MonoBehaviour
+public class TextUpdater : CoreUIUpdater<TextTracker,Text,string>
 {
-    [SerializeField]
-    protected TextTracker m_tracker;
-    protected Text m_text;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void UpdateState(string value)
     {
-        m_text = GetComponent<Text>();
-        m_tracker.OnStateChange += UpdateState;
-    }
-    public void UpdateTracker(TextTracker newTracker)
-    {
-        m_tracker.OnStateChange -= UpdateState;
-        m_tracker = newTracker;
-        m_tracker.OnStateChange += UpdateState;
-    }
-
-    protected void UpdateState(string value)
-    {
-
-        m_text.text = string.Format(value);
+        m_UIElement.text = value;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectedFishUI : MonoBehaviour
+public class SelectedFishUI : CoreUIElement
 {
     [SerializeField]
     protected FloatTextUpdater EnemyDistanceDisplay;
@@ -38,9 +38,11 @@ public class SelectedFishUI : MonoBehaviour
         }
 
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
-        //EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
+        MemberUpdate(EnemyNameDisplay, newData.FishData.Item.Name);
+        MemberUpdate(EnemyIconDisplay, newData.FishData.IconDisplay);
+
         //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        //EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
+        MemberUpdate(EnemyHealthNumberDisplay, string.Format("\\{0\\}/{0}", newData.FishData.Health.Max), newData.FishData.Health.CurrentAmount);
         EnemyHealthNumberDisplay.UpdateTracker(newData.FishData.Health.CurrentAmount);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
 

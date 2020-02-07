@@ -3,35 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageUpdater : MonoBehaviour
+public class ImageUpdater : CoreUIUpdater<ImageTracker, Image, Sprite>
 {
-
-    [SerializeField]
-    protected ImageTracker m_tracker;
-    
-    protected Image m_image;
-    
-    // Start is called before the first frame update
-    void Start()
+    protected override void UpdateState(Sprite value)
     {
-        m_image = GetComponentInChildren<UnityEngine.UI.Image>();
-        m_tracker.OnStateChange += UpdateState;
-    }
-
-    public void UpdateTracker(ImageTracker newTracker)
-    {
-        m_tracker.OnStateChange -= UpdateState;
-        m_tracker = newTracker;
-        m_tracker.OnStateChange += UpdateState;
-    }
-
-    protected void UpdateState(Sprite value)
-    {
-        if (m_image == default)
+        if (m_UIElement == default)
             return;
-        
-        m_image.enabled = (value != default);
-        if (m_image.enabled)
-            m_image.sprite = value;
+
+        m_UIElement.enabled = (value != default);
+        if (m_UIElement.enabled)
+            m_UIElement.sprite = value;
     }
 }

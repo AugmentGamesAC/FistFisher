@@ -27,5 +27,10 @@ public abstract class CoreUIUpdater<TTracker, TUIField, TDataType> : MonoBehavio
             m_tracker.OnStateChange += UpdateState;
     }
     protected abstract void UpdateState(TDataType value);
+
+    public void ForceUpdate(TDataType value)
+    {
+        UpdateState(value);
+    }
 }
 

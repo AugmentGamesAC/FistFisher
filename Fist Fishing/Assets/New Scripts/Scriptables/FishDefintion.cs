@@ -47,6 +47,9 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     [SerializeField]
     protected string m_Description;
     public string Description => m_Description;
+    [SerializeField]
+    protected string m_name;
+    public string Name => m_name;
     #endregion
 
     #region ModelReferences
