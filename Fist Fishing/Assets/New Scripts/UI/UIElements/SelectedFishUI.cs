@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectedFishUI : CoreUIElement
+public class SelectedFishUI : CoreUIElement<FishCombatInfo>
 {
     [SerializeField]
     protected FloatTextUpdater EnemyDistanceDisplay;
@@ -29,13 +29,10 @@ public class SelectedFishUI : CoreUIElement
     /// Gets selected fish from combat manager.
     /// </summary>
     /// <param name="newData"></param>
-    public void UpdateUI(FishCombatInfo newData)
+    public override void UpdateUI(FishCombatInfo newData)
     {
-        if (newData == null)
-        {
-            gameObject.SetActive(false);
+        if (!ShouldUpdateUI(newData))
             return;
-        }
 
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
         MemberUpdate(EnemyNameDisplay, newData.FishData.Item.Name);
@@ -45,7 +42,6 @@ public class SelectedFishUI : CoreUIElement
         MemberUpdate(EnemyHealthNumberDisplay, string.Format("\\{0\\}/{0}", newData.FishData.Health.Max), newData.FishData.Health.CurrentAmount);
         EnemyHealthNumberDisplay.UpdateTracker(newData.FishData.Health.CurrentAmount);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
-
     }
 }
 
