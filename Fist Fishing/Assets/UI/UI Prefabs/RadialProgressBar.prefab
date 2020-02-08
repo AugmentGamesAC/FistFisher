@@ -59,12 +59,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e02d90e54f16cda4aafbcaff72a142a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: efdca458895dbc24a989e4d4b77797a3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -83,9 +83,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5265456096714965179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4e2324526a65a4682df3e7ba75ef82, type: 3}
+  m_Script: {fileID: 11500000, guid: ff626905625ff2845afef7fbad82f7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 0
+  m_UIElement: {fileID: 0}
   m_minFillAmount: 0
-  m_maxFillAmount: 100
-  m_tracker: {fileID: 0}
+  m_maxFillAmount: 0
