@@ -72,6 +72,9 @@ public class PlayerMotion : MonoBehaviour
 
         if (ALInput.GetKeyDown(ALInput.ToggleInventory))
             ToggleInventoryDisplay();
+
+        if (ALInput.GetKeyDown(ALInput.Punch))
+            NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
     }
 
     protected bool m_displayInventory;

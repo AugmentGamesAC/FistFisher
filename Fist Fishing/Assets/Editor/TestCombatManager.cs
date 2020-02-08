@@ -8,9 +8,9 @@ public class TestCombatManager : CombatManager
     [Test]
     public void A_CombatManagerStart()
     {
-        m_fishInCombatInfo.Add(new FishCombatInfo());
-        m_fishInCombatInfo.Add(new FishCombatInfo());
-        m_fishInCombatInfo.Add(new FishCombatInfo());
+        m_fishInCombatInfo.Add(new FishCombatInfo(default));
+        m_fishInCombatInfo.Add(new FishCombatInfo(default));
+        m_fishInCombatInfo.Add(new FishCombatInfo(default));
 
         foreach (var fish in m_fishInCombatInfo)
         {
@@ -67,7 +67,7 @@ public class TestCombatManager : CombatManager
 
         float distanceAfterAttack = SelectedFish.CombatDistance
             - m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_moveDistance //this works
-            + SelectedFish.FishData.CombatSpeed; //this doesn't work
+            + SelectedFish.FishInstance.FishData.CombatSpeed; //this doesn't work
 
         //ACT
         PlayerAttack();
@@ -88,7 +88,7 @@ public class TestCombatManager : CombatManager
 
 
         //check health on fish, should be 90 after the first attack.
-        Assert.AreEqual(90.0f, SelectedFish.FishData.Health.CurrentAmount);
+        Assert.AreEqual(90.0f, SelectedFish.FishInstance.Health.CurrentAmount);
 
         //check that the queue is what expected.
         //the player turn is dequeued when awaiting input so 3 fish is in queue.

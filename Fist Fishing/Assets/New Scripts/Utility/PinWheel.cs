@@ -19,6 +19,8 @@ public class PinWheel<T> : IPinWheel<T>
     /// <param name="objects"></param>
     public PinWheel(int startingNumber, IEnumerable<T> objects)
     {
+        if (objects == default)
+            return;
         foreach (T curObject in objects)
             m_slots.Add(startingNumber++, curObject);
     }

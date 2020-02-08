@@ -6,23 +6,20 @@ using UnityEngine;
 /// <summary>
 /// holds all core gameplay data other than Combat Information.
 /// </summary>
-public class FishInstance : MonoBehaviour
+[System.Serializable]
+public class FishInstance
 {
-    /// <summary>
-    /// Item Definition
-    /// Live fish
-    /// Core Game Data
-    /// </summary>
+    [SerializeField]
+    protected FishDefintion m_fishData;
+    public IFishData FishData => m_fishData;
 
+    [SerializeField]
+    protected FishHealth m_health;
+    public FishHealth Health => m_health;
 
-    void Start()
+    public FishInstance(FishDefintion fishDef)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_fishData = fishDef;
+        m_health = new FishHealth(m_fishData.Health.Min, m_fishData.Health.Max);
     }
 }

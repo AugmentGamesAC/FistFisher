@@ -70,11 +70,11 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+       /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
-            m_maxSpawnChance += fish.SpawnChance;
+            //m_maxSpawnChance += fish.SpawnChance;
         }
     }
     
@@ -107,7 +107,7 @@ public class CombatManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         //can switch targets even when fish are attacking.
         ChangeSelectedFish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
@@ -118,7 +118,7 @@ public class CombatManager : MonoBehaviour
 
         //listen for input cases.
         //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
-        if (ALInput.GetKeyDown(ALInput.Attack))
+        if (ALInput.GetKeyDown(ALInput.Punch))
         {
             PlayerAttack();
         }
@@ -242,7 +242,7 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
     {
-        if (fishCombatInfo.FishData.Health.CurrentAmount <= 0)
+        if (fishCombatInfo.FishInstance.Health.CurrentAmount <= 0)
         {
             m_deadFishPile.Add(fishCombatInfo);
             return true;
@@ -253,14 +253,14 @@ public class CombatManager : MonoBehaviour
 
     protected void ResolveFishAttack(FishCombatInfo fish)
     {
-        if (fish.FishData.AttackRange > fish.CombatDistance)
-            m_playerCombatInfo.TakeDamage(fish.FishData.Damage);
+        if (fish.FishInstance.FishData.AttackRange > fish.CombatDistance)
+            m_playerCombatInfo.TakeDamage(fish.FishInstance.FishData.Damage);
     }
 
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
     }
 
     /// <summary>
@@ -289,7 +289,7 @@ public class CombatManager : MonoBehaviour
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
-            whichfish -= fish.SpawnChance;
+            //whichfish -= fish.SpawnChance;
             if (whichfish < 0)
             {
                 m_roundQueue.Enqueue(fish);
@@ -393,12 +393,4 @@ public class CombatManager : MonoBehaviour
         yield return null;
     }
 
-    [ContextMenu("Create Test Fish")]
-    public void newFish()
-    {
-        //Create new fish data
-        FishCombatInfo NewFish = new FishCombatInfo();
-
-        m_roundQueue.Enqueue(NewFish);
-    }
 }
