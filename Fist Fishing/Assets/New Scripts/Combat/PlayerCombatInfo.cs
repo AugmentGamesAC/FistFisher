@@ -21,8 +21,8 @@ public class PlayerCombatInfo : CombatInfo
     protected OxygenTracker m_oxygenTracker = new OxygenTracker();
     public OxygenTracker OxygenTracker => m_oxygenTracker;
 
-    public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
-    public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>();
+    public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>(1, default);
+    public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>(1, default);
 
     public void UpdateOxygen(float change)
     {
