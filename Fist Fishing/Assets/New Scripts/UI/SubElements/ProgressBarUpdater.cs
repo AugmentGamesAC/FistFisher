@@ -4,24 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBarUpdater : CoreUIUpdater<FloatTracker,Image,float>
+public class ProgressBarUpdater : CoreUIUpdater<PercentageTracker,Image,IPercentage>
 {
-    [SerializeField]
-    protected int m_minFillAmount;
-    [SerializeField]
-    protected int m_maxFillAmount;
-
-    public void ConfigureBar(int min, int max)
+    protected override void UpdateState(IPercentage fillValue)
     {
-        m_minFillAmount = min;
-        m_maxFillAmount = max;
-    }
-
-    protected override void UpdateState(float fillValue)
-    {
-        //Use offsets set in editor to dynamically change bar fill size
-        float fillAmount = (fillValue - m_minFillAmount) / (m_maxFillAmount - m_minFillAmount);
         //Set the fill amount based on what is changed in the tracker
-        m_UIElement.fillAmount = fillAmount;
+        m_UIElement.fillAmount = fillValue.Percent;
     }
 }

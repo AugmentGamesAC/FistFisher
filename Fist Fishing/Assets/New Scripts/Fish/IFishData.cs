@@ -17,3 +17,14 @@ public interface IFishData
 
     FishBrain.FishClassification FishClassification { get; }
 }
+
+public interface IPlayerData
+{
+    float AttackRange { get; }
+
+    PlayerHealth Health { get; }
+
+    OxygenTracker Oxygen { get; }
+
+    Sprite IconDisplay { get; }
+}

@@ -70,7 +70,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
         HPRoot.transform.SetParent(FishRoot.transform);
 
-        HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.CurrentAmount);
+        //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
 
 
