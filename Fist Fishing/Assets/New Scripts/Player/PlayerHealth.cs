@@ -8,6 +8,7 @@ public class PlayerHealth
     [SerializeField]
     protected PercentageTracker m_percent;
     public IPercentage Percentage => m_percent;
+    public PercentageTracker Tracker => m_percent;
 
     public delegate void MinimumAmountReached();
     public event MinimumAmountReached OnMinimumAmountReached;
