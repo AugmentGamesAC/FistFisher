@@ -91,7 +91,7 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection;
+    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
 
 
     protected void AddFishToQueue()
@@ -193,8 +193,8 @@ public class CombatManager : MonoBehaviour
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
-        foreach (var fishCombatInfo in m_FishSelection)
-            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == m_FishSelection.SelectedItem) ? -distance : distance));
+        for(int i = 0; i< m_FishSelection.Count; i++)
+            m_FishSelection[i].CombatDistance.SetValue(m_FishSelection[i].CombatDistance + ((i == m_FishSelection.Selection) ? -distance : distance));
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -350,25 +350,13 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// return true if selected fish is successful.
     /// </summary>
-    protected bool ChangeSelectedFish(float leftRight)
+    protected void ChangeSelectedFish(float leftRight)
     {
-
         //no axis input? do nothing.
         if ((leftRight == 0) || (m_FishSelection.Count == 0))
-            return false;
+            return ;
 
-        m_FishSelection
-            (leftRight);
-
-        m_fishSelection += (int)leftRight;
-        m_fishSelection %= m_FishSelection.Count;
-
-        if (m_fishSelection < 0)
-            m_fishSelection += m_FishSelection.Count;
-
-        OnSelected.Invoke(m_FishSelection.SelectedItem);
-
-        return true;
+        m_FishSelection.IncrementSelection((int)leftRight);
     }
 
     //Plays aninmation

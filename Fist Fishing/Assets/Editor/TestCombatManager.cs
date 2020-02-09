@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
+using UnityEditor;
 
 public class TestCombatManager : CombatManager
 {
+
+
     [Test]
     public void A_CombatManagerStart()
     {
-        m_fishInCombatInfo.Add(new FishCombatInfo(default));
-        m_fishInCombatInfo.Add(new FishCombatInfo(default));
-        m_fishInCombatInfo.Add(new FishCombatInfo(default));
+        var something = AssetDatabase.LoadAssetAtPath<FishDefintion>("Assets/Resources/Aggresive 1.asset");
+        var somethingelse = new FishInstance(something);
+        var someelsething = new FishCombatInfo(somethingelse);
+        m_FishSelection.AddItem(someelsething);
+        m_FishSelection.AddItem(new FishCombatInfo(new FishInstance(something)));
+        m_FishSelection.AddItem(new FishCombatInfo(new FishInstance(something)));
 
-        foreach (var fish in m_fishInCombatInfo)
+        foreach (var fish in m_FishSelection)
         {
             Assert.NotNull(fish);
         }
@@ -28,7 +34,7 @@ public class TestCombatManager : CombatManager
         Assert.AreEqual(false, m_roundQueue.Contains(m_playerCombatInfo));
 
         //should contain all fish still until the fish turn has started.
-        foreach (var fish in m_fishInCombatInfo)
+        foreach (var fish in m_FishSelection)
         {
             Assert.That(m_roundQueue.Contains(fish));
         }
@@ -67,7 +73,8 @@ public class TestCombatManager : CombatManager
 
         float distanceAfterAttack = m_FishSelection.SelectedItem.CombatDistance
             - m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_moveDistance //this works
-            + m_FishSelection.SelectedItem.FishInstance.FishData.CombatSpeed; //this doesn't work
+            + ResolveFishDirection(m_FishSelection.SelectedItem) * m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_slow;
+
 
         //ACT
         PlayerAttack();
@@ -78,63 +85,53 @@ public class TestCombatManager : CombatManager
 
         //ASSERT
         //check fish if fish position was affected properly.
-        //should be 10 - 2(move.distance) + 4(fish.moveSpeed.)
+        //should be 10 - 2(move.distance) +/- 4(fish.moveSpeed.)
 
         //test this elswhere.
-        Assert.AreEqual(m_fishInCombatInfo[0].CombatDistance, m_FishSelection.SelectedItem.CombatDistance);
-        Assert.AreEqual(distanceAfterAttack, m_FishSelection.SelectedItem.CombatDistance);
-        //Assert.AreEqual(m_fishInCombatInfo[1].m_combatDistance, SelectedFish.m_combatDistance);
+        Assert.AreEqual(m_FishSelection[0].CombatDistance, m_FishSelection.SelectedItem.CombatDistance);
+        Assert.AreEqual(distanceAfterAttack, (float) m_FishSelection.SelectedItem.CombatDistance);
+        //Assert.AreEqual(m_FishSelection[1].m_combatDistance, SelectedFish.m_combatDistance);
 
 
 
         //check health on fish, should be 90 after the first attack.
-        Assert.AreEqual(90.0f, m_FishSelection.SelectedItem.FishInstance.Health.CurrentAmount);
+        Assert.IsTrue(m_FishSelection.SelectedItem.FishInstance.Health.Max - moves[0].m_damage == m_FishSelection.SelectedItem.FishInstance.Health.CurrentAmount);
 
         //check that the queue is what expected.
         //the player turn is dequeued when awaiting input so 3 fish is in queue.
-        Assert.AreEqual(3, m_roundQueue.Count);
+        Assert.AreEqual(m_FishSelection.Count, m_roundQueue.Count);
         //Should be awaiting player input...
-        Assert.AreEqual(m_currentCombatState, CombatStates.AwaitingPlayerRound);
+        Assert.IsTrue(m_currentCombatState == CombatStates.AwaitingPlayerRound);
     }
 
     [Test]
     public void D_ChangeSelectedFish_Test()
     {
-        m_fishSelection = 0;
+        m_FishSelection.SetSelection(0);
 
         //ie. went around the list forwards once.
-        for (int i = 0; i < m_fishInCombatInfo.Count; i++)
+        for (int i = 0; i < m_FishSelection.Count; i++)
         {
-            Assert.AreEqual(i, m_fishSelection);
-            Assert.AreEqual(SelectedFish, m_fishInCombatInfo[i]);
+            Assert.AreEqual(i, m_FishSelection.Selection);
+            Assert.AreEqual(m_FishSelection.SelectedItem, m_FishSelection[i]);
 
             ChangeSelectedFish(1);
         }
 
-        Assert.AreEqual(0, m_fishSelection);
-        Assert.AreEqual(m_FishSelection.SelectedItem, m_fishInCombatInfo[0]);
+        Assert.AreEqual(0, m_FishSelection.Selection);
+        Assert.AreEqual(m_FishSelection.SelectedItem, m_FishSelection[0]);
 
+        ChangeSelectedFish(-1);
         //ie. went around the list backwards once.
-        for (int i = 0; i < m_fishInCombatInfo.Count; i--)
+        for (int i = m_FishSelection.Count - 1; i >= 0; i--)
         {
-            
-
-            if (i < 0)
-                i = m_fishInCombatInfo.Count - 1;
-
-            Assert.AreEqual(i, m_fishSelection);
-            Assert.AreEqual(SelectedFish, m_fishInCombatInfo[i]);
+            Assert.AreEqual(i, m_FishSelection.Selection);
+            Assert.AreEqual(m_FishSelection.SelectedItem, m_FishSelection[i]);
 
             ChangeSelectedFish(-1);
-
-            
-            if (m_fishSelection == 0)
-                break;
         }
 
-        Assert.AreEqual(0, m_fishSelection);
-        Assert.AreEqual(SelectedFish, m_fishInCombatInfo[0]);
-
+        Assert.AreEqual(m_FishSelection.Count - 1, m_FishSelection.Selection);
     }
 
 }

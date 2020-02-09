@@ -5,6 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>, ISingleSelectionList<T>
 {
+    public SingleSelectionListTracker()
+    {
+        m_value = new SingleSelectionList<T>();
+    }
+
     public T SelectedItem => m_value.SelectedItem;
 
     public int Selection => m_value.Selection;
