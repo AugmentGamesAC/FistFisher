@@ -20338,6 +20338,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5734878061098082104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055129972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055129971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af50505264e978846b5e29b78f52f47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_oxygen: {fileID: 0}
+  m_attackRange: 20
+  m_clams:
+    m_value: 0
 --- !u!114 &2055129974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21513,7 +21529,7 @@ PrefabInstance:
     - target: {fileID: 5120127943493809157, guid: fde67305293b3d940ad42a1c186f4cf6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.900009
+      value: -6.9000244
       objectReference: {fileID: 0}
     - target: {fileID: 5120127943493809157, guid: fde67305293b3d940ad42a1c186f4cf6,
         type: 3}

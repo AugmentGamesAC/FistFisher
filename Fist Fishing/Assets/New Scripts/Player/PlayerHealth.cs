@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerHealth
 {
+    [SerializeField]
     protected PercentageTracker m_percent;
     public IPercentage Percentage => m_percent;
 
     public delegate void MinimumAmountReached();
     public event MinimumAmountReached OnMinimumAmountReached;
 
+    [SerializeField]
     public PlayerStatManager m_PlayerStatMan;
 
     /// <summary>

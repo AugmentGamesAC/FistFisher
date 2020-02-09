@@ -1,13 +1,17 @@
-﻿
+﻿using UnityEngine;
+
 [System.Serializable]
 public class PercentageTracker : UITracker<IPercentage>, IPercentage
 {
     public PercentageTracker(float max)
     {
-        m_value = new Percentage();
+        displayPercentage = new Percentage();
+        m_value = displayPercentage;
         m_value.SetMax(max);
     }
 
+    [SerializeField]
+    protected Percentage displayPercentage;
     public float Current => m_value.Current;
 
     public float Max => m_value.Max;

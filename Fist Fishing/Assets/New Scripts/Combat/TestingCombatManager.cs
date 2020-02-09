@@ -25,7 +25,7 @@ public class TestingCombatManager : CombatManager
             new CombatMoveInfo(45, 0, 0, 10, 10)
         };
 
-        m_playerCombatInfo.m_attackPinwheel = new PinWheel<CombatMoveInfo>(1, moves);
+        m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
     }
 
