@@ -24,6 +24,8 @@ public class OxygenTracker : MonoBehaviour
 
     void Start()
     {
+        m_oxy = new PercentageTracker(100.0f);
+
         ResetOxygen();
         m_OxygenTickTimer = m_OxygenTickFrequency;
     }

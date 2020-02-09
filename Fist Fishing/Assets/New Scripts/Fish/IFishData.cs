@@ -9,7 +9,7 @@ public interface IFishData
     float CombatSpeed { get;  }
     float AttackRange { get; }
 
-    FishHealth Health { get;}
+    float MaxHealth { get;}
 
     IItem Item { get; }
 

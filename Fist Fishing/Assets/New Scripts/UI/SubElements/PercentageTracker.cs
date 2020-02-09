@@ -1,8 +1,10 @@
 ﻿
+[System.Serializable]
 public class PercentageTracker : UITracker<IPercentage>, IPercentage
 {
-    public PercentageTracker(float max) : base()
+    public PercentageTracker(float max)
     {
+        m_value = new Percentage();
         m_value.SetMax(max);
     }
 

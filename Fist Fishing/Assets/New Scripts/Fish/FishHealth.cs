@@ -17,12 +17,6 @@ public class FishHealth
     protected PercentageTracker m_percTracker;
     public PercentageTracker PercentTracker => m_percTracker;
 
-
-    public FishHealth()
-    {
-        ResetCurrentAmount();
-    }
-
     /// <summary>
     /// Can consider FishHealth as a float with this.
     /// returns ref to currentAmount.
@@ -40,6 +34,6 @@ public class FishHealth
 
     public void ResetCurrentAmount()
     {
-        m_percTracker.SetCurrent(m_percTracker.Max);
+        Change(m_percTracker.Max);
     }
 }

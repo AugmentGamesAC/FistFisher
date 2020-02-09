@@ -6,18 +6,16 @@ public class Water : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        OxygenTracker oxy = other.GetComponent<OxygenTracker>();
+        if (oxy != default)
+            oxy.m_isUnderWater = true;
 
-        if (other.tag == "FaceMask")
-        {
-            other.GetComponent<OxygenTracker>().m_isUnderWater = true;
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "FaceMask")
-        {
-            other.GetComponent<OxygenTracker>().m_isUnderWater = false;
-        }
+        OxygenTracker oxy = other.GetComponent<OxygenTracker>();
+        if (oxy != default)
+            oxy.m_isUnderWater = false;
     }
 }

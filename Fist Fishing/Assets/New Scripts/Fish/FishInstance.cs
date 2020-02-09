@@ -20,6 +20,6 @@ public class FishInstance
     public FishInstance(FishDefintion fishDef)
     {
         m_fishData = fishDef;
-        m_health = new FishHealth(m_fishData.Health.Max);
+        m_health = new FishHealth(m_fishData.MaxHealth);
     }
 }
