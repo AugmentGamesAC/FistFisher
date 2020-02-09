@@ -26,5 +26,7 @@ public interface IPlayerData
 
     OxygenTracker Oxygen { get; }
 
-    Sprite IconDisplay { get; }
+    ImageTracker IconDisplay { get; }
+
+    FloatTracker Clams { get; }
 }

@@ -4,8 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class OxygenTracker : MonoBehaviour
+[System.Serializable]
+public class OxygenTracker 
 {
+    public OxygenTracker(float max)
+    {
+        m_oxy = new PercentageTracker(max);
+        ResetOxygen();
+        m_OxygenTickTimer = m_OxygenTickFrequency;
+    }
+
     [SerializeField]
     protected PercentageTracker m_oxy;
 
@@ -22,16 +30,11 @@ public class OxygenTracker : MonoBehaviour
     public bool m_isUnderWater = false;
 
 
-    void Start()
-    {
-        m_oxy = new PercentageTracker(100.0f);
-
-        ResetOxygen();
-        m_OxygenTickTimer = m_OxygenTickFrequency;
-    }
-
     private void Update()
     {
+        //don't update if game is paused
+        if (NewMenuManager.PausedActiveState)
+            return;
         //Regen/degen oxygen process.
         m_OxygenTickTimer -= Time.deltaTime;
         if (m_OxygenTickTimer > 0)
@@ -57,7 +60,6 @@ public class OxygenTracker : MonoBehaviour
         //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
         if (OnLowOxygen != null)
             OnLowOxygen.Invoke();
-
     }
 
     public void ResetOxygen()
