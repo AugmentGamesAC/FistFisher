@@ -62,12 +62,12 @@ public class TestCombatManager : CombatManager
 
         //This call will come from the User's selection.
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
-        m_fishSelection = 0;
-        SelectedFish.CombatDistance.SetValue(10);
+        m_FishSelection.SetSelection(0);
+        m_FishSelection.SelectedItem.CombatDistance.SetValue(10);
 
-        float distanceAfterAttack = SelectedFish.CombatDistance
+        float distanceAfterAttack = m_FishSelection.SelectedItem.CombatDistance
             - m_playerCombatInfo.m_attackPinwheel.GetSelectedOption().m_moveDistance //this works
-            + SelectedFish.FishInstance.FishData.CombatSpeed; //this doesn't work
+            + m_FishSelection.SelectedItem.FishInstance.FishData.CombatSpeed; //this doesn't work
 
         //ACT
         PlayerAttack();
@@ -81,14 +81,14 @@ public class TestCombatManager : CombatManager
         //should be 10 - 2(move.distance) + 4(fish.moveSpeed.)
 
         //test this elswhere.
-        Assert.AreEqual(m_fishInCombatInfo[0].CombatDistance, SelectedFish.CombatDistance);
-        Assert.AreEqual(distanceAfterAttack, SelectedFish.CombatDistance);
+        Assert.AreEqual(m_fishInCombatInfo[0].CombatDistance, m_FishSelection.SelectedItem.CombatDistance);
+        Assert.AreEqual(distanceAfterAttack, m_FishSelection.SelectedItem.CombatDistance);
         //Assert.AreEqual(m_fishInCombatInfo[1].m_combatDistance, SelectedFish.m_combatDistance);
 
 
 
         //check health on fish, should be 90 after the first attack.
-        Assert.AreEqual(90.0f, SelectedFish.FishInstance.Health.CurrentAmount);
+        Assert.AreEqual(90.0f, m_FishSelection.SelectedItem.FishInstance.Health.CurrentAmount);
 
         //check that the queue is what expected.
         //the player turn is dequeued when awaiting input so 3 fish is in queue.
@@ -112,7 +112,7 @@ public class TestCombatManager : CombatManager
         }
 
         Assert.AreEqual(0, m_fishSelection);
-        Assert.AreEqual(SelectedFish, m_fishInCombatInfo[0]);
+        Assert.AreEqual(m_FishSelection.SelectedItem, m_fishInCombatInfo[0]);
 
         //ie. went around the list backwards once.
         for (int i = 0; i < m_fishInCombatInfo.Count; i--)
