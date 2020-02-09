@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class FishCombatInfo : CombatInfo
 {
+    [SerializeField]
     protected FishInstance m_fish;
     public FishInstance FishInstance => m_fish;
 
@@ -43,6 +44,4 @@ public class FishCombatInfo : CombatInfo
     {
         Speed.SetValue(m_fish.FishData.CombatSpeed);
     }
-
-
 }

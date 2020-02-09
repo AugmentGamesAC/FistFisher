@@ -9,11 +9,22 @@ public interface IFishData
     float CombatSpeed { get;  }
     float AttackRange { get; }
 
-    FishHealth Health { get;}
+    float MaxHealth { get;}
 
     IItem Item { get; }
 
     Sprite IconDisplay { get; }
 
     FishBrain.FishClassification FishClassification { get; }
+}
+
+public interface IPlayerData
+{
+    float AttackRange { get; }
+
+    PlayerHealth Health { get; }
+
+    OxygenTracker Oxygen { get; }
+
+    Sprite IconDisplay { get; }
 }

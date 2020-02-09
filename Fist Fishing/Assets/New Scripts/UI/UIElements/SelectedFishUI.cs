@@ -14,7 +14,7 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
-    protected FloatTextUpdater EnemyHealthNumberDisplay;
+    protected PercentTextUpdater EnemyHealthNumberDisplay;
     [SerializeField]
     protected FloatTextUpdater EnemySwimSpeedDisplay;
     [SerializeField]
@@ -29,14 +29,13 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
         if (!ShouldUpdateUI(newData))
             return;
 
-        ProgressBar.UpdateTracker(newData.FishInstance.Health.CurrentAmount);
+        ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
         MemberUpdate(EnemyNameDisplay, newData.FishInstance.FishData.Item.Name);
         MemberUpdate(EnemyIconDisplay, newData.FishInstance.FishData.IconDisplay);
 
-        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        MemberUpdate(EnemyHealthNumberDisplay, "{0}/" + newData.FishInstance.Health.Max.ToString(), newData.FishInstance.Health.CurrentAmount);
-        EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.CurrentAmount);
+
+        EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
     }
 }

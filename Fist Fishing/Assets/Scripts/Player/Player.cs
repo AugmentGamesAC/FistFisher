@@ -4,7 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Harvester))]
 [RequireComponent(typeof(HealthModule))]
-[RequireComponent(typeof(CombatModule))]
 [RequireComponent(typeof(Inventory))]
 //eventually require punchadex
 

@@ -25,6 +25,8 @@ public class CoreFish: MonoBehaviour, IFishData
     public Sprite IconDisplay => m_item.IconDisplay;
 
     public IItem Item => m_item;
+
+    public float MaxHealth => throw new System.NotImplementedException();
     #endregion
     protected IItem m_item;
     

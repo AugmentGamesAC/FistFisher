@@ -18,8 +18,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     public float AttackRange => m_attackRange;
 
     [SerializeField]
-    protected FishHealth m_Health;
-    public FishHealth Health => m_Health;
+    protected float m_maxHealth;
+    public float MaxHealth => m_maxHealth;
 
     [SerializeField]
     protected FishBrain.FishClassification m_fishClassification;
@@ -70,7 +70,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
         HPRoot.transform.SetParent(FishRoot.transform);
 
-        HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.CurrentAmount);
+        //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
 
 
@@ -83,7 +83,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         m_Type = ItemType.Fish;
         m_Description = "Funny not Found";
         m_worthInCurrency = 100;
-        m_Health = new FishHealth();
         m_combatSpeed = 4;
     }
 }
