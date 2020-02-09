@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ public class SingleSelectionList<T> : ISingleSelectionList<T>
 
     public int Count => m_Items.Count;
 
+    public T this[int value] => m_Items[value];
 
     public void SetSelection(int selection)
     {
@@ -45,6 +47,16 @@ public class SingleSelectionList<T> : ISingleSelectionList<T>
         m_Items.RemoveAt(removalIndex);
         if (removalIndex <= m_selection)
             IncrementSelection(-1);
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        return m_Items.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return m_Items.GetEnumerator();
     }
 }
 

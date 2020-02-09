@@ -11,6 +11,8 @@ public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>,
 
     public int Count => m_value.Count;
 
+    public T this[int value] => m_value[value];
+
     public void AddItem(T item)
     {
         m_value.AddItem(item);
@@ -38,5 +40,15 @@ public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>,
     protected override ISingleSelectionList<T> ImplicitOverRide(UITracker<ISingleSelectionList<T>> reference)
     {
         return this;
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        return m_value.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return m_value.GetEnumerator();
     }
 }

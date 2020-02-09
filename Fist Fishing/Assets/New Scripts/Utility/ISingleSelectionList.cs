@@ -1,5 +1,6 @@
-﻿public interface ISingleSelectionList<T>
+﻿public interface ISingleSelectionList<T> : System.Collections.Generic.IEnumerable<T>
 {
+    T this[int value] { get; }
     T SelectedItem { get; }
     int Selection { get; }
     int Count { get; }

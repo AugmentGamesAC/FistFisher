@@ -45,8 +45,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
 
-    public delegate void OnFishChange(FishCombatInfo fish);
-    public OnFishChange OnSelected;
 
 
     protected float m_maxSpawnChance = 0;
@@ -54,19 +52,13 @@ public class CombatManager : MonoBehaviour
 
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
-    protected List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
-
     protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
 
     [SerializeField]
     protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
-    //gets controlled by left right inputs.
-    protected int m_fishSelection = 0;
 
     protected float m_combatZone = 30.0f;
-
-    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
 
     private void Start()
     {
@@ -98,11 +90,15 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
+
+    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection;
+
+
     protected void AddFishToQueue()
     {
-        foreach (var fishInfo in m_fishInCombatInfo)
+        for(int i = 0; i < m_FishSelection.Count;  i++)
         {
-            m_roundQueue.Enqueue(fishInfo);
+            m_roundQueue.Enqueue(m_FishSelection[i]);
         }
     }
 
@@ -162,8 +158,9 @@ public class CombatManager : MonoBehaviour
 
         //apply damage from the player's move to the selected fish.
         MoveFishes(move.m_moveDistance);
-        SelectedFish.TakeDamage(move.m_damage);
-        SelectedFish.SlowDown(move.m_slow);
+
+        m_FishSelection.SelectedItem.TakeDamage(move.m_damage);
+        m_FishSelection.SelectedItem.SlowDown(move.m_slow);
 
         m_roundQueue.Enqueue(m_playerCombatInfo);
 
@@ -196,8 +193,8 @@ public class CombatManager : MonoBehaviour
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
-        foreach (var fishCombatInfo in m_fishInCombatInfo)
-            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == SelectedFish) ? -distance : distance));
+        foreach (var fishCombatInfo in m_FishSelection)
+            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == m_FishSelection.SelectedItem) ? -distance : distance));
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -355,17 +352,21 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     protected bool ChangeSelectedFish(float leftRight)
     {
+
         //no axis input? do nothing.
-        if ((leftRight == 0) || (m_fishInCombatInfo.Count == 0))
+        if ((leftRight == 0) || (m_FishSelection.Count == 0))
             return false;
 
+        m_FishSelection
+            (leftRight);
+
         m_fishSelection += (int)leftRight;
-        m_fishSelection %= m_fishInCombatInfo.Count;
+        m_fishSelection %= m_FishSelection.Count;
 
         if (m_fishSelection < 0)
-            m_fishSelection += m_fishInCombatInfo.Count;
+            m_fishSelection += m_FishSelection.Count;
 
-        OnSelected.Invoke(SelectedFish);
+        OnSelected.Invoke(m_FishSelection.SelectedItem);
 
         return true;
     }
