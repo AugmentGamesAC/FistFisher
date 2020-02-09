@@ -34,7 +34,7 @@ public class TestingCombatManager : CombatManager
     {
         //Create new fish data
         FishCombatInfo NewFish = new FishCombatInfo(new FishInstance(m_fish));
-        m_fishInCombatInfo.Add(NewFish);
+        m_FishSelection.AddItem(NewFish);
         m_showyFish.UpdateUI(NewFish);
         m_roundQueue.Enqueue(NewFish);
     }
