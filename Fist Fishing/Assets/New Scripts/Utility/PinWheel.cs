@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PinWheel<T>
+public class PinWheel<T> : IPinWheel<T>
 {
     [SerializeField]
     protected Dictionary<int, T> m_slots = new Dictionary<int, T>();
@@ -19,14 +19,11 @@ public class PinWheel<T>
     /// <param name="objects"></param>
     public PinWheel(int startingNumber, IEnumerable<T> objects)
     {
+        if (objects == default)
+            return;
         foreach (T curObject in objects)
             m_slots.Add(startingNumber++, curObject);
     }
-
-    /// <summary>
-    /// Creates a pinwheel (the list is Empty!)
-    /// </summary>
-    public PinWheel() { }
 
     /// <summary>
     /// Returns currently selected

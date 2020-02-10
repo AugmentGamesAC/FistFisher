@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectedFishUI : MonoBehaviour
+public class SelectedFishUI : CoreUIElement<FishCombatInfo>
 {
     [SerializeField]
     protected FloatTextUpdater EnemyDistanceDisplay;
@@ -14,46 +14,29 @@ public class SelectedFishUI : MonoBehaviour
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
-    protected FloatTextUpdater EnemyHealthNumberDisplay;
+    protected PercentTextUpdater EnemyHealthNumberDisplay;
     [SerializeField]
     protected FloatTextUpdater EnemySwimSpeedDisplay;
-
-    
-    [ContextMenu("DummyInit")]
-    public void newPsudoData()
-    {
-        UpdateUI(new PsudoCombatFish());
-    }
+    [SerializeField]
+    protected ProgressBarUpdater ProgressBar;
 
     /// <summary>
     /// Gets selected fish from combat manager.
     /// </summary>
     /// <param name="newData"></param>
-    public void UpdateUI(FishCombatInfo newData)
+    public override void UpdateUI(FishCombatInfo newData)
     {
-        if (newData == null)
-        {
-            gameObject.SetActive(false);
+        if (!ShouldUpdateUI(newData))
             return;
-        }
 
+        ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
-        //EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
-        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        //EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
-        EnemyHealthNumberDisplay.UpdateTracker(newData.FishData.Health.CurrentAmount);
+        MemberUpdate(EnemyNameDisplay, newData.FishInstance.FishData.Item.Name);
+        MemberUpdate(EnemyIconDisplay, newData.FishInstance.FishData.IconDisplay);
+
+
+        EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
-
     }
 }
 
-
-[System.Serializable]
-public class PsudoCombatFish : FishCombatInfo
-{
-    public PsudoCombatFish()
-    {
-        Speed.SetValue(5);
-        CombatDistance.SetValue(14);
-    }
-}

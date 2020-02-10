@@ -14,9 +14,7 @@ public class TestingFish : IFishData
     public float AttackRange => 6.0f;
 
 
-    [SerializeField]
-    protected FishHealth _Health = new FishHealth();
-    public FishHealth Health => _Health;
+    
 
 
     [SerializeField]
@@ -30,5 +28,7 @@ public class TestingFish : IFishData
 
     public FishBrain.FishClassification FishClassification => _FishClassification;
 
-    
+    public IItem Item => throw new System.NotImplementedException();
+
+    public float MaxHealth => 10;
 }

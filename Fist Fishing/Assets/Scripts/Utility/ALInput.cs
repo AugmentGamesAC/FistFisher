@@ -250,7 +250,7 @@ public class ALInput : MonoBehaviour
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.Space;
+        m_punch = KeyCode.P;
         m_manualCamera = KeyCode.Mouse1;
         m_backward = KeyCode.S;
 
@@ -272,7 +272,7 @@ public class ALInput : MonoBehaviour
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
         m_harvest = KeyCode.R;
-        m_throwBait = KeyCode.P;
+        m_throwBait = KeyCode.O;
 
         m_craftBait = KeyCode.B;
 

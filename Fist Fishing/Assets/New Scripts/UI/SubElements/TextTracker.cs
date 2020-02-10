@@ -4,13 +4,4 @@ using UnityEngine;
 
 
 
-public class TextTracker : MonoUITracker<string>
-{
-    private void Start()
-    {
-        if (m_value == null)
-        {
-            m_value = " ";
-        }
-    }
-}
+public class TextTracker : UITracker<string> { }

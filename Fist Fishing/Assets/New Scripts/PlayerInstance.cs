@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInstance : MonoBehaviour
+[System.Serializable]
+public class PlayerInstance : IPlayerData
 {
-    PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
+    [SerializeField]
+    protected PlayerHealth m_health;
+    public PlayerHealth Health => m_health;
 
-    //should have core game stats health, oxygen. 
-    //Reference to PlayerStatManager.
+    [SerializeField]
+    protected OxygenTracker m_oxygen;
+    public OxygenTracker Oxygen => m_oxygen;
 
-    private void Start()
-    {
-        
-    }
+    [SerializeField]
+    protected float m_attackRange;
+    public float AttackRange => m_attackRange;
 
-    private void Update()
-    {
-        
-    }
+    [SerializeField]
+    protected Sprite m_iconDisplay;
+    public Sprite IconDisplay => m_iconDisplay;
 }

@@ -26,7 +26,7 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     }
 }
 
-
+[System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
 {
     [SerializeField]
@@ -49,6 +49,11 @@ public class UITracker<T> : ISerializationCallbackReceiver
     {
     }
 
+    protected virtual T ImplicitOverRide(UITracker<T> reference)
+    {
+        return reference.m_value;
+    }
+
     /// <summary>
     /// Can consider StatTracker as a float with this.
     /// returns ref to currentAmount.
@@ -56,7 +61,7 @@ public class UITracker<T> : ISerializationCallbackReceiver
     /// <param name="reference"></param>
     public static implicit operator T(UITracker<T> reference)
     {
-        return reference.m_value;
+        return reference.ImplicitOverRide(reference);
     }
 
     public void SetValue(T newValue)

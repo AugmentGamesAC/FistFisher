@@ -45,8 +45,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
 
-    public delegate void OnFishChange(FishCombatInfo fish);
-    public OnFishChange OnSelected;
 
 
     protected float m_maxSpawnChance = 0;
@@ -54,27 +52,21 @@ public class CombatManager : MonoBehaviour
 
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
-    protected List<FishCombatInfo> m_fishInCombatInfo = new List<FishCombatInfo>();
-
     protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
 
     [SerializeField]
     protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
-    //gets controlled by left right inputs.
-    protected int m_fishSelection = 0;
 
     protected float m_combatZone = 30.0f;
 
-    public FishCombatInfo SelectedFish { get { return m_fishInCombatInfo[m_fishSelection]; } }
-
     private void Start()
     {
-        m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+       /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
-            m_maxSpawnChance += fish.SpawnChance;
+            //m_maxSpawnChance += fish.SpawnChance;
         }
     }
     
@@ -98,16 +90,20 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
+
+    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
+
+
     protected void AddFishToQueue()
     {
-        foreach (var fishInfo in m_fishInCombatInfo)
+        for(int i = 0; i < m_FishSelection.Count;  i++)
         {
-            m_roundQueue.Enqueue(fishInfo);
+            m_roundQueue.Enqueue(m_FishSelection[i]);
         }
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         //can switch targets even when fish are attacking.
         ChangeSelectedFish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
@@ -118,7 +114,7 @@ public class CombatManager : MonoBehaviour
 
         //listen for input cases.
         //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
-        if (ALInput.GetKeyDown(ALInput.Attack))
+        if (ALInput.GetKeyDown(ALInput.Punch))
         {
             PlayerAttack();
         }
@@ -162,8 +158,9 @@ public class CombatManager : MonoBehaviour
 
         //apply damage from the player's move to the selected fish.
         MoveFishes(move.m_moveDistance);
-        SelectedFish.TakeDamage(move.m_damage);
-        SelectedFish.SlowDown(move.m_slow);
+
+        m_FishSelection.SelectedItem.TakeDamage(move.m_damage);
+        m_FishSelection.SelectedItem.SlowDown(move.m_slow);
 
         m_roundQueue.Enqueue(m_playerCombatInfo);
 
@@ -196,8 +193,8 @@ public class CombatManager : MonoBehaviour
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
-        foreach (var fishCombatInfo in m_fishInCombatInfo)
-            fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ((fishCombatInfo == SelectedFish) ? -distance : distance));
+        for(int i = 0; i< m_FishSelection.Count; i++)
+            m_FishSelection[i].CombatDistance.SetValue(m_FishSelection[i].CombatDistance + ((i == m_FishSelection.Selection) ? -distance : distance));
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -242,9 +239,10 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
     {
-        if (fishCombatInfo.FishData.Health.CurrentAmount <= 0)
+        if (fishCombatInfo.FishInstance.Health.CurrentAmount <= 0)
         {
             m_deadFishPile.Add(fishCombatInfo);
+            m_FishSelection.Remove(fishCombatInfo);
             return true;
         }
 
@@ -253,14 +251,14 @@ public class CombatManager : MonoBehaviour
 
     protected void ResolveFishAttack(FishCombatInfo fish)
     {
-        if (fish.FishData.AttackRange > fish.CombatDistance)
-            m_playerCombatInfo.TakeDamage(fish.FishData.Damage);
+        if (fish.FishInstance.FishData.AttackRange > fish.CombatDistance)
+            m_playerCombatInfo.TakeDamage(fish.FishInstance.FishData.Damage);
     }
 
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
     }
 
     /// <summary>
@@ -289,7 +287,7 @@ public class CombatManager : MonoBehaviour
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
-            whichfish -= fish.SpawnChance;
+            //whichfish -= fish.SpawnChance;
             if (whichfish < 0)
             {
                 m_roundQueue.Enqueue(fish);
@@ -348,26 +346,23 @@ public class CombatManager : MonoBehaviour
     protected void EndCombat()
     {
         m_currentCombatState = CombatStates.CombatFinished;
+
+        //TODO: resolve fish handling
+       
+
+        NewMenuManager.DisplayMenuScreen(MenuScreens.NormalHUD);
     }
 
     /// <summary>
     /// return true if selected fish is successful.
     /// </summary>
-    protected bool ChangeSelectedFish(float leftRight)
+    protected void ChangeSelectedFish(float leftRight)
     {
         //no axis input? do nothing.
-        if ((leftRight == 0) || (m_fishInCombatInfo.Count == 0))
-            return false;
+        if ((leftRight == 0) || (m_FishSelection.Count == 0))
+            return ;
 
-        m_fishSelection += (int)leftRight;
-        m_fishSelection %= m_fishInCombatInfo.Count;
-
-        if (m_fishSelection < 0)
-            m_fishSelection += m_fishInCombatInfo.Count;
-
-        OnSelected.Invoke(SelectedFish);
-
-        return true;
+        m_FishSelection.IncrementSelection((int)leftRight);
     }
 
     //Plays aninmation
@@ -393,12 +388,4 @@ public class CombatManager : MonoBehaviour
         yield return null;
     }
 
-    [ContextMenu("Create Test Fish")]
-    public void newFish()
-    {
-        //Create new fish data
-        FishCombatInfo NewFish = new FishCombatInfo();
-
-        m_roundQueue.Enqueue(NewFish);
-    }
 }

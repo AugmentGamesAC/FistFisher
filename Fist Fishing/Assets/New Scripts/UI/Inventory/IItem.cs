@@ -10,4 +10,5 @@ public interface IItem
     ItemType Type { get; }
     string Description { get; }
     Sprite IconDisplay { get; }
+    string Name { get; }
 }

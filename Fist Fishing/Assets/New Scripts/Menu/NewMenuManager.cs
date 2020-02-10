@@ -68,6 +68,8 @@ public enum MenuScreens
     /// Options available when mounted on boat
     /// </summary>
     MountBoat,
+
+    Combat
 }
 
 /// <summary>
