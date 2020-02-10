@@ -152,8 +152,8 @@ public class CombatManager : MonoBehaviour
         //apply stat changes to the player.
         //Oxygen
         // noise .
-        //m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
-        //m_playerCombatInfo.UpdateNoise(move.m_noise);
+        m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
+        m_playerCombatInfo.UpdateNoise(move.m_noise);
 
 
         //apply damage from the player's move to the selected fish.

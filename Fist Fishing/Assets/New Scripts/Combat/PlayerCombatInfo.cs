@@ -7,28 +7,25 @@ using UnityEngine;
 /// </summary>
 public class PlayerCombatInfo : CombatInfo
 {
-    [SerializeField]
-    protected IPlayerData m_playerDef;
-
     //this or get these values from player.
     [SerializeField]
     protected NoiseTracker m_noiseTracker = new NoiseTracker();
     public NoiseTracker NoiseTracker => m_noiseTracker;
 
-    public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>(1, default);
-    public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>(1, default);
+    public PinwheelTracker<Bait> m_baitOptions = new PinwheelTracker<Bait>(1, default);
+    public PinwheelTracker<CombatMoveInfo> m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, default);
 
     public void UpdateOxygen(float change)
     {
-        //m_oxygenTracker.ModifyOxygen(change);
+        PlayerInstance.Instance.Oxygen.ModifyOxygen(-change);
     }
     public void ConsumeItem()
     {
-        
+        //inventory stuff.
     }
     public void TakeDamage(float damage)
     {
-        //health module.Change(damage);
+        PlayerInstance.Instance.Health.Change(-damage);
     }
     public void UpdateNoise(float change)
     {
