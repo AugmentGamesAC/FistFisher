@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// this needs to be removed when it's made
-/// </summary>
-public class BiomeDefinition
-{
-
-}
 
 /// <summary>
 /// This class exists to handle all the biomes in scene
@@ -119,8 +112,24 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected Vector3 FindValidPosition(BiomeDefinition bd)
     {
-        throw new System.NotImplementedException("Not Implemented");
+        Collider c = bd.Mesh.GetComponent<Collider>();
+        Bounds b = c.bounds;
 
+        bool validPos = false;
+        Vector3 pos = Vector3.zero;
+
+        //this is currently using "b" - a bounding box. does not yet account for more complex shapes
+        //https://answers.unity.com/questions/163864/test-if-point-is-in-collider.html?_ga=2.115196111.95679741.1581358981-1866372932.1581358981 
+        //is something to look into, but is a low priority at this point
+        while (!validPos)
+        {
+            pos.x = Random.Range(b.min.x, b.max.x);
+            pos.y = Random.Range(b.min.y, b.max.y);
+            pos.z = Random.Range(b.min.z, b.max.z);
+            if (b.Contains(pos))
+                validPos = true;
+        }
+        return pos;
     }
 
 
