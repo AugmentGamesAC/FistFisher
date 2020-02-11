@@ -16,6 +16,7 @@ public class OxygenTracker
 
     [SerializeField]
     protected PercentageTracker m_oxy;
+    public PercentageTracker Tracker => m_oxy;
 
     public delegate void OnLowOxygenEvent();
     public event OnLowOxygenEvent OnLowOxygen;

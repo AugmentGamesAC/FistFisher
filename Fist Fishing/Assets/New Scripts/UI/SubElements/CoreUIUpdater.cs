@@ -11,7 +11,7 @@ public abstract class CoreUIUpdater<TTracker, TUIField, TDataType> : MonoBehavio
     protected TUIField m_UIElement;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         m_UIElement = GetComponent<TUIField>();
         if (m_tracker != default)
