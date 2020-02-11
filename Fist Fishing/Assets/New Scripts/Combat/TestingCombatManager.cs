@@ -52,9 +52,9 @@ public class TestingCombatManager : CombatManager
     {
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
         var fishies = fishDefs.Select(X => new FishCombatInfo(new FishInstance(X)));
-        m_showyFish.UpdateUI(fishies.FirstOrDefault());
         foreach (var fish in fishies)
             m_FishSelection.AddItem(fish);
+        m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
         base.StartCombat(wasPlayer);
     }
 
