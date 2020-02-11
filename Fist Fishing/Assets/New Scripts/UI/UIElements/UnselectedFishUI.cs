@@ -31,8 +31,6 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
 
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
-        MemberUpdate(EnemyNameDisplay, newData.FishInstance.FishData.Item.Name);
-        MemberUpdate(EnemyIconDisplay, newData.FishInstance.FishData.IconDisplay);
 
         //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
         //MemberUpdate(EnemyHealthNumberDisplay, "{0}/" + newData.FishInstance.Health.Max.ToString(), newData.FishInstance.Health.CurrentAmount);

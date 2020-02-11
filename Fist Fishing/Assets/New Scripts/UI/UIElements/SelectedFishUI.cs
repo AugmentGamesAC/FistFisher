@@ -10,7 +10,9 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
     [SerializeField]
     protected TextUpdater EnemyNameDisplay;
     [SerializeField]
-    protected ImageUpdater EnemyTypeImageDisplay;
+    protected ImageUpdater EnemyTypeDisplay;
+    [SerializeField]
+    protected ImageUpdater EnemyAction;
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
@@ -31,10 +33,10 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
 
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
-        MemberUpdate(EnemyNameDisplay, newData.FishInstance.FishData.Item.Name);
-        MemberUpdate(EnemyIconDisplay, newData.FishInstance.FishData.IconDisplay);
-
-
+        EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
+        EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
+        EnemyAction.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
+        EnemyTypeDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
         EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
     }
