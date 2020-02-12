@@ -19,7 +19,10 @@ public class FishBrain : BehaviorTree
         Fearful             = 0x000004,    
         Player              = 0x000008,
         BaitSensitive1      = 0x000100,
-        FavoredPlant1       = 0x010000
+        FavoredPlant1       = 0x010000,
+
+        FishMask = FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.Fearful | FishBrain.FishClassification.Passive,
+
     }
 
     static public string TargetName  = "defaultGoal";

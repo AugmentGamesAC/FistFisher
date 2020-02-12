@@ -28,7 +28,7 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
         EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
-        EnemyTypeDisplay.ForceUpdate((int)Mathf.Log(2, (float)(newData.FishInstance.FishData.FishClassification & (FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.Fearful | FishBrain.FishClassification.Passive))));
+        EnemyTypeDisplay.ForceUpdate((int)Mathf.Log(2, (float)(newData.FishInstance.FishData.FishClassification & FishBrain.FishClassification.FishMask)));
 
     }
 }
