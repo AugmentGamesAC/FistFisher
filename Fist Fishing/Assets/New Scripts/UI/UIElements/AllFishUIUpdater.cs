@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class AllFishUIUpdater : CoreUIUpdater<SingleSelectionListTracker<FishCombatInfo>, CoreUIElement<FishCombatInfo>, ISingleSelectionList<FishCombatInfo>>
 {
     [SerializeField]
-    protected List<SelectedFishUI> m_unselectedFish = new List<SelectedFishUI>();
+    protected List<UnselectedFishUI> m_unselectedFish = new List<UnselectedFishUI>();
 
     protected override void UpdateState(ISingleSelectionList<FishCombatInfo> value)
     {
