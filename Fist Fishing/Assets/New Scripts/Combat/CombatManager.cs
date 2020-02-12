@@ -242,6 +242,7 @@ public class CombatManager : MonoBehaviour
         if (fishCombatInfo.FishInstance.Health.CurrentAmount <= 0)
         {
             m_deadFishPile.Add(fishCombatInfo);
+            m_FishSelection.Remove(fishCombatInfo);
             return true;
         }
 
@@ -345,6 +346,11 @@ public class CombatManager : MonoBehaviour
     protected void EndCombat()
     {
         m_currentCombatState = CombatStates.CombatFinished;
+
+        //TODO: resolve fish handling
+       
+
+        NewMenuManager.DisplayMenuScreen(MenuScreens.NormalHUD);
     }
 
     /// <summary>
