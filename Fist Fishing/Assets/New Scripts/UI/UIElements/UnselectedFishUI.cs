@@ -9,7 +9,7 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
     [SerializeField]
     protected TextUpdater EnemyNameDisplay;
     [SerializeField]
-    protected ImageUpdater EnemyTypeImageDisplay;
+    protected IntImageUpdater EnemyTypeDisplay;
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
@@ -28,6 +28,7 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
         EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
+        EnemyTypeDisplay.ForceUpdate((int)Mathf.Log(2, (float)(newData.FishInstance.FishData.FishClassification & (FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.Fearful | FishBrain.FishClassification.Passive))));
 
     }
 }
