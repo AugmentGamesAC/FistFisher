@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
 {
-    [SerializeField]
-    protected FloatTextUpdater EnemyDistanceDisplay;
+
     [SerializeField]
     protected TextUpdater EnemyNameDisplay;
     [SerializeField]
@@ -14,10 +13,7 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
-    protected PercentTextUpdater EnemyHealthNumberDisplay;
-    [SerializeField]
-    protected FloatTextUpdater EnemySwimSpeedDisplay;
-    [SerializeField]
+
     protected ProgressBarUpdater ProgressBar;
 
     /// <summary>
@@ -30,12 +26,9 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
             return;
 
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
-        EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
+        EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
+        EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
 
-        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        //MemberUpdate(EnemyHealthNumberDisplay, "{0}/" + newData.FishInstance.Health.Max.ToString(), newData.FishInstance.Health.CurrentAmount);
-        EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
-        EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
     }
 }
 
