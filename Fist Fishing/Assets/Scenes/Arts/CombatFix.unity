@@ -14356,6 +14356,7 @@ GameObject:
   - component: {fileID: 1111584711}
   - component: {fileID: 1111584710}
   - component: {fileID: 1111584709}
+  - component: {fileID: 1111584712}
   m_Layer: 5
   m_Name: Image_Targeted Enemy Info
   m_TagString: Untagged
@@ -14448,6 +14449,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111584707}
   m_CullTransparentMesh: 0
+--- !u!114 &1111584712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111584707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99afcd1f1e26d1647b75e06ad564336c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_unselectedFish: []
 --- !u!1001 &1112440918
 PrefabInstance:
   m_ObjectHideFlags: 0
