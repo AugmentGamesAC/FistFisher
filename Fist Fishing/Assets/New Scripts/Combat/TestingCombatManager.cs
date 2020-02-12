@@ -22,14 +22,14 @@ public class TestingCombatManager : CombatManager
 
     private void Start()
     {
-        List<CombatMoveInfo> moves = new List<CombatMoveInfo>
-        {
-            new CombatMoveInfo(10, 0.5f, 30, 2, 25),
-            new CombatMoveInfo(5, 0, 2, 3, 12),
-            new CombatMoveInfo(45, 0, 0, 10, 10)
-        };
+        //List<CombatMoveInfo> moves = new List<CombatMoveInfo>
+        //{
+        //    new CombatMoveInfo(10, 0.5f, 30, 2, 25),
+        //    new CombatMoveInfo(5, 0, 2, 3, 12),
+        //    new CombatMoveInfo(45, 0, 0, 10, 10)
+        //};
 
-        m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
+        //m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
         m_showyFish.UpdateUI(default);

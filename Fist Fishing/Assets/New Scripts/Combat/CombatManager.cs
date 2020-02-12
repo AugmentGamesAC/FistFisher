@@ -45,6 +45,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
 
+    [SerializeField]
+    protected List<CombatMoveInfo> ScriptablePlayerMoves = new List<CombatMoveInfo>();
+
 
 
     protected float m_maxSpawnChance = 0;
@@ -52,7 +55,7 @@ public class CombatManager : MonoBehaviour
 
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
-    protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
+    protected PlayerCombatInfo m_playerCombatInfo;
 
     [SerializeField]
     protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
@@ -62,7 +65,9 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-       /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+        /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+
+        m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
@@ -152,15 +157,15 @@ public class CombatManager : MonoBehaviour
         //apply stat changes to the player.
         //Oxygen
         // noise .
-        m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
-        m_playerCombatInfo.UpdateNoise(move.m_noise);
+        m_playerCombatInfo.UpdateOxygen(move.OxygenConsumption);
+        m_playerCombatInfo.UpdateNoise(move.Noise);
 
 
         //apply damage from the player's move to the selected fish.
-        MoveFishes(move.m_moveDistance);
+        MoveFishes(move.MoveDistance);
 
-        m_FishSelection.SelectedItem.TakeDamage(move.m_damage);
-        m_FishSelection.SelectedItem.SlowDown(move.m_slow);
+        m_FishSelection.SelectedItem.TakeDamage(move.Damage);
+        m_FishSelection.SelectedItem.SlowDown(move.Slow);
 
         m_roundQueue.Enqueue(m_playerCombatInfo);
 
