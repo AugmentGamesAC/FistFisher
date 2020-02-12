@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerOxygenUpdater : ProgressBarUpdater
 {
-    public new void Start()
+    public void Start()
     {
-        base.Start();
         UpdateTracker(PlayerInstance.Instance.Oxygen.Tracker);
     }
 }
