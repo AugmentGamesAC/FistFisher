@@ -26,7 +26,7 @@ public class FishCombatInfo : CombatInfo
         m_fish = fish;
         Speed.SetValue(fish.FishData.CombatSpeed);
         CombatDistance.SetValue(0);
-        Direction.SetValue(fish.FishData.FishClassification == FishBrain.FishClassification.Agressive ? 1 : -1);
+        Direction.SetValue(fish.FishData.FishClassification == FishBrain.FishClassification.Aggressive ? 1 : -1);
     }
 
     /// <summary>

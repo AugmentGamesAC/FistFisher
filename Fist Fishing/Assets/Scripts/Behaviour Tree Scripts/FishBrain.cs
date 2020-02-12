@@ -15,7 +15,7 @@ public class FishBrain : BehaviorTree
     public enum FishClassification
     {
         Passive             = 0x000001,
-        Agressive           = 0x000002,
+        Aggressive           = 0x000002,
         Fearful             = 0x000004,    
         Player              = 0x000008,
         BaitSensitive1      = 0x000100,

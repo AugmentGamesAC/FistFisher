@@ -258,7 +258,7 @@ public class CombatManager : MonoBehaviour
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
     }
 
     /// <summary>

@@ -97,15 +97,15 @@ public class FishMoveTo : FishTask
                 }
             },
             {//Attacked meh fish behavoir
-                FishBrain.FishClassification.Passive| FishBrain.FishClassification.Agressive,
+                FishBrain.FishClassification.Passive| FishBrain.FishClassification.Aggressive,
                 new Dictionary<FishBrain.FishClassification, FishResponse>()
                 {
                     { FishBrain.FishClassification.BaitSensitive1, FishResponse.Indifferent },
                     { FishBrain.FishClassification.Player, FishResponse.Attracted }
                 }
             },
-            {//Agressive fish behavoir
-                FishBrain.FishClassification.Agressive,
+            {//Aggressive fish behavoir
+                FishBrain.FishClassification.Aggressive,
                 new Dictionary<FishBrain.FishClassification, FishResponse>()
                 {
                     { FishBrain.FishClassification.BaitSensitive1, FishResponse.Indifferent },

@@ -7,7 +7,7 @@ public class FishDefinitionFactory : FishDefintion
     public static void CreateAgressive()
     {
         FishDefintion asset = ScriptableObject.CreateInstance<FishDefintion>();
-        asset.ConfigFish(FishBrain.FishClassification.Agressive | FishBrain.FishClassification.BaitSensitive1);
+        asset.ConfigFish(FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.BaitSensitive1);
 
         AssetDatabase.CreateAsset(asset,
             AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Aggresive.asset")

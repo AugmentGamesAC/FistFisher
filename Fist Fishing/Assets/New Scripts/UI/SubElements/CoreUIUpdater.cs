@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This is the base class for UI elements that update
+/// it needs to know the tracker, the thing being updated, and the type of data to handle
+/// </summary>
+/// <typeparam name="TTracker"></typeparam>
+/// <typeparam name="TUIField"></typeparam>
+/// <typeparam name="TDataType"></typeparam>
 [System.Serializable]
 public abstract class CoreUIUpdater<TTracker, TUIField, TDataType> : MonoBehaviour where TTracker :UITracker<TDataType>
 {

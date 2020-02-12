@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>
+/// this contains a delegate that tracks the type of data used in UI updaters. 
+/// When values need to change, SetValue is called
+/// All data used in UI elements are a child of this class
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
 {
@@ -12,8 +17,8 @@ public class UITracker<T> : ISerializationCallbackReceiver
     [SerializeField]
     protected bool SerializeInvokes;
 
-    public delegate void UIUpdateListner(T type);
-    public UIUpdateListner OnStateChange;
+    public delegate void UIUpdateListener(T type);
+    public UIUpdateListener OnStateChange;
 
     protected void UpdateState()
     {
