@@ -14,7 +14,7 @@ public class IntImageUpdater : CoreUIUpdater<IntTracker, Image, int>
         if (m_UIElement == default)
             return;
 
-        m_UIElement.enabled = (value < 0 || value > SpriteList.Count -1);
+        m_UIElement.enabled = (value > -1 || value < SpriteList.Count);
         if (m_UIElement.enabled)
             m_UIElement.sprite = SpriteList[value];
     }
