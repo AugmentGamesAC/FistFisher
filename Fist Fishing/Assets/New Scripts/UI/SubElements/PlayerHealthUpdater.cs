@@ -8,7 +8,6 @@ public class PlayerHealthUpdater : ProgressBarUpdater
 {
     public new void Start()
     {
-        base.Start();
         UpdateTracker(PlayerInstance.Instance.Health.Tracker);
     }
 }

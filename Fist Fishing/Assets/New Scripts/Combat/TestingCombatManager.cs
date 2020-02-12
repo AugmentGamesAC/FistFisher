@@ -19,7 +19,8 @@ public class TestingCombatManager : CombatManager
     protected FishDefintion m_f7Fish;
     [SerializeField]
     protected SelectedFishUI m_showyFish;
-
+    [SerializeField]
+    protected UnselectedFishUI m_lessshowyFish;
     private void Start()
     {
         List<CombatMoveInfo> moves = new List<CombatMoveInfo>
@@ -33,6 +34,7 @@ public class TestingCombatManager : CombatManager
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
         m_showyFish.UpdateUI(default);
+       // m_lessshowyFish.UpdateUI(default);
     }
 
     [ContextMenu("CombatYeast/Player Started F5 Fish battle")]
@@ -55,6 +57,7 @@ public class TestingCombatManager : CombatManager
         foreach (var fish in fishies)
             m_FishSelection.AddItem(fish);
         m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
+        //m_lessshowyFish.UpdateUI(m_FishSelection.SelectedItem);
         base.StartCombat(wasPlayer);
     }
 
