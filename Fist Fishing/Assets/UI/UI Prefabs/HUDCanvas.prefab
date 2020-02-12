@@ -363,7 +363,6 @@ GameObject:
   - component: {fileID: 1912377823174489467}
   - component: {fileID: 1912377823174489464}
   - component: {fileID: 1912377823174489465}
-  - component: {fileID: 7509044323818795175}
   - component: {fileID: 1308089185585411890}
   m_Layer: 5
   m_Name: HUDCanvas
@@ -464,20 +463,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7509044323818795175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912377823174489462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ad927ebdc23174ea85675e4e9c6bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HUD: {fileID: 1912377823174489462}
-  m_canvas: {fileID: 1912377823174489466}
 --- !u!114 &1308089185585411890
 MonoBehaviour:
   m_ObjectHideFlags: 0

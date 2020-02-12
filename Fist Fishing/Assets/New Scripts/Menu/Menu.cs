@@ -13,9 +13,4 @@ public class Menu : MonoBehaviour
     {
         gameObject.SetActive(activeState);
     }
-
-    public void Awake()
-    {
-        Show(false);
-    }
 }
