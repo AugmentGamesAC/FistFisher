@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+/*[System.Serializable]
 public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
 {
     [SerializeField]
@@ -24,7 +24,7 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     public void OnAfterDeserialize()
     {
     }
-}
+}*/
 
 [System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
