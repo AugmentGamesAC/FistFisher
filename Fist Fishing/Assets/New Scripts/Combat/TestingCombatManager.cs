@@ -18,9 +18,8 @@ public class TestingCombatManager : CombatManager
     [SerializeField]
     protected FishDefintion m_f7Fish;
     [SerializeField]
-    protected SelectedFishUI m_showyFish;
-    [SerializeField]
-    protected UnselectedFishUI m_lessshowyFish;
+    protected AllFishUIUpdater m_showThemALl;
+
     private void Start()
     {
         List<CombatMoveInfo> moves = new List<CombatMoveInfo>
@@ -33,7 +32,7 @@ public class TestingCombatManager : CombatManager
         m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
-        m_showyFish.UpdateUI(default);
+        m_showThemALl.UpdateTracker(default);
        // m_lessshowyFish.UpdateUI(default);
     }
 
@@ -56,8 +55,7 @@ public class TestingCombatManager : CombatManager
         var fishies = fishDefs.Select(X => new FishCombatInfo(new FishInstance(X)));
         foreach (var fish in fishies)
             m_FishSelection.AddItem(fish);
-        m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
-        //m_lessshowyFish.UpdateUI(m_FishSelection.SelectedItem);
+        m_showThemALl.UpdateTracker(m_FishSelection);
         base.StartCombat(wasPlayer);
     }
 
