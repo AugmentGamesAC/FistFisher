@@ -19,6 +19,8 @@ public class TestingCombatManager : CombatManager
     protected FishDefintion m_f7Fish;
     [SerializeField]
     protected SelectedFishUI m_showyFish;
+    [SerializeField]
+    protected AttackPinwheelUpdater m_attackPinwheelUpdater;
 
     private void Start()
     {
@@ -30,13 +32,21 @@ public class TestingCombatManager : CombatManager
         //};
 
         //m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
+        m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+
+        m_attackPinwheelUpdater = GetComponentInChildren<AttackPinwheelUpdater>();
+
+        if (m_attackPinwheelUpdater == null)
+            throw new System.Exception(string.Format("{0} not working", m_attackPinwheelUpdater));
+
+        m_attackPinwheelUpdater.UpdateTracker(m_playerCombatInfo.m_attackPinwheel);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
         m_showyFish.UpdateUI(default);
     }
 
     [ContextMenu("CombatYeast/Player Started F5 Fish battle")]
-    public void newFishF5True() { StartCombatTest(new []{m_f5Fish}, true); }
+    public void newFishF5True() { StartCombatTest(new[] { m_f5Fish }, true); }
     [ContextMenu("CombatYeast/Player Started F6 Fish battle")]
     public void newFishF6True() { StartCombatTest(new[] { m_f6Fish }, true); }
     [ContextMenu("CombatYeast/Player Started F7 Fish battle")]
