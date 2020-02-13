@@ -214,6 +214,14 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
+    protected bool ResolveOutOfRange(FishCombatInfo fish)
+    {
+        if (fish.CombatDistance <= m_combatZone)
+            return false;
+        m_FishSelection.Remove(fish);
+        return true;
+    }
+
     /// <summary>
     /// returns true if fish is out of range or dead.
     /// </summary>
@@ -221,7 +229,7 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveLeaveCombat(FishCombatInfo fish)
     {
-        if (fish.CombatDistance > m_combatZone)
+        if (ResolveOutOfRange(fish))
             return true;
 
         if (ResolveDeadFish(fish))
@@ -239,14 +247,12 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
     {
-        if (fishCombatInfo.FishInstance.Health.CurrentAmount <= 0)
-        {
-            m_deadFishPile.Add(fishCombatInfo);
-            m_FishSelection.Remove(fishCombatInfo);
-            return true;
-        }
+        if (fishCombatInfo.FishInstance.Health.CurrentAmount > 0)
+            return false;
 
-        return false;
+        m_deadFishPile.Add(fishCombatInfo);
+        m_FishSelection.Remove(fishCombatInfo);
+        return true;
     }
 
     protected void ResolveFishAttack(FishCombatInfo fish)
@@ -259,6 +265,12 @@ public class CombatManager : MonoBehaviour
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
         return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+    }
+
+    protected void ResolveAddFish(FishCombatInfo fish)
+    {
+        m_roundQueue.Enqueue(fish);
+        m_FishSelection.AddItem(fish);
     }
 
     /// <summary>

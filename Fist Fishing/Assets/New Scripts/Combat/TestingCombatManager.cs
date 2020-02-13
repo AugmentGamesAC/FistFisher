@@ -24,15 +24,15 @@ public class TestingCombatManager : CombatManager
     {
         List<CombatMoveInfo> moves = new List<CombatMoveInfo>
         {
-            new CombatMoveInfo(10, 0.5f, 30, 2, 25),
-            new CombatMoveInfo(5, 0, 2, 3, 12),
-            new CombatMoveInfo(45, 0, 0, 10, 10)
+            new CombatMoveInfo(10, 0.5f, 30, 0, 25),
+            new CombatMoveInfo(5, 0, 2, 0, 12),
+            new CombatMoveInfo(45, 0, 0, 0, 10)
         };
 
         m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
-        m_showThemALl.UpdateTracker(default);
+        m_showThemALl.ForceUpdate(default);
        // m_lessshowyFish.UpdateUI(default);
     }
 
@@ -43,11 +43,17 @@ public class TestingCombatManager : CombatManager
     [ContextMenu("CombatYeast/Player Started F7 Fish battle")]
     public void newFishF7True() { StartCombatTest(new[] { m_f7Fish }, true); }
     [ContextMenu("CombatYeast/Fish Started F5 Fish battle")]
-    public void newFishF5False() { StartCombatTest(new[] { m_f5Fish }, false); }
+    public void newFishF5False() { AddFishTest( m_f5Fish); }
     [ContextMenu("CombatYeast/Fish Started F6 Fish battle")]
-    public void newFishF6False() { StartCombatTest(new[] { m_f6Fish }, false); }
+    public void newFishF6False() { AddFishTest( m_f6Fish ); }
     [ContextMenu("CombatYeast/Fish Started F7 Fish battle")]
-    public void newFishF7False() { StartCombatTest(new[] { m_f7Fish }, false); }
+    public void newFishF7False() { AddFishTest(m_f7Fish ); }
+
+
+    protected void AddFishTest(FishDefintion fish)
+    {
+        ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
+    }
 
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
     {

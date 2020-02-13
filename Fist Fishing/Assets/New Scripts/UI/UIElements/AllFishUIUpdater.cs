@@ -11,7 +11,7 @@ public class AllFishUIUpdater : CoreUIUpdater<SingleSelectionListTracker<FishCom
 
     protected override void UpdateState(ISingleSelectionList<FishCombatInfo> value)
     {
-        if (value.Count < 1)
+        if (value == default || value.Count < 1)
         {
             ClearUI();
             return;
