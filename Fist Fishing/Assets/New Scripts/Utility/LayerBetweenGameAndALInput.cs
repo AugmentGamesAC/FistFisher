@@ -11,9 +11,9 @@ public class LayerBetweenGameAndALInput : MonoBehaviour
 
 
     //this allows us to know the current context to deal with the keys
-    protected ActionDefinition.ContextGroup m_worldCurrentContext;
-    public ActionDefinition.ContextGroup CurrentWorldContext => m_worldCurrentContext;
-    public void SetCurrentWorldContext(ActionDefinition.ContextGroup context) { m_worldCurrentContext = context; }
+    protected ContextGroup m_worldCurrentContext;
+    public ContextGroup CurrentWorldContext => m_worldCurrentContext;
+    public void SetCurrentWorldContext(ContextGroup context) { m_worldCurrentContext = context; }
 
 
     ///revising this - only return floats?
@@ -44,9 +44,9 @@ public class LayerBetweenGameAndALInput : MonoBehaviour
     public float KeyOrAxisInput(ActionDefinition action)
     {
         //get the info to determine input, input type, and context
-        ActionDefinition.ActionID aid = action.InternalID;
-        ActionDefinition.ContextGroup context = action.ContextGroups;
-        ActionDefinition.ActionType actionType = action.InputActionType;
+        ActionID aid = action.InternalID;
+        ContextGroup context = action.ContextGroups;
+        ActionType actionType = action.InputActionType;
 
 
 
