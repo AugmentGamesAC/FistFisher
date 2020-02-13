@@ -69,7 +69,9 @@ public enum MenuScreens
     /// </summary>
     MountBoat,
 
-    Combat
+    Combat,
+
+
 }
 
 /// <summary>

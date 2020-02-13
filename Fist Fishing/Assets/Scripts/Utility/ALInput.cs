@@ -16,6 +16,24 @@ public class ALInput : MonoBehaviour
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
 
+
+
+    #region new Keycodes
+    //CameraRotation;
+    //MovementOrInventoryNavigation;
+    //Action;
+    //SecondaryAction;
+    //DivingBellRaiseLower;
+    //OpenInventory;
+    //MainMenu;
+    //HoldPickup
+    //MenuAndShopMenuNavigationPageSelect;
+    //FleeOrCameraModeSwap;
+    //Targeting;
+    //AttackSwap;
+    //BaitSwap;
+    #endregion
+
     #region keycodes keycodes
     [SerializeField]
     protected KeyCode m_forward;
@@ -119,13 +137,13 @@ public class ALInput : MonoBehaviour
 
 
     //camera states
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_abzu;
-    public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
+    public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_locked;
-    public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }
+    public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }*/
 
     [SerializeField]
     KeyCode m_warthog;
@@ -242,6 +260,7 @@ public class ALInput : MonoBehaviour
     /// </summary>
     private void LoadFromFile()
     {
+        /*
         m_forward = KeyCode.W;
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
@@ -282,5 +301,6 @@ public class ALInput : MonoBehaviour
         m_start = KeyCode.Space;
 
         m_playerLateralMovement = AxisCode.Horizontal;
+        */
     }
 }

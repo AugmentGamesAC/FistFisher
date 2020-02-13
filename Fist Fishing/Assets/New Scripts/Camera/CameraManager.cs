@@ -15,8 +15,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     /// </summary>
     public enum CameraState
     {
-        Abzu,
-        Locked,
+        //Abzu,
+        //Locked,
         Warthog,
         FirstPerson,
     }
@@ -32,10 +32,11 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     [SerializeField]
     protected CameraBehavoir currentBehavoir;
 
-    [SerializeField]
+    /*[SerializeField]
     protected CameraBehavoir m_abzu = new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
     [SerializeField]
     protected CameraBehavoir m_locked = new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    */
     [SerializeField]
     protected CameraBehavoir m_warthog = new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
     [SerializeField]
@@ -61,8 +62,8 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         //Setup Dictionary while setting their values
         StateHolder = new Dictionary<CameraState, CameraBehavoir>()
         {
-            {CameraState.Abzu, m_abzu.SetCamBehavObjects(FollowObject, CameraObject) },
-            {CameraState.Locked, m_locked.SetCamBehavObjects(FollowObject, CameraObject) },
+            //{CameraState.Abzu, m_abzu.SetCamBehavObjects(FollowObject, CameraObject) },
+            //{CameraState.Locked, m_locked.SetCamBehavObjects(FollowObject, CameraObject) },
             {CameraState.Warthog, m_warthog.SetCamBehavObjects(FollowObject, CameraObject) },
             {CameraState.FirstPerson, m_firstPerson.SetCamBehavObjects(FollowObject, CameraObject) }
         };
@@ -84,16 +85,16 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     public void Awake()
     {
         InitStateHolderIfNeeded();
-        SwitchState(CameraState.Abzu);
+        SwitchState(CameraState.Warthog);
     }
 
     public void Update()
     {
-        if (ALInput.GetKeyDown(ALInput.Abzu))
-            SwitchState(CameraState.Abzu);
-        else if (ALInput.GetKeyDown(ALInput.Locked))
+        /*if (ALInput.GetKeyDown(ALInput.Abzu))
+            SwitchState(CameraState.Abzu);*/
+        /*else if (ALInput.GetKeyDown(ALInput.Locked))
             SwitchState(CameraState.Locked);
-        else if (ALInput.GetKeyDown(ALInput.Warthog))
+        else*/ if (ALInput.GetKeyDown(ALInput.Warthog))
             SwitchState(CameraState.Warthog);
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
             SwitchState(CameraState.FirstPerson);

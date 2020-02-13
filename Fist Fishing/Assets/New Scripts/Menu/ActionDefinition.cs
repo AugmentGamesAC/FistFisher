@@ -3,29 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/// <summary>
-/// the type of input
-/// </summary>
-public enum ActionType
-{
-    /// <summary>
-    /// pinwheel
-    /// joysticks and such
-    /// </summary>
-    TwoAxis,
-    /// <summary>
-    /// along a line (L->R, U->D)
-    /// </summary>
-    OneAxis,
-    /// <summary>
-    /// single button down input
-    /// </summary>
-    Button,
-    /// <summary>
-    /// 2axis with additional 1axis for cycling
-    /// </summary>
-    Page,
-}
+
 
 /// <summary>
 /// all of the inputs, generally context sensitive but sharing keys/inputs

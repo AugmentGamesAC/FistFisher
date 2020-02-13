@@ -40,9 +40,9 @@ public class PlayerMotion : MonoBehaviour
         m_vision = Camera.main.GetComponent<CameraManager>();
         m_movementResoultion = new Dictionary<CameraManager.CameraState, System.Action>()
         {
-           {CameraManager.CameraState.Abzu, AbzuMovement },
+           //{CameraManager.CameraState.Abzu, AbzuMovement },
            {CameraManager.CameraState.FirstPerson, FirstPersonMovement },
-           {CameraManager.CameraState.Locked, LockedMovement },
+           //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
         turningSpeedRef.Value = 180.0f;
