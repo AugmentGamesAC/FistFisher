@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19866c7c5604334b99d5285f2fcc487, type: 3}
   m_Name: FishItem
   m_EditorClassIdentifier: 
+  StackSize: 1
   ID: 3
+  m_worthInCurrency: 1
   prefab: {fileID: 467827030649447393, guid: 6f9d8a19bcf7c51448b0cc89ced1cda8, type: 3}
   type: 3
   description: Dis be A Fish.
-  m_worthInCurrency: 5
-  weight: 3
+  m_weight: 0

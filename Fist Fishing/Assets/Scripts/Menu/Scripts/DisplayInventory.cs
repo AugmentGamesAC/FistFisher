@@ -13,17 +13,25 @@ public class DisplayInventory : MonoBehaviour
 
     public InventoryObject m_inventory;
 
+    public Inventory m_playerInventory;
+
     public GameObject m_inventoryPrefab;
+
+    public Text m_text;
 
     public int m_xStartPos;
     public int m_yStartPos;
     public int m_xSpaceBetweenItems;
     public int m_ySpaceBetweenItems;
     public int m_numberOfColumns;
-    Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
+    protected Dictionary<GameObject, InventorySlot> m_itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     void Start()
     {
-        CreateSlots();
+        if (m_inventory != null)
+            CreateSlots();
+
+        if (m_playerInventory != null && m_text != null)
+            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
     }
 
     // Update is called once per frame
@@ -119,21 +127,42 @@ public class DisplayInventory : MonoBehaviour
         m_mouseItem.obj = mouseObject;
         m_mouseItem.item = m_itemsDisplayed[obj];
     }
-    public void OnDragEnd(GameObject obj)
+    public virtual void OnDragEnd(GameObject obj)
     {
         //if you're shuffling things in your own inventory use these functions.
         if (m_mouseItem.hoverObj && m_mouseItem.hoverSlot.m_inventory == m_inventory)
         {
             m_inventory.MoveItem(m_itemsDisplayed[obj], m_itemsDisplayed[m_mouseItem.hoverObj]);
         }
+
         else if (m_mouseItem.hoverSlot != null)//if it's dropped in another inventory, remove from current and add to new one in the empty slot's position.
         {
-            m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
-            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
+            if (m_mouseItem.hoverSlot.m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
+            {
+                ((ShopMenuDisplayInventory)m_mouseItem.hoverSlot.m_inventory).OnSell(m_mouseItem.item);
+                m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                if (m_playerInventory != null)
+                    m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
+            }
+            else
+            {
+                if (m_inventory.GetType() == typeof(ShopMenuDisplayInventory))
+                {
+                    if (((ShopMenuDisplayInventory)m_inventory).OnBuy(m_mouseItem.item))
+                    {
+                        m_mouseItem.hoverSlot.m_inventory.AddItemAtSlot(m_mouseItem.item.m_item, m_mouseItem.item.m_amount, m_mouseItem.hoverSlot);
+                        m_inventory.RemoveItem(m_itemsDisplayed[obj]);
+
+                        if (m_playerInventory != null)
+                            m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
+                    }
+                }
+            }
         }
         else
         {
-            m_inventory.RemoveItem(m_itemsDisplayed[obj].m_item);
+            m_inventory.RemoveItem(m_itemsDisplayed[obj]);
         }
         Destroy(m_mouseItem.obj);
         m_mouseItem.item = null;
@@ -148,7 +177,19 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot.m_item == null)
+        //if (m_playerInventory != null)
+        //{
+        //    Vector2 boxpos = new Vector2(325, 100);
+        //    GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
+        //}
+
+        if (!this.gameObject.activeSelf)
+            return;
+        if (m_mouseItem == null)
+            return;
+        if (m_mouseItem.hoverObj == null || m_mouseItem.hoverSlot == null)
+            return;
+        if (m_mouseItem.hoverSlot.m_item == null)
             return;
         //create position Vector2 for box.
         Vector2 DescriptionBoxPos = new Vector2(275, 40);
