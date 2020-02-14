@@ -65,7 +65,7 @@ public class MenuManager : MonoBehaviour
 {
     #region working inspector dictionary
     /// <summary>
-    /// this is the mess reuired to make dictionaries with  list as a value work in inspector
+    /// this is the mess required to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
     [System.Serializable]
@@ -113,6 +113,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     public Menus m_currentMenus = Menus.NotSet;
 
+    [SerializeField]
+    GameObject m_player;
+
     /// <summary>
     /// deactivate old menu, activate the one given if applicable
     /// </summary>
@@ -124,9 +127,10 @@ public class MenuManager : MonoBehaviour
         SetActiveSatusOncurrentMenuOption(false);
         Instance.m_currentMenus = m;
 
+        if (m == Menus.NotSet)
+            return;
         if (Instance.MenuList.TryGetValue(m, out m_Mylist))
             SetActiveSatusOncurrentMenuOption(true);
-
     }
 
     /// <summary>
@@ -151,17 +155,125 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    bool m_startup = true;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (m_startup)
+        {
+            m_startup = false;
+            ActivateMenu(Menus.MainMenu);
+            //ActivateMenu(Menus.MainMenu);
+            //ActivateMenu(Menus.MainMenu);
+        }
+        //as a fllback on closing a menu, we can always set the current menu to not et, and let this deal with choosing the correct one
+        if (m_currentMenus == Menus.NotSet)
+        {
+            //Menus m = Menus.NotSet;
+            //do stuff
+            ActivateMenu(Menus.NormalHUD);
+        }
+        HandleMenuRelatedInputs();
+
+
+        if (m_currentMenus == Menus.ShopMenu || m_currentMenus == Menus.SwimmingInventory)
+        {
+            ToggleMouseLock(true);
+        }
+        else
+        {
+            ToggleMouseLock(false);
+        }
     }
+
+    //forcing this to be public for the build until I can properly sort it out
+    public void ToggleMouseLock(bool on)
+    {
+        if (on)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void HandleMenuRelatedInputs()
+    {
+        if(m_player==null)
+            m_player = GameObject.FindGameObjectWithTag("Player");
+        if (m_player == null)
+            return;
+
+        if (m_currentMenus == Menus.MainMenu)
+        {
+            if (ALInput.GetKeyDown(ALInput.Start))
+            {
+                /*if (!(m_currentMenus == Menus.MainMenu))
+                    ActivateMenu(Menus.ShopMenu);
+                else
+                    ActivateMenu(Menus.NotSet);*/
+                ActivateMenu(Menus.NotSet);
+            }
+        }
+        else
+        {
+            if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            {
+                if (!(m_currentMenus == Menus.SwimmingInventory))
+                {
+                    ActivateMenu(Menus.SwimmingInventory);
+                    //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+                }
+                else
+                    ActivateMenu(Menus.NotSet);
+            }
+
+            if (ALInput.GetKeyDown(ALInput.MountBoat))
+            {
+                if (m_player.GetComponent<PlayerMovement>().m_isMounted)
+                {
+                    if (!(m_currentMenus == Menus.BoatTravel))
+                    {
+                        ActivateMenu(Menus.BoatTravel);
+                    }
+                    else
+                        ActivateMenu(Menus.NotSet);
+                }
+            }
+            else if (ALInput.GetKeyDown(ALInput.DismountBoat))
+            {
+                if (!m_player.GetComponent<PlayerMovement>().m_isMounted)
+                {
+                    if (!(m_currentMenus == Menus.NormalHUD))
+                    {
+                        ActivateMenu(Menus.NormalHUD);
+                    }
+                    else
+                        ActivateMenu(Menus.NotSet);
+                }
+            }
+
+
+            if (ALInput.GetKeyDown(ALInput.ToggleShop))
+            {
+                if (!(m_currentMenus == Menus.ShopMenu))
+                {
+                    ActivateMenu(Menus.ShopMenu);
+                    //m_player.gameObject.GetComponent<PlayerMovement>().ToggleMouseLock();
+                }
+                else
+                    ActivateMenu(Menus.NotSet);
+            };
+
+        }
+
+
+
+    }
+
+
+
 }

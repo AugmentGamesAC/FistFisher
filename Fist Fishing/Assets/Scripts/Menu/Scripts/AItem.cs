@@ -17,7 +17,9 @@ public enum ItemType
 
 public abstract class AItem : ScriptableObject
 {
+    public int StackSize;
     public int ID;
+    public int m_worthInCurrency;
     public GameObject prefab;
     public ItemType type;
     [TextArea(15, 20)]

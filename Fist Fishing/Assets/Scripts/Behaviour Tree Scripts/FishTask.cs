@@ -10,7 +10,7 @@ public class FishTask : Node
     [SerializeField]
     protected GameObject m_target;
     protected GameObject m_me;
-
+    protected float m_biteCooldown;
 
 
     protected void ReadInfo()
@@ -20,5 +20,6 @@ public class FishTask : Node
         m_speed = (float)m_tree.GetValue(FishBrain.SpeedName); // should, like targetname, pass the variable names in.
         m_turnSpeed = (float)m_tree.GetValue(FishBrain.TurnSpeedName);
         m_accuracy = (float)m_tree.GetValue(FishBrain.AccuracyName);
+        m_biteCooldown = (float)m_tree.GetValue(FishBrain.BiteCooldownName);
     }
 }

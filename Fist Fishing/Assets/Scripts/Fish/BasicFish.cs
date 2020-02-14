@@ -10,7 +10,7 @@ public class BasicFish : MonoBehaviour
 
     #region working inspector dictionary
     /// <summary>
-    /// this is the mess reuired to make dictionaries with  list as a value work in inspector
+    /// this is the mess required to make dictionaries with  list as a value work in inspector
     /// used in this case to pair enum of menu enum with a list of menu objects
     /// </summary>
     [System.Serializable]
@@ -75,7 +75,7 @@ public class BasicFish : MonoBehaviour
 
         m_camera = Camera.main;
         m_isListed = false;
-        m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponent<TargetController>();
+        m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<TargetController>();
 
         //Get all hitboxes from each fish compound colliders.
         /*FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();

@@ -19,7 +19,7 @@ public class VisibleAttackRange : MonoBehaviour
     {
         if (m_player == null)
             return;
-        m_currentShoulder = m_player.GetComponent<CombatModule>().m_currentShoulder;
+        m_currentShoulder = m_player.GetComponentInChildren<CombatModule>().m_currentShoulder;
     }
     private void OnDrawGizmos()
     {
