@@ -29,7 +29,7 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     [SerializeField]
     protected MenuList m_menuList;
 
-    protected void SwapSprite()
+    protected virtual void SwapSprite()
     {
         m_image.sprite = m_isSelected ? m_selectedSprite : m_isHovered ? m_HoverSprite : m_deselectedSprite;
     }
@@ -38,12 +38,12 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     /// Tells the menuList to show or hide when tab is Selected or not.
     /// </summary>
     /// <param name="activeState"></param>
-    protected void SwapMenuList()
+    protected virtual void SwapMenuList()
     {
         m_menuList.ShowActive(m_isSelected);
     }
 
-    void Start()
+    protected virtual void Start()
     {
         m_parentTabManager = GetComponentInParent<TabManager>();
 
@@ -59,26 +59,26 @@ public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IP
     /// Call this when a tab in the parent group gets changed.
     /// </summary>
     /// <param name="selected"></param>
-    public void SetIsSelected(bool selected)
+    public virtual void SetIsSelected(bool selected)
     {
         m_isSelected = selected;
         SwapSprite();
         SwapMenuList();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         m_parentTabManager.NewActivation(this);
     }
 
     //
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         m_isHovered = true;
         SwapSprite();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         m_isHovered = false;
         SwapSprite();

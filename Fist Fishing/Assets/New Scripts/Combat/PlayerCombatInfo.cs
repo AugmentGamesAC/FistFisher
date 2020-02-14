@@ -12,8 +12,14 @@ public class PlayerCombatInfo : CombatInfo
     protected NoiseTracker m_noiseTracker = new NoiseTracker();
     public NoiseTracker NoiseTracker => m_noiseTracker;
 
-    public PinwheelTracker<Bait> m_baitOptions = new PinwheelTracker<Bait>(1, default);
-    public PinwheelTracker<CombatMoveInfo> m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, default);
+    public PinwheelTracker<Bait> m_baitOptions ;
+    public PinwheelTracker<CombatMoveInfo> m_attackPinwheel;
+
+    public PlayerCombatInfo(List<CombatMoveInfo> moves)
+    {
+        m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
+        m_baitOptions = new PinwheelTracker<Bait>(1, default);
+    }
 
     public void UpdateOxygen(float change)
     {

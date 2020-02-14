@@ -1,31 +1,69 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
+public enum MoveType
+{
+    Regular,
+    Superior, 
+    Shotgun,
+    SuperiorShotgun,
+    FrogHop,
+    Funeral
+}
+
+public enum SweetSpotRange
+{
+    Close, 
+    Mid,
+    Long
+}
 
 /// <summary>
 /// Holds all the information needed for a player's move.
 /// </summary>
-public class CombatMoveInfo
+[CreateAssetMenu(fileName = "New Combat Move Definition", menuName = "Combat/ Combat Moves")]
+public class CombatMoveInfo : ScriptableObject
 {
-    public CombatMoveInfo(float damage, float slow, float noise, float moveDistance, float oxygenConsumption)
-    {
-        m_damage = damage;
-        m_slow = slow;
-        m_noise = noise;
-        m_moveDistance = moveDistance;
-        m_oxygenConsumption = oxygenConsumption;
-    }
+    [SerializeField]
+    protected MoveType m_currentMoveType;
+    public MoveType CurrentMoveType => m_currentMoveType;
 
-    public CombatMoveInfo() { }
+    [SerializeField]
+    protected FloatTracker m_damage;
+    public FloatTracker Damage => m_damage;
 
-    public float m_damage;
-    public float m_slow;
-    public float m_noise;
-    public float m_moveDistance;
-    public float m_oxygenConsumption;
+    [SerializeField]
+    protected FloatTracker m_slow;
+    public FloatTracker Slow => m_slow;
 
-    /// <summary>
-    /// probably RangeZone enum instead of float.
-    /// </summary>
-    public float m_sweetSpot;
+    [SerializeField]
+    protected FloatTracker m_noise;
+    public FloatTracker Noise => m_noise;
+
+    [SerializeField]
+    protected FloatTracker m_moveDistance;
+    public FloatTracker MoveDistance => m_moveDistance;
+
+    [SerializeField]
+    protected FloatTracker m_oxygenConsumption;
+    public FloatTracker OxygenConsumption => m_oxygenConsumption;
+
+    [SerializeField]
+    protected SweetSpotRange m_sweetSpot;
+    public SweetSpotRange SweetSpot => m_sweetSpot;
+
+    [SerializeField]
+    protected TextTracker m_name;
+    public TextTracker Name => m_name;
+
+    [SerializeField]
+    protected TextTracker m_description;
+    public TextTracker Description => m_description;
+
+
+    [SerializeField]
+    protected ImageTracker m_icon;
+    public ImageTracker Icon => m_icon;
 }

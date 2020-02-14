@@ -2,6 +2,4 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class TextTracker : UITracker<string> { }
+public class BaitPinwheelUpdater : PinwheelUpdater<Bait> { }

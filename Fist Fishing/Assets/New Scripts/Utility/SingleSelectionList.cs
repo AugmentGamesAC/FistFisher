@@ -41,9 +41,16 @@ public class SingleSelectionList<T> : ISingleSelectionList<T>
         m_Items.Add(item);
     }
 
+    public void AddItems(IEnumerable<T> items)
+    {
+        m_Items.AddRange(items);
+    }
+
     public void Remove(T item)
     {
         int removalIndex = m_Items.IndexOf(item);
+        if (removalIndex < 0)
+            return;
         m_Items.RemoveAt(removalIndex);
         if (removalIndex <= m_selection)
             IncrementSelection(-1);

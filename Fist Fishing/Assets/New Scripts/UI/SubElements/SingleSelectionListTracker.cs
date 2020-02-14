@@ -24,6 +24,13 @@ public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>,
         UpdateState();
     }
 
+    public void AddItems(IEnumerable<T> items)
+    {
+        m_value.AddItems(items);
+        UpdateState();
+    }
+
+
     public void IncrementSelection(int direction)
     {
         m_value.IncrementSelection(direction);
