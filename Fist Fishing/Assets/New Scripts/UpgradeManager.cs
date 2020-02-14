@@ -29,11 +29,11 @@ public class UpgradeManager : MonoBehaviour
         Torso
     }
 
-    protected int m_appliedUpgrades;
+    protected static int m_appliedUpgrades;
 
     PlayerStatManager statManager;
 
-    Dictionary<UpgradeTypes, int> UpgradeCosts;
+    static Dictionary<UpgradeTypes, int> UpgradeCosts;
 
     /// <summary>
     /// Creates an Upgrade with RNG.
@@ -55,7 +55,7 @@ public class UpgradeManager : MonoBehaviour
     /// <summary>
     /// Up the price of all upgrades after purchase.
     /// </summary>
-    void UpdateAppliedUpgrade()
+    public static void UpdateAppliedUpgrade()
     {
         //this needs to be first.
         m_appliedUpgrades++;
@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
     public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, float> updatefunction);
     public static CostChangeListener UpdateCosts;
 
-    float RecalculateCost(Dictionary<Stats, float> statsModifier)
+    static float RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
         return 100.0f;
     }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// this class exists to instantiate a list of prefabs into a scrollable list
+/// </summary>
 public class ActionDefinitionListController : MonoBehaviour
 {
     [SerializeField]
@@ -12,7 +15,7 @@ public class ActionDefinitionListController : MonoBehaviour
     void Start()
     {
         int count = 0;
-        foreach (GameObject AD in m_actionDefinitionPrefabs)
+        foreach (GameObject AD in m_actionDefinitionPrefabs) //loop through list
         {
             GameObject g = Instantiate(AD) as GameObject;
             ActionDefinition def = g.GetComponent<ActionDefinition>();
@@ -22,19 +25,12 @@ public class ActionDefinitionListController : MonoBehaviour
             }
             else
             {
-                def.m_humanReadableID += count.ToString();
-                g.GetComponentInChildren<Text>().text = def.m_humanReadableID;
+                //g.GetComponentInChildren<Text>().text = def.m_humanReadableID; //may need something like this in the future unless all text is set up in prefab (which is preferable)
 
                 g.SetActive(true);
                 g.transform.SetParent(gameObject.transform, false);
             }
             count++;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

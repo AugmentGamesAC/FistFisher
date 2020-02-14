@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5454482903942613004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lookFrom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 964892760461229543}
   - component: {fileID: 964892760461229339}
   - component: {fileID: 1164403225712643155}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish-Indifferent1
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -490,6 +490,7 @@ MonoBehaviour:
     - {fileID: 0}
     values:
     - 1
+  m_fishDef: {fileID: 11400000, guid: ec728b77512df5e4eb5be6c1b2802604, type: 2}
   m_personalSpaceRadius: 1
   Speed: 2
   TurnSpeed: 50
@@ -498,8 +499,6 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 3
-  m_targetController: {fileID: 0}
-  m_isListed: 0
 --- !u!114 &7847238372462921184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40890704cb00abd4cb388300a2fb1658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 0
+  m_currentHealth: 100
   m_maxHealth: 100
   m_healthPercentage: 0
   m_regenTimer: 0
@@ -569,10 +568,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5661560785264939147}
     m_Modifications:
-    - target: {fileID: 7337022691720220378, guid: cdf66abcac68aa04cb9cd625685f0814,
+    - target: {fileID: 1791835324322129690, guid: cdf66abcac68aa04cb9cd625685f0814,
         type: 3}
-      propertyPath: m_Name
-      value: AnteaterFish_Model_Prefab
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184397498985816633, guid: cdf66abcac68aa04cb9cd625685f0814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347969029294430005, guid: cdf66abcac68aa04cb9cd625685f0814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4988075351533106957, guid: cdf66abcac68aa04cb9cd625685f0814,
         type: 3}
@@ -634,6 +643,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1bbfa35cea637344589f8f1ddc32a0d2, type: 2}
+    - target: {fileID: 7337022691720220378, guid: cdf66abcac68aa04cb9cd625685f0814,
+        type: 3}
+      propertyPath: m_Name
+      value: AnteaterFish_Model_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337022691720220378, guid: cdf66abcac68aa04cb9cd625685f0814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135714902217626024, guid: cdf66abcac68aa04cb9cd625685f0814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf66abcac68aa04cb9cd625685f0814, type: 3}
 --- !u!4 &4980135836742252466 stripped

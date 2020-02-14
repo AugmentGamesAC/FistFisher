@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class OxygenTracker : MonoBehaviour
+[System.Serializable]
+public class OxygenTracker 
 {
-    [SerializeField]
-    protected float m_currentOxygen;
-    public float CurrentOxygen { get { return m_currentOxygen; } }
+    public OxygenTracker(float max)
+    {
+        m_oxy = new PercentageTracker(max);
+        ResetOxygen();
+        m_OxygenTickTimer = m_OxygenTickFrequency;
+    }
 
-    protected float m_maxOxygen = 100.0f;
-    public float MaxOxygen { get { return m_maxOxygen; } }
-
     [SerializeField]
-    protected float m_OxygenPercentage;
-    public float OxygenPercentage { get { return m_OxygenPercentage; } }
+    protected PercentageTracker m_oxy;
+    public PercentageTracker Tracker => m_oxy;
 
     public delegate void OnLowOxygenEvent();
     public event OnLowOxygenEvent OnLowOxygen;
@@ -28,84 +30,42 @@ public class OxygenTracker : MonoBehaviour
 
     public bool m_isUnderWater = false;
 
-    public HealthModule m_healthComponent;
-
-    public Slider m_OxygenSlider;
-
-
-    void Start()
-    {
-        ResetOxygen();
-        UpdateOxygenPercentage();
-    }
 
     private void Update()
     {
+        //don't update if game is paused
+        if (NewMenuManager.PausedActiveState)
+            return;
         //Regen/degen oxygen process.
-        m_OxygenTickTimer += Time.deltaTime;
-        if (m_OxygenTickTimer > m_OxygenTickFrequency)
-        {
-            if (m_isUnderWater)
-            {
-                ReduceOxygen(m_OxygenDegeneration);
-            }
-            else
-            {
-                ModifyOxygen(m_OxygenRegeneration);
-            }
-            ResetOxygenTickTimer();
-        }
-    }
+        m_OxygenTickTimer -= Time.deltaTime;
+        if (m_OxygenTickTimer > 0)
+            return;
 
-    public virtual void ModifyOxygen(float changeAmount)
-    {
-        m_currentOxygen += Mathf.Clamp(changeAmount, -m_maxOxygen, m_maxOxygen);
-        m_currentOxygen = Mathf.Clamp(m_currentOxygen, 0.0f, m_maxOxygen);
+        ModifyOxygen(m_isUnderWater ? -m_OxygenDegeneration: m_OxygenRegeneration);
 
-        UpdateOxygenPercentage();
-    }
-
-    public virtual bool ReduceOxygen(float reductionAmount)
-    {
-        ModifyOxygen(-reductionAmount);
+        m_OxygenTickTimer = m_OxygenTickFrequency;
 
         NoOxygenCheck();
-
-        return true;
     }
 
-    private void UpdateOxygenPercentage()
+    public void ModifyOxygen(float changeAmount)
     {
-        m_OxygenPercentage = m_currentOxygen / m_maxOxygen;
-
-        m_OxygenSlider.value = m_OxygenPercentage;
+        m_oxy.IncrementCurrent(changeAmount);
     }
 
-    private bool NoOxygenCheck()
+
+    protected void NoOxygenCheck()
     {
-        if (m_currentOxygen > 0.0f)
-            return false;
-
-        //start damaging health
-        m_healthComponent.TakeDamage(m_noOxygenDamage);
-
-        ResetOxygenTickTimer();
-
+        if (m_oxy.Current > 0)
+            return;
         //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
         if (OnLowOxygen != null)
             OnLowOxygen.Invoke();
-
-        return true;
     }
 
     public void ResetOxygen()
     {
-        m_currentOxygen = m_maxOxygen;
-        UpdateOxygenPercentage();
+        m_oxy.SetCurrent(m_oxy.Max);
     }
 
-    private void ResetOxygenTickTimer()
-    {
-        m_OxygenTickTimer = 0.0f;
-    }
 }

@@ -68,13 +68,15 @@ public enum MenuScreens
     /// Options available when mounted on boat
     /// </summary>
     MountBoat,
+
+    Combat
 }
 
 /// <summary>
 /// singleton that handles all active menus
 /// </summary>
 [System.Serializable]
-public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
+public class NewMenuManager : MonoBehaviour
 {
     #region working inspector dictionary
     /// <summary>
@@ -137,8 +139,7 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
     protected MenuScreens m_currentSelectedMenu = MenuScreens.NotSet;
     public static MenuScreens CurrentMenu => Instance.m_currentSelectedMenu;
 
-    [SerializeField]
-    MenuScreens controlMenu = MenuScreens.NotSet;
+
     /// <summary>
     /// Decides which menus to display based on what screen we are currently on
     /// Set the current menu  
@@ -152,7 +153,10 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Start()
     {
-        DisplayMenu(MenuScreens.MainMenu);
+        foreach (var menuList in Instance.m_menuConfigurations)
+            menuList.Value.ShowActive(false);
+
+        Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)
@@ -188,16 +192,5 @@ public class NewMenuManager : MonoBehaviour, ISerializationCallbackReceiver
         list.ShowActive(activeState);
     }
 
-    public void OnBeforeSerialize()
-    {
-        if (Instance == default)
-            Instance = this;
-        // DisplayMenuScreen(((TestMenuManager)Instance).m_currentSelectedMenu);
 
-        DisplayMenuScreen(m_currentSelectedMenu);
-    }
-
-    public void OnAfterDeserialize()
-    {
-    }
 }

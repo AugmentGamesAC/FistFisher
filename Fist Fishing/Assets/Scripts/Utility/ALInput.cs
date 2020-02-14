@@ -15,6 +15,8 @@ public class ALInput : MonoBehaviour
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
+
+    #region keycodes keycodes
     [SerializeField]
     protected KeyCode m_forward;
     public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
@@ -133,6 +135,8 @@ public class ALInput : MonoBehaviour
     KeyCode m_firstPerson;
     public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
 
+    #endregion keycodes
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -246,7 +250,7 @@ public class ALInput : MonoBehaviour
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.Space;
+        m_punch = KeyCode.P;
         m_manualCamera = KeyCode.Mouse1;
         m_backward = KeyCode.S;
 
@@ -268,7 +272,7 @@ public class ALInput : MonoBehaviour
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
         m_harvest = KeyCode.R;
-        m_throwBait = KeyCode.P;
+        m_throwBait = KeyCode.O;
 
         m_craftBait = KeyCode.B;
 
