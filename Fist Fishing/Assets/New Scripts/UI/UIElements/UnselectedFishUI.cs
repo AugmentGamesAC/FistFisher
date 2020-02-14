@@ -14,7 +14,7 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
     protected IntImageUpdater EnemyAction;
-
+    [SerializeField]
     protected ProgressBarUpdater ProgressBar;
 
     /// <summary>
