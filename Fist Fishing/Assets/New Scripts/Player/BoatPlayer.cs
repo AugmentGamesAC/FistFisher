@@ -73,14 +73,14 @@ public class BoatPlayer : MonoBehaviour
         //Mounted Context actions
         ResolveRotation();
 
-        if (ALInput.GetKey(ALInput.Forward))
+        if (/*ALInput.GetKey(ALInput.Forward)*/Configurations.AxisDirections(ActionID.MovementOrInventoryNavigation).z != 0)
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
 
     void ResolveRotation()
     {
-        float horizontalWeight = ALInput.GetAxis(ALInput.AxisCode.Horizontal);
+        float horizontalWeight = /*ALInput.GetAxis(ALInput.AxisCode.Horizontal);*/Configurations.AxisDirections(ActionID.MovementOrInventoryNavigation).x;
 
         Vector3 desiredDirection = new Vector3
         (

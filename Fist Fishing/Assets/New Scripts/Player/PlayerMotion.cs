@@ -127,8 +127,8 @@ public class PlayerMotion : MonoBehaviour
     {
         Vector3 desiredDirection = new Vector3
         (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
-            ALInput.GetAxis(ALInput.AxisCode.MouseX),
+            /*ALInput.GetAxis(ALInput.AxisCode.MouseY)*/Configurations.AxisDirections(ActionID.CameraRotation).y,
+            /*ALInput.GetAxis(ALInput.AxisCode.MouseX)*/Configurations.AxisDirections(ActionID.CameraRotation).x,
             0
         ) * turningSpeedRef * Time.deltaTime;
 

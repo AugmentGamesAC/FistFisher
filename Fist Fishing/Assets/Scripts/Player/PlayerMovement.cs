@@ -223,10 +223,10 @@ public class PlayerMovement : MonoBehaviour
     {
         m_isGrounded = false;
 
-        if (!ALInput.GetKey(ALInput.ManualCamera))
+        /*if (!ALInput.GetKey(ALInput.ManualCamera))*/
             ResolveSwimRotation();
 
-        if (ALInput.GetKey(ALInput.Forward))
+        if (/*ALInput.GetKey(ALInput.Forward)*/Configurations.AxisDirections(ActionID.MovementOrInventoryNavigation).y != 0)
             m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
     }
 
@@ -247,9 +247,9 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 desiredDirection = new Vector3
         (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
+            /*ALInput.GetAxis(ALInput.AxisCode.MouseY)*/Configurations.AxisDirections(ActionID.CameraRotation).y,
             0, // no touch Y
-            ALInput.GetAxis(ALInput.AxisCode.MouseX)
+               /*ALInput.GetAxis(ALInput.AxisCode.MouseX)*/Configurations.AxisDirections(ActionID.CameraRotation).x
         ) * m_turnSpeed * Time.deltaTime;
 
 
@@ -330,27 +330,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCamera()
     {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
+        //if (!ALInput.GetKey(ALInput.ManualCamera))
             return;
 
-        m_camera.UpdateRotation(GetLookInput().x, GetLookInput().y);
+        //m_camera.UpdateRotation(GetLookInput().x, GetLookInput().y);
 
         //get only forward and ignore Y. 
         //This is so we can move flat on the ground without rotating character model on xRot.
-        Vector3 targetDirection = m_camera.transform.forward;
+        /*Vector3 targetDirection = m_camera.transform.forward;
         targetDirection.y = 0;
-
+        */
         //m_player.transform.rotation = Quaternion.LookRotation(targetDirection);
     }
 
     Vector3 GetMoveInput()
     {
-        return ALInput.GetDirection(ALInput.DirectionCode.MoveInput);
+        return /*ALInput.GetDirection(ALInput.DirectionCode.MoveInput);*/Configurations.AxisDirections(ActionID.MovementOrInventoryNavigation);
     }
 
     public Vector3 GetLookInput()
     {
-        return ALInput.GetDirection(ALInput.DirectionCode.LookInput);
+        return /*ALInput.GetDirection(ALInput.DirectionCode.LookInput);*/Configurations.AxisDirections(ActionID.CameraRotation);
     }
 
     void ApplyGravity()

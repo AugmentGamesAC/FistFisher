@@ -106,7 +106,7 @@ public class CombatManager : MonoBehaviour
     protected void Update()
     {
         //can switch targets even when fish are attacking.
-        ChangeSelectedFish(ALInput.GetAxis(ALInput.AxisCode.Horizontal));
+        ChangeSelectedFish(/*ALInput.GetAxis(ALInput.AxisCode.Horizontal)*/Configurations.AxisDirections(ActionID.Targeting).x);
 
         //listen to inputs only during AwaitingPlayerRound.
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)

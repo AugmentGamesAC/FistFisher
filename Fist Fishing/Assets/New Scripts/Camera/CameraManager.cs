@@ -100,7 +100,7 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         }
 
 
-        Vector3 LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
+        Vector3 LookInputVec = Configurations.AxisDirections(ActionID.CameraRotation);//ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
 
         currentBehavoir.ResolveInput
             (LookInputVec.x,
