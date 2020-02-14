@@ -79,5 +79,18 @@ public class KeyConfiguration //: MonoBehaviour
 
 
 
+    public Vector3 AxisDirections(ActionID actionID)
+    {
+        ActionDefinition AD = GetActionDefinitionFromDictionary(actionID);
+        if (AD == null)
+            return Vector3.zero;
+
+        KeyCodeOrDirectionCode code = GetKeyOrAxis(AD);
+
+        if (code.direction == ALInput.DirectionCode.Unset)
+            return Vector3.zero;
+
+        return ALInput.GetDirection(code.direction);
+    }
 
 }

@@ -135,5 +135,10 @@ public class Configurations : MonoBehaviour
         return Instance.Controls.m_KBMKeyConfig.IsThisPressed(actionID);
     }
 
+    public static Vector3 AxisDirections(ActionID actionID)
+    {
+        return Instance.Controls.m_KBMKeyConfig.AxisDirections(actionID);
+    }
+
 
 }

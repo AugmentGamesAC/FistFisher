@@ -40,9 +40,7 @@ public class PlayerMotion : MonoBehaviour
         m_vision = Camera.main.GetComponent<CameraManager>();
         m_movementResoultion = new Dictionary<CameraManager.CameraState, System.Action>()
         {
-           //{CameraManager.CameraState.Abzu, AbzuMovement },
            {CameraManager.CameraState.FirstPerson, FirstPersonMovement },
-           //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
         turningSpeedRef.Value = 180.0f;
@@ -59,7 +57,7 @@ public class PlayerMotion : MonoBehaviour
 
         System.Action MoveResolution;
         if (!m_movementResoultion.TryGetValue(m_vision.CurrentState, out MoveResolution))
-            throw new System.NotImplementedException("Camera state not reconized by Player motion ");
+            throw new System.NotImplementedException("Camera state not recognized by Player motion ");
 
         MoveResolution();
     }
@@ -88,30 +86,6 @@ public class PlayerMotion : MonoBehaviour
     {
         MenuScreens desiredMenu = (m_displayInventory) ? MenuScreens.SwimmingInventory : MenuScreens.NormalHUD;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
-    }
-    protected void AbzuMovement()
-    { 
-        Vector3 desiredDirection = new Vector3
-        (
-             ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
-            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)), 
-            0            
-        ) * turningSpeedRef * Time.deltaTime;
-
-
-        if (desiredDirection.sqrMagnitude > 0.000001)
-            transform.Rotate(desiredDirection, Space.Self);
-
-        //motion
-        transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
-    }
-    protected void LockedMovement()
-    {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
-
-        if (ALInput.GetKey(ALInput.Forward))
-            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
     protected void WarthogMovement() 
