@@ -19,8 +19,8 @@ public class TestingCombatManager : CombatManager
     protected FishDefintion m_f7Fish;
     [SerializeField]
     protected AllFishUIUpdater m_showThemALl;
-    protected AttackPinwheelUpdater m_attackPinwheelUpdater;
     [SerializeField]
+    protected AttackPinwheelUpdater m_attackPinwheelUpdater;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class TestingCombatManager : CombatManager
         m_attackPinwheelUpdater.UpdateTracker(m_playerCombatInfo.m_attackPinwheel);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
-        m_showThemALl.ForceUpdate(default);
+       // m_showThemALl.ForceUpdate(default);
        // m_lessshowyFish.UpdateUI(default);
     }
 
@@ -71,7 +71,6 @@ public class TestingCombatManager : CombatManager
 
 
         base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
-        m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
     }
 
 

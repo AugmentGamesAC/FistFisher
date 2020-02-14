@@ -1026,7 +1026,7 @@ RectTransform:
   m_LocalScale: {x: 2.4528, y: 2.4528, z: 2.4528}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1844,6 +1844,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 167079006}
 --- !u!114 &167079006
 MonoBehaviour:
@@ -2131,7 +2134,7 @@ PrefabInstance:
     - target: {fileID: 6250691248373757601, guid: f88fdbde4d7dd7d459a0ba3e16771474,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6250691248373757601, guid: f88fdbde4d7dd7d459a0ba3e16771474,
         type: 3}
@@ -2229,7 +2232,7 @@ MonoBehaviour:
   EnemyDistanceDisplay: {fileID: 1089967620}
   EnemyNameDisplay: {fileID: 1919037463}
   EnemyTypeDisplay: {fileID: 483330884}
-  EnemyAction: {fileID: 167079005}
+  EnemyAction: {fileID: 0}
   EnemyIconDisplay: {fileID: 1342362887}
   EnemyHealthNumberDisplay: {fileID: 565521652}
   EnemySwimSpeedDisplay: {fileID: 1879645491}
@@ -2307,7 +2310,6 @@ RectTransform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1196360877}
-  - {fileID: 1154383150}
   - {fileID: 286296025}
   - {fileID: 1084750371}
   - {fileID: 510006713}
@@ -2316,7 +2318,7 @@ RectTransform:
   - {fileID: 1849274027}
   - {fileID: 1109933128}
   m_Father: {fileID: 1248647322}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2338,11 +2340,11 @@ MonoBehaviour:
   EnemyDistanceDisplay: {fileID: 111956443}
   EnemyNameDisplay: {fileID: 1084750372}
   EnemyTypeDisplay: {fileID: 1109933130}
-  EnemyAction: {fileID: 510006714}
+  EnemyAction: {fileID: 0}
   EnemyIconDisplay: {fileID: 286296026}
   EnemyHealthNumberDisplay: {fileID: 1092419665}
   EnemySwimSpeedDisplay: {fileID: 1849274028}
-  ProgressBar: {fileID: 1154383153}
+  ProgressBar: {fileID: 0}
 --- !u!114 &200064932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2692,7 +2694,7 @@ MonoBehaviour:
   EnemyDistanceDisplay: {fileID: 135114491}
   EnemyNameDisplay: {fileID: 1266861149}
   EnemyTypeDisplay: {fileID: 1852269198}
-  EnemyAction: {fileID: 1444336830}
+  EnemyAction: {fileID: 0}
   EnemyIconDisplay: {fileID: 1456990705}
   EnemyHealthNumberDisplay: {fileID: 815175970}
   EnemySwimSpeedDisplay: {fileID: 1288019780}
@@ -3591,7 +3593,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3610,6 +3612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 286296027}
 --- !u!114 &286296027
 MonoBehaviour:
@@ -5051,7 +5056,7 @@ RectTransform:
   m_LocalScale: {x: 1.7524, y: 1.7524, z: 1.7524}
   m_Children: []
   m_Father: {fileID: 1396585607}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5070,6 +5075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 449401715}
 --- !u!114 &449401715
 MonoBehaviour:
@@ -5631,7 +5639,7 @@ PrefabInstance:
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
@@ -5840,8 +5848,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.3932, y: 2.3932, z: 2.3932}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 7
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6099,7 +6107,7 @@ RectTransform:
   m_LocalScale: {x: 2.4528, y: 2.4528, z: 2.4528}
   m_Children: []
   m_Father: {fileID: 1396585607}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6194,7 +6202,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6213,6 +6221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 510006715}
 --- !u!114 &510006715
 MonoBehaviour:
@@ -7307,8 +7318,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 33}
   m_LocalScale: {x: 2.4528, y: 2.4528, z: 2.4528}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 6
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8978,7 +8989,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1396585607}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8997,6 +9008,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 714529631}
 --- !u!114 &714529631
 MonoBehaviour:
@@ -9206,7 +9220,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 263613594}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3992004637461473120, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
@@ -9257,7 +9271,7 @@ PrefabInstance:
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
@@ -9327,12 +9341,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2274296291261992489, guid: 1e8ea3150b678dd4287605e17f804008, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8ea3150b678dd4287605e17f804008, type: 3}
---- !u!224 &723016019 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
-    type: 3}
-  m_PrefabInstance: {fileID: 723016018}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &723016020 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6047021490070948617, guid: 1e8ea3150b678dd4287605e17f804008,
@@ -9397,6 +9405,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanMove: 0
   m_CanMoveForward: 0
+  m_sphereCastRadius: 5
+  m_closestFish:
+    m_fishData: {fileID: 0}
 --- !u!54 &745533147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9779,8 +9790,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.1696, y: 2.1696, z: 2.1696}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 5
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10765,6 +10776,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 825207211}
 --- !u!114 &825207211
 MonoBehaviour:
@@ -12041,7 +12055,7 @@ MonoBehaviour:
   m_f5Fish: {fileID: 11400000, guid: 1004598155e0b594dacc929842ab342e, type: 2}
   m_f6Fish: {fileID: 11400000, guid: 5fcafd14629e4ac469e8a975f522d58a, type: 2}
   m_f7Fish: {fileID: 11400000, guid: ec728b77512df5e4eb5be6c1b2802604, type: 2}
-  m_showyFish: {fileID: 1111584709}
+  m_showThemALl: {fileID: 0}
   m_attackPinwheelUpdater: {fileID: 0}
 --- !u!114 &911563336 stripped
 MonoBehaviour:
@@ -12092,7 +12106,7 @@ RectTransform:
   m_LocalScale: {x: 2.3932, y: 2.3932, z: 2.3932}
   m_Children: []
   m_Father: {fileID: 1396585607}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13677,7 +13691,7 @@ PrefabInstance:
     - target: {fileID: 2167131274534524110, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524110, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
@@ -14256,7 +14270,7 @@ PrefabInstance:
     - target: {fileID: 3298322455571996586, guid: ac545935919dc5c489f5d8d4214ccaab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3298322455571996586, guid: ac545935919dc5c489f5d8d4214ccaab,
         type: 3}
@@ -14332,7 +14346,7 @@ RectTransform:
   m_LocalScale: {x: 1.7524, y: 1.7524, z: 1.7524}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14351,6 +14365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1084750373}
 --- !u!114 &1084750373
 MonoBehaviour:
@@ -14536,7 +14553,7 @@ RectTransform:
   m_LocalScale: {x: 2.1696, y: 2.1696, z: 2.1696}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14820,7 +14837,7 @@ PrefabInstance:
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8946852084120264169, guid: 1e8ea3150b678dd4287605e17f804008,
         type: 3}
@@ -14985,7 +15002,7 @@ MonoBehaviour:
   EnemyDistanceDisplay: {fileID: 2107703317}
   EnemyNameDisplay: {fileID: 394598299}
   EnemyTypeDisplay: {fileID: 4861450218780631003}
-  EnemyAction: {fileID: 1380307980}
+  EnemyAction: {fileID: 0}
   EnemyIconDisplay: {fileID: 419660150}
   EnemyHealthNumberDisplay: {fileID: 360172299}
   EnemySwimSpeedDisplay: {fileID: 1403899059}
@@ -15166,7 +15183,7 @@ PrefabInstance:
     - target: {fileID: 3346029705072126580, guid: 1e0462c707b8b7d41a7ed656cd064dca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3346029705072126580, guid: 1e0462c707b8b7d41a7ed656cd064dca,
         type: 3}
@@ -17523,6 +17540,11 @@ RectTransform:
   m_LocalScale: {x: 0.4014413, y: 0.4014413, z: 0.4014413}
   m_Children:
   - {fileID: 1111584708}
+  - {fileID: 193673653}
+  - {fileID: 212633475}
+  - {fileID: 1396585607}
+  - {fileID: 1842121595}
+  - {fileID: 200064930}
   m_Father: {fileID: 72578046}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17706,6 +17728,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1266861150}
 --- !u!114 &1266861150
 MonoBehaviour:
@@ -18584,6 +18609,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1815528389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1335368875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3298322455571996591, guid: ac545935919dc5c489f5d8d4214ccaab,
+    type: 3}
+  m_PrefabInstance: {fileID: 1070331669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1335368876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335368875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_CameraOutput: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!4 &1336161537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1399349492036743577, guid: 29c9bca9523a4254aad0f1c82373f6ba,
@@ -18801,6 +18863,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1342362888}
 --- !u!114 &1342362888
 MonoBehaviour:
@@ -19028,8 +19093,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19048,6 +19113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1378691269}
 --- !u!114 &1378691269
 MonoBehaviour:
@@ -19302,6 +19370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1386090795}
 --- !u!114 &1386090795
 MonoBehaviour:
@@ -19570,13 +19641,11 @@ RectTransform:
   m_Children:
   - {fileID: 681334820}
   - {fileID: 1393070799}
-  - {fileID: 332925664}
   - {fileID: 449401713}
   - {fileID: 714529629}
   - {fileID: 1705302779}
   - {fileID: 504665356}
   - {fileID: 915830463}
-  - {fileID: 1648577530}
   m_Father: {fileID: 1248647322}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19599,9 +19668,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyDistanceDisplay: {fileID: 504665357}
   EnemyNameDisplay: {fileID: 449401714}
-  EnemyTypeDisplay: {fileID: 1648577532}
-  EnemyAction: {fileID: 714529630}
-  EnemyIconDisplay: {fileID: 332925665}
+  EnemyTypeDisplay: {fileID: 0}
+  EnemyAction: {fileID: 0}
+  EnemyIconDisplay: {fileID: 0}
   EnemyHealthNumberDisplay: {fileID: 1705302780}
   EnemySwimSpeedDisplay: {fileID: 915830464}
   ProgressBar: {fileID: 1393070802}
@@ -20146,6 +20215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1444336831}
 --- !u!114 &1444336831
 MonoBehaviour:
@@ -20233,6 +20305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1456990706}
 --- !u!114 &1456990706
 MonoBehaviour:
@@ -21186,8 +21261,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.7524, y: 1.7524, z: 1.7524}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -21206,6 +21281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1545556229}
 --- !u!114 &1545556229
 MonoBehaviour:
@@ -22417,6 +22495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1665545238}
 --- !u!114 &1665545238
 MonoBehaviour:
@@ -23079,7 +23160,7 @@ RectTransform:
   m_LocalScale: {x: 2.1696, y: 2.1696, z: 2.1696}
   m_Children: []
   m_Father: {fileID: 1396585607}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24023,7 +24104,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 263613594}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5265456096714965159, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
@@ -24068,7 +24149,7 @@ PrefabInstance:
     - target: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
@@ -24159,12 +24240,6 @@ PrefabInstance:
     - {fileID: 5265456096714965177, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
     - {fileID: 5265456096714965159, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
---- !u!224 &1763754416 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1763754415}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1763754417 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5265456096714965179, guid: bce635eacd296b244a8aafe1ec7a5b5e,
@@ -24724,8 +24799,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 263613594}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24744,6 +24819,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1832912890}
 --- !u!114 &1832912890
 MonoBehaviour:
@@ -24827,7 +24905,7 @@ RectTransform:
   - {fileID: 222528850}
   - {fileID: 1198311988}
   m_Father: {fileID: 1248647322}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24849,7 +24927,7 @@ MonoBehaviour:
   EnemyDistanceDisplay: {fileID: 1047242527}
   EnemyNameDisplay: {fileID: 825207210}
   EnemyTypeDisplay: {fileID: 1198311990}
-  EnemyAction: {fileID: 1665545237}
+  EnemyAction: {fileID: 0}
   EnemyIconDisplay: {fileID: 1386090794}
   EnemyHealthNumberDisplay: {fileID: 1892301086}
   EnemySwimSpeedDisplay: {fileID: 222528851}
@@ -25108,7 +25186,7 @@ RectTransform:
   m_LocalScale: {x: 2.3932, y: 2.3932, z: 2.3932}
   m_Children: []
   m_Father: {fileID: 200064930}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25818,7 +25896,7 @@ PrefabInstance:
     - target: {fileID: 4763221152673850636, guid: 8f77f32a3b91a26488254d11cc6456e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4763221152673850636, guid: 8f77f32a3b91a26488254d11cc6456e4,
         type: 3}
@@ -25903,7 +25981,7 @@ PrefabInstance:
     - target: {fileID: 4380623138018066514, guid: e53e7ca0e8284a541bde4b7420673f60,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4380623138018066514, guid: e53e7ca0e8284a541bde4b7420673f60,
         type: 3}
@@ -26076,6 +26154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1919037464}
 --- !u!114 &1919037464
 MonoBehaviour:
@@ -26732,14 +26813,14 @@ Transform:
   - {fileID: 2113537295}
   - {fileID: 1124458472}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1950582727
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 263613594}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5265456096714965159, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
@@ -26784,7 +26865,7 @@ PrefabInstance:
     - target: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
         type: 3}
@@ -26875,12 +26956,6 @@ PrefabInstance:
     - {fileID: 5265456096714965177, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
     - {fileID: 5265456096714965159, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bce635eacd296b244a8aafe1ec7a5b5e, type: 3}
---- !u!224 &1950582728 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5265456096714965176, guid: bce635eacd296b244a8aafe1ec7a5b5e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1950582727}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1950582729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5265456096714965179, guid: bce635eacd296b244a8aafe1ec7a5b5e,
@@ -28806,7 +28881,7 @@ PrefabInstance:
     - target: {fileID: 4979045375143554475, guid: e0c68cb2163999b41a3db3855eb26e04,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4979045375143554475, guid: e0c68cb2163999b41a3db3855eb26e04,
         type: 3}
@@ -29233,7 +29308,7 @@ Transform:
   - {fileID: 503532583}
   - {fileID: 900375523}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4588278492496823163
 Transform:
@@ -30918,7 +30993,7 @@ Transform:
   - {fileID: 4865424683049474776}
   - {fileID: 2487089619964385272}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8501701944320040554
 PrefabInstance:

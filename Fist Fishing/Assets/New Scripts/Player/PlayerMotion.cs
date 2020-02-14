@@ -31,7 +31,7 @@ public class PlayerMotion : MonoBehaviour
     protected float m_sphereCastRadius = 5;
     public float SphereCastRadius => m_sphereCastRadius;
 
-    public List<FishInstance> SurroundingFish =>  FindSurroundingFish();
+    public List<FishInstance> SurroundingFish => FindSurroundingFish();
 
     [SerializeField]
     protected FishInstance m_closestFish;
@@ -89,7 +89,7 @@ public class PlayerMotion : MonoBehaviour
             if (resultingFish.Count == 0)
                 return;
             m_CanMove = false;
-            PlayerInstance.Instance.CM.StartCombat(true, resultingFish);
+            CombatManager.Instance.StartCombat(true, resultingFish);
         }
     }
 
@@ -188,7 +188,9 @@ public class PlayerMotion : MonoBehaviour
 
         foreach (var fish in fishInRange)
         {
-            FishInstance def = fish.collider.gameObject.GetComponent<FishInstance>();
+            if (fish.collider.gameObject.GetComponent<BasicFish>() == default)
+                continue;
+            FishInstance def = fish.collider.gameObject.GetComponent<BasicFish>().FishInstance;
             if (def == null)
                 throw new System.Exception("Fish def was null for this fish!");
 
@@ -201,6 +203,8 @@ public class PlayerMotion : MonoBehaviour
                 m_closestFish = def;
             }
         }
+        if (FishInstances.Count == 0)
+            return FishInstances;
 
         FishInstances.Remove(m_closestFish);
         FishInstances.Insert(0, m_closestFish);

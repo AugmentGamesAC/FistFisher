@@ -33,6 +33,10 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
     protected override void UpdateState(IPinWheel<CombatMoveInfo> value)
     {
         base.UpdateState(value);
+
+        if (m_tabs == null)
+            return;
+
         if (value.SelectedSlot < 1 || value.SelectedSlot > m_tabs.Count)
             return;
         m_tabs[value.SelectedSlot].SetSelected(true);

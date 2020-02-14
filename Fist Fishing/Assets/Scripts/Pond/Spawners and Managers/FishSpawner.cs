@@ -32,7 +32,6 @@ public class FishSpawner : MonoBehaviour
         if (fishScript == null)
             return null;
         fishScript.Spawner = this;
-        fishScript.m_targetController = m_targetController;
 
         LayerMask mask = LayerMask.GetMask("Water");
         //Debug.LogError(mask);

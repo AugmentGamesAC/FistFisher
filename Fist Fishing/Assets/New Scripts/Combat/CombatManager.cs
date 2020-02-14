@@ -29,6 +29,15 @@ public class CombatManager : MonoBehaviour
         Large
     }
 
+
+    private static CombatManager m_instance;
+    public static CombatManager Instance => m_instance;
+    public void Awake()
+    {
+        if (CombatManager.m_instance == null)
+            CombatManager.m_instance = this;
+    }
+
     [System.Serializable]
     public class NoiseThresholdsDict : InspectorDictionary<noiseThreshold,float> { }
     [SerializeField]
