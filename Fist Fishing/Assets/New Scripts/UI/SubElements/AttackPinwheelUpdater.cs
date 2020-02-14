@@ -24,10 +24,7 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
     {
         if (index < 1 || index > m_tabs.Count)
             return;
-
-        m_tabs[m_currentSelection].SetSelected(false);
-        m_currentSelection = index;
-        
+       
         m_tracker.SetSelectedOption(index);
     }
 
@@ -41,6 +38,11 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
 
         if (value.SelectedSlot < 1 || value.SelectedSlot > m_tabs.Count)
             return;
+
+        m_tabs[m_currentSelection].SetSelected(false);
+        m_currentSelection = value.SelectedSlot;
         m_tabs[value.SelectedSlot].SetSelected(true);
-    }        
+    }  
+    
+
 }
