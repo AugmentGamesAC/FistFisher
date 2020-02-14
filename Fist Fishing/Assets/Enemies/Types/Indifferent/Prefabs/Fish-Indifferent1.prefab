@@ -405,20 +405,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!64 &1847720499880717542
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216819642430594600}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -5730392134794403111, guid: 3bf2e057a06626d4fbe87835e4a2ec1a, type: 3}
 --- !u!1 &5047043508614954978
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,8 +449,6 @@ GameObject:
   - component: {fileID: 964892760461229543}
   - component: {fileID: 964892760461229339}
   - component: {fileID: 1164403225712643155}
-  - component: {fileID: 8914441873396513277}
-  - component: {fileID: 2664285775755420718}
   m_Layer: 0
   m_Name: Fish-Indifferent1
   m_TagString: Fish
@@ -578,39 +562,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.125
   m_Center: {x: 0, y: 0, z: 0.2}
---- !u!114 &8914441873396513277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668380556320006104}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7aedd0b6a385c4ba00c197e7d8a234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_healthModule: {fileID: 964892760461229339}
-  m_damageStates:
-    keys:
-    - 1
-    - 0.5
-    values:
-    - {fileID: 0}
-    - {fileID: 0}
---- !u!114 &2664285775755420718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668380556320006104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ffc299dbd81f03449bebcaf22bceff9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Worth: 1
 --- !u!1001 &10637993693266111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,12 +636,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1bbfa35cea637344589f8f1ddc32a0d2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf66abcac68aa04cb9cd625685f0814, type: 3}
---- !u!1 &1216819642430594600 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1208873685960547991, guid: cdf66abcac68aa04cb9cd625685f0814,
-    type: 3}
-  m_PrefabInstance: {fileID: 10637993693266111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4980135836742252466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4988075351533106957, guid: cdf66abcac68aa04cb9cd625685f0814,

@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
 {
-    public int m_InventorySize = 32;
-    public InventorySlot[] m_inventorySlots = new InventorySlot[32];
+    public int m_InventorySize = 30;
+    public InventorySlot[] m_inventorySlots = new InventorySlot[30];
 
 
     public void Awake()
@@ -15,16 +15,12 @@ public class InventoryObject : ScriptableObject
         {
             m_inventorySlots[i] = new InventorySlot(-1, null, 0, this);
         }
-
-        
     }
 
-    public void AddItem(AItem item, int amount, ItemWorth worth)
+    public void AddItem(AItem item, int amount)
     {
         if (item.ID == -1)
             return;
-        if (worth != null)
-            item.m_worthInCurrency = worth.Worth;
 
         for (int i = 0; i < m_inventorySlots.Length; i++)
         {
@@ -37,7 +33,6 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-
         SetFirstEmptySlot(item, amount);
     }
 

@@ -12,11 +12,12 @@ public class Inventory : MonoBehaviour
 
     public InventoryObject m_displayInventoryObject;
 
-    public FishItem m_fishScriptableObject;
+    public FishItem m_AntEaterScriptableObject;
+    public FishItem m_YellowScriptableObject;
+    public FishItem m_RhynoScriptableObject;
     public BaitItem m_baitScriptableObject;
     public Coral1Item m_coral1ScriptableObject;
     public Coral2Item m_coral2ScriptableObject;
-    //public CurrencyItem m_currencyScriptableObject
 
     #region Currency
     //currency has to be an unsigned long. I need to imagine people are insane enough to 
@@ -92,10 +93,23 @@ public class Inventory : MonoBehaviour
         if (m_storedObjects.Contains(obj))
             return false;
 
+
+        if (m_displayInventoryObject != null)
+            ResolveCountUpdates(obj);
+
+        m_storedObjects.Add(obj);
+
+        obj.SetActive(false);
+
+        return true;
+    }
+
+    protected void ResolveCountUpdates(GameObject obj)
+    {
         if (IsABait(obj))
         {
             m_BaitCount++;
-            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1, iw);//Use delegate and event in future for every time a inventory item gets changed.
+            m_displayInventoryObject.AddItem(m_baitScriptableObject, 1);//Use delegate and event in future for every time a inventory item gets changed.
         }
         else if (IsAHarvestable(obj))
         {
@@ -105,32 +119,42 @@ public class Inventory : MonoBehaviour
             switch (hType)
             {
                 case HarvestableType.DeadFish:
+                    {
+                        FishBrain.FishClassification FishClass = test.gameObject.GetComponentInChildren<BasicFish>().FishClass;
+                        if (FishClass == FishBrain.FishClassification.Fearful)
+                        {
+                            m_displayInventoryObject.AddItem(m_YellowScriptableObject, 1);
+                        }
+                        else if (FishClass == FishBrain.FishClassification.Agressive)
+                        {
+                            m_displayInventoryObject.AddItem(m_RhynoScriptableObject, 1);
+                        }
+                        else if (FishClass == FishBrain.FishClassification.Passive)
+                        {
+                            m_displayInventoryObject.AddItem(m_AntEaterScriptableObject, 1);
+                        }
+                    }
                     m_fishCount++;
-                    m_displayInventoryObject.AddItem(m_fishScriptableObject, 1, iw);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count++;
-                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1, iw);
+                    m_displayInventoryObject.AddItem(m_coral1ScriptableObject, 1);
                     break;
                 case HarvestableType.Coral2:
                     m_coral2Count++;
-                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1, iw);
+                    m_displayInventoryObject.AddItem(m_coral2ScriptableObject, 1);
                     break;
                 case HarvestableType.NotSet:
-                    return false;
+                    return ;
             }
         }
         else
         {
-            return false;
+            return ;
         }
 
-        m_storedObjects.Add(obj);
-
-        obj.SetActive(false);
-
-        return true;
     }
+
 
     /// <summary>
     /// removes a given gameobject from inventory
@@ -157,8 +181,22 @@ public class Inventory : MonoBehaviour
             switch (hType)
             {
                 case HarvestableType.DeadFish:
+                    {
+                        FishBrain.FishClassification FishClass = test.gameObject.GetComponentInChildren<BasicFish>().FishClass;
+                        if (FishClass == FishBrain.FishClassification.Fearful)
+                        {
+                            m_displayInventoryObject.RemoveAmount(m_YellowScriptableObject, 1);
+                        }
+                        else if (FishClass == FishBrain.FishClassification.Agressive)
+                        {
+                            m_displayInventoryObject.RemoveAmount(m_RhynoScriptableObject, 1);
+                        }
+                        else if (FishClass == FishBrain.FishClassification.Passive)
+                        {
+                            m_displayInventoryObject.RemoveAmount(m_AntEaterScriptableObject, 1);
+                        }
+                    }
                     m_fishCount--;
-                    m_displayInventoryObject.RemoveAmount(m_fishScriptableObject, 1);
                     break;
                 case HarvestableType.Coral1:
                     m_coral1Count--;
@@ -201,7 +239,7 @@ public class Inventory : MonoBehaviour
     }
     public GameObject GetReferenceToStoredBait()
     {
-        if (m_storedObjects.Count == 0 || m_BaitCount ==0)
+        if (m_storedObjects.Count == 0 || m_BaitCount == 0)
             return null;
 
         foreach (GameObject g in m_storedObjects)
@@ -235,6 +273,6 @@ public class Inventory : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        m_displayInventoryObject.m_inventorySlots = new InventorySlot[32];
+        m_displayInventoryObject.m_inventorySlots = new InventorySlot[30];
     }
 }

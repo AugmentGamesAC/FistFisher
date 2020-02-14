@@ -24,7 +24,7 @@ public class FishDamageStates : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     void Awake()
@@ -37,20 +37,21 @@ public class FishDamageStates : MonoBehaviour
     void Update()
     {
         float curhp = m_healthModule.HealthPercentage;
-        
+
         //while(curhp >= )
-        foreach(float flt in DamageStates.Keys)
+        foreach (float flt in DamageStates.Keys)
         {
             //Debug.Log(flt + DamageStates[flt].name);
-            if(curhp < flt)
+            if (curhp < flt)
             {
                 //Debug.LogWarning(curhp + ": Switching States to " + DamageStates[flt]);
                 m_currentModel = DamageStates[flt];
             }
-            DamageStates[flt].SetActive(false);
+            if (DamageStates[flt] != null)
+                DamageStates[flt].SetActive(false);
 
         }
-
-        m_currentModel.SetActive(true);
+        if (m_currentModel != null)
+            m_currentModel.SetActive(true);
     }
 }

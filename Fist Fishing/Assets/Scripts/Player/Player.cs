@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public Vector3 m_respawnLocation;
 
+    public GameObject m_InfluenceSphereObject;
+
     [SerializeField]
     protected FishArchetype m_fishArchetype;
     public FishArchetype FishType { get { return m_fishArchetype; } }
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour
         m_respawnLocation = point;
     }
 
-    protected void HandleDeath()
+    public void HandleDeath()
     {
         //stick stuff here to handle player death
 
@@ -48,20 +50,28 @@ public class Player : MonoBehaviour
 
         //gameObject.transform.position = m_spawnLocation.position;
         //GEt Vector between boat spawn and player.
+        if (m_respawnLocation != null)
+        {
+            Vector3 MoveVector = m_respawnLocation - gameObject.transform.position;
 
-        Vector3 MoveVector = m_respawnLocation - gameObject.transform.position;
+            m_characterController.Move(MoveVector);
 
-        m_characterController.Move(MoveVector);
-
-        PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
-        move.Mount();
+            PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
+            move.Mount();
+        }
     }
 
     private void Init()
     {
+        if (m_InfluenceSphereObject == null)
+            m_InfluenceSphereObject = gameObject.transform.parent.gameObject;
+
         m_healthModule = GetComponent<HealthModule>();
 
-        m_characterController = GetComponent<CharacterController>();
+        if (m_characterController == null)
+        {
+            m_characterController = m_InfluenceSphereObject.GetComponent<CharacterController>();
+        }
 
         m_oxygenTracker = GetComponentInChildren<OxygenTracker>();
 
@@ -72,5 +82,4 @@ public class Player : MonoBehaviour
     {
         Init();
     }
-
 }
