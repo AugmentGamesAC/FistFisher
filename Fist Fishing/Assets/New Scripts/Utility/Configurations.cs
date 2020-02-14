@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization;
 using System.IO;
+using UnityEngine.UI;
 
 /// <summary>
 /// this class stores, saves, and loads all global configuration data
@@ -61,12 +62,25 @@ public class Configurations : MonoBehaviour
     public Vector2 ScreenResolution => m_screenResolution;
 
 
+    public Light m_Light;
+    public Slider m_gammaSlider;
 
-
+    [SerializeField]
+    public void SetGamma()
+    {
+        m_gamma = m_gammaSlider.value;
+        m_Light.intensity = m_gamma;
+    }
 
     void Start()
     {
         //LoadAllSettingsFromFile();
+
+        //Camera cam = UnityEngine.Camera.current;
+        //Color ambientLight = RenderSettings.ambientLight;
+        //RenderSettings.ambientIntensity = m_gamma+99999999;
+        m_Light.intensity = m_gamma;
+        m_gammaSlider.value = m_gamma;
     }
 
 
