@@ -71,7 +71,7 @@ public class HardcodedKBM : MonoBehaviour
         mainmenu.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
         mainmenu.SetActionType(ActionType.Button);
         KeyCodeOrDirectionCode keymainmenu = new KeyCodeOrDirectionCode();
-        keymainmenu.key = KeyCode.I;
+        keymainmenu.key = KeyCode.Escape;
         m_KBMKeyConfig.m_allTheInputs.Add(mainmenu, keymainmenu);
 
         ActionDefinition FleeOrCameraModeSwap = new ActionDefinition();
