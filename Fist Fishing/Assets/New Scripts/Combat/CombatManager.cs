@@ -380,6 +380,8 @@ public class CombatManager : MonoBehaviour
     {
         m_currentCombatState = CombatStates.CombatFinished;
 
+        m_roundQueue.Clear();
+
         //TODO: resolve fish handlingPackages{
         m_player.m_CanMove = true;
 
