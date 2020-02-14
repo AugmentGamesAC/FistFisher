@@ -289,48 +289,24 @@ public class ALInput : MonoBehaviour
     /// </summary>
     private void LoadFromFile()
     {
-        /*
+        
         m_forward = KeyCode.W;
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
         m_descend = KeyCode.E;
         m_ascend = KeyCode.Q;
-        m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.P;
         m_manualCamera = KeyCode.Mouse1;
         m_backward = KeyCode.S;
-
-        //Default Combat buttons
-        m_attack = KeyCode.Mouse0;
-        m_item = KeyCode.Mouse1;
-        m_flee = KeyCode.Mouse2;
 
         m_rotateForward = KeyCode.Keypad8;
         m_rotateBackwards = KeyCode.Keypad2;
         m_rotateRight = KeyCode.Keypad4;
         m_rotateLeft = KeyCode.Keypad6;
 
-        m_abzu = KeyCode.F1;
-        m_locked = KeyCode.F2;
-        m_warthog = KeyCode.F3;
-        m_firstPerson = KeyCode.F4;
-
-        m_mountBoat = KeyCode.M;
-        m_dismountBoat = KeyCode.N;
-        m_harvest = KeyCode.R;
-        m_throwBait = KeyCode.O;
-
-        m_craftBait = KeyCode.B;
-
-        m_toggleInventory = KeyCode.I;
-        m_toggleShop = KeyCode.O;
-
-        m_start = KeyCode.Space;
-
         m_playerLateralMovement = AxisCode.Horizontal;
-        */
+        
 
         m_action = KeyCode.F;
         m_secondaryAction = KeyCode.R;
@@ -338,5 +314,5 @@ public class ALInput : MonoBehaviour
         m_holdPickup = KeyCode.Mouse0;
         m_mainMenu = KeyCode.Escape;
         m_fleeOrCameraModeSwap = KeyCode.T;
-}
+    }
 }
