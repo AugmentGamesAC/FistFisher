@@ -47,7 +47,7 @@ public class CombatModule : MonoBehaviour
             return;
 
         //needs to be replaced with brian's method of input.
-        if (ALInput.GetKeyDown(ALInput.Action))
+        if (Configurations.IsThisPressed(ActionID.Action))
             Punch();
     }
 

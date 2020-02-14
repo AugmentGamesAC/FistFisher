@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBaitFromBag : MonoBehaviour
+/*public class SpawnBaitFromBag : MonoBehaviour
 {
     public GameObject m_baitPrefab;
     // Start is called before the first frame update
@@ -24,3 +24,4 @@ public class SpawnBaitFromBag : MonoBehaviour
         }
     }
 }
+*/

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnFishInThisPond : MonoBehaviour
+/*public class SpawnFishInThisPond : MonoBehaviour
 {
 
     [SerializeField]
@@ -26,3 +26,4 @@ public class SpawnFishInThisPond : MonoBehaviour
         }
     }
 }
+*/

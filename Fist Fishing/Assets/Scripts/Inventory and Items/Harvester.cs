@@ -121,7 +121,7 @@ public class Harvester : MonoBehaviour
         }
         
 
-        if (m_toHarvest!=null && ALInput.GetKeyDown(ALInput.Action))
+        if (m_toHarvest!=null && Configurations.IsThisPressed(ActionID.Action))
         {
             Harvest();
         }

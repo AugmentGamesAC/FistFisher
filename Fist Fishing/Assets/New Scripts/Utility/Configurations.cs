@@ -13,11 +13,11 @@ public class Configurations : MonoBehaviour
 {
 
     #region singletonification
-    private static Configurations Instance;
+    public static Configurations Instance;
     private static void hasInstance()
     {
         if (Instance == default)
-            throw new System.InvalidOperationException("ALInput not Initilized");
+            throw new System.InvalidOperationException("Configurations not Initilized");
     }
     void Awake()
     {
@@ -47,8 +47,20 @@ public class Configurations : MonoBehaviour
     protected bool m_invertXAxis;
     [SerializeField]
     protected bool m_invertYAxis;
-    //[SerializeField]
+
+
+
+    /******************************************************************************************************************************************/
+    [SerializeField]
     //protected List<KeyConfiguration> keyConfigurations; //(in the future, for customizable controls)
+    protected HardcodedKBM m_controls;
+    [SerializeField]
+    public HardcodedKBM Controls => m_controls;
+    /******************************************************************************************************************************************/
+
+
+
+
 
 
 
@@ -116,6 +128,11 @@ public class Configurations : MonoBehaviour
 #else
          Application.Quit();
 #endif
+    }
+
+    public static bool IsThisPressed(ActionID actionID)
+    {
+        return Instance.Controls.m_KBMKeyConfig.IsThisPressed(actionID);
     }
 
 

@@ -8,6 +8,24 @@ public class LayerBetweenGameAndALInput : MonoBehaviour
     /// <summary>
     /// make this a singleton
     /// </summary>
+    #region singletonification
+    private static LayerBetweenGameAndALInput Instance;
+    private static void hasInstance()
+    {
+        if (Instance == default)
+            throw new System.InvalidOperationException("LayerBetweenGameAndALInput not Initilized");
+    }
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
+        Instance = this;
+    }
+    #endregion
 
 
     //this allows us to know the current context to deal with the keys
@@ -41,7 +59,7 @@ public class LayerBetweenGameAndALInput : MonoBehaviour
 
 
 
-    public float KeyOrAxisInput(ActionDefinition action)
+    /*public float KeyOrAxisInput(ActionDefinition action)
     {
         //get the info to determine input, input type, and context
         ActionID aid = action.InternalID;
@@ -51,7 +69,7 @@ public class LayerBetweenGameAndALInput : MonoBehaviour
 
 
         return 0;
-    }
+    }*/
 
 
 

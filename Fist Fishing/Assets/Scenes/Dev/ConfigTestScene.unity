@@ -558,6 +558,8 @@ GameObject:
   m_Component:
   - component: {fileID: 42840468}
   - component: {fileID: 42840467}
+  - component: {fileID: 42840470}
+  - component: {fileID: 42840469}
   m_Layer: 0
   m_Name: ConfigSingleton
   m_TagString: Untagged
@@ -585,6 +587,7 @@ MonoBehaviour:
   m_sensitivity: 0
   m_invertXAxis: 0
   m_invertYAxis: 0
+  m_controls: {fileID: 42840469}
   m_Light: {fileID: 1193930017}
   m_gammaSlider: {fileID: 701613354}
 --- !u!4 &42840468
@@ -601,6 +604,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &42840469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42840466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de618955e86389a45a00705fb48040b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &42840470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42840466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fccd6f84a79b74db82a90873a77259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &43664140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1399349492036743577, guid: a812880c9d0704c4b92cda9f39ea6411,
@@ -28904,13 +28931,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c4032c4df22eb44a51bc53cb227a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_action: 0
+  m_secondaryAction: 0
+  m_openInventory: 0
+  m_holdPickup: 0
+  m_mainMenu: 0
+  m_fleeOrCameraModeSwap: 0
   m_forward: 119
   m_backward: 0
   m_goRight: 97
   m_goLeft: 100
   m_descend: 306
   m_ascend: 0
-  m_sprint: 304
   m_manualCamera: 0
   m_rotateForward: 0
   m_rotateBackwards: 0
@@ -28918,20 +28950,6 @@ MonoBehaviour:
   m_rotateLeft: 0
   m_keyTarget: 122
   m_forgetTarget: 120
-  m_punch: 113
-  m_mountBoat: 109
-  m_dismountBoat: 110
-  m_harvest: 101
-  m_throwBait: 112
-  m_craftBait: 98
-  m_toggleInventory: 105
-  m_toggleShop: 111
-  m_start: 32
-  m_attack: 0
-  m_item: 0
-  m_flee: 0
-  m_warthog: 0
-  m_firstPerson: 0
   m_playerLateralMovement: 1
 --- !u!4 &4317289871419914990
 Transform:
@@ -29674,6 +29692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.9000244
       objectReference: {fileID: 0}
     - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}

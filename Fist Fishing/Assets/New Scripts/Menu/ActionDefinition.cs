@@ -115,42 +115,36 @@ public enum ContextGroup
 /// 		ContextGroup as field (Boat Travel,inventoryshop,swiminventoy,Battle,Swimming,Menu Navigation)
 ///
 /// </summary>
-public class ActionDefinition : MonoBehaviour
+public class ActionDefinition //: MonoBehaviour
 {
 
 
     [SerializeField]
     protected ActionID m_internalID;
     public ActionID InternalID => m_internalID;
+    public void SetInternalID (ActionID aID) { m_internalID = aID; }
 
 
     [SerializeField]
     protected string m_humanReadableID;
-    public string HumandReadableID => m_humanReadableID;
+    public string HumanReadableID => m_humanReadableID;
+    public void SetHumanID(string aID) { m_humanReadableID = aID; }
 
     [SerializeField]
     protected string m_detailedDescription;
     public string DetailedDescription => m_detailedDescription;
+    public void SetDescription(string desc) { m_detailedDescription = desc; }
 
     [SerializeField]
     protected ContextGroup m_contextGroups;
     public ContextGroup ContextGroups => m_contextGroups;
+    public void SetContexts(ContextGroup con) { m_contextGroups = con; }
 
     [SerializeField]
     protected ActionType m_actionType;
     public ActionType InputActionType => m_actionType;
+    public void SetActionType(ActionType act) { m_actionType = act; }
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

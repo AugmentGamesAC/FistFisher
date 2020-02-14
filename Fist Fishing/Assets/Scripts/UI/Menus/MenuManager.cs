@@ -213,7 +213,7 @@ public class MenuManager : MonoBehaviour
 
         if (m_currentMenus == Menus.MainMenu)
         {
-            if (ALInput.GetKeyDown(ALInput.Action))
+            if (Configurations.IsThisPressed(ActionID.Action))
             {
                 /*if (!(m_currentMenus == Menus.MainMenu))
                     ActivateMenu(Menus.ShopMenu);
@@ -224,7 +224,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            if (ALInput.GetKeyDown(ALInput.OpenInventory))
+            if (Configurations.IsThisPressed(ActionID.OpenInventory))
             {
                 if (!(m_currentMenus == Menus.SwimmingInventory))
                 {
@@ -235,7 +235,7 @@ public class MenuManager : MonoBehaviour
                     ActivateMenu(Menus.NotSet);
             }
 
-            if (ALInput.GetKeyDown(ALInput.Action))
+            if (Configurations.IsThisPressed(ActionID.Action))
             {
                 if (m_player.GetComponent<PlayerMovement>().m_isMounted)
                 {
@@ -253,7 +253,7 @@ public class MenuManager : MonoBehaviour
             }
 
 
-            if (ALInput.GetKeyDown(ALInput.OpenInventory)) //conflict... I think we're no longer using this class anyways
+            if (Configurations.IsThisPressed(ActionID.OpenInventory)) //conflict... I think we're no longer using this class anyways
             {
                 if (!(m_currentMenus == Menus.ShopMenu))
                 {

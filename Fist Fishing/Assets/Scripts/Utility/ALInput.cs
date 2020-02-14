@@ -27,7 +27,7 @@ public class ALInput : MonoBehaviour
         HoldPickup
         FleeOrCameraModeSwap
         */
-    [SerializeField]
+    /*[SerializeField]
     protected KeyCode m_action;
     public static KeyCode Action { get { hasInstance(); return Instance.m_action; } }
     [SerializeField]
@@ -44,7 +44,7 @@ public class ALInput : MonoBehaviour
     public static KeyCode MainMenu { get { hasInstance(); return Instance.m_mainMenu; } }
     [SerializeField]
     protected KeyCode m_fleeOrCameraModeSwap;
-    public static KeyCode FleeOrCameraModeSwap { get { hasInstance(); return Instance.m_fleeOrCameraModeSwap; } }
+    public static KeyCode FleeOrCameraModeSwap { get { hasInstance(); return Instance.m_fleeOrCameraModeSwap; } }*/
 
     /*1axis
         DivingBellRaiseLower
@@ -308,11 +308,11 @@ public class ALInput : MonoBehaviour
         m_playerLateralMovement = AxisCode.Horizontal;
         
 
-        m_action = KeyCode.F;
+        /*m_action = KeyCode.F;
         m_secondaryAction = KeyCode.R;
         m_openInventory = KeyCode.I;
         m_holdPickup = KeyCode.Mouse0;
         m_mainMenu = KeyCode.Escape;
-        m_fleeOrCameraModeSwap = KeyCode.T;
+        m_fleeOrCameraModeSwap = KeyCode.T;*/
     }
 }
