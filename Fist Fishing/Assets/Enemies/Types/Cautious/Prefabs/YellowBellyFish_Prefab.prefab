@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 4278160274011495446}
   - component: {fileID: 1123369432447939955}
   - component: {fileID: 2972778591805540085}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish Body_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,6 +459,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -492,7 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3344846316184074339}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish_Blocking_FBX_V1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324393000187556280}
   - component: {fileID: 2874807257306346250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish Top
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -571,7 +572,7 @@ GameObject:
   - component: {fileID: 2764116741085963630}
   - component: {fileID: 2604070530474978243}
   - component: {fileID: 1059438132783223882}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish Head
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -616,6 +617,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -663,7 +665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778016122875491784}
   - component: {fileID: 8009581915198579566}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish Belly
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -707,7 +709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5103083702298749847}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lookFrom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +744,7 @@ GameObject:
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
   - component: {fileID: 2110840545424256968}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: YellowBellyFish_Prefab
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -789,6 +791,7 @@ MonoBehaviour:
     - 1
     - 0.75
     - 0.5
+  m_fishDef: {fileID: 11400000, guid: 5fcafd14629e4ac469e8a975f522d58a, type: 2}
   m_personalSpaceRadius: 1
   Speed: 2
   TurnSpeed: 50
@@ -797,8 +800,6 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 2
-  m_targetController: {fileID: 0}
-  m_isListed: 0
 --- !u!114 &7027024320410773115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,7 +873,7 @@ GameObject:
   - component: {fileID: 139246192926191493}
   - component: {fileID: 5270209537886691236}
   - component: {fileID: 3983968101412933866}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fish Body_Belly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,6 +916,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -948,7 +950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7330948179792871702}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FishFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,11 +978,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4896005792019608336}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: c90e0b7a343d5154bb77e588e91ffca7,
-        type: 3}
-      propertyPath: m_Name
-      value: Fish1_Model
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c90e0b7a343d5154bb77e588e91ffca7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1041,6 +1038,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e47d5a3adedf38d4bab82b581a719fbf, type: 2}
+    - target: {fileID: -927199367670048503, guid: c90e0b7a343d5154bb77e588e91ffca7,
+        type: 3}
+      propertyPath: m_Name
+      value: Fish1_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c90e0b7a343d5154bb77e588e91ffca7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -284520696571435953, guid: c90e0b7a343d5154bb77e588e91ffca7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c90e0b7a343d5154bb77e588e91ffca7, type: 3}
 --- !u!4 &5020762215965183718 stripped

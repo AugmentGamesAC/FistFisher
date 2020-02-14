@@ -23,6 +23,8 @@ public class PinWheel<T> : IPinWheel<T>
             return;
         foreach (T curObject in objects)
             m_slots.Add(startingNumber++, curObject);
+
+        m_selectedSlot = startingNumber;
     }
 
     /// <summary>

@@ -25,6 +25,17 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
             throw new System.InvalidOperationException("Menu Manager not Initilized");
     }
 
+    protected CombatManager m_cM;
+    public CombatManager CM {
+        get
+        {
+            if (m_cM == default)
+                m_cM = GameObject.Find("CombatScreen").GetComponent<CombatManager>();
+            return m_cM;
+        }
+    }
+
+
     [SerializeField]
     protected PlayerHealth m_health = new PlayerHealth(100);
     public PlayerHealth Health => m_health;

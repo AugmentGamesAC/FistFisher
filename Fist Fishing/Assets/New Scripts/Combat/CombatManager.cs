@@ -29,6 +29,15 @@ public class CombatManager : MonoBehaviour
         Large
     }
 
+
+    private static CombatManager m_instance;
+    public static CombatManager Instance => m_instance;
+    public void Awake()
+    {
+        if (CombatManager.m_instance == null)
+            CombatManager.m_instance = this;
+    }
+
     [System.Serializable]
     public class NoiseThresholdsDict : InspectorDictionary<noiseThreshold,float> { }
     [SerializeField]
@@ -45,6 +54,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected List<FishCombatInfo> m_deadFishPile = new List<FishCombatInfo>();
 
+    [SerializeField]
+    protected List<CombatMoveInfo> ScriptablePlayerMoves = new List<CombatMoveInfo>();
+
 
 
     protected float m_maxSpawnChance = 0;
@@ -52,7 +64,7 @@ public class CombatManager : MonoBehaviour
 
     protected Queue<CombatInfo> m_roundQueue = new Queue<CombatInfo>();
 
-    protected PlayerCombatInfo m_playerCombatInfo = new PlayerCombatInfo();
+    protected PlayerCombatInfo m_playerCombatInfo;
 
     [SerializeField]
     protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
@@ -62,7 +74,9 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-       /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+        /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
+
+        m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
@@ -70,13 +84,15 @@ public class CombatManager : MonoBehaviour
         }
     }
     
-    public void StartCombat(bool didPlayerStartIt)
+    public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes)
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
 
         //Clear the list from previous battles just in case player didn't grab em all.
         m_deadFishPile.Clear();
+
+        m_FishSelection.AddItems(fishes.Select(x => new FishCombatInfo(x)));
 
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);
@@ -152,15 +168,15 @@ public class CombatManager : MonoBehaviour
         //apply stat changes to the player.
         //Oxygen
         // noise .
-        m_playerCombatInfo.UpdateOxygen(move.m_oxygenConsumption);
-        m_playerCombatInfo.UpdateNoise(move.m_noise);
+        m_playerCombatInfo.UpdateOxygen(move.OxygenConsumption);
+        m_playerCombatInfo.UpdateNoise(move.Noise);
 
 
         //apply damage from the player's move to the selected fish.
-        MoveFishes(move.m_moveDistance);
+        MoveFishes(move.MoveDistance);
 
-        m_FishSelection.SelectedItem.TakeDamage(move.m_damage);
-        m_FishSelection.SelectedItem.SlowDown(move.m_slow);
+        m_FishSelection.SelectedItem.TakeDamage(move.Damage);
+        m_FishSelection.SelectedItem.SlowDown(move.Slow);
 
         m_roundQueue.Enqueue(m_playerCombatInfo);
 
