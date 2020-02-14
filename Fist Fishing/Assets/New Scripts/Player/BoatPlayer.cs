@@ -46,7 +46,7 @@ public class BoatPlayer : MonoBehaviour
 
     public void Update()
     {
-        if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
+        if ((ALInput.GetKeyDown(ALInput.Action)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
             NewMenuManager.DisplayMenuScreen(MenuScreens.BoatTravel);
 
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
@@ -55,13 +55,13 @@ public class BoatPlayer : MonoBehaviour
         if (m_validPlayer == default) // no player around no action
             return;
 
-        if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
+        if (ALInput.GetKeyDown(ALInput.Action)) //handle mounting
             MountAction();
 
         if (!m_isMounted)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.OpenInventory))
             ToggleMapInventoryDisplays();
     }
 

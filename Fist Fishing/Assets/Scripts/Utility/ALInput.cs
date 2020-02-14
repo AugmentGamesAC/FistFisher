@@ -19,19 +19,48 @@ public class ALInput : MonoBehaviour
 
 
     #region new Keycodes
-    //CameraRotation;
-    //MovementOrInventoryNavigation;
-    //Action;
-    //SecondaryAction;
-    //DivingBellRaiseLower;
-    //OpenInventory;
-    //MainMenu;
-    //HoldPickup
-    //MenuAndShopMenuNavigationPageSelect;
-    //FleeOrCameraModeSwap;
-    //Targeting;
-    //AttackSwap;
-    //BaitSwap;
+    /*button
+        Action
+        SecondaryAction
+        OpenInventory
+        MainMenu
+        HoldPickup
+        FleeOrCameraModeSwap
+        */
+    [SerializeField]
+    protected KeyCode m_action;
+    public static KeyCode Action { get { hasInstance(); return Instance.m_action; } }
+    [SerializeField]
+    protected KeyCode m_secondaryAction;
+    public static KeyCode SecondaryAction { get { hasInstance(); return Instance.m_secondaryAction; } }
+    [SerializeField]
+    protected KeyCode m_openInventory;
+    public static KeyCode OpenInventory { get { hasInstance(); return Instance.m_openInventory; } }
+    [SerializeField]
+    protected KeyCode m_holdPickup;
+    public static KeyCode HoldPickup { get { hasInstance(); return Instance.m_holdPickup; } }
+    [SerializeField]
+    protected KeyCode m_mainMenu;
+    public static KeyCode MainMenu { get { hasInstance(); return Instance.m_mainMenu; } }
+    [SerializeField]
+    protected KeyCode m_fleeOrCameraModeSwap;
+    public static KeyCode FleeOrCameraModeSwap { get { hasInstance(); return Instance.m_fleeOrCameraModeSwap; } }
+
+    /*1axis
+        DivingBellRaiseLower
+    */
+
+    /*2axis
+        CameraRotation
+        MovementOrInventoryNavigation
+        Targeting
+        AttackSwap
+        BaitSwap
+        */
+
+    /*3axis
+        MenuAndShopMenuNavigationPageSelect
+        */
     #endregion
 
     #region keycodes keycodes
@@ -54,9 +83,9 @@ public class ALInput : MonoBehaviour
     KeyCode m_ascend;
     public static KeyCode Ascend { get { hasInstance(); return Instance.m_ascend; } }
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_sprint;
-    public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
+    public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }*/
 
     [SerializeField]
     KeyCode m_manualCamera;
@@ -85,55 +114,55 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_forgetTarget;
     public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_punch;
-    public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
+    public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }*/
 
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_mountBoat;
-    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
-    [SerializeField]
+    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }*/
+    /*[SerializeField]
     KeyCode m_dismountBoat;
-    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
+    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_harvest;
-    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
+    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_throwBait;
-    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
+    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_craftBait;
-    public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
+    public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_toggleInventory;
-    public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
+    public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_toggleShop;
-    public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
+    public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_start;
-    public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
+    public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }*/
 
 
     //Encounter Combat Buttons.
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_attack;
-    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_item;
-    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_flee;
-    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
+    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }*/
 
 
     //camera states
@@ -145,13 +174,13 @@ public class ALInput : MonoBehaviour
     KeyCode m_locked;
     public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_warthog;
-    public static KeyCode Warthog { get { hasInstance(); return Instance.m_warthog; } }
+    public static KeyCode Warthog { get { hasInstance(); return Instance.m_warthog; } }*/
 
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_firstPerson;
-    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }*/
 
     #endregion keycodes
 
@@ -302,5 +331,12 @@ public class ALInput : MonoBehaviour
 
         m_playerLateralMovement = AxisCode.Horizontal;
         */
-    }
+
+        m_action = KeyCode.F;
+        m_secondaryAction = KeyCode.R;
+        m_openInventory = KeyCode.I;
+        m_holdPickup = KeyCode.Mouse0;
+        m_mainMenu = KeyCode.Escape;
+        m_fleeOrCameraModeSwap = KeyCode.T;
+}
 }

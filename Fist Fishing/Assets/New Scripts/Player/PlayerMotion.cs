@@ -70,10 +70,10 @@ public class PlayerMotion : MonoBehaviour
         if (!m_CanMove)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.OpenInventory))
             ToggleInventoryDisplay();
 
-        if (ALInput.GetKeyDown(ALInput.Punch))
+        if (ALInput.GetKeyDown(ALInput.Action))
             NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
     }
 

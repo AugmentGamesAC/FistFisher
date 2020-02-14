@@ -213,7 +213,7 @@ public class MenuManager : MonoBehaviour
 
         if (m_currentMenus == Menus.MainMenu)
         {
-            if (ALInput.GetKeyDown(ALInput.Start))
+            if (ALInput.GetKeyDown(ALInput.Action))
             {
                 /*if (!(m_currentMenus == Menus.MainMenu))
                     ActivateMenu(Menus.ShopMenu);
@@ -224,7 +224,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            if (ALInput.GetKeyDown(ALInput.OpenInventory))
             {
                 if (!(m_currentMenus == Menus.SwimmingInventory))
                 {
@@ -235,7 +235,7 @@ public class MenuManager : MonoBehaviour
                     ActivateMenu(Menus.NotSet);
             }
 
-            if (ALInput.GetKeyDown(ALInput.MountBoat))
+            if (ALInput.GetKeyDown(ALInput.Action))
             {
                 if (m_player.GetComponent<PlayerMovement>().m_isMounted)
                 {
@@ -243,15 +243,7 @@ public class MenuManager : MonoBehaviour
                     {
                         ActivateMenu(Menus.BoatTravel);
                     }
-                    else
-                        ActivateMenu(Menus.NotSet);
-                }
-            }
-            else if (ALInput.GetKeyDown(ALInput.DismountBoat))
-            {
-                if (!m_player.GetComponent<PlayerMovement>().m_isMounted)
-                {
-                    if (!(m_currentMenus == Menus.NormalHUD))
+                    else if (!(m_currentMenus == Menus.NormalHUD))
                     {
                         ActivateMenu(Menus.NormalHUD);
                     }
@@ -261,7 +253,7 @@ public class MenuManager : MonoBehaviour
             }
 
 
-            if (ALInput.GetKeyDown(ALInput.ToggleShop))
+            if (ALInput.GetKeyDown(ALInput.OpenInventory)) //conflict... I think we're no longer using this class anyways
             {
                 if (!(m_currentMenus == Menus.ShopMenu))
                 {

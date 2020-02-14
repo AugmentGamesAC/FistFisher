@@ -32,6 +32,9 @@ public class InputType
 {
     protected ActionType m_actionType;
     public ActionType ActionType => m_actionType;
+
+    protected Vector3 m_Input;
+    public Vector3 Input => m_Input;
 }
 
 public class ButtonInput : InputType

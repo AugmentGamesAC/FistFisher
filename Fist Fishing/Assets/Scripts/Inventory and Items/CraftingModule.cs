@@ -36,11 +36,11 @@ public class CraftingModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (ALInput.GetKeyDown(ALInput.CraftBait) && m_playerMovementRef.m_isMounted==true) //can craft if mounted
+        //unused class now
+        /*if (ALInput.GetKeyDown(ALInput.CraftBait) && m_playerMovementRef.m_isMounted==true) //can craft if mounted
         {
             CraftBait();
-        }
+        }*/
     }
 
     public void CraftBait()

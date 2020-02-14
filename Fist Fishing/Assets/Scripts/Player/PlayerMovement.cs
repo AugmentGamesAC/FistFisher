@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.OpenInventory))
         {
             ToggleMouseLock();
         }
@@ -202,14 +202,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateBoatMountStatus()
     {
         //if pressing mount button and allowed to mount.
-        if (m_canMount && ALInput.GetKeyDown(ALInput.MountBoat) && !m_isMounted)
+        if (m_canMount && ALInput.GetKeyDown(ALInput.Action) && !m_isMounted)
         {
             Mount();
 
             m_mountCooldown = m_mountCooldownMax;
         }
         //if i am mounted and pressing the dismount button.
-        else if (ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
+        else if (ALInput.GetKeyDown(ALInput.Action) && m_isMounted)
         {
             Dismount();
 
@@ -369,11 +369,11 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return ALInput.GetKey(ALInput.Sprint);
+        return false;// ALInput.GetKey(ALInput.Sprint);
         //return Input.GetButton("Sprint");
     }
     public bool IsThrowBait()
     {
-        return ALInput.GetKey(ALInput.ThrowBait);
+        return ALInput.GetKey(ALInput.SecondaryAction);
     }
 }

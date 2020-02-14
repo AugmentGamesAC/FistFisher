@@ -94,10 +94,19 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
             SwitchState(CameraState.Abzu);*/
         /*else if (ALInput.GetKeyDown(ALInput.Locked))
             SwitchState(CameraState.Locked);
-        else*/ if (ALInput.GetKeyDown(ALInput.Warthog))
+        else*/ /*if (ALInput.GetKeyDown(ALInput.Warthog))
             SwitchState(CameraState.Warthog);
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
-            SwitchState(CameraState.FirstPerson);
+            SwitchState(CameraState.FirstPerson);*/
+
+        if (ALInput.GetKeyDown(ALInput.FleeOrCameraModeSwap))
+        {
+            if(CurrentState==CameraState.FirstPerson)
+                SwitchState(CameraState.Warthog);
+            else
+                SwitchState(CameraState.FirstPerson);
+        }
+
 
         Vector3 LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
 

@@ -114,17 +114,17 @@ public class CombatManager : MonoBehaviour
 
         //listen for input cases.
         //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
-        if (ALInput.GetKeyDown(ALInput.Punch))
+        if (ALInput.GetKeyDown(ALInput.Action))
         {
             PlayerAttack();
         }
 
-        if (ALInput.GetKeyDown(ALInput.Item))
+        if (ALInput.GetKeyDown(ALInput.SecondaryAction))
         {
             PlayerItem();
         }
 
-        if (ALInput.GetKeyDown(ALInput.Flee))
+        if (ALInput.GetKeyDown(ALInput.FleeOrCameraModeSwap))
         {
             PlayerFlee();
         }
