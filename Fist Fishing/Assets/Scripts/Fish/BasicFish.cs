@@ -22,13 +22,9 @@ public class BasicFish : MonoBehaviour
 
     #endregion working inspector dictionary
 
-
-
-
-
-
-
-
+    [SerializeField]
+    protected FishDefintion m_fishDef;
+    protected FishInstance m_fish;
 
 
 
@@ -67,6 +63,9 @@ public class BasicFish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_fish = new FishInstance(m_fishDef);
+
+        //TODO: clean
         m_healthModule = GetComponent<HealthModule>();
         m_behaviour = GetComponent<BehaviorTree>();
 
@@ -77,17 +76,7 @@ public class BasicFish : MonoBehaviour
         m_isListed = false;
         m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<TargetController>();
 
-        //Get all hitboxes from each fish compound colliders.
-        /*FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();
 
-        if (m_hitBoxes != null)
-        {
-            //add them to our InspectorDictionary.
-            foreach (FishHitBox hitBox in m_hitBoxes)
-            {
-                //m_hitBoxModifiers.Add(hitBox.m_HitBoxModifier.Key, hitBox.m_HitBoxModifier.Value);
-            }
-        }*/
     }
 
     private void Update()

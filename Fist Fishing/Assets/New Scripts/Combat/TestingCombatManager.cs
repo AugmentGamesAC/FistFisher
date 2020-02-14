@@ -61,11 +61,10 @@ public class TestingCombatManager : CombatManager
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
     {
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
-        var fishies = fishDefs.Select(X => new FishCombatInfo(new FishInstance(X)));
-        foreach (var fish in fishies)
-            m_FishSelection.AddItem(fish);
+
+
+        base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
         m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
-        base.StartCombat(wasPlayer);
     }
 
 

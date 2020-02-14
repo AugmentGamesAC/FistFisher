@@ -75,13 +75,15 @@ public class CombatManager : MonoBehaviour
         }
     }
     
-    public void StartCombat(bool didPlayerStartIt)
+    public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes)
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
 
         //Clear the list from previous battles just in case player didn't grab em all.
         m_deadFishPile.Clear();
+
+        m_FishSelection.AddItems(fishes.Select(x => new FishCombatInfo(x)));
 
         if (didPlayerStartIt)
             m_roundQueue.Enqueue(m_playerCombatInfo);

@@ -41,6 +41,11 @@ public class SingleSelectionList<T> : ISingleSelectionList<T>
         m_Items.Add(item);
     }
 
+    public void AddItems(IEnumerable<T> items)
+    {
+        m_Items.AddRange(items);
+    }
+
     public void Remove(T item)
     {
         int removalIndex = m_Items.IndexOf(item);
