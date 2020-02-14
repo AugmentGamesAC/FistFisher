@@ -31,7 +31,7 @@ public class HardcodedKBM : MonoBehaviour
         action.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
         action.SetActionType(ActionType.Button);
         KeyCodeOrDirectionCode keyAction = new KeyCodeOrDirectionCode();
-        keyAction.key = KeyCode.E;
+        keyAction.key = KeyCode.F;
         m_KBMKeyConfig.m_allTheInputs.Add(action, keyAction);
 
         ActionDefinition action2 = new ActionDefinition();
@@ -155,7 +155,7 @@ public class HardcodedKBM : MonoBehaviour
         MovementOrInventoryNavigation.SetContexts(ContextGroup.Swimming | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
         MovementOrInventoryNavigation.SetActionType(ActionType.Page);
         KeyCodeOrDirectionCode keymovemenu = new KeyCodeOrDirectionCode();
-        keymovemenu.direction = ALInput.DirectionCode.MoveInput;
+        keymovemenu.direction = ALInput.DirectionCode.KeyboardInput1;
         m_KBMKeyConfig.m_allTheInputs.Add(MovementOrInventoryNavigation, keymovemenu);
 
 

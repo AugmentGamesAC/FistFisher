@@ -118,6 +118,17 @@ public class PlayerMotion : MonoBehaviour
 
         //apply movement vector
 
+        Vector3 desiredMovement2 = Configurations.AxisDirections(ActionID.MovementOrInventoryNavigation) * Time.deltaTime * movementSpeedRef;
+
+        /*float fb = desiredMovement2.z;
+        if (desiredMovement2.z < 0)
+            fb *= 0.2f;
+        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * fb;*/
+
+
+        //Debug.Log(desiredMovement2.x + ", " + desiredMovement2.y + ", " +desiredMovement2.z);
+        /*if (desiredMovement2!=Vector3.zero)
+            transform.position += desiredMovement2;*/
         transform.position += desiredMovement;
     }
 

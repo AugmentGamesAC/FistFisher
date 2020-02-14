@@ -68,7 +68,15 @@ public class ALInput : MonoBehaviour
         MUp,
         MForward,
         LHorizontal,
-        LVertical
+        LVertical,
+
+
+        FakeUpDown1,
+        FakeUpDown2,
+        FakeInOut1,
+        FakeInOut2,
+        FakeLeftRight1,
+        FakeLeftRight2,
     };
 
     public enum DirectionCode
@@ -84,7 +92,9 @@ public class ALInput : MonoBehaviour
         /// <summary>
         /// AxisCode.MouseX,AxisCode.MouseY,0
         /// </summary>
-        LookInput
+        LookInput,
+        KeyboardInput1,
+        KeyboardInput2,
     }
     /// <summary>
     /// Tuple is a dummy object that lets me link 3 objects into one without an offical class
@@ -95,7 +105,9 @@ public class ALInput : MonoBehaviour
         new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
         {
             {DirectionCode.LookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.MouseX,AxisCode.MouseY,AxisCode.Unset) },
-            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.Horizontal,AxisCode.Unset,AxisCode.Vertical) }
+            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.Horizontal,AxisCode.Unset,AxisCode.Vertical) },
+            {DirectionCode.KeyboardInput1, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.FakeLeftRight1,AxisCode.FakeUpDown1,AxisCode.FakeInOut1) },
+            {DirectionCode.KeyboardInput2, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.FakeLeftRight2,AxisCode.FakeUpDown2,AxisCode.FakeInOut2) },
         };
 
 
@@ -125,12 +137,26 @@ public class ALInput : MonoBehaviour
         if (!m_registeredDirections.TryGetValue(dC, out directionInstructions))
             return Vector3.zero;
 
-        return new Vector3
-        (
+
+        if (!(dC == DirectionCode.KeyboardInput1 || dC == DirectionCode.KeyboardInput2))
+        {
+            return new Vector3
+            (
                 GetAxis(directionInstructions.Item1),
                 GetAxis(directionInstructions.Item2),
                 GetAxis(directionInstructions.Item3)
-        );
+            );
+        }
+        else
+        {
+            return new Vector3
+            (
+                Configurations.GetAxis(directionInstructions.Item1),
+                Configurations.GetAxis(directionInstructions.Item2),
+                Configurations.GetAxis(directionInstructions.Item3)
+            );
+        }
+       
     }
 
 

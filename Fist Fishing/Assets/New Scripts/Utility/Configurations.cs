@@ -145,5 +145,8 @@ public class Configurations : MonoBehaviour
         return Instance.Controls.m_KBMKeyConfig.AxisDirections(actionID);
     }
 
-
+    public static float GetAxis(ALInput.AxisCode ac)
+    {
+        return KeyConfiguration.GetAxis(ac);
+    }
 }
