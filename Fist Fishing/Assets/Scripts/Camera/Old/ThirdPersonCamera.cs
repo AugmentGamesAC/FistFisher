@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public FollowCameraBehaviour m_followCameraBehaviour;
+    [SerializeField]
+    public OldLockedCameraBehaviour m_followCameraBehaviour;
     public TargetingCameraBehaviour m_targetingCameraBehaviour;
 
     public TargetController m_targetController;
@@ -11,12 +13,11 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         //Create a basic behaviour for our camera if it doesn't have one.
         if (m_followCameraBehaviour == null)
-            m_followCameraBehaviour = new FollowCameraBehaviour();
+            m_followCameraBehaviour = new OldLockedCameraBehaviour();
 
         if (m_targetingCameraBehaviour == null)
             m_targetingCameraBehaviour = new TargetingCameraBehaviour();
 
-        
     }
 
     //this overrides every camera change in any other class even in lateUpdate.
@@ -88,7 +89,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public Vector3 ControlRotation { get; private set; }
     public Vector3 LookPos { get; set; }
 
-    public Vector3 PivotRotation { get; set; }
+    public Vector3 PivotRotation;
 
     void SetCameraBehaviour(CameraBehaviour behaviour)
     {
