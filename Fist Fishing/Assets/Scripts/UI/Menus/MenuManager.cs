@@ -215,7 +215,7 @@ public class MenuManager : MonoBehaviour
                     ActivateMenu(Menus.ShopMenu);
                 else
                     ActivateMenu(Menus.NotSet);*/
-                ActivateMenu(Menus.NotSet);
+                ActivateMenu(Menus.BoatTravel);
             }
         }
         else

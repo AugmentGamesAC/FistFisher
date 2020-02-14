@@ -98,6 +98,37 @@ public class ALInput : MonoBehaviour
     public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
 
 
+    //Encounter Combat Buttons.
+    [SerializeField]
+    KeyCode m_attack;
+    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+
+    [SerializeField]
+    KeyCode m_item;
+    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+
+    [SerializeField]
+    KeyCode m_flee;
+    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
+
+
+    //camera states
+    [SerializeField]
+    KeyCode m_abzu;
+    public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
+
+    [SerializeField]
+    KeyCode m_locked;
+    public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }
+
+    [SerializeField]
+    KeyCode m_warthog;
+    public static KeyCode Warthog { get { hasInstance(); return Instance.m_warthog; } }
+
+    [SerializeField]
+    KeyCode m_firstPerson;
+    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+
 
     /// <summary>
     /// These are the AxisCodes that we configured in unity.Input manager as name
@@ -111,8 +142,7 @@ public class ALInput : MonoBehaviour
         MouseX,
         MouseY,
         Horizontal,
-        Vertical
-        //futhere axis will be needed for a controler. 
+        Vertical,
     };
 
     public enum DirectionCode
@@ -210,16 +240,22 @@ public class ALInput : MonoBehaviour
         m_punch = KeyCode.Q;
         m_manualCamera = KeyCode.Mouse1;
 
+        //Default Combat buttons
+        m_attack = KeyCode.Mouse0;
+        m_item = KeyCode.Mouse1;
+        m_flee = KeyCode.Mouse2;
 
         m_rotateForward = KeyCode.Keypad8;
         m_rotateBackwards = KeyCode.Keypad2;
         m_rotateRight = KeyCode.Keypad4;
         m_rotateLeft = KeyCode.Keypad6;
 
+        m_abzu = KeyCode.F1;
+        m_locked = KeyCode.F2;
+        m_warthog = KeyCode.F3;
+        m_firstPerson = KeyCode.F4;
 
-
-
-    m_mountBoat = KeyCode.M;
+        m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
         m_harvest = KeyCode.E;
         m_throwBait = KeyCode.P;
