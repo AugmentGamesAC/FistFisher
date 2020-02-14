@@ -28,7 +28,7 @@ public class PlayerMotion : MonoBehaviour
     public bool m_CanMoveForward;
 
     [SerializeField]
-    protected float m_sphereCastRadius = 50;
+    protected float m_sphereCastRadius = 500;
     public float SphereCastRadius => m_sphereCastRadius;
 
     public List<FishInstance> SurroundingFish => FindSurroundingFish();
@@ -185,7 +185,7 @@ public class PlayerMotion : MonoBehaviour
 
         List<FishInstance> FishInstances = new List<FishInstance>();
 
-        var fishInRange = Physics.SphereCastAll(transform.position, 1000, transform.forward);
+        var fishInRange = Physics.SphereCastAll(transform.position, m_sphereCastRadius, transform.forward);
 
         foreach (var fish in fishInRange)
         {
