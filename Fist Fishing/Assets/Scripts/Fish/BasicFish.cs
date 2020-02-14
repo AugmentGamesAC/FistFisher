@@ -75,7 +75,7 @@ public class BasicFish : MonoBehaviour
 
         m_camera = Camera.main;
         m_isListed = false;
-        m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponent<TargetController>();
+        m_targetController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<TargetController>();
 
         //Get all hitboxes from each fish compound colliders.
         /*FishHitBox[] m_hitBoxes = GetComponentsInChildren<FishHitBox>();

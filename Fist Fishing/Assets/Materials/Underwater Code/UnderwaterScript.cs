@@ -30,27 +30,8 @@ public class UnderwaterScript : MonoBehaviour
     void Update()
     {
         RenderSettings.fogDensity = m_fogDensity;
-        if ((transform.position.y < m_WaterLevel) != isUnderwater)
-        {
             isUnderwater = transform.position.y < m_WaterLevel;
-            if (isUnderwater)
-            {
-                SetUnderWater();
-
-            }
-            if (!isUnderwater)
-            {
-                SetOutofWater();
-            }
-        }
-        void SetUnderWater()
-        {
-            RenderSettings.fog = true;
-
-        }
-        void SetOutofWater()
-        {
-            RenderSettings.fog = false;
-        }
+            RenderSettings.fog = isUnderwater;
+        
     }
 }

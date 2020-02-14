@@ -12,7 +12,7 @@ public class Boat : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
+            PlayerMovement PlayerController = other.GetComponentInChildren<PlayerMovement>();
 
             PlayerController.m_canMount = true;
             PlayerController.m_boatMountPosition = m_mountTransform.position;
@@ -37,7 +37,7 @@ public class Boat : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerMovement PlayerController = other.GetComponent<PlayerMovement>();
+            PlayerMovement PlayerController = other.GetComponentInChildren<PlayerMovement>();
 
             PlayerController.m_canMount = false;
             PlayerController.m_boatMountPosition = m_mountTransform.position;
