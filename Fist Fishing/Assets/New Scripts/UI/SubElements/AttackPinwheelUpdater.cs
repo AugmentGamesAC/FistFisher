@@ -16,6 +16,8 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
         m_tabs = new Dictionary<int, PinwheelTab>(tabs.Length);
         foreach (var tab in tabs)
             m_tabs.Add(tab.ID, tab);
+
+        SetValue(m_currentSelection);
     }
 
     public void SetValue (int index)

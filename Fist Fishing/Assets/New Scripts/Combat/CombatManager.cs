@@ -72,6 +72,9 @@ public class CombatManager : MonoBehaviour
 
     protected float m_combatZone = 30.0f;
 
+    protected PlayerMotion m_player;
+
+
     private void Start()
     {
         /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
@@ -84,10 +87,12 @@ public class CombatManager : MonoBehaviour
         }
     }
     
-    public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes)
+    public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes, PlayerMotion player = default(PlayerMotion))
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
+
+        m_player = player;
 
         //Clear the list from previous battles just in case player didn't grab em all.
         m_deadFishPile.Clear();
@@ -375,8 +380,8 @@ public class CombatManager : MonoBehaviour
     {
         m_currentCombatState = CombatStates.CombatFinished;
 
-        //TODO: resolve fish handling
-       
+        //TODO: resolve fish handlingPackages{
+        m_player.m_CanMove = true;
 
         NewMenuManager.DisplayMenuScreen(MenuScreens.NormalHUD);
     }

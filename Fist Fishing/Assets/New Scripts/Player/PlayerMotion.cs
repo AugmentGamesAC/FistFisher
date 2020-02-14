@@ -28,7 +28,7 @@ public class PlayerMotion : MonoBehaviour
     public bool m_CanMoveForward;
 
     [SerializeField]
-    protected float m_sphereCastRadius = 5;
+    protected float m_sphereCastRadius = 25;
     public float SphereCastRadius => m_sphereCastRadius;
 
     public List<FishInstance> SurroundingFish => FindSurroundingFish();
@@ -89,7 +89,8 @@ public class PlayerMotion : MonoBehaviour
             if (resultingFish.Count == 0)
                 return;
             m_CanMove = false;
-            CombatManager.Instance.StartCombat(true, resultingFish);
+            NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
+            CombatManager.Instance.StartCombat(true, resultingFish, this);
         }
     }
 
@@ -184,7 +185,7 @@ public class PlayerMotion : MonoBehaviour
 
         List<FishInstance> FishInstances = new List<FishInstance>();
 
-        var fishInRange = Physics.SphereCastAll(transform.position, m_sphereCastRadius, transform.forward, LayerMask.GetMask("Fish"));
+        var fishInRange = Physics.SphereCastAll(transform.position, m_sphereCastRadius, transform.forward);
 
         foreach (var fish in fishInRange)
         {

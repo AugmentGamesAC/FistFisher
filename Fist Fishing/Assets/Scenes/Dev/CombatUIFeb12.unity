@@ -1506,6 +1506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 141931477}
 --- !u!114 &141931477
 MonoBehaviour:
@@ -3624,6 +3627,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 398915426}
 --- !u!114 &398915426
 MonoBehaviour:
@@ -7288,6 +7294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanMove: 0
   m_CanMoveForward: 0
+  m_sphereCastRadius: 5
+  m_closestFish:
+    m_fishData: {fileID: 0}
 --- !u!54 &745533147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9395,11 +9404,13 @@ MonoBehaviour:
   m_currentNoiseState: 0
   m_aggressiveFishToSpawn: []
   m_deadFishPile: []
+  ScriptablePlayerMoves: []
   m_currentCombatState: 0
   m_f5Fish: {fileID: 11400000, guid: 1004598155e0b594dacc929842ab342e, type: 2}
   m_f6Fish: {fileID: 11400000, guid: 5fcafd14629e4ac469e8a975f522d58a, type: 2}
   m_f7Fish: {fileID: 11400000, guid: ec728b77512df5e4eb5be6c1b2802604, type: 2}
   m_showThemALl: {fileID: 922931588}
+  m_attackPinwheelUpdater: {fileID: 0}
 --- !u!114 &911563336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3157294906104814087, guid: 79ee761726c202041b9e0966ded9777e,
@@ -10838,6 +10849,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2167131274534524105, guid: 1832ebb68dcb3874782014bd9eef49ed,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1847
+      objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524107, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_Name
@@ -11210,6 +11226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1054749621}
 --- !u!114 &1054749621
 MonoBehaviour:
@@ -13597,6 +13616,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5388dafad0f8b34fa9f0d3f80af5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 
+    SerializeInvokes: 0
   m_UIElement: {fileID: 1211051046}
 --- !u!114 &1211051046
 MonoBehaviour:
@@ -20732,6 +20754,9 @@ MonoBehaviour:
     m_OxygenTickTimer: 1
     m_isUnderWater: 0
   m_attackRange: 20
+  m_iconDisplay:
+    m_value: {fileID: 0}
+    SerializeInvokes: 0
   m_clams:
     m_value: 0
     SerializeInvokes: 0
