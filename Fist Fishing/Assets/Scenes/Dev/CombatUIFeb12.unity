@@ -15786,7 +15786,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0.994
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -22149,6 +22149,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1912377822403006860, guid: ab35b0a157a83cc4c9630b9011137d99,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912377822403006860, guid: ab35b0a157a83cc4c9630b9011137d99,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912377822403006863, guid: ab35b0a157a83cc4c9630b9011137d99,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 15eacfcba959bae4397136721e72ec44,
+        type: 3}
     - target: {fileID: 1912377823174489462, guid: ab35b0a157a83cc4c9630b9011137d99,
         type: 3}
       propertyPath: m_Name
@@ -23181,7 +23197,9 @@ MonoBehaviour:
     m_value: 0
     SerializeInvokes: 0
   m_UIElement: {fileID: 0}
-  SpriteList: []
+  SpriteList:
+  - {fileID: 21300000, guid: e4cb72ff74f165d439f053b416ec9b9f, type: 3}
+  - {fileID: 21300000, guid: 0b23c49a4a7ba2f4bbc447fe1101e9b1, type: 3}
 --- !u!23 &6046229919248512312
 MeshRenderer:
   m_ObjectHideFlags: 0
