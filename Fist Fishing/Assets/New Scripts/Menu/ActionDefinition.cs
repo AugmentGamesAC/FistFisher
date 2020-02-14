@@ -19,7 +19,8 @@ public enum ActionID
     /// <summary>
     /// while swimming or steering boat. 
     /// or while selecting inventory slots
-    /// 2Axis
+    /// PAGE
+    /// WASD, QE
     /// </summary>
     MovementOrInventoryNavigation,
     /// <summary>

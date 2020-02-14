@@ -38,7 +38,7 @@ public class HardcodedKBM : MonoBehaviour
         action2.SetInternalID(ActionID.SecondaryAction);
         action2.SetHumanID("SecondaryAction");
         action2.SetDescription("SecondaryAction");
-        action2.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        action2.SetContexts(ContextGroup.Swimming | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
         action2.SetActionType(ActionType.Button);
         KeyCodeOrDirectionCode keySecondaryAction = new KeyCodeOrDirectionCode();
         keySecondaryAction.key = KeyCode.R;
@@ -58,7 +58,7 @@ public class HardcodedKBM : MonoBehaviour
         holdPickup.SetInternalID(ActionID.HoldPickup);
         holdPickup.SetHumanID("HoldPickup");
         holdPickup.SetDescription("HoldPickup");
-        holdPickup.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        holdPickup.SetContexts(ContextGroup.InventoryShop);
         holdPickup.SetActionType(ActionType.Button);
         KeyCodeOrDirectionCode keyHoldPickup = new KeyCodeOrDirectionCode();
         keyHoldPickup.key = KeyCode.Mouse0;
@@ -78,7 +78,7 @@ public class HardcodedKBM : MonoBehaviour
         FleeOrCameraModeSwap.SetInternalID(ActionID.FleeOrCameraModeSwap);
         FleeOrCameraModeSwap.SetHumanID("FleeOrCameraModeSwap");
         FleeOrCameraModeSwap.SetDescription("FleeOrCameraModeSwap");
-        FleeOrCameraModeSwap.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        FleeOrCameraModeSwap.SetContexts(ContextGroup.Battle | ContextGroup.Swimming);
         FleeOrCameraModeSwap.SetActionType(ActionType.Button);
         KeyCodeOrDirectionCode keyFlee = new KeyCodeOrDirectionCode();
         keyFlee.key = KeyCode.T;
@@ -94,7 +94,6 @@ public class HardcodedKBM : MonoBehaviour
 
         /*2axis
             CameraRotation
-            MovementOrInventoryNavigation
             Targeting
             AttackSwap
             BaitSwap
@@ -105,27 +104,17 @@ public class HardcodedKBM : MonoBehaviour
         CameraRotation.SetInternalID(ActionID.CameraRotation);
         CameraRotation.SetHumanID("CameraRotation");
         CameraRotation.SetDescription("CameraRotation");
-        CameraRotation.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        CameraRotation.SetContexts(ContextGroup.Swimming);
         CameraRotation.SetActionType(ActionType.TwoAxis);
         KeyCodeOrDirectionCode keyCam = new KeyCodeOrDirectionCode();
         keyCam.direction = ALInput.DirectionCode.LookInput;
         m_KBMKeyConfig.m_allTheInputs.Add(CameraRotation, keyCam);
 
-        ActionDefinition MovementOrInventoryNavigation = new ActionDefinition();
-        MovementOrInventoryNavigation.SetInternalID(ActionID.MovementOrInventoryNavigation);
-        MovementOrInventoryNavigation.SetHumanID("MovementOrInventoryNavigation");
-        MovementOrInventoryNavigation.SetDescription("MovementOrInventoryNavigation");
-        MovementOrInventoryNavigation.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
-        MovementOrInventoryNavigation.SetActionType(ActionType.TwoAxis);
-        KeyCodeOrDirectionCode keymovemenu = new KeyCodeOrDirectionCode();
-        keymovemenu.direction = ALInput.DirectionCode.MoveInput;
-        m_KBMKeyConfig.m_allTheInputs.Add(MovementOrInventoryNavigation, keymovemenu);
-
         ActionDefinition Targeting = new ActionDefinition();
         Targeting.SetInternalID(ActionID.Targeting);
         Targeting.SetHumanID("Targeting");
         Targeting.SetDescription("Targeting");
-        Targeting.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        Targeting.SetContexts(ContextGroup.Battle);
         Targeting.SetActionType(ActionType.TwoAxis);
         KeyCodeOrDirectionCode keyTargeting = new KeyCodeOrDirectionCode();
         keyTargeting.direction = ALInput.DirectionCode.MoveInput;
@@ -135,7 +124,7 @@ public class HardcodedKBM : MonoBehaviour
         AttackSwap.SetInternalID(ActionID.AttackSwap);
         AttackSwap.SetHumanID("AttackSwap");
         AttackSwap.SetDescription("AttackSwap");
-        AttackSwap.SetContexts(ContextGroup.Battle | ContextGroup.Swimming | ContextGroup.MenuNavigation | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        AttackSwap.SetContexts(ContextGroup.Battle | ContextGroup.Swimming);
         AttackSwap.SetActionType(ActionType.TwoAxis);
         KeyCodeOrDirectionCode keyAttackSwap = new KeyCodeOrDirectionCode();
         keyAttackSwap.direction = ALInput.DirectionCode.MoveInput;
@@ -154,9 +143,20 @@ public class HardcodedKBM : MonoBehaviour
 
         /*3axis
             MenuAndShopMenuNavigationPageSelect
+            MovementOrInventoryNavigation
             */
 
 
+
+        ActionDefinition MovementOrInventoryNavigation = new ActionDefinition();
+        MovementOrInventoryNavigation.SetInternalID(ActionID.MovementOrInventoryNavigation);
+        MovementOrInventoryNavigation.SetHumanID("MovementOrInventoryNavigation");
+        MovementOrInventoryNavigation.SetDescription("MovementOrInventoryNavigation");
+        MovementOrInventoryNavigation.SetContexts(ContextGroup.Swimming | ContextGroup.BoatTravel | ContextGroup.InventoryShop);
+        MovementOrInventoryNavigation.SetActionType(ActionType.Page);
+        KeyCodeOrDirectionCode keymovemenu = new KeyCodeOrDirectionCode();
+        keymovemenu.direction = ALInput.DirectionCode.MoveInput;
+        m_KBMKeyConfig.m_allTheInputs.Add(MovementOrInventoryNavigation, keymovemenu);
 
 
 
@@ -171,8 +171,8 @@ public class HardcodedKBM : MonoBehaviour
 
     }
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
         
     }
