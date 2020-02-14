@@ -99,8 +99,6 @@ public class ALInput : MonoBehaviour
         };
 
 
-    public AxisCode m_playerLateralMovement;
-    public static AxisCode PlayerLateralMovement { get { hasInstance(); return Instance.m_playerLateralMovement; } }
     
     public static bool GetKeyUp(KeyCode key) { hasInstance(); return Input.GetKeyUp(key); }
     public static bool GetKeyDown(KeyCode key) { hasInstance(); return Input.GetKeyDown(key); }
@@ -161,23 +159,12 @@ public class ALInput : MonoBehaviour
         m_goRight = KeyCode.D;
         m_descend = KeyCode.E;
         m_ascend = KeyCode.Q;
-        m_keyTarget = KeyCode.Z;
-        m_forgetTarget = KeyCode.X;
         m_backward = KeyCode.S;
 
-        /*m_rotateForward = KeyCode.Keypad8;
-        m_rotateBackwards = KeyCode.Keypad2;
-        m_rotateRight = KeyCode.Keypad4;
-        m_rotateLeft = KeyCode.Keypad6;*/
 
-        m_playerLateralMovement = AxisCode.Horizontal;
-        
+        /*
+        m_keyTarget = KeyCode.Z;
+        m_forgetTarget = KeyCode.X;*/
 
-        /*m_action = KeyCode.F;
-        m_secondaryAction = KeyCode.R;
-        m_openInventory = KeyCode.I;
-        m_holdPickup = KeyCode.Mouse0;
-        m_mainMenu = KeyCode.Escape;
-        m_fleeOrCameraModeSwap = KeyCode.T;*/
     }
 }

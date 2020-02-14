@@ -65,7 +65,7 @@ public enum ActionID
     MenuAndShopMenuNavigationPageSelect,
     /// <summary>
     /// in combat, flees
-    /// out of combat, toggles between 3rd person or 1st person camera modes (f3-f4) 
+    /// out of combat, toggles between 3rd person or 1st person camera modes 
     /// button
     /// </summary>
     FleeOrCameraModeSwap,

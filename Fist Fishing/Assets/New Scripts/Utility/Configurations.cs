@@ -31,6 +31,11 @@ public class Configurations : MonoBehaviour
     }
     #endregion
 
+    //this allows us to know the current context to deal with the keys
+    protected ContextGroup m_worldCurrentContext;
+    public ContextGroup CurrentWorldContext => m_worldCurrentContext;
+    public void SetCurrentWorldContext(ContextGroup context) { m_worldCurrentContext = context; }
+
     [SerializeField]
     protected Vector2 m_screenResolution;
     [SerializeField]

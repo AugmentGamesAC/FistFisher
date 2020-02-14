@@ -78,6 +78,67 @@ public class KeyConfiguration //: MonoBehaviour
     }
 
 
+    private static Dictionary<ALInput.AxisCode, System.Func<float>> my_Axis = new Dictionary<ALInput.AxisCode, System.Func<float>>()
+    {
+        { ALInput.AxisCode.Horizontal,()=>{return FakeAxis(KeyCode.A, KeyCode.D); } }
+    };
+
+
+    private static float FakeAxis(KeyCode positive, KeyCode neagitve)
+    {
+        return (ALInput.GetKey(positive) ? 1 : 0) - (ALInput.GetKey(neagitve) ? 1 : 0);
+
+    }
+
+
+    /// <summary>
+    /// Tuple is a dummy object that lets me link 3 objects into one without an offical class
+    /// this allows us to define behavoir in the dictionary here rather than in movementDirection
+    /// will need to be refined when doing dynamic updating to controls
+    /// </summary>
+    /*private static Dictionary<ALInput.DirectionCode, System.Tuple<ALInput.AxisCode, AxisCode, AxisCode>> m_registeredDirections =
+        new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
+        {
+            {DirectionCode.LookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.MouseX,AxisCode.MouseY,AxisCode.Unset) },
+            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.Horizontal,AxisCode.Unset,AxisCode.Vertical) }
+        };
+
+        */
+
+    protected static float GetAxis(ALInput.AxisCode key)
+    {
+      System.Func<float> fakeaxis;
+        if (!my_Axis.TryGetValue(key, out fakeaxis))
+            return 0;
+            
+        return fakeaxis();
+    }
+
+
+
+    /// <summary>
+    /// this function checks our registered direction codes and supples a vec3 as desired 
+    /// </summary>
+    /// <param name="dC">Enum defined in ALinput</param>
+    /// <returns>either Vector3.zero on failure or a new vector 3 based on registeredDirections</returns>
+ /*   public static Vector3 GetDirection(ALInput.DirectionCode dC)
+    {
+        System.Tuple<ALInput.AxisCode, ALInput.AxisCode, ALInput.AxisCode> directionInstructions;
+
+        //this breaks and directionInstuctions is null so player cannot receive input yet.
+        if (!m_registeredDirections.TryGetValue(dC, out directionInstructions))
+            return Vector3.zero;
+
+        return new Vector3
+        (
+                GetAxis(directionInstructions.Item1),
+                GetAxis(directionInstructions.Item2),
+                GetAxis(directionInstructions.Item3)
+        );
+    }*/
+
+
+
 
     public Vector3 AxisDirections(ActionID actionID)
     {

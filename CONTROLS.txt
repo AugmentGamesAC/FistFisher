@@ -1,31 +1,69 @@
-Fist Fishing Controls:
----------------------------
+
+---------------------------------
+Actions Available per context:
+---------------------------------
+
+While Travelling in Boat:
+	Action (Dismount) (Button)
+	MovementOrInventoryNavigation (steer boat) (3 Axis)
+	DivingBellRaiseLower (Raise/Lower Diving Bell) (1 Axis) (Unimplemented)
+	OpenInventory (Open Inventory/Shop) (Button)
+	MainMenu (Pause/Show Main Menu) (Button)
+
+While in the Inventory or Shop:
+	MovementOrInventoryNavigation (selecting inventory slots) (3 Axis)
+	Action (Buy/Sell/Eat) (Button)
+	OpenInventory (Close inventory) (Button)
+	MainMenu (Pause/Show Main Menu) (Button)
+	HoldPickup (pick up selected item) (Button)
+	MenuAndShopMenuNavigationPageSelect (Menu/Tab Navigation) (3 Axis)
+
+While in Battle:
+	Action (Attack) (Button)
+	SecondaryAction (Use Bait) (Button)
+	MainMenu (Pause/Show Main Menu) (Button)
+	FleeOrCameraModeSwap (Flee) (Button)
+	Targeting (Cycle though target fish) (1 Axis)
+	AttackSwap (open pinwheel to select attack) (2 Axis)
+	BaitSwap (open pinwheel to select bait) (2 Axis)
+
+While Navigating Menus:
+	Action (Select) (Button)
+	SecondaryAction (Back) (Button)
+	MainMenu (Pause/Show Main Menu) (Button)
+	MenuAndShopMenuNavigationPageSelect (Menu/Tab Navigation) (3 Axis)
+
+While Swimming:
+	CameraRotation (Rotate your view around the player) (2 Axis)
+	MovementOrInventoryNavigation (Movement) (3 Axis)
+	Action (Mount, Harvest) (Button)
+	SecondaryAction (Use Bait) (Button)
+	OpenInventory (open inventory) (Button)
+	MainMenu (Pause/Show Main Menu) (Button)
+	FleeOrCameraModeSwap (Change bewteen 1st and 3rd person camera modes) (Button)
+	BaitSwap (open pinwheel to select bait) (2 Axis)
 
 
----------------------------
-While Mounted on Boat:
----------------------------
-W		Forwards
-A		Left
-D		Right
-RMB-Held	Rotate Camera
-M		Map
-N		Dismount Boat
-I		Inventory
-O		Shop Window
+--------------------------
+Associated buttons:
+--------------------------
 
+Action = E
+Secondary Action = R
+Inventory = I 
+Hold/pickup = left mouse button
+main menu = escape
+flee/camera swap = T
 
----------------------------
-While In World:
----------------------------
-W			Swim Forwards
-RMB-Held		Rotate Camera
-M			Mount Boat
-I			Inventory
-Z			Toggle Targeting
-X			Change Target
-Q			Punch
-E			Harvest/Loot
-P			Throw Bait
+Diving bell = n/a
+
+CameraRotation = Mouse Rotation
+MovementOrInventoryNavigation = WASDQE 
+Targeting = AD
+AttackSwap = WASD 
+BaitSwap = WASD 
+
+MenuAndShopMenuNavigationPageSelect = pl;' 
+
 
 
