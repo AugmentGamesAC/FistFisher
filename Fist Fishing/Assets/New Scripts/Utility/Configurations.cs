@@ -108,4 +108,15 @@ public class Configurations : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
     }
     
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
+    }
+
+
 }
