@@ -52,13 +52,16 @@ public class Player : MonoBehaviour
         //GEt Vector between boat spawn and player.
         if (m_respawnLocation != null)
         {
-            Vector3 MoveVector = m_respawnLocation - gameObject.transform.position;
+            //Vector3 MoveVector = m_respawnLocation - gameObject.transform.position;
 
-            m_characterController.Move(MoveVector);
+            //m_characterController.Move(MoveVector);
 
-            PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
-            move.Mount();
+
         }
+
+
+        PlayerMovement move = gameObject.GetComponent<PlayerMovement>();
+        move.Mount();
     }
 
     private void Init()
@@ -76,6 +79,8 @@ public class Player : MonoBehaviour
         m_oxygenTracker = GetComponentInChildren<OxygenTracker>();
 
         m_healthModule.OnDeath += HandleDeath;
+
+        HandleDeath();
     }
 
     private void Start()
