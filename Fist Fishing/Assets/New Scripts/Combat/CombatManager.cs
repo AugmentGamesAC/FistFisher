@@ -132,8 +132,10 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        //can switch targets even when fish are attacking.
-        ChangeSelectedFish( (ALInput.GetKey(KeyCode.O) ? 1 : 0) - (ALInput.GetKey(KeyCode.P) ? 1 : 0) );
+
+            //can switch targets even when fish are attacking.
+            ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+
 
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
@@ -144,7 +146,7 @@ public class CombatManager : MonoBehaviour
 
         //listen for input cases.
         //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
-        if (ALInput.GetKeyDown(ALInput.Punch))
+        if (ALInput.GetKeyDown(KeyCode.F))
         {
             PlayerAttack();
         }
