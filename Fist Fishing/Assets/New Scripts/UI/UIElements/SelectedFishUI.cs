@@ -36,8 +36,11 @@ public class SelectedFishUI : CoreUIElement<FishCombatInfo>
         EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
         EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
         //EnemyAction.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
-        EnemyAction.ForceUpdate(0);
-        EnemyTypeDisplay.ForceUpdate( (int)Mathf.Log(2,(float) (newData.FishInstance.FishData.FishClassification & (FishBrain.FishClassification.Agressive|FishBrain.FishClassification.Fearful|FishBrain.FishClassification.Passive))) );
+        EnemyAction.ForceUpdate(newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)?1:0 );
+        EnemyTypeDisplay.ForceUpdate(
+            newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Passive) ? 0 :
+                        newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) ? 1 : 2);
+
         EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
     }
