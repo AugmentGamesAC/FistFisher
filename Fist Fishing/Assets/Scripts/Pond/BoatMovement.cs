@@ -23,6 +23,10 @@ public class BoatMovement : MonoBehaviour
     float m_movementFactor;
     float m_steerFactor;
 
+    [SerializeField]
+    public Transform spawnPoint;
+
+
     private void Update()
     {
         if (m_allowUpdate)
@@ -62,6 +66,17 @@ public class BoatMovement : MonoBehaviour
             transform.Translate(0.0f, 0.0f, -m_movementFactor * m_speed);
         }
     }
+
+
+    public void MountObject(GameObject someObject)
+    {
+
+
+        someObject.transform.SetParent(transform);
+        someObject.transform.localPosition = spawnPoint.localPosition;
+        someObject.transform.rotation = transform.rotation;
+    }
+
 
     void Steer()
     {

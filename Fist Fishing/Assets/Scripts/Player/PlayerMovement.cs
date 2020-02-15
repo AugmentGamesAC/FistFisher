@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 m_boatDismountPosition;
 
     private ThirdPersonCamera m_camera;
-    public DisplayInventory m_displayInventory;
 
     public float m_walkSpeed = 10.0f;
     public float m_sprintSpeed = 15.0f;
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
-        m_displayInventory = GetComponentInChildren<DisplayInventory>();
+        //m_displayInventory = GetComponentInChildren<DisplayInventory>();
 
         Cursor.lockState = CursorLockMode.Locked;
         //m_displayInventory.gameObject.transform.parent.gameObject.SetActive(false);
@@ -134,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
 
-        /*if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+
+        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
         {
             ToggleMouseLock();
-        }*/
+        }
     }
 
     private void LateUpdate()
@@ -151,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool setToNone = Cursor.lockState == CursorLockMode.Locked;
 
-        m_displayInventory.gameObject.SetActive(setToNone);
+        //m_displayInventory.gameObject.SetActive(setToNone);
         Cursor.lockState = (setToNone) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
@@ -171,9 +170,9 @@ public class PlayerMovement : MonoBehaviour
     public void Mount()
     {
         //teleport to boat seat.
-        m_characterController.gameObject.transform.position = m_boatMountPosition;
+       // m_characterController.gameObject.transform.position = m_boatMountPosition;
 
-        m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
+//        m_player.GetComponent<Player>().SetNewCheckpoint(transform.position);
 
         //player is now mounted and shouldn't be able to move until dismount.
         m_isMounted = true;
@@ -181,8 +180,11 @@ public class PlayerMovement : MonoBehaviour
         m_canMount = false;
 
 
-        m_characterController.gameObject.transform.forward = m_boat.transform.forward;
-        m_characterController.gameObject.transform.SetParent(m_boat.transform);
+        m_boat.GetComponent<BoatMovement>().MountObject(m_characterController.gameObject);
+
+        //m_characterController.gameObject.transform.forward = m_boat.transform.forward;
+        //m_characterController.gameObject.transform.SetParent(m_boat.transform);
+        //m_characterController.gameObject.transform.localPosition = m_boatMountPosition;
     }
 
     private void Dismount()
@@ -355,12 +357,7 @@ public class PlayerMovement : MonoBehaviour
         m_characterController.Move(m_velocity * Time.deltaTime);
     }
 
-    public bool IsJumping()
-    {
-        return ALInput.GetKey(ALInput.Jump);
-        //return Input.GetButton("Jump");
-    }
-    public bool IsDescending()
+   public bool IsDescending()
     {
         return ALInput.GetKey(ALInput.Descend);
         //return Input.GetButton("Descend");

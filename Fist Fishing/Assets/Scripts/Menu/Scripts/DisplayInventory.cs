@@ -30,7 +30,13 @@ public class DisplayInventory : MonoBehaviour
         if (m_inventory != null)
             CreateSlots();
 
-        if (m_playerInventory != null && m_text != null)
+        GameObject m_player = GameObject.FindGameObjectWithTag("Player");
+        m_playerInventory = m_player.GetComponentInChildren<Inventory>();
+
+        if (m_playerInventory == null)
+            throw new System.InvalidOperationException("Display Inventory is not working");
+
+        if (m_text != null)
             m_text.text = m_playerInventory.CurrentCurrency.ToString("n0");
     }
 
