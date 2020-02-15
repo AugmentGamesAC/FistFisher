@@ -80,4 +80,16 @@ public class PinWheel<T> : IPinWheel<T>
         return false;
     }
 
+
+    public static int TwoDToSelection(float x, float y)
+    {
+ 
+        if (x < 0)
+            return (y > 0) ? 8 : ((y < 0) ? 6 : 7);
+        else if (x > 0)
+            return (y > 0) ? 2 : ((y < 0) ? 4 : 3);
+        else
+            return (y > 0) ? 1 : ((y < 0) ? 5 : 0);
+    }
+
 }

@@ -11,6 +11,8 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
     protected FloatTextUpdater OxygenUpdater;
     [SerializeField]
     protected FloatTextUpdater MoveDistanceUpdater;
+    [SerializeField]
+    protected FloatTextUpdater DamageUpdater;
 
     [SerializeField]
     protected TextUpdater SweetSpotUpdater;
@@ -31,6 +33,7 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
         ThrashUpdater.UpdateTracker(newData.Noise);
         OxygenUpdater.UpdateTracker(newData.OxygenConsumption);
         MoveDistanceUpdater.UpdateTracker(newData.MoveDistance);
+        DamageUpdater.UpdateTracker(newData.Damage);
 
         NameUpdater.UpdateTracker(newData.Name);
         DescriptionUpdater.UpdateTracker(newData.Description);

@@ -42,7 +42,7 @@ public class TestingCombatManager : CombatManager
         m_attackPinwheelUpdater.UpdateTracker(m_playerCombatInfo.m_attackPinwheel);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
-       // m_showThemALl.ForceUpdate(default);
+       m_showThemALl.UpdateTracker(m_FishSelection);
        // m_lessshowyFish.UpdateUI(default);
     }
 

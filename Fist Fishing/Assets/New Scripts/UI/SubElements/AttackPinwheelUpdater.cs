@@ -16,16 +16,15 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
         m_tabs = new Dictionary<int, PinwheelTab>(tabs.Length);
         foreach (var tab in tabs)
             m_tabs.Add(tab.ID, tab);
+
+        SetValue(m_currentSelection);
     }
 
     public void SetValue (int index)
     {
         if (index < 1 || index > m_tabs.Count)
             return;
-
-        m_tabs[m_currentSelection].SetSelected(false);
-        m_currentSelection = index;
-        
+       
         m_tracker.SetSelectedOption(index);
     }
 
@@ -39,6 +38,11 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
 
         if (value.SelectedSlot < 1 || value.SelectedSlot > m_tabs.Count)
             return;
+
+        m_tabs[m_currentSelection].SetSelected(false);
+        m_currentSelection = value.SelectedSlot;
         m_tabs[value.SelectedSlot].SetSelected(true);
-    }        
+    }  
+    
+
 }
