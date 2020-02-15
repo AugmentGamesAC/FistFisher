@@ -15,7 +15,7 @@ public class SlotUI : CoreUIElement<SlotData>
     /// <param name="newData"></param>
     public override void UpdateUI(SlotData newData)
     {
-        if (!ShouldUpdateUI(newData))
+        if (!ShouldUpdateUI(newData,x=>newData.Item != null))
             return;
 
         CountDisplay.ForceUpdate(newData.Count);
