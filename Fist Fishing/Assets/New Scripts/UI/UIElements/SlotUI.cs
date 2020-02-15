@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class SlotUI : CoreUIElement<SlotData>
+public class SlotUI : CoreUIElement<ISlotData>
 {
     [SerializeField]
     protected FloatTextUpdater CountDisplay;
@@ -10,10 +10,10 @@ public class SlotUI : CoreUIElement<SlotData>
     [SerializeField]
 
     /// <summary>
-    /// Gets selected fish from combat manager.
+    /// Gets the selectedSlotInformation 
     /// </summary>
     /// <param name="newData"></param>
-    public override void UpdateUI(SlotData newData)
+    public override void UpdateUI(ISlotData newData)
     {
         if (!ShouldUpdateUI(newData,x=>newData.Item != null))
             return;
