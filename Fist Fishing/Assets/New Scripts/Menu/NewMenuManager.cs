@@ -110,8 +110,6 @@ public class NewMenuManager : MonoBehaviour
         }
     }
 
-    //Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
-
     #region singletonification
     /// <summary>
     /// we only need one of these
@@ -178,7 +176,6 @@ public class NewMenuManager : MonoBehaviour
             SetMenuListActiveState(resultList, true);
     }
 
-
     /// <summary>
     /// Set the visibility of the menu items within a menu
     /// </summary>
@@ -191,6 +188,4 @@ public class NewMenuManager : MonoBehaviour
 
         list.ShowActive(activeState);
     }
-
-
 }

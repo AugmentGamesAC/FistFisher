@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerInstance : MonoBehaviour, IPlayerData
 {
-
     public static IPlayerData Instance { get; private set; }
 
     public void Awake()
@@ -35,11 +34,9 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         }
     }
 
-
     [SerializeField]
     protected PlayerHealth m_health = new PlayerHealth(100);
     public PlayerHealth Health => m_health;
-
 
     [SerializeField]
     protected OxygenTracker m_oxygen = new OxygenTracker(100);

@@ -89,7 +89,6 @@ public class PlayerMotion : MonoBehaviour
             if (resultingFish.Count == 0)
                 return;
             m_CanMove = false;
-            NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
             CombatManager.Instance.StartCombat(true, resultingFish, this);
         }
     }

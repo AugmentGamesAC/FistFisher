@@ -47,7 +47,7 @@ public class BoatPlayer : MonoBehaviour
     public void Update()
     {
         if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
-            NewMenuManager.DisplayMenuScreen(MenuScreens.BoatTravel);
+            SwapUI();
 
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
@@ -93,7 +93,7 @@ public class BoatPlayer : MonoBehaviour
             transform.Rotate(desiredDirection, Space.Self);
     }
 
-    protected bool m_displayMap;
+    protected bool m_displayMap = true;
     protected void ToggleMapInventoryDisplays()
     {
         m_displayMap = !m_displayMap;
@@ -105,7 +105,7 @@ public class BoatPlayer : MonoBehaviour
     /// </summary>
     protected void SwapUI()
     {
-        MenuScreens desiredMenu = (!m_isMounted) ? MenuScreens.NormalHUD :  (m_displayMap) ? MenuScreens.BoatTravel : MenuScreens.ShopMenu;
+        MenuScreens desiredMenu = (!m_isMounted) ? MenuScreens.NormalHUD : (m_displayMap) ? MenuScreens.BoatTravel : MenuScreens.ShopMenu;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
 

@@ -29696,7 +29696,7 @@ MonoBehaviour:
     m_percent:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 100
+        m_max: 500
         m_current: 100
   m_oxygen:
     m_oxy:
@@ -29712,7 +29712,7 @@ MonoBehaviour:
     m_isUnderWater: 0
   m_attackRange: 20
   m_iconDisplay:
-    m_value: {fileID: 0}
+    m_value: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
     SerializeInvokes: 0
   m_clams:
     m_value: 0
@@ -30981,12 +30981,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2487089619964385272}
-  - component: {fileID: 3820011626181531302}
-  - component: {fileID: 4304768315763348171}
   - component: {fileID: 4801728315751104329}
-  - component: {fileID: 4874465617951466587}
   - component: {fileID: 2779509146182768129}
-  - component: {fileID: 5169064943009717539}
   - component: {fileID: 745533147}
   - component: {fileID: 745533149}
   - component: {fileID: 1113158690175786254}
@@ -31012,7 +31008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanMove: 0
   m_CanMoveForward: 0
-  m_sphereCastRadius: 100
+  m_sphereCastRadius: 10
   m_closestFish:
     m_fishData: {fileID: 0}
 --- !u!4 &2487089619964385272
@@ -31457,25 +31453,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c68cb2163999b41a3db3855eb26e04, type: 3}
---- !u!114 &3820011626181531302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2487089619964385254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40890704cb00abd4cb388300a2fb1658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_currentHealth: 0
-  m_maxHealth: 100
-  m_healthPercentage: 0
-  m_regenTimer: 0
-  m_regenDelay: 3
-  m_regenRate: 5
-  m_HealthSlider: {fileID: 0}
 --- !u!1 &3820011626604501086
 GameObject:
   m_ObjectHideFlags: 0
@@ -31871,24 +31848,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4304768315763348171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2487089619964385254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0c58019adb2c74cb00bb818366e96e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_punchDamage: 30
-  m_rightShoulder: {fileID: 2264765215594626236}
-  m_leftShoulder: {fileID: 8938296248664053649}
-  m_currentShoulder: {fileID: 0}
-  m_targetController: {fileID: 8268430212035573679, guid: 2d45297892e4340489bb4592ecdb53f6,
-    type: 3}
 --- !u!1 &4317289871419914988
 GameObject:
   m_ObjectHideFlags: 0
@@ -32278,21 +32237,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4874465617951466587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2487089619964385254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1c28f071024bd4cb4c70ee564a809f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_healthModule: {fileID: 3820011627261351948, guid: 168295bf6d21e7c41a897d5c74c456b1,
-    type: 3}
-  m_fishArchetype: 4
 --- !u!1 &4933493245087307560
 GameObject:
   m_ObjectHideFlags: 0
@@ -32429,21 +32373,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5169064943009717539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2487089619964385254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8c81be45cd58146b9394c00792e16d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_currentShoulder: {fileID: 0}
-  m_player: {fileID: 2487089619964385254}
-  Toggle: 0
 --- !u!4 &5339289674734664030
 Transform:
   m_ObjectHideFlags: 0
@@ -32581,6 +32510,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.9000397
       objectReference: {fileID: 0}
     - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
