@@ -40,7 +40,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     void GenerateUpgrade()
     {
-
+        //Upgrade upgrade = new Upgrade()
     }
 
     /// <summary>
@@ -62,11 +62,11 @@ public class UpgradeManager : MonoBehaviour
         UpdateCosts?.Invoke(RecalculateCost);
     }
 
-    public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, float> updatefunction);
+    public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, int> updatefunction);
     public static CostChangeListener UpdateCosts;
 
-    static float RecalculateCost(Dictionary<Stats, float> statsModifier)
+    static int RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
-        return 100.0f;
+        return 100;
     }
 }

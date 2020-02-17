@@ -29,6 +29,4 @@ public class Bait_IItem : ScriptableObject, IItem
     public string Name => m_name;
     [SerializeField]
     protected FishBrain.FishClassification m_currentBaitType = FishBrain.FishClassification.BaitSensitive1;
-
-
 }

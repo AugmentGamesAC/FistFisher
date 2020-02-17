@@ -19,9 +19,10 @@ public class FishBrain : BehaviorTree
         Fearful             = 0x000004,    
         Player              = 0x000008,
         BaitSensitive1      = 0x000100,
-        BaitSensitive2      = 0x000101,
-        BaitSensitive3      = 0x000102,
-        BaitSensitive4      = 0x000104,
+        BaitSensitive2      = 0x000200,
+        BaitSensitive3      = 0x000400,
+        BaitSensitive4      = 0x000800,
+        IsBait = BaitSensitive1|BaitSensitive2|BaitSensitive3|BaitSensitive4,
         FavoredPlant1 = 0x010000
     }
 

@@ -61,4 +61,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
     public FloatTracker Clams => m_clams;
+
+    [SerializeField]
+    protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
+    public PlayerStatManager PlayerStatMan => m_playerStatManager;
 }
