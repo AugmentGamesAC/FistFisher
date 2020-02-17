@@ -19,7 +19,10 @@ public class FishBrain : BehaviorTree
         Fearful             = 0x000004,    
         Player              = 0x000008,
         BaitSensitive1      = 0x000100,
-        FavoredPlant1       = 0x010000
+        BaitSensitive2      = 0x000101,
+        BaitSensitive3      = 0x000102,
+        BaitSensitive4      = 0x000104,
+        FavoredPlant1 = 0x010000
     }
 
     static public string TargetName  = "defaultGoal";
