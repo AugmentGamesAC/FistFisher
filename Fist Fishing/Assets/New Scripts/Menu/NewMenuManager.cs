@@ -163,7 +163,6 @@ public class NewMenuManager : MonoBehaviour
         if (Instance.m_currentSelectedMenu == newMenu)
             return;
 
-
         MenuList resultList;
 
         //deactivate current menu
@@ -174,6 +173,8 @@ public class NewMenuManager : MonoBehaviour
 
         if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
             SetMenuListActiveState(resultList, true);
+
+        SwapMouseLock();
     }
 
     /// <summary>
@@ -187,5 +188,16 @@ public class NewMenuManager : MonoBehaviour
             return;
 
         list.ShowActive(activeState);
+    }
+
+    protected void SwapMouseLock()
+    {
+        if(MouseActiveState)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

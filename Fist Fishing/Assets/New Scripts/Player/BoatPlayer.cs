@@ -44,6 +44,11 @@ public class BoatPlayer : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        PlayerInstance.Instance.Health.OnMinimumAmountReached += RespawnPlayer;
+    }
+
     public void Update()
     {
         if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
@@ -111,6 +116,8 @@ public class BoatPlayer : MonoBehaviour
 
     protected void MountAction()
     {
+        PlayerInstance.Instance.Health.ResetCurrentAmount();
+        PlayerInstance.Instance.Oxygen.ResetOxygen();
         m_isMounted = !m_isMounted;
         SwapUI();
         ToggleControls();
@@ -129,9 +136,8 @@ public class BoatPlayer : MonoBehaviour
         m_validPlayer.transform.SetPositionAndRotation(targetTransform.position, targetTransform.rotation);
     }
 
-    public void RespawnPlayer(PlayerMotion player)
+    public void RespawnPlayer()
     {
-        m_validPlayer = player;
         MountAction();
     }
 }
