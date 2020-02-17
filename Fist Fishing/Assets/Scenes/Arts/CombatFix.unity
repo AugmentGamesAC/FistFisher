@@ -29697,15 +29697,15 @@ MonoBehaviour:
       SerializeInvokes: 0
       displayPercentage:
         m_max: 500
-        m_current: 100
+        m_current: 500
   m_oxygen:
     m_oxy:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 100
+        m_max: 200
         m_current: 100
     m_OxygenRegeneration: 20
-    m_OxygenDegeneration: 5
+    m_OxygenDegeneration: 1
     m_noOxygenDamage: 5
     m_OxygenTickFrequency: 1
     m_OxygenTickTimer: 1
@@ -31008,6 +31008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanMove: 0
   m_CanMoveForward: 0
+  m_canMoveUp: 0
   m_sphereCastRadius: 10
   m_closestFish:
     m_fishData: {fileID: 0}

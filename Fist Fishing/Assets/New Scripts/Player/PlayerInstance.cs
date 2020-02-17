@@ -7,6 +7,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 {
     public static IPlayerData Instance { get; private set; }
 
+    #region singletonification
     public void Awake()
     {
         if (Instance != null)
@@ -23,6 +24,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         if (Instance == default)
             throw new System.InvalidOperationException("Menu Manager not Initilized");
     }
+    #endregion
 
     protected CombatManager m_cM;
     public CombatManager CM {
@@ -32,6 +34,12 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
                 m_cM = GameObject.Find("CombatScreen").GetComponent<CombatManager>();
             return m_cM;
         }
+    }
+
+    private void Update()
+    {
+        //needs to update for regen and degen.
+        m_oxygen.Update();
     }
 
     [SerializeField]

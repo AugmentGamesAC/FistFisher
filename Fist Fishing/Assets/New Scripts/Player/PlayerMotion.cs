@@ -159,6 +159,9 @@ public class PlayerMotion : MonoBehaviour
 
         //apply movement vector
 
+        if (!PlayerInstance.Instance.Oxygen.m_isUnderWater)
+            desiredMovement.y = Mathf.Min(0, desiredMovement.y);
+
         transform.position += desiredMovement;
     }
 
