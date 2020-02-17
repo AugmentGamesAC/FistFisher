@@ -30,5 +30,16 @@ public class Bait_IItem : ScriptableObject, IItem
     [SerializeField]
     protected FishBrain.FishClassification m_currentBaitType = FishBrain.FishClassification.BaitSensitive1;
 
+    public bool CanMerge(IItem newItem)
+    {
+        Bait_IItem item = (Bait_IItem)newItem;
+        if (item == null)
+            return false;
+        if (m_currentBaitType != item.m_currentBaitType)
+            return true;
+        
+        return false;
+    }
+
 
 }
