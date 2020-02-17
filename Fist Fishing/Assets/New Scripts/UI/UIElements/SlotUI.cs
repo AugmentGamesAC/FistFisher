@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-
+[RequireComponent(typeof(ASlotRender))]
 public class SlotUI : CoreUIElement<ISlotData>
 {
     [SerializeField]

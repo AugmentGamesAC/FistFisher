@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class SlotManager
+using UnityEngine.EventSystems;
+
+public class SlotManager : MonoBehaviour, IDropHandler
 {
     /// <summary>
     /// contains all the slot data for the manager, the key being the index of the slot 
     /// so a "next" previous logic can be maintained/observed.
     /// </summary>
-    protected Dictionary<int, SlotData> m_mySLots;
+    protected Dictionary<int, SlotData> m_mySLots = new Dictionary<int, SlotData>();
 
-    protected HashSet<int> m_freeSlots;
+    protected HashSet<int> m_freeSlots = new HashSet<int>();
 
 
     /// <summary>
@@ -34,7 +36,7 @@ public class SlotManager
         if (slot == default)
             return;
 
-        m_freeSlots.Remove(slot.Index);
+        m_freeSlots.Add(slot.Index);
     }
 
     /// <summary>
@@ -58,6 +60,11 @@ public class SlotManager
     public virtual bool AddItem(IItem item, int count)
     {
         return false;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }
 
