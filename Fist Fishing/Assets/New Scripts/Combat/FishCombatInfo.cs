@@ -6,12 +6,27 @@ using UnityEngine;
 public class FishCombatInfo : CombatInfo
 {
     [SerializeField]
-    protected IFishData m_fishData = new TestingFish();
-    public IFishData FishData => m_fishData;
+    protected FishInstance m_fish;
+    public FishInstance FishInstance => m_fish;
+
+    [SerializeField]
+    public FloatTracker Speed = new FloatTracker();
+    [SerializeField]
+    public FloatTracker CombatDistance = new FloatTracker();
+    [SerializeField]
+    public FloatTracker Direction = new FloatTracker();
 
     public void TakeDamage(float damage)
     {
-        m_fishData.Health.Change(-damage);
+        m_fish.Health.Change(-damage);
+    }
+
+    public FishCombatInfo(FishInstance fish)
+    {
+        m_fish = fish;
+        Speed.SetValue(fish.FishData.CombatSpeed);
+        CombatDistance.SetValue(0);
+        Direction.SetValue(fish.FishData.FishClassification == FishBrain.FishClassification.Agressive ? 1 : -1);
     }
 
     /// <summary>
@@ -27,16 +42,6 @@ public class FishCombatInfo : CombatInfo
 
     public void ResetMoveSpeed()
     {
-        Speed.SetValue(m_fishData.CombatSpeed);
+        Speed.SetValue(m_fish.FishData.CombatSpeed);
     }
-
-    [SerializeField]
-    protected FloatTracker m_spawnChance = new FloatTracker();
-    public FloatTracker SpawnChance => m_spawnChance;
-    [SerializeField]
-    public FloatTracker Speed = new FloatTracker();
-    [SerializeField]
-    public FloatTracker CombatDistance = new FloatTracker();
-    [SerializeField]
-    public FloatTracker Direction = new FloatTracker();
 }

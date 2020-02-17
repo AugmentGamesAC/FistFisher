@@ -15,6 +15,8 @@ public class ALInput : MonoBehaviour
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
+
+    #region keycodes keycodes
     [SerializeField]
     protected KeyCode m_forward;
     public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
@@ -117,7 +119,7 @@ public class ALInput : MonoBehaviour
 
 
     //camera states
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_abzu;
     public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
 
@@ -131,7 +133,14 @@ public class ALInput : MonoBehaviour
 
     [SerializeField]
     KeyCode m_firstPerson;
-    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }*/
+
+
+    [SerializeField]
+    KeyCode m_cameraSwap;
+    public static KeyCode CameraSwap { get { hasInstance(); return Instance.m_cameraSwap; } }
+
+    #endregion keycodes
 
 
     /// <summary>
@@ -246,7 +255,7 @@ public class ALInput : MonoBehaviour
         m_sprint = KeyCode.LeftShift;
         m_keyTarget = KeyCode.Z;
         m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.Space;
+        m_punch = KeyCode.P;
         m_manualCamera = KeyCode.Mouse1;
         m_backward = KeyCode.S;
 
@@ -260,15 +269,16 @@ public class ALInput : MonoBehaviour
         m_rotateRight = KeyCode.Keypad4;
         m_rotateLeft = KeyCode.Keypad6;
 
-        m_abzu = KeyCode.F1;
+        /*m_abzu = KeyCode.F1;
         m_locked = KeyCode.F2;
         m_warthog = KeyCode.F3;
-        m_firstPerson = KeyCode.F4;
+        m_firstPerson = KeyCode.F4;*/
+        m_cameraSwap = KeyCode.T;
 
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;
         m_harvest = KeyCode.R;
-        m_throwBait = KeyCode.P;
+        m_throwBait = KeyCode.O;
 
         m_craftBait = KeyCode.B;
 

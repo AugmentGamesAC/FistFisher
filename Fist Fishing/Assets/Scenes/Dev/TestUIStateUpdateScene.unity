@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 350024962}
   - component: {fileID: 350024961}
   - component: {fileID: 350024963}
+  - component: {fileID: 350024964}
   m_Layer: 5
   m_Name: Image_Targeted Enemy Info
   m_TagString: Untagged
@@ -1156,6 +1157,7 @@ GameObject:
   - component: {fileID: 1415692709}
   - component: {fileID: 1415692711}
   - component: {fileID: 1415692710}
+  - component: {fileID: 1415692712}
   m_Layer: 5
   m_Name: Image_Fish Model Goes Here
   m_TagString: Untagged
@@ -1218,6 +1220,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415692708}
   m_CullTransparentMesh: 0
+--- !u!114 &1415692712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415692708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff50b24cd6981040a2c77cbf3a684fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tracker: {fileID: 0}
 --- !u!1 &1480558655
 GameObject:
   m_ObjectHideFlags: 0

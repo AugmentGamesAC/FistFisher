@@ -26,11 +26,13 @@ public class MonoUITracker<T> : MonoBehaviour, ISerializationCallbackReceiver
     }
 }
 
-
+[System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
 {
     [SerializeField]
     protected T m_value;
+    [SerializeField]
+    protected bool SerializeInvokes;
 
     public delegate void UIUpdateListner(T type);
     public UIUpdateListner OnStateChange;
@@ -42,11 +44,18 @@ public class UITracker<T> : ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
+        if (!SerializeInvokes)
+            return;
         UpdateState();
     }
 
     public void OnAfterDeserialize()
     {
+    }
+
+    protected virtual T ImplicitOverRide(UITracker<T> reference)
+    {
+        return reference.m_value;
     }
 
     /// <summary>
@@ -56,7 +65,7 @@ public class UITracker<T> : ISerializationCallbackReceiver
     /// <param name="reference"></param>
     public static implicit operator T(UITracker<T> reference)
     {
-        return reference.m_value;
+        return reference.ImplicitOverRide(reference);
     }
 
     public void SetValue(T newValue)

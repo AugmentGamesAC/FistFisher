@@ -12,29 +12,26 @@ public class PlayerCombatInfo : CombatInfo
     protected NoiseTracker m_noiseTracker = new NoiseTracker();
     public NoiseTracker NoiseTracker => m_noiseTracker;
 
-    [SerializeField]
-    protected PlayerHealth m_playerHealth = new PlayerHealth();
-    public PlayerHealth PlayerHealth => m_playerHealth;
+    public PinwheelTracker<Bait> m_baitOptions ;
+    public PinwheelTracker<CombatMoveInfo> m_attackPinwheel;
 
-
-    [SerializeField]
-    protected OxygenTracker m_oxygenTracker = new OxygenTracker();
-    public OxygenTracker OxygenTracker => m_oxygenTracker;
-
-    public PinWheel<Bait> m_baitOptions = new PinWheel<Bait>();
-    public PinWheel<CombatMoveInfo> m_attackPinwheel = new PinWheel<CombatMoveInfo>();
+    public PlayerCombatInfo(List<CombatMoveInfo> moves)
+    {
+        m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
+        m_baitOptions = new PinwheelTracker<Bait>(1, default);
+    }
 
     public void UpdateOxygen(float change)
     {
-        //Oxygen module.Change(change);
+        PlayerInstance.Instance.Oxygen.ModifyOxygen(-change);
     }
     public void ConsumeItem()
     {
-        
+        //inventory stuff.
     }
     public void TakeDamage(float damage)
     {
-        //health module.Change(damage);
+        PlayerInstance.Instance.Health.Change(-damage);
     }
     public void UpdateNoise(float change)
     {

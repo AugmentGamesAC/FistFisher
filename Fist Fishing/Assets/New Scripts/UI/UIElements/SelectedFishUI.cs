@@ -3,55 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectedFishUI : MonoBehaviour
+public class SelectedFishUI : CoreUIElement<FishCombatInfo>
 {
-    [SerializeField]
-    protected FishCombatInfo Info;
-
-    [SerializeField]
-    protected CombatManager m_combatManager;
-
-
     [SerializeField]
     protected FloatTextUpdater EnemyDistanceDisplay;
     [SerializeField]
     protected TextUpdater EnemyNameDisplay;
     [SerializeField]
-    protected ImageUpdater EnemyTypeImageDisplay;
+    protected IntImageUpdater EnemyTypeDisplay;
+    [SerializeField]
+    protected IntImageUpdater EnemyAction;
     [SerializeField]
     protected ImageUpdater EnemyIconDisplay;
     [SerializeField]
-    protected FloatTextUpdater EnemyHealthNumberDisplay;
+    protected PercentTextUpdater EnemyHealthNumberDisplay;
     [SerializeField]
     protected FloatTextUpdater EnemySwimSpeedDisplay;
+    [SerializeField]
+    protected ProgressBarUpdater ProgressBar;
 
-    
-    [ContextMenu("SwapData")]
-    public void newPsudoData()
+    /// <summary>
+    /// Gets selected fish from combat manager.
+    /// </summary>
+    /// <param name="newData"></param>
+    public override void UpdateUI(FishCombatInfo newData)
     {
-        UpdateUI(new PsudoCombatFish());
-    }
+        if (!ShouldUpdateUI(newData))
+            return;
 
-    public void UpdateUI(FishCombatInfo newData)
-    {
-        Info = newData;
+        ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
+        EnemyDistanceDisplay.UpdateTracker(newData.CombatDistance);
+        EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
+        EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
+        //EnemyAction.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
+        EnemyAction.ForceUpdate(newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)?1:0 );
+        EnemyTypeDisplay.ForceUpdate(
+            newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Passive) ? 0 :
+                        newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) ? 1 : 2);
 
-        EnemyDistanceDisplay.UpdateTracker(Info.CombatDistance);
-        //EnemyNameDisplay.UpdateTracker(MyPsudoData.Name);
-        //EnemyTypeImageDisplay.UpdateTracker(MyPsudoData.TypeImage);
-        //EnemyIconDisplay.UpdateTracker(MyPsudoData.IconImage);
-        EnemyHealthNumberDisplay.UpdateTracker(Info.FishData.Health.CurrentAmount);
-        EnemySwimSpeedDisplay.UpdateTracker(Info.Speed);
-    }
-}
-
-
-[System.Serializable]
-public class PsudoCombatFish : FishCombatInfo
-{
-    public PsudoCombatFish()
-    {
-        Speed.SetValue(5);
-        CombatDistance.SetValue(14);
+        EnemyHealthNumberDisplay.UpdateTracker(newData.FishInstance.Health.PercentTracker);
+        EnemySwimSpeedDisplay.UpdateTracker(newData.Speed);
     }
 }
+
