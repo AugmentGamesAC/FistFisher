@@ -119,7 +119,7 @@ public class ALInput : MonoBehaviour
 
 
     //camera states
-    [SerializeField]
+    /*[SerializeField]
     KeyCode m_abzu;
     public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
 
@@ -133,7 +133,12 @@ public class ALInput : MonoBehaviour
 
     [SerializeField]
     KeyCode m_firstPerson;
-    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }
+    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }*/
+
+
+    [SerializeField]
+    KeyCode m_cameraSwap;
+    public static KeyCode CameraSwap { get { hasInstance(); return Instance.m_cameraSwap; } }
 
     #endregion keycodes
 
@@ -264,10 +269,11 @@ public class ALInput : MonoBehaviour
         m_rotateRight = KeyCode.Keypad4;
         m_rotateLeft = KeyCode.Keypad6;
 
-        m_abzu = KeyCode.F1;
+        /*m_abzu = KeyCode.F1;
         m_locked = KeyCode.F2;
         m_warthog = KeyCode.F3;
-        m_firstPerson = KeyCode.F4;
+        m_firstPerson = KeyCode.F4;*/
+        m_cameraSwap = KeyCode.T;
 
         m_mountBoat = KeyCode.M;
         m_dismountBoat = KeyCode.N;

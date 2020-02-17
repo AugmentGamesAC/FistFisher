@@ -11,4 +11,6 @@ public interface IItem
     string Description { get; }
     Sprite IconDisplay { get; }
     string Name { get; }
+
+    bool CanMerge(IItem newItem);
 }
