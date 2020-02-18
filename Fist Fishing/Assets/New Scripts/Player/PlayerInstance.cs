@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerInstance : MonoBehaviour, IPlayerData
 {
-
     public static IPlayerData Instance { get; private set; }
 
+    #region singletonification
     public void Awake()
     {
         if (Instance != null)
@@ -24,6 +24,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         if (Instance == default)
             throw new System.InvalidOperationException("Menu Manager not Initilized");
     }
+    #endregion
 
     protected CombatManager m_cM;
     public CombatManager CM {
@@ -35,11 +36,15 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         }
     }
 
+    private void Update()
+    {
+        //needs to update for regen and degen.
+        m_oxygen.Update();
+    }
 
     [SerializeField]
     protected PlayerHealth m_health = new PlayerHealth(100);
     public PlayerHealth Health => m_health;
-
 
     [SerializeField]
     protected OxygenTracker m_oxygen = new OxygenTracker(100);
@@ -56,4 +61,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
     public FloatTracker Clams => m_clams;
+
+    [SerializeField]
+    protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
+    public PlayerStatManager PlayerStatMan => m_playerStatManager;
 }

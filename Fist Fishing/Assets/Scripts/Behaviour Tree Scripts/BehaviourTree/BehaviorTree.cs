@@ -116,6 +116,9 @@ public class BehaviorTree : MonoBehaviour {
 
     public NodeResult RunStack()
     {
+        if (NewMenuManager.PausedActiveState)
+            return NodeResult.FAILURE;
+
         if (CallStack.Count == 0)
         {
             // stack is empty - add to it

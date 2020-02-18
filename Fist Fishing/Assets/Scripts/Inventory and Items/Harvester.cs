@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Inventory))]
 public class Harvester : MonoBehaviour
 {

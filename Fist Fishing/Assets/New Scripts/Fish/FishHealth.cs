@@ -17,6 +17,9 @@ public class FishHealth
     protected PercentageTracker m_percTracker;
     public PercentageTracker PercentTracker => m_percTracker;
 
+    public delegate void Death();
+    public event Death OnMinimumHealthReached;
+
     /// <summary>
     /// Can consider FishHealth as a float with this.
     /// returns ref to currentAmount.
@@ -30,6 +33,9 @@ public class FishHealth
     public void Change(float changeAmount)
     {
         m_percTracker.IncrementCurrent(changeAmount);
+
+        if (CurrentAmount <= 0)
+            OnMinimumHealthReached?.Invoke();
     }
 
     public void ResetCurrentAmount()

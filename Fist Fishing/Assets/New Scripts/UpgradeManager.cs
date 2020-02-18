@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -20,13 +23,19 @@ public class UpgradeManager : MonoBehaviour
     //- AppliedUpgradeChange passes in a float based on number of appliedUpgrades.
     //this calls updateCost on Upgrades.
 
-
-
     public enum UpgradeTypes
     {
-        Arms,
-        Legs,
-        Torso
+        Arms,// power, airConsumption
+        Legs,//MovementSpeed, stealth, turnSpeed
+        Torso//AirRestoration, MaxAir, Max Health.
+    }
+
+    public enum Rarity
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Epic
     }
 
     protected static int m_appliedUpgrades;
@@ -35,21 +44,106 @@ public class UpgradeManager : MonoBehaviour
 
     static Dictionary<UpgradeTypes, int> UpgradeCosts;
 
+    List<string> m_upgradeNames = new List<string>();
+
+
     /// <summary>
     /// Creates an Upgrade with RNG.
     /// </summary>
-    void GenerateUpgrade()
+    public void GenerateUpgrade()
     {
-
+        //GenerateUpgrade(RNG);
     }
 
     /// <summary>
     /// Creates an Upgrade with RNG. within the "UpgradeType".
     /// </summary>
     /// <param name="type"></param>
-    void GenerateUpgrade(UpgradeTypes type)
+    public Upgrade GenerateUpgrade(UpgradeTypes type)
     {
+        Upgrade upgrade = default;
 
+        switch (type)
+        {
+            case UpgradeTypes.Arms:
+                upgrade = GenerateArmUpgrade();
+                break;
+            case UpgradeTypes.Torso:
+                upgrade = GenerateChestUpgrade();
+                break;
+            case UpgradeTypes.Legs:
+                upgrade = GenerateLegUpgrade();
+                break;
+        }
+
+        return upgrade;
+    }
+
+    protected string GetRandomRarity()
+    {
+        var rarities = Enum.GetValues(typeof(Rarity)).Cast<string>().ToList();
+
+        int minIndex = rarities.IndexOf(rarities.First<string>());
+        int maxIndex = rarities.IndexOf(rarities.Last<string>());
+
+        return rarities[RandRange(minIndex, maxIndex)];
+    }
+
+    protected int RandRange(int min, int max)
+    {
+        return Random.Range(min, max);
+    }
+
+    protected Upgrade GenerateArmUpgrade()
+    {
+        float PowerMod = RandRange(10, 30);
+        float AirConsumptionMod = RandRange(25, 50);
+        int Worth = RandRange(200, 500);
+
+
+        Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
+        {
+            { Stats.Power , PowerMod },
+            { Stats.AirConsumption, AirConsumptionMod }
+        };
+
+        return new Upgrade(string.Format("{0} Strong Arm", GetRandomRarity()), default, "strong frogman RISE!!", Worth, modifiers);
+    }
+
+    protected Upgrade GenerateChestUpgrade()
+    {
+        float MaxAirMod = RandRange(30, 60);
+        float AirRestoreMod = RandRange(25, 50);
+        float MaxHealthMod = RandRange(40, 80);
+
+        int Worth = RandRange(200, 500);
+
+        Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
+        {
+            { Stats.MaxAir , MaxAirMod },
+            { Stats.AirRestoration, AirRestoreMod },
+            { Stats.MaxHealth, MaxHealthMod }
+        };
+
+        return new Upgrade(string.Format("{0} Iron Lungs", GetRandomRarity()), default, "Cardiovasculature is very important kids!!", Worth, modifiers);
+    }
+
+    protected Upgrade GenerateLegUpgrade()
+    {
+        float MoveSpeedMod = RandRange(5, 15);
+        float StealthMod = RandRange(50, 80);
+        float TurnSpeedMod = RandRange(10, 20);
+
+        int Worth = RandRange(200, 500);
+
+        Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
+        {
+            { Stats.MovementSpeed , MoveSpeedMod },
+            { Stats.Stealth, StealthMod },
+            { Stats.TurnSpeed, TurnSpeedMod }
+        };//MovementSpeed, stealth, turnSpeed
+
+        return new Upgrade(string.Format("{0} Leg Muscles", GetRandomRarity()), default, "Strong legs lead happy families!!", Worth, modifiers);
     }
 
     /// <summary>
@@ -62,11 +156,11 @@ public class UpgradeManager : MonoBehaviour
         UpdateCosts?.Invoke(RecalculateCost);
     }
 
-    public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, float> updatefunction);
+    public delegate void CostChangeListener(System.Func<Dictionary<Stats, float>, int> updatefunction);
     public static CostChangeListener UpdateCosts;
 
-    static float RecalculateCost(Dictionary<Stats, float> statsModifier)
+    static int RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
-        return 100.0f;
+        return 100;
     }
 }

@@ -44,10 +44,15 @@ public class BoatPlayer : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        PlayerInstance.Instance.Health.OnMinimumAmountReached += RespawnPlayer;
+    }
+
     public void Update()
     {
         if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
-            NewMenuManager.DisplayMenuScreen(MenuScreens.BoatTravel);
+            SwapUI();
 
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
@@ -93,7 +98,7 @@ public class BoatPlayer : MonoBehaviour
             transform.Rotate(desiredDirection, Space.Self);
     }
 
-    protected bool m_displayMap;
+    protected bool m_displayMap = true;
     protected void ToggleMapInventoryDisplays()
     {
         m_displayMap = !m_displayMap;
@@ -105,12 +110,14 @@ public class BoatPlayer : MonoBehaviour
     /// </summary>
     protected void SwapUI()
     {
-        MenuScreens desiredMenu = (!m_isMounted) ? MenuScreens.NormalHUD :  (m_displayMap) ? MenuScreens.BoatTravel : MenuScreens.ShopMenu;
+        MenuScreens desiredMenu = (!m_isMounted) ? MenuScreens.NormalHUD : (m_displayMap) ? MenuScreens.BoatTravel : MenuScreens.ShopMenu;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
 
     protected void MountAction()
     {
+        PlayerInstance.Instance.Health.ResetCurrentAmount();
+        PlayerInstance.Instance.Oxygen.ResetOxygen();
         m_isMounted = !m_isMounted;
         SwapUI();
         ToggleControls();
@@ -129,9 +136,8 @@ public class BoatPlayer : MonoBehaviour
         m_validPlayer.transform.SetPositionAndRotation(targetTransform.position, targetTransform.rotation);
     }
 
-    public void RespawnPlayer(PlayerMotion player)
+    public void RespawnPlayer()
     {
-        m_validPlayer = player;
         MountAction();
     }
 }

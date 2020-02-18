@@ -114,8 +114,6 @@ public class NewMenuManager : MonoBehaviour
         }
     }
 
-    //Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
-
     #region singletonification
     /// <summary>
     /// we only need one of these
@@ -169,7 +167,6 @@ public class NewMenuManager : MonoBehaviour
         if (Instance.m_currentSelectedMenu == newMenu)
             return;
 
-
         MenuList resultList;
 
         //deactivate current menu
@@ -180,8 +177,9 @@ public class NewMenuManager : MonoBehaviour
 
         if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
             SetMenuListActiveState(resultList, true);
-    }
 
+        SwapMouseLock();
+    }
 
     /// <summary>
     /// Set the visibility of the menu items within a menu
@@ -196,5 +194,14 @@ public class NewMenuManager : MonoBehaviour
         list.ShowActive(activeState);
     }
 
+    protected void SwapMouseLock()
+    {
+        if(MouseActiveState)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
 
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }

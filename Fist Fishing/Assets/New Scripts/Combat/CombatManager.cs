@@ -91,6 +91,7 @@ public class CombatManager : MonoBehaviour
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
+        NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
         m_player = player;
 

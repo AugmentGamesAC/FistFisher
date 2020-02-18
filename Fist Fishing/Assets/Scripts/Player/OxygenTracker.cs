@@ -18,6 +18,10 @@ public class OxygenTracker
     protected PercentageTracker m_oxy;
     public PercentageTracker Tracker => m_oxy;
 
+    [SerializeField]
+    public bool m_isUnderWater = false;
+    public bool IsUnderWater => m_isUnderWater;
+
     public delegate void OnLowOxygenEvent();
     public event OnLowOxygenEvent OnLowOxygen;
 
@@ -25,13 +29,15 @@ public class OxygenTracker
     public float m_OxygenDegeneration = 5.0f;
     public float m_noOxygenDamage = 5.0f;
 
+
+
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
-    public bool m_isUnderWater = false;
+   
 
 
-    private void Update()
+    public void Update()
     {
         //don't update if game is paused
         if (NewMenuManager.PausedActiveState)

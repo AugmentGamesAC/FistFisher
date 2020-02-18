@@ -41,6 +41,7 @@ public class PlayerMotion : MonoBehaviour
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
 
+    protected bool m_displayInventory;
 
     /// <summary>
     /// gets the camera manager on the main camera, then sets up a dictionary of all the possible camera states paired to movement resolution functions
@@ -74,7 +75,6 @@ public class PlayerMotion : MonoBehaviour
         MoveResolution();
     }
 
-
     public void Update()
     {
         if (!m_CanMove)
@@ -89,23 +89,22 @@ public class PlayerMotion : MonoBehaviour
             if (resultingFish.Count == 0)
                 return;
             m_CanMove = false;
-            NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
             CombatManager.Instance.StartCombat(true, resultingFish, this);
         }
     }
-
-    protected bool m_displayInventory;
 
     protected void ToggleInventoryDisplay()
     {
         m_displayInventory = !m_displayInventory;
         SwapUI();
     }
+
     protected void SwapUI()
     {
         MenuScreens desiredMenu = (m_displayInventory) ? MenuScreens.SwimmingInventory : MenuScreens.NormalHUD;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
+
     protected void AbzuMovement()
     {
         Vector3 desiredDirection = new Vector3
@@ -147,7 +146,6 @@ public class PlayerMotion : MonoBehaviour
         XZDirectional();
     }
 
-
     protected void XZDirectional()
     {
         //Forward movement
@@ -161,10 +159,11 @@ public class PlayerMotion : MonoBehaviour
 
         //apply movement vector
 
+        if (!PlayerInstance.Instance.Oxygen.m_isUnderWater)
+            desiredMovement.y = Mathf.Min(0, desiredMovement.y);
+
         transform.position += desiredMovement;
     }
-
-
 
     void ResolveSwimRotation()
     {

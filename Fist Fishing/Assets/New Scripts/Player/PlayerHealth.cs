@@ -13,9 +13,6 @@ public class PlayerHealth
     public delegate void MinimumAmountReached();
     public event MinimumAmountReached OnMinimumAmountReached;
 
-    [SerializeField]
-    public PlayerStatManager m_PlayerStatMan;
-
     /// <summary>
     /// Can consider StatTracker as a float with this.
     /// returns ref to currentAmount.
@@ -30,6 +27,8 @@ public class PlayerHealth
     {
         m_percent = new PercentageTracker(max);
         ResetCurrentAmount();
+
+        PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth].OnCurrentAmountChanged += SetMax;
     }
 
     public void Change(float changeAmount)
@@ -43,6 +42,11 @@ public class PlayerHealth
     public void ResetCurrentAmount()
     {
         Change(m_percent.Max);
+    }
+
+    protected void SetMax(float max)
+    {
+        m_percent.SetMax(max);
     }
 }
 

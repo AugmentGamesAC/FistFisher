@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class BasicFish : MonoBehaviour
 {
-
-
-
     #region working inspector dictionary
     /// <summary>
     /// this is the mess required to make dictionaries with  list as a value work in inspector
@@ -27,9 +24,6 @@ public class BasicFish : MonoBehaviour
 
     protected FishInstance m_fish;
     public FishInstance FishInstance => m_fish;
-
-
-
 
     public float m_personalSpaceRadius = 1.0f;
 
@@ -57,38 +51,15 @@ public class BasicFish : MonoBehaviour
     void Start()
     {
         m_fish = new FishInstance(m_fishDef);
+        m_fish.Health.OnMinimumHealthReached += HandleDeath;
 
         //TODO: clean
-        m_healthModule = GetComponent<HealthModule>();
         m_behaviour = GetComponent<BehaviorTree>();
-
-        if (m_healthModule != null)
-            m_healthModule.OnDeath += HandleDeath;
-       
-
-
     }
     private void HandleDeath()
     {
-        ////ObjectPool should Handle fish.
-
-        ////Fish turns into a harvestable.
-        //Harvestable h = gameObject.AddComponent<Harvestable>();
-        //h.m_harvestableType = HarvestableType.DeadFish;
-        //tag = "Harvestable";
-
-        //Collider[] fishyParts = GetComponents<Collider>();
-
-        //foreach(Collider fp in fishyParts)
-        //{
-        //    fp.tag = "Harvestable";
-        //}
-
-        ////gameObject.SetActive(false);
+        //ObjectPool should Handle fish.
+        gameObject.SetActive(false);
         //m_behaviour.enabled = false;
-        ////m_healthModule.ResetHealth();
-        //m_healthModule.enabled = false;
-
-
     }
 }
