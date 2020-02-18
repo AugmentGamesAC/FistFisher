@@ -26,6 +26,11 @@ public class SlotData : UITracker<ISlotData> , ISlotData
     }
 
 
+    public void SetIndex(int newIndex)
+    {
+        m_index = newIndex;
+    }
+
     /// <summary>
     /// adds item and updates as a tracker.
     /// </summary>

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
-public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SlotManager : MonoBehaviour
 {
 
     /// <summary>
@@ -89,6 +89,7 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         CommonMountPointer.Rect = mouseObject.AddComponent<RectTransform>();
         CommonMountPointer.Rect.sizeDelta = new Vector2(32, 32);
         CommonMountPointer.DragImage = mouseObject.AddComponent<Image>();
+        CommonMountPointer.DragImage.raycastTarget = false;
     }
 
     protected static DragTracker CommonMountPointer;
@@ -100,6 +101,7 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         CommonMountPointer.gameObject.SetActive(true);
         CommonMountPointer.eventData = eventData;
         CommonMountPointer.DragImage.sprite = eventData.pointerDrag.GetComponentInChildren<Image>().sprite;
+
     }
 
     public void HandleDrag(PointerEventData eventData)
@@ -132,22 +134,15 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //dropped needs to be added to first so that we don't loose ref to the IItem;
        dropped.AddItem(slotref.Tracker.Item, delta);
        slotref.Tracker.RemoveCount(delta);
+       OnDrop(eventData);
     }
 
 
-    public void HandleHover(IDropHandler dropee)
+    public void HandleHover(ISlotData dropee)
     {
-
+        CommonMountPointer.SlotTarget = dropee;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        
-    }
 }
 

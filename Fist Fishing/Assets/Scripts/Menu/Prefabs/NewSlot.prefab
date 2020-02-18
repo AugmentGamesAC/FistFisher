@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 8525292041771331784}
   - component: {fileID: 8525292041771331787}
   - component: {fileID: -2061427322557052856}
-  - component: {fileID: 833630151947112854}
+  - component: {fileID: 4680427202504893174}
   m_Layer: 5
   m_Name: NewSlot
   m_TagString: Untagged
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &833630151947112854
+--- !u!114 &4680427202504893174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,6 +418,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8525292041771331796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f8cb1c71e2848458fe94cd1d4a6736, type: 3}
+  m_Script: {fileID: 11500000, guid: 92d1b68bdd5bb0a4f907cbeec9012d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
