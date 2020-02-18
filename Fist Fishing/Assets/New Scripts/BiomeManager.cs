@@ -38,13 +38,14 @@ public class BiomeManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if(m_biomes==default)
+        if(m_biomes.Count<=0)
         {
             Destroy(this);
         }
         foreach(BiomeDefinition bd in m_biomes)
         {
-            //SpawnClutter(bd);
+            bd.m_numberOfThingsCurrentlySpawnedInThisBiome = 0;
+            SpawnClutter(bd);
         }
     }
 
@@ -56,7 +57,30 @@ public class BiomeManager : MonoBehaviour
         
     }
 
+    private float GetWeghtedSum(List<ProbabilitySpawn> list)
+    {
+        float prob = 0; //total weight
+        foreach (ProbabilitySpawn p in list)
+        {
+            prob += p.m_weightedChance;
+        }
+        return prob;
+    }
 
+    private int GetIndexFromWeightedList(List<ProbabilitySpawn> list, float weightSum)
+    {
+        float rand = UnityEngine.Random.Range(0, weightSum);
+        float objweightcount = 0;
+        int objIndex = 0;
+        while (objweightcount < rand)
+        {
+            objweightcount += list[objIndex].m_weightedChance;
+            objIndex++;
+            if (objIndex >= list.Count)
+                return 0;
+        }
+        return objIndex;
+    }
 
 
     /// <summary>
@@ -65,26 +89,15 @@ public class BiomeManager : MonoBehaviour
     /// <param name="bd"></param>
     protected void SpawnClutter(BiomeDefinition bd)
     {
-        float prob = 0; //total weight
-        foreach (ProbabilitySpawn p in bd.ClutterList)
-        {
-            prob += p.m_weightedChance;
-        }
+        float prob = GetWeghtedSum(bd.ClutterList);
 
 
 
         for (int i = 0; i < bd.ClutterCount; i++)
         {
             
-            float rand = UnityEngine.Random.Range(0, prob);
             GameObject obj;
-            float objweightcount = 0;
-            int objIndex = 0;
-            while (objweightcount<rand)
-            {
-                objweightcount += bd.ClutterList[(int)objIndex].m_weightedChance;
-                objIndex++;
-            }
+            int objIndex = GetIndexFromWeightedList(bd.ClutterList, prob);
             Transform pos = gameObject.transform;
             pos.position = FindValidPosition(bd);
             pos.position = GetSeafloorPosition(pos.position);
@@ -101,7 +114,7 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected bool CanWeSpawnAnythingInThisBiome(BiomeDefinition bd)
     {
-        throw new System.NotImplementedException("Not Implemented");
+        return (bd.m_numberOfThingsCurrentlySpawnedInThisBiome < bd.MaxNumberOfSpawns);
     }
 
 
@@ -123,8 +136,8 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected bool SpawnCollectable(BiomeDefinition bd)
     {
-        throw new System.NotImplementedException("Not Implemented");
-
+        if (!CanWeSpawnAnythingInThisBiome(bd))
+            return false;
     }
 
 

@@ -36,4 +36,8 @@ public class BiomeDefinition : ScriptableObject
 
     protected Color m_boatMapColour;
 
+
+
+    public int m_numberOfThingsCurrentlySpawnedInThisBiome; //this needs to have ways of changing
+
 }
