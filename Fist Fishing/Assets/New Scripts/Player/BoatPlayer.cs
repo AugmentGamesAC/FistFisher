@@ -142,7 +142,7 @@ public class BoatPlayer : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        //m_validPlayer = PlayerInstance.Instance.PlayerMotion;
+        m_validPlayer = PlayerInstance.Instance.PlayerMotion;
         MountAction();
     }
 }

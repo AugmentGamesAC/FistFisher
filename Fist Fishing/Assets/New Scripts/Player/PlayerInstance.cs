@@ -72,8 +72,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
-    public FloatTracker Clams => m_clams;
-
+    public FloatTracker Clams => m_clams;
 
     protected SlotManager m_playerInventory;
     public SlotManager PlayerInventory => m_playerInventory;
