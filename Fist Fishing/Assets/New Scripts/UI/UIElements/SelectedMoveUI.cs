@@ -11,6 +11,8 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
     protected FloatTextUpdater OxygenUpdater;
     [SerializeField]
     protected FloatTextUpdater MoveDistanceUpdater;
+    [SerializeField]
+    protected FloatTextUpdater DamageUpdater;
 
     [SerializeField]
     protected TextUpdater SweetSpotUpdater;
@@ -22,6 +24,15 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
     [SerializeField]
     protected ImageUpdater IconUpdater;
 
+    [SerializeField]
+    protected ImageUpdater AttackIconUpdater;
+
+    [SerializeField]
+    protected ImageUpdater PinWheelIconUpdater;
+
+    //[SerializeField]
+    //protected ImageUpdater ItemIconUpdater;
+
     public override void UpdateUI(CombatMoveInfo newData)
     {
         if (!ShouldUpdateUI(newData))
@@ -31,10 +42,14 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
         ThrashUpdater.UpdateTracker(newData.Noise);
         OxygenUpdater.UpdateTracker(newData.OxygenConsumption);
         MoveDistanceUpdater.UpdateTracker(newData.MoveDistance);
+        DamageUpdater.UpdateTracker(newData.Damage);
 
         NameUpdater.UpdateTracker(newData.Name);
         DescriptionUpdater.UpdateTracker(newData.Description);
 
         IconUpdater.UpdateTracker(newData.Icon);
+        AttackIconUpdater.UpdateTracker(newData.Icon);
+        PinWheelIconUpdater.UpdateTracker(newData.Icon);
+
     }
 }

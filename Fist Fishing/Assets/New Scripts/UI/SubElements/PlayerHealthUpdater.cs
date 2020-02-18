@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthUpdater : ProgressBarUpdater
 {
-    public new void Start()
+    public void Start()
     {
         UpdateTracker(PlayerInstance.Instance.Health.Tracker);
     }

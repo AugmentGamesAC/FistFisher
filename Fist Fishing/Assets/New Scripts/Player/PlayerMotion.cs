@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// this class appears to be a placeholder to store a float value and get it.
@@ -25,6 +26,15 @@ public class PlayerMotion : MonoBehaviour
 
     public bool m_CanMove;
     public bool m_CanMoveForward;
+
+    [SerializeField]
+    protected float m_sphereCastRadius = 500;
+    public float SphereCastRadius => m_sphereCastRadius;
+
+    public List<FishInstance> SurroundingFish => FindSurroundingFish();
+
+    [SerializeField]
+    protected FishInstance m_closestFish;
 
     protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
     protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
@@ -74,7 +84,14 @@ public class PlayerMotion : MonoBehaviour
             ToggleInventoryDisplay();
 
         if (ALInput.GetKeyDown(ALInput.Punch))
+        {
+            List<FishInstance> resultingFish = SurroundingFish;
+            if (resultingFish.Count == 0)
+                return;
+            m_CanMove = false;
             NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
+            CombatManager.Instance.StartCombat(true, resultingFish, this);
+        }
     }
 
     protected bool m_displayInventory;
@@ -90,12 +107,12 @@ public class PlayerMotion : MonoBehaviour
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
     protected void AbzuMovement()
-    { 
+    {
         Vector3 desiredDirection = new Vector3
         (
              ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
-            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)), 
-            0            
+            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)),
+            0
         ) * turningSpeedRef * Time.deltaTime;
 
 
@@ -114,7 +131,7 @@ public class PlayerMotion : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
-    protected void WarthogMovement() 
+    protected void WarthogMovement()
     {
         //hopefully will rotate the frog to be looking facedown towards object
         transform.LookAt(m_vision.LookAtWorldTransform, Vector3.up);
@@ -134,7 +151,7 @@ public class PlayerMotion : MonoBehaviour
     protected void XZDirectional()
     {
         //Forward movement
-        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0)) ;
+        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
 
         //Left Right
         desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
@@ -162,5 +179,36 @@ public class PlayerMotion : MonoBehaviour
             transform.Rotate(desiredDirection, Space.Self);
     }
 
+    List<FishInstance> FindSurroundingFish()
+    {
+        float distance = float.MaxValue;
 
+        List<FishInstance> FishInstances = new List<FishInstance>();
+
+        var fishInRange = Physics.SphereCastAll(transform.position, m_sphereCastRadius, transform.forward);
+
+        foreach (var fish in fishInRange)
+        {
+            if (fish.collider.gameObject.GetComponent<BasicFish>() == default)
+                continue;
+            FishInstance def = fish.collider.gameObject.GetComponent<BasicFish>().FishInstance;
+            if (def == null)
+                throw new System.Exception("Fish def was null for this fish!");
+
+            FishInstances.Add(def);
+
+            Vector3 offset = fish.transform.position - transform.position;
+            if (offset.sqrMagnitude < distance)
+            {
+                distance = offset.sqrMagnitude;
+                m_closestFish = def;
+            }
+        }
+        if (FishInstances.Count == 0)
+            return FishInstances;
+
+        FishInstances.Remove(m_closestFish);
+        FishInstances.Insert(0, m_closestFish);
+        return FishInstances;
+    }
 }

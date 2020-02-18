@@ -13,12 +13,28 @@ MonoBehaviour:
   m_Name: Shotgun Punch
   m_EditorClassIdentifier: 
   m_currentMoveType: 2
-  m_damage: 40
-  m_slow: 0.5
-  m_noise: 50
-  m_moveDistance: 0
-  m_oxygenConsumption: 35
+  m_damage:
+    m_value: 40
+    SerializeInvokes: 0
+  m_slow:
+    m_value: 0.5
+    SerializeInvokes: 0
+  m_noise:
+    m_value: 50
+    SerializeInvokes: 0
+  m_moveDistance:
+    m_value: 0
+    SerializeInvokes: 0
+  m_oxygenConsumption:
+    m_value: 35
+    SerializeInvokes: 0
   m_sweetSpot: 0
-  m_name: Shotgun Punch
-  m_description: Close range destructinator.
-  m_icon: {fileID: 21300000, guid: 0b23c49a4a7ba2f4bbc447fe1101e9b1, type: 3}
+  m_name:
+    m_value: 
+    SerializeInvokes: 0
+  m_description:
+    m_value: 
+    SerializeInvokes: 0
+  m_icon:
+    m_value: {fileID: 21300000, guid: b198cfd00948a5d43ab85d71682e4add, type: 3}
+    SerializeInvokes: 0

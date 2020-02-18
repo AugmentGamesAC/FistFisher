@@ -58,7 +58,7 @@ public class CombatMoveInfo : ScriptableObject
     protected TextTracker m_name;
     public TextTracker Name => m_name;
 
-    [SerializeField, TextArea(10, 15)]
+    [SerializeField]
     protected TextTracker m_description;
     public TextTracker Description => m_description;
 

@@ -18,7 +18,9 @@ public class TestingCombatManager : CombatManager
     [SerializeField]
     protected FishDefintion m_f7Fish;
     [SerializeField]
-    protected SelectedFishUI m_showyFish;
+    protected AllFishUIUpdater m_showThemALl;
+    [SerializeField]
+    protected AttackPinwheelUpdater m_attackPinwheelUpdater;
 
     private void Start()
     {
@@ -30,32 +32,45 @@ public class TestingCombatManager : CombatManager
         //};
 
         //m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
+        m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+
+        m_attackPinwheelUpdater = GetComponentInChildren<AttackPinwheelUpdater>();
+
+        if (m_attackPinwheelUpdater == null)
+            throw new System.Exception(string.Format("{0} not working", m_attackPinwheelUpdater));
+
+        m_attackPinwheelUpdater.UpdateTracker(m_playerCombatInfo.m_attackPinwheel);
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
-        m_showyFish.UpdateUI(default);
+       m_showThemALl.UpdateTracker(m_FishSelection);
+       // m_lessshowyFish.UpdateUI(default);
     }
 
     [ContextMenu("CombatYeast/Player Started F5 Fish battle")]
-    public void newFishF5True() { StartCombatTest(new []{m_f5Fish}, true); }
+    public void newFishF5True() { StartCombatTest(new[] { m_f5Fish }, true); }
     [ContextMenu("CombatYeast/Player Started F6 Fish battle")]
     public void newFishF6True() { StartCombatTest(new[] { m_f6Fish }, true); }
     [ContextMenu("CombatYeast/Player Started F7 Fish battle")]
     public void newFishF7True() { StartCombatTest(new[] { m_f7Fish }, true); }
     [ContextMenu("CombatYeast/Fish Started F5 Fish battle")]
-    public void newFishF5False() { StartCombatTest(new[] { m_f5Fish }, false); }
+    public void newFishF5False() { AddFishTest( m_f5Fish); }
     [ContextMenu("CombatYeast/Fish Started F6 Fish battle")]
-    public void newFishF6False() { StartCombatTest(new[] { m_f6Fish }, false); }
+    public void newFishF6False() { AddFishTest( m_f6Fish ); }
     [ContextMenu("CombatYeast/Fish Started F7 Fish battle")]
-    public void newFishF7False() { StartCombatTest(new[] { m_f7Fish }, false); }
+    public void newFishF7False() { AddFishTest(m_f7Fish ); }
+
+
+    protected void AddFishTest(FishDefintion fish)
+    {
+        ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
+    }
 
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
     {
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
-        var fishies = fishDefs.Select(X => new FishCombatInfo(new FishInstance(X)));
-        foreach (var fish in fishies)
-            m_FishSelection.AddItem(fish);
-        m_showyFish.UpdateUI(m_FishSelection.SelectedItem);
-        base.StartCombat(wasPlayer);
+
+
+        base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
     }
 
 

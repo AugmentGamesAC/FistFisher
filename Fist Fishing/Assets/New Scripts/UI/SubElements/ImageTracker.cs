@@ -4,4 +4,5 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class ImageTracker : UITracker<Sprite> { }

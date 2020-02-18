@@ -29,4 +29,6 @@ public interface IPlayerData
     ImageTracker IconDisplay { get; }
 
     FloatTracker Clams { get; }
+
+    CombatManager CM { get; }
 }

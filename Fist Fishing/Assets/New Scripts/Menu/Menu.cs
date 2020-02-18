@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class Menu : MonoBehaviour
@@ -12,5 +13,7 @@ public class Menu : MonoBehaviour
     public void Show(bool activeState)
     {
         gameObject.SetActive(activeState);
+        var something = GetComponentsInChildren<DisapearingMenu>().Select(x => { x.Show(false); return 1; });
     }
+    
 }

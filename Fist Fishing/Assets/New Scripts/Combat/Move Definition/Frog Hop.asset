@@ -13,12 +13,28 @@ MonoBehaviour:
   m_Name: Frog Hop
   m_EditorClassIdentifier: 
   m_currentMoveType: 4
-  m_damage: 0
-  m_slow: 1
-  m_noise: 60
-  m_moveDistance: 18
-  m_oxygenConsumption: 65
+  m_damage:
+    m_value: 0
+    SerializeInvokes: 0
+  m_slow:
+    m_value: 0
+    SerializeInvokes: 0
+  m_noise:
+    m_value: 40
+    SerializeInvokes: 0
+  m_moveDistance:
+    m_value: 8
+    SerializeInvokes: 0
+  m_oxygenConsumption:
+    m_value: 45
+    SerializeInvokes: 0
   m_sweetSpot: 2
-  m_name: Frog Hop
-  m_description: I will find you, and i will punch you...
-  m_icon: {fileID: 21300000, guid: 684c21be3ca962d4a8ab89fbcdae6fec, type: 3}
+  m_name:
+    m_value: 
+    SerializeInvokes: 0
+  m_description:
+    m_value: 
+    SerializeInvokes: 0
+  m_icon:
+    m_value: {fileID: 21300000, guid: 9d6980fcdca30ae45be6d9861ffd0f8e, type: 3}
+    SerializeInvokes: 0
