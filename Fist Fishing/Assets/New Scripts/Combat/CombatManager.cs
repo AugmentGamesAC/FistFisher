@@ -134,15 +134,15 @@ public class CombatManager : MonoBehaviour
     protected void Update()
     {
 
-            //can switch targets even when fish are attacking.
-            ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        //can switch targets even when fish are attacking.
+        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
 
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
 
         //listen to inputs only during AwaitingPlayerRound.
-            if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
+        if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
         //listen for input cases.
@@ -205,7 +205,7 @@ public class CombatManager : MonoBehaviour
         //apply stat changes to the player.
         //Oxygen
         // noise .
-        m_playerCombatInfo.UpdateOxygen(move.OxygenConsumption);
+        m_playerCombatInfo.UpdateOxygen(-move.OxygenConsumption);
         m_playerCombatInfo.UpdateNoise(move.Noise);
 
 
@@ -416,8 +416,8 @@ public class CombatManager : MonoBehaviour
     {
         m_currentCombatState = CombatStates.CombatFinished;
 
+        m_FishSelection.Clear();
         m_roundQueue.Clear();
-
         //TODO: resolve fish handlingPackages{
         m_player.m_CanMove = true;
 

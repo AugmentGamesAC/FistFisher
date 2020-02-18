@@ -17458,6 +17458,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 757886787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1125381349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1912377822403006863, guid: ab35b0a157a83cc4c9630b9011137d99,
+    type: 3}
+  m_PrefabInstance: {fileID: 3989247053632883104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1128257261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29692,6 +29704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af50505264e978846b5e29b78f52f47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxHealth: 500
+  m_maxOxygen: 200
   m_health:
     m_percent:
       SerializeInvokes: 0
@@ -29704,12 +29718,12 @@ MonoBehaviour:
       displayPercentage:
         m_max: 200
         m_current: 100
+    m_isUnderWater: 0
     m_OxygenRegeneration: 20
     m_OxygenDegeneration: 1
     m_noOxygenDamage: 5
     m_OxygenTickFrequency: 1
     m_OxygenTickTimer: 1
-    m_isUnderWater: 0
   m_attackRange: 20
   m_iconDisplay:
     m_value: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
@@ -29717,6 +29731,7 @@ MonoBehaviour:
   m_clams:
     m_value: 0
     SerializeInvokes: 0
+  m_playerMotion: {fileID: 2487089619964385255}
 --- !u!114 &2055129974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31008,7 +31023,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanMove: 0
   m_CanMoveForward: 0
-  m_canMoveUp: 0
   m_sphereCastRadius: 10
   m_closestFish:
     m_fishData: {fileID: 0}
@@ -31591,6 +31605,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ee53113a9446ec7449917a9fa3f24a9c,
         type: 3}
+    - target: {fileID: 1912377822403006864, guid: ab35b0a157a83cc4c9630b9011137d99,
+        type: 3}
+      propertyPath: m_UIElement
+      value: 
+      objectReference: {fileID: 1125381349}
     - target: {fileID: 1912377822424358072, guid: ab35b0a157a83cc4c9630b9011137d99,
         type: 3}
       propertyPath: m_Sprite
@@ -32515,7 +32534,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.9000397
+      value: -6.9000244
       objectReference: {fileID: 0}
     - target: {fileID: 7935555078170190126, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
@@ -32972,6 +32991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8463207306956946894}
   - component: {fileID: 936431007}
+  - component: {fileID: 7264625813581415063}
   m_Layer: 0
   m_Name: Boat (1)
   m_TagString: Boat
@@ -32979,6 +32999,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &7264625813581415063
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264625813581415062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.05, y: 3.55, z: 12.77}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7630909001440909028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34167,7 +34200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8072206955134169338
 MeshRenderer:
   m_ObjectHideFlags: 0

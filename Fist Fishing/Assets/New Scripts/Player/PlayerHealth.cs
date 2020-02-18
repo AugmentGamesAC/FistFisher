@@ -28,7 +28,8 @@ public class PlayerHealth
         m_percent = new PercentageTracker(max);
         ResetCurrentAmount();
 
-        //PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth].OnCurrentAmountChanged += SetMax;
+        PlayerInstance.Instance.Oxygen.OnLowOxygen += Change;
+        PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth].OnCurrentAmountChanged += SetMax;
     }
 
     public void Change(float changeAmount)

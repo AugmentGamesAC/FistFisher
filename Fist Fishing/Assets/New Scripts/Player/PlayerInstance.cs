@@ -17,6 +17,9 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         }
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
+
+        m_oxygen = new OxygenTracker(m_maxOxygen);
+        m_health = new PlayerHealth(m_maxHealth); 
     }
 
     private static void HasInstance()
@@ -43,11 +46,19 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     }
 
     [SerializeField]
-    protected PlayerHealth m_health = new PlayerHealth(100);
+    protected float m_maxHealth = 500;
+    public float MaxHealth => m_maxHealth;
+
+    [SerializeField]
+    protected float m_maxOxygen = 200;
+    public float MaxOxygen => m_maxOxygen;
+
+    [SerializeField]
+    protected PlayerHealth m_health;
     public PlayerHealth Health => m_health;
 
     [SerializeField]
-    protected OxygenTracker m_oxygen = new OxygenTracker(100);
+    protected OxygenTracker m_oxygen;
     public OxygenTracker Oxygen => m_oxygen;
 
     [SerializeField]
@@ -65,4 +76,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
     public PlayerStatManager PlayerStatMan => m_playerStatManager;
+
+    [SerializeField]
+    protected PlayerMotion m_playerMotion = new PlayerMotion();
+    public PlayerMotion PlayerMotion => m_playerMotion;
 }

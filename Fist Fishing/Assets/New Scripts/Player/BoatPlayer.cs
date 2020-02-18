@@ -116,6 +116,9 @@ public class BoatPlayer : MonoBehaviour
 
     protected void MountAction()
     {
+        if (m_validPlayer == default)
+            return;
+
         PlayerInstance.Instance.Health.ResetCurrentAmount();
         PlayerInstance.Instance.Oxygen.ResetOxygen();
         m_isMounted = !m_isMounted;
@@ -134,10 +137,12 @@ public class BoatPlayer : MonoBehaviour
 
         Transform targetTransform = (m_isMounted) ? m_mountTransform : m_dismountTransform;
         m_validPlayer.transform.SetPositionAndRotation(targetTransform.position, targetTransform.rotation);
+        m_validPlayer = m_isMounted ? m_validPlayer : default;
     }
 
     public void RespawnPlayer()
     {
+        //m_validPlayer = PlayerInstance.Instance.PlayerMotion;
         MountAction();
     }
 }

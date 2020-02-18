@@ -33,4 +33,6 @@ public interface IPlayerData
     CombatManager CM { get; }
 
     PlayerStatManager PlayerStatMan { get; }
+
+    PlayerMotion PlayerMotion { get; }
 }

@@ -23,7 +23,7 @@ public class PlayerCombatInfo : CombatInfo
 
     public void UpdateOxygen(float change)
     {
-        PlayerInstance.Instance.Oxygen.ModifyOxygen(-change);
+        PlayerInstance.Instance.Oxygen.ModifyOxygen(change);
     }
     public void ConsumeItem()
     {
