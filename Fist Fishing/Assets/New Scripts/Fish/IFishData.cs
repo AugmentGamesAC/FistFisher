@@ -35,4 +35,8 @@ public interface IPlayerData
     PlayerStatManager PlayerStatMan { get; }
 
     PlayerMotion PlayerMotion { get; }
+
+    SlotManager PlayerInventory { get; }
+    SlotManager ItemInventory { get; }
+
 }

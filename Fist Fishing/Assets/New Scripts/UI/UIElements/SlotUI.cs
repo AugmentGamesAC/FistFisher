@@ -4,10 +4,9 @@
 public class SlotUI : CoreUIElement<ISlotData>
 {
     [SerializeField]
-    protected FloatTextUpdater CountDisplay;
+    protected FloatTextProUpdater CountDisplay;
     [SerializeField]
     protected ImageUpdater Image;
-    [SerializeField]
 
     /// <summary>
     /// Gets the selectedSlotInformation 

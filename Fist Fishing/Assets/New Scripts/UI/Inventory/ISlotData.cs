@@ -5,6 +5,7 @@
     IItem Item { get; }
     SlotManager Manager { get; }
 
+    void SetIndex(int newIndex);
     int AddItem(IItem item, int count);
     int CheckAddItem(IItem item, int count);
     void RemoveItem();
