@@ -31,4 +31,8 @@ public interface IPlayerData
     FloatTracker Clams { get; }
 
     CombatManager CM { get; }
+
+    SlotManager PlayerInventory { get; }
+    SlotManager ItemInventory { get; }
+
 }

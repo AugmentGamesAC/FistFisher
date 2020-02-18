@@ -7,6 +7,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 {
 
     public static IPlayerData Instance { get; private set; }
+    protected static PlayerInstance MyInstance => Instance as PlayerInstance;
+
 
     public void Awake()
     {
@@ -35,7 +37,6 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         }
     }
 
-
     [SerializeField]
     protected PlayerHealth m_health = new PlayerHealth(100);
     public PlayerHealth Health => m_health;
@@ -56,4 +57,20 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
     public FloatTracker Clams => m_clams;
+
+
+    protected SlotManager m_playerInventory;
+    public SlotManager PlayerInventory => m_playerInventory;
+    protected SlotManager m_itemInventory;
+    public SlotManager ItemInventory => m_itemInventory;
+
+    public static void RegisterPlayerInventory(SlotManager newInventory)
+    {
+        MyInstance.m_playerInventory = newInventory;
+    }
+    public static void RegisterItemInventory(SlotManager newInventory)
+    {
+        MyInstance.m_itemInventory = newInventory;
+    }
+
 }
