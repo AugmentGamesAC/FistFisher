@@ -158,7 +158,7 @@ public class NewMenuManager : MonoBehaviour
         foreach (var menuList in Instance.m_menuConfigurations)
             menuList.Value.ShowActive(false);
 
-        Instance.DisplayMenu(MenuScreens.SwimmingInventory);
+        Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)

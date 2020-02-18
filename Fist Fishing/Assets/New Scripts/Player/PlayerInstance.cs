@@ -87,9 +87,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     public static void RegisterItemInventory(SlotManager newInventory)
     {
         MyInstance.m_itemInventory = newInventory;
-    }
-
-    public FloatTracker Clams => m_clams;
+    }
 
     [SerializeField]
     protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
