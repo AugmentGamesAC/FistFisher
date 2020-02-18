@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
 
-
-public class SlotUI : CoreUIElement<SlotData>
+[RequireComponent(typeof(ASlotRender))]
+public class SlotUI : CoreUIElement<ISlotData>
 {
     [SerializeField]
-    protected FloatTextUpdater CountDisplay;
+    protected FloatTextProUpdater CountDisplay;
     [SerializeField]
     protected ImageUpdater Image;
-    [SerializeField]
 
     /// <summary>
-    /// Gets selected fish from combat manager.
+    /// Gets the selectedSlotInformation 
     /// </summary>
     /// <param name="newData"></param>
-    public override void UpdateUI(SlotData newData)
+    public override void UpdateUI(ISlotData newData)
     {
-        if (!ShouldUpdateUI(newData))
+        if (!ShouldUpdateUI(newData,x=>newData.Item != null))
             return;
 
         CountDisplay.ForceUpdate(newData.Count);
