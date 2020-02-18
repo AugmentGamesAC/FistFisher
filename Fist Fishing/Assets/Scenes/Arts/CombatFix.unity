@@ -34562,6 +34562,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871419914990}
     m_Modifications:
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7321673373289557122}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetGamma
+      objectReference: {fileID: 0}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 550179824603047832, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ab486b0c062976642b015e5fc8876db4,
+        type: 3}
+    - target: {fileID: 550179824603047832, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3105584864846595238, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -34705,6 +34746,17 @@ PrefabInstance:
     - target: {fileID: 7805495641238113423, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805495642123809729, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77f2a70fddcfdce45b3fea3faedb0be1,
+        type: 3}
+    - target: {fileID: 7805495642123809729, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
