@@ -5,4 +5,5 @@ using UnityEngine;
 public class ArtistScriptableObject : ScriptableObject
 {
     protected GameObject m_model;
+    public GameObject Model => m_model;
 }

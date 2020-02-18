@@ -65,7 +65,32 @@ public class BiomeManager : MonoBehaviour
     /// <param name="bd"></param>
     protected void SpawnClutter(BiomeDefinition bd)
     {
-        throw new System.NotImplementedException("Not Implemented");
+        float prob = 0; //total weight
+        foreach (ProbabilitySpawn p in bd.ClutterList)
+        {
+            prob += p.m_weightedChance;
+        }
+
+
+
+        for (int i = 0; i < bd.ClutterCount; i++)
+        {
+            
+            float rand = UnityEngine.Random.Range(0, prob);
+            GameObject obj;
+            float objweightcount = 0;
+            int objIndex = 0;
+            while (objweightcount<rand)
+            {
+                objweightcount += bd.ClutterList[(int)objIndex].m_weightedChance;
+                objIndex++;
+            }
+            Transform pos = gameObject.transform;
+            pos.position = FindValidPosition(bd);
+            pos.position = GetSeafloorPosition(pos.position);
+
+            obj = Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
+        }
     }
 
 
@@ -77,7 +102,6 @@ public class BiomeManager : MonoBehaviour
     protected bool CanWeSpawnAnythingInThisBiome(BiomeDefinition bd)
     {
         throw new System.NotImplementedException("Not Implemented");
-
     }
 
 
@@ -89,7 +113,6 @@ public class BiomeManager : MonoBehaviour
     protected bool SpawnFish(BiomeDefinition bd)
     {
         throw new System.NotImplementedException("Not Implemented");
-
     }
 
 
@@ -141,8 +164,8 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius)
     {
-        throw new System.NotImplementedException("Not Implemented");
-
+        RaycastHit hit; //unused here
+        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
     }
 
 
@@ -154,7 +177,8 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected Vector3 GetSeafloorPosition(Vector3 pos)
     {
-        throw new System.NotImplementedException("Not Implemented");
-
+        RaycastHit hit;
+        Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
+        return hit.point;
     }
 }
