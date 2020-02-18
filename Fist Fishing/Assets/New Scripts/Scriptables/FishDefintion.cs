@@ -50,6 +50,11 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     [SerializeField]
     protected string m_name;
     public string Name => m_name;
+
+    public bool CanMerge(IItem newItem)
+    {
+        return false;
+    }
     #endregion
 
     #region ModelReferences
@@ -85,4 +90,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         m_worthInCurrency = 100;
         m_combatSpeed = 4;
     }
+
+
 }

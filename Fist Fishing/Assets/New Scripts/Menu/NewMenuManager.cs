@@ -69,7 +69,11 @@ public enum MenuScreens
     /// </summary>
     MountBoat,
 
-    Combat
+    Combat,
+    /// <summary>
+    /// ItemPinwheel will not be called by the newmenumanger but is registered hear for conviences
+    /// </summary>
+    ItemPinwheel
 }
 
 /// <summary>
@@ -156,7 +160,7 @@ public class NewMenuManager : MonoBehaviour
         foreach (var menuList in Instance.m_menuConfigurations)
             menuList.Value.ShowActive(false);
 
-        Instance.DisplayMenu(MenuScreens.MainMenu);
+        Instance.DisplayMenu(MenuScreens.ItemPinwheel);
     }
 
     protected void DisplayMenu(MenuScreens newMenu)
