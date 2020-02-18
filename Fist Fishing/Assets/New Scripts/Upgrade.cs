@@ -17,7 +17,7 @@ public class Upgrade : IItem
  */
     protected PlayerStatManager statManager;
 
-    protected Dictionary<Stats, float> statsModifier;
+    protected Dictionary<Stats, float> m_statsModifier;
 
 
     [SerializeField]
@@ -54,10 +54,10 @@ public class Upgrade : IItem
     /// <param name="func"></param>
     public void UpdateCost(System.Func<Dictionary<Stats, float>, int> calculateNewCost)
     {
-        m_worth = calculateNewCost(statsModifier);
+        m_worth = calculateNewCost(m_statsModifier);
     }
 
-    public Upgrade(string name, Sprite icon, string description, int worth, ItemType itemType = ItemType.Upgrade, int id = (int)ItemType.Upgrade, int stackSize = 1 )
+    public Upgrade(string name, Sprite icon, string description, int worth, Dictionary<Stats, float> statsModifier, ItemType itemType = ItemType.Upgrade, int id = (int)ItemType.Upgrade, int stackSize = 1 )
     {
         m_name = name;
         m_display = icon;
@@ -66,9 +66,12 @@ public class Upgrade : IItem
         m_type = itemType;
         m_id = id;
         m_stackSize = stackSize;
+        m_statsModifier = statsModifier;
 
         UpgradeManager.UpdateCosts += UpdateCost;
     }
+
+    public Upgrade() { }
     ~Upgrade()
     {
         UpgradeManager.UpdateCosts -= UpdateCost;
@@ -76,10 +79,10 @@ public class Upgrade : IItem
 
     public void ApplyUpgrade()
     {
-        if (statsModifier.Count <= 0 && statManager != default)
+        if (m_statsModifier.Count <= 0 && statManager != default)
             return;
 
-        foreach (var item in statsModifier)
+        foreach (var item in m_statsModifier)
         {
             statManager.UpdateStat(item.Key, item.Value);
         }
