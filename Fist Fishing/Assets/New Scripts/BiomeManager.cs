@@ -57,7 +57,7 @@ public class BiomeManager : MonoBehaviour
         
     }
 
-    private float GetWeghtedSum(List<ProbabilitySpawn> list)
+    private float GetWeightedSum(List<ProbabilitySpawn> list)
     {
         float prob = 0; //total weight
         foreach (ProbabilitySpawn p in list)
@@ -89,20 +89,18 @@ public class BiomeManager : MonoBehaviour
     /// <param name="bd"></param>
     protected void SpawnClutter(BiomeDefinition bd)
     {
-        float prob = GetWeghtedSum(bd.ClutterList);
+        float prob = GetWeightedSum(bd.ClutterList);
 
 
 
         for (int i = 0; i < bd.ClutterCount; i++)
         {
-            
-            GameObject obj;
             int objIndex = GetIndexFromWeightedList(bd.ClutterList, prob);
             Transform pos = gameObject.transform;
             pos.position = FindValidPosition(bd);
             pos.position = GetSeafloorPosition(pos.position);
 
-            obj = Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
+            Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
         }
     }
 
@@ -125,7 +123,25 @@ public class BiomeManager : MonoBehaviour
     /// <returns></returns>
     protected bool SpawnFish(BiomeDefinition bd)
     {
-        throw new System.NotImplementedException("Not Implemented");
+        if (!CanWeSpawnAnythingInThisBiome(bd))
+            return false;
+
+        float prob = GetWeightedSum(bd.CollectablesList);
+        int objIndex = GetIndexFromWeightedList(bd.CollectablesList, prob);
+        Transform pos = gameObject.transform;
+        float rad = bd.ClutterList[objIndex].m_spawnReference.Model.GetComponent<Collider>().bounds.size.x / 2.0f;
+
+        RaycastHit hit; //unused
+
+        do
+        {
+            pos.position = FindValidPosition(bd);
+
+        } while (SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+        Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
+        bd.m_numberOfThingsCurrentlySpawnedInThisBiome++;
+        return true;
     }
 
 
@@ -138,6 +154,16 @@ public class BiomeManager : MonoBehaviour
     {
         if (!CanWeSpawnAnythingInThisBiome(bd))
             return false;
+
+        float prob = GetWeightedSum(bd.CollectablesList);
+        int objIndex = GetIndexFromWeightedList(bd.CollectablesList, prob);
+        Transform pos = gameObject.transform;
+        pos.position = FindValidPosition(bd);
+        pos.position = GetSeafloorPosition(pos.position);
+
+        Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
+        bd.m_numberOfThingsCurrentlySpawnedInThisBiome++;
+        return true;
     }
 
 
@@ -175,9 +201,8 @@ public class BiomeManager : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="radius"></param>
     /// <returns></returns>
-    protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius)
+    protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
-        RaycastHit hit; //unused here
         return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
     }
 
