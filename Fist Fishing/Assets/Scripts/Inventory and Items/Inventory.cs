@@ -125,7 +125,7 @@ public class Inventory : MonoBehaviour
                         {
                             m_displayInventoryObject.AddItem(m_YellowScriptableObject, 1);
                         }
-                        else if (FishClass == FishBrain.FishClassification.Agressive)
+                        else if (FishClass == FishBrain.FishClassification.Aggressive)
                         {
                             m_displayInventoryObject.AddItem(m_RhynoScriptableObject, 1);
                         }
@@ -187,7 +187,7 @@ public class Inventory : MonoBehaviour
                         {
                             m_displayInventoryObject.RemoveAmount(m_YellowScriptableObject, 1);
                         }
-                        else if (FishClass == FishBrain.FishClassification.Agressive)
+                        else if (FishClass == FishBrain.FishClassification.Aggressive)
                         {
                             m_displayInventoryObject.RemoveAmount(m_RhynoScriptableObject, 1);
                         }

@@ -115,7 +115,7 @@ public class CombatManager : MonoBehaviour
 
     protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
     [SerializeField]
-    protected DisapearingMenu m_puchingUI;
+    protected DisappearingMenu m_puchingUI;
 
     protected void AddFishToQueue()
     {
@@ -317,7 +317,7 @@ public class CombatManager : MonoBehaviour
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
     }
 
     protected void ResolveAddFish(FishCombatInfo fish)

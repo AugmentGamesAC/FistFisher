@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockedCameraBehaviour : CameraBehavoir
+public class LockedCameraBehaviour : CameraBehavior
 {
     //LookAt Point doesn't move
     //camera rotates around followObject by a restricted amount of degrees.

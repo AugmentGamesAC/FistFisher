@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisapearingMenu : Menu
+public class DisappearingMenu : Menu
 {
     [SerializeField]
     protected float m_timer;

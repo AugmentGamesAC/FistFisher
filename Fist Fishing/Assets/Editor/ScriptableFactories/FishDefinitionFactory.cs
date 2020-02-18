@@ -4,10 +4,10 @@ using UnityEditor;
 public class FishDefinitionFactory : FishDefintion
 {
     [MenuItem("Assets/QuickCreate/Aggressive Fish")]
-    public static void CreateAgressive()
+    public static void CreateAggressive()
     {
         FishDefintion asset = ScriptableObject.CreateInstance<FishDefintion>();
-        asset.ConfigFish(FishBrain.FishClassification.Agressive | FishBrain.FishClassification.BaitSensitive1);
+        asset.ConfigFish(FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.BaitSensitive1);
 
         AssetDatabase.CreateAsset(asset,
             AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Aggresive.asset")

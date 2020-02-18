@@ -15,9 +15,13 @@ public class FishBrain : BehaviorTree
     public enum FishClassification
     {
         Passive             = 0x000001,
-        Agressive           = 0x000002,
+        Aggressive           = 0x000002,
         Fearful             = 0x000004,    
         Player              = 0x000008,
+
+
+        FishMask = FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.Fearful | FishBrain.FishClassification.Passive,
+
         BaitSensitive1      = 0x000100,
         BaitSensitive2      = 0x000200,
         BaitSensitive3      = 0x000400,
