@@ -247,7 +247,11 @@ public class CombatManager : MonoBehaviour
     {
         //Increase distance to other fish.
         for (int i = 0; i < m_FishSelection.Count; i++)
-            m_FishSelection[i].CombatDistance.SetValue(m_FishSelection[i].CombatDistance + ((i == m_FishSelection.Selection) ? -distance : distance));
+        {
+            bool isTheSelectedOne = (i == m_FishSelection.Selection);
+            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
+            m_FishSelection[i].CombatDistance.SetValue(value);
+        }
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -255,7 +259,7 @@ public class CombatManager : MonoBehaviour
     /// <param name=""></param>
     protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo));
+        fishCombatInfo.CombatDistance.SetValue(Mathf.Max(0, fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo)));
         ResolveFishAttack(fishCombatInfo);
 
         //if the fish doesn't leave the battle, enqueue for next turn.
