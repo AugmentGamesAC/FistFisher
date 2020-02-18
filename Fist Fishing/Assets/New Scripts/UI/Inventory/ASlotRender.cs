@@ -3,36 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ASlotRender : MonoBehaviour, IDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler 
+[RequireComponent(typeof(SlotUI)),System.Serializable]
+public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler 
 {
-    protected SlotData m_SlotData;
-    public SlotData SlotData => m_SlotData;
-
     protected SlotManager m_SlotManager;
+
+
+    public new void Awake()
+    {
+        base.Awake();
+        if (m_tracker == default)
+            m_tracker = new SlotData();
+    }
 
     public void Start()
     {
         m_SlotManager = GetComponentInParent<SlotManager>();
         if (m_SlotManager == default)
             throw new System.InvalidOperationException("SlotData Has no manager");
+        m_SlotManager.RegisterSlot(m_tracker);
+        UpdateTracker(m_tracker);
+       // var dropHandler = GetComponentInParent<SlotDrop>();
+        //dropHandler.RegisterSlot(this);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
+        if ((m_tracker == null) || (m_tracker.Item == default))
+            return;
+        m_SlotManager.HandleDrag(eventData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+
+    }
+
+    protected override void UpdateState(ISlotData value)
+    {
+        m_UIElement.UpdateUI(value);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
     {
         throw new System.NotImplementedException();
     }

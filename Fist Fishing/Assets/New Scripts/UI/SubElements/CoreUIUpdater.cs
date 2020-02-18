@@ -26,6 +26,8 @@ public abstract class CoreUIUpdater<TTracker, TUIField, TDataType> : MonoBehavio
             m_tracker.OnStateChange += UpdateState;
     }
 
+
+
     public void UpdateTracker(TTracker newTracker)
     {
         if (m_tracker != default)

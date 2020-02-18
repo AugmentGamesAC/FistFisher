@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class SlotData : UITracker<ISlotData> , ISlotData
 {
     [SerializeField]
@@ -13,12 +14,17 @@ public class SlotData : UITracker<ISlotData> , ISlotData
     public int Index => m_index;
 
     [SerializeField]
-    protected int m_count = -1;
+    protected int m_count = 0;
     public int Count => m_count;
 
     [SerializeField]
     protected SlotManager m_Manager;
     public SlotManager Manager => m_Manager;
+    protected new void UpdateState()
+    {
+        OnStateChange?.Invoke(this);
+    }
+
 
     /// <summary>
     /// adds item and updates as a tracker.
@@ -63,6 +69,17 @@ public class SlotData : UITracker<ISlotData> , ISlotData
     {
         m_count = 0;
         m_item = default;
+        UpdateState();
+    }
+
+
+    public void RemoveCount(int count)
+    {
+        m_count = Mathf.Max(0, m_count - count);
+
+        if (m_count == 0)
+            m_item = default;
+
         UpdateState();
     }
 
