@@ -63,22 +63,22 @@ public class SlotManager : MonoBehaviour
     /// <returns></returns>
     public virtual bool AddItem(IItem item, int count)
     {
-        return false;
+        ///eventually add code to limitObjects. 
+        HashSet<int> usedSlots = new HashSet<int>();
+        int myCount = count;
+        while(myCount > 0 &&  m_freeSlots.Count > 0)
+        {
+            int targetSlot = m_freeSlots.Min();
+            usedSlots.Add(targetSlot);
+            myCount = m_mySLots[targetSlot].CheckAddItem(item, myCount);
+        }
+        if (myCount > 0)
+            return false;
+        myCount = count;
+        foreach (int slotkey in usedSlots)
+            myCount = m_mySLots[slotkey].AddItem(item, myCount);
+        return true;
     }
-
-    [SerializeField]
-    protected List<FishDefintion> m_Fishies = new List<FishDefintion>();
-
-
-
-    public void Update()
-    {
-        if (ALInput.GetKeyDown(KeyCode.Y))
-            m_mySLots[1].AddItem(m_Fishies[0], 1);
-    }
-
-
-
 
     public void Start()
     {
@@ -134,6 +134,8 @@ public class SlotManager : MonoBehaviour
         //dropped needs to be added to first so that we don't loose ref to the IItem;
        dropped.AddItem(slotref.Tracker.Item, delta);
        slotref.Tracker.RemoveCount(delta);
+        if (slotref.Tracker.Count == 0)
+           FreeSlot(slotref.Tracker);
        OnDrop(eventData);
     }
 

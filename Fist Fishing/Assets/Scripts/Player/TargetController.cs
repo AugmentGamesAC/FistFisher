@@ -10,7 +10,7 @@ public class TargetController : MonoBehaviour
 
     public GameObject m_targetPrefab;
 
-    public Player m_playerRef;
+    public PlayerMotion m_playerRef;
 
     public ThirdPersonCamera m_camera;
 

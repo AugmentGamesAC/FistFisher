@@ -91,6 +91,7 @@ public class CombatManager : MonoBehaviour
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
+        NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
         m_player = player;
 
@@ -133,15 +134,15 @@ public class CombatManager : MonoBehaviour
     protected void Update()
     {
 
-            //can switch targets even when fish are attacking.
-            ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        //can switch targets even when fish are attacking.
+        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
 
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
 
         //listen to inputs only during AwaitingPlayerRound.
-            if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
+        if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
         //listen for input cases.
@@ -204,7 +205,7 @@ public class CombatManager : MonoBehaviour
         //apply stat changes to the player.
         //Oxygen
         // noise .
-        m_playerCombatInfo.UpdateOxygen(move.OxygenConsumption);
+        m_playerCombatInfo.UpdateOxygen(-move.OxygenConsumption);
         m_playerCombatInfo.UpdateNoise(move.Noise);
 
 
@@ -246,7 +247,11 @@ public class CombatManager : MonoBehaviour
     {
         //Increase distance to other fish.
         for (int i = 0; i < m_FishSelection.Count; i++)
-            m_FishSelection[i].CombatDistance.SetValue(m_FishSelection[i].CombatDistance + ((i == m_FishSelection.Selection) ? -distance : distance));
+        {
+            bool isTheSelectedOne = (i == m_FishSelection.Selection);
+            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
+            m_FishSelection[i].CombatDistance.SetValue(value);
+        }
     }
     /// <summary>
     /// Attacks, Moves or and checks if it left combat.
@@ -254,7 +259,7 @@ public class CombatManager : MonoBehaviour
     /// <param name=""></param>
     protected void ResolveFishCombatant(FishCombatInfo fishCombatInfo)
     {
-        fishCombatInfo.CombatDistance.SetValue(fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo));
+        fishCombatInfo.CombatDistance.SetValue(Mathf.Max(0, fishCombatInfo.CombatDistance + ResolveFishDirection(fishCombatInfo)));
         ResolveFishAttack(fishCombatInfo);
 
         //if the fish doesn't leave the battle, enqueue for next turn.
@@ -411,8 +416,8 @@ public class CombatManager : MonoBehaviour
     {
         m_currentCombatState = CombatStates.CombatFinished;
 
+        m_FishSelection.Clear();
         m_roundQueue.Clear();
-
         //TODO: resolve fish handlingPackages{
         m_player.m_CanMove = true;
 

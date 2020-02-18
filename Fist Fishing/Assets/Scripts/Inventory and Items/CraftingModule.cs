@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
+
 public class CraftingModule : MonoBehaviour
 {
 
     [SerializeField]
-    protected Player m_playerRef;
-    public Player PlayerRef { get { return m_playerRef; } }
+    protected PlayerMotion m_playerRef;
+    public PlayerMotion PlayerRef { get { return m_playerRef; } }
 
     [SerializeField]
     protected Inventory m_inventoryRef;
@@ -25,7 +25,7 @@ public class CraftingModule : MonoBehaviour
     void Start()
     {
         if (m_playerRef == null)
-            m_playerRef = gameObject.GetComponent<Player>();
+            m_playerRef = gameObject.GetComponent<PlayerMotion>();
         if (m_inventoryRef == null)
             m_inventoryRef = gameObject.GetComponent<Inventory>();
         if (m_playerMovementRef == null)

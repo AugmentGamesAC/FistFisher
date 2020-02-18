@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 
-public class TestUpgrade : Upgrade
-{
-    [Test]
-    public void Construct_test()
-    {
-        statManager = new PlayerStatManager();
-        cost = 50.0f;
+//public class TestUpgrade : Upgrade
+//{
+//    [Test]
+//    public void Construct_test()
+//    {
+//        statManager = new PlayerStatManager();
+//        m_worth = 50;
 
-        //setup stat mods, this should be done.
+//        //setup stat mods, this should be done.
 
-    }
-}
+//    }
+//}
