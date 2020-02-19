@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour
     public void Show(bool activeState)
     {
         gameObject.SetActive(activeState);
-        var something = GetComponentsInChildren<DisapearingMenu>().Select(x => { x.Show(false); return 1; });
+        var something = GetComponentsInChildren<DisappearingMenu>().Select(x => { x.Show(false); return 1; });
     }
     
 }

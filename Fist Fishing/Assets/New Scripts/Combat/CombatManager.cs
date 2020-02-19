@@ -115,7 +115,7 @@ public class CombatManager : MonoBehaviour
 
     protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
     [SerializeField]
-    protected DisapearingMenu m_puchingUI;
+    protected DisappearingMenu m_puchingUI;
 
     protected void AddFishToQueue()
     {
@@ -132,16 +132,19 @@ public class CombatManager : MonoBehaviour
 
     // Update is called once per frame
     protected void Update()
-    {
+    {
+
+        //can switch targets even when fish are attacking.
+        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
-        //can switch targets even when fish are attacking.
-        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+            //can switch targets even when fish are attacking.
+            ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
 
         if (m_keypressTimeout > 0)
-            m_keypressTimeout -= Time.deltaTime;
-
-        //listen to inputs only during AwaitingPlayerRound.
+            m_keypressTimeout -= Time.deltaTime;
+
+        //listen to inputs only during AwaitingPlayerRound.
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
@@ -246,10 +249,10 @@ public class CombatManager : MonoBehaviour
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
-        for (int i = 0; i < m_FishSelection.Count; i++)
-        {
-            bool isTheSelectedOne = (i == m_FishSelection.Selection);
-            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
+        for (int i = 0; i < m_FishSelection.Count; i++)
+        {
+            bool isTheSelectedOne = (i == m_FishSelection.Selection);
+            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
             m_FishSelection[i].CombatDistance.SetValue(value);
         }
     }
@@ -321,7 +324,7 @@ public class CombatManager : MonoBehaviour
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
     }
 
     protected void ResolveAddFish(FishCombatInfo fish)
@@ -414,9 +417,9 @@ public class CombatManager : MonoBehaviour
 
     protected void EndCombat()
     {
-        m_currentCombatState = CombatStates.CombatFinished;
-
-        m_FishSelection.Clear();
+        m_currentCombatState = CombatStates.CombatFinished;
+
+        m_FishSelection.Clear();
         m_roundQueue.Clear();
         //TODO: resolve fish handlingPackages{
         m_player.m_CanMove = true;
