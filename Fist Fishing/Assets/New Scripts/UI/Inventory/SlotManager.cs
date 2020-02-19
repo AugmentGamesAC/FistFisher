@@ -116,7 +116,7 @@ public class SlotManager : MonoBehaviour
         {
             HandleDragStart(eventData);
         }
-        CommonMountPointer.Rect.position = Input.mousePosition + Vector3.forward * 20;
+        CommonMountPointer.Rect.position = Input.mousePosition;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -128,7 +128,6 @@ public class SlotManager : MonoBehaviour
     public void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
-
        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
        if (newvalue == slotref.Tracker.Count)
        {
@@ -144,10 +143,33 @@ public class SlotManager : MonoBehaviour
        OnDrop(eventData);
     }
 
-
-    public void HandleHover(ISlotData dropee)
+    public void OnGUI()
     {
+        if (!gameObject.activeSelf 
+            || CommonMountPointer == default 
+            || CommonMountPointer.SlotTarget == default
+            || CommonMountPointer.SlotTarget.Item == default)
+            return;
+        CreateDescBox(CommonMountPointer.StartingPosition, Vector2.one * 20, CommonMountPointer.SlotTarget.Item.Description);
+    }
+
+
+    public void HandleHover(ISlotData dropee, PointerEventData eventData)
+    {
+        CommonMountPointer.StartingPosition = Input.mousePosition;
         CommonMountPointer.SlotTarget = dropee;
+    }
+
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription)
+    {
+        if (string.IsNullOrEmpty(detailedDescription))
+            return;
+        //create offset that is Vector2 + offset for Label position.
+        Vector2 DescriptionTextPos = startingPos + textOffset;
+        // Make a background box
+        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), "Description");
+
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), detailedDescription);
     }
 }
 
