@@ -448,7 +448,9 @@ public class CombatManager : MonoBehaviour
     protected void EndCombat()
     {
         m_currentCombatState = CombatStates.CombatFinished;
-
+        m_deadFishPile.Select(x => PlayerInstance.Instance.PlayerInventory.AddItem(x.FishInstance.FishData.Item, 1));
+        m_deadFishPile.Clear();
+
         m_FishSelection.Clear();
         m_roundQueue.Clear();
         //TODO: resolve fish handlingPackages{
