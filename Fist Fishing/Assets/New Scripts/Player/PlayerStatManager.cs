@@ -16,13 +16,6 @@ public enum Stats
 }
 public class PlayerStatManager
 {
-    /*
-Responsibilities
-- keeps track of StatTrackers
-- fetch statTrackers with StatTrackerContainer[Stats]
-*/
-
-
     [SerializeField]
     protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
@@ -67,5 +60,4 @@ Responsibilities
 
         return true;
     }
-
 }

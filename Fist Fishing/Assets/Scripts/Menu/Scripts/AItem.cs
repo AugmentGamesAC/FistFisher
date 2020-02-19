@@ -13,6 +13,7 @@ public enum ItemType
     Equipment,
     Coral1,
     Coral2,
+    Upgrade
 }
 
 public abstract class AItem : ScriptableObject

@@ -19,7 +19,11 @@ public class FishBrain : BehaviorTree
         Fearful             = 0x000004,    
         Player              = 0x000008,
         BaitSensitive1      = 0x000100,
-        FavoredPlant1       = 0x010000
+        BaitSensitive2      = 0x000200,
+        BaitSensitive3      = 0x000400,
+        BaitSensitive4      = 0x000800,
+        IsBait = BaitSensitive1|BaitSensitive2|BaitSensitive3|BaitSensitive4,
+        FavoredPlant1 = 0x010000
     }
 
     static public string TargetName  = "defaultGoal";
@@ -49,7 +53,7 @@ public class FishBrain : BehaviorTree
     public void ApplyImpulse(GameObject triggeringObject, float intensity, FishClassification FishType)
     {
         if (m_fishMood == default)
-            m_fishMood = (Dictionary < GameObject, FishReaction > ) GetValue(MoodName);
+            m_fishMood = (Dictionary <GameObject, FishReaction>) GetValue(MoodName);
 
         FishReaction reaction;
         if (m_fishMood.TryGetValue(triggeringObject, out reaction))
