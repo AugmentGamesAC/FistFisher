@@ -103,7 +103,7 @@ public class SlotManager : MonoBehaviour
 
     protected void HandleDragStart(PointerEventData eventData)
     {
-        CommonMountPointer.transform.SetParent(transform);
+        CommonMountPointer.transform.SetParent(transform.parent.parent);
         CommonMountPointer.transform.SetAsLastSibling();
         CommonMountPointer.gameObject.SetActive(true);
         CommonMountPointer.eventData = eventData;
@@ -125,7 +125,7 @@ public class SlotManager : MonoBehaviour
         CommonMountPointer.eventData = default;
     }
 
-    public void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
+    public virtual void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);

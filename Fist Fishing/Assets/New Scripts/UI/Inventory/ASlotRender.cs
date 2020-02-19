@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     protected SlotManager m_SlotManager;
-
+    public SlotManager SlotMan => m_SlotManager;
 
     public new void Awake()
     {
