@@ -39,6 +39,8 @@ public class UITracker<T> : ISerializationCallbackReceiver
 
     protected void UpdateState()
     {
+        if (m_value == default)
+            return;
         OnStateChange?.Invoke(m_value);
     }
 

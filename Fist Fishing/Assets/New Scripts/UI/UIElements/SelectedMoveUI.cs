@@ -24,6 +24,15 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
     [SerializeField]
     protected ImageUpdater IconUpdater;
 
+    [SerializeField]
+    protected ImageUpdater AttackIconUpdater;
+
+    [SerializeField]
+    protected ImageUpdater PinWheelIconUpdater;
+
+    //[SerializeField]
+    //protected ImageUpdater ItemIconUpdater;
+
     public override void UpdateUI(CombatMoveInfo newData)
     {
         if (!ShouldUpdateUI(newData))
@@ -39,5 +48,8 @@ public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
         DescriptionUpdater.UpdateTracker(newData.Description);
 
         IconUpdater.UpdateTracker(newData.Icon);
+        AttackIconUpdater.UpdateTracker(newData.Icon);
+        PinWheelIconUpdater.UpdateTracker(newData.Icon);
+
     }
 }

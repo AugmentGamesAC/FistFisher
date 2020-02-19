@@ -13,7 +13,7 @@ public class StatTracker
     protected float m_currentAmount;
     public float CurrentAmount { get { return m_currentAmount; } }
 
-    public delegate void CurrentAmountChanged();
+    public delegate void CurrentAmountChanged(float current);
     public CurrentAmountChanged OnCurrentAmountChanged;
 
     /// <summary>
@@ -35,6 +35,6 @@ public class StatTracker
     {
         m_currentAmount += changeAmount;
 
-        OnCurrentAmountChanged?.Invoke();
+        OnCurrentAmountChanged?.Invoke(m_currentAmount);
     }
 }

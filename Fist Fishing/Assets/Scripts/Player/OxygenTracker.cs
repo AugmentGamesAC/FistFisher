@@ -18,20 +18,26 @@ public class OxygenTracker
     protected PercentageTracker m_oxy;
     public PercentageTracker Tracker => m_oxy;
 
-    public delegate void OnLowOxygenEvent();
+    [SerializeField]
+    public bool m_isUnderWater = false;
+    public bool IsUnderWater => m_isUnderWater;
+
+    public delegate void OnLowOxygenEvent(float change);
     public event OnLowOxygenEvent OnLowOxygen;
 
-    public float m_OxygenRegeneration = 20.0f;
-    public float m_OxygenDegeneration = 5.0f;
+    public float m_OxygenRegeneration = 50.0f;
+    public float m_OxygenDegeneration = 1.0f;
     public float m_noOxygenDamage = 5.0f;
+
+
 
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
-    public bool m_isUnderWater = false;
+   
 
 
-    private void Update()
+    public void Update()
     {
         //don't update if game is paused
         if (NewMenuManager.PausedActiveState)
@@ -44,23 +50,22 @@ public class OxygenTracker
         ModifyOxygen(m_isUnderWater ? -m_OxygenDegeneration: m_OxygenRegeneration);
 
         m_OxygenTickTimer = m_OxygenTickFrequency;
-
-        NoOxygenCheck();
     }
 
     public void ModifyOxygen(float changeAmount)
     {
+        if (NoOxygenCheck(changeAmount))
+            return;
         m_oxy.IncrementCurrent(changeAmount);
     }
 
 
-    protected void NoOxygenCheck()
+    protected bool NoOxygenCheck(float change)
     {
         if (m_oxy.Current > 0)
-            return;
-        //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
-        if (OnLowOxygen != null)
-            OnLowOxygen.Invoke();
+            return false;
+        OnLowOxygen?.Invoke(change);
+        return true;
     }
 
     public void ResetOxygen()
