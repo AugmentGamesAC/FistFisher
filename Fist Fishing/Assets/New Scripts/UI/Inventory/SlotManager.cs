@@ -40,6 +40,15 @@ public class SlotManager : MonoBehaviour
         m_freeSlots.Add(slot.Index);
     }
 
+    public void UseSlot(SlotData slot)
+    {
+        if (slot == default)
+            return;
+
+        m_freeSlots.Remove(slot.Index);
+
+    }
+
     /// <summary>
     /// Handle Slot Drop handles the logic between different slots and determins solution
     /// </summary>
@@ -73,7 +82,9 @@ public class SlotManager : MonoBehaviour
             return false;
         myCount = count;
         foreach (int slotkey in usedSlots)
+        {
             myCount = m_mySLots[slotkey].AddItem(item, myCount);
+        }
         return true;
     }
 

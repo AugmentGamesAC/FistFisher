@@ -424,6 +424,11 @@ public class CombatManager : MonoBehaviour
         //player wins if he's the only one in the queue
         if (m_roundQueue.Count == 1)
         {
+            foreach (var deadFish in m_deadFishPile)
+            {
+                PlayerInstance.Instance.PlayerInventory.AddItem(deadFish.FishInstance.FishData.Item, 1);
+            }
+            m_deadFishPile.Clear();
             EndCombat();
             return;
         }
@@ -446,9 +451,7 @@ public class CombatManager : MonoBehaviour
 
     protected void EndCombat()
     {
-        m_currentCombatState = CombatStates.CombatFinished;
-        m_deadFishPile.Select(x => PlayerInstance.Instance.PlayerInventory.AddItem(x.FishInstance.FishData.Item, 1));
-        m_deadFishPile.Clear();
+        m_currentCombatState = CombatStates.CombatFinished;
 
         m_FishSelection.Clear();
         m_roundQueue.Clear();
