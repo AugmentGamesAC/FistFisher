@@ -262,7 +262,7 @@ public class ALInput : MonoBehaviour
         //Default Combat buttons
         m_attack = KeyCode.Mouse0;
         m_item = KeyCode.Mouse1;
-        m_flee = KeyCode.Mouse2;
+        m_flee = KeyCode.N;
 
         m_rotateForward = KeyCode.Keypad8;
         m_rotateBackwards = KeyCode.Keypad2;

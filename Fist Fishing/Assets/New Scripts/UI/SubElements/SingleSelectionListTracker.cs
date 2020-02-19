@@ -49,6 +49,14 @@ public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>,
         UpdateState();
     }
 
+    public void Clear()
+    {
+        while (Count > 0)
+        {
+            Remove(SelectedItem);
+        }
+    }
+
     protected override ISingleSelectionList<T> ImplicitOverRide(UITracker<ISingleSelectionList<T>> reference)
     {
         return this;

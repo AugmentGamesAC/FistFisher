@@ -35,10 +35,10 @@ public class FishAttack : FishTask
 
         foreach(Collider chewable in myMouth.InMouth)
         {
-            Player fishVictem = chewable.GetComponentInParent<Player>();
+            PlayerMotion fishVictem = chewable.GetComponent<PlayerMotion>();
             if (fishVictem == default)
-                continue;   
-            fishVictem.HealthModule.TakeDamage(myMouth.BiteDamage);
+                continue;
+            CombatManager.Instance.StartCombat(false, fishVictem.SurroundingFish, fishVictem);
         }
     }
 }

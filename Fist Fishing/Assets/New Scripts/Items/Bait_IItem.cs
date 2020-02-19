@@ -43,14 +43,9 @@ public class Bait_IItem : ScriptableObject, IItem
     public int MaxTurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
     public bool CanMerge(IItem newItem)
     {
-        Bait_IItem item = (Bait_IItem)newItem;
-        if (item == null)
+        Bait_IItem item = newItem as Bait_IItem;
+        if (item == default)
             return false;
-        if (m_currentBaitType != item.m_currentBaitType)
-            return false;
-        
-        return true;
+        return m_currentBaitType == item.m_currentBaitType;
     }
-
-
 }

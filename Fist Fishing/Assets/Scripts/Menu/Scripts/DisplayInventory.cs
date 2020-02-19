@@ -183,11 +183,6 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        //if (m_playerInventory != null)
-        //{
-        //    Vector2 boxpos = new Vector2(325, 100);
-        //    GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
-        //}
 
         if (!this.gameObject.activeSelf)
             return;

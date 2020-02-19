@@ -53,7 +53,7 @@ public class FishBrain : BehaviorTree
     public void ApplyImpulse(GameObject triggeringObject, float intensity, FishClassification FishType)
     {
         if (m_fishMood == default)
-            m_fishMood = (Dictionary < GameObject, FishReaction > ) GetValue(MoodName);
+            m_fishMood = (Dictionary <GameObject, FishReaction>) GetValue(MoodName);
 
         FishReaction reaction;
         if (m_fishMood.TryGetValue(triggeringObject, out reaction))
