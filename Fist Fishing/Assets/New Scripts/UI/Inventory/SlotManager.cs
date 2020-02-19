@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SlotManager : MonoBehaviour
 {
-
     /// <summary>
     /// contains all the slot data for the manager, the key being the index of the slot 
     /// so a "next" previous logic can be maintained/observed.
@@ -15,8 +14,6 @@ public class SlotManager : MonoBehaviour
     protected Dictionary<int, ISlotData> m_mySLots = new Dictionary<int, ISlotData>();
 
     protected HashSet<int> m_freeSlots = new HashSet<int>();
-
-
 
     /// <summary>
     /// Adds a new slote to the SlotManager to handle
@@ -101,7 +98,6 @@ public class SlotManager : MonoBehaviour
         CommonMountPointer.gameObject.SetActive(true);
         CommonMountPointer.eventData = eventData;
         CommonMountPointer.DragImage.sprite = eventData.pointerDrag.GetComponentInChildren<Image>().sprite;
-
     }
 
     public void HandleDrag(PointerEventData eventData)
@@ -123,7 +119,6 @@ public class SlotManager : MonoBehaviour
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
 
-
        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
        if (newvalue == slotref.Tracker.Count)
        {
@@ -144,7 +139,5 @@ public class SlotManager : MonoBehaviour
     {
         CommonMountPointer.SlotTarget = dropee;
     }
-
-
 }
 
