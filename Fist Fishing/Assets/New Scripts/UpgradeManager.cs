@@ -44,15 +44,18 @@ public class UpgradeManager : MonoBehaviour
 
     static Dictionary<UpgradeTypes, int> UpgradeCosts;
 
-    List<string> m_upgradeNames = new List<string>();
-
-
     /// <summary>
+    /// called when shop boots up.
     /// Creates an Upgrade with RNG.
     /// </summary>
-    public void GenerateUpgrade()
+    public Upgrade GenerateUpgrade()
     {
-        //GenerateUpgrade(RNG);
+        var upgradeTypesList = Enum.GetValues(typeof(UpgradeTypes)).Cast<UpgradeTypes>().ToList();
+
+        int minIndex = upgradeTypesList.IndexOf(upgradeTypesList.First<UpgradeTypes>());
+        int maxIndex = upgradeTypesList.IndexOf(upgradeTypesList.Last<UpgradeTypes>());
+        
+        return GenerateUpgrade(upgradeTypesList[RandRange(minIndex, maxIndex)]);
     }
 
     /// <summary>
@@ -161,6 +164,6 @@ public class UpgradeManager : MonoBehaviour
 
     static int RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
-        return 100;
+        return m_appliedUpgrades * 100;
     }
 }

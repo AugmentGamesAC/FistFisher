@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SlotUI)),System.Serializable]
-public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler 
+public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler 
 {
     protected SlotManager m_SlotManager;
 
@@ -16,6 +16,8 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
             m_tracker = new SlotData();
     }
 
+    public void SetSlotIndex(int index) => m_tracker.SetIndex(index);
+
     public void Start()
     {
         m_SlotManager = GetComponentInParent<SlotManager>();
@@ -23,8 +25,8 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
             throw new System.InvalidOperationException("SlotData Has no manager");
         m_SlotManager.RegisterSlot(m_tracker);
         UpdateTracker(m_tracker);
-       // var dropHandler = GetComponentInParent<SlotDrop>();
-        //dropHandler.RegisterSlot(this);
+        var dropHandler = GetComponentInParent<SlotSpace>();
+        dropHandler.RegisterSlot(Tracker);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -34,16 +36,6 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
         m_SlotManager.HandleDrag(eventData);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
-    }
-
     protected override void UpdateState(ISlotData value)
     {
         m_UIElement.UpdateUI(value);
@@ -51,12 +43,12 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
 
     public void OnDrop(PointerEventData eventData)
     {
-
+        throw new System.NotImplementedException();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        m_SlotManager.OnDrop(eventData);
     }
 }
 

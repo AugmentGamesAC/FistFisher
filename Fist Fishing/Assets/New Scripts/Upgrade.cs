@@ -4,21 +4,7 @@ using UnityEngine;
 
 public class Upgrade : IItem
 {
-    /*
-     Upgrade 
- --
- PlayerStatManager statManager;
- float cost;
- delegate wasUpdated;
- Dictionary<Stats, float> statsModifier;
- --
- UpdateCost(Func<Dictionary<Stats, float>, float>);
- ApplyUpgrade();
- */
-    protected PlayerStatManager statManager;
-
     protected Dictionary<Stats, float> m_statsModifier;
-
 
     [SerializeField]
     protected int m_stackSize;
@@ -77,14 +63,19 @@ public class Upgrade : IItem
         UpgradeManager.UpdateCosts -= UpdateCost;
     }
 
+    /// <summary>
+    /// Called when you buy
+    /// </summary>
     public void ApplyUpgrade()
     {
-        if (m_statsModifier.Count <= 0 && statManager != default)
+        PlayerStatManager statMan = PlayerInstance.Instance.PlayerStatMan;
+
+        if (m_statsModifier.Count <= 0 && statMan != default)
             return;
 
         foreach (var item in m_statsModifier)
         {
-            statManager.UpdateStat(item.Key, item.Value);
+            statMan.UpdateStat(item.Key, item.Value);
         }
 
         UpgradeManager.UpdateAppliedUpgrade();

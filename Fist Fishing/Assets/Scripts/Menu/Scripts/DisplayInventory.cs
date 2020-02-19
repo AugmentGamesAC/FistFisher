@@ -201,6 +201,18 @@ public class DisplayInventory : MonoBehaviour
         GUI.Box(new Rect(DescriptionBoxPos.x, DescriptionBoxPos.y, 250, 250), "Description");
 
         GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), m_mouseItem.hoverSlot.m_item.description);
+
+    }
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription )
+    {
+        //create position Vector2 for box.
+
+        //create offset that is Vector2 + offset for Label position.
+        Vector2 DescriptionTextPos = startingPos + textOffset;
+        // Make a background box
+        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), "Description");
+
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), detailedDescription);
     }
 }
 

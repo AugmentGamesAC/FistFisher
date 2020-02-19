@@ -5,9 +5,8 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
-public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SlotManager : MonoBehaviour
 {
-
     /// <summary>
     /// contains all the slot data for the manager, the key being the index of the slot 
     /// so a "next" previous logic can be maintained/observed.
@@ -15,8 +14,6 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     protected Dictionary<int, ISlotData> m_mySLots = new Dictionary<int, ISlotData>();
 
     protected HashSet<int> m_freeSlots = new HashSet<int>();
-
-
 
     /// <summary>
     /// Adds a new slote to the SlotManager to handle
@@ -63,22 +60,22 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     /// <returns></returns>
     public virtual bool AddItem(IItem item, int count)
     {
-        return false;
+        ///eventually add code to limitObjects. 
+        HashSet<int> usedSlots = new HashSet<int>();
+        int myCount = count;
+        while(myCount > 0 &&  m_freeSlots.Count > 0)
+        {
+            int targetSlot = m_freeSlots.Min();
+            usedSlots.Add(targetSlot);
+            myCount = m_mySLots[targetSlot].CheckAddItem(item, myCount);
+        }
+        if (myCount > 0)
+            return false;
+        myCount = count;
+        foreach (int slotkey in usedSlots)
+            myCount = m_mySLots[slotkey].AddItem(item, myCount);
+        return true;
     }
-
-    [SerializeField]
-    protected List<FishDefintion> m_Fishies = new List<FishDefintion>();
-
-
-
-    public void Update()
-    {
-        if (ALInput.GetKeyDown(KeyCode.Y))
-            m_mySLots[1].AddItem(m_Fishies[0], 1);
-    }
-
-
-
 
     public void Start()
     {
@@ -89,6 +86,7 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         CommonMountPointer.Rect = mouseObject.AddComponent<RectTransform>();
         CommonMountPointer.Rect.sizeDelta = new Vector2(32, 32);
         CommonMountPointer.DragImage = mouseObject.AddComponent<Image>();
+        CommonMountPointer.DragImage.raycastTarget = false;
     }
 
     protected static DragTracker CommonMountPointer;
@@ -121,7 +119,6 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
 
-
        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
        if (newvalue == slotref.Tracker.Count)
        {
@@ -132,22 +129,15 @@ public class SlotManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //dropped needs to be added to first so that we don't loose ref to the IItem;
        dropped.AddItem(slotref.Tracker.Item, delta);
        slotref.Tracker.RemoveCount(delta);
+        if (slotref.Tracker.Count == 0)
+           FreeSlot(slotref.Tracker);
+       OnDrop(eventData);
     }
 
 
-    public void HandleHover(IDropHandler dropee)
+    public void HandleHover(ISlotData dropee)
     {
-
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        
+        CommonMountPointer.SlotTarget = dropee;
     }
 }
 

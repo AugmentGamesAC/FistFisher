@@ -25,6 +25,10 @@ public class SlotData : UITracker<ISlotData> , ISlotData
         OnStateChange?.Invoke(this);
     }
 
+    public void SetIndex(int newIndex)
+    {
+        m_index = newIndex;
+    }
 
     /// <summary>
     /// adds item and updates as a tracker.
@@ -72,7 +76,6 @@ public class SlotData : UITracker<ISlotData> , ISlotData
         UpdateState();
     }
 
-
     public void RemoveCount(int count)
     {
         m_count = Mathf.Max(0, m_count - count);
@@ -82,6 +85,5 @@ public class SlotData : UITracker<ISlotData> , ISlotData
 
         UpdateState();
     }
-
 }
 

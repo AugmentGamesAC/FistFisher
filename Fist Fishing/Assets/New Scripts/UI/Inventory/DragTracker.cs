@@ -9,5 +9,6 @@ public class DragTracker : MonoBehaviour
     public PointerEventData eventData;
     public Image DragImage;
     public RectTransform Rect;
+    public ISlotData SlotTarget;
 }
 
