@@ -3582,7 +3582,7 @@ Transform:
   - {fileID: 1809781910}
   - {fileID: 1553418756}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &201825577
 GameObject:
@@ -12184,6 +12184,29 @@ Transform:
   m_Father: {fileID: 201424466}
   m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: -39.267002, y: 0, z: 0}
+--- !u!1 &741054166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1549260997, guid: 7553e4ea89084da4eb83d73374a4f15c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7905424348207429108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &741054170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741054166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f16858bf44f4e49b3641b478d73f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tracker:
+    m_value: 2
+    SerializeInvokes: 0
+  m_UIElement: {fileID: 0}
+  m_textInput: 
 --- !u!224 &741863357 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1912377823174489469, guid: ab35b0a157a83cc4c9630b9011137d99,
@@ -29691,12 +29714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761687265}
   m_CullTransparentMesh: 0
---- !u!4 &1763316774 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3618891424285693848, guid: a9da2936977b94d4580cf056c1f399ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1128257261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1764187997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244630333596019604, guid: b7c53c1141cf31549999d2b83979eca5,
@@ -30634,7 +30651,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5758115767889527099}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1850825396
+--- !u!114 &1850825395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30643,7 +30660,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1850825390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417c61b3233b50c488400bbe7c777057, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbe501fb2aea1542bd1c5d06ffc450c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_xStartPos: -210
@@ -30655,6 +30672,13 @@ MonoBehaviour:
   m_boxScale: 29
   m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
     type: 3}
+  m_initialShopItems:
+    keys:
+    - {fileID: 11400000, guid: d00b9377f06a85c4a9198194e099f8b8, type: 2}
+    - {fileID: 11400000, guid: fd1cdd04e7d975848ac363c768b73fc8, type: 2}
+    - {fileID: 11400000, guid: 9d34b850532496843a37e0914deff21b, type: 2}
+    - {fileID: 11400000, guid: b92d5a7473a6a314cab8b02bf47c7ff7, type: 2}
+    values: 04000000020000000300000001000000
 --- !u!4 &1856247713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244630333596019604, guid: b7c53c1141cf31549999d2b83979eca5,
@@ -32058,7 +32082,7 @@ Transform:
   - {fileID: 1401306467}
   - {fileID: 289939931}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1951024249 stripped
 Transform:
@@ -32456,6 +32480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af50505264e978846b5e29b78f52f47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_clamsUpdater: {fileID: 741054170}
   m_maxHealth: 500
   m_maxOxygen: 200
   m_health:
@@ -34924,7 +34949,7 @@ Transform:
   - {fileID: 900375523}
   - {fileID: 1740332620002746569}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4384967988488678361
 MonoBehaviour:
@@ -36791,6 +36816,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4317289871419914990}
     m_Modifications:
+    - target: {fileID: 1549260997, guid: 7553e4ea89084da4eb83d73374a4f15c, type: 3}
+      propertyPath: m_Name
+      value: Clams
+      objectReference: {fileID: 0}
     - target: {fileID: 1990969796264009378, guid: 7553e4ea89084da4eb83d73374a4f15c,
         type: 3}
       propertyPath: m_Camera

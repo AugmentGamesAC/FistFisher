@@ -7,9 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerSlotManager : RetangleSlotManager
 {
-    public new  void Start()
+    public void Start()
     {
-        base.Start();
         PlayerInstance.RegisterPlayerInventory(this);
     }
 }

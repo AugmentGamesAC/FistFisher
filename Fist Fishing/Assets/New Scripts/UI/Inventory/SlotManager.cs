@@ -19,7 +19,7 @@ public class SlotManager : MonoBehaviour
     /// Adds a new slote to the SlotManager to handle
     /// </summary>
     /// <param name="slot"></param>
-    public void RegisterSlot(ISlotData slot)
+    public virtual void RegisterSlot(ISlotData slot)
     {
         if (slot == default)
             return;
@@ -46,7 +46,6 @@ public class SlotManager : MonoBehaviour
             return;
 
         m_freeSlots.Remove(slot.Index);
-
     }
 
     /// <summary>
@@ -88,7 +87,7 @@ public class SlotManager : MonoBehaviour
         return true;
     }
 
-    public void Start()
+    public void Awake()
     {
         if (CommonMountPointer != default)
             return;

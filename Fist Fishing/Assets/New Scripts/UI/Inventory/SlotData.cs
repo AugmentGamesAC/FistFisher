@@ -48,7 +48,8 @@ public class SlotData : UITracker<ISlotData> , ISlotData
             remainder = CheckAddItem(item, count);
             m_item = item;
             m_count = Mathf.Min(count, m_item.StackSize);
-            m_Manager.UseSlot(this);
+            if (m_Manager != default)
+                m_Manager.UseSlot(this);
             UpdateState();
             return remainder;
         }
@@ -94,6 +95,11 @@ public class SlotData : UITracker<ISlotData> , ISlotData
         }
 
         UpdateState();
+    }
+
+    protected override ISlotData ImplicitOverRide(UITracker<ISlotData> reference)
+    {
+        return this;
     }
 }
 
