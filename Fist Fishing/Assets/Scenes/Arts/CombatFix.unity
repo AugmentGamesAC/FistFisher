@@ -3396,7 +3396,7 @@ PrefabInstance:
     - target: {fileID: 6250691248373757601, guid: f88fdbde4d7dd7d459a0ba3e16771474,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6250691248373757601, guid: f88fdbde4d7dd7d459a0ba3e16771474,
         type: 3}
@@ -7415,7 +7415,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 1
+  m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
@@ -13806,6 +13806,8 @@ MonoBehaviour:
     keys: 
     values: []
   m_currentNoiseState: 0
+  m_isItemActive: 0
+  m_item: {fileID: 0}
   m_aggressiveFishToSpawn: []
   m_deadFishPile: []
   ScriptablePlayerMoves:
@@ -13817,8 +13819,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10b2caa2d942af943b53f1cf79e0d156, type: 2}
   - {fileID: 11400000, guid: f7a3595cdeba20d44ad6c83323eef695, type: 2}
   - {fileID: 11400000, guid: 5e8e05d40a5a6d84a83bf01e14c5400e, type: 2}
+  ScriptableItems: []
   m_currentCombatState: 0
-  m_puchingUI: {fileID: 0}
+  m_puchingUI: {fileID: 518438521}
   m_keypressTimeout: 0
   m_keypressTimeoutDuration: 0.05
   m_f5Fish: {fileID: 11400000, guid: 1004598155e0b594dacc929842ab342e, type: 2}
@@ -16166,7 +16169,7 @@ PrefabInstance:
     - target: {fileID: 2167131274534524110, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2167131274534524110, guid: 1832ebb68dcb3874782014bd9eef49ed,
         type: 3}
@@ -16866,7 +16869,7 @@ PrefabInstance:
     - target: {fileID: 3298322455571996586, guid: ac545935919dc5c489f5d8d4214ccaab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3298322455571996586, guid: ac545935919dc5c489f5d8d4214ccaab,
         type: 3}
@@ -17471,7 +17474,7 @@ PrefabInstance:
     - target: {fileID: 3346029705072126580, guid: 1e0462c707b8b7d41a7ed656cd064dca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3346029705072126580, guid: 1e0462c707b8b7d41a7ed656cd064dca,
         type: 3}
@@ -17490,12 +17493,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e0462c707b8b7d41a7ed656cd064dca, type: 3}
---- !u!4 &1124458472 stripped
+--- !u!4 &1124458472
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3618891424285693848, guid: a9da2936977b94d4580cf056c1f399ce,
     type: 3}
-  m_PrefabInstance: {fileID: 757886787}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163228137}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1125381349 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1912377822403006863, guid: ab35b0a157a83cc4c9630b9011137d99,
@@ -18313,6 +18325,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c53c1141cf31549999d2b83979eca5, type: 3}
+--- !u!1 &1163228137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1124458472}
+  m_Layer: 0
+  m_Name: Recovery GameObject (1124458472)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1164941205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1273734233299365806, guid: 03c939227ed6e87468dba4b31614a7cf,
@@ -19013,7 +19041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &1194171430 stripped
 Transform:
@@ -27171,6 +27199,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761687265}
   m_CullTransparentMesh: 0
+--- !u!4 &1763316774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3618891424285693848, guid: a9da2936977b94d4580cf056c1f399ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1128257261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1764187997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244630333596019604, guid: b7c53c1141cf31549999d2b83979eca5,
@@ -28177,7 +28211,7 @@ PrefabInstance:
     - target: {fileID: 4763221152673850636, guid: 8f77f32a3b91a26488254d11cc6456e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4763221152673850636, guid: 8f77f32a3b91a26488254d11cc6456e4,
         type: 3}
@@ -29238,8 +29272,9 @@ Transform:
   - {fileID: 1323531672}
   - {fileID: 111422501}
   - {fileID: 1401306467}
+  - {fileID: 1763316774}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1951024249 stripped
 Transform:
@@ -31943,7 +31978,7 @@ Transform:
   - {fileID: 900375523}
   - {fileID: 1740332620002746569}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4384967988488678361
 MonoBehaviour:
@@ -32989,7 +33024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8463207306956946894}
   - component: {fileID: 936431007}
-  - component: {fileID: 7264625813581415063}
   m_Layer: 0
   m_Name: Boat (1)
   m_TagString: Boat
@@ -34557,7 +34591,7 @@ Transform:
   - {fileID: 4865424683049474776}
   - {fileID: 2487089619964385272}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8501701944320040554
 PrefabInstance:

@@ -139,13 +139,9 @@ public class CombatManager : MonoBehaviour
 
     // Update is called once per frame
     protected void Update()
-    {
-
+    {
         //can switch targets even when fish are attacking.
-        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
-
-            //can switch targets even when fish are attacking.
-            ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
 
         if (m_keypressTimeout > 0)
@@ -355,7 +351,7 @@ public class CombatManager : MonoBehaviour
             m_isItemActive = false;
         }
 
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
       
         
     }
