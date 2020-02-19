@@ -150,7 +150,7 @@ public class SlotManager : MonoBehaviour
             || CommonMountPointer.SlotTarget == default
             || CommonMountPointer.SlotTarget.Item == default)
             return;
-        CreateDescBox(CommonMountPointer.StartingPosition, Vector2.one * 20, CommonMountPointer.SlotTarget.Item.Description);
+        CreateDescBox(CommonMountPointer.StartingPosition, Vector2.one * 20, CommonMountPointer.SlotTarget.Item.Description, CommonMountPointer.SlotTarget.Item.Name);
     }
 
 
@@ -160,14 +160,14 @@ public class SlotManager : MonoBehaviour
         CommonMountPointer.SlotTarget = dropee;
     }
 
-    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription)
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription, string name )
     {
         if (string.IsNullOrEmpty(detailedDescription))
             return;
         //create offset that is Vector2 + offset for Label position.
         Vector2 DescriptionTextPos = startingPos + textOffset;
         // Make a background box
-        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), "Description");
+        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), name);
 
         GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), detailedDescription);
     }
