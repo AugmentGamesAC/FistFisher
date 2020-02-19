@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SlotUI)),System.Serializable]
-public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler 
+public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     protected SlotManager m_SlotManager;
 
@@ -49,6 +49,16 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
     public void OnEndDrag(PointerEventData eventData)
     {
         m_SlotManager.OnDrop(eventData);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        m_SlotManager.HandleHover(m_tracker, eventData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        m_SlotManager.HandleHover(default, eventData);
     }
 }
 
