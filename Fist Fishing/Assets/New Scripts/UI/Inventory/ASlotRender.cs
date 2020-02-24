@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     protected SlotManager m_SlotManager;
-
+    public SlotManager SlotMan => m_SlotManager;
 
     public new void Awake()
     {
@@ -24,6 +24,7 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
         if (m_SlotManager == default)
             throw new System.InvalidOperationException("SlotData Has no manager");
         m_SlotManager.RegisterSlot(m_tracker);
+        m_tracker.SetSlotManager(m_SlotManager);
         UpdateTracker(m_tracker);
         var dropHandler = GetComponentInParent<SlotSpace>();
         dropHandler.RegisterSlot(Tracker);

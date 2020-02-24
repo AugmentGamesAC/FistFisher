@@ -32,19 +32,19 @@ public class CombatManager : MonoBehaviour
 
     private static CombatManager m_instance;
     public static CombatManager Instance => m_instance;
-    public void Awake()
-    {
-        if (CombatManager.m_instance == null)
-            CombatManager.m_instance = this;
+    public void Awake()
+    {
+        if (CombatManager.m_instance == null)
+            CombatManager.m_instance = this;
     }
 
     [System.Serializable]
     public class NoiseThresholdsDict : InspectorDictionary<noiseThreshold, float> { }
     [SerializeField]
     protected NoiseThresholdsDict m_noiseThresholds = new NoiseThresholdsDict();
-    public NoiseThresholdsDict NoiseThresholds => m_noiseThresholds;
-
-
+    public NoiseThresholdsDict NoiseThresholds => m_noiseThresholds;
+
+
     [SerializeField]
     protected noiseThreshold m_currentNoiseState = noiseThreshold.Quiet;
     public noiseThreshold CurrentNoiseState => m_currentNoiseState;
@@ -92,8 +92,8 @@ public class CombatManager : MonoBehaviour
         {
             //m_maxSpawnChance += fish.SpawnChance;
         }
-    }
-
+    }
+
     public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes, PlayerMotion player = default(PlayerMotion))
     {
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
@@ -120,9 +120,9 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
-    [SerializeField]
-    protected DisapearingMenu m_puchingUI;
+    protected SingleSelectionListTracker<FishCombatInfo> m_FishSelection = new SingleSelectionListTracker<FishCombatInfo>();
+    [SerializeField]
+    protected DisappearingMenu m_puchingUI;
 
     protected void AddFishToQueue()
     {
@@ -132,17 +132,16 @@ public class CombatManager : MonoBehaviour
         }
     }
     [SerializeField]
-    protected float m_keypressTimeout;
+    protected float m_keypressTimeout;
     [SerializeField]
     protected float m_keypressTimeoutDuration;
 
 
     // Update is called once per frame
     protected void Update()
-    {
-
+    {
         //can switch targets even when fish are attacking.
-        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
 
         if (m_keypressTimeout > 0)
@@ -167,28 +166,28 @@ public class CombatManager : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.Flee))
         {
             PlayerFlee();
-        }
-
-        int newselection = PinWheel<CombatMoveInfo>.TwoDToSelection
-        (
-        (ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
-        (ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0)
-        );
-        if (newselection != 0 && m_keypressTimeout <= 0)
-        {
-            m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(newselection);
-            if (m_puchingUI != default)
-                m_puchingUI.WasKeyed();
-
-            m_keypressTimeout = m_keypressTimeoutDuration;
+        }
+
+        int newselection = PinWheel<CombatMoveInfo>.TwoDToSelection
+        (
+        (ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
+        (ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0)
+        );
+        if (newselection != 0 && m_keypressTimeout <= 0)
+        {
+            m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(newselection);
+            if (m_puchingUI != default)
+                m_puchingUI.WasKeyed();
+
+            m_keypressTimeout = m_keypressTimeoutDuration;
         }
 
 
     }
 
-    private void FixedUpdate()
-    {
-
+    private void FixedUpdate()
+    {
+
     }
 
     protected void PlayerFlee()
@@ -288,12 +287,12 @@ public class CombatManager : MonoBehaviour
         ResolveRound();
     }
 
-    protected bool ResolveOutOfRange(FishCombatInfo fish)
-    {
-        if (fish.CombatDistance <= m_combatZone)
-            return false;
+    protected bool ResolveOutOfRange(FishCombatInfo fish)
+    {
+        if (fish.CombatDistance <= m_combatZone)
+            return false;
         m_FishSelection.Remove(fish);
-        return true;
+        return true;
     }
 
     /// <summary>
@@ -321,9 +320,9 @@ public class CombatManager : MonoBehaviour
     /// <returns></returns>
     protected bool ResolveDeadFish(FishCombatInfo fishCombatInfo)
     {
-        if (fishCombatInfo.FishInstance.Health.CurrentAmount > 0)
-            return false;
-
+        if (fishCombatInfo.FishInstance.Health.CurrentAmount > 0)
+            return false;
+
         m_deadFishPile.Add(fishCombatInfo);
         m_FishSelection.Remove(fishCombatInfo);
         return true;
@@ -352,15 +351,15 @@ public class CombatManager : MonoBehaviour
             m_isItemActive = false;
         }
 
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive)) ? -fish.Speed : fish.Speed;
+        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
       
         
     }
 
-    protected void ResolveAddFish(FishCombatInfo fish)
-    {
-        m_roundQueue.Enqueue(fish);
-        m_FishSelection.AddItem(fish);
+    protected void ResolveAddFish(FishCombatInfo fish)
+    {
+        m_roundQueue.Enqueue(fish);
+        m_FishSelection.AddItem(fish);
     }
 
     /// <summary>
@@ -425,6 +424,11 @@ public class CombatManager : MonoBehaviour
         //player wins if he's the only one in the queue
         if (m_roundQueue.Count == 1)
         {
+            foreach (var deadFish in m_deadFishPile)
+            {
+                PlayerInstance.Instance.PlayerInventory.AddItem(deadFish.FishInstance.FishData.Item, 1);
+            }
+            m_deadFishPile.Clear();
             EndCombat();
             return;
         }
@@ -440,16 +444,14 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
-        m_currentCombatState = CombatStates.AwaitingFishRound;
-
+        m_currentCombatState = CombatStates.AwaitingFishRound;
+
         ResolveFishCombatant(nextCombatant as FishCombatInfo);
     }
 
     protected void EndCombat()
     {
-        m_currentCombatState = CombatStates.CombatFinished;
-        m_deadFishPile.Select(x => PlayerInstance.Instance.PlayerInventory.AddItem(x.FishInstance.FishData.Item, 1));
-        m_deadFishPile.Clear();
+        m_currentCombatState = CombatStates.CombatFinished;
 
         m_FishSelection.Clear();
         m_roundQueue.Clear();

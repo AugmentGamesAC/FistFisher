@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AbzuCameraBehaviour : CameraBehavoir
+public class AbzuCameraBehaviour : CameraBehavior
 {
     public AbzuCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) {}
 

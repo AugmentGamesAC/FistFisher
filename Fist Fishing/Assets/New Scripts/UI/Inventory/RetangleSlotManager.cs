@@ -22,9 +22,14 @@ public class RetangleSlotManager : SlotManager
         return new Vector3(m_xStartPos + (m_xSpaceBetweenItems * (i % m_numberOfColumns)), m_yStartPos + (-m_ySpaceBetweenItems * (i / m_numberOfColumns)), 0f);
     }
 
-    public new void Start()
+    public new void Awake()
     {
-        base.Start();
+        base.Awake();
+        Init();
+    }
+
+    protected virtual void Init()
+    {
         for (int i = 0; i < m_slotCount; i++)
         {
             var obj = Instantiate(m_inventoryPrefab, Vector3.zero, Quaternion.identity, transform);

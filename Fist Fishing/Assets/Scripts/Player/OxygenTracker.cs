@@ -26,7 +26,7 @@ public class OxygenTracker
     public event OnLowOxygenEvent OnLowOxygen;
 
     public float m_OxygenRegeneration = 50.0f;
-    public float m_OxygenDegeneration = 1.0f;
+    public float m_OxygenDegeneration = 3.0f;
     public float m_noOxygenDamage = 5.0f;
 
 
@@ -64,7 +64,7 @@ public class OxygenTracker
     {
         if (m_oxy.Current > 0)
             return false;
-        OnLowOxygen?.Invoke(change);
+        OnLowOxygen?.Invoke(change*2);
         return true;
     }
 

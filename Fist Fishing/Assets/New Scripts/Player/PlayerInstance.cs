@@ -7,6 +7,9 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 {
     public static IPlayerData Instance { get; private set; }
     protected static PlayerInstance MyInstance => Instance as PlayerInstance;
+    [SerializeField]
+    protected FloatTextUpdater m_clamsUpdater;
+    public FloatTextUpdater ClamsUpdater => m_clamsUpdater;
 
     #region singletonification
     public void Awake()
@@ -20,7 +23,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         Instance = this;
 
         m_oxygen = new OxygenTracker(m_maxOxygen);
-        m_health = new PlayerHealth(m_maxHealth); 
+        m_health = new PlayerHealth(m_maxHealth);
+        m_clamsUpdater.UpdateTracker(m_clams);
     }
 
     private static void HasInstance()
@@ -72,8 +76,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
-    public FloatTracker Clams => m_clams;
-
+    public FloatTracker Clams => m_clams;
     protected SlotManager m_playerInventory;
     public SlotManager PlayerInventory => m_playerInventory;
     protected SlotManager m_itemInventory;
