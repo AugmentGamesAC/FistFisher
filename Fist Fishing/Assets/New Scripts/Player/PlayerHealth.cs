@@ -11,7 +11,7 @@ public class PlayerHealth
     public PercentageTracker Tracker => m_percent;
 
     public delegate void MinimumAmountReached();
-    public event MinimumAmountReached OnMinimumAmountReached;
+    public MinimumAmountReached OnMinimumAmountReached;
 
     /// <summary>
     /// Can consider StatTracker as a float with this.

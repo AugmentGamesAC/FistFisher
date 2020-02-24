@@ -15,10 +15,7 @@ public class statclassPlaceholder
         return reference.Value;
     }
 }
-/// <summary>
-/// Camera manager is to have a list of behaviors
-/// we are using input controls to switch states
-/// </summary>
+
 [System.Serializable]
 public class PlayerMotion : MonoBehaviour
 {
@@ -57,6 +54,8 @@ public class PlayerMotion : MonoBehaviour
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
         turningSpeedRef.Value = 180.0f;
+
+        PlayerInstance.RegisterPlayerMotion(this);
     }
     /// <summary>
     /// creates a system.action (essentiually function with no in/out - funct ptr) 
@@ -104,31 +103,6 @@ public class PlayerMotion : MonoBehaviour
         MenuScreens desiredMenu = (m_displayInventory) ? MenuScreens.SwimmingInventory : MenuScreens.NormalHUD;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
-
-    /*protected void AbzuMovement()
-    {
-        Vector3 desiredDirection = new Vector3
-        (
-             ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
-            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)),
-            0
-        ) * turningSpeedRef * Time.deltaTime;
-
-
-        if (desiredDirection.sqrMagnitude > 0.000001)
-            transform.Rotate(desiredDirection, Space.Self);
-
-        //motion
-        transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
-    }*/
-   /* protected void LockedMovement()
-    {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
-
-        if (ALInput.GetKey(ALInput.Forward))
-            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
-    }*/
 
     protected void WarthogMovement()
     {

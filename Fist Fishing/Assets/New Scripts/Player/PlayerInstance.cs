@@ -91,11 +91,16 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         MyInstance.m_itemInventory = newInventory;
     }
 
+    public static void RegisterPlayerMotion(PlayerMotion playerMotion)
+    {
+        MyInstance.m_playerMotion = playerMotion;
+    }
+
     [SerializeField]
     protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
     public PlayerStatManager PlayerStatMan => m_playerStatManager;
 
     [SerializeField]
-    protected PlayerMotion m_playerMotion = new PlayerMotion();
+    protected PlayerMotion m_playerMotion;
     public PlayerMotion PlayerMotion => m_playerMotion;
 }
