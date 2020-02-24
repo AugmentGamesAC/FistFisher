@@ -51,9 +51,9 @@ public class PlayerMotion : MonoBehaviour
         m_vision = Camera.main.GetComponent<CameraManager>();
         m_movementResoultion = new Dictionary<CameraManager.CameraState, System.Action>()
         {
-           {CameraManager.CameraState.Abzu, AbzuMovement },
+           //{CameraManager.CameraState.Abzu, AbzuMovement },
            {CameraManager.CameraState.FirstPerson, FirstPersonMovement },
-           {CameraManager.CameraState.Locked, LockedMovement },
+           //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
         turningSpeedRef.Value = 180.0f;
@@ -105,7 +105,7 @@ public class PlayerMotion : MonoBehaviour
         NewMenuManager.DisplayMenuScreen(desiredMenu);
     }
 
-    protected void AbzuMovement()
+    /*protected void AbzuMovement()
     {
         Vector3 desiredDirection = new Vector3
         (
@@ -120,15 +120,15 @@ public class PlayerMotion : MonoBehaviour
 
         //motion
         transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
-    }
-    protected void LockedMovement()
+    }*/
+   /* protected void LockedMovement()
     {
         if (!ALInput.GetKey(ALInput.ManualCamera))
             ResolveSwimRotation();
 
         if (ALInput.GetKey(ALInput.Forward))
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
-    }
+    }*/
 
     protected void WarthogMovement()
     {

@@ -117,6 +117,10 @@ public class ALInput : MonoBehaviour
     KeyCode m_flee;
     public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
 
+    [SerializeField]
+    KeyCode m_showOptionsPause;
+    public static KeyCode ShowOptionsPause { get { hasInstance(); return Instance.m_showOptionsPause; } }
+
 
     //camera states
     /*[SerializeField]
@@ -180,7 +184,7 @@ public class ALInput : MonoBehaviour
     }
     /// <summary>
     /// Tuple is a dummy object that lets me link 3 objects into one without an offical class
-    /// this allows us to define behavoir in the dictionary here rather than in movementDirection
+    /// this allows us to define behavior in the dictionary here rather than in movementDirection
     /// will need to be refined when doing dynamic updating to controls
     /// </summary>
     private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredDirections =
@@ -286,6 +290,8 @@ public class ALInput : MonoBehaviour
         m_toggleShop = KeyCode.O;
 
         m_start = KeyCode.Space;
+
+        m_showOptionsPause = KeyCode.Escape;
 
         m_playerLateralMovement = AxisCode.Horizontal;
     }

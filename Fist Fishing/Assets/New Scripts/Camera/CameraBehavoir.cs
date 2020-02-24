@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CameraBehavoir
+public class CameraBehavior
 {
     //these values set in inspector
     [SerializeField]
@@ -15,7 +15,7 @@ public class CameraBehavoir
     protected GameObject m_followObject;
 
     //made to initialize the orbit point values since new up above cancels inspector values.
-    public CameraBehavoir(OrbitPoint lookAtPoint, OrbitPoint cameraPoint)
+    public CameraBehavior(OrbitPoint lookAtPoint, OrbitPoint cameraPoint)
     {
         m_lookAtPoint = lookAtPoint;
         m_cameraPoint = cameraPoint;
@@ -31,7 +31,7 @@ public class CameraBehavoir
     }
 
     //set GameObjects to work with and return this behaviour.
-    public CameraBehavoir SetCamBehavObjects(GameObject followObject, GameObject camera)
+    public CameraBehavior SetCamBehavObjects(GameObject followObject, GameObject camera)
     {
         m_followObject = followObject;
         m_camera = camera;

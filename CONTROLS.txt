@@ -1,31 +1,37 @@
-Fist Fishing Controls:
+Fist Fisher Controls: Keyboard & Mouse
 ---------------------------
+Space   -	start game
+Escape	-	open pause/options menu
 
+While on boat:
+	W - forwards
+	A/D - Rotate
+	I - toggle between shop and map
+	M - dismount
+	
+While in shop/Inventory: 
+	Left-Click (& drag) - move items
+	drag item between shop and inventory - buy/sell item (if possible)
+	drag item out of valid space - throw away 
 
----------------------------
-While Mounted on Boat:
----------------------------
-W		Forwards
-A		Left
-D		Right
-RMB-Held	Rotate Camera
-M		Map
-N		Dismount Boat
-I		Inventory
-O		Shop Window
+While Swimming:
 
+	T - change camera modes
+	
+	Camera Mode 3rd person:
+		W/S - Move Forwards/Backwards
+		A/D - Strafe Left/Right 
+		Q/E - Ascend/Descend 
+		Mouse Move - Rotate Camera
+		P - Punch (start combat)
+	Camera Mode 1st person:
+		W/S - Move Forwards/Backwards
+		A/D - Strafe Left/Right 
+		Q/E - Ascend/Descend 
+		Mouse Move - Rotate Camera
+		P - Punch (start combat)
 
----------------------------
-While In World:
----------------------------
-W			Swim Forwards
-RMB-Held		Rotate Camera
-M			Mount Boat
-I			Inventory
-Z			Toggle Targeting
-X			Change Target
-Q			Punch
-E			Harvest/Loot
-P			Throw Bait
-
-
+While in Combat:
+	O/P - change target
+	F - punch/use attack
+	W/A/S/D - open attack pinwheel (automatically uses one visibly selected)
