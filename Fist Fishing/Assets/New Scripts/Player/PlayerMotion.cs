@@ -7,8 +7,10 @@ using System.Linq;
 /// this class appears to be a placeholder to store a float value and get it.
 /// thing replacing this has more functionality that gives reason for it to exist
 /// </summary>
+[System.Serializable]
 public class statclassPlaceholder
 {
+
     public float Value = 30;
     public static implicit operator float(statclassPlaceholder reference)
     {
@@ -36,7 +38,9 @@ public class PlayerMotion : MonoBehaviour
     [SerializeField]
     protected FishInstance m_closestFish;
 
+    [SerializeField]
     protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
+    [SerializeField]
     protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
