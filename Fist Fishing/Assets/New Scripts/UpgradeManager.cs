@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class UpgradeManager : MonoBehaviour
+public class UpgradeManager
 {
     //int appliedUpgrades;
     //    enum UpgradeTypes;
@@ -84,12 +84,14 @@ public class UpgradeManager : MonoBehaviour
 
     protected string GetRandomRarity()
     {
-        var rarities = Enum.GetValues(typeof(Rarity)).Cast<string>().ToList();
+        //TODO: this breaks
+        var rarities = Enum.GetValues(typeof(Rarity)).Cast<Rarity>();
+        rarities.ToList();
 
-        int minIndex = rarities.IndexOf(rarities.First<string>());
-        int maxIndex = rarities.IndexOf(rarities.Last<string>());
+        int minIndex = 0;
+        int maxIndex = rarities.Count() - 1;
 
-        return rarities[RandRange(minIndex, maxIndex)];
+        return rarities.ElementAt(RandRange(minIndex, maxIndex)).ToString();
     }
 
     protected int RandRange(int min, int max)
