@@ -39,7 +39,7 @@ public class UpgradeSlotManager : RetangleSlotManager
 
         if (slotref.SlotMan != this)
             PlayerInstance.Instance.Clams.SetValue(PlayerInstance.Instance.Clams + slotref.Tracker.Item.WorthInCurrency * delta);
-
+        
         base.HandleSlotDrop(eventData, droppedOn);
     }
 }

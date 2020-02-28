@@ -3,20 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-/// <summary>
-/// this class appears to be a placeholder to store a float value and get it.
-/// thing replacing this has more functionality that gives reason for it to exist
-/// </summary>
-[System.Serializable]
-public class statclassPlaceholder
-{
-
-    public float Value = 30;
-    public static implicit operator float(statclassPlaceholder reference)
-    {
-        return reference.Value;
-    }
-}
 
 [System.Serializable]
 public class PlayerMotion : MonoBehaviour
@@ -36,9 +22,11 @@ public class PlayerMotion : MonoBehaviour
     protected FishInstance m_closestFish;
 
     [SerializeField]
-    protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
+    protected StatTracker turningSpeedRef = new StatTracker();
+    public StatTracker TurnSpeed => turningSpeedRef;
     [SerializeField]
-    protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
+    protected StatTracker movementSpeedRef = new StatTracker(5.0f);
+    public StatTracker MoveSpeed => movementSpeedRef;
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
 
@@ -57,7 +45,7 @@ public class PlayerMotion : MonoBehaviour
            //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
-        turningSpeedRef.Value = 180.0f;
+        turningSpeedRef.SetValue(180.0f);
 
         PlayerInstance.RegisterPlayerMotion(this);
     }

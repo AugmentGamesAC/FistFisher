@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerHealth : StatTracker
+public class PlayerHealth
 {
     [SerializeField]
     protected PercentageTracker m_percent;
@@ -13,7 +13,7 @@ public class PlayerHealth : StatTracker
     public delegate void MinimumAmountReached();
     public MinimumAmountReached OnMinimumAmountReached;
 
-    public override float MaxValue => m_percent.Max;
+    public StatTracker MaxValue => m_percent.Max;
     /// <summary>
     /// Can consider StatTracker as a float with this.
     /// returns ref to currentAmount.
@@ -32,7 +32,7 @@ public class PlayerHealth : StatTracker
         PlayerInstance.Instance.Oxygen.OnLowOxygen += Change;
     }
 
-    public override void Change(float changeAmount)
+    public void Change(float changeAmount)
     {
         m_percent.IncrementCurrent(changeAmount);
 
@@ -45,7 +45,7 @@ public class PlayerHealth : StatTracker
         Change(m_percent.Max);
     }
 
-    public override void SetMax(float max)
+    public void SetMax(float max)
     {
         m_percent.SetMax(max);
     }

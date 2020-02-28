@@ -14,22 +14,52 @@ public enum Stats
     MovementSpeed,
     TurnSpeed
 }
+[System.Serializable]
 public class PlayerStatManager
 {
     [SerializeField]
     protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
+    [SerializeField]
+    protected float m_baseMaxHealth;
+    public float BaseMaxHealth => m_baseMaxHealth;
+    [SerializeField]
+    protected float m_baseStealth;
+    public float BaseStealth => m_baseStealth;
+    [SerializeField]
+    protected float m_basePower;
+    public float BasePower => m_basePower;
+    [SerializeField]
+    protected float m_baseMaxAir;
+    public float BaseMaxAir => m_baseMaxAir;
+    [SerializeField]
+    protected float m_baseAirConsumption;
+    public float BaseAirConsumption => m_baseAirConsumption;
+    [SerializeField]
+    protected float m_baseAirRestoration;
+    public float BaseAirRestoration => m_baseAirRestoration;
+    [SerializeField]
+    protected float m_baseMoveSpeed;
+    public float BaseMoveSpeed => m_baseMoveSpeed;
+    [SerializeField]
+    protected float m_baseTurnSpeed;
+    public float BaseTurnSpeed => m_baseTurnSpeed;
+
     public StatTracker this[Stats value] { get { return m_statTrackerContainer[value]; } }
-    /// <summary>
-    /// Sets StatTrackerContainer.
-    /// </summary>
-    public PlayerStatManager()
+
+    public void Init()
     {
-        var ListOfStats = Enum.GetValues(typeof(Stats));
-        foreach (var stat in ListOfStats)
+        m_statTrackerContainer = new Dictionary<Stats, StatTracker>()
         {
-            AddStat((Stats)stat, new StatTracker());
-        }
+            { Stats.MaxHealth, new StatTracker(m_baseMaxHealth) },
+            { Stats.Stealth, new StatTracker(m_baseMaxHealth) },
+            { Stats.Power, new StatTracker(m_baseMaxHealth) },
+            { Stats.MaxAir, new StatTracker(m_baseMaxHealth) },
+            { Stats.AirConsumption, new StatTracker(m_baseMaxHealth) },
+            { Stats.AirRestoration, new StatTracker(m_baseMaxHealth) },
+            { Stats.MovementSpeed, new StatTracker(m_baseMaxHealth) },
+            { Stats.TurnSpeed, new StatTracker(m_baseMaxHealth) }
+        };
     }
 
     /// <summary>
@@ -55,7 +85,7 @@ public class PlayerStatManager
         if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        m_statTrackerContainer[statType].SetMax(m_statTrackerContainer[statType].MaxValue + amount);
+        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + amount);
 
         return true;
     }

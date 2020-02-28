@@ -71,7 +71,7 @@ public class SlotManager : MonoBehaviour
         ///eventually add code to limitObjects. 
         HashSet<int> usedSlots = new HashSet<int>();
         int myCount = count;
-        while(myCount > 0 &&  m_freeSlots.Count > 0)
+        while (myCount > 0 && m_freeSlots.Count > 0)
         {
             int targetSlot = m_freeSlots.Min();
             usedSlots.Add(targetSlot);
@@ -128,25 +128,33 @@ public class SlotManager : MonoBehaviour
     public virtual void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
-       int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
-       if (newvalue == slotref.Tracker.Count)
-       {
+
+        if (slotref.SlotMan != this)
+            if (slotref.Tracker.Item.ResolveDropCase(dropped, slotref.Tracker))
+            {
+                OnDrop(eventData);
+                return;
+            }
+
+        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
+        if (newvalue == slotref.Tracker.Count)
+        {
             OnDrop(eventData);
             return;
-       }
-       var delta = slotref.Tracker.Count - newvalue;
+        }
+        var delta = slotref.Tracker.Count - newvalue;
         //dropped needs to be added to first so that we don't loose ref to the IItem;
-       dropped.AddItem(slotref.Tracker.Item, delta);
-       slotref.Tracker.RemoveCount(delta);
+        dropped.AddItem(slotref.Tracker.Item, delta);
+        slotref.Tracker.RemoveCount(delta);
         if (slotref.Tracker.Count == 0)
-           FreeSlot(slotref.Tracker);
-       OnDrop(eventData);
+            FreeSlot(slotref.Tracker);
+        OnDrop(eventData);
     }
 
     public void OnGUI()
     {
-        if (!gameObject.activeSelf 
-            || CommonMountPointer == default 
+        if (!gameObject.activeSelf
+            || CommonMountPointer == default
             || CommonMountPointer.SlotTarget == default
             || CommonMountPointer.SlotTarget.Item == default)
             return;
@@ -160,7 +168,7 @@ public class SlotManager : MonoBehaviour
         CommonMountPointer.SlotTarget = dropee;
     }
 
-    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription, string name )
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription, string name)
     {
         if (string.IsNullOrEmpty(detailedDescription))
             return;

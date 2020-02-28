@@ -57,7 +57,17 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     protected int BaseTorsoWorth;
 
+    public void Awake()
+    {
+        actionList = new List<Func<Upgrade>>()
+        {
+            GenerateArmUpgrade,
+            GenerateChestUpgrade,
+            GenerateLegUpgrade
+        };
+    }
 
+    protected List<Func<Upgrade>> actionList;
 
     /// <summary>
     /// called when shop boots up.
@@ -65,48 +75,24 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public Upgrade GenerateUpgrade()
     {
-        var upgradeTypesList = Enum.GetValues(typeof(UpgradeTypes)).Cast<UpgradeTypes>().ToList();
-
-        int minIndex = upgradeTypesList.IndexOf(upgradeTypesList.First<UpgradeTypes>());
-        int maxIndex = upgradeTypesList.Count;
-        
-        return GenerateUpgradeOfType(upgradeTypesList[RandRange(minIndex, maxIndex)]);
-    }
-
-    /// <summary>
-    /// Creates an Upgrade with RNG. within the "UpgradeType".
-    /// </summary>
-    /// <param name="type"></param>
-    public Upgrade GenerateUpgradeOfType(UpgradeTypes type)
-    {
-        Upgrade upgrade = default;
-
-        switch (type)
-        {
-            case UpgradeTypes.Arms:
-                upgrade = GenerateArmUpgrade();
-                break;
-            case UpgradeTypes.Torso:
-                upgrade = GenerateChestUpgrade();
-                break;
-            case UpgradeTypes.Legs:
-                upgrade = GenerateLegUpgrade();
-                break;
-        }
-
-        return upgrade;
+        return RandomListEntry<Func<Upgrade>>(actionList)();
     }
 
     protected string GetRandomRarity()
     {
-        //TODO: this breaks
-        var rarities = Enum.GetValues(typeof(Rarity)).Cast<Rarity>();
-        rarities.ToList();
+        return RandomEnum<Rarity>().ToString();
+    }
 
-        int minIndex = 0;
-        int maxIndex = rarities.Count();
 
-        return rarities.ElementAt(RandRange(minIndex, maxIndex)).ToString();
+    protected T RandomListEntry<T>(List<T> toRandomize)
+    {
+        return toRandomize[Random.Range(0, toRandomize.Count)];
+    }
+
+    protected T RandomEnum<T>()
+    {
+        var selection = Enum.GetValues(typeof(T));
+        return (T)selection.GetValue(Random.Range(0, selection.Length));
     }
 
     protected int RandRange(int min, int max)

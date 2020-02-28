@@ -13,8 +13,8 @@ public class BoatPlayer : MonoBehaviour
 
     [SerializeField]
     public bool m_CanMove;
-    protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
-    protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
+    protected StatTracker turningSpeedRef = new StatTracker();
+    protected StatTracker movementSpeedRef = new StatTracker();
 
     [SerializeField]
     protected bool m_isMounted;

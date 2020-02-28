@@ -13,4 +13,11 @@ public interface IItem
     string Name { get; }
 
     bool CanMerge(IItem newItem);
+
+    /// <summary>
+    /// Handles resolution of the drop.
+    /// </summary>
+    /// <param name="slot"></param>
+    /// <returns>true when drop logic handled otherwise false.</returns>
+    bool ResolveDropCase(ISlotData newSlot, ISlotData oldSlot);
 }

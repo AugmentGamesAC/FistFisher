@@ -48,4 +48,9 @@ public class Bait_IItem : ScriptableObject, IItem
             return false;
         return m_currentBaitType == item.m_currentBaitType;
     }
+
+    public bool ResolveDropCase(ISlotData slot, ISlotData oldSlot)
+    {
+        return false;
+    }
 }

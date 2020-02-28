@@ -1,15 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class StatTracker
 {
-    public virtual float MaxValue { get; }
-
-    public virtual void Change(float changeAmount){}
-
-    public virtual void SetMax(float max)
+    public static implicit operator float(StatTracker reference)
     {
-        //throw new System.Exception("SetMax empty base function called.");
+        return reference.m_maxValue;
+    }
+
+    public StatTracker(float max = 3.0f)
+    {
+        m_maxValue = max;
+    }
+
+    [SerializeField]
+    protected virtual float m_maxValue { get; set; }
+    public virtual float MaxValue => m_maxValue;
+
+    public virtual void Change(float changeAmount)
+    {
+        m_maxValue += changeAmount;
+    }
+
+    public virtual void SetValue(float max)
+    {
+        m_maxValue = max;
     }
 }
