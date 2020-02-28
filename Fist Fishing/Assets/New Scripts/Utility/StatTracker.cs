@@ -4,37 +4,12 @@ using UnityEngine;
 
 public class StatTracker
 {
-    //    Responsibilities
-    //- keeps track of an amount
-    //- Invoke delegates when values reach certain amounts
-    //- helper functions
+    public virtual float MaxValue { get; }
 
-    [SerializeField]
-    protected float m_currentAmount;
-    public float CurrentAmount { get { return m_currentAmount; } }
+    public virtual void Change(float changeAmount){}
 
-    public delegate void CurrentAmountChanged(float current);
-    public CurrentAmountChanged OnCurrentAmountChanged;
-
-    /// <summary>
-    /// Can consider StatTracker as a float with this.
-    /// returns ref to currentAmount.
-    /// </summary>
-    /// <param name="reference"></param>
-    public static implicit operator float(StatTracker reference)
+    public virtual void SetMax(float max)
     {
-        return reference.CurrentAmount;
-    }
-
-    /// <summary>
-    /// Adds changeAmount to current amount.
-    /// Invokes OnChanged delegates.
-    /// </summary>
-    /// <param name="changeAmount"></param>
-    public void Change(float changeAmount)
-    {
-        m_currentAmount += changeAmount;
-
-        OnCurrentAmountChanged?.Invoke(m_currentAmount);
+        //throw new System.Exception("SetMax empty base function called.");
     }
 }

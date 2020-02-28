@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class UpgradeManager
+public class UpgradeManager : MonoBehaviour
 {
     //int appliedUpgrades;
     //    enum UpgradeTypes;
@@ -35,14 +35,29 @@ public class UpgradeManager
         Common,
         Uncommon,
         Rare,
-        Epic
+        Epic,
+        Legendary
     }
 
     protected static int m_appliedUpgrades;
 
-    PlayerStatManager statManager;
-
     static Dictionary<UpgradeTypes, int> UpgradeCosts;
+
+    [SerializeField]
+    protected Sprite ArmIcon;
+    [SerializeField]
+    protected Sprite LegIcon;
+    [SerializeField]
+    protected Sprite TorsoIcon;
+
+    [SerializeField]
+    protected int BaseArmWorth;
+    [SerializeField]
+    protected int BaseLegWorth;
+    [SerializeField]
+    protected int BaseTorsoWorth;
+
+
 
     /// <summary>
     /// called when shop boots up.
@@ -53,16 +68,16 @@ public class UpgradeManager
         var upgradeTypesList = Enum.GetValues(typeof(UpgradeTypes)).Cast<UpgradeTypes>().ToList();
 
         int minIndex = upgradeTypesList.IndexOf(upgradeTypesList.First<UpgradeTypes>());
-        int maxIndex = upgradeTypesList.IndexOf(upgradeTypesList.Last<UpgradeTypes>());
+        int maxIndex = upgradeTypesList.Count;
         
-        return GenerateUpgrade(upgradeTypesList[RandRange(minIndex, maxIndex)]);
+        return GenerateUpgradeOfType(upgradeTypesList[RandRange(minIndex, maxIndex)]);
     }
 
     /// <summary>
     /// Creates an Upgrade with RNG. within the "UpgradeType".
     /// </summary>
     /// <param name="type"></param>
-    public Upgrade GenerateUpgrade(UpgradeTypes type)
+    public Upgrade GenerateUpgradeOfType(UpgradeTypes type)
     {
         Upgrade upgrade = default;
 
@@ -89,7 +104,7 @@ public class UpgradeManager
         rarities.ToList();
 
         int minIndex = 0;
-        int maxIndex = rarities.Count() - 1;
+        int maxIndex = rarities.Count();
 
         return rarities.ElementAt(RandRange(minIndex, maxIndex)).ToString();
     }
@@ -103,8 +118,6 @@ public class UpgradeManager
     {
         float PowerMod = RandRange(10, 30);
         float AirConsumptionMod = RandRange(25, 50);
-        int Worth = RandRange(200, 500);
-
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -112,25 +125,7 @@ public class UpgradeManager
             { Stats.AirConsumption, AirConsumptionMod }
         };
 
-        return new Upgrade(string.Format("{0} Strong Arm", GetRandomRarity()), default, "strong frogman RISE!!", Worth, modifiers);
-    }
-
-    protected Upgrade GenerateChestUpgrade()
-    {
-        float MaxAirMod = RandRange(30, 60);
-        float AirRestoreMod = RandRange(25, 50);
-        float MaxHealthMod = RandRange(40, 80);
-
-        int Worth = RandRange(200, 500);
-
-        Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
-        {
-            { Stats.MaxAir , MaxAirMod },
-            { Stats.AirRestoration, AirRestoreMod },
-            { Stats.MaxHealth, MaxHealthMod }
-        };
-
-        return new Upgrade(string.Format("{0} Iron Lungs", GetRandomRarity()), default, "Cardiovasculature is very important kids!!", Worth, modifiers);
+        return new Upgrade(string.Format("{0} Strong Arm", GetRandomRarity()), ArmIcon, "strong frogman RISE!!", BaseArmWorth, modifiers);
     }
 
     protected Upgrade GenerateLegUpgrade()
@@ -139,8 +134,6 @@ public class UpgradeManager
         float StealthMod = RandRange(50, 80);
         float TurnSpeedMod = RandRange(10, 20);
 
-        int Worth = RandRange(200, 500);
-
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
             { Stats.MovementSpeed , MoveSpeedMod },
@@ -148,7 +141,23 @@ public class UpgradeManager
             { Stats.TurnSpeed, TurnSpeedMod }
         };//MovementSpeed, stealth, turnSpeed
 
-        return new Upgrade(string.Format("{0} Leg Muscles", GetRandomRarity()), default, "Strong legs lead happy families!!", Worth, modifiers);
+        return new Upgrade(string.Format("{0} Leg Muscles", GetRandomRarity()), LegIcon, "Strong legs lead happy families!!", BaseLegWorth, modifiers);
+    }
+
+    protected Upgrade GenerateChestUpgrade()
+    {
+        float MaxAirMod = RandRange(30, 60);
+        float AirRestoreMod = RandRange(25, 50);
+        float MaxHealthMod = RandRange(40, 80);
+
+        Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
+        {
+            { Stats.MaxAir , MaxAirMod },
+            { Stats.AirRestoration, AirRestoreMod },
+            { Stats.MaxHealth, MaxHealthMod }
+        };
+
+        return new Upgrade(string.Format("{0} Iron Lungs", GetRandomRarity()), TorsoIcon, "Cardiovasculature is very important kids!!", BaseTorsoWorth, modifiers);
     }
 
     /// <summary>

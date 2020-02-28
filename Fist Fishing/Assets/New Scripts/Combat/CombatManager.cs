@@ -388,27 +388,29 @@ public class CombatManager : MonoBehaviour
         //do we span a fish at all
         float RNGNumber = Random.Range(0.0f, 5);
 
-        float spawnThreshold = Mathf.Log(5, m_playerCombatInfo.NoiseTracker);
+        throw new System.NotImplementedException();
 
-        if (RNGNumber < spawnThreshold)
-            return false;
+        //float spawnThreshold = Mathf.Log(5, m_playerCombatInfo.NoiseTracker);
 
-        //a fish spawns
+        //if (RNGNumber < 0/*spawnThreshold*/)
+        //    return false;
 
-        float whichfish = Random.Range(0, MaxSpawnChance);  //
+        ////a fish spawns
 
-        foreach (var fish in m_aggressiveFishToSpawn)
-        {
-            //whichfish -= fish.SpawnChance;
-            if (whichfish < 0)
-            {
-                m_roundQueue.Enqueue(fish);
-                return true;
-            }
-        }
+        //float whichfish = Random.Range(0, MaxSpawnChance);  //
+
+        //foreach (var fish in m_aggressiveFishToSpawn)
+        //{
+        //    //whichfish -= fish.SpawnChance;
+        //    if (whichfish < 0)
+        //    {
+        //        m_roundQueue.Enqueue(fish);
+        //        return true;
+        //    }
+        //}
 
 
-        return false;
+        //return false;
     }
 
     /// <summary>
@@ -417,14 +419,16 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     protected void ResolveNoiseChange()
     {
-        foreach (var threshold in m_noiseThresholds)
-        {
-            if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Value)
-            {
-                m_currentNoiseState = threshold.Key;
-                break;
-            }
-        }
+        throw new System.NotImplementedException();
+
+        //foreach (var threshold in m_noiseThresholds)
+        //{
+        //    if (m_playerCombatInfo.NoiseTracker.CurrentAmount > threshold.Value)
+        //    {
+        //        m_currentNoiseState = threshold.Key;
+        //        break;
+        //    }
+        //}
     }
 
     /// <summary>
@@ -446,7 +450,7 @@ public class CombatManager : MonoBehaviour
         //check for next combatant type and change the state. check if a fish will spawn.
         if (nextCombatant as PlayerCombatInfo != null)
         {
-            ResolveAggressiveFishSpawn();
+            //ResolveAggressiveFishSpawn();
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
             return;
         }

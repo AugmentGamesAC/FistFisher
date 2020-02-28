@@ -25,6 +25,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_oxygen = new OxygenTracker(m_maxOxygen);
         m_health = new PlayerHealth(m_maxHealth);
         m_clamsUpdater.UpdateTracker(m_clams);
+
+        m_playerStatManager.SetTracker(Stats.MaxHealth, m_health);
     }
 
     private static void HasInstance()
