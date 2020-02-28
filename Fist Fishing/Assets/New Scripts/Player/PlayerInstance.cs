@@ -25,6 +25,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_oxygen = new OxygenTracker(m_maxOxygen);
         m_health = new PlayerHealth(m_maxHealth);
         m_clamsUpdater.UpdateTracker(m_clams);
+
+        m_playerStatManager.SetTracker(Stats.MaxHealth, m_health);
     }
 
     private static void HasInstance()
@@ -91,11 +93,16 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         MyInstance.m_itemInventory = newInventory;
     }
 
+    public static void RegisterPlayerMotion(PlayerMotion playerMotion)
+    {
+        MyInstance.m_playerMotion = playerMotion;
+    }
+
     [SerializeField]
     protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
     public PlayerStatManager PlayerStatMan => m_playerStatManager;
 
     [SerializeField]
-    protected PlayerMotion m_playerMotion = new PlayerMotion();
+    protected PlayerMotion m_playerMotion;
     public PlayerMotion PlayerMotion => m_playerMotion;
 }

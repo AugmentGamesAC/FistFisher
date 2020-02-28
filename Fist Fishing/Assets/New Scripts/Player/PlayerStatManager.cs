@@ -19,8 +19,7 @@ public class PlayerStatManager
     [SerializeField]
     protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
-    public StatTracker this[Stats value] {  get { return m_statTrackerContainer[value]; } }
-
+    public StatTracker this[Stats value] { get { return m_statTrackerContainer[value]; } }
     /// <summary>
     /// Sets StatTrackerContainer.
     /// </summary>
@@ -56,8 +55,13 @@ public class PlayerStatManager
         if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        m_statTrackerContainer[statType].Change(amount);
+        m_statTrackerContainer[statType].SetMax(m_statTrackerContainer[statType].MaxValue + amount);
 
         return true;
+    }
+
+    public void SetTracker(Stats statType, StatTracker tracker)
+    {
+        m_statTrackerContainer[statType] = tracker;
     }
 }

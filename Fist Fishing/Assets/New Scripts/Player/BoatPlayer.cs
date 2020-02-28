@@ -129,7 +129,7 @@ public class BoatPlayer : MonoBehaviour
     protected void ToggleControls()
     {
         m_CanMove = m_isMounted;
-        m_validPlayer.m_CanMove = !m_isMounted;
+        m_validPlayer.m_CanMove = !m_CanMove;
     }
     protected void PositionPlayer()
     {

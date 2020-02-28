@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerSlotManager : RetangleSlotManager
 {
-
-
     public override void HandleSlotDrop(PointerEventData eventData, ISlotData droppedOn)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
@@ -28,6 +26,8 @@ public class PlayerSlotManager : RetangleSlotManager
                 return;
             }
             PlayerInstance.Instance.Clams.SetValue(PlayerInstance.Instance.Clams - slotref.Tracker.Item.WorthInCurrency * delta);
+            if (slotref.Tracker.Item.Type == ItemType.Upgrade)
+                (slotref.Tracker.Item as Upgrade).ApplyUpgrade();
         }
         base.HandleSlotDrop(eventData, droppedOn);
     }

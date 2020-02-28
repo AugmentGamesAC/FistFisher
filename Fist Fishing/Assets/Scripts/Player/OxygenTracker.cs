@@ -30,7 +30,6 @@ public class OxygenTracker
     public float m_noOxygenDamage = 5.0f;
 
 
-
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
@@ -62,7 +61,7 @@ public class OxygenTracker
 
     protected bool NoOxygenCheck(float change)
     {
-        if (m_oxy.Current > 0)
+        if (m_oxy.Current > 0 || !m_isUnderWater)
             return false;
         OnLowOxygen?.Invoke(change*2);
         return true;
