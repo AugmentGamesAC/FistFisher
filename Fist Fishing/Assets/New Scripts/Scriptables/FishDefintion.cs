@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishDefintion : ScriptableObject, IFishData, IItem
+public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
     #region IFishData
     public IItem Item => this;
@@ -66,7 +66,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     protected GameObject m_swimingHPDisplayRefence;
     #endregion
 
-    public GameObject InstatiateFish()
+    public GameObject Instatiate(MeshCollider m)
     {
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
