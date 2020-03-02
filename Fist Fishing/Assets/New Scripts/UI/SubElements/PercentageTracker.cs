@@ -14,7 +14,7 @@ public class PercentageTracker : UITracker<IPercentage>, IPercentage
     protected Percentage displayPercentage;
     public float Current => m_value.Current;
 
-    public float Max => m_value.Max;
+    public StatTracker Max => m_value.Max;
 
     public float Percent => m_value.Percent;
 

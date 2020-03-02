@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8062,7 +8062,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 497687152}
 --- !u!114 &497687152
@@ -10251,7 +10250,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 663622157}
 --- !u!1001 &665761761
@@ -10783,6 +10781,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1279734696}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &682197991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1427157043570078320, guid: 79ee761726c202041b9e0966ded9777e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5758115767889527099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &682197993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682197991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecd92034be90354d8d3a5659a2bb647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_xStartPos: -210
+  m_yStartPos: 50
+  m_xSpaceBetweenItems: 31
+  m_ySpaceBetweenItems: 31
+  m_numberOfColumns: 9
+  m_slotCount: 54
+  m_boxScale: 29
+  m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
+    type: 3}
+--- !u!114 &682197997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682197991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3d90c67e1df6d4392cdd35f5cec081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArmIcon: {fileID: 21300000, guid: 625de9f8753563e46abd29701d5d0759, type: 3}
+  LegIcon: {fileID: 21300000, guid: 9d6980fcdca30ae45be6d9861ffd0f8e, type: 3}
+  TorsoIcon: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
+  BaseArmWorth: 5
+  BaseLegWorth: 2
+  BaseTorsoWorth: 1
 --- !u!1001 &683832587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11842,7 +11885,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 724232419}
 --- !u!4 &724382161 stripped
@@ -12763,7 +12805,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 0}
   m_textInput: '{0}/{1}'
@@ -13802,7 +13843,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 832352641}
 --- !u!114 &832352641
@@ -25081,7 +25121,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 1437159516}
 --- !u!1001 &1437875070
@@ -27540,7 +27579,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 1626660637}
 --- !u!1 &1628317584
@@ -32581,17 +32619,13 @@ MonoBehaviour:
     m_percent:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 500
         m_current: 500
   m_oxygen:
     m_oxy:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 200
         m_current: 100
     m_isUnderWater: 0
-    m_OxygenRegeneration: 20
-    m_OxygenDegeneration: 3
     m_noOxygenDamage: 5
     m_OxygenTickFrequency: 1
     m_OxygenTickTimer: 1
@@ -32600,8 +32634,17 @@ MonoBehaviour:
     m_value: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
     SerializeInvokes: 0
   m_clams:
-    m_value: 0
+    m_value: 1000000
     SerializeInvokes: 0
+  m_playerStatManager:
+    m_baseMaxHealth: 0
+    m_baseStealth: 0
+    m_basePower: 0
+    m_baseMaxAir: 0
+    m_baseAirConsumption: 0
+    m_baseAirRestoration: 0
+    m_baseMoveSpeed: 0
+    m_baseTurnSpeed: 0
   m_playerMotion: {fileID: 2487089619964385255}
 --- !u!114 &2055129974
 MonoBehaviour:
@@ -33593,7 +33636,6 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
       m_current: 0
   m_UIElement: {fileID: 2143321836}
 --- !u!114 &2143321836
@@ -35663,15 +35705,45 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2717419233127886756, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: IsSelectedOnInit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717419233971436836, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 315.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717419233971436836, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 393.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717419233971436836, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 511.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717419233971436836, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 640.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2717419233971436837, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717419233971436840, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5758115765954170521, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
@@ -37144,8 +37216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: 0.5}
-  m_SizeDelta: {x: -1, y: -1}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7929822326569856926
 CanvasRenderer:

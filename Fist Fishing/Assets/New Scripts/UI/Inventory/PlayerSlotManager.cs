@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerSlotManager : RetangleSlotManager
 {
-
-
     public override void HandleSlotDrop(PointerEventData eventData, ISlotData droppedOn)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();

@@ -91,5 +91,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         m_combatSpeed = 4;
     }
 
+    public bool ResolveDropCase(ISlotData slot, ISlotData oldSlot)
+    {
+        if (!(slot.Manager is ShopSlotManager))
+            return false;
+        oldSlot.RemoveItem();
+        slot.RemoveItem();
 
+        return true;
+    }
 }

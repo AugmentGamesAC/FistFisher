@@ -1,7 +1,7 @@
 ﻿public interface IPercentage
 {
     float Current { get; }
-    float Max { get; }
+    StatTracker Max { get; }
     float Percent { get; }
 
     void IncrementCurrent(float increment);

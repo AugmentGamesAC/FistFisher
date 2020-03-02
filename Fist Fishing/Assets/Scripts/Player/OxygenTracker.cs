@@ -5,13 +5,17 @@ using UnityEngine.UI;
 using System;
 
 [System.Serializable]
-public class OxygenTracker 
+public class OxygenTracker : StatTracker
 {
     public OxygenTracker(float max)
     {
         m_oxy = new PercentageTracker(max);
         ResetOxygen();
         m_OxygenTickTimer = m_OxygenTickFrequency;
+
+
+        m_oxygenRegeneration = PlayerInstance.Instance.PlayerStatMan[Stats.AirRestoration];
+        m_oxygenConsumption = PlayerInstance.Instance.PlayerStatMan[Stats.AirConsumption];
     }
 
     [SerializeField]
@@ -25,17 +29,21 @@ public class OxygenTracker
     public delegate void OnLowOxygenEvent(float change);
     public event OnLowOxygenEvent OnLowOxygen;
 
-    public float m_OxygenRegeneration = 50.0f;
-    public float m_OxygenDegeneration = 3.0f;
-    public float m_noOxygenDamage = 5.0f;
+    [SerializeField]
+    protected StatTracker m_oxygenRegeneration;
+    public StatTracker OxygenRegeneration => m_oxygenRegeneration;
 
+    [SerializeField]
+    protected StatTracker m_oxygenConsumption;
+    public StatTracker OxygenConsumption => m_oxygenConsumption;
+
+    public float m_noOxygenDamage = 5.0f;
 
 
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
-   
-
+    public override float MaxValue => m_oxy.Max;
 
     public void Update()
     {
@@ -47,22 +55,21 @@ public class OxygenTracker
         if (m_OxygenTickTimer > 0)
             return;
 
-        ModifyOxygen(m_isUnderWater ? -m_OxygenDegeneration: m_OxygenRegeneration);
+        Change(m_isUnderWater ? -OxygenConsumption: m_oxygenRegeneration);
 
         m_OxygenTickTimer = m_OxygenTickFrequency;
     }
 
-    public void ModifyOxygen(float changeAmount)
+    public override void Change(float changeAmount)
     {
         if (NoOxygenCheck(changeAmount))
             return;
         m_oxy.IncrementCurrent(changeAmount);
     }
 
-
     protected bool NoOxygenCheck(float change)
     {
-        if (m_oxy.Current > 0)
+        if (m_oxy.Current > 0 || !m_isUnderWater)
             return false;
         OnLowOxygen?.Invoke(change*2);
         return true;
@@ -73,4 +80,8 @@ public class OxygenTracker
         m_oxy.SetCurrent(m_oxy.Max);
     }
 
+    public override void SetValue(float max)
+    {
+        m_oxy.SetMax(max);
+    }
 }

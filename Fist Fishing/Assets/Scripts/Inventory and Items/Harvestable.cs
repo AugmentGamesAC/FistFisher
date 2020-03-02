@@ -59,4 +59,9 @@ public class Harvestable : MonoBehaviour, IItem
             return false;
         return newItem.Type == m_Type;
     }
+
+    public bool ResolveDropCase(ISlotData slot, ISlotData oldSlot)
+    {
+        return false;
+    }
 }

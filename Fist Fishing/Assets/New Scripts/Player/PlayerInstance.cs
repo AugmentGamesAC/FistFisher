@@ -22,9 +22,22 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
 
+        m_playerStatManager.Init();
+
         m_oxygen = new OxygenTracker(m_maxOxygen);
         m_health = new PlayerHealth(m_maxHealth);
         m_clamsUpdater.UpdateTracker(m_clams);
+
+        //m_playerStatManager.SetTracker(Stats.MaxHealth, m_health);
+        //m_playerStatManager.SetTracker(Stats.MaxAir, m_oxygen);
+        //m_playerStatManager.SetTracker(Stats.AirConsumption, m_oxygen.OxygenConsumption);
+        //m_playerStatManager.SetTracker(Stats.AirRestoration, m_oxygen.OxygenRegeneration);
+        //m_playerStatManager.SetTracker(Stats.MovementSpeed, m_playerMotion.MoveSpeed);
+        //m_playerStatManager.SetTracker(Stats.TurnSpeed, m_playerMotion.TurnSpeed);
+
+        Debug.Log("Don't forget to SetTrackers: stealth and damage");
+        //m_playerStatManager.SetTracker(Stats.Power, damageTracker);
+        //m_playerStatManager.SetTracker(Stats.Stealth, noiseTracker);
     }
 
     private static void HasInstance()
@@ -50,6 +63,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_oxygen.Update();
     }
 
+    //TODO: remove these and fix
     [SerializeField]
     protected float m_maxHealth = 500;
     public float MaxHealth => m_maxHealth;
@@ -91,11 +105,16 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         MyInstance.m_itemInventory = newInventory;
     }
 
+    public static void RegisterPlayerMotion(PlayerMotion playerMotion)
+    {
+        MyInstance.m_playerMotion = playerMotion;
+    }
+
     [SerializeField]
     protected PlayerStatManager m_playerStatManager = new PlayerStatManager();
     public PlayerStatManager PlayerStatMan => m_playerStatManager;
 
     [SerializeField]
-    protected PlayerMotion m_playerMotion = new PlayerMotion();
+    protected PlayerMotion m_playerMotion;
     public PlayerMotion PlayerMotion => m_playerMotion;
 }

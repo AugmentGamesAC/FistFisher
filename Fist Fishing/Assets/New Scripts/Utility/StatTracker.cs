@@ -1,40 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class StatTracker
 {
-    //    Responsibilities
-    //- keeps track of an amount
-    //- Invoke delegates when values reach certain amounts
-    //- helper functions
-
-    [SerializeField]
-    protected float m_currentAmount;
-    public float CurrentAmount { get { return m_currentAmount; } }
-
-    public delegate void CurrentAmountChanged(float current);
-    public CurrentAmountChanged OnCurrentAmountChanged;
-
-    /// <summary>
-    /// Can consider StatTracker as a float with this.
-    /// returns ref to currentAmount.
-    /// </summary>
-    /// <param name="reference"></param>
     public static implicit operator float(StatTracker reference)
     {
-        return reference.CurrentAmount;
+        return reference.m_maxValue;
     }
 
-    /// <summary>
-    /// Adds changeAmount to current amount.
-    /// Invokes OnChanged delegates.
-    /// </summary>
-    /// <param name="changeAmount"></param>
-    public void Change(float changeAmount)
+    public StatTracker(float max = 3.0f)
     {
-        m_currentAmount += changeAmount;
+        m_maxValue = max;
+    }
 
-        OnCurrentAmountChanged?.Invoke(m_currentAmount);
+    [SerializeField]
+    protected virtual float m_maxValue { get; set; }
+    public virtual float MaxValue => m_maxValue;
+
+    public virtual void Change(float changeAmount)
+    {
+        m_maxValue += changeAmount;
+    }
+
+    public virtual void SetValue(float max)
+    {
+        m_maxValue = max;
     }
 }
