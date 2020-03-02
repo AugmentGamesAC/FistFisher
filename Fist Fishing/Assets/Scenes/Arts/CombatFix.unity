@@ -8062,6 +8062,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 497687152}
 --- !u!114 &497687152
@@ -10250,6 +10252,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 663622157}
 --- !u!1001 &665761761
@@ -11885,6 +11889,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 724232419}
 --- !u!4 &724382161 stripped
@@ -12805,6 +12811,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 0}
   m_textInput: '{0}/{1}'
@@ -13843,6 +13851,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 832352641}
 --- !u!114 &832352641
@@ -25121,6 +25131,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 1437159516}
 --- !u!1001 &1437875070
@@ -27579,6 +27591,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 1626660637}
 --- !u!1 &1628317584
@@ -32536,19 +32550,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_clamsUpdater: {fileID: 741054170}
-  m_maxHealth: 500
-  m_maxOxygen: 200
   m_health:
     m_percent:
       SerializeInvokes: 0
       displayPercentage:
+        m_max:
+          m_maxValue: 3
         m_current: 500
   m_oxygen:
     m_oxy:
       SerializeInvokes: 0
       displayPercentage:
+        m_max:
+          m_maxValue: 3
         m_current: 100
     m_isUnderWater: 0
+    m_oxygenRegeneration:
+      m_maxValue: 0
+    m_oxygenConsumption:
+      m_maxValue: 0
     m_noOxygenDamage: 5
     m_OxygenTickFrequency: 1
     m_OxygenTickTimer: 1
@@ -32560,14 +32580,14 @@ MonoBehaviour:
     m_value: 1000000
     SerializeInvokes: 0
   m_playerStatManager:
-    m_baseMaxHealth: 0
-    m_baseStealth: 0
-    m_basePower: 0
-    m_baseMaxAir: 0
-    m_baseAirConsumption: 0
-    m_baseAirRestoration: 0
-    m_baseMoveSpeed: 0
-    m_baseTurnSpeed: 0
+    m_baseMaxHealth: 500
+    m_baseStealth: 10
+    m_basePower: 5
+    m_baseMaxAir: 200
+    m_baseAirConsumption: 5
+    m_baseAirRestoration: 20
+    m_baseMoveSpeed: 15
+    m_baseTurnSpeed: 30
   m_playerMotion: {fileID: 2487089619964385255}
 --- !u!114 &2055129974
 MonoBehaviour:
@@ -33553,6 +33573,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 3
       m_current: 0
   m_UIElement: {fileID: 2143321836}
 --- !u!114 &2143321836
@@ -34028,6 +34050,10 @@ MonoBehaviour:
   m_sphereCastRadius: 10
   m_closestFish:
     m_fishData: {fileID: 0}
+  m_turningSpeedRef:
+    m_maxValue: 0
+  m_movementSpeedRef:
+    m_maxValue: 0
 --- !u!4 &2487089619964385272
 Transform:
   m_ObjectHideFlags: 0

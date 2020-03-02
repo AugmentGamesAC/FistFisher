@@ -4,7 +4,7 @@ using UnityEngine;
 public class Percentage : IPercentage
 {
     [SerializeField]
-    protected StatTracker m_max;
+    protected StatTracker m_max = new StatTracker();
     public StatTracker Max => m_max;
     [SerializeField]
     protected float m_current;
@@ -30,7 +30,7 @@ public class Percentage : IPercentage
 
     public void SetMax(float max)
     {
-        m_max.SetValue( max);
+        m_max.SetValue(max);
         updatePercentage();
     }
 }

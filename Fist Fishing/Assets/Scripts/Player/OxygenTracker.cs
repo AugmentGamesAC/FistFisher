@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using System;
 
 [System.Serializable]
-public class OxygenTracker : StatTracker
+public class OxygenTracker
 {
-    public OxygenTracker(float max)
+    public OxygenTracker(StatTracker max)
     {
         m_oxy = new PercentageTracker(max);
         ResetOxygen();
@@ -16,6 +16,8 @@ public class OxygenTracker : StatTracker
 
         m_oxygenRegeneration = PlayerInstance.Instance.PlayerStatMan[Stats.AirRestoration];
         m_oxygenConsumption = PlayerInstance.Instance.PlayerStatMan[Stats.AirConsumption];
+
+        MaxValue.OnChange += ResetOxygen;
     }
 
     [SerializeField]
@@ -43,7 +45,7 @@ public class OxygenTracker : StatTracker
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
-    public override float MaxValue => m_oxy.Max;
+    public StatTracker MaxValue => m_oxy.Max;
 
     public void Update()
     {
@@ -60,7 +62,7 @@ public class OxygenTracker : StatTracker
         m_OxygenTickTimer = m_OxygenTickFrequency;
     }
 
-    public override void Change(float changeAmount)
+    public void Change(float changeAmount)
     {
         if (NoOxygenCheck(changeAmount))
             return;
@@ -80,7 +82,7 @@ public class OxygenTracker : StatTracker
         m_oxy.SetCurrent(m_oxy.Max);
     }
 
-    public override void SetValue(float max)
+    public void SetMax(float max)
     {
         m_oxy.SetMax(max);
     }

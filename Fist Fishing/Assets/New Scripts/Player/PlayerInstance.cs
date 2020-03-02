@@ -24,16 +24,15 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 
         m_playerStatManager.Init();
 
-        m_oxygen = new OxygenTracker(m_maxOxygen);
-        m_health = new PlayerHealth(m_maxHealth);
+        m_oxygen = new OxygenTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MaxAir]);
+        m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
+        m_playerMotion.SetMoveSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MovementSpeed]);
+        m_playerMotion.SetTurnSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.TurnSpeed]);
+
+
         m_clamsUpdater.UpdateTracker(m_clams);
 
-        //m_playerStatManager.SetTracker(Stats.MaxHealth, m_health);
-        //m_playerStatManager.SetTracker(Stats.MaxAir, m_oxygen);
-        //m_playerStatManager.SetTracker(Stats.AirConsumption, m_oxygen.OxygenConsumption);
-        //m_playerStatManager.SetTracker(Stats.AirRestoration, m_oxygen.OxygenRegeneration);
-        //m_playerStatManager.SetTracker(Stats.MovementSpeed, m_playerMotion.MoveSpeed);
-        //m_playerStatManager.SetTracker(Stats.TurnSpeed, m_playerMotion.TurnSpeed);
+       
 
         Debug.Log("Don't forget to SetTrackers: stealth and damage");
         //m_playerStatManager.SetTracker(Stats.Power, damageTracker);
@@ -62,15 +61,6 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         //needs to update for regen and degen.
         m_oxygen.Update();
     }
-
-    //TODO: remove these and fix
-    [SerializeField]
-    protected float m_maxHealth = 500;
-    public float MaxHealth => m_maxHealth;
-
-    [SerializeField]
-    protected float m_maxOxygen = 200;
-    public float MaxOxygen => m_maxOxygen;
 
     [SerializeField]
     protected PlayerHealth m_health;

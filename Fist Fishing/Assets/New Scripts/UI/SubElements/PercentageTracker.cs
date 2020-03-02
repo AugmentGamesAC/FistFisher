@@ -3,11 +3,12 @@
 [System.Serializable]
 public class PercentageTracker : UITracker<IPercentage>, IPercentage
 {
-    public PercentageTracker(float max)
+    public PercentageTracker(StatTracker max)
     {
         displayPercentage = new Percentage();
         m_value = displayPercentage;
         m_value.SetMax(max);
+        m_value.Max.OnChange += UpdateState;
     }
 
     [SerializeField]

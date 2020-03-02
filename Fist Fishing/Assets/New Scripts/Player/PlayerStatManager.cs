@@ -18,7 +18,7 @@ public enum Stats
 public class PlayerStatManager
 {
     [SerializeField]
-    protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
+    protected static Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
     [SerializeField]
     protected float m_baseMaxHealth;
@@ -52,13 +52,13 @@ public class PlayerStatManager
         m_statTrackerContainer = new Dictionary<Stats, StatTracker>()
         {
             { Stats.MaxHealth, new StatTracker(m_baseMaxHealth) },
-            { Stats.Stealth, new StatTracker(m_baseMaxHealth) },
-            { Stats.Power, new StatTracker(m_baseMaxHealth) },
-            { Stats.MaxAir, new StatTracker(m_baseMaxHealth) },
-            { Stats.AirConsumption, new StatTracker(m_baseMaxHealth) },
-            { Stats.AirRestoration, new StatTracker(m_baseMaxHealth) },
-            { Stats.MovementSpeed, new StatTracker(m_baseMaxHealth) },
-            { Stats.TurnSpeed, new StatTracker(m_baseMaxHealth) }
+            { Stats.Stealth, new StatTracker(m_baseStealth) },
+            { Stats.Power, new StatTracker(m_basePower) },
+            { Stats.MaxAir, new StatTracker(m_baseMaxAir) },
+            { Stats.AirConsumption, new StatTracker(m_baseAirConsumption) },
+            { Stats.AirRestoration, new StatTracker(m_baseAirRestoration) },
+            { Stats.MovementSpeed, new StatTracker(m_baseMoveSpeed) },
+            { Stats.TurnSpeed, new StatTracker(m_baseTurnSpeed) }
         };
     }
 
