@@ -44,8 +44,7 @@ public class BiomeManager : MonoBehaviour
         }
         foreach(BiomeDefinition bd in m_biomes)
         {
-            bd.m_numberOfThingsCurrentlySpawnedInThisBiome = 0;
-            SpawnClutter(bd);
+            bd.Start();
         }
     }
 
@@ -54,169 +53,10 @@ public class BiomeManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
-    }
-
-    private float GetWeightedSum(List<ProbabilitySpawn> list)
-    {
-        float prob = 0; //total weight
-        foreach (ProbabilitySpawn p in list)
+        foreach (BiomeDefinition bd in m_biomes)
         {
-            prob += p.m_weightedChance;
-        }
-        return prob;
-    }
-
-    private int GetIndexFromWeightedList(List<ProbabilitySpawn> list, float weightSum)
-    {
-        float rand = UnityEngine.Random.Range(0, weightSum);
-        float objweightcount = 0;
-        int objIndex = 0;
-        while (objweightcount < rand)
-        {
-            objweightcount += list[objIndex].m_weightedChance;
-            objIndex++;
-            if (objIndex >= list.Count)
-                return 0;
-        }
-        return objIndex;
-    }
-
-
-    /// <summary>
-    /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
-    /// </summary>
-    /// <param name="bd"></param>
-    protected void SpawnClutter(BiomeDefinition bd)
-    {
-        float prob = GetWeightedSum(bd.ClutterList);
-
-
-
-        for (int i = 0; i < bd.ClutterCount; i++)
-        {
-            int objIndex = GetIndexFromWeightedList(bd.ClutterList, prob);
-            Transform pos = gameObject.transform;
-            pos.position = FindValidPosition(bd);
-            pos.position = GetSeafloorPosition(pos.position);
-
-            Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
+            bd.SpawnStuff(Time.deltaTime);
         }
     }
 
-
-    /// <summary>
-    /// this takes the biome, finds out how many things are in it and what the max number of things it should have is, and says if it is allowed to spawn more
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool CanWeSpawnAnythingInThisBiome(BiomeDefinition bd)
-    {
-        return (bd.m_numberOfThingsCurrentlySpawnedInThisBiome < bd.MaxNumberOfSpawns);
-    }
-
-
-    /// <summary>
-    /// this picks a random fish from the biome definition and spawns it in a random valid location
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool SpawnFish(BiomeDefinition bd)
-    {
-        if (!CanWeSpawnAnythingInThisBiome(bd))
-            return false;
-
-        float prob = GetWeightedSum(bd.CollectablesList);
-        int objIndex = GetIndexFromWeightedList(bd.CollectablesList, prob);
-        Transform pos = gameObject.transform;
-        float rad = bd.ClutterList[objIndex].m_spawnReference.Model.GetComponent<Collider>().bounds.size.x / 2.0f;
-
-        RaycastHit hit; //unused
-
-        do
-        {
-            pos.position = FindValidPosition(bd);
-
-        } while (SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
-
-        Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
-        bd.m_numberOfThingsCurrentlySpawnedInThisBiome++;
-        return true;
-    }
-
-
-    /// <summary>
-    /// this picks a random collectable from within the biome definition, picks a random location for it to spawn
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool SpawnCollectable(BiomeDefinition bd)
-    {
-        if (!CanWeSpawnAnythingInThisBiome(bd))
-            return false;
-
-        float prob = GetWeightedSum(bd.CollectablesList);
-        int objIndex = GetIndexFromWeightedList(bd.CollectablesList, prob);
-        Transform pos = gameObject.transform;
-        pos.position = FindValidPosition(bd);
-        pos.position = GetSeafloorPosition(pos.position);
-
-        Instantiate(bd.ClutterList[objIndex].m_spawnReference.Model, pos);
-        bd.m_numberOfThingsCurrentlySpawnedInThisBiome++;
-        return true;
-    }
-
-
-    /// <summary>
-    /// this picks a random position within a given mesh
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected Vector3 FindValidPosition(BiomeDefinition bd)
-    {
-        Collider c = bd.Mesh.GetComponent<Collider>();
-        Bounds b = c.bounds;
-
-        bool validPos = false;
-        Vector3 pos = Vector3.zero;
-
-        //this is currently using "b" - a bounding box. does not yet account for more complex shapes
-        //https://answers.unity.com/questions/163864/test-if-point-is-in-collider.html?_ga=2.115196111.95679741.1581358981-1866372932.1581358981 
-        //is something to look into, but is a low priority at this point
-        while (!validPos)
-        {
-            pos.x = Random.Range(b.min.x, b.max.x);
-            pos.y = Random.Range(b.min.y, b.max.y);
-            pos.z = Random.Range(b.min.z, b.max.z);
-            if (b.Contains(pos))
-                validPos = true;
-        }
-        return pos;
-    }
-
-
-    /// <summary>
-    /// this takes the size of the fist and position it is trying to span in to ensure it has room
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="radius"></param>
-    /// <returns></returns>
-    protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
-    {
-        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
-    }
-
-
-
-    /// <summary>
-    /// this takes in a position in world and raycasts down and returns where it hit the floor
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <returns></returns>
-    protected Vector3 GetSeafloorPosition(Vector3 pos)
-    {
-        RaycastHit hit;
-        Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
-        return hit.point;
-    }
 }
