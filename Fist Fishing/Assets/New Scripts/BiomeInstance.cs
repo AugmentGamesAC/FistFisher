@@ -54,6 +54,8 @@ public class BiomeInstance : MonoBehaviour
 
     protected void ResolveSpawning()
     {
+        if (m_memberCount == default)
+            return;
         if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
             return;
         if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn])
