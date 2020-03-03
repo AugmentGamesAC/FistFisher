@@ -47,6 +47,8 @@ public class PlayerStatManager
 
     public StatTracker this[Stats value] { get { return m_statTrackerContainer[value]; } }
 
+    protected Dictionary<Stats, float> m_startingStats;
+
     public void Init()
     {
         m_statTrackerContainer = new Dictionary<Stats, StatTracker>()
@@ -60,6 +62,19 @@ public class PlayerStatManager
             { Stats.MovementSpeed, new StatTracker(m_baseMoveSpeed) },
             { Stats.TurnSpeed, new StatTracker(m_baseTurnSpeed) }
         };
+
+        m_startingStats = new Dictionary<Stats, float>()
+        {
+            { Stats.MaxHealth, m_baseMaxHealth },
+            { Stats.Stealth, m_baseStealth },
+            { Stats.Power, m_basePower },
+            { Stats.MaxAir, m_baseMaxAir },
+            { Stats.AirConsumption, m_baseAirConsumption },
+            { Stats.AirRestoration, m_baseAirRestoration },
+            { Stats.MovementSpeed, m_baseMoveSpeed },
+            { Stats.TurnSpeed, m_baseTurnSpeed }
+        };
+
     }
 
     /// <summary>
@@ -85,7 +100,7 @@ public class PlayerStatManager
         if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + amount);
+        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + m_startingStats[statType] * amount);
 
         return true;
     }

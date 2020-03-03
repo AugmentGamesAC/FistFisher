@@ -7087,7 +7087,7 @@ GameObject:
   - component: {fileID: 459276866}
   - component: {fileID: 459276865}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Shop Screen canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10824,12 +10824,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3d90c67e1df6d4392cdd35f5cec081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BaseUpgradesCost: 100
   ArmIcon: {fileID: 21300000, guid: 625de9f8753563e46abd29701d5d0759, type: 3}
   LegIcon: {fileID: 21300000, guid: 9d6980fcdca30ae45be6d9861ffd0f8e, type: 3}
   TorsoIcon: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
   BaseArmWorth: 5
   BaseLegWorth: 2
   BaseTorsoWorth: 1
+  ArmUpgradeDescription: damage
+  LegUpgradeDescription: pure speed
+  TorsoUpgradeDescription: lungs, health
 --- !u!1001 &683832587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19324,10 +19328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0381128e2080c9e4d947f2eb2c9c0dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerStatBar: {fileID: 8195271892098104434}
-  RangeStatBar: {fileID: 9221682388165312562}
-  OxygenStatBar: {fileID: 7572097101472441313}
-  MovementStatBar: {fileID: 5129013194411493740}
 --- !u!1 &1126666661
 GameObject:
   m_ObjectHideFlags: 0
@@ -35451,6 +35451,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 0}
 --- !u!23 &5167398436973512361
@@ -36688,6 +36690,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 0}
 --- !u!1001 &7630909001440909028
@@ -38172,6 +38176,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 0}
 --- !u!1001 &8391428359960292422
@@ -39065,5 +39071,7 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 0}

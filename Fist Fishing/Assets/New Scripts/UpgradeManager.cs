@@ -41,7 +41,16 @@ public class UpgradeManager : MonoBehaviour
 
     protected static int m_appliedUpgrades;
 
-    static Dictionary<UpgradeTypes, int> UpgradeCosts;
+    [SerializeField]
+    protected int BaseUpgradesCost;
+
+    [SerializeField]
+    protected static int m_currentUpgradesCost;
+    public int CurrentUpgradeCost => m_currentUpgradesCost;
+
+    static Dictionary<Stats, float> StatMultiplierPerLevel;
+
+    static Dictionary<Stats, int> CostMultiplierPerLevel;
 
     [SerializeField]
     protected Sprite ArmIcon;
@@ -66,6 +75,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void Awake()
     {
+        m_currentUpgradesCost = BaseUpgradesCost;
+
         actionList = new List<Func<Upgrade>>()
         {
             GenerateArmUpgrade,
@@ -73,12 +84,44 @@ public class UpgradeManager : MonoBehaviour
             GenerateLegUpgrade
         };
 
-        UpgradeCosts = new Dictionary<UpgradeTypes, int>() {
-            { UpgradeTypes.Arms, BaseArmWorth},
-            { UpgradeTypes.Legs, BaseLegWorth},
-            { UpgradeTypes.Torso, BaseTorsoWorth}
+        StatMultiplierPerLevel = new Dictionary<Stats, float>() {
+            { Stats.AirConsumption, 0.05f},
+            { Stats.AirRestoration, 0.5f},
+            { Stats.MaxAir, 0.2f},
+            { Stats.MaxHealth , 0.25f},
+            { Stats.MovementSpeed, 0.1f},
+            { Stats.Power, 0.25f},
+            { Stats.Stealth, 0.5f},
+            { Stats.TurnSpeed, 1}
+        };
+
+        CostMultiplierPerLevel = new Dictionary<Stats, int>()
+        {
+            { Stats.AirConsumption, 3},
+            { Stats.AirRestoration, 5},
+            { Stats.MaxAir, 2},
+            { Stats.MaxHealth , 2},
+            { Stats.MovementSpeed, 3},
+            { Stats.Power, 3},
+            { Stats.Stealth, 3},
+            { Stats.TurnSpeed, 1}
         };
     }
+
+    /*
+ (AR) (50%) (5*) Air Regeneration - base value needs to be low 
+ (AC) (5%)  (3*) Air Consumption - The amount of air that is used up as the player performs actions. Base 
+ (AV) (20%) (2*) Air Capacity - amount of air 
+ (AM) (50%) (1*)  Air Metabolize rate - how much oxygen per pound it cost,
+ (M) (50%) (1*)  how much heal per pound
+ (SF) (10%) (3*) Forward 
+ (ST) (100%) (1*) Swim turning
+ (SN) (50%) (3*)  Swim Noise
+ (CD) (25%) (3*)  Combat Damage
+ (CN) (50%) (3*)  Combat Noise
+ (CA) (10%) (4*)  Combat Air Use
+ (H) (25%) (2*) Health
+*/
 
     protected List<Func<Upgrade>> actionList;
 
@@ -119,27 +162,12 @@ public class UpgradeManager : MonoBehaviour
         return Random.Range(min, max);
     }
 
-    /*
-     (AR) (50%) (5*) Air Regeneration - base value needs to be low 
-     (AC) (5%)  (3*) Air Consumption - The amount of air that is used up as the player performs actions. Base 
-     (AV) (20%) (2*) Air Capacity - amount of air 
-     (AM) (50%) (1*)  Air Metabolize rate - how much oxygen per pound it cost,
-     (M) (50%) (1*)  how much heal per pound
-     (SF) (10%) (3*) Forward 
-     (ST) (100%) (1*) Swim turning
-     (SN) (50%) (3*)  Swim Noise
-     (CD) (25%) (3*)  Combat Damage
-     (CN) (50%) (3*)  Combat Noise
-     (CA) (10%) (4*)  Combat Air Use
-     (H) (25%) (2*) Health
-    */
-
     protected Upgrade GenerateArmUpgrade()
     {
         int level = GetRandomUpgradeLevel();
 
-        float PowerMod = .25f * PlayerInstance.Instance.PlayerStatMan.BasePower * level;
-        float AirConsumptionMod = 0.5f * PlayerInstance.Instance.PlayerStatMan.BaseAirConsumption * level;
+        float PowerMod = StatMultiplierPerLevel[Stats.Power] * PlayerInstance.Instance.PlayerStatMan.BasePower * level;
+        float AirConsumptionMod = StatMultiplierPerLevel[Stats.AirConsumption] * PlayerInstance.Instance.PlayerStatMan.BaseAirConsumption * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -154,9 +182,9 @@ public class UpgradeManager : MonoBehaviour
     {
         int level = GetRandomUpgradeLevel();
 
-        float MoveSpeedMod = .10f * PlayerInstance.Instance.PlayerStatMan.BaseMoveSpeed * level;
-        float StealthMod = .50f * PlayerInstance.Instance.PlayerStatMan.BaseStealth * level;
-        float TurnSpeedMod = 1 * PlayerInstance.Instance.PlayerStatMan.BaseTurnSpeed * level;
+        float MoveSpeedMod = StatMultiplierPerLevel[Stats.MovementSpeed] * PlayerInstance.Instance.PlayerStatMan.BaseMoveSpeed * level;
+        float StealthMod = StatMultiplierPerLevel[Stats.Stealth] * PlayerInstance.Instance.PlayerStatMan.BaseStealth * level;
+        float TurnSpeedMod = StatMultiplierPerLevel[Stats.TurnSpeed] * PlayerInstance.Instance.PlayerStatMan.BaseTurnSpeed * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -178,11 +206,9 @@ public class UpgradeManager : MonoBehaviour
     {
         int level = GetRandomUpgradeLevel();
 
-        float MaxAirMod = .20f * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
-        float AirRestoreMod = .50f * PlayerInstance.Instance.PlayerStatMan.BaseAirRestoration * level;
-        float MaxHealthMod = .25f * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
-
-
+        float MaxAirMod = StatMultiplierPerLevel[Stats.MaxAir] * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
+        float AirRestoreMod = StatMultiplierPerLevel[Stats.AirRestoration] * PlayerInstance.Instance.PlayerStatMan.BaseAirRestoration * level;
+        float MaxHealthMod = StatMultiplierPerLevel[Stats.MaxHealth] * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -209,6 +235,13 @@ public class UpgradeManager : MonoBehaviour
 
     static int RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
-        return m_appliedUpgrades * 100;
+        float totalCost = 0;
+
+        foreach (var modifier in statsModifier)
+        {
+            totalCost += CostMultiplierPerLevel[modifier.Key]  * modifier.Value / StatMultiplierPerLevel[modifier.Key];
+        }
+
+        return (int)(m_appliedUpgrades * totalCost * m_currentUpgradesCost);
     }
 }
