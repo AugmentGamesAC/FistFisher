@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerInstance : MonoBehaviour, IPlayerData
 {
     public static IPlayerData Instance { get; private set; }
-    protected static PlayerInstance MyInstance => Instance as PlayerInstance;
+    protected static PlayerInstance MyInstance => Instance as PlayerInstance;
+
     [SerializeField]
     protected FloatTextUpdater m_clamsUpdater;
     public FloatTextUpdater ClamsUpdater => m_clamsUpdater;
@@ -26,13 +27,9 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 
         m_oxygen = new OxygenTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MaxAir]);
         m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
-        m_playerMotion.SetMoveSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MovementSpeed]);
-        m_playerMotion.SetTurnSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.TurnSpeed]);
-
 
         m_clamsUpdater.UpdateTracker(m_clams);
 
-       
 
         Debug.Log("Don't forget to SetTrackers: stealth and damage");
         //m_playerStatManager.SetTracker(Stats.Power, damageTracker);
@@ -80,16 +77,20 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
 
     [SerializeField]
     protected FloatTracker m_clams = new FloatTracker();
-    public FloatTracker Clams => m_clams;
+    public FloatTracker Clams => m_clams;
+
     protected SlotManager m_playerInventory;
-    public SlotManager PlayerInventory => m_playerInventory;
+    public SlotManager PlayerInventory => m_playerInventory;
+
     protected SlotManager m_itemInventory;
     public SlotManager ItemInventory => m_itemInventory;
-
+
+
     public static void RegisterPlayerInventory(SlotManager newInventory)
     {
         MyInstance.m_playerInventory = newInventory;
-    }
+    }
+
     public static void RegisterItemInventory(SlotManager newInventory)
     {
         MyInstance.m_itemInventory = newInventory;
@@ -98,6 +99,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     public static void RegisterPlayerMotion(PlayerMotion playerMotion)
     {
         MyInstance.m_playerMotion = playerMotion;
+        playerMotion.SetMoveSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MovementSpeed]);
+        playerMotion.SetTurnSpeedTracker(PlayerInstance.Instance.PlayerStatMan[Stats.TurnSpeed]);
     }
 
     [SerializeField]

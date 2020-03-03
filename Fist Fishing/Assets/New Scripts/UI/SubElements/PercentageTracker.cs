@@ -30,6 +30,12 @@ public class PercentageTracker : UITracker<IPercentage>, IPercentage
         m_value.SetCurrent(current);
         UpdateState();
     }
+    public void SetMax(StatTracker stat)
+    {
+        m_value.SetMax(stat);
+        UpdateState();
+    }
+
 
     public void SetMax(float max)
     {
