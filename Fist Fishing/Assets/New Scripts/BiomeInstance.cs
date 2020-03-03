@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 
 /// <summary>
@@ -15,14 +16,28 @@ public class BiomeInstance : MonoBehaviour
     [SerializeField]
     protected BiomeDefinition m_myInstructions;
 
+    protected Dictionary<IEnumerable<ProbabilitySpawn>, int> m_memberCount;
+
+    protected IEnumerable<ProbabilitySpawn> m_aggresiveProbSpawn;
+    protected IEnumerable<ProbabilitySpawn> m_mehProbSpawn;
+    protected IEnumerable<ProbabilitySpawn> m_preyProbSpawn;
+    protected IEnumerable<ProbabilitySpawn> m_collectablesProbSpawn;
+
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
         currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
+        SpawnClutter();
 
-
-
+        m_memberCount = new Dictionary<IEnumerable<ProbabilitySpawn>, int>()
+        {
+            {m_aggresiveProbSpawn   = m_myInstructions.AggressiveFishList.Cast<ProbabilitySpawn>() , 0},
+            {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ProbabilitySpawn>()        , 0},
+            {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ProbabilitySpawn>()       , 0},
+            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ProbabilitySpawn>()   , 0}
+        };
+        
     }
 
     protected float currentCooldown;
@@ -39,32 +54,28 @@ public class BiomeInstance : MonoBehaviour
 
     protected void ResolveSpawning()
     {
-        bool spawnsuccess = false;
-        do
+        if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
+            return;
+        if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn])
         {
-            if (!CanWeSpawnAnythingInThisBiome())
-                return;
-
-            Func<BiomeDefinition, bool> action = (CoinFlip() == true) ? (Func<BiomeDefinition, bool>)SpawnFish : (Func<BiomeDefinition, bool>)SpawnCollectable;
-
-            action(this);
-
-        } while (spawnsuccess == false);
+            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            return;
+        }
+        if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn])
+        {
+            m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            return;
+        }
+        if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggresiveProbSpawn])
+        {
+            m_memberCount[m_mehProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            return;
+        }
+        if (m_memberCount[m_aggresiveProbSpawn] < m_memberCount[m_mehProbSpawn] )
+            m_memberCount[m_aggresiveProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
     }
 
-
-
-    /// <summary>
-    /// for 50/50 things
-    /// </summary>
-    /// <returns></returns>
-    public static bool CoinFlip()
-    {
-        return Convert.ToBoolean(UnityEngine.Random.Range(0, 2));
-    }
-
-
-    protected bool SpawnFromWeightedList(List<ProbabilitySpawn> list)
+    protected bool SpawnFromWeightedList(IEnumerable<ProbabilitySpawn> list)
     {
         float rand = UnityEngine.Random.Range(0, 1.0f);
         foreach (ProbabilitySpawn possibbleSpawn in list)
@@ -78,14 +89,20 @@ public class BiomeInstance : MonoBehaviour
 
 
     /// <summary>
-    /// this takes the biome, finds out how many things are in it and what the max number of things it should have is, and says if it is allowed to spawn more
+    /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
     /// </summary>
     /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool CanWeSpawnAnythingInThisBiome()
+    protected void SpawnClutter()
     {
-        return (m_myInstructions.NumberOfThingsCurrentlySpawnedInThisBiome < m_myInstructions.MaxNumberOfSpawns);
+        if (m_collectablesProbSpawn.Count() == 0)
+            return;
+        
+        int cluttercount = (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+
+        while (cluttercount < m_myInstructions.ClutterCount)
+            cluttercount += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
     }
+
 
     /// <summary>
     /// this picks a random position within a given mesh
@@ -105,7 +122,7 @@ public class BiomeInstance : MonoBehaviour
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
             pos.y = UnityEngine.Random.Range(b.min.y, b.max.y);
             pos.z = UnityEngine.Random.Range(b.min.z, b.max.z);
-            if (/*b.Contains(pos)*/IsInside(/*c*/m_MeshCollider, pos))
+            if (IsInside(m_MeshCollider, pos))
                 validPos = true;
         }
         return pos;
@@ -113,9 +130,8 @@ public class BiomeInstance : MonoBehaviour
 
     public static bool IsInside(Collider c, Vector3 point)
     {
-        Vector3 closest = c.ClosestPoint(point);
-        // Because closest=point if point is inside - not clear from docs I feel
-        return closest == point;
+        // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
+        return c.ClosestPoint(point) == point;
     }
 
     /// <summary>
@@ -129,8 +145,6 @@ public class BiomeInstance : MonoBehaviour
         return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
     }
 
-
-
     /// <summary>
     /// this takes in a position in world and raycasts down and returns where it hit the floor
     /// </summary>
@@ -143,85 +157,4 @@ public class BiomeInstance : MonoBehaviour
         return hit.point;
     }
 
-
-
-
-
-
-
-
-
-
-    /// <summary>
-    /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
-    /// </summary>
-    /// <param name="bd"></param>
-    protected void SpawnClutter()
-    {
-        float prob = UnityEngine.Random.Range(0.0f, 1.0f);
-
-
-
-        for (int i = 0; i < m_myInstructions.ClutterCount; i++)
-        {
-            int objIndex = GetIndexFromWeightedList(m_myInstructions.ClutterList, prob);
-            Transform pos = m_MeshCollider.gameObject.transform;
-            pos.position = FindValidPosition();
-            pos.position = GetSeafloorPosition(pos.position);
-
-            Instantiate(m_myInstructions.ClutterList[objIndex].m_spawnReference.Model, pos);
-
-            m_myInstructions.ClutterList[objIndex].Instatiate(m_myInstructions.ClutterList);
-
-        }
-    }
-    /// <summary>
-    /// this picks a random fish from the biome definition and spawns it in a random valid location
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool SpawnFish()
-    {
-        if (!CanWeSpawnAnythingInThisBiome())
-            return false;
-
-        float prob = UnityEngine.Random.Range(0.0f, 1.0f);
-        int objIndex = GetIndexFromWeightedList(bd.CollectablesList, prob);
-        Transform pos = m_biomeMesh.gameObject.transform;
-        float rad = bd.ClutterList[objIndex].m_spawnReference.Model.GetComponent<Collider>().bounds.size.x / 2.0f;
-
-        RaycastHit hit; //unused
-
-        do
-        {
-            pos.position = FindValidPosition(bd);
-
-        } while (SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
-
-        Instantiate(m_myInstructions.ClutterList[objIndex].m_spawnReference.Model, pos);
-        m_myInstructions.NumberOfThingsCurrentlySpawnedInThisBiome++;
-        return true;
-    }
-
-
-    /// <summary>
-    /// this picks a random collectable from within the biome definition, picks a random location for it to spawn
-    /// </summary>
-    /// <param name="bd"></param>
-    /// <returns></returns>
-    protected bool SpawnCollectable()
-    {
-        if (!CanWeSpawnAnythingInThisBiome())
-            return false;
-
-        float prob = UnityEngine.Random.Range(0.0f, 1.0f);
-        int objIndex = GetIndexFromWeightedList(m_myInstructions.CollectablesList, prob);
-        Transform pos = m_MeshCollider.gameObject.transform;
-        pos.position = FindValidPosition();
-        pos.position = GetSeafloorPosition(pos.position);
-
-        Instantiate(m_myInstructions.ClutterList[objIndex].m_spawnReference.Model, pos);
-        m_myInstructions.m_numberOfThingsCurrentlySpawnedInThisBiome++;
-        return true;
-    }
 }

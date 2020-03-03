@@ -27,7 +27,6 @@ public class BiomeDefinition : ScriptableObject
     [SerializeField]
     protected List<ProbabilitySpawnFish> m_preyFish;
 
-
     public List<ProbabilitySpawnClutter> ClutterList => m_clutter;
     public List<ProbabilitySpawnCollectable> CollectablesList => m_collectables;
     public List<ProbabilitySpawnFish> AggressiveFishList => m_aggressiveFish;
@@ -41,21 +40,20 @@ public class BiomeDefinition : ScriptableObject
     protected float m_timeBetweenSpawns;
     public float TimeBetweenSpawns => m_timeBetweenSpawns;
 
-    protected int m_numberOfThingsCurrentlySpawnedInThisBiome;
-    public int NumberOfThingsCurrentlySpawnedInThisBiome => m_numberOfThingsCurrentlySpawnedInThisBiome;
+
     #endregion variables
 
     public void Start()
     {
-        if (m_clutter.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_clutter.Count > 0) && m_clutter.Select(X => X.m_weightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Clutters weightedAverage doesn't sum to 1");
-        if (m_collectables.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_collectables.Count > 0) && m_collectables.Select(X => X.m_weightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Collectables weightedAverage doesn't sum to 1");
-        if (m_aggressiveFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_aggressiveFish.Count > 0) && m_aggressiveFish.Select(X => X.m_weightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Aggressive Fish weightedAverage doesn't sum to 1");
-        if (m_mehFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_mehFish.Count > 0) && m_mehFish.Select(X => X.m_weightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Meh Fish weightedAverage doesn't sum to 1");
-        if (m_preyFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_preyFish.Count > 0) && m_preyFish.Select(X => X.m_weightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Prey Fish weightedAverage doesn't sum to 1");
     }
 
