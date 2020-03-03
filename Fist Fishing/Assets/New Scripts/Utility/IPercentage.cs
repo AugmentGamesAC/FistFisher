@@ -6,5 +6,6 @@
 
     void IncrementCurrent(float increment);
     void SetCurrent(float current);
+    void SetMax(StatTracker max);
     void SetMax(float max);
 }
