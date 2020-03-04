@@ -41,7 +41,16 @@ public class UpgradeManager : MonoBehaviour
 
     protected static int m_appliedUpgrades;
 
-    static Dictionary<UpgradeTypes, int> UpgradeCosts;
+    [SerializeField]
+    protected int BaseUpgradesCost;
+
+    [SerializeField]
+    protected static int m_currentUpgradesCost;
+    public int CurrentUpgradeCost => m_currentUpgradesCost;
+
+    static Dictionary<Stats, float> StatMultiplierPerLevel;
+
+    static Dictionary<Stats, int> CostMultiplierPerLevel;
 
     [SerializeField]
     protected Sprite ArmIcon;
@@ -57,15 +66,62 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     protected int BaseTorsoWorth;
 
+    [SerializeField]
+    protected string ArmUpgradeDescription;
+    [SerializeField]
+    protected string LegUpgradeDescription;
+    [SerializeField]
+    protected string TorsoUpgradeDescription;
+
     public void Awake()
     {
+        m_currentUpgradesCost = BaseUpgradesCost;
+
         actionList = new List<Func<Upgrade>>()
         {
             GenerateArmUpgrade,
             GenerateChestUpgrade,
             GenerateLegUpgrade
         };
+
+        StatMultiplierPerLevel = new Dictionary<Stats, float>() {
+            { Stats.AirConsumption, 0.05f},
+            { Stats.AirRestoration, 0.5f},
+            { Stats.MaxAir, 0.2f},
+            { Stats.MaxHealth , 0.25f},
+            { Stats.MovementSpeed, 0.1f},
+            { Stats.Power, 0.25f},
+            { Stats.Stealth, 0.5f},
+            { Stats.TurnSpeed, 1}
+        };
+
+        CostMultiplierPerLevel = new Dictionary<Stats, int>()
+        {
+            { Stats.AirConsumption, 3},
+            { Stats.AirRestoration, 5},
+            { Stats.MaxAir, 2},
+            { Stats.MaxHealth , 2},
+            { Stats.MovementSpeed, 3},
+            { Stats.Power, 3},
+            { Stats.Stealth, 3},
+            { Stats.TurnSpeed, 1}
+        };
     }
+
+    /*
+ (AR) (50%) (5*) Air Regeneration - base value needs to be low 
+ (AC) (5%)  (3*) Air Consumption - The amount of air that is used up as the player performs actions. Base 
+ (AV) (20%) (2*) Air Capacity - amount of air 
+ (AM) (50%) (1*)  Air Metabolize rate - how much oxygen per pound it cost,
+ (M) (50%) (1*)  how much heal per pound
+ (SF) (10%) (3*) Forward 
+ (ST) (100%) (1*) Swim turning
+ (SN) (50%) (3*)  Swim Noise
+ (CD) (25%) (3*)  Combat Damage
+ (CN) (50%) (3*)  Combat Noise
+ (CA) (10%) (4*)  Combat Air Use
+ (H) (25%) (2*) Health
+*/
 
     protected List<Func<Upgrade>> actionList;
 
@@ -83,6 +139,12 @@ public class UpgradeManager : MonoBehaviour
         return RandomEnum<Rarity>().ToString();
     }
 
+    protected string GetRarity(int upgradelevel)
+    {
+        var selection = Enum.GetValues(typeof(Rarity));
+        Rarity rarity = (Rarity)selection.GetValue(upgradelevel);
+        return rarity.ToString(); 
+    }
 
     protected T RandomListEntry<T>(List<T> toRandomize)
     {
@@ -102,8 +164,10 @@ public class UpgradeManager : MonoBehaviour
 
     protected Upgrade GenerateArmUpgrade()
     {
-        float PowerMod = RandRange(10, 30);
-        float AirConsumptionMod = RandRange(25, 50);
+        int level = GetRandomUpgradeLevel();
+
+        float PowerMod = StatMultiplierPerLevel[Stats.Power] * PlayerInstance.Instance.PlayerStatMan.BasePower * level;
+        float AirConsumptionMod = StatMultiplierPerLevel[Stats.AirConsumption] * PlayerInstance.Instance.PlayerStatMan.BaseAirConsumption * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -111,14 +175,16 @@ public class UpgradeManager : MonoBehaviour
             { Stats.AirConsumption, AirConsumptionMod }
         };
 
-        return new Upgrade(string.Format("{0} Strong Arm", GetRandomRarity()), ArmIcon, "strong frogman RISE!!", BaseArmWorth, modifiers);
+        return new Upgrade(string.Format("{0} Strong Arm", GetRarity(level)), ArmIcon, ArmUpgradeDescription, BaseArmWorth, modifiers);
     }
 
     protected Upgrade GenerateLegUpgrade()
     {
-        float MoveSpeedMod = RandRange(5, 15);
-        float StealthMod = RandRange(50, 80);
-        float TurnSpeedMod = RandRange(10, 20);
+        int level = GetRandomUpgradeLevel();
+
+        float MoveSpeedMod = StatMultiplierPerLevel[Stats.MovementSpeed] * PlayerInstance.Instance.PlayerStatMan.BaseMoveSpeed * level;
+        float StealthMod = StatMultiplierPerLevel[Stats.Stealth] * PlayerInstance.Instance.PlayerStatMan.BaseStealth * level;
+        float TurnSpeedMod = StatMultiplierPerLevel[Stats.TurnSpeed] * PlayerInstance.Instance.PlayerStatMan.BaseTurnSpeed * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -127,14 +193,22 @@ public class UpgradeManager : MonoBehaviour
             { Stats.TurnSpeed, TurnSpeedMod }
         };//MovementSpeed, stealth, turnSpeed
 
-        return new Upgrade(string.Format("{0} Leg Muscles", GetRandomRarity()), LegIcon, "Strong legs lead happy families!!", BaseLegWorth, modifiers);
+        return new Upgrade(string.Format("{0} Leg Muscles", GetRarity(level)), LegIcon, LegUpgradeDescription, BaseLegWorth, modifiers);
+    }
+
+    protected int GetRandomUpgradeLevel()
+    {
+        var selection = Enum.GetValues(typeof(Rarity));
+        return RandRange(0, selection.Length);
     }
 
     protected Upgrade GenerateChestUpgrade()
     {
-        float MaxAirMod = RandRange(30, 60);
-        float AirRestoreMod = RandRange(25, 50);
-        float MaxHealthMod = RandRange(40, 80);
+        int level = GetRandomUpgradeLevel();
+
+        float MaxAirMod = StatMultiplierPerLevel[Stats.MaxAir] * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
+        float AirRestoreMod = StatMultiplierPerLevel[Stats.AirRestoration] * PlayerInstance.Instance.PlayerStatMan.BaseAirRestoration * level;
+        float MaxHealthMod = StatMultiplierPerLevel[Stats.MaxHealth] * PlayerInstance.Instance.PlayerStatMan.BaseMaxAir * level;
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
@@ -143,7 +217,7 @@ public class UpgradeManager : MonoBehaviour
             { Stats.MaxHealth, MaxHealthMod }
         };
 
-        return new Upgrade(string.Format("{0} Iron Lungs", GetRandomRarity()), TorsoIcon, "Cardiovasculature is very important kids!!", BaseTorsoWorth, modifiers);
+        return new Upgrade(string.Format("{0} Iron Lungs", GetRarity(level)), TorsoIcon, TorsoUpgradeDescription, BaseTorsoWorth, modifiers);
     }
 
     /// <summary>
@@ -161,6 +235,13 @@ public class UpgradeManager : MonoBehaviour
 
     static int RecalculateCost(Dictionary<Stats, float> statsModifier)
     {
-        return m_appliedUpgrades * 100;
+        float totalCost = 0;
+
+        foreach (var modifier in statsModifier)
+        {
+            totalCost += CostMultiplierPerLevel[modifier.Key]  * modifier.Value / StatMultiplierPerLevel[modifier.Key];
+        }
+
+        return (int)(m_appliedUpgrades * totalCost * m_currentUpgradesCost);
     }
 }

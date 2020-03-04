@@ -28,9 +28,15 @@ public class Percentage : IPercentage
         SetCurrent(m_current + increment);
     }
 
+    public void SetMax(StatTracker newMax)
+    {
+        m_max = newMax;
+        updatePercentage();
+    }
+
     public void SetMax(float max)
     {
-        m_max.SetValue( max);
+        m_max.SetValue(max);
         updatePercentage();
     }
 }
