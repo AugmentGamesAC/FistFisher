@@ -25,6 +25,8 @@ public class TestingCombatManager : CombatManager
     private void Start()
     {
         m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+        if (m_playerCombatInfo == null)
+            throw new System.InvalidOperationException();
 
         m_attackPinwheelUpdater = GetComponentInChildren<AttackPinwheelUpdater>();
 

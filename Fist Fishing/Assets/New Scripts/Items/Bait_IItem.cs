@@ -31,16 +31,10 @@ public class Bait_IItem : ScriptableObject, IItem
     protected FishBrain.FishClassification m_currentBaitType = FishBrain.FishClassification.BaitSensitive1;
     [SerializeField]
     public FishBrain.FishClassification BaitType { get { return m_currentBaitType; } set { m_currentBaitType = value; } }
-    [SerializeField]
-    protected float m_direction;
-    /// <summary>
-    /// Set to either positive 1 or negative 1. FOR TESTING
-    /// </summary>
-    public float Direction { get { return m_direction; } set { m_direction = value; } }
 
     [SerializeField]
     protected int m_activeTurnCount;
-    public int MaxTurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
+    public int TurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
     public bool CanMerge(IItem newItem)
     {
         Bait_IItem item = newItem as Bait_IItem;

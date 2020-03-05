@@ -89,6 +89,8 @@ public class CombatManager : MonoBehaviour
 
 
         m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+        if (m_playerCombatInfo == null)
+            throw new System.InvalidOperationException();
 
         foreach (var fish in m_aggressiveFishToSpawn)
         {
@@ -102,6 +104,10 @@ public class CombatManager : MonoBehaviour
         //ResolveAggressiveFishes(Biome biomeType)
         PlayerInstance.Instance.Health.OnMinimumAmountReached -= EndCombat;
         PlayerInstance.Instance.Health.OnMinimumAmountReached += EndCombat;
+
+        if (m_playerCombatInfo == null)
+            throw new System.InvalidOperationException();
+
 
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
@@ -166,7 +172,7 @@ public class CombatManager : MonoBehaviour
         {
             PlayerAttack();
         }
-
+        if (!m_isItemActive)
         if (ALInput.GetKeyDown(ALInput.Item))
         {
             PlayerItem();
@@ -237,20 +243,16 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     protected void PlayerItem()
     {
+        
         //Set bool that item is now in play
-        m_isItemActive = true;
-
-        //Create Item
+        m_isItemActive = true;
+        //Create Item
         Bait_IItem Bitem = ScriptableItems[0];
-
-
+        //Get the bait sensitivity type
+        
 
         //Enqueue for next round
-
-        m_roundQueue.Enqueue(m_playerCombatInfo);
-
-        //ResolveRound
-        ResolveRound();
+        m_roundQueue.Enqueue(m_playerCombatInfo);
 
         //throw new System.NotImplementedException("dependency items implementation.");
 
@@ -261,7 +263,7 @@ public class CombatManager : MonoBehaviour
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
 
         //this happens after stat and State changes.
-        //ResolveRound();
+        ResolveRound();
     }
 
     /// <summary>
@@ -347,21 +349,29 @@ public class CombatManager : MonoBehaviour
 
 
     protected float ResolveFishDirection(FishCombatInfo fish)
-    {
-        if (m_isItemActive != false)
-        {
-            //if a bait item is active check to see if it has reached 0 in its remaining active turns
-            if (ScriptableItems[0].MaxTurnCount <= 0)
-            {
-                //decrease the active turns by 1
-                ScriptableItems[0].MaxTurnCount -= 1;
-                //update fish direction using the bait direction 
-                return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.BaitSensitive1)) ? -fish.Speed : fish.Speed;
-            }
-            //Set item active to false
+    {
+        //Check if there is an item (bait) & if the fish is sensitive to the item (bait)
+        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(ScriptableItems[0].BaitType)))
+        { 
+            //check if item has reached 0 in its remaining active turns
+            if (ScriptableItems[0].TurnCount >= 1)
+            {
+                Debug.Log("Fish Moved Toward Bait");
+                //decrease the active turns by 1
+                ScriptableItems[0].TurnCount -= 1;
+                //update fish direction using the bait direction 
+                return  -fish.Speed;
+            }
+
+            //Set item active to false
+            //Reset turn count TESTING remove later
+            ScriptableItems[0].TurnCount = 2;
             m_isItemActive = false;
-        }
-
+        }
+
+
+        Debug.Log("Fish Moved due to behaviour");
+
         return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
 
 
