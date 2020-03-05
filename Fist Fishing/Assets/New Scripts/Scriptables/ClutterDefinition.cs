@@ -19,6 +19,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         if (m == null)
             return null;
 
+
         m_thisObject = ObjectPoolManager.Get(m_BasicClutter);
 
         m_thisObject.gameObject.transform.position = BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m));

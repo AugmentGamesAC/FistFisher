@@ -30,7 +30,6 @@ public class ProbabilitySpawnCollectable : ProbabilitySpawn
     public override bool Despawn() { return m_spawnReference.Despawn(); }
     [SerializeField]
     protected CollectableDefinition m_spawnReference;
-
 }
 [Serializable]
 public class ProbabilitySpawnFish : ProbabilitySpawn
@@ -39,5 +38,4 @@ public class ProbabilitySpawnFish : ProbabilitySpawn
     public override bool Despawn() { return m_spawnReference.Despawn(); }
     [SerializeField]
     protected FishDefintion m_spawnReference;
-
 }
