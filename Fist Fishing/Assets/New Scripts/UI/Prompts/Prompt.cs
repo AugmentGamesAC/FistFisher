@@ -20,21 +20,27 @@ public class Prompt : MonoBehaviour
 
     protected PromptUpdater promptUpdater;
 
+    protected Collider m_collider;
+
     private void Start()
     {
-        Collider collider = GetComponent<Collider>();
-        collider.isTrigger = true;
-
-        promptUpdater = FindObjectOfType<PromptUpdater>();
+        if (promptUpdater == default)
+            promptUpdater = FindObjectOfType<PromptUpdater>();//doesn't work because it's in Dont destroy on load.
 
         if (promptUpdater == default)
             throw new System.Exception("did not find promptUpdater!");
+
+        m_collider = GetComponent<Collider>();
+        if (m_collider == null)
+            return;
+
+        m_collider.isTrigger = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMotion check = other.GetComponent<PlayerMotion>();
-        if (check == default)
+        if (other.GetComponent<PlayerMotion>() == default)
             return;
 
         //show prompt image.
@@ -44,8 +50,7 @@ public class Prompt : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerMotion check = other.GetComponent<PlayerMotion>();
-        if (check == default)
+        if (other.GetComponent<PlayerMotion>() == default)
             return;
 
         //stop updating this ui element
