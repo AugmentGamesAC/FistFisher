@@ -11,6 +11,7 @@ using System.Linq;
 public class BiomeDefinition : ScriptableObject
 {
     #region variables
+    [SerializeField]
     protected float m_maximumNumberOfSpawns;
     public float MaxNumberOfSpawns => m_maximumNumberOfSpawns;
     protected float m_clutterCount;
