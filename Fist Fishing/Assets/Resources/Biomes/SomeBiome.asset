@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: SomeBiome
   m_EditorClassIdentifier: 
   m_maximumNumberOfSpawns: 100
-  m_clutter: []
+  m_amountOfClutterToSpawn: 5
+  m_clutter:
+  - m_weightedChance: 1
+    m_meshOverRide: {fileID: 0}
+    m_spawnReference: {fileID: 11400000, guid: 56bac72bd9b752c4788189fd8dda2b18, type: 2}
   m_collectables: []
   m_aggressiveFish:
   - m_weightedChance: 1

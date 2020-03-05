@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
     #region IFishData
@@ -83,10 +84,10 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         //throw new System.NotImplementedException();
 
-        if (m == null || FishRoot == null)
+        if (m == null)
             return null;
 
-        Transform pos = m.gameObject.transform;
+        Transform pos = FishRoot.transform;
         float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
         RaycastHit hit; //unused
 
@@ -97,10 +98,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
 
-        pos.position = BiomeInstance.FindValidPosition(m);
-        pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
 
-        GameObject m_thisObject = Instantiate(FishRoot, pos);
+        m_thisObject = FishRoot;
         return m_thisObject;
     }
 

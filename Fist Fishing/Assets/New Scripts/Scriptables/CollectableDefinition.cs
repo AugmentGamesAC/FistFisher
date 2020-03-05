@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables")]
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
@@ -14,16 +15,12 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {
-        GameObject CollectRoot = ObjectPoolManager.Get(m_BasicCollectable);
-
-        if (m == null || CollectRoot == null)
+        if (m == null)
             return null;
 
-        Transform pos = m.gameObject.transform;
-        pos.position = BiomeInstance.FindValidPosition(m);
-        pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
+        Transform transform = m.gameObject.transform;
+        m_thisObject = Instantiate(m_BasicCollectable, BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m)), transform.rotation, transform);
 
-        GameObject m_thisObject = Instantiate(CollectRoot, pos);
         return m_thisObject;
     }
 

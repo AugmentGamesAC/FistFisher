@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "New Clutter Object", menuName = "Clutter")]
 public class ClutterDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
@@ -14,17 +16,12 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {
-
-        GameObject ClutterRoot = ObjectPoolManager.Get(m_BasicClutter);
-
-        if (m == null || ClutterRoot == null)
+        if (m == null)
             return null;
 
-        Transform pos = m.gameObject.transform;
-        pos.position = BiomeInstance.FindValidPosition(m);
-        pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
+        Transform transform = m.gameObject.transform;
+        m_thisObject = Instantiate(m_BasicClutter, BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m)), transform.rotation, transform);
 
-        GameObject m_thisObject = Instantiate(ClutterRoot, pos);
         return m_thisObject;
     }
 

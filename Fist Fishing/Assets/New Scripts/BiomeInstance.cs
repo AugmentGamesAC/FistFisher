@@ -36,7 +36,7 @@ public class BiomeInstance : MonoBehaviour
             {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ProbabilitySpawnCollectable>()   , 0}
         };
 
-        if (!(m_myInstructions.ClutterList.Count() > 0))
+        if ((m_myInstructions.ClutterList.Count > 0))
             SpawnClutter();
 
     }
@@ -86,7 +86,6 @@ public class BiomeInstance : MonoBehaviour
 
     protected bool SpawnFromWeightedList(IEnumerable<ProbabilitySpawn> list)
     {
-        Debug.Log("trying to spawn from " + list + " of size " + list.Count());
         float rand = UnityEngine.Random.Range(0, 1.0f);
         foreach (ProbabilitySpawn possibbleSpawn in list)
             if ((rand -= possibbleSpawn.m_weightedChance) < 0)
@@ -110,7 +109,7 @@ public class BiomeInstance : MonoBehaviour
         
         int cluttercount = (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
 
-        while (cluttercount < m_myInstructions.ClutterCount)
+        while (cluttercount < m_myInstructions.AmountOfClutterToSpawn)
         {
             cluttercount += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
         }
@@ -127,8 +126,8 @@ public class BiomeInstance : MonoBehaviour
         Bounds b = biome.bounds;
 
         bool validPos = false;
-        Vector3 pos = Vector3.zero;
 
+        Vector3 pos = Vector3.zero;
         while (!validPos)
         {
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
