@@ -43,7 +43,7 @@ public class Upgrade : IItem
         m_worth = calculateNewCost(m_statsModifier);
     }
 
-    public Upgrade(string name, Sprite icon, string description, int worth, Dictionary<Stats, float> statsModifier, ItemType itemType = ItemType.Upgrade, int id = (int)ItemType.Upgrade, int stackSize = 1 )
+    public Upgrade(string name, Sprite icon, string description, int worth, Dictionary<Stats, float> statsModifier, ItemType itemType = ItemType.Upgrade, int id = (int)ItemType.Upgrade, int stackSize = 1)
     {
         m_name = name;
         m_display = icon;
@@ -84,5 +84,16 @@ public class Upgrade : IItem
     public bool CanMerge(IItem newItem)
     {
         return false;
+    }
+
+    public bool ResolveDropCase(ISlotData newSlot, ISlotData oldSlot)
+    {
+        if (!(newSlot.Manager is PlayerSlotManager))
+            return false;
+
+        ApplyUpgrade();
+        oldSlot.RemoveItem();
+
+        return true ;
     }
 }

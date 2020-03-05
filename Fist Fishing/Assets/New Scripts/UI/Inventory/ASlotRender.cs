@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SlotUI)),System.Serializable]
-public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler 
+public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHandler, IDropHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     protected SlotManager m_SlotManager;
-
+    public SlotManager SlotMan => m_SlotManager;
 
     public new void Awake()
     {
@@ -24,6 +24,7 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
         if (m_SlotManager == default)
             throw new System.InvalidOperationException("SlotData Has no manager");
         m_SlotManager.RegisterSlot(m_tracker);
+        m_tracker.SetSlotManager(m_SlotManager);
         UpdateTracker(m_tracker);
         var dropHandler = GetComponentInParent<SlotSpace>();
         dropHandler.RegisterSlot(Tracker);
@@ -49,6 +50,16 @@ public class ASlotRender : CoreUIUpdater<SlotData,SlotUI,ISlotData>, IEndDragHan
     public void OnEndDrag(PointerEventData eventData)
     {
         m_SlotManager.OnDrop(eventData);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        m_SlotManager.HandleHover(m_tracker, eventData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        m_SlotManager.HandleHover(default, eventData);
     }
 }
 

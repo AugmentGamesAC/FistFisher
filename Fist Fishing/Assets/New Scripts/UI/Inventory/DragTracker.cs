@@ -10,5 +10,6 @@ public class DragTracker : MonoBehaviour
     public Image DragImage;
     public RectTransform Rect;
     public ISlotData SlotTarget;
+    public Vector2 StartingPosition;
 }
 

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SlotManager : MonoBehaviour
 {
-
     /// <summary>
     /// contains all the slot data for the manager, the key being the index of the slot 
     /// so a "next" previous logic can be maintained/observed.
@@ -16,13 +15,11 @@ public class SlotManager : MonoBehaviour
 
     protected HashSet<int> m_freeSlots = new HashSet<int>();
 
-
-
     /// <summary>
     /// Adds a new slote to the SlotManager to handle
     /// </summary>
     /// <param name="slot"></param>
-    public void RegisterSlot(ISlotData slot)
+    public virtual void RegisterSlot(ISlotData slot)
     {
         if (slot == default)
             return;
@@ -41,6 +38,14 @@ public class SlotManager : MonoBehaviour
             return;
 
         m_freeSlots.Add(slot.Index);
+    }
+
+    public void UseSlot(SlotData slot)
+    {
+        if (slot == default)
+            return;
+
+        m_freeSlots.Remove(slot.Index);
     }
 
     /// <summary>
@@ -66,7 +71,7 @@ public class SlotManager : MonoBehaviour
         ///eventually add code to limitObjects. 
         HashSet<int> usedSlots = new HashSet<int>();
         int myCount = count;
-        while(myCount > 0 &&  m_freeSlots.Count > 0)
+        while (myCount > 0 && m_freeSlots.Count > 0)
         {
             int targetSlot = m_freeSlots.Min();
             usedSlots.Add(targetSlot);
@@ -76,11 +81,13 @@ public class SlotManager : MonoBehaviour
             return false;
         myCount = count;
         foreach (int slotkey in usedSlots)
+        {
             myCount = m_mySLots[slotkey].AddItem(item, myCount);
+        }
         return true;
     }
 
-    public void Start()
+    public void Awake()
     {
         if (CommonMountPointer != default)
             return;
@@ -96,12 +103,11 @@ public class SlotManager : MonoBehaviour
 
     protected void HandleDragStart(PointerEventData eventData)
     {
-        CommonMountPointer.transform.SetParent(transform);
+        CommonMountPointer.transform.SetParent(transform.parent.parent);
         CommonMountPointer.transform.SetAsLastSibling();
         CommonMountPointer.gameObject.SetActive(true);
         CommonMountPointer.eventData = eventData;
         CommonMountPointer.DragImage.sprite = eventData.pointerDrag.GetComponentInChildren<Image>().sprite;
-
     }
 
     public void HandleDrag(PointerEventData eventData)
@@ -110,7 +116,7 @@ public class SlotManager : MonoBehaviour
         {
             HandleDragStart(eventData);
         }
-        CommonMountPointer.Rect.position = Input.mousePosition + Vector3.forward * 20;
+        CommonMountPointer.Rect.position = Input.mousePosition;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -119,32 +125,59 @@ public class SlotManager : MonoBehaviour
         CommonMountPointer.eventData = default;
     }
 
-    public void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
+    public virtual void HandleSlotDrop(PointerEventData eventData, ISlotData dropped)
     {
         var slotref = CommonMountPointer.eventData.pointerDrag.GetComponent<ASlotRender>();
 
+        if (slotref.SlotMan != this)
+            if (slotref.Tracker.Item.ResolveDropCase(dropped, slotref.Tracker))
+            {
+                OnDrop(eventData);
+                return;
+            }
 
-       int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
-       if (newvalue == slotref.Tracker.Count)
-       {
+        int newvalue = dropped.CheckAddItem(slotref.Tracker.Item, slotref.Tracker.Count);
+        if (newvalue == slotref.Tracker.Count)
+        {
             OnDrop(eventData);
             return;
-       }
-       var delta = slotref.Tracker.Count - newvalue;
+        }
+        var delta = slotref.Tracker.Count - newvalue;
         //dropped needs to be added to first so that we don't loose ref to the IItem;
-       dropped.AddItem(slotref.Tracker.Item, delta);
-       slotref.Tracker.RemoveCount(delta);
+        dropped.AddItem(slotref.Tracker.Item, delta);
+        slotref.Tracker.RemoveCount(delta);
         if (slotref.Tracker.Count == 0)
-           FreeSlot(slotref.Tracker);
-       OnDrop(eventData);
+            FreeSlot(slotref.Tracker);
+        OnDrop(eventData);
+    }
+
+    public void OnGUI()
+    {
+        if (!gameObject.activeSelf
+            || CommonMountPointer == default
+            || CommonMountPointer.SlotTarget == default
+            || CommonMountPointer.SlotTarget.Item == default)
+            return;
+        CreateDescBox(CommonMountPointer.StartingPosition, Vector2.one * 20, CommonMountPointer.SlotTarget.Item.Description, CommonMountPointer.SlotTarget.Item.Name);
     }
 
 
-    public void HandleHover(ISlotData dropee)
+    public void HandleHover(ISlotData dropee, PointerEventData eventData)
     {
+        CommonMountPointer.StartingPosition = Input.mousePosition;
         CommonMountPointer.SlotTarget = dropee;
     }
 
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription, string name)
+    {
+        if (string.IsNullOrEmpty(detailedDescription))
+            return;
+        //create offset that is Vector2 + offset for Label position.
+        Vector2 DescriptionTextPos = startingPos + textOffset;
+        // Make a background box
+        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), name);
 
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), detailedDescription);
+    }
 }
 

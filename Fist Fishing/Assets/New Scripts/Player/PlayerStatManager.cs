@@ -14,23 +14,67 @@ public enum Stats
     MovementSpeed,
     TurnSpeed
 }
+[System.Serializable]
 public class PlayerStatManager
 {
     [SerializeField]
-    protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
+    protected static Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
-    public StatTracker this[Stats value] {  get { return m_statTrackerContainer[value]; } }
+    [SerializeField]
+    protected float m_baseMaxHealth;
+    public float BaseMaxHealth => m_baseMaxHealth;
+    [SerializeField]
+    protected float m_baseStealth;
+    public float BaseStealth => m_baseStealth;
+    [SerializeField]
+    protected float m_basePower;
+    public float BasePower => m_basePower;
+    [SerializeField]
+    protected float m_baseMaxAir;
+    public float BaseMaxAir => m_baseMaxAir;
+    [SerializeField]
+    protected float m_baseAirConsumption;
+    public float BaseAirConsumption => m_baseAirConsumption;
+    [SerializeField]
+    protected float m_baseAirRestoration;
+    public float BaseAirRestoration => m_baseAirRestoration;
+    [SerializeField]
+    protected float m_baseMoveSpeed;
+    public float BaseMoveSpeed => m_baseMoveSpeed;
+    [SerializeField]
+    protected float m_baseTurnSpeed;
+    public float BaseTurnSpeed => m_baseTurnSpeed;
 
-    /// <summary>
-    /// Sets StatTrackerContainer.
-    /// </summary>
-    public PlayerStatManager()
+    public StatTracker this[Stats value] { get { return m_statTrackerContainer[value]; } }
+
+    protected Dictionary<Stats, float> m_startingStats;
+
+    public void Init()
     {
-        var ListOfStats = Enum.GetValues(typeof(Stats));
-        foreach (var stat in ListOfStats)
+        m_statTrackerContainer = new Dictionary<Stats, StatTracker>()
         {
-            AddStat((Stats)stat, new StatTracker());
-        }
+            { Stats.MaxHealth, new StatTracker(m_baseMaxHealth) },
+            { Stats.Stealth, new StatTracker(m_baseStealth) },
+            { Stats.Power, new StatTracker(m_basePower) },
+            { Stats.MaxAir, new StatTracker(m_baseMaxAir) },
+            { Stats.AirConsumption, new StatTracker(m_baseAirConsumption) },
+            { Stats.AirRestoration, new StatTracker(m_baseAirRestoration) },
+            { Stats.MovementSpeed, new StatTracker(m_baseMoveSpeed) },
+            { Stats.TurnSpeed, new StatTracker(m_baseTurnSpeed) }
+        };
+
+        m_startingStats = new Dictionary<Stats, float>()
+        {
+            { Stats.MaxHealth, m_baseMaxHealth },
+            { Stats.Stealth, m_baseStealth },
+            { Stats.Power, m_basePower },
+            { Stats.MaxAir, m_baseMaxAir },
+            { Stats.AirConsumption, m_baseAirConsumption },
+            { Stats.AirRestoration, m_baseAirRestoration },
+            { Stats.MovementSpeed, m_baseMoveSpeed },
+            { Stats.TurnSpeed, m_baseTurnSpeed }
+        };
+
     }
 
     /// <summary>
@@ -56,8 +100,13 @@ public class PlayerStatManager
         if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        m_statTrackerContainer[statType].Change(amount);
+        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + m_startingStats[statType] * amount);
 
         return true;
+    }
+
+    public void SetTracker(Stats statType, StatTracker tracker)
+    {
+        m_statTrackerContainer[statType] = tracker;
     }
 }

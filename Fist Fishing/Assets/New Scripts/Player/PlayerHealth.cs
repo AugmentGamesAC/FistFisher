@@ -11,8 +11,9 @@ public class PlayerHealth
     public PercentageTracker Tracker => m_percent;
 
     public delegate void MinimumAmountReached();
-    public event MinimumAmountReached OnMinimumAmountReached;
+    public MinimumAmountReached OnMinimumAmountReached;
 
+    public StatTracker MaxValue => m_percent.Max;
     /// <summary>
     /// Can consider StatTracker as a float with this.
     /// returns ref to currentAmount.
@@ -23,13 +24,14 @@ public class PlayerHealth
         return reference.m_percent.Current;
     }
 
-    public PlayerHealth(float max)
+    public PlayerHealth(StatTracker max)
     {
         m_percent = new PercentageTracker(max);
+
         ResetCurrentAmount();
 
         PlayerInstance.Instance.Oxygen.OnLowOxygen += Change;
-        PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth].OnCurrentAmountChanged += SetMax;
+        max.OnChange += ResetCurrentAmount;
     }
 
     public void Change(float changeAmount)
@@ -37,17 +39,12 @@ public class PlayerHealth
         m_percent.IncrementCurrent(changeAmount);
 
         if (this == 0 && OnMinimumAmountReached != null)
-            OnMinimumAmountReached.Invoke();
+            OnMinimumAmountReached?.Invoke();
     }
 
     public void ResetCurrentAmount()
     {
         Change(m_percent.Max);
-    }
-
-    protected void SetMax(float max)
-    {
-        m_percent.SetMax(max);
     }
 }
 

@@ -61,6 +61,13 @@ MonoBehaviour:
   m_spawner: {fileID: 0}
   m_targetController: {fileID: 0}
   m_harvestableType: 3
+  m_stackSize: 10
+  m_iD: 6
+  m_worthInCurrency: 15
+  m_Type: 0
+  m_Description: The cheaper alternative that the fauna just can't get enough of.
+  m_name: Coral2
+  m_iconDisplay: {fileID: 21300000, guid: 97b55ba6ef95fef4ab1d78704f8a5c28, type: 3}
 --- !u!1 &4949772967607708853
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +122,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

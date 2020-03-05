@@ -25,10 +25,14 @@ public class SlotData : UITracker<ISlotData> , ISlotData
         OnStateChange?.Invoke(this);
     }
 
-
     public void SetIndex(int newIndex)
     {
         m_index = newIndex;
+    }
+
+    public void SetSlotManager(SlotManager newManger)
+    {
+        m_Manager = newManger;
     }
 
     /// <summary>
@@ -44,6 +48,8 @@ public class SlotData : UITracker<ISlotData> , ISlotData
             remainder = CheckAddItem(item, count);
             m_item = item;
             m_count = Mathf.Min(count, m_item.StackSize);
+            if (m_Manager != default)
+                m_Manager.UseSlot(this);
             UpdateState();
             return remainder;
         }
@@ -74,19 +80,26 @@ public class SlotData : UITracker<ISlotData> , ISlotData
     {
         m_count = 0;
         m_item = default;
+        m_Manager.FreeSlot(this);
         UpdateState();
     }
-
 
     public void RemoveCount(int count)
     {
         m_count = Mathf.Max(0, m_count - count);
 
         if (m_count == 0)
-            m_item = default;
+        {
+            RemoveItem();
+            return;
+        }
 
         UpdateState();
     }
 
+    protected override ISlotData ImplicitOverRide(UITracker<ISlotData> reference)
+    {
+        return this;
+    }
 }
 
