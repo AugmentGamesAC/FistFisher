@@ -64,6 +64,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     protected GameObject m_BasicFish; 
     [SerializeField]
     protected GameObject m_swimingHPDisplayRefence;
+
+    private GameObject m_thisObject;
     #endregion
 
     public GameObject Instatiate(MeshCollider m)
@@ -98,8 +100,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         pos.position = BiomeInstance.FindValidPosition(m);
         pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
 
-        GameObject o = Instantiate(FishRoot, pos);
-        return o;
+        GameObject m_thisObject = Instantiate(FishRoot, pos);
+        return m_thisObject;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)

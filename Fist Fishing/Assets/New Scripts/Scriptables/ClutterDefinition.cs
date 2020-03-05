@@ -9,6 +9,8 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     protected Mesh m_BaseModelRefence;
     [SerializeField]
     protected GameObject m_BasicClutter;
+
+    private GameObject m_thisObject;
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {
@@ -22,7 +24,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         pos.position = BiomeInstance.FindValidPosition(m);
         pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
 
-        GameObject o = Instantiate(ClutterRoot, pos);
-        return o;
+        GameObject m_thisObject = Instantiate(ClutterRoot, pos);
+        return m_thisObject;
     }
 }
