@@ -9598,6 +9598,39 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2274296291261992489, guid: 1e8ea3150b678dd4287605e17f804008, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8ea3150b678dd4287605e17f804008, type: 3}
+--- !u!1 &1328326928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1328326929}
+  m_Layer: 0
+  m_Name: GameObject_Placeholder_Biome Spawn Areas_V2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1328326929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328326928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -47.821095, y: 2.9512901, z: -17.521519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5870545567352550437}
+  - {fileID: 3512046506386319820}
+  - {fileID: 169466019555489887}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1336635704
 GameObject:
   m_ObjectHideFlags: 0
@@ -13707,6 +13740,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &169466019555489887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+    type: 3}
+  m_PrefabInstance: {fileID: 5733743055461634328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &235012339128704311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15657,6 +15696,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &3512046506386319820 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8206657552346911006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3558522834633453835
 Transform:
   m_ObjectHideFlags: 0
@@ -16574,6 +16619,75 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &4417144636673385757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1328326929}
+    m_Modifications:
+    - target: {fileID: 6516671737947251499, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_Name
+      value: Biome Trigger Box_Starting Sea FloorV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3531.4211
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2994.6155
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1574.1176
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 23ff7757dc01ad64a801be565a8bbb27, type: 3}
 --- !u!33 &4488942559345074780
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17607,6 +17721,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005, type: 3}
+--- !u!1001 &5733743055461634328
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1328326929}
+    m_Modifications:
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4257.4214
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3116.149
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1503.7214
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604809572444137799, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904479874692619092, guid: bb30c1e6df163d245abacc5a00c3c026,
+        type: 3}
+      propertyPath: m_Name
+      value: Biome Trigger Box_West of Start001V2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb30c1e6df163d245abacc5a00c3c026, type: 3}
 --- !u!1001 &5758115767889527099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17796,6 +17979,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6621086123801402807}
   m_Mesh: {fileID: -3363268023925679331, guid: 8c9019ea631863147966add95181c631, type: 3}
+--- !u!4 &5870545567352550437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7797006061339840824, guid: 23ff7757dc01ad64a801be565a8bbb27,
+    type: 3}
+  m_PrefabInstance: {fileID: 4417144636673385757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &5871376893041397704
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20079,6 +20268,75 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6780518628858867271, guid: 8c9019ea631863147966add95181c631, type: 3}
+--- !u!1001 &8206657552346911006
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1328326929}
+    m_Modifications:
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4247.8213
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3091.3835
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1525.2574
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710391516787701970, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8576531512385735361, guid: eb449d689c464ae4d99fbd161d4e841e,
+        type: 3}
+      propertyPath: m_Name
+      value: Biome Trigger Box_West of StartV2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb449d689c464ae4d99fbd161d4e841e, type: 3}
 --- !u!1001 &8391428359960292422
 PrefabInstance:
   m_ObjectHideFlags: 0
