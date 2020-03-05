@@ -27,4 +27,12 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         GameObject m_thisObject = Instantiate(ClutterRoot, pos);
         return m_thisObject;
     }
+
+    public bool Despawn()
+    {
+        if (m_thisObject == default)
+            return false;
+        m_thisObject.SetActive(false);
+        return m_thisObject.activeSelf;
+    }
 }

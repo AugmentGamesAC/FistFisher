@@ -122,4 +122,12 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         return true;
     }
+
+    public bool Despawn()
+    {
+        if (m_thisObject == default)
+            return false;
+        m_thisObject.SetActive(false);
+        return m_thisObject.activeSelf;
+    }
 }
