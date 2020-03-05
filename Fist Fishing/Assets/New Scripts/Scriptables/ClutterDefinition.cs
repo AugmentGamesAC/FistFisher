@@ -10,7 +10,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     [SerializeField]
     protected GameObject m_BasicClutter;
 
-    private GameObject m_thisObject;
+    private GameObject m_thisObject = null;
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {

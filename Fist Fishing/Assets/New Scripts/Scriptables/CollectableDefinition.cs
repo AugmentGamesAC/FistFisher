@@ -10,7 +10,7 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
     [SerializeField]
     protected GameObject m_BasicCollectable;
 
-    private GameObject m_thisObject;
+    private GameObject m_thisObject = null;
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {

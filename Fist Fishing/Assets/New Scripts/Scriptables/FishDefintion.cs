@@ -65,7 +65,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     [SerializeField]
     protected GameObject m_swimingHPDisplayRefence;
 
-    private GameObject m_thisObject;
+    private GameObject m_thisObject = null;
     #endregion
 
     public GameObject Instatiate(MeshCollider m)
