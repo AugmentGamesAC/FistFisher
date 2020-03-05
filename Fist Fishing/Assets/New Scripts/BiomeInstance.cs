@@ -111,10 +111,9 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     /// <param name="bd"></param>
     /// <returns></returns>
-    protected Vector3 FindValidPosition()
+    public static Vector3 FindValidPosition(MeshCollider biome)
     {
-        //Collider c = bd.Mesh.GetComponent<Collider>();
-        Bounds b = m_MeshCollider.bounds;
+        Bounds b = biome.bounds;
 
         bool validPos = false;
         Vector3 pos = Vector3.zero;
@@ -124,7 +123,7 @@ public class BiomeInstance : MonoBehaviour
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
             pos.y = UnityEngine.Random.Range(b.min.y, b.max.y);
             pos.z = UnityEngine.Random.Range(b.min.z, b.max.z);
-            if (IsInside(m_MeshCollider, pos))
+            if (IsInside(biome, pos))
                 validPos = true;
         }
         return pos;
@@ -142,7 +141,7 @@ public class BiomeInstance : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="radius"></param>
     /// <returns></returns>
-    protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
+    public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
         return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
     }
@@ -152,7 +151,7 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    protected Vector3 GetSeafloorPosition(Vector3 pos)
+    public static Vector3 GetSeafloorPosition(Vector3 pos)
     {
         RaycastHit hit;
         Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));

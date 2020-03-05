@@ -79,7 +79,27 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
 
 
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+
+        if (m == null || FishRoot == null)
+            return null;
+
+        Transform pos = m.gameObject.transform;
+        float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
+        RaycastHit hit; //unused
+
+
+        do
+        {
+            pos.position = BiomeInstance.FindValidPosition(m);
+
+        } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+        pos.position = BiomeInstance.FindValidPosition(m);
+        pos.position = BiomeInstance.GetSeafloorPosition(pos.position);
+
+        GameObject o = Instantiate(FishRoot, pos);
+        return o;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
