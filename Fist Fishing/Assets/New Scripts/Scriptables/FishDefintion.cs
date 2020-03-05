@@ -60,11 +60,11 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     #region ModelReferences
     [SerializeField]
-    protected Mesh m_BaseModelRefence;
+    protected Mesh m_BaseModelReference;
     [SerializeField]
     protected GameObject m_BasicFish; 
     [SerializeField]
-    protected GameObject m_swimingHPDisplayRefence;
+    protected GameObject m_swimingHPDisplayReference;
 
     private GameObject m_thisObject = null;
     #endregion
@@ -75,7 +75,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
         coreFish.Init(this, this);
         //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
+        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
         HPRoot.transform.SetParent(FishRoot.transform);
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);

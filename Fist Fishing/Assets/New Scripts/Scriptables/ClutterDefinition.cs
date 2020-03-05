@@ -8,7 +8,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
     [SerializeField]
-    protected Mesh m_BaseModelRefence;
+    protected Mesh m_BaseModelReference;
     [SerializeField]
     protected GameObject m_BasicClutter;
 
@@ -19,8 +19,11 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         if (m == null)
             return null;
 
-        Transform transform = m.gameObject.transform;
-        m_thisObject = Instantiate(m_BasicClutter, BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m)), transform.rotation, transform);
+        m_thisObject = ObjectPoolManager.Get(m_BasicClutter);
+
+        m_thisObject.gameObject.transform.position = BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m));
+        //Transform transform = m.gameObject.transform;
+        //m_thisObject = Instantiate(m_BasicClutter, BiomeInstance.GetSeafloorPosition(BiomeInstance.FindValidPosition(m)), transform.rotation, transform);
 
         return m_thisObject;
     }
