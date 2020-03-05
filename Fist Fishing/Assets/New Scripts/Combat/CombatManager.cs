@@ -248,13 +248,12 @@ public class CombatManager : MonoBehaviour
         m_isItemActive = true;
         //Create Item
         Bait_IItem Bitem = ScriptableItems[0];
-        //Get the bait sensitivity type
-        
+   
 
         //Enqueue for next round
         m_roundQueue.Enqueue(m_playerCombatInfo);
 
-        //throw new System.NotImplementedException("dependency items implementation.");
+        
 
         //Get the player's current pinwheel choice.
 
