@@ -261,7 +261,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280844287
+    rgba: 4280910079
   m_fontColor: {r: 1, g: 0.50173634, b: 0.16037738, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280844287
+    rgba: 4280910079
   m_fontColor: {r: 1, g: 0.50173634, b: 0.16037738, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280844287
+    rgba: 4280910079
   m_fontColor: {r: 1, g: 0.50173634, b: 0.16037738, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1202,6 +1202,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ab486b0c062976642b015e5fc8876db4,
+        type: 3}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_mouseItem
+      value: 
+      objectReference: {fileID: 905206826204380161}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_inventoryPrefab
+      value: 
+      objectReference: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
+        type: 3}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_yStartPos
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_xSpaceBetweenItems
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_ySpaceBetweenItems
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
+        type: 3}
+      propertyPath: m_numberOfColumns
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5758115767510758825, guid: 79ee761726c202041b9e0966ded9777e,
         type: 3}
       propertyPath: m_Name
@@ -1322,53 +1369,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_mouseItem
-      value: 
-      objectReference: {fileID: 905206826204380161}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_inventoryPrefab
-      value: 
-      objectReference: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
-        type: 3}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_yStartPos
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_xSpaceBetweenItems
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_ySpaceBetweenItems
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170527, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_numberOfColumns
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758115765954170526, guid: 79ee761726c202041b9e0966ded9777e,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ab486b0c062976642b015e5fc8876db4,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79ee761726c202041b9e0966ded9777e, type: 3}
 --- !u!224 &5734878061133385883 stripped
@@ -1539,11 +1539,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
-    - target: {fileID: 1990969796264009383, guid: 7553e4ea89084da4eb83d73374a4f15c,
-        type: 3}
-      propertyPath: m_Name
-      value: InventoryPrefab1
-      objectReference: {fileID: 0}
     - target: {fileID: 1990969796264009379, guid: 7553e4ea89084da4eb83d73374a4f15c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1649,6 +1644,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1990969796264009383, guid: 7553e4ea89084da4eb83d73374a4f15c,
+        type: 3}
+      propertyPath: m_Name
+      value: InventoryPrefab1
+      objectReference: {fileID: 0}
     - target: {fileID: 1990969797250425327, guid: 7553e4ea89084da4eb83d73374a4f15c,
         type: 3}
       propertyPath: m_mouseItem
@@ -1681,11 +1681,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
-    - target: {fileID: 8494059171992567174, guid: cee6ac136d049ac418d16dc07d343388,
-        type: 3}
-      propertyPath: m_Name
-      value: Minimap
-      objectReference: {fileID: 0}
     - target: {fileID: 3858970453553817728, guid: cee6ac136d049ac418d16dc07d343388,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1791,6 +1786,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8494059171992567174, guid: cee6ac136d049ac418d16dc07d343388,
+        type: 3}
+      propertyPath: m_Name
+      value: Minimap
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cee6ac136d049ac418d16dc07d343388, type: 3}
 --- !u!114 &373781177644189651 stripped
@@ -1818,11 +1818,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
-    - target: {fileID: 3302975193047270299, guid: 0e1a4bacf77a7664b888cc9bb2313204,
-        type: 3}
-      propertyPath: m_Name
-      value: HUDCanvas
-      objectReference: {fileID: 0}
     - target: {fileID: 3302975193047270288, guid: 0e1a4bacf77a7664b888cc9bb2313204,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1928,6 +1923,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3302975193047270299, guid: 0e1a4bacf77a7664b888cc9bb2313204,
+        type: 3}
+      propertyPath: m_Name
+      value: HUDCanvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e1a4bacf77a7664b888cc9bb2313204, type: 3}
 --- !u!114 &1224902399907374655 stripped
@@ -1955,11 +1955,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8393717351741040086}
     m_Modifications:
-    - target: {fileID: 136204560929175180, guid: e5badc9afc3d3884bac54a6d3c0f52f6,
-        type: 3}
-      propertyPath: m_Name
-      value: Start Menu Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 136204560929175168, guid: e5badc9afc3d3884bac54a6d3c0f52f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2069,6 +2064,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 136204560929175180, guid: e5badc9afc3d3884bac54a6d3c0f52f6,
+        type: 3}
+      propertyPath: m_Name
+      value: Start Menu Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5badc9afc3d3884bac54a6d3c0f52f6, type: 3}
