@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9628,6 +9628,7 @@ Transform:
   - {fileID: 5870545567352550437}
   - {fileID: 3512046506386319820}
   - {fileID: 169466019555489887}
+  - {fileID: 6687052995252381516}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14214,6 +14215,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4813010467281470021}
   m_Mesh: {fileID: -6271494756339716250, guid: 8c9019ea631863147966add95181c631, type: 3}
+--- !u!1001 &1282719762938116684
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1328326929}
+    m_Modifications:
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1207.821
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1612.0487
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -531.47845
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888790966079631123, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+        type: 3}
+      propertyPath: m_Name
+      value: Biome Trigger Box_Deep Sea BiomeV2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3dc77e9acdca3bd449904ee1caa9ea36, type: 3}
 --- !u!33 &1324681027684514361
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18383,6 +18453,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3363268023925679331, guid: 8c9019ea631863147966add95181c631, type: 3}
+--- !u!4 &6687052995252381516 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5548449657349627136, guid: 3dc77e9acdca3bd449904ee1caa9ea36,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282719762938116684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &6763051658052598562
 MeshRenderer:
   m_ObjectHideFlags: 0
