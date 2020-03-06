@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class ProbabilitySpawn : ISpawnable
+public class ProbabilitySpawn<T,V>: ISpawnable where T:ISpawnable where V: UnityEngine.Object
 {
-    public abstract GameObject Instatiate(MeshCollider m);
+    public GameObject Instatiate(MeshCollider m) { return m_spawnRefence.Instatiate(m); }
     public float m_weightedChance;
     public MeshCollider m_meshOverRide;
-    public abstract void Clone();
+    [SerializeField]
+    protected T m_spawnRefence;
+    //public V Clone( (V) this.meb )
 }
 
 
 [Serializable]
-public class ProbabilitySpawnClutter : ProbabilitySpawn
+public class ProbabilitySpawnClutter : ProbabilitySpawn<FishDefintion,ProbabilitySpawnClutter>
 {
-    public GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    [SerializeField]
-    protected FishDefintion m_spawnReference;
+    public override GameObject Instatiate(MeshCollider m)
+    {
+        return m_spawnReference.Instatiate(m);
+    }
+    public override void Clone()
+    {
+        
+    }
+
 
 }
 [Serializable]
-public class ProbabilitySpawnCollectable : ProbabilitySpawn
-{
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    [SerializeField]
-    protected FishDefintion m_spawnReference;
+public class ProbabilitySpawnCollectable : ProbabilitySpawn<FishDefintion, ProbabilitySpawnClutter> { }
 
-}
+
 [Serializable]
-public class ProbabilitySpawnFish : ProbabilitySpawn
-{
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    [SerializeField]
-    protected FishDefintion m_spawnReference;
-
-}
+public class ProbabilitySpawnFish : ProbabilitySpawn<FishDefintion, ProbabilitySpawnFish> { }
