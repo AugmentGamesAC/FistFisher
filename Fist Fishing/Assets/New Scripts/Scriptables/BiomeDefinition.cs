@@ -34,6 +34,7 @@ public class BiomeDefinition : ScriptableObject
     public List<ProbabilitySpawnFish> PreyFishList => m_preyFish;
 
     protected string m_name;
+    public string Name => m_name;
 
     protected Color m_boatMapColour;
     [SerializeField]
@@ -42,6 +43,29 @@ public class BiomeDefinition : ScriptableObject
 
 
     #endregion variables
+    protected BiomeDefinition CloneSelf(BiomeDefinition biome)
+    {
+        m_clutterCount = biome.m_clutterCount;
+        m_maximumNumberOfSpawns = biome.m_maximumNumberOfSpawns;
+        m_clutter = biome.m_clutter.Select(x=>x).ToList();
+        m_collectables = biome.m_collectables.ToList();
+        m_aggressiveFish = biome.m_aggressiveFish.ToList();
+        m_mehFish = biome.m_mehFish.ToList();
+        m_preyFish = biome.m_preyFish.ToList();
+        m_name = biome.m_name;
+        m_boatMapColour = biome.m_boatMapColour;
+        m_timeBetweenSpawns = biome.m_timeBetweenSpawns; 
+        return this;
+    }
+
+    public BiomeDefinition CloneSelf(string NewCloneName)
+    {
+        BiomeDefinition newME = ScriptableObject.CreateInstance<BiomeDefinition>();
+        newME.name = NewCloneName;
+
+        return newME.CloneSelf(this);
+    }
+
 
     public void Start()
     {

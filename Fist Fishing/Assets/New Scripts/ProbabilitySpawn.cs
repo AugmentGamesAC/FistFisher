@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
-
-public class ProbabilitySpawn : ISpawnable
+public abstract class ProbabilitySpawn : ISpawnable
 {
-    public virtual GameObject Instatiate(MeshCollider m) { return null; }
+    public abstract GameObject Instatiate(MeshCollider m);
     public float m_weightedChance;
     public MeshCollider m_meshOverRide;
+    public abstract void Clone();
 }
 
 
 [Serializable]
 public class ProbabilitySpawnClutter : ProbabilitySpawn
 {
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
+    public GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
     [SerializeField]
     protected FishDefintion m_spawnReference;
 

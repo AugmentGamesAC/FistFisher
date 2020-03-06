@@ -15,6 +15,9 @@ public class BiomeInstance : MonoBehaviour
 
     [SerializeField]
     protected BiomeDefinition m_myInstructions;
+    public BiomeDefinition Definiton { get => m_myInstructions; set => m_myInstructions = value; }
+
+
 
     protected Dictionary<IEnumerable<ProbabilitySpawn>, int> m_memberCount;
 
