@@ -47,4 +47,17 @@ public class Bait_IItem : ScriptableObject, IItem
     {
         return false;
     }
+    /// <summary>
+    /// Decriments the active turn count of a bait that is out in combat
+    /// </summary>
+    /// <param name="value">The number of turns to decriment by</param>
+    public void DecrimentActiveTurnCount ()
+    {
+        TurnCount --;
+    }
+    public bool IsStillActive()
+    {
+        DecrimentActiveTurnCount();
+        return TurnCount <= 0;
+    }
 }

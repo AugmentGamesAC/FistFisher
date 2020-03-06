@@ -44,4 +44,14 @@ public class FishCombatInfo : CombatInfo
     {
         Speed.SetValue(m_fish.FishData.CombatSpeed);
     }
+    /// <summary>
+    /// Changes the fish's direction
+    /// </summary>
+    /// <param name="direction">Either 1 or -1 </param>
+    public void ChangeDirection(int direction)
+    {
+        if (direction == -1 || direction == 1)
+             Direction.SetValue(direction);
+        return;
+    }
 }

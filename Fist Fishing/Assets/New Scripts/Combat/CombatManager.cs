@@ -51,8 +51,8 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField]
     protected bool m_isItemActive;
-    [SerializeField]
-    protected Bait_IItem m_item;
+    protected Bait_IItem m_Baititem;
+    protected Repellent_IItem m_RepellentItem;
 
     [SerializeField]
     protected List<FishCombatInfo> m_aggressiveFishToSpawn = new List<FishCombatInfo>();
@@ -61,6 +61,8 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField]
     protected List<CombatMoveInfo> ScriptablePlayerMoves = new List<CombatMoveInfo>();
+
+    //NEED TO DISCUSS THIS IITEM CANT BE ADDED TO IN INSPECTOR DUE TO LACK OF MONOBEHAVIOUR
     [SerializeField]
     protected List<Bait_IItem> ScriptableItems = new List<Bait_IItem>();
 
@@ -173,10 +175,10 @@ public class CombatManager : MonoBehaviour
             PlayerAttack();
         }
         if (!m_isItemActive)
-        if (ALInput.GetKeyDown(ALInput.Item))
-        {
-            PlayerItem();
-        }
+            if (ALInput.GetKeyDown(ALInput.Item))
+            {
+                PlayerItem();
+            }
 
         if (ALInput.GetKeyDown(ALInput.Flee))
         {
@@ -243,24 +245,21 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     protected void PlayerItem()
     {
-        
+
         //Set bool that item is now in play
         m_isItemActive = true;
-        //Create Item
-        Bait_IItem Bitem = ScriptableItems[0];
-   
 
-        //Enqueue for next round
-        m_roundQueue.Enqueue(m_playerCombatInfo);
+        //FOR TESTING SET ITEM TO BAIT OR REPELLENT
+        m_Baititem = (Bait_IItem)ScriptableItems[0];
+      //  m_RepellentItem = (Repellent_IItem)ScriptableItems[1];
 
-        
+        //Apply effect to the combat (None yet till pinwheel).
 
         //Get the player's current pinwheel choice.
 
-        //Apply effect to the combat.
-
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
-
+        //Enqueue for next round
+        m_roundQueue.Enqueue(m_playerCombatInfo);
         //this happens after stat and State changes.
         ResolveRound();
     }
@@ -349,31 +348,37 @@ public class CombatManager : MonoBehaviour
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        //Check if there is an item (bait) & if the fish is sensitive to the item (bait)
-        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(ScriptableItems[0].BaitType)))
-        { 
-            //check if item has reached 0 in its remaining active turns
-            if (ScriptableItems[0].TurnCount >= 1)
-            {
-                Debug.Log("Fish Moved Toward Bait");
-                //decrease the active turns by 1
-                ScriptableItems[0].TurnCount -= 1;
-                //update fish direction using the bait direction 
-                return  -fish.Speed;
-            }
+        //To be changed once pinwheels playercombatinfo is finished
 
-            //Set item active to false
-            //Reset turn count TESTING remove later
-            ScriptableItems[0].TurnCount = 2;
-            m_isItemActive = false;
+        //BAIT TESTING
+        //Check if there is an item (bait) & if the fish is sensitive to the item (bait)
+        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType)))
+        {
+            Debug.Log("Fish Moved Toward Bait");
+            //decrease the active turns by 1
+         
+            //update fish direction using the bait direction 
+            fish.ChangeDirection(-1);
+            //Check if item should still be active after this turn
+            m_isItemActive = m_Baititem.IsStillActive();
+            return fish.Speed;
+        }
+        //REPELLENT TESTING
+        //Check if there is an item (repell) & if the fish is sensitive to the item (repell)
+        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(m_RepellentItem.RepellentType)))
+        {
+            Debug.Log("Fish Moved Toward Bait");
+            //decrease the active turns by 1
+
+            //update fish direction using the bait direction 
+            fish.ChangeDirection(1);
+            //Check if item should still be active after this turn
+            m_isItemActive = m_RepellentItem.IsStillActive();
+            return fish.Speed;
         }
 
-
         Debug.Log("Fish Moved due to behaviour");
-
         return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
-
-
     }
 
     protected void ResolveAddFish(FishCombatInfo fish)
