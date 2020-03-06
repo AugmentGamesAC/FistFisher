@@ -86,8 +86,6 @@ public class BiomeInstance : MonoBehaviour
             m_memberCount[m_aggressiveProbSpawn] += (SpawnFromWeightedList(m_aggressiveProbSpawn)) ? 1 : 0;
             return;
         }
-
-        //m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_preyProbSpawn)) ? 1 : 0;
     }
 
 
@@ -100,7 +98,6 @@ public class BiomeInstance : MonoBehaviour
             {
                 possibbleSpawn.Instatiate((possibbleSpawn.m_meshOverRide == default) ? m_MeshCollider : possibbleSpawn.m_meshOverRide)
                     .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; Debug.Log(m_memberCount[list]); };
-                //m_memberCount[list].
                 return true;
             }
         return false;

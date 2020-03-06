@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New Clutter Object", menuName = "Clutter")]
+[CreateAssetMenu(fileName = "New Clutter Object", menuName = "Clutter/Clutter Definition")]
 public class ClutterDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences

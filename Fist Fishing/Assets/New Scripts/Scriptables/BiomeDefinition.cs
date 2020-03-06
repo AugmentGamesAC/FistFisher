@@ -7,7 +7,7 @@ using System.Linq;
 /// <summary>
 /// this class stores the data needed to instantiate it as an object from biome manager and then spawn stuff
 /// </summary>
-[CreateAssetMenu(fileName = "New Biome Object", menuName = "Biome")]
+[CreateAssetMenu(fileName = "New Biome Object", menuName = "Biome/Biome Definition")]
 public class BiomeDefinition : ScriptableObject
 {
     #region variables

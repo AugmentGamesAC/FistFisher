@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables")]
+[CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables/Collectable Definition")]
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences

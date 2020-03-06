@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish")]
+[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
     #region IFishData
