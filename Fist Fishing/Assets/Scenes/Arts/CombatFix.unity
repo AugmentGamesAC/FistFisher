@@ -19433,7 +19433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1126590165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19466,7 +19466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1126590164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0381128e2080c9e4d947f2eb2c9c0dc7, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1126666661
@@ -32944,6 +32944,7 @@ MonoBehaviour:
       m_gamePaused: 1
       m_mouseActive: 1
     - m_menuList:
+      - {fileID: 1024370003}
       - {fileID: 34558226459747239}
       m_gamePaused: 1
       m_mouseActive: 1
@@ -36127,7 +36128,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.9000244
+      value: -6.900055
       objectReference: {fileID: 0}
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
