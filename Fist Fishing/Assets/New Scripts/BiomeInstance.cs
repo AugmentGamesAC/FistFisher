@@ -31,6 +31,8 @@ public class BiomeInstance : MonoBehaviour
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
+        m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+
         currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
         m_memberCount = new Dictionary<IEnumerable<ProbabilitySpawn>, int>()
