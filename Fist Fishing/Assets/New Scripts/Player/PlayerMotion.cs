@@ -22,11 +22,11 @@ public class PlayerMotion : MonoBehaviour
     protected FishInstance m_closestFish;
 
     [SerializeField]
-    protected StatTracker turningSpeedRef = new StatTracker();
-    public StatTracker TurnSpeed => turningSpeedRef;
+    protected StatTracker m_turningSpeedRef;
+    public StatTracker TurnSpeed => m_turningSpeedRef;
     [SerializeField]
-    protected StatTracker movementSpeedRef = new StatTracker(5.0f);
-    public StatTracker MoveSpeed => movementSpeedRef;
+    protected StatTracker m_movementSpeedRef;
+    public StatTracker MoveSpeed => m_movementSpeedRef;
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
 
@@ -45,7 +45,7 @@ public class PlayerMotion : MonoBehaviour
            //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
-        turningSpeedRef.SetValue(180.0f);
+        m_turningSpeedRef.SetValue(180.0f);
 
         PlayerInstance.RegisterPlayerMotion(this);
     }
@@ -84,6 +84,16 @@ public class PlayerMotion : MonoBehaviour
         }
     }
 
+    public void SetMoveSpeedTracker(StatTracker tracker)
+    {
+        m_movementSpeedRef = tracker;
+    }
+
+    public void SetTurnSpeedTracker(StatTracker tracker)
+    {
+        m_turningSpeedRef = tracker;
+    }
+
     protected void ToggleInventoryDisplay()
     {
         m_displayInventory = !m_displayInventory;
@@ -115,13 +125,13 @@ public class PlayerMotion : MonoBehaviour
     protected void XZDirectional()
     {
         //Forward movement
-        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
+        Vector3 desiredMovement = transform.forward * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
 
         //Left Right
-        desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
+        desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
 
         //ascend descend.
-        desiredMovement += Vector3.up * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
+        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
 
         //apply movement vector
 
@@ -138,7 +148,7 @@ public class PlayerMotion : MonoBehaviour
             ALInput.GetAxis(ALInput.AxisCode.MouseY),
             ALInput.GetAxis(ALInput.AxisCode.MouseX),
             0
-        ) * turningSpeedRef * Time.deltaTime;
+        ) * m_turningSpeedRef * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);

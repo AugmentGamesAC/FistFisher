@@ -7,7 +7,7 @@ public class FishHealth
 {
     public FishHealth(float max)
     {
-        m_percTracker = new PercentageTracker(max);
+        m_percTracker = new PercentageTracker(new StatTracker(max));
         ResetCurrentAmount();
     }
 

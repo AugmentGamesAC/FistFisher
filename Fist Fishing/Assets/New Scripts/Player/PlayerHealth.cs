@@ -24,12 +24,14 @@ public class PlayerHealth
         return reference.m_percent.Current;
     }
 
-    public PlayerHealth(float max)
+    public PlayerHealth(StatTracker max)
     {
         m_percent = new PercentageTracker(max);
+
         ResetCurrentAmount();
 
         PlayerInstance.Instance.Oxygen.OnLowOxygen += Change;
+        max.OnChange += ResetCurrentAmount;
     }
 
     public void Change(float changeAmount)
@@ -43,11 +45,6 @@ public class PlayerHealth
     public void ResetCurrentAmount()
     {
         Change(m_percent.Max);
-    }
-
-    public void SetMax(float max)
-    {
-        m_percent.SetMax(max);
     }
 }
 

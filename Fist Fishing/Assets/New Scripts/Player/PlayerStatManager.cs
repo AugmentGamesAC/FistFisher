@@ -18,7 +18,7 @@ public enum Stats
 public class PlayerStatManager
 {
     [SerializeField]
-    protected Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
+    protected static Dictionary<Stats, StatTracker> m_statTrackerContainer = new Dictionary<Stats, StatTracker>();
 
     [SerializeField]
     protected float m_baseMaxHealth;
@@ -47,19 +47,34 @@ public class PlayerStatManager
 
     public StatTracker this[Stats value] { get { return m_statTrackerContainer[value]; } }
 
+    protected Dictionary<Stats, float> m_startingStats;
+
     public void Init()
     {
         m_statTrackerContainer = new Dictionary<Stats, StatTracker>()
         {
             { Stats.MaxHealth, new StatTracker(m_baseMaxHealth) },
-            { Stats.Stealth, new StatTracker(m_baseMaxHealth) },
-            { Stats.Power, new StatTracker(m_baseMaxHealth) },
-            { Stats.MaxAir, new StatTracker(m_baseMaxHealth) },
-            { Stats.AirConsumption, new StatTracker(m_baseMaxHealth) },
-            { Stats.AirRestoration, new StatTracker(m_baseMaxHealth) },
-            { Stats.MovementSpeed, new StatTracker(m_baseMaxHealth) },
-            { Stats.TurnSpeed, new StatTracker(m_baseMaxHealth) }
+            { Stats.Stealth, new StatTracker(m_baseStealth) },
+            { Stats.Power, new StatTracker(m_basePower) },
+            { Stats.MaxAir, new StatTracker(m_baseMaxAir) },
+            { Stats.AirConsumption, new StatTracker(m_baseAirConsumption) },
+            { Stats.AirRestoration, new StatTracker(m_baseAirRestoration) },
+            { Stats.MovementSpeed, new StatTracker(m_baseMoveSpeed) },
+            { Stats.TurnSpeed, new StatTracker(m_baseTurnSpeed) }
         };
+
+        m_startingStats = new Dictionary<Stats, float>()
+        {
+            { Stats.MaxHealth, m_baseMaxHealth },
+            { Stats.Stealth, m_baseStealth },
+            { Stats.Power, m_basePower },
+            { Stats.MaxAir, m_baseMaxAir },
+            { Stats.AirConsumption, m_baseAirConsumption },
+            { Stats.AirRestoration, m_baseAirRestoration },
+            { Stats.MovementSpeed, m_baseMoveSpeed },
+            { Stats.TurnSpeed, m_baseTurnSpeed }
+        };
+
     }
 
     /// <summary>
@@ -85,7 +100,7 @@ public class PlayerStatManager
         if (!m_statTrackerContainer.ContainsKey(statType))
             return false;
 
-        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + amount);
+        m_statTrackerContainer[statType].SetValue(m_statTrackerContainer[statType].MaxValue + m_startingStats[statType] * amount);
 
         return true;
     }
