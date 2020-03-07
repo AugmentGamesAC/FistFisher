@@ -10,8 +10,7 @@ public class CombatPrompt : Prompt
     {
         m_detectionRadius = PlayerInstance.Instance.PlayerMotion.SphereCastRadius;
 
-        if (m_collider == null)
-            m_collider = gameObject.AddComponent<SphereCollider>();
+        m_collider = gameObject.AddComponent<SphereCollider>();
 
         SphereCollider collider = (m_collider as SphereCollider);
         if (collider == default)
@@ -22,13 +21,5 @@ public class CombatPrompt : Prompt
         if (m_detectionRadius <= 0)
             return;
         collider.radius = m_detectionRadius;
-    }
-
-    //might need multiple prompts later but this overrides for now.
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<PlayerMotion>() == default)
-            return;
-        promptUpdater.UpdateUI(this);
     }
 }

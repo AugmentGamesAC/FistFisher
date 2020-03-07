@@ -6,34 +6,27 @@ using UnityEngine.UI;
 [System.Serializable, RequireComponent(typeof(Collider))]
 public class Prompt : MonoBehaviour
 {
+    /// <summary>
+    /// Lower the number more likely it will appear.
+    /// 0 is reserved as a null option
+    /// </summary>
     [SerializeField]
-    protected bool m_inZone = false;
-    public bool InZone => m_inZone;
+    protected int m_priority;
+    public int Priority => m_priority;
 
     [SerializeField]
-    protected ImageTracker m_display = new ImageTracker();
-    public ImageTracker Display => m_display;
+    protected Sprite m_display;
+    public Sprite Display => m_display;
 
     [SerializeField]
-    protected TextTracker m_description = new TextTracker();
-    public TextTracker Description => m_description;
-
-    protected PromptUpdater promptUpdater;
+    protected string m_description;
+    public string Description => m_description;
 
     protected Collider m_collider;
 
     private void Start()
     {
-        if (promptUpdater == default)
-            promptUpdater = FindObjectOfType<PromptUpdater>();//doesn't work because it's in Dont destroy on load.
-
-        if (promptUpdater == default)
-            throw new System.Exception("did not find promptUpdater!");
-
         m_collider = GetComponent<Collider>();
-        if (m_collider == null)
-            return;
-
         m_collider.isTrigger = true;
 
     }
@@ -43,18 +36,13 @@ public class Prompt : MonoBehaviour
         if (other.GetComponent<PlayerMotion>() == default)
             return;
 
-        //show prompt image.
-        m_inZone = true;
-        promptUpdater.UpdateUI(this);
+        PlayerInstance.Instance.PromptManager.RegisterPrompt(this);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerMotion>() == default)
             return;
-
-        //stop updating this ui element
-        m_inZone = false;
-        promptUpdater.UpdateUI(null);
+        PlayerInstance.Instance.PromptManager.DeregisterPrompt(this);
     }
 }
