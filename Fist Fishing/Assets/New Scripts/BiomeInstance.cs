@@ -4,7 +4,11 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-
+public delegate void CleanupCall();
+public interface IDyingThing
+{
+    event CleanupCall Death;
+}
 /// <summary>
 /// This class exists to handle all the biomes in scene
 /// </summary>
@@ -21,32 +25,38 @@ public class BiomeInstance : MonoBehaviour
 
     protected Dictionary<IEnumerable<ProbabilitySpawn>, int> m_memberCount;
 
-    protected IEnumerable<ProbabilitySpawn> m_aggresiveProbSpawn;
+    protected IEnumerable<ProbabilitySpawn> m_aggressiveProbSpawn;
     protected IEnumerable<ProbabilitySpawn> m_mehProbSpawn;
     protected IEnumerable<ProbabilitySpawn> m_preyProbSpawn;
     protected IEnumerable<ProbabilitySpawn> m_collectablesProbSpawn;
+    protected IEnumerable<ProbabilitySpawn> m_cluterProbSpawn;
 
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
-        currentCooldown = UnityEngine.Random.Range(0, 0.25f);
+        m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-        SpawnClutter();
+        currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
         m_memberCount = new Dictionary<IEnumerable<ProbabilitySpawn>, int>()
         {
-            {m_aggresiveProbSpawn   = m_myInstructions.AggressiveFishList.Cast<ProbabilitySpawn>() , 0},
+            {m_aggressiveProbSpawn  = m_myInstructions.AggressiveFishList.Cast<ProbabilitySpawn>() , 0},
             {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ProbabilitySpawn>()        , 0},
             {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ProbabilitySpawn>()       , 0},
-            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ProbabilitySpawn>()   , 0}
+            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ProbabilitySpawn>()   , 0},
+            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ProbabilitySpawn>()   , 0}
         };
-        
+
+        if ((m_myInstructions.ClutterList.Count > 0))
+            SpawnClutter();
+
     }
 
     protected float currentCooldown;
 
     public void Update()
     {
+        //Debug.Log("Biome update: " + currentCooldown);
         if (currentCooldown < 0)
         {
             ResolveSpawning();
@@ -61,24 +71,29 @@ public class BiomeInstance : MonoBehaviour
             return;
         if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
             return;
-        if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn])
+        if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn] && m_myInstructions.CollectablesList.Count >0)
         {
             m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
             return;
         }
-        if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn])
+        if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn] && m_myInstructions.PreyFishList.Count > 0)
         {
-            m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_preyProbSpawn)) ? 1 : 0;
             return;
         }
-        if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggresiveProbSpawn])
+        if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggressiveProbSpawn] && m_myInstructions.MehFishList.Count > 0)
         {
-            m_memberCount[m_mehProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            m_memberCount[m_mehProbSpawn] += (SpawnFromWeightedList(m_mehProbSpawn)) ? 1 : 0;
             return;
         }
-        if (m_memberCount[m_aggresiveProbSpawn] < m_memberCount[m_mehProbSpawn] )
-            m_memberCount[m_aggresiveProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+        if (m_memberCount[m_aggressiveProbSpawn] < m_memberCount[m_preyProbSpawn] && m_myInstructions.AggressiveFishList.Count > 0)
+        {
+            m_memberCount[m_aggressiveProbSpawn] += (SpawnFromWeightedList(m_aggressiveProbSpawn)) ? 1 : 0;
+            return;
+        }
     }
+
+
 
     protected bool SpawnFromWeightedList(IEnumerable<ProbabilitySpawn> list)
     {
@@ -86,7 +101,8 @@ public class BiomeInstance : MonoBehaviour
         foreach (ProbabilitySpawn possibbleSpawn in list)
             if ((rand -= possibbleSpawn.m_weightedChance) < 0)
             {
-                possibbleSpawn.Instatiate((possibbleSpawn.m_meshOverRide==default)?m_MeshCollider:possibbleSpawn.m_meshOverRide);
+                possibbleSpawn.Instatiate((possibbleSpawn.m_meshOverRide == default) ? m_MeshCollider : possibbleSpawn.m_meshOverRide)
+                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; Debug.Log(m_memberCount[list]); };
                 return true;
             }
         return false;
@@ -99,13 +115,15 @@ public class BiomeInstance : MonoBehaviour
     /// <param name="bd"></param>
     protected void SpawnClutter()
     {
-        if (m_collectablesProbSpawn.Count() == 0)
+        if (!(m_myInstructions.ClutterList.Count() > 0))
             return;
-        
-        int cluttercount = (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
 
-        while (cluttercount < m_myInstructions.ClutterCount)
-            cluttercount += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+        m_memberCount[m_cluterProbSpawn] = (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+
+        while (m_memberCount[m_cluterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
+        {
+            m_memberCount[m_cluterProbSpawn] += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+        }
     }
 
 
@@ -114,20 +132,19 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     /// <param name="bd"></param>
     /// <returns></returns>
-    protected Vector3 FindValidPosition()
+    public static Vector3 FindValidPosition(MeshCollider biome)
     {
-        //Collider c = bd.Mesh.GetComponent<Collider>();
-        Bounds b = m_MeshCollider.bounds;
+        Bounds b = biome.bounds;
 
         bool validPos = false;
-        Vector3 pos = Vector3.zero;
 
+        Vector3 pos = Vector3.zero;
         while (!validPos)
         {
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
             pos.y = UnityEngine.Random.Range(b.min.y, b.max.y);
             pos.z = UnityEngine.Random.Range(b.min.z, b.max.z);
-            if (IsInside(m_MeshCollider, pos))
+            if (IsInside(biome, pos))
                 validPos = true;
         }
         return pos;
@@ -145,7 +162,7 @@ public class BiomeInstance : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="radius"></param>
     /// <returns></returns>
-    protected bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
+    public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
         return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
     }
@@ -155,7 +172,7 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    protected Vector3 GetSeafloorPosition(Vector3 pos)
+    public static Vector3 GetSeafloorPosition(Vector3 pos)
     {
         RaycastHit hit;
         Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));

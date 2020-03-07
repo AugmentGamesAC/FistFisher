@@ -7,14 +7,16 @@ using System.Linq;
 /// <summary>
 /// this class stores the data needed to instantiate it as an object from biome manager and then spawn stuff
 /// </summary>
-[CreateAssetMenu(fileName = "New Biome Object", menuName = "Biome/Biome")]
+[CreateAssetMenu(fileName = "New Biome Object", menuName = "Biome/Biome Definition")]
 public class BiomeDefinition : ScriptableObject
 {
     #region variables
+    [SerializeField]
     protected float m_maximumNumberOfSpawns;
     public float MaxNumberOfSpawns => m_maximumNumberOfSpawns;
-    protected float m_clutterCount;
-    public float ClutterCount => m_clutterCount;
+    [SerializeField]
+    protected float m_amountOfClutterToSpawn;
+    public float AmountOfClutterToSpawn => m_amountOfClutterToSpawn;
 
     [SerializeField]
     protected List<ProbabilitySpawnClutter> m_clutter;

@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class ProbabilitySpawn<T,V>: ISpawnable where T:ISpawnable where V: UnityEngine.Object
+public interface IObject<T>
+{
+    T MemberwiseClone();
+}
+
+public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>
 {
     public GameObject Instatiate(MeshCollider m) { return m_spawnRefence.Instatiate(m); }
+
+    public new V MemberwiseClone() => (V)base.MemberwiseClone();
+
     public float m_weightedChance;
     public MeshCollider m_meshOverRide;
     [SerializeField]
     protected T m_spawnRefence;
-    //public V Clone( (V) this.meb )
+
 }
 
 
 [Serializable]
-public class ProbabilitySpawnClutter : ProbabilitySpawn<FishDefintion,ProbabilitySpawnClutter>
-{
-    public override GameObject Instatiate(MeshCollider m)
-    {
-        return m_spawnReference.Instatiate(m);
-    }
-    public override void Clone()
-    {
-        
-    }
-
-
-}
+public class ProbabilitySpawnClutter : ProbabilitySpawn<ClutterDefinition,ProbabilitySpawnClutter> {}
 [Serializable]
-public class ProbabilitySpawnCollectable : ProbabilitySpawn<FishDefintion, ProbabilitySpawnClutter> { }
-
+public class ProbabilitySpawnCollectable : ProbabilitySpawn<CollectableDefinition, ProbabilitySpawnCollectable> { }
 
 [Serializable]
 public class ProbabilitySpawnFish : ProbabilitySpawn<FishDefintion, ProbabilitySpawnFish> { }
+
+
+

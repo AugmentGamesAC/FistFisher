@@ -12,9 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0099f26a0656242a8bfe8f454355ef, type: 3}
   m_Name: SomeBiome
   m_EditorClassIdentifier: 
-  m_clutter: []
+  m_maximumNumberOfSpawns: 100
+  m_amountOfClutterToSpawn: 5
+  m_clutter:
+  - m_weightedChance: 1
+    m_meshOverRide: {fileID: 0}
+    m_spawnReference: {fileID: 11400000, guid: 56bac72bd9b752c4788189fd8dda2b18, type: 2}
   m_collectables: []
-  m_aggressiveFish: []
-  m_mehFish: []
-  m_preyFish: []
-  m_timeBetweenSpawns: 25
+  m_aggressiveFish:
+  - m_weightedChance: 1
+    m_meshOverRide: {fileID: 0}
+    m_spawnReference: {fileID: 11400000, guid: c6ebb17d564d97b48b43082b393c3b73, type: 2}
+  m_mehFish:
+  - m_weightedChance: 1
+    m_meshOverRide: {fileID: 0}
+    m_spawnReference: {fileID: 11400000, guid: e7461b9fe464e3d46b66a8edb5e181c5, type: 2}
+  m_preyFish:
+  - m_weightedChance: 1
+    m_meshOverRide: {fileID: 0}
+    m_spawnReference: {fileID: 11400000, guid: 1121a201c7a810240be7660c3d4546f6, type: 2}
+  m_timeBetweenSpawns: 2

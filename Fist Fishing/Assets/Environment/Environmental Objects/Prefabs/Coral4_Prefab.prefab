@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141012240691620191}
   m_Layer: 0
-  m_Name: Coral4_Model_Prefab
+  m_Name: Coral4_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3165254914154240844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.592607, y: -7.8089247, z: -9.975351}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.40635, y: 1.40635, z: 1.40635}
   m_Children:
   - {fileID: 8337551157841478657}
@@ -85,6 +85,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

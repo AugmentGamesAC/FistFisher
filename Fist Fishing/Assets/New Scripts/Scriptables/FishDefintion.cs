@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
     #region IFishData
@@ -59,11 +60,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     #region ModelReferences
     [SerializeField]
-    protected Mesh m_BaseModelRefence;
+    protected Mesh m_BaseModelReference;
     [SerializeField]
     protected GameObject m_BasicFish; 
     [SerializeField]
-    protected GameObject m_swimingHPDisplayRefence;
+    protected GameObject m_swimingHPDisplayReference;
+
+    private GameObject m_thisObject = null;
     #endregion
 
     public GameObject Instatiate(MeshCollider m)
@@ -72,14 +75,32 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
         coreFish.Init(this, this);
         //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
+        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
         HPRoot.transform.SetParent(FishRoot.transform);
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
 
 
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+
+        if (m == null)
+            return null;
+
+        Transform pos = FishRoot.transform;
+        float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
+        RaycastHit hit; //unused
+
+
+        do
+        {
+            pos.position = BiomeInstance.FindValidPosition(m);
+
+        } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+
+        m_thisObject = FishRoot;
+        return m_thisObject;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
@@ -99,5 +120,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         slot.RemoveItem();
 
         return true;
+    }
+
+    public bool Despawn()
+    {
+        if (m_thisObject == default)
+            return false;
+        m_thisObject.SetActive(false);
+        return m_thisObject.activeSelf;
     }
 }
