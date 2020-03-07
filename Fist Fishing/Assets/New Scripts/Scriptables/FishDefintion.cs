@@ -52,6 +52,10 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     protected string m_name;
     public string Name => m_name;
 
+    public float WeightedChance => throw new System.NotImplementedException();
+
+    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
+
     public bool CanMerge(IItem newItem)
     {
         return false;
@@ -68,6 +72,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     private GameObject m_thisObject = null;
     #endregion
+
+
 
     public GameObject Instatiate(MeshCollider m)
     {
@@ -122,11 +128,4 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return true;
     }
 
-    public bool Despawn()
-    {
-        if (m_thisObject == default)
-            return false;
-        m_thisObject.SetActive(false);
-        return m_thisObject.activeSelf;
-    }
 }

@@ -47,13 +47,12 @@ public class BiomeDefinition : ScriptableObject
     #endregion variables
     protected BiomeDefinition CloneSelf(BiomeDefinition biome)
     {
-        m_clutterCount = biome.m_clutterCount;
         m_maximumNumberOfSpawns = biome.m_maximumNumberOfSpawns;
-        m_clutter = biome.m_clutter.Select(x=>x).ToList();
-        m_collectables = biome.m_collectables.ToList();
-        m_aggressiveFish = biome.m_aggressiveFish.ToList();
-        m_mehFish = biome.m_mehFish.ToList();
-        m_preyFish = biome.m_preyFish.ToList();
+        m_clutter = biome.m_clutter.Select(x=>x.MemberwiseClone()).ToList();
+        m_collectables = biome.m_collectables.Select(x => x.MemberwiseClone()).ToList();
+        m_aggressiveFish = biome.m_aggressiveFish.Select(x => x.MemberwiseClone()).ToList();
+        m_mehFish = biome.m_mehFish.Select(x => x.MemberwiseClone()).ToList();
+        m_preyFish = biome.m_preyFish.Select(x => x.MemberwiseClone()).ToList();
         m_name = biome.m_name;
         m_boatMapColour = biome.m_boatMapColour;
         m_timeBetweenSpawns = biome.m_timeBetweenSpawns; 
@@ -71,15 +70,15 @@ public class BiomeDefinition : ScriptableObject
 
     public void Start()
     {
-        if ((m_clutter.Count > 0) && m_clutter.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_clutter.Count > 0) && m_clutter.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Clutters weightedAverage doesn't sum to 1");
-        if ((m_collectables.Count > 0) && m_collectables.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_collectables.Count > 0) && m_collectables.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Collectables weightedAverage doesn't sum to 1");
-        if ((m_aggressiveFish.Count > 0) && m_aggressiveFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_aggressiveFish.Count > 0) && m_aggressiveFish.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Aggressive Fish weightedAverage doesn't sum to 1");
-        if ((m_mehFish.Count > 0) && m_mehFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_mehFish.Count > 0) && m_mehFish.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Meh Fish weightedAverage doesn't sum to 1");
-        if ((m_preyFish.Count > 0) && m_preyFish.Select(X => X.m_weightedChance).Sum() != 1)
+        if ((m_preyFish.Count > 0) && m_preyFish.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Prey Fish weightedAverage doesn't sum to 1");
     }
 

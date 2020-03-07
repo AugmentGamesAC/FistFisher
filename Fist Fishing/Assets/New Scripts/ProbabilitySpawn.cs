@@ -8,16 +8,20 @@ public interface IObject<T>
     T MemberwiseClone();
 }
 
-public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>
+public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
 {
     public GameObject Instatiate(MeshCollider m) { return m_spawnRefence.Instatiate(m); }
 
     public new V MemberwiseClone() => (V)base.MemberwiseClone();
-
-    public float m_weightedChance;
-    public MeshCollider m_meshOverRide;
+    [SerializeField]
+    protected float m_weightedChance;
+    public float WeightedChance => m_weightedChance;
+    [SerializeField]
+    protected MeshCollider m_meshOverRide;
+    public MeshCollider MeshOverRide => m_meshOverRide;
     [SerializeField]
     protected T m_spawnRefence;
+
 
 }
 
@@ -27,7 +31,7 @@ public class ProbabilitySpawnClutter : ProbabilitySpawn<ClutterDefinition,Probab
 [Serializable]
 public class ProbabilitySpawnCollectable : ProbabilitySpawn<CollectableDefinition, ProbabilitySpawnCollectable> { }
 
-[Serializable]
+[Serializable] 
 public class ProbabilitySpawnFish : ProbabilitySpawn<FishDefintion, ProbabilitySpawnFish> { }
 
 
