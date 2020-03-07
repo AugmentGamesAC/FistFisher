@@ -28,7 +28,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_oxygen = new OxygenTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MaxAir]);
         m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
 
-        m_clamsUpdater.UpdateTracker(m_clams);
+        //m_clamsUpdater.UpdateTracker(m_clams);
+
 
 
         Debug.Log("Don't forget to SetTrackers: stealth and damage");

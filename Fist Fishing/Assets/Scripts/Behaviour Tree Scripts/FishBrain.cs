@@ -27,7 +27,14 @@ public class FishBrain : BehaviorTree
         BaitSensitive3      = 0x000400,
         BaitSensitive4      = 0x000800,
         IsBait              = BaitSensitive1 | BaitSensitive2 | BaitSensitive3 | BaitSensitive4,
-        FavoredPlant1       = 0x010000
+
+        RepellentStrength1  = 0x000010,
+        RepellentStrength2  = 0x000020,
+        RepellentStrength3  = 0x000040,
+        RepellentStrength4  = 0x000080,
+        IsRepellent         = RepellentStrength1 | RepellentStrength2 | RepellentStrength3 | RepellentStrength4,
+
+        FavoredPlant1 = 0x010000
     }
 
     static public string TargetName  = "defaultGoal";
