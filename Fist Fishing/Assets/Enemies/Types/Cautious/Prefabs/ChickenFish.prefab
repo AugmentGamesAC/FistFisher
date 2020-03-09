@@ -744,6 +744,7 @@ GameObject:
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
   - component: {fileID: 2110840545424256968}
+  - component: {fileID: -3442607511342579574}
   m_Layer: 10
   m_Name: ChickenFish
   m_TagString: Fish
@@ -800,6 +801,7 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 2
+  promptPrefab: {fileID: 0}
 --- !u!114 &7027024320410773115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,6 +864,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.125
   m_Center: {x: 0, y: 0, z: 0.2}
+--- !u!114 &-3442607511342579574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424311146307238979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130f459ff5547b3409b657540b694bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_priority: 10
+  m_display: {fileID: 21300000, guid: 96202c234be17f649a03b622271bef3f, type: 3}
+  m_description: '{0} P for Combat Start! Fish'
 --- !u!1 &8567224104664165731
 GameObject:
   m_ObjectHideFlags: 0
