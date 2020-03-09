@@ -33,6 +33,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_clamsUpdater.UpdateTracker(m_clams);
 
 
+
         Debug.Log("Don't forget to SetTrackers: stealth and damage");
         //m_playerStatManager.SetTracker(Stats.Power, damageTracker);
         //m_playerStatManager.SetTracker(Stats.Stealth, noiseTracker);
