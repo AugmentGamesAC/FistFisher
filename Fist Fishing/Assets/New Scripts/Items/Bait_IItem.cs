@@ -28,7 +28,7 @@ public class Bait_IItem : ScriptableObject, IItem
     protected string m_name;
     public string Name => m_name;
     [SerializeField]
-    protected FishBrain.FishClassification m_currentBaitType = FishBrain.FishClassification.BaitSensitive1;
+    protected FishBrain.FishClassification m_currentBaitType;
     [SerializeField]
     public FishBrain.FishClassification BaitType { get { return m_currentBaitType; } set { m_currentBaitType = value; } }
 
@@ -47,17 +47,10 @@ public class Bait_IItem : ScriptableObject, IItem
     {
         return false;
     }
-    /// <summary>
-    /// Decriments the active turn count of a bait that is out in combat
-    /// </summary>
-    /// <param name="value">The number of turns to decriment by</param>
-    public void DecrimentActiveTurnCount ()
-    {
-        TurnCount --;
-    }
+ 
     public bool IsStillActive()
     {
-        DecrimentActiveTurnCount();
+        TurnCount--;
         return TurnCount <= 0;
     }
 }

@@ -244,17 +244,14 @@ public class CombatManager : MonoBehaviour
     /// Grabs selected item from the player's itemPinwheel.
     /// </summary>
     protected void PlayerItem()
-    {
-
+    { 
         //Set bool that item is now in play
         m_isItemActive = true;
-
         //FOR TESTING SET ITEM TO BAIT OR REPELLENT
         m_Baititem = (Bait_IItem)ScriptableItems[0];
-      //  m_RepellentItem = (Repellent_IItem)ScriptableItems[1];
-
         //Apply effect to the combat (None yet till pinwheel).
-
+        //Set Active turn count to default
+        m_Baititem.TurnCount = default;
         //Get the player's current pinwheel choice.
 
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
@@ -345,40 +342,38 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    protected void ResolveBait(FishCombatInfo fish)
+    {
+        //Check if bait
+        if (m_Baititem.BaitType == FishBrain.FishClassification.IsBait)
+        {
+            if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
+                fish.ChangeDirection(-1);               //update fish direction using the appropriate direction 
+
+        }
+        //Check if repellent
+        if (m_Baititem.BaitType == FishBrain.FishClassification.IsRepellent)
+        {
+            if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
+                fish.ChangeDirection(1);               //update fish direction using the appropriate direction 
+
+        }
+        Debug.Log("Fish was affected by item");
+
+
+    }
 
     protected float ResolveFishDirection(FishCombatInfo fish)
     {
-        //To be changed once pinwheels playercombatinfo is finished
+        //Check if there is a bait resolve behaviour movement
+        if (m_isItemActive == false)
+            return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
 
-        //BAIT TESTING
-        //Check if there is an item (bait) & if the fish is sensitive to the item (bait)
-        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType)))
-        {
-            Debug.Log("Fish Moved Toward Bait");
-            //decrease the active turns by 1
-         
-            //update fish direction using the bait direction 
-            fish.ChangeDirection(-1);
-            //Check if item should still be active after this turn
-            m_isItemActive = m_Baititem.IsStillActive();
-            return fish.Speed;
-        }
-        //REPELLENT TESTING
-        //Check if there is an item (repell) & if the fish is sensitive to the item (repell)
-        if (m_isItemActive != false && (fish.FishInstance.FishData.FishClassification.HasFlag(m_RepellentItem.RepellentType)))
-        {
-            Debug.Log("Fish Moved Toward Bait");
-            //decrease the active turns by 1
-
-            //update fish direction using the bait direction 
-            fish.ChangeDirection(1);
-            //Check if item should still be active after this turn
-            m_isItemActive = m_RepellentItem.IsStillActive();
-            return fish.Speed;
-        }
-
-        Debug.Log("Fish Moved due to behaviour");
-        return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
+        //Resolve Bait changes
+        ResolveBait(fish);
+        //Check if item should still be active after this turn
+        m_isItemActive = m_Baititem.IsStillActive();
+        return fish.Speed;
     }
 
     protected void ResolveAddFish(FishCombatInfo fish)
