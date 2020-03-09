@@ -24,11 +24,14 @@ public class Prompt : MonoBehaviour
 
     protected Collider m_collider;
 
-    private void Start()
+    public virtual void Init(Sprite sprite, string desc, int priority = 1)
     {
+        m_display = sprite;
+        m_description = desc;
+        m_priority = priority;
+
         m_collider = GetComponent<Collider>();
         m_collider.isTrigger = true;
-
     }
 
     private void OnTriggerEnter(Collider other)

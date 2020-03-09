@@ -59,14 +59,13 @@ public class BasicFish : MonoBehaviour
         //TODO: clean
         m_behaviour = GetComponent<BehaviorTree>();
 
-        if (promptPrefab == null)
-            return;
-        Instantiate(promptPrefab, transform);
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
     }
     private void HandleDeath()
     {
         //ObjectPool should Handle fish.
         gameObject.SetActive(false);
-        //m_behaviour.enabled = false;
+        //TODO: Fix prompt disapearing during combat.
     }
 }
