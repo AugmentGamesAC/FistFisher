@@ -859,7 +859,6 @@ GameObject:
   - component: {fileID: 7027024320410773115}
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
-  - component: {fileID: 2110840545424256968}
   - component: {fileID: 8562901438202665574}
   - component: {fileID: -6225508407773902923}
   m_Layer: 10
@@ -914,6 +913,7 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 2
+  promptPrefab: {fileID: 0}
 --- !u!114 &7027024320410773115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,19 +963,6 @@ MonoBehaviour:
   m_regenDelay: 3
   m_regenRate: 5
   m_HealthSlider: {fileID: 698346547}
---- !u!135 &2110840545424256968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7424311146307238979}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0, z: 0.2}
 --- !u!114 &8562901438202665574
 MonoBehaviour:
   m_ObjectHideFlags: 0

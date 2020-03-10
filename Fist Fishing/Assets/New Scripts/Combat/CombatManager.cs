@@ -98,6 +98,8 @@ public class CombatManager : MonoBehaviour
 
     public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes, PlayerMotion player = default(PlayerMotion))
     {
+
+        PlayerInstance.Instance.PromptManager.HideCurrentPrompt();
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
         PlayerInstance.Instance.Health.OnMinimumAmountReached -= EndCombat;
@@ -331,6 +333,8 @@ public class CombatManager : MonoBehaviour
     {
         if (fishCombatInfo.FishInstance.Health.CurrentAmount > 0)
             return false;
+
+        PlayerInstance.Instance.PromptManager.DeregisterPrompt(fishCombatInfo.FishInstance.FishPrompt);
 
         m_deadFishPile.Add(fishCombatInfo);
         m_FishSelection.Remove(fishCombatInfo);

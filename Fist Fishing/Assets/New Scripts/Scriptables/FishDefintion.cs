@@ -77,8 +77,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
-
-
         throw new System.NotImplementedException();
     }
 

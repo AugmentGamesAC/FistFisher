@@ -9,22 +9,13 @@ public class CombatPrompt : Prompt
 
     public override void Init(Sprite sprite, string desc, int priority = 1)
     {
-        base.Init(sprite, desc, priority);
-
         m_detectionRadius = PlayerInstance.Instance.PlayerMotion.SphereCastRadius;
 
-        m_collider = gameObject.AddComponent<SphereCollider>();
-
-        SphereCollider collider = (m_collider as SphereCollider);
-        if (collider == default)
-            return;
-
-        collider.isTrigger = true;
-
         if (m_detectionRadius <= 0)
-            return;
-        collider.radius = m_detectionRadius;
+            throw new System.InvalidOperationException( "Radius must be > 0");
 
-        m_collider = collider;
+        gameObject.AddComponent<SphereCollider>().radius = m_detectionRadius;
+
+        base.Init(sprite, desc, priority);
     }
 }

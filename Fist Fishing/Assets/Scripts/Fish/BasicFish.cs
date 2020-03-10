@@ -53,14 +53,14 @@ public class BasicFish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_fish = new FishInstance(m_fishDef);
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_fish = new FishInstance(m_fishDef, prompt);
         m_fish.Health.OnMinimumHealthReached += HandleDeath;
 
         //TODO: clean
         m_behaviour = GetComponent<BehaviorTree>();
-
-        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
-        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
     }
     private void HandleDeath()
     {
