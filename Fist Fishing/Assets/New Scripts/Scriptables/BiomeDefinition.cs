@@ -34,7 +34,7 @@ public class BiomeDefinition : ScriptableObject
     public List<ProbabilitySpawnFish> AggressiveFishList => m_aggressiveFish;
     public List<ProbabilitySpawnFish> MehFishList => m_mehFish;
     public List<ProbabilitySpawnFish> PreyFishList => m_preyFish;
-
+    [SerializeField]
     protected string m_name;
     public string Name => m_name;
 
@@ -45,13 +45,14 @@ public class BiomeDefinition : ScriptableObject
 
 
     #endregion variables
-    protected BiomeDefinition CloneSelf(BiomeDefinition biome)
+    protected BiomeDefinition CloneSelf(string NewCloneName, BiomeDefinition biome)
     {
         m_clutter = biome.m_clutter.Select(x=>x.MemberwiseClone()).ToList();
         m_collectables = biome.m_collectables.Select(x => x.MemberwiseClone()).ToList();
         m_aggressiveFish = biome.m_aggressiveFish.Select(x => x.MemberwiseClone()).ToList();
         m_mehFish = biome.m_mehFish.Select(x => x.MemberwiseClone()).ToList();
         m_preyFish = biome.m_preyFish.Select(x => x.MemberwiseClone()).ToList();
+        m_name = NewCloneName;
         return this;
     }
 
@@ -59,7 +60,8 @@ public class BiomeDefinition : ScriptableObject
     {
         BiomeDefinition newME = Instantiate(this);
         newME.name = NewCloneName;
-        return newME.CloneSelf(this);
+
+        return newME.CloneSelf(NewCloneName,this);
     }
 
 

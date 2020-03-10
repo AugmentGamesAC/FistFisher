@@ -33,10 +33,13 @@ public class ZoneStamper : MonoBehaviour
     [ContextMenu("StampZone")]
     public void DuplicateBiome()
     {
-        GameObject.Destroy(GameObject.Instantiate(this).GetComponent<ZoneStamper>().GetComponent<ZoneStamper>());
+        var myclone = GameObject.Instantiate(this);
+        myclone.name = Biome.Definiton.Name;
+        GameObject.DestroyImmediate(myclone.GetComponent<ZoneStamper>());
+
     }
 
-    [ContextMenu("NewBiomeandStamp")]
+    [ContextMenu("StampAndNewBiome")]
     public void CreateBiomeObject()
     {
         CloneBiomeDefiniton();
