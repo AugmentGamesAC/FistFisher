@@ -24,7 +24,6 @@ public class BiomeInstance : MonoBehaviour
 
 
     protected Dictionary<IEnumerable<ISpawnable>, int> m_memberCount;
-
     protected IEnumerable<ISpawnable> m_aggressiveProbSpawn;
     protected IEnumerable<ISpawnable> m_mehProbSpawn;
     protected IEnumerable<ISpawnable> m_preyProbSpawn;

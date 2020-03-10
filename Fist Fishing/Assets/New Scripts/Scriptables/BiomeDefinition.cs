@@ -47,23 +47,18 @@ public class BiomeDefinition : ScriptableObject
     #endregion variables
     protected BiomeDefinition CloneSelf(BiomeDefinition biome)
     {
-        m_maximumNumberOfSpawns = biome.m_maximumNumberOfSpawns;
         m_clutter = biome.m_clutter.Select(x=>x.MemberwiseClone()).ToList();
         m_collectables = biome.m_collectables.Select(x => x.MemberwiseClone()).ToList();
         m_aggressiveFish = biome.m_aggressiveFish.Select(x => x.MemberwiseClone()).ToList();
         m_mehFish = biome.m_mehFish.Select(x => x.MemberwiseClone()).ToList();
         m_preyFish = biome.m_preyFish.Select(x => x.MemberwiseClone()).ToList();
-        m_name = biome.m_name;
-        m_boatMapColour = biome.m_boatMapColour;
-        m_timeBetweenSpawns = biome.m_timeBetweenSpawns; 
         return this;
     }
 
     public BiomeDefinition CloneSelf(string NewCloneName)
     {
-        BiomeDefinition newME = ScriptableObject.CreateInstance<BiomeDefinition>();
+        BiomeDefinition newME = Instantiate(this);
         newME.name = NewCloneName;
-
         return newME.CloneSelf(this);
     }
 
