@@ -13,6 +13,10 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     protected GameObject m_BasicClutter;
 
     private GameObject m_thisObject = null;
+
+    public float WeightedChance => throw new System.NotImplementedException();
+
+    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
     #endregion
     public GameObject Instatiate(MeshCollider m)
     {
@@ -31,13 +35,5 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         }
 
         return m_thisObject;
-    }
-
-    public bool Despawn()
-    {
-        if (m_thisObject == default)
-            return false;
-        m_thisObject.SetActive(false);
-        return m_thisObject.activeSelf;
     }
 }
