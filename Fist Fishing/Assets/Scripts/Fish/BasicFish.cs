@@ -32,7 +32,7 @@ public class BasicFish : MonoBehaviour
 
     [SerializeField]
     protected FishBrain.FishClassification m_fishClass = FishBrain.FishClassification.Fearful;
-    public FishBrain.FishClassification FishClass {  get { return m_fishClass; } }
+    public FishBrain.FishClassification FishClass { get { return m_fishClass; } }
 
     public Transform LookFrom;
     public FishSpawner Spawner;
@@ -47,6 +47,9 @@ public class BasicFish : MonoBehaviour
     protected BehaviorTree m_behaviour;
     protected HealthModule m_healthModule;
 
+    [SerializeField]
+    protected CombatPrompt promptPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,10 @@ public class BasicFish : MonoBehaviour
 
         //TODO: clean
         m_behaviour = GetComponent<BehaviorTree>();
+
+        if (promptPrefab == null)
+            return;
+        Instantiate(promptPrefab, transform);
     }
     private void HandleDeath()
     {
