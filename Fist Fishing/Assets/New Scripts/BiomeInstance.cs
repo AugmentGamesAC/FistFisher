@@ -19,14 +19,16 @@ public class BiomeInstance : MonoBehaviour
 
     [SerializeField]
     protected BiomeDefinition m_myInstructions;
+    public BiomeDefinition Definiton { get => m_myInstructions; set => m_myInstructions = value; }
 
-    protected Dictionary<IEnumerable<ProbabilitySpawn>, int> m_memberCount;
 
-    protected IEnumerable<ProbabilitySpawn> m_aggressiveProbSpawn;
-    protected IEnumerable<ProbabilitySpawn> m_mehProbSpawn;
-    protected IEnumerable<ProbabilitySpawn> m_preyProbSpawn;
-    protected IEnumerable<ProbabilitySpawn> m_collectablesProbSpawn;
-    protected IEnumerable<ProbabilitySpawn> m_cluterProbSpawn;
+
+    protected Dictionary<IEnumerable<ISpawnable>, int> m_memberCount;
+    protected IEnumerable<ISpawnable> m_aggressiveProbSpawn;
+    protected IEnumerable<ISpawnable> m_mehProbSpawn;
+    protected IEnumerable<ISpawnable> m_preyProbSpawn;
+    protected IEnumerable<ISpawnable> m_collectablesProbSpawn;
+    protected IEnumerable<ISpawnable> m_cluterProbSpawn;
 
     public void Start()
     {
@@ -35,13 +37,13 @@ public class BiomeInstance : MonoBehaviour
 
         currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
-        m_memberCount = new Dictionary<IEnumerable<ProbabilitySpawn>, int>()
+        m_memberCount = new Dictionary<IEnumerable<ISpawnable>, int>()
         {
-            {m_aggressiveProbSpawn  = m_myInstructions.AggressiveFishList.Cast<ProbabilitySpawn>() , 0},
-            {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ProbabilitySpawn>()        , 0},
-            {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ProbabilitySpawn>()       , 0},
-            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ProbabilitySpawn>()   , 0},
-            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ProbabilitySpawn>()   , 0}
+            {m_aggressiveProbSpawn  = m_myInstructions.AggressiveFishList.Cast<ISpawnable>() , 0},
+            {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
+            {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
+            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
+            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()   , 0}
         };
 
         if ((m_myInstructions.ClutterList.Count > 0))
@@ -92,13 +94,13 @@ public class BiomeInstance : MonoBehaviour
 
 
 
-    protected bool SpawnFromWeightedList(IEnumerable<ProbabilitySpawn> list)
+    protected bool SpawnFromWeightedList(IEnumerable<ISpawnable> list)
     {
         float rand = UnityEngine.Random.Range(0, 1.0f);
-        foreach (ProbabilitySpawn possibbleSpawn in list)
-            if ((rand -= possibbleSpawn.m_weightedChance) < 0)
+        foreach (ISpawnable possibbleSpawn in list)
+            if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
-                possibbleSpawn.Instatiate((possibbleSpawn.m_meshOverRide == default) ? m_MeshCollider : possibbleSpawn.m_meshOverRide)
+                possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide)
                     .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; Debug.Log(m_memberCount[list]); };
                 return true;
             }

@@ -3277,8 +3277,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 500646748}
+  - component: {fileID: 500646751}
+  - component: {fileID: 500646750}
+  - component: {fileID: 500646749}
   m_Layer: 0
-  m_Name: DummyZone
+  m_Name: ZoneStamper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3294,11 +3297,50 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -61.0449, y: -45.5, z: 19.27846}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 6835997776106211502}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &500646749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500646747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ab00d4f8031cc45b2c797f5eb92f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewBiomeName: newthingy
+--- !u!114 &500646750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500646747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: a8556b69aea11664c99a5561eab1c4ae, type: 2}
+--- !u!64 &500646751
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500646747}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9209452786486236677, guid: f84c448fd40615a4e9c8bb1df8340b6f, type: 3}
 --- !u!1 &502545362
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,6 +4611,65 @@ MonoBehaviour:
         m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 663622157}
+--- !u!1 &666487862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666487865}
+  - component: {fileID: 666487864}
+  - component: {fileID: 666487863}
+  m_Layer: 0
+  m_Name: SomeBiome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &666487863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666487862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: a8556b69aea11664c99a5561eab1c4ae, type: 2}
+--- !u!64 &666487864
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666487862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9209452786486236677, guid: f84c448fd40615a4e9c8bb1df8340b6f, type: 3}
+--- !u!4 &666487865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666487862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -61.0449, y: -45.5, z: 19.27846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674886782
 GameObject:
   m_ObjectHideFlags: 0
@@ -6506,7 +6607,6 @@ MonoBehaviour:
     values: []
   m_currentNoiseState: 0
   m_isItemActive: 0
-  m_item: {fileID: 0}
   m_aggressiveFishToSpawn: []
   m_deadFishPile: []
   ScriptablePlayerMoves:
@@ -15478,51 +15578,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &5200463348696517223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6835997776106211502}
-  - component: {fileID: 5200463348696517224}
-  - component: {fileID: 5200463348696517225}
-  m_Layer: 0
-  m_Name: isntthename
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &5200463348696517224
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5200463348696517223}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1162548567411819558, guid: 8c9019ea631863147966add95181c631, type: 3}
---- !u!114 &5200463348696517225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5200463348696517223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_myInstructions: {fileID: 11400000, guid: a8556b69aea11664c99a5561eab1c4ae, type: 2}
 --- !u!4 &5339289674734664030
 Transform:
   m_ObjectHideFlags: 0
@@ -16086,20 +16141,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6604031806827691355}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6835997776106211502
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5200463348696517223}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 500646748}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &6880655647181436953
 RectTransform:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ public class TestingCombatManager : CombatManager
     private void Start()
     {
         m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+        if (m_playerCombatInfo == null)
+            throw new System.InvalidOperationException();
 
         m_attackPinwheelUpdater = GetComponentInChildren<AttackPinwheelUpdater>();
 
@@ -53,7 +55,7 @@ public class TestingCombatManager : CombatManager
 
     protected void AddFishTest(FishDefintion fish)
     {
-        ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
+        //ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
     }
 
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
@@ -61,7 +63,7 @@ public class TestingCombatManager : CombatManager
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
 
-        base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
+        //base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
     }
 
 

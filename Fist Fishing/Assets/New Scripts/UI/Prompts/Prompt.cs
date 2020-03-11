@@ -3,53 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable, RequireComponent(typeof(Collider))]
+[System.Serializable]
 public class Prompt : MonoBehaviour
 {
+    /// <summary>
+    /// Lower the number more likely it will appear.
+    /// 0 is reserved as a null option
+    /// </summary>
     [SerializeField]
-    protected bool m_inZone = false;
-    public bool InZone => m_inZone;
+    protected int m_priority;
+    public int Priority => m_priority;
 
     [SerializeField]
-    protected ImageTracker m_display = new ImageTracker();
-    public ImageTracker Display => m_display;
+    protected Sprite m_display;
+    public Sprite Display => m_display;
 
     [SerializeField]
-    protected TextTracker m_description = new TextTracker();
-    public TextTracker Description => m_description;
+    protected string m_description;
+    public string Description => m_description;
 
-    protected PromptUpdater promptUpdater;
+    protected Collider m_collider;
 
-    private void Start()
+    public delegate void CombatStarts();
+    public event CombatStarts OnCombatStart;
+
+    public virtual void Init(Sprite sprite, string desc, int priority = 1)
     {
-        Collider collider = GetComponent<Collider>();
-        collider.isTrigger = true;
+        m_display = sprite;
+        m_description = desc;
+        m_priority = priority;
 
-        promptUpdater = FindObjectOfType<PromptUpdater>();
+        m_collider = GetComponent<Collider>();
+        m_collider.isTrigger = true;
 
-        if (promptUpdater == default)
-            throw new System.Exception("did not find promptUpdater!");
+        OnCombatStart += Prompt_OnCombatStart;
+    }
+
+    private void Prompt_OnCombatStart()
+    {
+        PlayerInstance.Instance.PromptManager.DeregisterPrompt(this);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMotion check = other.GetComponent<PlayerMotion>();
-        if (check == default)
+        if (other.GetComponent<PlayerMotion>() == default)
             return;
 
-        //show prompt image.
-        m_inZone = true;
-        promptUpdater.UpdateUI(this);
+        PlayerInstance.Instance.PromptManager.RegisterPrompt(this);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerMotion check = other.GetComponent<PlayerMotion>();
-        if (check == default)
+        if (other.GetComponent<PlayerMotion>() == default)
             return;
-
-        //stop updating this ui element
-        m_inZone = false;
-        promptUpdater.UpdateUI(null);
+        PlayerInstance.Instance.PromptManager.DeregisterPrompt(this);
     }
 }

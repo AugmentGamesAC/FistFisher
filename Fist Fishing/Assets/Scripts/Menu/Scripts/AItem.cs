@@ -8,6 +8,7 @@ public enum ItemType
     Default = -1,
     Currency,
     Bait,
+    Repellent,
     Harvestable,
     Fish,
     Equipment,

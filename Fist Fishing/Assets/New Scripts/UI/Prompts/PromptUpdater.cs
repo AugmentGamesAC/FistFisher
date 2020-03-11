@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class PromptUpdater : CoreUIElement<Prompt>
+
+[RequireComponent(typeof(PromptElement))]
+public class PromptUpdater : CoreUIUpdater<UITracker<PromptManager>, PromptElement, PromptManager>
 {
-    [SerializeField]
-    protected ImageUpdater m_promptDisplayUpdater;
-
-    [SerializeField]
-    protected TextUpdater m_textUpdater;
-    //Possible description updater 
-
-    public override void UpdateUI(Prompt newData)
+    public void Start()
     {
-        if (!ShouldUpdateUI(newData))
-            return;
+        UpdateTracker(PlayerInstance.Instance.PromptManager);
+    }
 
-        m_promptDisplayUpdater.UpdateTracker(newData.Display);
-        m_textUpdater.UpdateTracker(newData.Description);
+
+    protected override void UpdateState(PromptManager value)
+    {
+        m_UIElement.UpdateUI(value);
     }
 }
+
+
