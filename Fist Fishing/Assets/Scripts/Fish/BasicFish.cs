@@ -53,20 +53,19 @@ public class BasicFish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_fish = new FishInstance(m_fishDef);
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_fish = new FishInstance(m_fishDef, prompt);
         m_fish.Health.OnMinimumHealthReached += HandleDeath;
 
         //TODO: clean
         m_behaviour = GetComponent<BehaviorTree>();
-
-        if (promptPrefab == null)
-            return;
-        Instantiate(promptPrefab, transform);
     }
     private void HandleDeath()
     {
         //ObjectPool should Handle fish.
         gameObject.SetActive(false);
-        //m_behaviour.enabled = false;
+        //TODO: Fix prompt disapearing during combat.
     }
 }
