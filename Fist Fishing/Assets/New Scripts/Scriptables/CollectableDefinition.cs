@@ -6,8 +6,8 @@ using UnityEngine;
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
-    [SerializeField]
-    protected Mesh m_BaseModelReference;
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicCollectable;
 

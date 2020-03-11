@@ -63,8 +63,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     #endregion
 
     #region ModelReferences
-    [SerializeField]
-    protected Mesh m_BaseModelReference;
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicFish; 
     [SerializeField]

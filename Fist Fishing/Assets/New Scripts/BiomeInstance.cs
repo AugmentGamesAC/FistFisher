@@ -101,7 +101,7 @@ public class BiomeInstance : MonoBehaviour
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
                 possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide)
-                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; Debug.Log(m_memberCount[list]); };
+                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; /*Debug.Log(m_memberCount[list]);*/ };
                 return true;
             }
         return false;

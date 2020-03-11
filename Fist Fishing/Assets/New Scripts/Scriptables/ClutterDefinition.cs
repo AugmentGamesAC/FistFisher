@@ -7,8 +7,8 @@ using UnityEngine;
 public class ClutterDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
-    [SerializeField]
-    protected Mesh m_BaseModelReference;
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicClutter;
 
