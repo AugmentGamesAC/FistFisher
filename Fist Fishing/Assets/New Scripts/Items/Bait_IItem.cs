@@ -33,7 +33,7 @@ public class Bait_IItem : ScriptableObject, IItem
     public FishBrain.FishClassification BaitType { get { return m_currentBaitType; } set { m_currentBaitType = value; } }
 
     [SerializeField]
-    protected int m_activeTurnCount;
+    protected int m_activeTurnCount = 2;
     public int TurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
     public bool CanMerge(IItem newItem)
     {
@@ -51,6 +51,6 @@ public class Bait_IItem : ScriptableObject, IItem
     public bool IsStillActive()
     {
         TurnCount--;
-        return TurnCount <= 0;
+        return TurnCount > 0;
     }
 }

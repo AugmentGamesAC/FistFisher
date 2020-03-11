@@ -251,7 +251,7 @@ public class CombatManager : MonoBehaviour
         m_Baititem = (Bait_IItem)ScriptableItems[0];
         //Apply effect to the combat (None yet till pinwheel).
         //Set Active turn count to default
-        m_Baititem.TurnCount = default;
+        m_Baititem.TurnCount = 2;
         //Get the player's current pinwheel choice.
 
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
@@ -345,14 +345,14 @@ public class CombatManager : MonoBehaviour
     protected void ResolveBait(FishCombatInfo fish)
     {
         //Check if bait
-        if (m_Baititem.BaitType == FishBrain.FishClassification.IsBait)
+        if (m_Baititem.BaitType == FishBrain.FishClassification.BaitSensitive1)// FishBrain.FishClassification.IsBait) NEED TO UNDERSTAND THIS!!!!!
         {
             if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
                 fish.ChangeDirection(-1);               //update fish direction using the appropriate direction 
 
         }
         //Check if repellent
-        if (m_Baititem.BaitType == FishBrain.FishClassification.IsRepellent)
+        if (m_Baititem.BaitType.HasFlag(FishBrain.FishClassification.IsRepellent))
         {
             if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
                 fish.ChangeDirection(1);               //update fish direction using the appropriate direction 
