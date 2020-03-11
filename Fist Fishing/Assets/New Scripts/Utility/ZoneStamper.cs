@@ -45,6 +45,6 @@ public class ZoneStamper : MonoBehaviour
         CloneBiomeDefiniton();
         DuplicateBiome();
     }
-
+    
 
 }
