@@ -52,7 +52,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     protected bool m_isItemActive;
     protected Bait_IItem m_Baititem;
-    protected Repellent_IItem m_RepellentItem;
 
     [SerializeField]
     protected List<FishCombatInfo> m_aggressiveFishToSpawn = new List<FishCombatInfo>();
@@ -102,6 +101,8 @@ public class CombatManager : MonoBehaviour
 
     public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes, PlayerMotion player = default(PlayerMotion))
     {
+        //Set any items from prior combat to false
+        m_isItemActive = false;
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
         //ResolveAggressiveFishes(Biome biomeType)
         PlayerInstance.Instance.Health.OnMinimumAmountReached -= EndCombat;
@@ -174,6 +175,7 @@ public class CombatManager : MonoBehaviour
         {
             PlayerAttack();
         }
+        //Cannot place another bait if one is active CHANGE THIS TO ACCOUNT FOR PINWHEEL/OTHER ITEMS LATER
         if (!m_isItemActive)
             if (ALInput.GetKeyDown(ALInput.Item))
             {
@@ -247,17 +249,17 @@ public class CombatManager : MonoBehaviour
     { 
         //Set bool that item is now in play
         m_isItemActive = true;
-        //FOR TESTING SET ITEM TO BAIT OR REPELLENT
+        //FOR TESTING SET ITEM TO BAIT
         m_Baititem = (Bait_IItem)ScriptableItems[0];
         //Apply effect to the combat (None yet till pinwheel).
         //Set Active turn count to default
-        m_Baititem.TurnCount = 2;
+        m_Baititem.TurnCount = 3;
         //Get the player's current pinwheel choice.
 
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
         //Enqueue for next round
         m_roundQueue.Enqueue(m_playerCombatInfo);
-        //this happens after stat and State changes.
+        //Move to resolving the round
         ResolveRound();
     }
 
@@ -345,20 +347,25 @@ public class CombatManager : MonoBehaviour
     protected void ResolveBait(FishCombatInfo fish)
     {
         //Check if bait
-        if (m_Baititem.BaitType == FishBrain.FishClassification.BaitSensitive1)// FishBrain.FishClassification.IsBait) NEED TO UNDERSTAND THIS!!!!!
+        if ((m_Baititem.BaitType & FishBrain.FishClassification.IsBait) > 0)
         {
             if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
+            {
+                Debug.Log("Fish was affected by bait");
                 fish.ChangeDirection(-1);               //update fish direction using the appropriate direction 
-
+                return;
+            }
         }
         //Check if repellent
-        if (m_Baititem.BaitType.HasFlag(FishBrain.FishClassification.IsRepellent))
+        if ((m_Baititem.RepelType & FishBrain.FishClassification.IsRepellent) > 0)
         {
-            if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.BaitType))
+            if (fish.FishInstance.FishData.FishClassification.HasFlag(m_Baititem.RepelType))
+            {
+                Debug.Log("Fish was affected by repellent");
                 fish.ChangeDirection(1);               //update fish direction using the appropriate direction 
-
+                return;
+            }
         }
-        Debug.Log("Fish was affected by item");
 
 
     }
@@ -367,13 +374,14 @@ public class CombatManager : MonoBehaviour
     {
         //Check if there is a bait resolve behaviour movement
         if (m_isItemActive == false)
+        {
+            Debug.Log("Fish was affected by AI");
             return (fish.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive)) ? -fish.Speed : fish.Speed;
-
+        }
         //Resolve Bait changes
         ResolveBait(fish);
-        //Check if item should still be active after this turn
-        m_isItemActive = m_Baititem.IsStillActive();
-        return fish.Speed;
+        //Return the new direction
+        return fish.Speed * fish.Direction;
     }
 
     protected void ResolveAddFish(FishCombatInfo fish)
@@ -461,6 +469,9 @@ public class CombatManager : MonoBehaviour
         {
             //ResolveAggressiveFishSpawn();
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
+            //Check if item should still be active after this turn
+            if (m_isItemActive)
+            m_isItemActive = m_Baititem.IsStillActive();
             return;
         }
 

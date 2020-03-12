@@ -29,11 +29,13 @@ public class Bait_IItem : ScriptableObject, IItem
     public string Name => m_name;
     [SerializeField]
     protected FishBrain.FishClassification m_currentBaitType;
-    [SerializeField]
     public FishBrain.FishClassification BaitType { get { return m_currentBaitType; } set { m_currentBaitType = value; } }
+    [SerializeField]
+    protected FishBrain.FishClassification m_currentRepelType;
+    public FishBrain.FishClassification RepelType { get { return m_currentRepelType; } set { m_currentRepelType = value; } }
 
     [SerializeField]
-    protected int m_activeTurnCount = 2;
+    protected int m_activeTurnCount = 3;
     public int TurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
     public bool CanMerge(IItem newItem)
     {
@@ -52,5 +54,5 @@ public class Bait_IItem : ScriptableObject, IItem
     {
         TurnCount--;
         return TurnCount > 0;
-    }
+    } 
 }
