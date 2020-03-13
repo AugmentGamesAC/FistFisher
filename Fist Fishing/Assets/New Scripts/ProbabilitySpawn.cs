@@ -3,39 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
-
-public class ProbabilitySpawn : ISpawnable
+public interface IObject<T>
 {
-    public virtual GameObject Instatiate(MeshCollider m) { return null; }
-    public virtual bool Despawn() { return false; }
-    public float m_weightedChance;
-    public MeshCollider m_meshOverRide;
+    T MemberwiseClone();
+}
+
+public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
+{
+    public GameObject Instatiate(MeshCollider m) { return m_spawnRefence.Instatiate(m); }
+
+    public new V MemberwiseClone() => (V)base.MemberwiseClone();
+    [SerializeField]
+    protected float m_weightedChance;
+    public float WeightedChance => m_weightedChance;
+    [SerializeField]
+    protected MeshCollider m_meshOverRide;
+    public MeshCollider MeshOverRide => m_meshOverRide;
+    [SerializeField]
+    protected T m_spawnRefence;
+
+
 }
 
 
 [Serializable]
-public class ProbabilitySpawnClutter : ProbabilitySpawn
-{
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    public override bool Despawn() { return m_spawnReference.Despawn(); }
-    [SerializeField]
-    protected ClutterDefinition m_spawnReference;
+public class ProbabilitySpawnClutter : ProbabilitySpawn<ClutterDefinition,ProbabilitySpawnClutter> {}
+[Serializable]
+public class ProbabilitySpawnCollectable : ProbabilitySpawn<CollectableDefinition, ProbabilitySpawnCollectable> { }
 
-}
-[Serializable]
-public class ProbabilitySpawnCollectable : ProbabilitySpawn
-{
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    public override bool Despawn() { return m_spawnReference.Despawn(); }
-    [SerializeField]
-    protected CollectableDefinition m_spawnReference;
-}
-[Serializable]
-public class ProbabilitySpawnFish : ProbabilitySpawn
-{
-    public override GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
-    public override bool Despawn() { return m_spawnReference.Despawn(); }
-    [SerializeField]
-    protected FishDefintion m_spawnReference;
-}
+[Serializable] 
+public class ProbabilitySpawnFish : ProbabilitySpawn<FishDefintion, ProbabilitySpawnFish> { }
+
+
+
