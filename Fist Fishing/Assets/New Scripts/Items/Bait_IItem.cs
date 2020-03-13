@@ -28,12 +28,14 @@ public class Bait_IItem : ScriptableObject, IItem
     protected string m_name;
     public string Name => m_name;
     [SerializeField]
-    protected FishBrain.FishClassification m_currentBaitType = FishBrain.FishClassification.BaitSensitive1;
-    [SerializeField]
+    protected FishBrain.FishClassification m_currentBaitType;
     public FishBrain.FishClassification BaitType { get { return m_currentBaitType; } set { m_currentBaitType = value; } }
+    [SerializeField]
+    protected FishBrain.FishClassification m_currentRepelType;
+    public FishBrain.FishClassification RepelType { get { return m_currentRepelType; } set { m_currentRepelType = value; } }
 
     [SerializeField]
-    protected int m_activeTurnCount;
+    protected int m_activeTurnCount = 3;
     public int TurnCount { get { return m_activeTurnCount; } set { m_activeTurnCount = value; } }
     public bool CanMerge(IItem newItem)
     {
@@ -47,17 +49,10 @@ public class Bait_IItem : ScriptableObject, IItem
     {
         return false;
     }
-    /// <summary>
-    /// Decriments the active turn count of a bait that is out in combat
-    /// </summary>
-    /// <param name="value">The number of turns to decriment by</param>
-    public void DecrimentActiveTurnCount ()
-    {
-        TurnCount --;
-    }
+ 
     public bool IsStillActive()
     {
-        DecrimentActiveTurnCount();
-        return TurnCount <= 0;
-    }
+        TurnCount--;
+        return TurnCount > 0;
+    } 
 }
