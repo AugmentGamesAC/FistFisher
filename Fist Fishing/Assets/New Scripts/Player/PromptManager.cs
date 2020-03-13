@@ -14,7 +14,7 @@ public class PromptManager : UITracker<PromptManager>
 
     Dictionary<int, HashSet<Prompt>> priorityPromptGroups = new Dictionary<int, HashSet<Prompt>>();
 
-    protected int m_currentPriority; 
+    protected int m_currentPriority;
     public int CurrentPriority => m_currentPriority;
 
     public int CurrentPriorityCount => priorityPromptGroups[CurrentPriority].Count;
@@ -26,10 +26,15 @@ public class PromptManager : UITracker<PromptManager>
         if (!priorityPromptGroups.TryGetValue(prompt.Priority, out priorityGroup))
             priorityPromptGroups.Add(prompt.Priority, priorityGroup = new HashSet<Prompt>());
 
+        if (priorityGroup.Contains(prompt))
+            return;
         priorityGroup.Add(prompt);
     }
 
-
+    /// <summary>
+    /// Call this when an object that holds a prompt dies like a fish or Harvestable.
+    /// </summary>
+    /// <param name="prompt"></param>
     public void RemovePriority(Prompt prompt)
     {
         HashSet<Prompt> priorityGroup;
@@ -74,6 +79,12 @@ public class PromptManager : UITracker<PromptManager>
     {
         m_display.SetValue(newPrompt.Display);
         m_description.SetValue(newPrompt.Description);
+        UpdateState();
+    }
+
+    public void HideCurrentPrompt()
+    {
+        m_currentPriority = 0;
         UpdateState();
     }
 

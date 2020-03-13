@@ -55,7 +55,7 @@ public class TestingCombatManager : CombatManager
 
     protected void AddFishTest(FishDefintion fish)
     {
-        ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
+        //ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
     }
 
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
@@ -63,7 +63,7 @@ public class TestingCombatManager : CombatManager
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
 
-        base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
+        //base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
     }
 
 

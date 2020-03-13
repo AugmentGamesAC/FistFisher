@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable, RequireComponent(typeof(Collider))]
+[System.Serializable]
 public class Prompt : MonoBehaviour
 {
     /// <summary>
@@ -24,11 +24,24 @@ public class Prompt : MonoBehaviour
 
     protected Collider m_collider;
 
-    private void Start()
+    public delegate void CombatStarts();
+    public event CombatStarts OnCombatStart;
+
+    public virtual void Init(Sprite sprite, string desc, int priority = 1)
     {
+        m_display = sprite;
+        m_description = desc;
+        m_priority = priority;
+
         m_collider = GetComponent<Collider>();
         m_collider.isTrigger = true;
 
+        OnCombatStart += Prompt_OnCombatStart;
+    }
+
+    private void Prompt_OnCombatStart()
+    {
+        PlayerInstance.Instance.PromptManager.DeregisterPrompt(this);
     }
 
     private void OnTriggerEnter(Collider other)

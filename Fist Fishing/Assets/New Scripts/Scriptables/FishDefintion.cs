@@ -63,14 +63,14 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     #endregion
 
     #region ModelReferences
-    [SerializeField]
-    protected Mesh m_BaseModelReference;
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicFish; 
     [SerializeField]
     protected GameObject m_swimingHPDisplayReference;
 
-    private GameObject m_thisObject = null;
+    //private GameObject m_thisObject = null;
     #endregion
 
 
@@ -85,10 +85,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         HPRoot.transform.SetParent(FishRoot.transform);
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
-
-
-
-        //throw new System.NotImplementedException();
 
         if (m == null)
             return null;
@@ -105,8 +101,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
 
 
-        m_thisObject = FishRoot;
-        return m_thisObject;
+        return FishRoot;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)

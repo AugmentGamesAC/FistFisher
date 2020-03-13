@@ -10,7 +10,7 @@ public interface IObject<T>
 
 public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
 {
-    public GameObject Instatiate(MeshCollider m) { return m_spawnRefence.Instatiate(m); }
+    public GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
 
     public new V MemberwiseClone() => (V)base.MemberwiseClone();
     [SerializeField]
@@ -20,7 +20,7 @@ public class ProbabilitySpawn<T,V>: UnityEngine.Object, ISpawnable, IObject<V> w
     protected MeshCollider m_meshOverRide;
     public MeshCollider MeshOverRide => m_meshOverRide;
     [SerializeField]
-    protected T m_spawnRefence;
+    protected T m_spawnReference;
 
 
 }
