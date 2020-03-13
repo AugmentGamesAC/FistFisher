@@ -28,7 +28,9 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_oxygen = new OxygenTracker(PlayerInstance.Instance.PlayerStatMan[Stats.MaxAir]);
         m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
 
-        //m_clamsUpdater.UpdateTracker(m_clams);
+        m_promptManager = new PromptManager();
+
+        m_clamsUpdater.UpdateTracker(m_clams);
 
 
 
@@ -111,4 +113,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected PlayerMotion m_playerMotion;
     public PlayerMotion PlayerMotion => m_playerMotion;
+
+    [SerializeField]
+    protected PromptManager m_promptManager;
+    public PromptManager PromptManager => m_promptManager;
 }

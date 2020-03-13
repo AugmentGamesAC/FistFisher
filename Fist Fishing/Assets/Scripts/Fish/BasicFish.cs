@@ -32,7 +32,7 @@ public class BasicFish : MonoBehaviour
 
     [SerializeField]
     protected FishBrain.FishClassification m_fishClass = FishBrain.FishClassification.Fearful;
-    public FishBrain.FishClassification FishClass {  get { return m_fishClass; } }
+    public FishBrain.FishClassification FishClass { get { return m_fishClass; } }
 
     public Transform LookFrom;
     public FishSpawner Spawner;
@@ -47,10 +47,16 @@ public class BasicFish : MonoBehaviour
     protected BehaviorTree m_behaviour;
     protected HealthModule m_healthModule;
 
+    [SerializeField]
+    protected CombatPrompt promptPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_fish = new FishInstance(m_fishDef);
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_fish = new FishInstance(m_fishDef, prompt);
         m_fish.Health.OnMinimumHealthReached += HandleDeath;
 
         //TODO: clean
@@ -60,6 +66,6 @@ public class BasicFish : MonoBehaviour
     {
         //ObjectPool should Handle fish.
         gameObject.SetActive(false);
-        //m_behaviour.enabled = false;
+        //TODO: Fix prompt disapearing during combat.
     }
 }

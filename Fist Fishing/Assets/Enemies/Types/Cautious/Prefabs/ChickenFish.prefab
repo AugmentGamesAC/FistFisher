@@ -524,7 +524,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4324393000187556280}
-  - component: {fileID: 2874807257306346250}
   m_Layer: 10
   m_Name: Fish Top
   m_TagString: Fish
@@ -547,19 +546,6 @@ Transform:
   m_Father: {fileID: 7261612471859864279}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2874807257306346250
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3667010726600415697}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1, z: 0.2}
-  m_Center: {x: -0.25, y: 0.05, z: 0}
 --- !u!1 &4635849435235170307
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +557,6 @@ GameObject:
   - component: {fileID: 7261612471859864279}
   - component: {fileID: 2764116741085963630}
   - component: {fileID: 2604070530474978243}
-  - component: {fileID: 1059438132783223882}
   m_Layer: 10
   m_Name: Fish Head
   m_TagString: Fish
@@ -642,19 +627,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1059438132783223882
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4635849435235170307}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0.000000059604645, y: 0, z: 0}
 --- !u!1 &5162455063617563284
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +636,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1778016122875491784}
-  - component: {fileID: 8009581915198579566}
   m_Layer: 10
   m_Name: Fish Belly
   m_TagString: Fish
@@ -687,19 +658,6 @@ Transform:
   m_Father: {fileID: 7261612471859864279}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8009581915198579566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5162455063617563284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.06, z: 0.15}
-  m_Center: {x: -0.25, y: -0.06, z: 0}
 --- !u!1 &5433961900939779193
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +701,6 @@ GameObject:
   - component: {fileID: 7027024320410773115}
   - component: {fileID: 768204412}
   - component: {fileID: 768204416}
-  - component: {fileID: 2110840545424256968}
   m_Layer: 10
   m_Name: ChickenFish
   m_TagString: Fish
@@ -784,13 +741,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fishHitboxList:
     keys:
-    - {fileID: 1059438132783223882}
-    - {fileID: 8009581915198579566}
-    - {fileID: 2874807257306346250}
+    - {fileID: 0}
     values:
     - 1
-    - 0.75
-    - 0.5
   m_fishDef: {fileID: 11400000, guid: 1121a201c7a810240be7660c3d4546f6, type: 2}
   m_personalSpaceRadius: 1
   Speed: 2
@@ -800,6 +753,7 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 2
+  promptPrefab: {fileID: 0}
 --- !u!114 &7027024320410773115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,19 +803,6 @@ MonoBehaviour:
   m_regenDelay: 3
   m_regenRate: 5
   m_HealthSlider: {fileID: 698346547}
---- !u!135 &2110840545424256968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7424311146307238979}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0, z: 0.2}
 --- !u!1 &8567224104664165731
 GameObject:
   m_ObjectHideFlags: 0

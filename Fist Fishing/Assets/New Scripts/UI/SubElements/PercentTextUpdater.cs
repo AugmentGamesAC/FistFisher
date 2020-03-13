@@ -12,6 +12,6 @@ public class PercentTextUpdater : CoreUIUpdater<PercentageTracker,Text,IPercenta
     public void SetFormatter(string format) { m_textInput = format; }
     protected override void UpdateState(IPercentage value)
     {
-        m_UIElement.text = string.Format(m_textInput, value.Current, value.Max, value.Percent);
+        m_UIElement.text = string.Format(m_textInput, (float)value.Current, (float)value.Max, (float)value.Percent);
     }
 }

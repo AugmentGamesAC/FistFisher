@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 7847238372462921184}
   - component: {fileID: 964892760461229543}
   - component: {fileID: 964892760461229339}
-  - component: {fileID: 1164403225712643155}
   m_Layer: 10
   m_Name: Fish-Indifferent1
   m_TagString: Fish
@@ -464,7 +463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7668380556320006104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78, y: -8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4980135836742252466}
@@ -499,6 +498,7 @@ MonoBehaviour:
   Spawner: {fileID: 0}
   m_inBaitZone: 0
   m_fishArchetype: 3
+  promptPrefab: {fileID: 0}
 --- !u!114 &7847238372462921184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,19 +548,6 @@ MonoBehaviour:
   m_regenDelay: 3
   m_regenRate: 5
   m_HealthSlider: {fileID: 964892760533700520}
---- !u!135 &1164403225712643155
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668380556320006104}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0, z: 0.2}
 --- !u!1001 &10637993693266111
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishDefintion : ScriptableObject, IFishData, IItem
+[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
+public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
     #region IFishData
     public IItem Item => this;
@@ -51,6 +52,10 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     protected string m_name;
     public string Name => m_name;
 
+    public float WeightedChance => throw new System.NotImplementedException();
+
+    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
+
     public bool CanMerge(IItem newItem)
     {
         return false;
@@ -58,28 +63,45 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     #endregion
 
     #region ModelReferences
-    [SerializeField]
-    protected Mesh m_BaseModelRefence;
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicFish; 
     [SerializeField]
-    protected GameObject m_swimingHPDisplayRefence;
+    protected GameObject m_swimingHPDisplayReference;
+
+    //private GameObject m_thisObject = null;
     #endregion
 
-    public GameObject InstatiateFish()
+
+
+    public GameObject Instatiate(MeshCollider m)
     {
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
         coreFish.Init(this, this);
         //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
+        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
         HPRoot.transform.SetParent(FishRoot.transform);
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
+        if (m == null)
+            return null;
+
+        Transform pos = FishRoot.transform;
+        float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
+        RaycastHit hit; //unused
 
 
-        throw new System.NotImplementedException();
+        do
+        {
+            pos.position = BiomeInstance.FindValidPosition(m);
+
+        } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+
+        return FishRoot;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
@@ -100,4 +122,5 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
 
         return true;
     }
+
 }

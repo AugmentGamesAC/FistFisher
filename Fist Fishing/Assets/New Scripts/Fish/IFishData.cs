@@ -39,4 +39,6 @@ public interface IPlayerData
     SlotManager PlayerInventory { get; }
     SlotManager ItemInventory { get; }
 
+    PromptManager PromptManager { get; }
+
 }
