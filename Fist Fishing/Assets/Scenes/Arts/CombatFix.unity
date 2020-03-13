@@ -15313,7 +15313,6 @@ MonoBehaviour:
     values: []
   m_currentNoiseState: 0
   m_isItemActive: 0
-  m_item: {fileID: 0}
   m_aggressiveFishToSpawn: []
   m_deadFishPile: []
   ScriptablePlayerMoves:
@@ -15325,7 +15324,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10b2caa2d942af943b53f1cf79e0d156, type: 2}
   - {fileID: 11400000, guid: f7a3595cdeba20d44ad6c83323eef695, type: 2}
   - {fileID: 11400000, guid: 5e8e05d40a5a6d84a83bf01e14c5400e, type: 2}
-  ScriptableItems: []
+  ScriptableItems:
+  - {fileID: 11400000, guid: d00b9377f06a85c4a9198194e099f8b8, type: 2}
   m_currentCombatState: 0
   m_puchingUI: {fileID: 518438521}
   m_keypressTimeout: 0
