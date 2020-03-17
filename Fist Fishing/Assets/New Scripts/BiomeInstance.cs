@@ -43,7 +43,7 @@ public class BiomeInstance : MonoBehaviour
             {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
             {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
             {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
-            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()   , 0}
+            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()        , 0}
         };
 
         if ((m_myInstructions.ClutterList.Count > 0))
@@ -101,7 +101,7 @@ public class BiomeInstance : MonoBehaviour
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
                 possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide)
-                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; Debug.Log(m_memberCount[list]); };
+                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; /*Debug.Log(m_memberCount[list]);*/ };
                 return true;
             }
         return false;
