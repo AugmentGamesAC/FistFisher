@@ -43,7 +43,7 @@ public class BiomeInstance : MonoBehaviour
             {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
             {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
             {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
-            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()   , 0}
+            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()        , 0}
         };
 
         if ((m_myInstructions.ClutterList.Count > 0))
