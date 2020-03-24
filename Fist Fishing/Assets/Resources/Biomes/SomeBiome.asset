@@ -15,20 +15,11 @@ MonoBehaviour:
   m_maximumNumberOfSpawns: 100
   m_amountOfClutterToSpawn: 5
   m_clutter:
-  - m_weightedChance: 1
-    m_meshOverRide: {fileID: 0}
-    m_spawnReference: {fileID: 11400000, guid: 56bac72bd9b752c4788189fd8dda2b18, type: 2}
-  m_collectables: []
-  m_aggressiveFish:
-  - m_weightedChance: 1
-    m_meshOverRide: {fileID: 0}
-    m_spawnReference: {fileID: 11400000, guid: c6ebb17d564d97b48b43082b393c3b73, type: 2}
-  m_mehFish:
-  - m_weightedChance: 1
-    m_meshOverRide: {fileID: 0}
-    m_spawnReference: {fileID: 11400000, guid: e7461b9fe464e3d46b66a8edb5e181c5, type: 2}
-  m_preyFish:
-  - m_weightedChance: 1
-    m_meshOverRide: {fileID: 0}
-    m_spawnReference: {fileID: 11400000, guid: 1121a201c7a810240be7660c3d4546f6, type: 2}
+  - {fileID: 11400000, guid: b8879c4ce3d3ecc4cb670b7bc1e5dc96, type: 2}
+  m_collectables:
+  - {fileID: 11400000, guid: 360fc8a6cf038ca4c969dfba05eed292, type: 2}
+  m_aggressiveFish: []
+  m_mehFish: []
+  m_preyFish: []
+  m_name: test biome
   m_timeBetweenSpawns: 2

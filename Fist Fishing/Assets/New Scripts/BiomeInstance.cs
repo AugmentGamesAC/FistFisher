@@ -152,7 +152,10 @@ public class BiomeInstance : MonoBehaviour
     public static bool IsInside(Collider c, Vector3 point)
     {
         // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
-        return c.ClosestPoint(point) == point;
+        if (c.bounds.ClosestPoint(point) == point)
+            return true;
+        return false;
+        //return c.ClosestPoint(point) == point;
     }
 
     /// <summary>

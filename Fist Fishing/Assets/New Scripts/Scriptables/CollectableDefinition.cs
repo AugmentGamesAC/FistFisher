@@ -15,7 +15,7 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
 
     public MeshCollider MeshOverRide => throw new System.NotImplementedException();
     #endregion
-    public GameObject Instatiate(MeshCollider m)
+    public virtual GameObject Instatiate(MeshCollider m)
     {
         if (m == null)
             return null;
