@@ -184,22 +184,19 @@ public class CombatManager : MonoBehaviour
             ResolvePlayerAction();
         }
 
-        //Old attack key
-        {
-            //if (ALInput.GetKeyDown(KeyCode.F))
-            //    PlayerAttack();
-
-        }
+        //Attack use hotkey
+            if (ALInput.GetKeyDown(ALInput.Action))
+                PlayerAttack();
+        
         //Hotkeys for placing a bait
-        {
             if (!m_isItemActive)
-                if (ALInput.GetKeyDown(KeyCode.Alpha0) || ALInput.GetKeyDown(KeyCode.Keypad0))
+                if (ALInput.GetKeyDown(ALInput.AltAction))
                 {
                     PlayerItem();
                 }
-        }
+        
 
-        if (ALInput.GetKeyDown(ALInput.Flee))
+        if (ALInput.GetKeyDown(ALInput.CancleKey))
             PlayerFlee();
         
         //Uncomment for WASD controls on attack pinwheel

@@ -98,7 +98,7 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
             SwitchState(CameraState.FirstPerson);*/
 
-        if (ALInput.GetKeyDown(ALInput.CameraSwap))
+        if (ALInput.GetKeyDown(ALInput.Toggle))
         {
             if (CurrentState == CameraState.FirstPerson)
                 SwitchState(CameraState.Warthog);
