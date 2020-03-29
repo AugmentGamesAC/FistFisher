@@ -17,6 +17,7 @@ public class ALInput : MonoBehaviour
     }
 
     #region keycodes keycodes
+    //Movement Keys
     [SerializeField]
     protected KeyCode m_forward;
     public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
@@ -29,12 +30,53 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_goLeft;
     public static KeyCode GoLeft { get { hasInstance(); return Instance.m_goLeft; } }
+  
     [SerializeField]
-    KeyCode m_descend;
-    public static KeyCode Descend { get { hasInstance(); return Instance.m_descend; } }
+    KeyCode m_action;
+    /// <summary>
+    /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
+    /// </summary>
+    public static KeyCode Action { get { hasInstance(); return Instance.m_action; } }
     [SerializeField]
-    KeyCode m_ascend;
-    public static KeyCode Ascend { get { hasInstance(); return Instance.m_ascend; } }
+    KeyCode m_altAction;
+    /// <summary>
+    /// Covers Canceling Menus, Quick Buy, Quick Sell, Ascending, Combat: Item Action
+    /// </summary>
+    public static KeyCode AltAction { get { hasInstance(); return Instance.m_altAction; } }
+    [SerializeField]
+    KeyCode m_cancleKey;
+    /// <summary>
+    /// Button for exiting menus, decsending, and Combat: using item
+    /// </summary>
+    public static KeyCode CancleKey { get { hasInstance(); return Instance.m_cancleKey; } }
+    [SerializeField]
+    KeyCode m_toggle;
+    /// <summary>
+    /// Toggles screens, camera mode, quips?
+    /// </summary>
+    public static KeyCode Toggle { get { hasInstance(); return Instance.m_toggle; } }
+    [SerializeField]
+    KeyCode m_menuKey;
+    /// <summary>
+    /// Opens Menu
+    /// </summary>
+    public static KeyCode MenuButton { get { hasInstance(); return Instance.m_menuKey; } }
+    [SerializeField]
+    KeyCode m_selectMouse;
+    /// <summary>
+    /// Make selections with the LMB, acts as a second action button for prompts
+    /// </summary>
+    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_selectMouse; } }
+    [SerializeField]
+    KeyCode m_switch;
+    /// <summary>
+    /// Switching targets and opening player inventory
+    /// </summary>
+    public static KeyCode Switch { get { hasInstance(); return Instance.m_switch; } }
+    [SerializeField]
+    KeyCode m_cancelMouse;
+    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_cancelMouse; } }
+
 
     [SerializeField]
     KeyCode m_sprint;
@@ -60,67 +102,61 @@ public class ALInput : MonoBehaviour
 
 
 
-
-    [SerializeField]
-    KeyCode m_keyTarget;
-    public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
-    [SerializeField]
-    KeyCode m_forgetTarget;
-    public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
-    [SerializeField]
-    KeyCode m_punch;
-    public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
-
-
-    [SerializeField]
-    KeyCode m_mountBoat;
-    public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
-    [SerializeField]
-    KeyCode m_dismountBoat;
-    public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
-
-    [SerializeField]
-    KeyCode m_harvest;
-    public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
-
-    [SerializeField]
-    KeyCode m_throwBait;
-    public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
-
-    [SerializeField]
-    KeyCode m_craftBait;
-    public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
-
-    [SerializeField]
-    KeyCode m_toggleInventory;
-    public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
-
-    [SerializeField]
-    KeyCode m_toggleShop;
-    public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
-
-    [SerializeField]
-    KeyCode m_start;
-    public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
+    
+    //[SerializeField]
+    //KeyCode m_keyTarget;
+    //public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
+    //[SerializeField]
+    //KeyCode m_forgetTarget;
+    //public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
+    //[SerializeField]
+    //KeyCode m_punch;
+    //public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
 
 
-    //Encounter Combat Buttons.
-    [SerializeField]
-    KeyCode m_attack;
-    public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+    //[SerializeField]
+    //KeyCode m_mountBoat;
+    //public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
+    //[SerializeField]
+    //KeyCode m_dismountBoat;
+    //public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
 
-    [SerializeField]
-    KeyCode m_item;
-    public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+    //[SerializeField]
+    //KeyCode m_harvest;
+    //public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
 
-    [SerializeField]
-    KeyCode m_flee;
-    public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
+    //[SerializeField]
+    //KeyCode m_throwBait;
+    //public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
 
-    [SerializeField]
-    KeyCode m_showOptionsPause;
-    public static KeyCode ShowOptionsPause { get { hasInstance(); return Instance.m_showOptionsPause; } }
+    //[SerializeField]
+    //KeyCode m_craftBait;
+    //public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
 
+    //[SerializeField]
+    //KeyCode m_toggleInventory;
+    //public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
+
+    //[SerializeField]
+    //KeyCode m_toggleShop;
+    //public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
+
+    //[SerializeField]
+    //KeyCode m_start;
+    //public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
+    
+    ////Encounter Combat Buttons.
+    //[SerializeField]
+    //KeyCode m_attack;
+    //public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
+
+    //[SerializeField]
+    //KeyCode m_item;
+    //public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
+
+    //[SerializeField]
+    //KeyCode m_flee;
+    //public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
 
     //camera states
     /*[SerializeField]
@@ -140,9 +176,9 @@ public class ALInput : MonoBehaviour
     public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }*/
 
 
-    [SerializeField]
-    KeyCode m_cameraSwap;
-    public static KeyCode CameraSwap { get { hasInstance(); return Instance.m_cameraSwap; } }
+    //[SerializeField]
+    //KeyCode m_cameraSwap;
+    //public static KeyCode CameraSwap { get { hasInstance(); return Instance.m_cameraSwap; } }
 
     #endregion keycodes
 
@@ -251,48 +287,56 @@ public class ALInput : MonoBehaviour
     /// </summary>
     private void LoadFromFile()
     {
+        
         m_forward = KeyCode.W;
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
-        m_descend = KeyCode.E;
-        m_ascend = KeyCode.Q;
-        m_sprint = KeyCode.LeftShift;
-        m_keyTarget = KeyCode.Z;
-        m_forgetTarget = KeyCode.X;
-        m_punch = KeyCode.P;
-        m_manualCamera = KeyCode.Mouse1;
-        m_backward = KeyCode.S;
+        m_action = KeyCode.F;
+        m_altAction = KeyCode.R;
+        m_toggle = KeyCode.Space;
+        m_menuKey = KeyCode.Escape;
+        m_cancleKey = KeyCode.E;
 
-        //Default Combat buttons
-        m_attack = KeyCode.Mouse0;
-        m_item = KeyCode.Mouse1;
-        m_flee = KeyCode.N;
+        //OLD KEYS
+        //m_sprint = KeyCode.LeftShift;
+        //m_keyTarget = KeyCode.Z;
+        //m_forgetTarget = KeyCode.X;
+        //m_punch = KeyCode.P;
+        //m_manualCamera = KeyCode.Mouse1;
+        //m_backward = KeyCode.S;
 
-        m_rotateForward = KeyCode.Keypad8;
-        m_rotateBackwards = KeyCode.Keypad2;
-        m_rotateRight = KeyCode.Keypad4;
-        m_rotateLeft = KeyCode.Keypad6;
+        ////Default Combat buttons
+        //m_attack = KeyCode.Mouse0;
+        //m_item = KeyCode.Mouse1;
+        //m_flee = KeyCode.N;
 
-        /*m_abzu = KeyCode.F1;
-        m_locked = KeyCode.F2;
-        m_warthog = KeyCode.F3;
-        m_firstPerson = KeyCode.F4;*/
-        m_cameraSwap = KeyCode.T;
+        //m_rotateForward = KeyCode.Keypad8;
+        //m_rotateBackwards = KeyCode.Keypad2;
+        //m_rotateRight = KeyCode.Keypad4;
+        //m_rotateLeft = KeyCode.Keypad6;
 
-        m_mountBoat = KeyCode.M;
-        m_dismountBoat = KeyCode.N;
-        m_harvest = KeyCode.R;
-        m_throwBait = KeyCode.O;
+        ///*m_abzu = KeyCode.F1;
+        //m_locked = KeyCode.F2;
+        //m_warthog = KeyCode.F3;
+        //m_firstPerson = KeyCode.F4;*/
+        //m_cameraSwap = KeyCode.T;
 
-        m_craftBait = KeyCode.B;
+        //m_mountBoat = KeyCode.M;
+        //m_dismountBoat = KeyCode.N;
+        //m_harvest = KeyCode.R;
+        //m_throwBait = KeyCode.O;
 
-        m_toggleInventory = KeyCode.I;
-        m_toggleShop = KeyCode.O;
+        //m_craftBait = KeyCode.B;
 
-        m_start = KeyCode.Space;
+        //m_toggleInventory = KeyCode.I;
+        //m_toggleShop = KeyCode.O;
 
-        m_showOptionsPause = KeyCode.Escape;
+        //m_start = KeyCode.Space;
 
-        m_playerLateralMovement = AxisCode.Horizontal;
+        //m_showOptionsPause = KeyCode.Escape;
+
+        //m_playerLateralMovement = AxisCode.Horizontal;
+
+
     }
 }

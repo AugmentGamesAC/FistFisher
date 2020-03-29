@@ -112,7 +112,7 @@ public class Harvester : MonoBehaviour
         }
 
 
-        if (m_toHarvest != null && ALInput.GetKeyDown(ALInput.Harvest))
+        if (m_toHarvest != null && ( ALInput.GetKeyDown(ALInput.Action) || ALInput.GetKeyDown(ALInput.MouseAction)))
         {
             Harvest();
         }

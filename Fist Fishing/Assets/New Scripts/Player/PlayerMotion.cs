@@ -71,10 +71,10 @@ public class PlayerMotion : MonoBehaviour
         if (!m_CanMove)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.Switch))
             ToggleInventoryDisplay();
 
-        if (ALInput.GetKeyDown(ALInput.Punch))
+        if (ALInput.GetKeyDown(ALInput.AltAction))
         {
             List<FishInstance> resultingFish = SurroundingFish;
             if (resultingFish.Count == 0)
@@ -131,7 +131,7 @@ public class PlayerMotion : MonoBehaviour
         desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
 
         //ascend descend.
-        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
+        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.CancleKey) ? 0.5f : 0));
 
         //apply movement vector
 
