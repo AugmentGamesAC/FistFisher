@@ -61,8 +61,19 @@ public class CoralNew : MonoBehaviour, IDyingThing
         GameObject g = gameObject.transform.Find(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt[i]).gameObject;
         //Debug.Log(g);
         Vector3 pos = g.transform.position;
+        /*Debug.Log(m_definitionForThis);
+        Debug.Log(m_definitionForThis.CoralBudDefinition);
+        Debug.Log(m_definitionForThis.CoralBudDefinition.ItemData);*/
         GameObject o = m_definitionForThis.CoralBudDefinition.Instantiate(pos);
+
+        Harvestable h; 
+        if (o.gameObject.TryGetComponent<Harvestable>(out h))
+            Destroy(h);
+        h = o.AddComponent<Harvestable>();
+        h.TransferProperties(m_definitionForThis.CoralBudDefinition.ItemData);
+
         o.GetComponent<IDyingThing>().Death += () => { m_numberOfBudsDied++; };
+
         return o;
     }
 

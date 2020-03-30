@@ -11,11 +11,14 @@ public class CoralBudDefinition : ScriptableObject
     [SerializeField]
     protected Material m_materialOverride;
     [SerializeField]
-    protected IItem m_coralItemData;
-    public IItem ItemData => m_coralItemData;
+    protected AItem m_coralItemData;
+    public AItem ItemData => m_coralItemData;
 
     public GameObject Instantiate(Vector3 pos)
     {
+        /*Debug.Log(m_modelOfBud);
+        Debug.Log(m_materialOverride);
+        Debug.Log(m_coralItemData);*/
         if (m_modelOfBud == default)
             return null;
         GameObject o = ObjectPoolManager.Get(m_modelOfBud, pos, Quaternion.identity);

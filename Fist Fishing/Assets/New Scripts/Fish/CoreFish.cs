@@ -12,7 +12,11 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider m_biome)
     {
-        m_Instance = new FishInstance(fishDefinition);
+
+        /**********************************************************************************************/
+        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
+        /**********************************************************************************************/
+        //m_Instance = new FishInstance(fishDefinition);
         m_defintion = fishDefinition;
         
     }
