@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -35040,6 +35040,7 @@ GameObject:
   - component: {fileID: 4317289871419914989}
   - component: {fileID: 2055129972}
   - component: {fileID: 2055129974}
+  - component: {fileID: 4317289871419914991}
   m_Layer: 0
   m_Name: SamsSingleton
   m_TagString: Untagged
@@ -35111,6 +35112,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4317289871419914991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317289871419914988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37eb3d4884e851347b5e930425e3f7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_questLine:
+  - m_IsActive: 0
+    m_tasksLeft: 0
+    m_def:
+      m_icon: {fileID: 0}
+      m_description: 
+      m_loot:
+        m_fish:
+        - {fileID: 11400000, guid: c9684bb9a733e4d439be7ea80953766d, type: 2}
+        m_baits:
+        - {fileID: 11400000, guid: d00b9377f06a85c4a9198194e099f8b8, type: 2}
+        - {fileID: 11400000, guid: fd1cdd04e7d975848ac363c768b73fc8, type: 2}
+        m_upgradeAmount: 1
+        m_clams: 100
+      m_taskAmount: 3
+  m_selectedQuestIndex: 0
 --- !u!114 &4384967988488678361
 MonoBehaviour:
   m_ObjectHideFlags: 0

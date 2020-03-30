@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class GatheringQuest : Quest
 {
-    protected int m_tasksLeft;
     protected IItem m_itemType;
 
     public GatheringQuest(QuestDefinition def, IItem itemType) : base(def)
     {
-        throw new System.NotImplementedException();
-    }
-    protected bool ItemGathered(IItem item)
-    {
-        throw new System.NotImplementedException();
+        m_itemType = itemType;
     }
     //returns true if the item is what we are looking for.
-    protected void TaskCompleted()
+    public bool ItemGathered(IItem item)
     {
-        throw new System.NotImplementedException();
+        if (item.Type != m_itemType.Type)
+            return false;
+
+        m_tasksLeft--;
+
+        CheckTaskCompleted();
+
+        return true;
+    }
+    
+    //check if we have met the requirements, if so, call resolve completed.
+    protected bool CheckTaskCompleted()
+    {
+        if (m_tasksLeft >= 0)
+            return false;
+
+        ResolveCompletedQuest();
+
+        return true;
     }
 }
