@@ -66,9 +66,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected GameObject m_BaseModelReference;
+    protected SkinnedMeshRenderer m_BaseModelReference;
+    public SkinnedMeshRenderer SkinedMesh => m_BaseModelReference;
     [SerializeField]
-    protected GameObject m_BasicFish; 
+    protected GameObject m_BasicFish;
+    [SerializeField]
+    protected Material m_Skin;
+    public Material Skin => m_Skin;
 
     //private GameObject m_thisObject = null;
     #endregion
@@ -83,7 +87,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
-        coreFish.Init(this, m);
 
 
         Transform pos = FishRoot.transform;
@@ -96,6 +99,9 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
             pos.position = BiomeInstance.FindValidPosition(m);
 
         } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+
+        coreFish.Init(this, m);
 
 
         return FishRoot;
