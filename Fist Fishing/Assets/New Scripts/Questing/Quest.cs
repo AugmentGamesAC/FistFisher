@@ -20,7 +20,7 @@ public class Quest
     public int TaskLeft => m_tasksLeft;
 
     [SerializeField]
-    protected QuestDefinition m_def;
+    protected QuestDefinition m_def = new QuestDefinition();
     public QuestDefinition QuestDef => m_def;
 
     public Quest(QuestDefinition def)
@@ -29,11 +29,14 @@ public class Quest
             throw new System.EntryPointNotFoundException("Quest definition was default");
 
         m_def = def;
-        m_tasksLeft = m_def.TaskAmount;
+    }
+    public Quest()
+    {
     }
     public virtual void Activate()
     {
         m_IsActive = true;
+        m_tasksLeft = m_def.TaskAmount;
     }
     public virtual void Deactivate()
     {
@@ -42,17 +45,22 @@ public class Quest
     }
     public virtual void ResolveCompletedQuest()
     {
-        List<IItem> rewardItems = m_def.LootGrab.Items;
+        //List<FishDefintion> FishItems = m_def.LootGrab.FishReward;
+        //List<Bait_IItem> BaitItems = m_def.LootGrab.BaitReward;
         //add items from reward to players inventory.
-        foreach (var item in rewardItems)
-        {
-            if(item is Upgrade)
-            {
-                (item as Upgrade).ApplyUpgrade();
-                continue;
-            }
-            PlayerInstance.Instance.ItemInventory.AddItem(item, 1);
-        }
+        //foreach (var item in FishItems)
+        //{
+        //    PlayerInstance.Instance.ItemInventory.AddItem(item, 1);
+        //}
+        //foreach (var item in BaitItems)
+        //{
+        //    PlayerInstance.Instance.ItemInventory.AddItem(item, 1);
+        //}
+
+        //for (int i = 0; i < m_def.LootGrab.UpgradeAmount; i++)
+        //{
+        //    UpgradeManager.Instance.GenerateUpgrade().ApplyUpgrade();
+        //}
 
         //add clams to player's inventory from the reward.
         PlayerInstance.Instance.Clams.SetValue(PlayerInstance.Instance.Clams + m_def.LootGrab.Clams);

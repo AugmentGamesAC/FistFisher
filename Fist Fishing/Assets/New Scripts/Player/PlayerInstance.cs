@@ -91,11 +91,13 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     public static void RegisterPlayerInventory(SlotManager newInventory)
     {
         MyInstance.m_playerInventory = newInventory;
+        MyInstance.m_playerInventory.OnGatheringProgress += QuestManager.Instance.CheckGatheringProgress;
     }
 
     public static void RegisterItemInventory(SlotManager newInventory)
     {
         MyInstance.m_itemInventory = newInventory;
+        MyInstance.m_itemInventory.OnGatheringProgress += QuestManager.Instance.CheckGatheringProgress;
     }
 
     public static void RegisterPlayerMotion(PlayerMotion playerMotion)

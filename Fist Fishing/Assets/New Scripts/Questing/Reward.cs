@@ -18,6 +18,10 @@ public class Reward
     public List<Bait_IItem> BaitReward => m_baits;
 
     [SerializeField]
+    protected List<Upgrade> m_upgradeReward = new List<Upgrade>();
+    public List<Upgrade> UpgradeRewards => m_upgradeReward;
+
+    [SerializeField]
     protected int m_upgradeAmount;
     public int UpgradeAmount => m_upgradeAmount;
 
@@ -29,7 +33,7 @@ public class Reward
     {
         for (int i = 0; i < m_upgradeAmount; i++)
         {
-            AddItem(UpgradeManager.Instance.GenerateUpgrade());
+            UpgradeRewards.Add(UpgradeManager.Instance.GenerateUpgrade());
         }
     }
 

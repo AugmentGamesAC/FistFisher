@@ -8,14 +8,11 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     [SerializeField]
-    protected List<Quest> m_questLine;
+    protected List<FishGatheringQuest> m_questLine = new List<FishGatheringQuest>();
 
     [SerializeField]
     protected int m_selectedQuestIndex = 0;
-    public Quest CurrentQuest => m_questLine[m_selectedQuestIndex];
-
-    public delegate void QuestTrigger(IItem item);
-    public event QuestTrigger OnGatheringProgress;
+    public FishGatheringQuest CurrentQuest => m_questLine[m_selectedQuestIndex];
 
     private void Awake()
     {
@@ -27,7 +24,7 @@ public class QuestManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
 
-        OnGatheringProgress += CheckGatheringProgress;
+        CurrentQuest.Activate();
     }
 
     public void NextQuest()
@@ -39,21 +36,34 @@ public class QuestManager : MonoBehaviour
             ResolveQuestlineCompleted();
             return;
         }
-        
+
         CurrentQuest.Activate();
     }
 
-    protected void CheckGatheringProgress(IItem item)
+    public bool CheckGatheringProgress(IItem item, int count)
     {
-        if (!(CurrentQuest is GatheringQuest))
+        if (!(CurrentQuest is FishGatheringQuest))
         {
             Debug.Log("Not Gathering Quest!");
-            return;
+            return false;
         }
 
-        GatheringQuest gatheringQuest = CurrentQuest as GatheringQuest;
+        if (!(item is FishDefintion))
+        {
+            Debug.Log("Not Fish!");
+            return false;
+        }
 
-        gatheringQuest.ItemGathered(item);
+        if (count > 1)
+            Debug.Log("more than one item gathered.");
+
+        for (int i = 0; i < count; i++)
+        {
+            if (!(CurrentQuest.ItemGathered(item as FishDefintion)))
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>

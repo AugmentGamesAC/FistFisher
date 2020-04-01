@@ -17,6 +17,11 @@ public class QuestDefinition
     protected Reward m_loot;
     public Reward LootGrab => m_loot;
 
+    public QuestDefinition()
+    {
+        m_loot = new Reward();
+    }
+
     [SerializeField]
     protected int m_taskAmount;
     public int TaskAmount => m_taskAmount;
