@@ -77,28 +77,25 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     public GameObject Instatiate(MeshCollider m)
     {
-        GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
-        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
-        coreFish.Init(this, this);
-        //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
-        HPRoot.transform.SetParent(FishRoot.transform);
-
-        //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
-
         if (m == null)
             return null;
 
+
+        GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
+        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
+        coreFish.Init(this, m);
+
+
         Transform pos = FishRoot.transform;
         float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
-        RaycastHit hit; //unused
+        RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
 
         do
         {
             pos.position = BiomeInstance.FindValidPosition(m);
 
-        } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
 
 
         return FishRoot;

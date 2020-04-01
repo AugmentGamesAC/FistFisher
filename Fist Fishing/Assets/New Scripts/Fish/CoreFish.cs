@@ -12,14 +12,17 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider m_biome)
     {
-        m_Instance = new FishInstance(fishDefinition);
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(fishDefinition.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_Instance = new FishInstance(fishDefinition, prompt);
         m_defintion = fishDefinition;
         
     }
 
-    public event CleanupCall Death
+    public event Death Death
     {
-        add { }
-        remove { }
+        add { m_Instance.Health.OnMinimumHealthReached += value; }
+        remove { m_Instance.Health.OnMinimumHealthReached -= value; }
     }
 }

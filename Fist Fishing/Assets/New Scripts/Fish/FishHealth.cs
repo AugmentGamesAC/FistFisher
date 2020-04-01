@@ -17,7 +17,7 @@ public class FishHealth
     protected PercentageTracker m_percTracker;
     public PercentageTracker PercentTracker => m_percTracker;
 
-    public delegate void Death();
+
     public event Death OnMinimumHealthReached;
 
     /// <summary>

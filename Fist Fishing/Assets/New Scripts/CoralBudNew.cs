@@ -15,15 +15,7 @@ public class CoralBudNew : MonoBehaviour, IDyingThing
     }
 
 
-
-
-
-
-
-
-
-
-    public event CleanupCall Death;
+    public event Death Death;
     public void Die()
     {
         this.gameObject.SetActive(false);

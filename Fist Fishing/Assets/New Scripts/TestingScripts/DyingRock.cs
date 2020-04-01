@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class DyingRock : MonoBehaviour, IDyingThing
 {
-    public event CleanupCall Death;
+    public event Death Death;
 
     [ContextMenu("From hells heart I stab at thee")]
     public void GoDie()
