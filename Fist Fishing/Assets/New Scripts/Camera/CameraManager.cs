@@ -111,21 +111,13 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
             else
                 SwitchState(CameraState.FirstPerson);
         }
-        Vector3 LookInputVec;
-        if (!m_controllerToggle)
-        {
-            LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
-        }
-        else
-        {
-            LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
-        }
-
+        Vector2 lookInputVec = new Vector2(ALInput.GetAxis(ALInput.AxisType.LookHorizontal), ALInput.GetAxis(ALInput.AxisType.LookVertical));
+        
         currentBehavior.ResolveInput
-            (LookInputVec.x,
-            LookInputVec.y,
-            LookInputVec.x,
-           LookInputVec.y);
+            (lookInputVec.x,
+            lookInputVec.y,
+            lookInputVec.x,
+           lookInputVec.y);
     }
 
 }

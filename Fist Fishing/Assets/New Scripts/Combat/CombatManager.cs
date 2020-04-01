@@ -180,9 +180,8 @@ public class CombatManager : MonoBehaviour
 
         //Spacebar input will resolves whatever action is currently selected
         if (ALInput.GetKeyDown(KeyCode.Space))
-        {
             ResolvePlayerAction();
-        }
+        
 
         //Attack use hotkey
             if (ALInput.GetKeyDown(ALInput.Action))

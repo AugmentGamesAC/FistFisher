@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -31,7 +30,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     KeyCode m_goLeft;
     public static KeyCode GoLeft { get { hasInstance(); return Instance.m_goLeft; } }
-  
+
     [SerializeField]
     KeyCode m_action;
     /// <summary>
@@ -102,85 +101,6 @@ public class ALInput : MonoBehaviour
     public static KeyCode RotateLeft { get { hasInstance(); return Instance.m_rotateLeft; } }
 
 
-
-    
-    //[SerializeField]
-    //KeyCode m_keyTarget;
-    //public static KeyCode KeyTarget { get { hasInstance(); return Instance.m_keyTarget; } }
-    //[SerializeField]
-    //KeyCode m_forgetTarget;
-    //public static KeyCode ForgetTarget { get { hasInstance(); return Instance.m_forgetTarget; } }
-    //[SerializeField]
-    //KeyCode m_punch;
-    //public static KeyCode Punch { get { hasInstance(); return Instance.m_punch; } }
-
-
-    //[SerializeField]
-    //KeyCode m_mountBoat;
-    //public static KeyCode MountBoat { get { hasInstance(); return Instance.m_mountBoat; } }
-    //[SerializeField]
-    //KeyCode m_dismountBoat;
-    //public static KeyCode DismountBoat { get { hasInstance(); return Instance.m_dismountBoat; } }
-
-    //[SerializeField]
-    //KeyCode m_harvest;
-    //public static KeyCode Harvest { get { hasInstance(); return Instance.m_harvest; } }
-
-    //[SerializeField]
-    //KeyCode m_throwBait;
-    //public static KeyCode ThrowBait { get { hasInstance(); return Instance.m_throwBait; } }
-
-    //[SerializeField]
-    //KeyCode m_craftBait;
-    //public static KeyCode CraftBait { get { hasInstance(); return Instance.m_craftBait; } }
-
-    //[SerializeField]
-    //KeyCode m_toggleInventory;
-    //public static KeyCode ToggleInventory { get { hasInstance(); return Instance.m_toggleInventory; } }
-
-    //[SerializeField]
-    //KeyCode m_toggleShop;
-    //public static KeyCode ToggleShop { get { hasInstance(); return Instance.m_toggleShop; } }
-
-    //[SerializeField]
-    //KeyCode m_start;
-    //public static KeyCode Start { get { hasInstance(); return Instance.m_start; } }
-    
-    ////Encounter Combat Buttons.
-    //[SerializeField]
-    //KeyCode m_attack;
-    //public static KeyCode Attack { get { hasInstance(); return Instance.m_attack; } }
-
-    //[SerializeField]
-    //KeyCode m_item;
-    //public static KeyCode Item { get { hasInstance(); return Instance.m_item; } }
-
-    //[SerializeField]
-    //KeyCode m_flee;
-    //public static KeyCode Flee { get { hasInstance(); return Instance.m_flee; } }
-
-    //camera states
-    /*[SerializeField]
-    KeyCode m_abzu;
-    public static KeyCode Abzu { get { hasInstance(); return Instance.m_abzu; } }
-
-    [SerializeField]
-    KeyCode m_locked;
-    public static KeyCode Locked { get { hasInstance(); return Instance.m_locked; } }
-
-    [SerializeField]
-    KeyCode m_warthog;
-    public static KeyCode Warthog { get { hasInstance(); return Instance.m_warthog; } }
-
-    [SerializeField]
-    KeyCode m_firstPerson;
-    public static KeyCode FirstPerson { get { hasInstance(); return Instance.m_firstPerson; } }*/
-
-
-    //[SerializeField]
-    //KeyCode m_cameraSwap;
-    //public static KeyCode CameraSwap { get { hasInstance(); return Instance.m_cameraSwap; } }
-
     #endregion keycodes
 
 
@@ -193,14 +113,22 @@ public class ALInput : MonoBehaviour
         /// this is a cheat that will always return 0 using ALInput.GetAxis
         /// </summary>
         Unset,
-        MouseX,
-        MouseY,
-        KeyboardHorizontal,
-        KeyboardVertical,
-        JoystickLHorizontal,
-        JoystickLVerticle,
-        JoystickRHorizontal,
-        JoystickRVerticle
+        LookHorizontal,
+        LookVertical,
+        MoveHorizontal,
+        MoveVertical,
+        JoystickMoveHorizontal,
+        JoystickMoveVertical,
+        JoystickLookHorizontal,
+        JoystickLookVertical
+    };
+
+    public enum AxisType
+    {
+        LookHorizontal,
+        LookVertical,
+        MoveHorizontal,
+        MoveVertical
     };
 
     public enum DirectionCode
@@ -228,32 +156,45 @@ public class ALInput : MonoBehaviour
     private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredMouseDirections =
         new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
         {
-            {DirectionCode.LookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.MouseX,AxisCode.MouseY,AxisCode.Unset) },
-            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.KeyboardHorizontal,AxisCode.Unset,AxisCode.KeyboardVertical) }
+            {DirectionCode.LookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.LookHorizontal,AxisCode.LookVertical,AxisCode.Unset) },
+            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.MoveHorizontal,AxisCode.Unset,AxisCode.MoveVertical) }
         };
     private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredJoystickDirections =
         new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
         {
-            {DirectionCode.JoystickLookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickRHorizontal,AxisCode.JoystickRVerticle,AxisCode.Unset) },
-            {DirectionCode.JoystickMoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickLHorizontal,AxisCode.Unset,AxisCode.JoystickLVerticle) }
+            {DirectionCode.JoystickLookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickLookHorizontal,AxisCode.JoystickLookVertical,AxisCode.Unset) },
+            {DirectionCode.JoystickMoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickMoveHorizontal,AxisCode.Unset,AxisCode.JoystickMoveVertical) }
         };
 
 
     public AxisCode m_playerLateralMovement;
     public static AxisCode PlayerLateralMovement { get { hasInstance(); return Instance.m_playerLateralMovement; } }
-    
+
     public static bool GetKeyUp(KeyCode key) { hasInstance(); return Input.GetKeyUp(key); }
     public static bool GetKeyDown(KeyCode key) { hasInstance(); return Input.GetKeyDown(key); }
     public static bool GetKey(KeyCode key) { hasInstance(); return Input.GetKey(key); }
 
-    public static float GetAxis(AxisCode key)
+
+    public static float GetAxis(AxisType dir)
+    {
+        hasInstance();
+        //Return the correct control input based on if controller is toggled or not
+        return (ControllerToggle ? Input.GetAxis("Joystick" + dir.ToString()) : Input.GetAxis(dir.ToString()));
+
+    }
+
+    public static float GetAxisByCode(AxisCode key)
     {
         hasInstance();
         //Unset set to 0 here for efficiency reasons
-        return (key == AxisCode.Unset) ? 0: Input.GetAxis(key.ToString());
+        return (key == AxisCode.Unset) ? 0 : Input.GetAxis(key.ToString());
     }
 
-    
+    public static bool IsControllerToggled()
+    {
+        return (Instance.m_controllerToggle ? true : false);
+    }
+
     /// <summary>
     /// this function checks our registered direction codes and supples a vec3 as desired 
     /// </summary>
@@ -264,7 +205,7 @@ public class ALInput : MonoBehaviour
         System.Tuple<AxisCode, AxisCode, AxisCode> directionInstructions;
 
         //this breaks and directionInstuctions is null so player cannot receive input yet.
-        if (Instance.m_controllerToggle == false)
+        if (!ControllerToggle)
         {
             if (!m_registeredMouseDirections.TryGetValue(dC, out directionInstructions))
                 return Vector3.zero;
@@ -276,9 +217,9 @@ public class ALInput : MonoBehaviour
         }
         return new Vector3
         (
-                GetAxis(directionInstructions.Item1),
-                GetAxis(directionInstructions.Item2),
-                GetAxis(directionInstructions.Item3)
+                GetAxisByCode(directionInstructions.Item1),
+                GetAxisByCode(directionInstructions.Item2),
+                GetAxisByCode(directionInstructions.Item3)
         );
     }
 
@@ -302,7 +243,6 @@ public class ALInput : MonoBehaviour
     /// </summary>
     private void LoadFromFile()
     {
-        
         m_forward = KeyCode.W;
         m_goLeft = KeyCode.A;
         m_goRight = KeyCode.D;
@@ -312,51 +252,9 @@ public class ALInput : MonoBehaviour
         m_menuKey = KeyCode.Escape;
         m_cancleKey = KeyCode.E;
 
-        //OLD KEYS
-        //m_sprint = KeyCode.LeftShift;
-        //m_keyTarget = KeyCode.Z;
-        //m_forgetTarget = KeyCode.X;
-        //m_punch = KeyCode.P;
-        //m_manualCamera = KeyCode.Mouse1;
-        //m_backward = KeyCode.S;
-
-        ////Default Combat buttons
-        //m_attack = KeyCode.Mouse0;
-        //m_item = KeyCode.Mouse1;
-        //m_flee = KeyCode.N;
-
-        //m_rotateForward = KeyCode.Keypad8;
-        //m_rotateBackwards = KeyCode.Keypad2;
-        //m_rotateRight = KeyCode.Keypad4;
-        //m_rotateLeft = KeyCode.Keypad6;
-
-        ///*m_abzu = KeyCode.F1;
-        //m_locked = KeyCode.F2;
-        //m_warthog = KeyCode.F3;
-        //m_firstPerson = KeyCode.F4;*/
-        //m_cameraSwap = KeyCode.T;
-
-        //m_mountBoat = KeyCode.M;
-        //m_dismountBoat = KeyCode.N;
-        //m_harvest = KeyCode.R;
-        //m_throwBait = KeyCode.O;
-
-        //m_craftBait = KeyCode.B;
-
-        //m_toggleInventory = KeyCode.I;
-        //m_toggleShop = KeyCode.O;
-
-        //m_start = KeyCode.Space;
-
-        //m_showOptionsPause = KeyCode.Escape;
-
-        //m_playerLateralMovement = AxisCode.Horizontal;
-
-
     }
-    //For testing only
 
     [SerializeField]
     protected bool m_controllerToggle;
-    public static bool ControllerToggleTest { get { hasInstance(); return Instance.m_controllerToggle; } }
+    public static bool ControllerToggle { get { hasInstance(); return Instance.m_controllerToggle; } }
 }

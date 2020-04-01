@@ -9,8 +9,6 @@ public class BoatPlayer : MonoBehaviour
     protected Transform m_mountTransform;
     [SerializeField]
     protected Transform m_dismountTransform;
-    //For testing only
-    public bool m_controllerToggle = false;
 
     [SerializeField]
     public bool m_CanMove;
@@ -69,8 +67,7 @@ public class BoatPlayer : MonoBehaviour
 
         if (ALInput.GetKeyDown(ALInput.Toggle))
             ToggleMapInventoryDisplays();
-        if (Input.GetKeyDown(KeyCode.Backspace))
-            m_controllerToggle = !m_controllerToggle;
+        
     }
 
     private void FixedUpdate()
@@ -81,7 +78,7 @@ public class BoatPlayer : MonoBehaviour
         //Mounted Context actions
         ResolveRotation();
 
-        if (ALInput.GetKey(ALInput.Forward) || (m_controllerToggle && ALInput.GetAxis(ALInput.AxisCode.JoystickLVerticle) < -0.1))
+        if (ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0.2f)
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
@@ -90,15 +87,8 @@ public class BoatPlayer : MonoBehaviour
     {
         //Changed for testing
         float horizontalWeight;
-        if (m_controllerToggle)
-        {
 
-             horizontalWeight = ALInput.GetAxis(ALInput.AxisCode.JoystickLHorizontal);
-        }
-        else
-        {
-             horizontalWeight = ALInput.GetAxis(ALInput.AxisCode.KeyboardHorizontal);
-        }
+        horizontalWeight = ALInput.GetAxis(ALInput.AxisType.MoveHorizontal);
         Vector3 desiredDirection = new Vector3
         (
             0,

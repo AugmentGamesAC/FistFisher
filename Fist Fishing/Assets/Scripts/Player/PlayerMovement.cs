@@ -245,9 +245,9 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 desiredDirection = new Vector3
         (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
+            ALInput.GetAxisByCode(ALInput.AxisCode.LookVertical),
             0, // no touch Y
-            ALInput.GetAxis(ALInput.AxisCode.MouseX)
+            ALInput.GetAxisByCode(ALInput.AxisCode.LookHorizontal)
         ) * m_turnSpeed * Time.deltaTime;
 
 
