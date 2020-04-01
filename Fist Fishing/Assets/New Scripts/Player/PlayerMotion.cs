@@ -21,6 +21,9 @@ public class PlayerMotion : MonoBehaviour
     [SerializeField]
     protected FishInstance m_closestFish;
 
+    //For testing only
+    public bool m_controllerToggle = false;
+
     [SerializeField]
     protected StatTracker m_turningSpeedRef;
     public StatTracker TurnSpeed => m_turningSpeedRef;
@@ -70,6 +73,8 @@ public class PlayerMotion : MonoBehaviour
     {
         if (!m_CanMove)
             return;
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            m_controllerToggle = !m_controllerToggle;
 
         if (ALInput.GetKeyDown(ALInput.Switch))
             ToggleInventoryDisplay();
@@ -124,14 +129,26 @@ public class PlayerMotion : MonoBehaviour
 
     protected void XZDirectional()
     {
+        Vector3 desiredMovement;
         //Forward movement
-        Vector3 desiredMovement = transform.forward * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
-
-        //Left Right
-        desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
-
-        //ascend descend.
-        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.CancleKey) ? 0.5f : 0));
+        if (!m_controllerToggle)
+        {
+            //Keyboard
+            desiredMovement = transform.forward * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
+            //Left Right
+            desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
+            //ascend descend.
+            desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.CancleKey) ? 0.5f : 0));
+        }
+        else
+        {
+            //Controller
+            desiredMovement = transform.forward * Time.deltaTime * m_movementSpeedRef * -ALInput.GetAxis(ALInput.AxisCode.JoystickLVerticle);
+            //Left Right
+            desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ALInput.GetAxis(ALInput.AxisCode.JoystickLHorizontal);
+            //ascend descend. NOT SET UP FOR CONTROLLER YET
+            desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.CancleKey) ? 0.5f : 0));
+        }
 
         //apply movement vector
 
@@ -143,12 +160,7 @@ public class PlayerMotion : MonoBehaviour
 
     void ResolveSwimRotation()
     {
-        Vector3 desiredDirection = new Vector3
-        (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
-            ALInput.GetAxis(ALInput.AxisCode.MouseX),
-            0
-        ) * m_turningSpeedRef * Time.deltaTime;
+        Vector3 desiredDirection = ALInput.GetDirection(ALInput.DirectionCode.LookInput) * m_turningSpeedRef * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);

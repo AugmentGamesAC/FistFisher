@@ -16,6 +16,7 @@ public class ALInput : MonoBehaviour
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
 
+
     #region keycodes keycodes
     //Movement Keys
     [SerializeField]
@@ -194,13 +195,12 @@ public class ALInput : MonoBehaviour
         Unset,
         MouseX,
         MouseY,
-        Horizontal,
-        Vertical,
-        MHorizontal,
-        MUp,
-        MForward,
-        LHorizontal,
-        LVertical
+        KeyboardHorizontal,
+        KeyboardVertical,
+        JoystickLHorizontal,
+        JoystickLVerticle,
+        JoystickRHorizontal,
+        JoystickRVerticle
     };
 
     public enum DirectionCode
@@ -216,18 +216,26 @@ public class ALInput : MonoBehaviour
         /// <summary>
         /// AxisCode.MouseX,AxisCode.MouseY,0
         /// </summary>
-        LookInput
+        LookInput,
+        JoystickMoveInput,
+        JoystickLookInput
     }
     /// <summary>
     /// Tuple is a dummy object that lets me link 3 objects into one without an offical class
     /// this allows us to define behavior in the dictionary here rather than in movementDirection
     /// will need to be refined when doing dynamic updating to controls
     /// </summary>
-    private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredDirections =
+    private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredMouseDirections =
         new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
         {
             {DirectionCode.LookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.MouseX,AxisCode.MouseY,AxisCode.Unset) },
-            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.Horizontal,AxisCode.Unset,AxisCode.Vertical) }
+            {DirectionCode.MoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.KeyboardHorizontal,AxisCode.Unset,AxisCode.KeyboardVertical) }
+        };
+    private static Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>> m_registeredJoystickDirections =
+        new Dictionary<DirectionCode, System.Tuple<AxisCode, AxisCode, AxisCode>>()
+        {
+            {DirectionCode.JoystickLookInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickRHorizontal,AxisCode.JoystickRVerticle,AxisCode.Unset) },
+            {DirectionCode.JoystickMoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickLHorizontal,AxisCode.Unset,AxisCode.JoystickLVerticle) }
         };
 
 
@@ -256,9 +264,16 @@ public class ALInput : MonoBehaviour
         System.Tuple<AxisCode, AxisCode, AxisCode> directionInstructions;
 
         //this breaks and directionInstuctions is null so player cannot receive input yet.
-        if (!m_registeredDirections.TryGetValue(dC, out directionInstructions))
-            return Vector3.zero;
-
+        if (Instance.m_controllerToggle == false)
+        {
+            if (!m_registeredMouseDirections.TryGetValue(dC, out directionInstructions))
+                return Vector3.zero;
+        }
+        else
+        {
+            if (!m_registeredJoystickDirections.TryGetValue(dC, out directionInstructions))
+                return Vector3.zero;
+        }
         return new Vector3
         (
                 GetAxis(directionInstructions.Item1),
@@ -339,4 +354,9 @@ public class ALInput : MonoBehaviour
 
 
     }
+    //For testing only
+
+    [SerializeField]
+    protected bool m_controllerToggle;
+    public static bool ControllerToggleTest { get { hasInstance(); return Instance.m_controllerToggle; } }
 }
