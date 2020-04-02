@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class QuestManager : MonoBehaviour
+public class QuestManager : UITracker<QuestManager>
 {
-    public static QuestManager Instance { get; private set; }
-
     [SerializeField]
     protected List<FishGatheringQuest> m_questLine = new List<FishGatheringQuest>();
 
@@ -14,17 +12,10 @@ public class QuestManager : MonoBehaviour
     protected int m_selectedQuestIndex = 0;
     public FishGatheringQuest CurrentQuest => m_questLine[m_selectedQuestIndex];
 
-    private void Awake()
+    public QuestManager()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
-
         CurrentQuest.Activate();
+        UpdateState();
     }
 
     public void NextQuest()
@@ -38,6 +29,7 @@ public class QuestManager : MonoBehaviour
         }
 
         CurrentQuest.Activate();
+        UpdateState();
     }
 
     public bool CheckGatheringProgress(IItem item, int count)
@@ -62,6 +54,7 @@ public class QuestManager : MonoBehaviour
             if (!(CurrentQuest.ItemGathered(item as FishDefintion)))
                 return false;
         }
+        UpdateState();
 
         return true;
     }
@@ -73,5 +66,10 @@ public class QuestManager : MonoBehaviour
     {
         m_selectedQuestIndex = 0;
         CurrentQuest.Activate();
+    }
+
+    protected new void UpdateState()
+    {
+        OnStateChange?.Invoke(this);
     }
 }

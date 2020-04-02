@@ -24,7 +24,7 @@ public class GatheringQuest<T> : Quest where T: IItem
         if (item.Name != m_itemType.Name)
             return false;
 
-        m_tasksLeft--;
+        m_tasksLeft.SetValue(m_tasksLeft - 1);
 
         if (CheckTaskCompleted())
             return false;

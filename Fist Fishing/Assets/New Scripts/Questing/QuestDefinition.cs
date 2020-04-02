@@ -6,12 +6,12 @@ using UnityEngine;
 public class QuestDefinition
 {
     [SerializeField]
-    protected Sprite m_icon;
-    public Sprite Icon => m_icon;
+    protected ImageTracker m_icon;
+    public ImageTracker Icon => m_icon;
 
     [SerializeField]
-    protected string m_description;
-    public string Description => m_description;
+    protected TextTracker m_description;
+    public TextTracker Description => m_description;
 
     [SerializeField]
     protected Reward m_loot;

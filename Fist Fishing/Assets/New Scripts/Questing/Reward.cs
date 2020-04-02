@@ -26,8 +26,8 @@ public class Reward
     public int UpgradeAmount => m_upgradeAmount;
 
     [SerializeField]
-    protected int m_clams;
-    public int Clams => m_clams;
+    protected IntTracker m_clams;
+    public IntTracker Clams => m_clams;
 
     public Reward()
     {
@@ -46,6 +46,6 @@ public class Reward
 
     public void SetClams(int clams)
     {
-        m_clams = clams;
+        m_clams.SetValue(clams);
     }
 }
