@@ -202,17 +202,10 @@ public class ALInput : MonoBehaviour
     {
         System.Tuple<AxisCode, AxisCode, AxisCode> directionInstructions;
 
-        //this breaks and directionInstuctions is null so player cannot receive input yet.
-        if (!ControllerToggle)
-        {
-            if (!m_registeredMouseDirections.TryGetValue(dC, out directionInstructions))
-                return Vector3.zero;
-        }
-        else
-        {
-            if (!m_registeredJoystickDirections.TryGetValue(dC, out directionInstructions))
-                return Vector3.zero;
-        }
+        var controller = (ControllerToggle) ? m_registeredJoystickDirections : m_registeredMouseDirections;
+        if (!controller.TryGetValue(dC, out directionInstructions))
+            return Vector3.zero;
+
         return new Vector3
         (
                 GetAxisByCode(directionInstructions.Item1),
