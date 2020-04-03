@@ -22,6 +22,20 @@ public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ IS
     [SerializeField]
     protected T m_spawnReference;
 
+    [SerializeField]
+    protected bool m_spawnFromBottom;
+
+    public static void AdjustForBottom(GameObject g)
+    {
+        Bounds b = g.gameObject.GetComponent<Collider>().bounds;
+        if(b!=null)
+        {
+            Vector3 o = g.transform.position;
+            Vector3 offset = b.extents;
+            o.y += offset.y;
+            g.transform.position = o;
+        }
+    }
 
 }
 

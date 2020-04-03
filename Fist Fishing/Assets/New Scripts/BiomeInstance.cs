@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using TMPro;
 
 public delegate void CleanupCall();
 public interface IDyingThing
@@ -20,8 +21,8 @@ public class BiomeInstance : MonoBehaviour
     [SerializeField]
     protected BiomeDefinition m_myInstructions;
     public BiomeDefinition Definiton { get => m_myInstructions; set => m_myInstructions = value; }
-
-
+    
+    protected TextMeshPro m_biomeText;
 
     protected Dictionary<IEnumerable<ISpawnable>, int> m_memberCount;
     protected IEnumerable<ISpawnable> m_aggressiveProbSpawn;
@@ -33,7 +34,9 @@ public class BiomeInstance : MonoBehaviour
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
-        m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        //m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        LayerMask l = LayerMask.NameToLayer("BoatMapOnly");
+        m_MeshCollider.gameObject.layer = l;
 
         currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
@@ -48,7 +51,18 @@ public class BiomeInstance : MonoBehaviour
 
         if ((m_myInstructions.ClutterList.Count > 0))
             SpawnClutter();
+        SpawnText();
+    }
 
+    private void SpawnText()
+    {
+        Vector3 v = gameObject.transform.position;
+        v.y = 30.0f;
+
+        GameObject o = GameObject.Instantiate(Definiton.BaseTextTemplate, gameObject.transform);
+        m_biomeText = o.GetComponent<TextMeshPro>();
+        m_biomeText.gameObject.transform.position = v;
+        m_biomeText.gameObject.transform.localScale = Vector3.one * 3.0f;
     }
 
     protected float currentCooldown;

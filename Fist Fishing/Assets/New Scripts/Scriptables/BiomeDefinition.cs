@@ -44,6 +44,9 @@ public class BiomeDefinition : ScriptableObject
     public float TimeBetweenSpawns => m_timeBetweenSpawns;
 
 
+    [SerializeField]
+    protected GameObject m_baseTextTemplate;
+    public GameObject BaseTextTemplate => m_baseTextTemplate;
     #endregion variables
     protected BiomeDefinition CloneSelf(string NewCloneName, BiomeDefinition biome)
     {

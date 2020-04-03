@@ -19,6 +19,13 @@ public class CoralNew : MonoBehaviour, IDyingThing
     protected float m_currentTimeToSpawn;
     protected bool m_isThisStillAbleToSpawnbuds = true;
 
+    public void BudDied()
+    {
+        m_numberOfBudsDied++;
+    }
+
+
+
     public void SetTimeBetweenSpawns(float t)
     {
         m_timeBetweenSpawns = Mathf.Clamp(t, 0, Mathf.Infinity);
