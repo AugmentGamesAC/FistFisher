@@ -149,16 +149,16 @@ public class Configurations : MonoBehaviour
     public void ToggleController()
     {
         string[] joysticks = Input.GetJoystickNames();
-        string usableJoystick = null;
+        bool usableJoystick = false;
         foreach (string item in joysticks)
         {
             //Print names of all conected joysticks
             Debug.Log("Controller found: " + item);
             //Check all controllers for usability based on brand. Wireless refers to PS4
             if (item.Contains("XBOX") || item.Contains("Wireless"))
-                usableJoystick = item;
+                usableJoystick = true;
         }
-        if (usableJoystick == null)
+        if (!usableJoystick)
         {
             Debug.Log("No useable controller detected");
             return;
