@@ -29,7 +29,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
 
         m_promptManager = new PromptManager();
-        m_questManager = new QuestManager();
+        //m_questManager = new QuestManager();
 
         m_clamsUpdater.UpdateTracker(m_clams);
 

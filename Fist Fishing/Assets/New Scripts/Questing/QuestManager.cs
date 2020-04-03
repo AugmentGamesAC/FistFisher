@@ -6,17 +6,17 @@ using UnityEngine;
 public class QuestManager : UITracker<QuestManager>
 {
     [SerializeField]
-    protected List<FishGatheringQuest> m_questLine = new List<FishGatheringQuest>();
+    protected List<FishGatheringQuest> m_questLine;
 
     [SerializeField]
     protected int m_selectedQuestIndex = 0;
     public FishGatheringQuest CurrentQuest => m_questLine[m_selectedQuestIndex];
 
-    public QuestManager()
-    {
-        CurrentQuest.Activate();
-        UpdateState();
-    }
+    //public QuestManager()
+    //{
+    //    CurrentQuest.Activate();
+    //    UpdateState();
+    //}
 
     public void NextQuest()
     {
@@ -25,7 +25,6 @@ public class QuestManager : UITracker<QuestManager>
         if (m_selectedQuestIndex == m_questLine.Count)
         {
             ResolveQuestlineCompleted();
-            return;
         }
 
         CurrentQuest.Activate();
