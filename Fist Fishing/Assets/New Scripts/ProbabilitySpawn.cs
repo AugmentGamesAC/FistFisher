@@ -8,6 +8,25 @@ public interface IObject<T>
     T MemberwiseClone();
 }
 
+public static class SpawningTweaks
+{
+    public static void AdjustForBottom(GameObject g)
+    {
+        if (g == default)
+            return;
+        Collider c = g.gameObject.GetComponent<Collider>();
+        if (c == default)
+            return;
+        Bounds b = c.bounds;
+        if (b == default)
+            return;
+        Vector3 o = g.transform.position;
+            Vector3 offset = b.extents;
+            o.y += offset.y;
+            g.transform.position = o;
+    }
+}
+
 public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
 {
     public GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
@@ -24,19 +43,6 @@ public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ IS
 
     [SerializeField]
     protected bool m_spawnFromBottom;
-
-    public static void AdjustForBottom(GameObject g)
-    {
-        Bounds b = g.gameObject.GetComponent<Collider>().bounds;
-        if(b!=null)
-        {
-            Vector3 o = g.transform.position;
-            Vector3 offset = b.extents;
-            o.y += offset.y;
-            g.transform.position = o;
-        }
-    }
-
 }
 
 
