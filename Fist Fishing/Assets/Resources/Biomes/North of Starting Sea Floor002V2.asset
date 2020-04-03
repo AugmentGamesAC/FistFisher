@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: North of Starting Sea Floor002V2
   m_EditorClassIdentifier: 
   m_maximumNumberOfSpawns: 0
-  m_amountOfClutterToSpawn: 0
+  m_amountOfClutterToSpawn: 3
   m_clutter: []
   m_collectables: []
-  m_aggressiveFish: []
+  m_aggressiveFish:
+  - {fileID: 11400000, guid: 89d7e6eedb034e049abf1ab68722915c, type: 2}
   m_mehFish: []
   m_preyFish: []
-  m_name: 
+  m_name: North Sea
+  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
   m_timeBetweenSpawns: 0
-  m_baseTextTemplate: {fileID: 0}
+  m_textScale: 1
+  m_textHeight: 10
+  m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
+    type: 3}

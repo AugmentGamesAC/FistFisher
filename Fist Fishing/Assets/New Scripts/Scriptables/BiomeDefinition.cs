@@ -38,7 +38,10 @@ public class BiomeDefinition : ScriptableObject
     protected string m_name;
     public string Name => m_name;
 
+    [SerializeField]
     protected Color m_boatMapColour;
+    public Color BoatMapColour => m_boatMapColour;
+
     [SerializeField]
     protected float m_timeBetweenSpawns;
     public float TimeBetweenSpawns => m_timeBetweenSpawns;

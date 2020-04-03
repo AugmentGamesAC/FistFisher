@@ -12,13 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0099f26a0656242a8bfe8f454355ef, type: 3}
   m_Name: Southeast of StartV2
   m_EditorClassIdentifier: 
-  m_maximumNumberOfSpawns: 0
-  m_amountOfClutterToSpawn: 0
-  m_clutter: []
-  m_collectables: []
+  m_maximumNumberOfSpawns: 80
+  m_amountOfClutterToSpawn: 200
+  m_clutter:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_collectables:
+  - {fileID: 11400000, guid: bac904802cc0e994d83e114445ece139, type: 2}
   m_aggressiveFish: []
-  m_mehFish: []
-  m_preyFish: []
-  m_name: 
+  m_mehFish:
+  - {fileID: 11400000, guid: f9291ac109b21694d8cb22731cb13e65, type: 2}
+  m_preyFish:
+  - {fileID: 11400000, guid: ab61e8896617f6e4ba2c30c72595fd7c, type: 2}
+  - {fileID: 11400000, guid: 1e2aeb5614211274281c2522940f1109, type: 2}
+  m_name: South Sea
+  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
   m_timeBetweenSpawns: 0
-  m_baseTextTemplate: {fileID: 0}
+  m_textScale: 1
+  m_textHeight: 10
+  m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
+    type: 3}

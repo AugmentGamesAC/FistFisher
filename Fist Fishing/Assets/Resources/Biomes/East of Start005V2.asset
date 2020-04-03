@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0099f26a0656242a8bfe8f454355ef, type: 3}
   m_Name: East of Start005V2
   m_EditorClassIdentifier: 
-  m_maximumNumberOfSpawns: 0
+  m_maximumNumberOfSpawns: 1
   m_amountOfClutterToSpawn: 0
   m_clutter: []
   m_collectables: []
-  m_aggressiveFish: []
+  m_aggressiveFish:
+  - {fileID: 11400000, guid: 00ad33132ca61144f8609b37395ff403, type: 2}
   m_mehFish: []
   m_preyFish: []
   m_name: 
+  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
   m_timeBetweenSpawns: 0
-  m_baseTextTemplate: {fileID: 0}
+  m_textScale: 1
+  m_textHeight: 10
+  m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
+    type: 3}

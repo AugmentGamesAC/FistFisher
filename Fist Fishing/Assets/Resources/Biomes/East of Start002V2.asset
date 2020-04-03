@@ -12,13 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0099f26a0656242a8bfe8f454355ef, type: 3}
   m_Name: East of Start002V2
   m_EditorClassIdentifier: 
-  m_maximumNumberOfSpawns: 0
-  m_amountOfClutterToSpawn: 0
-  m_clutter: []
+  m_maximumNumberOfSpawns: 25
+  m_amountOfClutterToSpawn: 50
+  m_clutter:
+  - {fileID: 11400000, guid: 3d00f511af65f2042b0f821c92bdb8d7, type: 2}
+  - {fileID: 11400000, guid: 924b9649c5f8f8a4aa5a403b16b3e992, type: 2}
   m_collectables: []
   m_aggressiveFish: []
-  m_mehFish: []
-  m_preyFish: []
-  m_name: 
+  m_mehFish:
+  - {fileID: 11400000, guid: f9291ac109b21694d8cb22731cb13e65, type: 2}
+  m_preyFish:
+  - {fileID: 11400000, guid: e90a72703a3096b41a5ce6fda160d7f0, type: 2}
+  - {fileID: 11400000, guid: 5bbf1976fb88eba4d843b399cab36cc0, type: 2}
+  m_name: East Sea
+  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
   m_timeBetweenSpawns: 0
-  m_baseTextTemplate: {fileID: 0}
+  m_textScale: 1
+  m_textHeight: 10
+  m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
+    type: 3}
