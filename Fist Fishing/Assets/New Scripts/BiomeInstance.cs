@@ -31,6 +31,10 @@ public class BiomeInstance : MonoBehaviour
     protected IEnumerable<ISpawnable> m_collectablesProbSpawn;
     protected IEnumerable<ISpawnable> m_cluterProbSpawn;
 
+    protected bool m_areThereAnyFish = false;
+    protected bool m_areThereAnyCollectables = false;
+    protected int m_totalFishCount;
+
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
@@ -52,6 +56,16 @@ public class BiomeInstance : MonoBehaviour
         if ((m_myInstructions.ClutterList.Count > 0))
             SpawnClutter();
         SpawnText();
+
+
+        if (m_myInstructions.CollectablesList.Count > 0)
+            m_areThereAnyCollectables = true;
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count > 0  )
+            m_areThereAnyFish = true;
+        if (m_areThereAnyFish)
+            m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
     }
 
     private void SpawnText()
@@ -81,10 +95,38 @@ public class BiomeInstance : MonoBehaviour
 
     protected void ResolveSpawning()
     {
-        if (m_memberCount == default)
+        if (m_memberCount == default) //nothing in any list to spawn
+            return;
+        if (!m_areThereAnyCollectables && !m_areThereAnyFish) //the above list includes clutter. this handles clutter-only biome
             return;
         if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
             return;
+
+
+        if (m_areThereAnyCollectables && !m_areThereAnyFish) //only collectables
+        {
+            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            return;
+        }
+        if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
+        {
+            return;
+        }
+        if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
+        {
+            return;
+        }
+
+
+
+
+
+
+
+
+
+
+
         if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn] && m_myInstructions.CollectablesList.Count >0)
         {
             m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;

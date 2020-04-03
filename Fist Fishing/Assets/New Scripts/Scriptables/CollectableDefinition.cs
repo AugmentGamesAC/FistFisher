@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables/Collectable Definition")]
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
@@ -10,6 +9,10 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicCollectable;
+
+    [SerializeField]
+    protected AItem m_collectableItemData;
+    public AItem ItemData => m_collectableItemData;
 
     public float WeightedChance => throw new System.NotImplementedException();
 
