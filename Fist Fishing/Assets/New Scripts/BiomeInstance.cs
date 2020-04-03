@@ -57,12 +57,13 @@ public class BiomeInstance : MonoBehaviour
     private void SpawnText()
     {
         Vector3 v = gameObject.transform.position;
-        v.y = 30.0f;
+        v.y = Definiton.TextHeight;
 
         GameObject o = GameObject.Instantiate(Definiton.BaseTextTemplate, gameObject.transform);
         m_biomeText = o.GetComponent<TextMeshPro>();
+        m_biomeText.text = Definiton.Name;
         m_biomeText.gameObject.transform.position = v;
-        m_biomeText.gameObject.transform.localScale = Vector3.one * 3.0f;
+        m_biomeText.gameObject.transform.localScale = Vector3.one * Definiton.TextScale;
     }
 
     protected float currentCooldown;

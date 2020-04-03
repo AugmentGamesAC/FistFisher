@@ -45,6 +45,14 @@ public class BiomeDefinition : ScriptableObject
 
 
     [SerializeField]
+    protected float m_textScale;
+    public float TextScale => m_textScale;
+
+    [SerializeField]
+    protected float m_textHeight;
+    public float TextHeight => m_textHeight;
+
+    [SerializeField]
     protected GameObject m_baseTextTemplate;
     public GameObject BaseTextTemplate => m_baseTextTemplate;
     #endregion variables
