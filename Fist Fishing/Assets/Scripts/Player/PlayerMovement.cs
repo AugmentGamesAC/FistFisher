@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.Toggle))
         {
             ToggleMouseLock();
         }
@@ -202,14 +202,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateBoatMountStatus()
     {
         //if pressing mount button and allowed to mount.
-        if (m_canMount && ALInput.GetKeyDown(ALInput.MountBoat) && !m_isMounted)
+        if (m_canMount && ALInput.GetKeyDown(ALInput.Action) && !m_isMounted)
         {
             Mount();
 
             m_mountCooldown = m_mountCooldownMax;
         }
         //if i am mounted and pressing the dismount button.
-        else if (ALInput.GetKeyDown(ALInput.DismountBoat) && m_isMounted)
+        else if (ALInput.GetKeyDown(ALInput.Action) && m_isMounted)
         {
             Dismount();
 
@@ -245,9 +245,9 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 desiredDirection = new Vector3
         (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
+            ALInput.GetAxisByCode(ALInput.AxisCode.LookVertical),
             0, // no touch Y
-            ALInput.GetAxis(ALInput.AxisCode.MouseX)
+            ALInput.GetAxisByCode(ALInput.AxisCode.LookHorizontal)
         ) * m_turnSpeed * Time.deltaTime;
 
 
@@ -359,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
    public bool IsDescending()
     {
-        return ALInput.GetKey(ALInput.Descend);
+        return ALInput.GetKey(ALInput.CancleKey);
         //return Input.GetButton("Descend");
     }
     public bool IsPunching()
@@ -374,6 +374,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool IsThrowBait()
     {
-        return ALInput.GetKey(ALInput.ThrowBait);
+        return ALInput.GetKey(ALInput.CancleKey);
     }
 }

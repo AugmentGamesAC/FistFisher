@@ -56,7 +56,7 @@ public class OrbitCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        IncrementRotation(ALInput.GetAxis(ALInput.AxisCode.MouseX), ALInput.GetAxis(ALInput.AxisCode.MouseY));
+        IncrementRotation(ALInput.GetAxis(ALInput.AxisType.LookHorizontal), ALInput.GetAxis(ALInput.AxisType.LookVertical));
         SetOffset();
         transform.LookAt(m_LookAtObject.transform);
         m_OrbitObject.transform.up = transform.forward;

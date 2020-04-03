@@ -80,8 +80,13 @@ public class PinWheel<T> : IPinWheel<T>
         return false;
     }
 
-
-    public static int TwoDToSelection(float x, float y)
+    /// <summary>
+    /// 2 Axis selection with keyboard. WASD
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public static int TwoDToSelectionKeyboard(float x, float y)
     {
  
         if (x < 0)

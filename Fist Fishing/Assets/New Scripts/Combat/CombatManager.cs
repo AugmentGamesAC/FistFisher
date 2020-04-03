@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using UnityEngine.UI;
 
 /// <summary>
 /// Should be Singleton
@@ -75,6 +76,9 @@ public class CombatManager : MonoBehaviour
     protected PlayerCombatInfo m_playerCombatInfo;
 
     [SerializeField]
+    protected List<Button> m_ActionButtons;
+    private int m_Actionselection = -1;
+    [SerializeField]
     protected CombatStates m_currentCombatState = CombatStates.OutofCombat;
 
 
@@ -86,8 +90,6 @@ public class CombatManager : MonoBehaviour
     private void Start()
     {
         /// m_playerCombatInfo.NoiseTracker.OnCurrentAmountChanged += ResolveNoiseChange;
-
-
 
         m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
         if (m_playerCombatInfo == null)
@@ -103,6 +105,11 @@ public class CombatManager : MonoBehaviour
     {
         //Set any items from prior combat to false
         m_isItemActive = false;
+
+        //Add listner to buttons
+        m_ActionButtons[0].onClick.AddListener(OpenPinwheel); //Button 0: Attack
+        m_ActionButtons[1].onClick.AddListener(OnClickItem); //Button 1: Item
+        m_ActionButtons[2].onClick.AddListener(PlayerFlee); //Button 2: Flee
 
         PlayerInstance.Instance.PromptManager.HideCurrentPrompt();
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
@@ -163,47 +170,87 @@ public class CombatManager : MonoBehaviour
         //can switch targets even when fish are attacking.
         ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
 
-
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
-
         //listen to inputs only during AwaitingPlayerRound.
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
-        //listen for input cases.
-        //5 input cases, attack, flee, item, 1 axis for m_selectedFish swapping. (toggle left, right)
-        if (ALInput.GetKeyDown(KeyCode.F))
-        {
-            PlayerAttack();
-        }
-        //Cannot place another bait if one is active CHANGE THIS TO ACCOUNT FOR PINWHEEL/OTHER ITEMS LATER
-        if (!m_isItemActive)
-            if (ALInput.GetKeyDown(ALInput.Item))
-            {
-                PlayerItem();
-            }
+        //listen for input cases. Spacebar to finalize player turn - 0 - 8 to hotkey an action - Flee key
 
-        if (ALInput.GetKeyDown(ALInput.Flee))
-        {
+        //Spacebar input will resolves whatever action is currently selected
+        if (ALInput.GetKeyDown(KeyCode.Space))
+            ResolvePlayerAction();
+        
+
+        //Attack use hotkey
+            if (ALInput.GetKeyDown(ALInput.Action))
+                PlayerAttack();
+        
+        //Hotkeys for placing a bait
+            if (!m_isItemActive)
+                if (ALInput.GetKeyDown(ALInput.AltAction))
+                {
+                    PlayerItem();
+                }
+        
+
+        if (ALInput.GetKeyDown(ALInput.CancleKey))
             PlayerFlee();
-        }
-
-        int newselection = PinWheel<CombatMoveInfo>.TwoDToSelection
-        (
-        (ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
-        (ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0)
-        );
-        if (newselection != 0 && m_keypressTimeout <= 0)
+        
+        //Uncomment for WASD controls on attack pinwheel
         {
-            m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(newselection);
-            if (m_puchingUI != default)
-                m_puchingUI.WasKeyed();
+            //int newselection = PinWheel<CombatMoveInfo>.TwoDToSelectionKeyboard(
+            //(ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
+            //(ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
+        }
+        //Selection hotkeys for attacks. By using these you do not need to open the pinwheel
+        {
 
-            m_keypressTimeout = m_keypressTimeoutDuration;
+            if (ALInput.GetKeyDown(KeyCode.Alpha1) || ALInput.GetKeyDown(KeyCode.Keypad1))
+                m_Actionselection = 1;
+            if (ALInput.GetKeyDown(KeyCode.Alpha2) || ALInput.GetKeyDown(KeyCode.Keypad2))
+                m_Actionselection = 2;
+            if (ALInput.GetKeyDown(KeyCode.Alpha3) || ALInput.GetKeyDown(KeyCode.Keypad3))
+                m_Actionselection = 3;
+            if (ALInput.GetKeyDown(KeyCode.Alpha4) || ALInput.GetKeyDown(KeyCode.Keypad4))
+                m_Actionselection = 4;
+            if (ALInput.GetKeyDown(KeyCode.Alpha5) || ALInput.GetKeyDown(KeyCode.Keypad5))
+                m_Actionselection = 5;
+            if (ALInput.GetKeyDown(KeyCode.Alpha6) || ALInput.GetKeyDown(KeyCode.Keypad6))
+                m_Actionselection = 6;
+            if (ALInput.GetKeyDown(KeyCode.Alpha7) || ALInput.GetKeyDown(KeyCode.Keypad7))
+                m_Actionselection = 7;
+            if (ALInput.GetKeyDown(KeyCode.Alpha8) || ALInput.GetKeyDown(KeyCode.Keypad8))
+                m_Actionselection = 8;
+
+            if (m_Actionselection <= 1 && m_keypressTimeout <= 0)
+            {
+                m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(m_Actionselection);
+                m_keypressTimeout = m_keypressTimeoutDuration;
+            }
         }
 
+    }
+    /// <summary>
+    /// Calls the appropriate action based on current selection
+    /// </summary>
+    private void ResolvePlayerAction()
+    {
+        if (m_Actionselection >= 1)
+            PlayerAttack();
+        else if (m_Actionselection == 0)
+            PlayerItem();
+    }
 
+    /// <summary>
+    /// Calls on the attack pinwheel to open
+    /// </summary>
+    private void OpenPinwheel()
+    {
+        m_puchingUI.WasKeyed();
+        //Set action selection to an attack
+        m_Actionselection = 9;
     }
 
     protected void PlayerFlee()
@@ -248,23 +295,22 @@ public class CombatManager : MonoBehaviour
     /// Grabs selected item from the player's itemPinwheel.
     /// </summary>
     protected void PlayerItem()
-    { 
+    {
         //Set bool that item is now in play
         m_isItemActive = true;
-        //FOR TESTING SET ITEM TO BAIT
         m_Baititem = (Bait_IItem)ScriptableItems[0];
-        //Apply effect to the combat (None yet till pinwheel).
         //Set Active turn count to default
         m_Baititem.TurnCount = 3;
-        //Get the player's current pinwheel choice.
-
         //m_currentCombatState = CombatStates.AwaitingPlayerAnimation;
         //Enqueue for next round
         m_roundQueue.Enqueue(m_playerCombatInfo);
         //Move to resolving the round
         ResolveRound();
     }
-
+    protected void OnClickItem()
+    {
+        m_Actionselection = 0;
+    }
     /// <summary>
     /// moves selected fish closer and others further by distance amount.
     /// </summary>
@@ -273,7 +319,7 @@ public class CombatManager : MonoBehaviour
     {
         //Increase distance to other fish.
         for (int i = 0; i < m_FishSelection.Count; i++)
-        {
+        {
             bool isTheSelectedOne = (i == m_FishSelection.Selection);
             float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
             m_FishSelection[i].CombatDistance.SetValue(value);
@@ -475,11 +521,19 @@ public class CombatManager : MonoBehaviour
             m_currentCombatState = CombatStates.AwaitingPlayerRound;
             //Check if item should still be active after this turn
             if (m_isItemActive)
-            m_isItemActive = m_Baititem.IsStillActive();
+                m_isItemActive = m_Baititem.IsStillActive();
+            //Set buttons interactables
+            m_ActionButtons[0].interactable = true;
+            m_ActionButtons[1].interactable = true;
+            m_ActionButtons[2].interactable = true;
             return;
         }
 
         m_currentCombatState = CombatStates.AwaitingFishRound;
+        //Remove buttons interactables
+        m_ActionButtons[0].interactable = false;
+        m_ActionButtons[1].interactable = false;
+        m_ActionButtons[2].interactable = false;
 
         ResolveFishCombatant(nextCombatant as FishCombatInfo);
     }

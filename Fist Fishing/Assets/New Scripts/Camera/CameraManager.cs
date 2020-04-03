@@ -21,6 +21,9 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         FirstPerson,
     }
 
+    //For testing only
+    public bool m_controllerToggle = false;
+
     [SerializeField]
     protected GameObject FollowObject;
     [SerializeField]
@@ -98,21 +101,23 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
             SwitchState(CameraState.FirstPerson);*/
 
-        if (ALInput.GetKeyDown(ALInput.CameraSwap))
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            m_controllerToggle = !m_controllerToggle;
+
+        if (ALInput.GetKeyDown(ALInput.Toggle))
         {
             if (CurrentState == CameraState.FirstPerson)
                 SwitchState(CameraState.Warthog);
             else
                 SwitchState(CameraState.FirstPerson);
         }
-
-        Vector3 LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
-
+        Vector2 lookInputVec = new Vector2(ALInput.GetAxis(ALInput.AxisType.LookHorizontal), ALInput.GetAxis(ALInput.AxisType.LookVertical));
+        
         currentBehavior.ResolveInput
-            (LookInputVec.x,
-            LookInputVec.y,
-            LookInputVec.x,
-           LookInputVec.y);
+            (lookInputVec.x,
+            lookInputVec.y,
+            lookInputVec.x,
+           lookInputVec.y);
     }
 
 }
