@@ -34196,6 +34196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a691aaaaec911a4d939e531951723ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_controllerToggle: 0
   FollowObject: {fileID: 2487089619964385254}
   CameraObject: {fileID: 2138587749}
   _currentState: 2
@@ -35754,6 +35755,8 @@ MonoBehaviour:
   m_rotateRight: 0
   m_rotateLeft: 0
   m_playerLateralMovement: 1
+  m_controllerToggle: 0
+  m_invertToggle: 0
 --- !u!4 &4317289871419914990
 Transform:
   m_ObjectHideFlags: 0
@@ -36517,7 +36520,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.900055
+      value: -6.9000244
       objectReference: {fileID: 0}
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
@@ -39071,11 +39074,46 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7321673373289557122}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.8198202
+      objectReference: {fileID: 0}
+    - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.8198202
+      objectReference: {fileID: 0}
     - target: {fileID: 3105584864846595238, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7321673373289557122}
+    - target: {fileID: 5005335724762558819, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_Name
+      value: ExitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 6313036145032757386, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
       propertyPath: m_AnchorMin.x

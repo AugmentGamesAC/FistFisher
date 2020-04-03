@@ -179,6 +179,11 @@ public class ALInput : MonoBehaviour
     {
         hasInstance();
         //Return the correct control input based on if controller is toggled or not
+
+        //Invert is toggled return the inverse 
+        if (InvertToggle && dir == AxisType.LookVertical)
+            return (ControllerToggle ? -Input.GetAxis("Joystick" + dir.ToString()) : -Input.GetAxis(dir.ToString()));
+
         return (ControllerToggle ? Input.GetAxis("Joystick" + dir.ToString()) : Input.GetAxis(dir.ToString()));
 
     }
@@ -195,6 +200,16 @@ public class ALInput : MonoBehaviour
         return (Instance.m_controllerToggle ? true : false);
     }
 
+    public static void ToggleController()
+    {
+        Instance.m_controllerToggle = !ControllerToggle;
+    }
+
+    public static void InvertLookYAxis()
+    {
+        Instance.m_invertToggle = !InvertToggle;
+
+    }
     /// <summary>
     /// this function checks our registered direction codes and supples a vec3 as desired 
     /// </summary>
@@ -257,4 +272,7 @@ public class ALInput : MonoBehaviour
     [SerializeField]
     protected bool m_controllerToggle;
     public static bool ControllerToggle { get { hasInstance(); return Instance.m_controllerToggle; } }
+    [SerializeField]
+    protected bool m_invertToggle;
+    public static bool InvertToggle { get { hasInstance(); return Instance.m_invertToggle; } }
 }
