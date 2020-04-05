@@ -14,61 +14,63 @@ public class ALInput : MonoBehaviour
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
-
+    /// <summary>
+    /// Action, AltAction, Cancel, Toggle, Menu, Inventory, MouseAction, MouseCancel. 8 elements - In that order please.
+    /// </summary>
+    [SerializeField]
+    protected KeyCode[] m_currentKeyCodes;
+    /// <summary>
+    /// This has 2 extra buttons that are exclusive to keyboard and mouse.
+    /// </summary>
+    [SerializeField]
+    protected KeyCode[] m_keyboardKeyCodes;
+    /// <summary>
+    /// Last 2 elements are left empty on purpose please leave them that way
+    /// </summary>
+    [SerializeField]
+    protected KeyCode[] m_controllerKeyCodes;
 
     #region keycodes keycodes
     [SerializeField]
-    List<KeyCode> m_action;
+    //List<KeyCode> m_action;
     /// <summary>
     /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
     /// </summary>
-    public static KeyCode Action;
-    [SerializeField]
-    List<KeyCode> m_altAction;
+    public static KeyCode Action { get { hasInstance(); return Instance.m_currentKeyCodes[0]; } private set { Instance.m_currentKeyCodes[0] = value; } }
     /// <summary>
     /// Covers Canceling Menus, Quick Buy, Quick Sell, Ascending, Combat: Item Action
     /// </summary>
-    public static KeyCode AltAction;
-    [SerializeField]
-    List<KeyCode> m_cancel;
+    public static KeyCode AltAction { get { hasInstance(); return Instance.m_currentKeyCodes[1]; } private set { Instance.m_currentKeyCodes[1] = value; } }
     /// <summary>
     /// Button for exiting menus, decsending, and Combat: using item
     /// </summary>
-    public static KeyCode Cancel;
-    [SerializeField]
-    List<KeyCode> m_toggle;
+    public static KeyCode Cancel { get { hasInstance(); return Instance.m_currentKeyCodes[2]; } private set { Instance.m_currentKeyCodes[2] = value; } }
     /// <summary>
     /// Toggles screens, camera mode, quips?
     /// </summary>
-    public static KeyCode Toggle;
-    [SerializeField]
-    List<KeyCode> m_menu;
+    public static KeyCode Toggle { get { hasInstance(); return Instance.m_currentKeyCodes[3]; } private set { Instance.m_currentKeyCodes[3] = value; } }
     /// <summary>
     /// Opens Menu
     /// </summary>
-    public static KeyCode Menu;
-    [SerializeField]
-    KeyCode m_menuKeyboard;
-    /// <summary>
-    /// Opens Menu
-    /// </summary>
-    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_menuKeyboard; } }
-    [SerializeField]
-    List<KeyCode> m_selectMouse;
-    /// <summary>
-    /// Make selections with the LMB, acts as a second action button for prompts
-    /// </summary>
-    public static KeyCode MouseAction;
-    [SerializeField]
-    List<KeyCode> m_inventory;
+    public static KeyCode Menu { get { hasInstance(); return Instance.m_currentKeyCodes[4]; } private set { Instance.m_currentKeyCodes[4] = value; } }
     /// <summary>
     /// Opening player inventory
     /// </summary>
-    public static KeyCode Inventory;
-    [SerializeField]
-    List<KeyCode> m_cancelMouse;
-    public static KeyCode MouseCancel;
-
+    public static KeyCode Inventory { get { hasInstance(); return Instance.m_currentKeyCodes[5]; } private set { Instance.m_currentKeyCodes[5] = value; } }
+    protected KeyCode m_menuKeyboard;
+    /// <summary>
+    /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
+    /// </summary>
+    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_menuKeyboard; } }
+    /// <summary>
+    /// Make selections with the LMB, acts as a second action button for prompts. Only for keyboard & mouse.
+    /// </summary>
+    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_currentKeyCodes[6]; } private set { Instance.m_currentKeyCodes[6] = value; } }
+    /// <summary>
+    /// Cancel prompts and things with RMB. Only for keyboard & mouse.
+    /// </summary>
+    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_currentKeyCodes[7]; } private set { Instance.m_currentKeyCodes[7] = value; } }
+    
     #endregion keycodes
 
 
@@ -183,18 +185,15 @@ public class ALInput : MonoBehaviour
     {
         Instance.m_controllerToggle = !ControllerToggle;
 
-        int i = (ControllerToggle ? 1 : 0);
+        
 
         //Swap controls
         {
-            Action = Instance.m_action[i];
-            AltAction = Instance.m_altAction[i];
-            Cancel = Instance.m_cancel[i];
-            Toggle = Instance.m_toggle[i];
-            //Menu = Instance.m_menu[i];
-            //MouseAction = Instance.m_selectMouse[i];
-            Inventory = Instance.m_inventory[i];
-            //MouseCancel = Instance.m_cancelMouse[i];
+            for (int i = 0; i < Instance.m_currentKeyCodes.Length; i++)
+            {
+                Instance.m_currentKeyCodes[i] = (ControllerToggle ? 
+                    Instance.m_controllerKeyCodes[i] : Instance.m_keyboardKeyCodes[i]);
+            }
         }
     }
 
@@ -245,14 +244,7 @@ public class ALInput : MonoBehaviour
         LoadFromFile();
         //Set starting controls
         {
-            Action = Instance.m_action[0];
-            AltAction = Instance.m_altAction[0];
-            Cancel = Instance.m_cancel[0];
-            Toggle = Instance.m_toggle[0];
-            Menu = Instance.m_menu[0];
-            MouseAction = Instance.m_selectMouse[0];
-            Inventory = Instance.m_inventory[0];
-            MouseCancel = Instance.m_cancelMouse[0];
+            
         }
     }
 
