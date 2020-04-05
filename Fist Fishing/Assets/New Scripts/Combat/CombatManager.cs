@@ -179,7 +179,7 @@ public class CombatManager : MonoBehaviour
         //listen for input cases. Spacebar to finalize player turn - 0 - 8 to hotkey an action - Flee key
 
         //Spacebar input will resolves whatever action is currently selected
-        if (ALInput.GetKeyDown(KeyCode.Space))
+        if (ALInput.GetKeyDown(ALInput.Toggle))
             ResolvePlayerAction();
         
 
@@ -198,12 +198,27 @@ public class CombatManager : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.Cancel))
             PlayerFlee();
         
-        //Uncomment for WASD controls on attack pinwheel
+        
         {
-            //int newselection = PinWheel<CombatMoveInfo>.TwoDToSelectionKeyboard(
-            //(ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
-            //(ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
+            int newselection = PinWheel<CombatMoveInfo>.TwoDToSelectionKeyboard(
+            (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) > 0 ? 1 : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) < 0 ? 1 : 0),
+            (ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0 ? 1 : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveVertical) < 0 ? 1 : 0));
+            if (newselection != 0 && m_keypressTimeout <= 0)
+
+            {
+
+                m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(newselection);
+
+                if (m_puchingUI != default)
+
+                    m_puchingUI.WasKeyed();
+
+                m_keypressTimeout = m_keypressTimeoutDuration;
+
+            }
+
         }
+    
         //Selection hotkeys for attacks. By using these you do not need to open the pinwheel
         {
 
