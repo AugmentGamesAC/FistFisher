@@ -5,6 +5,7 @@ using UnityEngine;
 public interface ISpawnable
 {
     GameObject Instatiate(MeshCollider m);
+
     float WeightedChance { get; }
     MeshCollider MeshOverRide { get; }
 }
