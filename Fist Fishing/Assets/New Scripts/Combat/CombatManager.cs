@@ -167,8 +167,8 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        //can switch targets even when fish are attacking.
-        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        //can switch targets even when fish are attacking.                if (ALInput.GetAxisPress(ALInput.AxisType.Switch))
+        ChangeSelectedFish((ALInput.GetAxis(ALInput.AxisType.Switch)));
 
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
@@ -195,7 +195,7 @@ public class CombatManager : MonoBehaviour
                 }
         
 
-        if (ALInput.GetKeyDown(ALInput.CancleKey))
+        if (ALInput.GetKeyDown(ALInput.Cancel))
             PlayerFlee();
         
         //Uncomment for WASD controls on attack pinwheel
@@ -582,6 +582,12 @@ public class CombatManager : MonoBehaviour
         if ((leftRight == 0) || (m_FishSelection.Count == 0))
             return;
 
+        if (leftRight > 0)
+            leftRight = 1;
+        else if (leftRight < 0)
+            leftRight = -1;
+
+        
         m_FishSelection.IncrementSelection((int)leftRight);
     }
 

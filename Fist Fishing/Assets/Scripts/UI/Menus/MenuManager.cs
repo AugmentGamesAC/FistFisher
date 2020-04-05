@@ -224,7 +224,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            if (ALInput.GetKeyDown(ALInput.Switch))
+            if (ALInput.GetKeyDown(ALInput.Inventory))
             {
                 if (!(m_currentMenus == Menus.SwimmingInventory))
                 {

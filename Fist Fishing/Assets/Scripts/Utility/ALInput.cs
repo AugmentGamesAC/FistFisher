@@ -17,89 +17,57 @@ public class ALInput : MonoBehaviour
 
 
     #region keycodes keycodes
-    //Movement Keys
     [SerializeField]
-    protected KeyCode m_forward;
-    public static KeyCode Forward { get { hasInstance(); return Instance.m_forward; } }
-    [SerializeField]
-    protected KeyCode m_backward;
-    public static KeyCode Backward { get { hasInstance(); return Instance.m_backward; } }
-    [SerializeField]
-    KeyCode m_goRight;
-    public static KeyCode GoRight { get { hasInstance(); return Instance.m_goRight; } }
-    [SerializeField]
-    KeyCode m_goLeft;
-    public static KeyCode GoLeft { get { hasInstance(); return Instance.m_goLeft; } }
-
-    [SerializeField]
-    KeyCode m_action;
+    List<KeyCode> m_action;
     /// <summary>
     /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
     /// </summary>
-    public static KeyCode Action { get { hasInstance(); return Instance.m_action; } }
+    public static KeyCode Action;
     [SerializeField]
-    KeyCode m_altAction;
+    List<KeyCode> m_altAction;
     /// <summary>
     /// Covers Canceling Menus, Quick Buy, Quick Sell, Ascending, Combat: Item Action
     /// </summary>
-    public static KeyCode AltAction { get { hasInstance(); return Instance.m_altAction; } }
+    public static KeyCode AltAction;
     [SerializeField]
-    KeyCode m_cancleKey;
+    List<KeyCode> m_cancel;
     /// <summary>
     /// Button for exiting menus, decsending, and Combat: using item
     /// </summary>
-    public static KeyCode CancleKey { get { hasInstance(); return Instance.m_cancleKey; } }
+    public static KeyCode Cancel;
     [SerializeField]
-    KeyCode m_toggle;
+    List<KeyCode> m_toggle;
     /// <summary>
     /// Toggles screens, camera mode, quips?
     /// </summary>
-    public static KeyCode Toggle { get { hasInstance(); return Instance.m_toggle; } }
+    public static KeyCode Toggle;
     [SerializeField]
-    KeyCode m_menuKey;
+    List<KeyCode> m_menu;
     /// <summary>
     /// Opens Menu
     /// </summary>
-    public static KeyCode MenuButton { get { hasInstance(); return Instance.m_menuKey; } }
+    public static KeyCode Menu;
     [SerializeField]
-    KeyCode m_selectMouse;
+    KeyCode m_menuKeyboard;
+    /// <summary>
+    /// Opens Menu
+    /// </summary>
+    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_menuKeyboard; } }
+    [SerializeField]
+    List<KeyCode> m_selectMouse;
     /// <summary>
     /// Make selections with the LMB, acts as a second action button for prompts
     /// </summary>
-    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_selectMouse; } }
+    public static KeyCode MouseAction;
     [SerializeField]
-    KeyCode m_switch;
+    List<KeyCode> m_inventory;
     /// <summary>
-    /// Switching targets and opening player inventory
+    /// Opening player inventory
     /// </summary>
-    public static KeyCode Switch { get { hasInstance(); return Instance.m_switch; } }
+    public static KeyCode Inventory;
     [SerializeField]
-    KeyCode m_cancelMouse;
-    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_cancelMouse; } }
-
-
-    [SerializeField]
-    KeyCode m_sprint;
-    public static KeyCode Sprint { get { hasInstance(); return Instance.m_sprint; } }
-
-    [SerializeField]
-    KeyCode m_manualCamera;
-    public static KeyCode ManualCamera { get { hasInstance(); return Instance.m_manualCamera; } }
-
-
-    [SerializeField]
-    KeyCode m_rotateForward;
-    public static KeyCode RotateForward { get { hasInstance(); return Instance.m_rotateForward; } }
-    [SerializeField]
-    KeyCode m_rotateBackwards;
-    public static KeyCode RotateBackwards { get { hasInstance(); return Instance.m_rotateBackwards; } }
-    [SerializeField]
-    KeyCode m_rotateRight;
-    public static KeyCode RotateRight { get { hasInstance(); return Instance.m_rotateRight; } }
-    [SerializeField]
-    KeyCode m_rotateLeft;
-    public static KeyCode RotateLeft { get { hasInstance(); return Instance.m_rotateLeft; } }
-
+    List<KeyCode> m_cancelMouse;
+    public static KeyCode MouseCancel;
 
     #endregion keycodes
 
@@ -120,7 +88,9 @@ public class ALInput : MonoBehaviour
         JoystickMoveHorizontal,
         JoystickMoveVertical,
         JoystickLookHorizontal,
-        JoystickLookVertical
+        JoystickLookVertical,
+        Switch,
+        JoystickSwitch
     };
 
     public enum AxisType
@@ -128,7 +98,8 @@ public class ALInput : MonoBehaviour
         LookHorizontal,
         LookVertical,
         MoveHorizontal,
-        MoveVertical
+        MoveVertical,
+        Switch
     };
 
     public enum DirectionCode
@@ -166,25 +137,21 @@ public class ALInput : MonoBehaviour
             {DirectionCode.JoystickMoveInput, new System.Tuple<AxisCode, AxisCode, AxisCode>(AxisCode.JoystickMoveHorizontal,AxisCode.Unset,AxisCode.JoystickMoveVertical) }
         };
 
-
-    public AxisCode m_playerLateralMovement;
-    public static AxisCode PlayerLateralMovement { get { hasInstance(); return Instance.m_playerLateralMovement; } }
-
     public static bool GetKeyUp(KeyCode key) { hasInstance(); return Input.GetKeyUp(key); }
     public static bool GetKeyDown(KeyCode key) { hasInstance(); return Input.GetKeyDown(key); }
     public static bool GetKey(KeyCode key) { hasInstance(); return Input.GetKey(key); }
 
 
-    public static float GetAxis(AxisType dir)
+    public static float GetAxis(AxisType type)
     {
         hasInstance();
         //Return the correct control input based on if controller is toggled or not
 
         //Invert is toggled return the inverse 
-        if (InvertToggle && dir == AxisType.LookVertical)
-            return (ControllerToggle ? -Input.GetAxis("Joystick" + dir.ToString()) : -Input.GetAxis(dir.ToString()));
+        if (InvertToggle && type == AxisType.LookVertical)
+            return (ControllerToggle ? -Input.GetAxis("Joystick" + type.ToString()) : -Input.GetAxis(type.ToString()));
 
-        return (ControllerToggle ? Input.GetAxis("Joystick" + dir.ToString()) : Input.GetAxis(dir.ToString()));
+        return (ControllerToggle ? Input.GetAxis("Joystick" + type.ToString()) : Input.GetAxis(type.ToString()));
 
     }
 
@@ -194,7 +161,19 @@ public class ALInput : MonoBehaviour
         //Unset set to 0 here for efficiency reasons
         return (key == AxisCode.Unset) ? 0 : Input.GetAxis(key.ToString());
     }
+    /// <summary>
+    /// Returns true on the frame an axis that has a button is modified by a press. (Use in update)
+    /// AXIS NEEDS TO HAVE A BUTTON
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public static bool GetAxisPress(AxisType type)
+    {
+        if (!ControllerToggle && type == AxisType.Switch)
+            return (Input.GetAxis(type.ToString()) != 0 ? true : false);
 
+        return (ControllerToggle ? Input.GetButtonDown("Joystick" + type.ToString()) : Input.GetButtonDown(type.ToString()));
+    }
     public static bool IsControllerToggled()
     {
         return (Instance.m_controllerToggle ? true : false);
@@ -203,6 +182,20 @@ public class ALInput : MonoBehaviour
     public static void ToggleController()
     {
         Instance.m_controllerToggle = !ControllerToggle;
+
+        int i = (ControllerToggle ? 1 : 0);
+
+        //Swap controls
+        {
+            Action = Instance.m_action[i];
+            AltAction = Instance.m_altAction[i];
+            Cancel = Instance.m_cancel[i];
+            Toggle = Instance.m_toggle[i];
+            //Menu = Instance.m_menu[i];
+            //MouseAction = Instance.m_selectMouse[i];
+            Inventory = Instance.m_inventory[i];
+            //MouseCancel = Instance.m_cancelMouse[i];
+        }
     }
 
     public static void InvertLookYAxis()
@@ -250,6 +243,17 @@ public class ALInput : MonoBehaviour
         DontDestroyOnLoad(gameObject); //unity is stupid. Needs this to not implode
         Instance = this;
         LoadFromFile();
+        //Set starting controls
+        {
+            Action = Instance.m_action[0];
+            AltAction = Instance.m_altAction[0];
+            Cancel = Instance.m_cancel[0];
+            Toggle = Instance.m_toggle[0];
+            Menu = Instance.m_menu[0];
+            MouseAction = Instance.m_selectMouse[0];
+            Inventory = Instance.m_inventory[0];
+            MouseCancel = Instance.m_cancelMouse[0];
+        }
     }
 
 
@@ -258,14 +262,11 @@ public class ALInput : MonoBehaviour
     /// </summary>
     private void LoadFromFile()
     {
-        m_forward = KeyCode.W;
-        m_goLeft = KeyCode.A;
-        m_goRight = KeyCode.D;
-        m_action = KeyCode.F;
-        m_altAction = KeyCode.R;
-        m_toggle = KeyCode.Space;
-        m_menuKey = KeyCode.Escape;
-        m_cancleKey = KeyCode.E;
+        //m_action = KeyCode.F;
+        //m_altAction = KeyCode.R;
+        //m_toggle = KeyCode.Space;
+        //m_menuKey = KeyCode.Escape;
+        //m_cancleKey = KeyCode.E;
 
     }
 

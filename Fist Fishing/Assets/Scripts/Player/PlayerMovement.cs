@@ -221,11 +221,11 @@ public class PlayerMovement : MonoBehaviour
     {
         m_isGrounded = false;
 
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
+        //if (!ALInput.GetKey(ALInput.ManualCamera))
+        //    ResolveSwimRotation();
 
-        if (ALInput.GetKey(ALInput.Forward))
-            m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
+        //if (ALInput.GetKey(ALInput.Forward))
+        //    m_characterController.Move(transform.up * Time.deltaTime * m_swimSpeed);
     }
 
     void ResolveSwimRotation()
@@ -328,8 +328,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCamera()
     {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            return;
+        //if (!ALInput.GetKey(ALInput.ManualCamera))
+        //    return;
 
         m_camera.UpdateRotation(GetLookInput().x, GetLookInput().y);
 
@@ -359,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
    public bool IsDescending()
     {
-        return ALInput.GetKey(ALInput.CancleKey);
+        return ALInput.GetKey(ALInput.Cancel);
         //return Input.GetButton("Descend");
     }
     public bool IsPunching()
@@ -369,11 +369,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return ALInput.GetKey(ALInput.Sprint);
+        //return ALInput.GetKey(ALInput.Sprint);
         //return Input.GetButton("Sprint");
+        return false;
     }
     public bool IsThrowBait()
     {
-        return ALInput.GetKey(ALInput.CancleKey);
+        return ALInput.GetKey(ALInput.Cancel);
     }
 }

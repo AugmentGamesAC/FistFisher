@@ -103,7 +103,7 @@ public class Configurations : MonoBehaviour
 
     void Update()
     {
-        if (ALInput.GetKeyDown(ALInput.MenuButton))
+        if (ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))
         {
             if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
             {
