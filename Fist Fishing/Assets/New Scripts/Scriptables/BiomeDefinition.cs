@@ -38,12 +38,26 @@ public class BiomeDefinition : ScriptableObject
     protected string m_name;
     public string Name => m_name;
 
+    [SerializeField]
     protected Color m_boatMapColour;
+    public Color BoatMapColour => m_boatMapColour;
+
     [SerializeField]
     protected float m_timeBetweenSpawns;
     public float TimeBetweenSpawns => m_timeBetweenSpawns;
 
 
+    [SerializeField]
+    protected float m_textScale;
+    public float TextScale => m_textScale;
+
+    [SerializeField]
+    protected float m_textHeight;
+    public float TextHeight => m_textHeight;
+
+    [SerializeField]
+    protected GameObject m_baseTextTemplate;
+    public GameObject BaseTextTemplate => m_baseTextTemplate;
     #endregion variables
     protected BiomeDefinition CloneSelf(string NewCloneName, BiomeDefinition biome)
     {

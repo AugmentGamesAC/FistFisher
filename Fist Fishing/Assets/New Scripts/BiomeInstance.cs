@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
+using TMPro;
 
 public delegate void Death();
 public interface IDyingThing
@@ -20,8 +20,8 @@ public class BiomeInstance : MonoBehaviour
     [SerializeField]
     protected BiomeDefinition m_myInstructions;
     public BiomeDefinition Definiton { get => m_myInstructions; set => m_myInstructions = value; }
-
-
+    
+    protected TextMeshPro m_biomeText;
 
     protected Dictionary<IEnumerable<ISpawnable>, int> m_memberCount;
     protected IEnumerable<ISpawnable> m_aggressiveProbSpawn;
@@ -30,10 +30,16 @@ public class BiomeInstance : MonoBehaviour
     protected IEnumerable<ISpawnable> m_collectablesProbSpawn;
     protected IEnumerable<ISpawnable> m_cluterProbSpawn;
 
+    protected bool m_areThereAnyFish = false;
+    protected bool m_areThereAnyCollectables = false;
+    protected int m_totalFishCount;
+
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
-        m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        //m_MeshCollider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        LayerMask l = LayerMask.NameToLayer("BoatMapOnly");
+        m_MeshCollider.gameObject.layer = l;
 
         currentCooldown = UnityEngine.Random.Range(0, 0.25f);
 
@@ -48,7 +54,29 @@ public class BiomeInstance : MonoBehaviour
 
         if ((m_myInstructions.ClutterList.Count > 0))
             SpawnClutter();
+        SpawnText();
 
+
+        if (m_myInstructions.CollectablesList.Count > 0)
+            m_areThereAnyCollectables = true;
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count > 0  )
+            m_areThereAnyFish = true;
+        if (m_areThereAnyFish)
+            m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
+    }
+
+    private void SpawnText()
+    {
+        Vector3 v = gameObject.transform.position;
+        v.y = Definiton.TextHeight;
+
+        GameObject o = GameObject.Instantiate(Definiton.BaseTextTemplate, gameObject.transform);
+        m_biomeText = o.GetComponent<TextMeshPro>();
+        m_biomeText.text = Definiton.Name;
+        m_biomeText.gameObject.transform.position = v;
+        m_biomeText.gameObject.transform.localScale = Vector3.one * Definiton.TextScale;
     }
 
     protected float currentCooldown;
@@ -66,10 +94,38 @@ public class BiomeInstance : MonoBehaviour
 
     protected void ResolveSpawning()
     {
-        if (m_memberCount == default)
+        if (m_memberCount == default) //nothing in any list to spawn
+            return;
+        if (!m_areThereAnyCollectables && !m_areThereAnyFish) //the above list includes clutter. this handles clutter-only biome
             return;
         if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
             return;
+
+
+        if (m_areThereAnyCollectables && !m_areThereAnyFish) //only collectables
+        {
+            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            return;
+        }
+        if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
+        {
+            return;
+        }
+        if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
+        {
+            return;
+        }
+
+
+
+
+
+
+
+
+
+
+
         if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn] && m_myInstructions.CollectablesList.Count >0)
         {
             m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
@@ -100,8 +156,9 @@ public class BiomeInstance : MonoBehaviour
         foreach (ISpawnable possibbleSpawn in list)
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
-                possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide)
-                    .GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; /*Debug.Log(m_memberCount[list]);*/ };
+                GameObject g = possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
+                g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
+                SpawningTweaks.AdjustForBottom(g);
                 return true;
             }
         return false;
@@ -152,7 +209,10 @@ public class BiomeInstance : MonoBehaviour
     public static bool IsInside(Collider c, Vector3 point)
     {
         // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
-        return c.ClosestPoint(point) == point;
+        if (c.bounds.ClosestPoint(point) == point)
+            return true;
+        return false;
+        //return c.ClosestPoint(point) == point;
     }
 
     /// <summary>

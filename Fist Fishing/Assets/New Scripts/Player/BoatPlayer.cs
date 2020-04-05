@@ -62,6 +62,9 @@ public class BoatPlayer : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.Action) ||(!m_isMounted && ALInput.GetKeyDown(ALInput.MouseAction))) //handle mounting
             MountAction();
 
+        if (m_validPlayer == default) // no player around no action
+            return;
+
         if (!m_isMounted)
             return;
 

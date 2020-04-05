@@ -86,8 +86,24 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
 
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
-        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
 
+
+        /**********************************************************************************************/
+        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
+        /**********************************************************************************************/
+        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
+        //coreFish.Init(this, this);
+        //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
+        //GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
+        //HPRoot.transform.SetParent(FishRoot.transform);
+
+
+        /**********************************************************************************************/
+        /**********************************************************************************************/
+        /**********************************************************************************************/
+
+        if (m == null)
+            return null;
 
         Transform pos = FishRoot.transform;
         float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;

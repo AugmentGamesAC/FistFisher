@@ -15,6 +15,20 @@ public class CoralBudNew : MonoBehaviour, IDyingThing
     }
 
 
+    [ContextMenu("Magically Harvest This")]
+    public void GoGetHarvested()
+    {
+        Harvestable h = gameObject.GetComponent<Harvestable>();
+        PlayerInstance.Instance.PlayerInventory.AddItem(h, 1);
+        Die();
+    }
+
+
+
+
+
+
+
     public event Death Death;
     public void Die()
     {

@@ -12,6 +12,11 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider biome)
     {
+
+        /**********************************************************************************************/
+        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
+        /**********************************************************************************************/
+        //m_Instance = new FishInstance(fishDefinition);
         m_biome = biome;
 
         Prompt prompt = GetComponent<CombatPrompt>();

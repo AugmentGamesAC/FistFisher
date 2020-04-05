@@ -39,7 +39,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399349492036743577}
-  - component: {fileID: 706571167}
   m_Layer: 0
   m_Name: Coral2.1_Prefab
   m_TagString: Untagged
@@ -65,29 +64,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &706571167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3262025088812690561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9c363e41e08814db5dce0118564522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_targetController: {fileID: 0}
-  m_parentPond: {fileID: 0}
-  m_harvestablePrefab: {fileID: 5710855553094708655, guid: 07eab6ef08294ae4e8ffaf9cc3ae39da,
-    type: 3}
-  m_maxSpawnedHavestable: 3
-  m_normalNumberOfSecondsToSpawnHarvestable: 5
-  m_spawnRadius: 5
-  m_spawnCooldown: 0
-  bud1: {fileID: 1885768148936071823}
-  bud2: {fileID: 7190557573765648400}
-  bud3: {fileID: 4491290804108708282}
 --- !u!1 &4491290804108708282
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,11 +131,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1399349492036743577}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 3afce220273540143b871b6a47b3408e,
-        type: 3}
-      propertyPath: m_Name
-      value: Coral3_Model
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3afce220273540143b871b6a47b3408e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,6 +185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3afce220273540143b871b6a47b3408e,
+        type: 3}
+      propertyPath: m_Name
+      value: Coral3_Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3afce220273540143b871b6a47b3408e, type: 3}
