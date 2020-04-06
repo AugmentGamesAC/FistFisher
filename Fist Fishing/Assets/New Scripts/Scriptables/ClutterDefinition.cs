@@ -22,13 +22,14 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
             return null;
 
         Vector3 pos = BiomeInstance.FindValidPosition(m);
+        //Debug.Log(pos);
         Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
         if (p == Vector3.zero)
         {
-            pos.y = m.bounds.max.y;
+            pos.y = m.bounds.max.y - m.bounds.extents.y;
             p = BiomeInstance.GetSeafloorPosition(pos);
         }
-
+        //Debug.Log(p);
         return ObjectPoolManager.Get(m_BasicClutter, p, Quaternion.identity);
     }
 }

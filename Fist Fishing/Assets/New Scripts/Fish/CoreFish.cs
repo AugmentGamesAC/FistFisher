@@ -1,39 +1,29 @@
 ﻿using UnityEngine;
-public class CoreFish: MonoBehaviour, IFishData
+public class CoreFish: MonoBehaviour, IDyingThing
 {
-    #region IFishData
     [SerializeField]
-    protected float m_damage;
-    public float Damage => m_damage;
+    protected FishDefintion m_defintion;
+    public FishDefintion Defintion => m_defintion;
 
-    [SerializeField]
-    protected float m_combatSpeed;
-    public float CombatSpeed => m_combatSpeed;
-    [SerializeField]
-    protected float m_attackRange;
-    public float AttackRange => m_attackRange;
+    protected MeshCollider m_biome;
+    protected SkinnedMeshRenderer mesh;
 
-    [SerializeField]
-    protected FishHealth m_Health;
-    public FishHealth Health => m_Health;
+    protected FishInstance m_Instance;
 
-    [SerializeField]
-    protected FishBrain.FishClassification m_fishClassification;
-    public FishBrain.FishClassification FishClassification => m_fishClassification;
-    #endregion
-    #region IFishData IItem Overlap
-    public Sprite IconDisplay => m_item.IconDisplay;
-
-    public IItem Item => m_item;
-
-    public float MaxHealth => throw new System.NotImplementedException();
-    #endregion
-    protected IItem m_item;
-    
-    public void Init(IFishData fishData, IItem item)
+    public void Init(FishDefintion fishDefinition, MeshCollider m_biome)
     {
-        m_item = item;
-        throw new System.NotImplementedException();
+
+        /**********************************************************************************************/
+        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
+        /**********************************************************************************************/
+        //m_Instance = new FishInstance(fishDefinition);
+        m_defintion = fishDefinition;
+        
     }
 
+    public event CleanupCall Death
+    {
+        add { }
+        remove { }
+    }
 }

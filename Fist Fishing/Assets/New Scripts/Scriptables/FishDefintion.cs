@@ -66,9 +66,9 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected GameObject m_BasicFish; 
+    protected GameObject m_BaseModelReference;
     [SerializeField]
-    protected GameObject m_swimingHPDisplayReference;
+    protected GameObject m_BasicFish; 
 
     //private GameObject m_thisObject = null;
     #endregion
@@ -78,13 +78,22 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     public GameObject Instatiate(MeshCollider m)
     {
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
+
+
+        /**********************************************************************************************/
+        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
+        /**********************************************************************************************/
         CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
-        coreFish.Init(this, this);
+        //coreFish.Init(this, this);
         //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
-        HPRoot.transform.SetParent(FishRoot.transform);
+        //GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
+        //HPRoot.transform.SetParent(FishRoot.transform);
 
         //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
+
+        /**********************************************************************************************/
+        /**********************************************************************************************/
+        /**********************************************************************************************/
 
         if (m == null)
             return null;

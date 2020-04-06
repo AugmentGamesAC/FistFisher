@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public enum HarvestableType
 {
     NotSet, 
@@ -11,7 +13,23 @@ public enum HarvestableType
 }
 public class Harvestable : MonoBehaviour, IItem
 {
-    public HarvestableSpawner m_spawner;
+
+    public bool TransferProperties(AItem from)
+    {
+        if(from == null)
+            return false;
+        m_stackSize = from.StackSize;
+        m_iD  = from.ID;
+        m_worthInCurrency = from.m_worthInCurrency;
+        m_Type = from.type;
+        m_Description = from.description;
+        m_iconDisplay = from.Display;
+        //m_name = from.Name;
+
+        return true;
+    }
+
+    //public HarvestableSpawner m_spawner;
 
     public TargetController m_targetController;
 
@@ -48,8 +66,8 @@ public class Harvestable : MonoBehaviour, IItem
 
     void Start()
     {
-        if (m_harvestableType == HarvestableType.NotSet)
-            gameObject.SetActive(false);
+        /*if (m_harvestableType == HarvestableType.NotSet)
+            gameObject.SetActive(false);*/
     }
 
     public bool CanMerge(IItem newItem)

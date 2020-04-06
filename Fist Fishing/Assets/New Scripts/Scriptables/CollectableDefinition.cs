@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables/Collectable Definition")]
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     #region ModelReferences
@@ -11,11 +10,15 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
     [SerializeField]
     protected GameObject m_BasicCollectable;
 
+    [SerializeField]
+    protected AItem m_collectableItemData;
+    public AItem ItemData => m_collectableItemData;
+
     public float WeightedChance => throw new System.NotImplementedException();
 
     public MeshCollider MeshOverRide => throw new System.NotImplementedException();
     #endregion
-    public GameObject Instatiate(MeshCollider m)
+    public virtual GameObject Instatiate(MeshCollider m)
     {
         if (m == null)
             return null;
@@ -24,7 +27,7 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
         Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
         if (p == Vector3.zero)
         {
-            pos.y = m.bounds.max.y;
+            pos.y = m.bounds.max.y - m.bounds.extents.y;
             p = BiomeInstance.GetSeafloorPosition(pos);
         }
 

@@ -11,14 +11,25 @@ public class CoralNew : MonoBehaviour, IDyingThing
     [SerializeField]
     protected CoralDefinition m_definitionForThis;
     [SerializeField]
-    protected HashSet<int> m_hashForTrackingWhichOfTheseHasBeenUsed;
+    protected HashSet<int> m_hashForTrackingWhichOfTheseHasBeenUsed = new HashSet<int>();
     [SerializeField]
-    protected int m_numberOfbudsDied = 0;
+    protected int m_numberOfBudsDied = 0;
     [SerializeField]
     protected float m_timeBetweenSpawns;
     protected float m_currentTimeToSpawn;
     protected bool m_isThisStillAbleToSpawnbuds = true;
 
+    public void BudDied()
+    {
+        m_numberOfBudsDied++;
+    }
+
+
+
+    public void SetTimeBetweenSpawns(float t)
+    {
+        m_timeBetweenSpawns = Mathf.Clamp(t, 0, Mathf.Infinity);
+    }
 
     public bool SetDefinition(CoralDefinition def)
     {
@@ -30,6 +41,11 @@ public class CoralNew : MonoBehaviour, IDyingThing
 
     protected int SelectSpawnNode()
     {
+        /*Debug.Log(m_hashForTrackingWhichOfTheseHasBeenUsed);
+        Debug.Log(m_hashForTrackingWhichOfTheseHasBeenUsed.Count);
+        Debug.Log(m_definitionForThis);
+        Debug.Log(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt);
+        Debug.Log(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count);*/
         if (m_hashForTrackingWhichOfTheseHasBeenUsed.Count >= m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count)
             return -1;
         int returnval;
@@ -50,16 +66,27 @@ public class CoralNew : MonoBehaviour, IDyingThing
             return null;
 
         GameObject g = gameObject.transform.Find(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt[i]).gameObject;
-
+        //Debug.Log(g);
         Vector3 pos = g.transform.position;
+        /*Debug.Log(m_definitionForThis);
+        Debug.Log(m_definitionForThis.CoralBudDefinition);
+        Debug.Log(m_definitionForThis.CoralBudDefinition.ItemData);*/
         GameObject o = m_definitionForThis.CoralBudDefinition.Instantiate(pos);
-        o.GetComponent<IDyingThing>().Death += () => { m_numberOfbudsDied++; };
+
+        Harvestable h; 
+        if (o.gameObject.TryGetComponent<Harvestable>(out h))
+            Destroy(h);
+        h = o.AddComponent<Harvestable>();
+        h.TransferProperties(m_definitionForThis.CoralBudDefinition.ItemData);
+
+        o.GetComponent<IDyingThing>().Death += () => { m_numberOfBudsDied++; };
+
         return o;
     }
 
     public void Update()
     {
-        if(m_numberOfbudsDied >= m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count)
+        if(m_numberOfBudsDied >= m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count)
         {
             Die();
             return;//just for safety

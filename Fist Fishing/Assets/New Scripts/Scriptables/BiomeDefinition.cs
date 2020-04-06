@@ -38,12 +38,26 @@ public class BiomeDefinition : ScriptableObject
     protected string m_name;
     public string Name => m_name;
 
+    [SerializeField]
     protected Color m_boatMapColour;
+    public Color BoatMapColour => m_boatMapColour;
+
     [SerializeField]
     protected float m_timeBetweenSpawns;
     public float TimeBetweenSpawns => m_timeBetweenSpawns;
 
 
+    [SerializeField]
+    protected float m_textScale;
+    public float TextScale => m_textScale;
+
+    [SerializeField]
+    protected float m_textHeight;
+    public float TextHeight => m_textHeight;
+
+    [SerializeField]
+    protected GameObject m_baseTextTemplate;
+    public GameObject BaseTextTemplate => m_baseTextTemplate;
     #endregion variables
     protected BiomeDefinition CloneSelf(string NewCloneName, BiomeDefinition biome)
     {
@@ -64,8 +78,7 @@ public class BiomeDefinition : ScriptableObject
         return newME.CloneSelf(NewCloneName,this);
     }
 
-
-    public void Start()
+    public void ErrorDetection()
     {
         if ((m_clutter.Count > 0) && m_clutter.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Clutters weightedAverage doesn't sum to 1");
@@ -77,6 +90,15 @@ public class BiomeDefinition : ScriptableObject
             throw new System.InvalidOperationException("Meh Fish weightedAverage doesn't sum to 1");
         if ((m_preyFish.Count > 0) && m_preyFish.Select(X => X.WeightedChance).Sum() != 1)
             throw new System.InvalidOperationException("Prey Fish weightedAverage doesn't sum to 1");
+    }
+
+    public void Start()
+    {
+        ErrorDetection();
+    }
+    public void Update()
+    {
+        ErrorDetection();
     }
 
 
