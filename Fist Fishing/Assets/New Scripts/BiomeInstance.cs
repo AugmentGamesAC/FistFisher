@@ -211,7 +211,7 @@ public class BiomeInstance : MonoBehaviour
             {
                 GameObject g = possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
                 g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
-                g.transform.Rotate(Vector3.up, UnityEngine.Random.rotation.y);
+                g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
                 SpawningTweaks.AdjustForBottom(g);
                 return true;
             }
