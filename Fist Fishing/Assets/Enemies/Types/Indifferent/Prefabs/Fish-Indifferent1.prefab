@@ -485,19 +485,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fishHitboxList:
-    keys:
-    - {fileID: 0}
-    values:
-    - 1
-  m_fishDef: {fileID: 11400000, guid: e7461b9fe464e3d46b66a8edb5e181c5, type: 2}
+    keys: []
+    values: []
+  m_fishDef: {fileID: 11400000, guid: ec728b77512df5e4eb5be6c1b2802604, type: 2}
   m_personalSpaceRadius: 1
-  Speed: 2
-  TurnSpeed: 50
-  m_fishClass: 1
-  LookFrom: {fileID: 5454482903942613004}
+  Speed: 0
+  TurnSpeed: 0
+  m_fishClass: 4
+  LookFrom: {fileID: 0}
   Spawner: {fileID: 0}
   m_inBaitZone: 0
-  m_fishArchetype: 3
+  m_fishArchetype: 0
   promptPrefab: {fileID: 0}
 --- !u!114 &7847238372462921184
 MonoBehaviour:
@@ -527,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1c475c36c03dd419f0f9c3d28d45b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 964892760397640987}
+  HUD: {fileID: 0}
   m_deactivateDelay: 3
 --- !u!114 &964892760461229339
 MonoBehaviour:
@@ -541,13 +539,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40890704cb00abd4cb388300a2fb1658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 100
+  m_currentHealth: 0
   m_maxHealth: 100
   m_healthPercentage: 0
   m_regenTimer: 0
   m_regenDelay: 3
   m_regenRate: 5
-  m_HealthSlider: {fileID: 964892760533700520}
+  m_HealthSlider: {fileID: 0}
 --- !u!1001 &10637993693266111
 PrefabInstance:
   m_ObjectHideFlags: 0

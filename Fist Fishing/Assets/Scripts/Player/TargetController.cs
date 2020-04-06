@@ -51,11 +51,11 @@ public class TargetController : MonoBehaviour
             return;
         }
 
-        if (ALInput.GetKeyDown(ALInput.KeyTarget))
-            ToggleTargeting();
+        //if (ALInput.GetKeyDown(ALInput.KeyTarget))
+        //    ToggleTargeting();
 
-        if (ALInput.GetKeyDown(ALInput.ForgetTarget))
-            SelectNextTarget();
+        //if (ALInput.GetKeyDown(ALInput.ForgetTarget))
+        //    SelectNextTarget();
 
 
         if (m_targetedFish == null)

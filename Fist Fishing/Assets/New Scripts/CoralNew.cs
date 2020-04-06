@@ -6,7 +6,7 @@ using System;
 [System.Serializable]
 public class CoralNew : MonoBehaviour, IDyingThing 
 {
-    public event CleanupCall Death;
+    public event Death Death;
 
     [SerializeField]
     protected CoralDefinition m_definitionForThis;

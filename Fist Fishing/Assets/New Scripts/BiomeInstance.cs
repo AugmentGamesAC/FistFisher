@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 using TMPro;
 
-public delegate void CleanupCall();
+public delegate void Death();
 public interface IDyingThing
 {
-    event CleanupCall Death;
+    event Death Death;
 }
 /// <summary>
 /// This class exists to handle all the biomes in scene

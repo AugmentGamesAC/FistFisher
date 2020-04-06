@@ -66,9 +66,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected GameObject m_BaseModelReference;
+    protected SkinnedMeshRenderer m_BaseModelReference;
+    public SkinnedMeshRenderer SkinedMesh => m_BaseModelReference;
     [SerializeField]
-    protected GameObject m_BasicFish; 
+    protected GameObject m_BasicFish;
+    [SerializeField]
+    protected Material m_Skin;
+    public Material Skin => m_Skin;
 
     //private GameObject m_thisObject = null;
     #endregion
@@ -77,6 +81,10 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     public GameObject Instatiate(MeshCollider m)
     {
+        if (m == null)
+            return null;
+
+
         GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
 
 
@@ -89,7 +97,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         //GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
         //HPRoot.transform.SetParent(FishRoot.transform);
 
-        //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
 
         /**********************************************************************************************/
         /**********************************************************************************************/
@@ -100,14 +107,17 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         Transform pos = FishRoot.transform;
         float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
-        RaycastHit hit; //unused
+        RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
 
         do
         {
             pos.position = BiomeInstance.FindValidPosition(m);
 
-        } while (BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+
+
+        coreFish.Init(this, m);
 
 
         return FishRoot;
