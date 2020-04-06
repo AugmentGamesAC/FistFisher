@@ -143,6 +143,100 @@ public class BiomeInstance : MonoBehaviour
             );
     }
 
+
+
+    private enum FishTypeToSpawn
+    {
+        prey,
+        meh,
+        pred,
+        error
+    }
+    private FishTypeToSpawn DetermineFishTypeToSpawn()
+    {
+        //prey
+        if (m_myInstructions.AggressiveFishList.Count == 0 &&
+            m_myInstructions.MehFishList.Count == 0 &&
+            m_myInstructions.PreyFishList.Count > 0)
+        {
+            return FishTypeToSpawn.prey;
+        }
+        //pred
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count == 0 &&
+            m_myInstructions.PreyFishList.Count == 0)
+        {
+            return FishTypeToSpawn.pred;
+        }
+        //meh
+        if (m_myInstructions.AggressiveFishList.Count == 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count == 0)
+        {
+            return FishTypeToSpawn.meh;
+        }
+        //prey+meh
+        if (m_myInstructions.AggressiveFishList.Count == 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count > 0)
+        {
+            if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn])
+                return FishTypeToSpawn.prey;
+            return FishTypeToSpawn.meh;
+        }
+        //prey+pred
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count == 0 &&
+            m_myInstructions.PreyFishList.Count > 0)
+        {
+            if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_aggressiveProbSpawn])
+                return FishTypeToSpawn.prey;
+            return FishTypeToSpawn.pred;
+        }
+        //pred+meh
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count == 0)
+        {
+            if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggressiveProbSpawn])
+                return FishTypeToSpawn.meh;
+            return FishTypeToSpawn.pred;
+        }
+        //all3
+        if (m_myInstructions.AggressiveFishList.Count > 0 &&
+            m_myInstructions.MehFishList.Count > 0 &&
+            m_myInstructions.PreyFishList.Count > 0)
+        {
+            /*if (m_memberCount[m_collectablesProbSpawn] < m_memberCount[m_preyProbSpawn])
+                return FishTypeToSpawn.error;*/
+            if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn])
+                return FishTypeToSpawn.prey;
+            if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggressiveProbSpawn])
+                return FishTypeToSpawn.meh;
+            return FishTypeToSpawn.pred;
+        }
+
+
+        return FishTypeToSpawn.error;
+    }
+
+    private void SpawnFishFromType(FishTypeToSpawn ft)
+    {
+        switch (ft)
+        {
+            case FishTypeToSpawn.pred:
+                m_memberCount[m_aggressiveProbSpawn] += (SpawnFromWeightedList(m_aggressiveProbSpawn)) ? 1 : 0;
+                break;
+            case FishTypeToSpawn.meh:
+                m_memberCount[m_mehProbSpawn] += (SpawnFromWeightedList(m_mehProbSpawn)) ? 1 : 0;
+                break;
+            case FishTypeToSpawn.prey:
+                m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_preyProbSpawn)) ? 1 : 0;
+                break;
+        }
+    }
+
+
     protected void ResolveSpawning()
     {
         if (m_memberCount == default) //nothing in any list to spawn
@@ -158,47 +252,22 @@ public class BiomeInstance : MonoBehaviour
             m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
             return;
         }
+
+        FishTypeToSpawn ft = DetermineFishTypeToSpawn();
         if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
         {
+            SpawnFishFromType(ft);
             return;
         }
+
         if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
         {
+            if(m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn]))
+                m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            else
+                SpawnFishFromType(ft);
             return;
         }
-
-
-
-
-
-
-
-
-
-
-
-        if (m_memberCount[m_collectablesProbSpawn] <= m_memberCount[m_preyProbSpawn] && m_myInstructions.CollectablesList.Count >0)
-        {
-            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
-            return;
-        }
-        if (m_memberCount[m_preyProbSpawn] < m_memberCount[m_mehProbSpawn] && m_myInstructions.PreyFishList.Count > 0)
-        {
-            m_memberCount[m_preyProbSpawn] += (SpawnFromWeightedList(m_preyProbSpawn)) ? 1 : 0;
-            return;
-        }
-        if (m_memberCount[m_mehProbSpawn] < m_memberCount[m_aggressiveProbSpawn] && m_myInstructions.MehFishList.Count > 0)
-        {
-            m_memberCount[m_mehProbSpawn] += (SpawnFromWeightedList(m_mehProbSpawn)) ? 1 : 0;
-            return;
-        }
-        if (m_memberCount[m_aggressiveProbSpawn] < m_memberCount[m_preyProbSpawn] && m_myInstructions.AggressiveFishList.Count > 0)
-        {
-            m_memberCount[m_aggressiveProbSpawn] += (SpawnFromWeightedList(m_aggressiveProbSpawn)) ? 1 : 0;
-            return;
-        }
-
-
     }
 
 
