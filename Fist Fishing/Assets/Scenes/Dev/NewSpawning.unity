@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3704,6 +3704,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b729e228e8140b14eaf16b570d8bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &540857486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -6057140222963153312, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9aa5dade3d95c2e4f9566b4730af4852, type: 2}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_Name
+      value: Anteater_Animated_Textured_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002910502376513804, guid: afda78a4fd34c9a4b9df70360ca546ca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30a9c8e5aa608c24581e64e512049798, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: afda78a4fd34c9a4b9df70360ca546ca, type: 3}
 --- !u!1 &545179196
 GameObject:
   m_ObjectHideFlags: 0
@@ -6566,6 +6645,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7a3595cdeba20d44ad6c83323eef695, type: 2}
   - {fileID: 11400000, guid: 5e8e05d40a5a6d84a83bf01e14c5400e, type: 2}
   ScriptableItems: []
+  m_ActionButtons: []
   m_currentCombatState: 0
   m_puchingUI: {fileID: 518438521}
   m_keypressTimeout: 0
@@ -8846,7 +8926,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.4
@@ -13598,6 +13678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a691aaaaec911a4d939e531951723ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_controllerToggle: 0
   FollowObject: {fileID: 2487089619964385254}
   CameraObject: {fileID: 2138587749}
   _currentState: 2
@@ -15060,31 +15141,23 @@ MonoBehaviour:
   m_backward: 0
   m_goRight: 97
   m_goLeft: 100
-  m_descend: 306
-  m_ascend: 0
+  m_action: 0
+  m_altAction: 0
+  m_cancleKey: 0
+  m_toggle: 0
+  m_menuKey: 0
+  m_selectMouse: 0
+  m_switch: 0
+  m_cancelMouse: 0
   m_sprint: 304
   m_manualCamera: 0
   m_rotateForward: 0
   m_rotateBackwards: 0
   m_rotateRight: 0
   m_rotateLeft: 0
-  m_keyTarget: 122
-  m_forgetTarget: 120
-  m_punch: 113
-  m_mountBoat: 109
-  m_dismountBoat: 110
-  m_harvest: 101
-  m_throwBait: 112
-  m_craftBait: 98
-  m_toggleInventory: 105
-  m_toggleShop: 111
-  m_start: 32
-  m_attack: 0
-  m_item: 0
-  m_flee: 0
-  m_showOptionsPause: 27
-  m_cameraSwap: 0
   m_playerLateralMovement: 1
+  m_controllerToggle: 0
+  m_invertToggle: 0
 --- !u!4 &4317289871419914990
 Transform:
   m_ObjectHideFlags: 0
