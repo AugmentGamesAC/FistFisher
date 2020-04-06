@@ -22,7 +22,7 @@ public class BasicCollectableDefinition : CollectableDefinition
         Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
         if (p == Vector3.zero)
         {
-            pos.y = m.bounds.max.y;
+            pos.y = m.bounds.max.y - m.bounds.extents.y;
             p = BiomeInstance.GetSeafloorPosition(pos);
         }
         GameObject o = ObjectPoolManager.Get(m_BasicCollectable, p, Quaternion.identity);

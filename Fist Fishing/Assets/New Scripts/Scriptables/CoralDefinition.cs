@@ -33,7 +33,7 @@ public class CoralDefinition : CollectableDefinition//ScriptableObject, ISpawnab
         Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
         if (p == Vector3.zero)
         {
-            pos.y = m.bounds.max.y;
+            pos.y = m.bounds.max.y - m.bounds.extents.y;
             p = BiomeInstance.GetSeafloorPosition(pos);
         }
         GameObject o = ObjectPoolManager.Get(m_modelOfCoral, p, Quaternion.identity);

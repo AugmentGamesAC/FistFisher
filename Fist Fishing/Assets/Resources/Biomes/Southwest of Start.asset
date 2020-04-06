@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0099f26a0656242a8bfe8f454355ef, type: 3}
+  m_Name: Southwest of Start
+  m_EditorClassIdentifier: 
+  m_maximumNumberOfSpawns: 50
+  m_amountOfClutterToSpawn: 50
+  m_clutter:
+  - {fileID: 11400000, guid: 25411a58642c2ca43be0b1676e67baa6, type: 2}
+  - {fileID: 11400000, guid: fda147b5e5fa471489cf14804718df37, type: 2}
+  m_collectables:
+  - {fileID: 11400000, guid: bac904802cc0e994d83e114445ece139, type: 2}
+  m_aggressiveFish: []
+  m_mehFish:
+  - {fileID: 11400000, guid: 508d6d2285a2ad54bbf79e3f4af9dca7, type: 2}
+  m_preyFish:
+  - {fileID: 11400000, guid: bf04e1da0dddd6a40b52d677bae71403, type: 2}
+  - {fileID: 11400000, guid: 2e7548d213fa89c408d258c73180d805, type: 2}
+  m_name: Generic
+  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
+  m_timeBetweenSpawns: 2
+  m_textScale: 1
+  m_textHeight: 10
+  m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
+    type: 3}

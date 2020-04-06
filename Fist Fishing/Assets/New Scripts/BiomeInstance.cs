@@ -56,7 +56,7 @@ public class BiomeInstance : MonoBehaviour
         if ((m_myInstructions.ClutterList.Count > 0))
             SpawnClutter();
         SpawnText();
-
+        ResolveBiomeMeshRendering();
 
         if (m_myInstructions.CollectablesList.Count > 0)
             m_areThereAnyCollectables = true;
@@ -66,6 +66,42 @@ public class BiomeInstance : MonoBehaviour
             m_areThereAnyFish = true;
         if (m_areThereAnyFish)
             m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
+    }
+
+    private void ResolveBiomeMeshRendering()
+    {
+        //m_MeshCollider
+        MeshFilter m = gameObject.GetComponent<MeshFilter>();
+        MeshRenderer r = gameObject.GetComponent<MeshRenderer>();
+        if (m == null)
+        {
+            m = gameObject.AddComponent<MeshFilter>();
+            m.sharedMesh = m_MeshCollider.sharedMesh;
+        }
+        if (r == null)
+        {
+            r = gameObject.AddComponent<MeshRenderer>();
+
+            GameObject p = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            p.SetActive(false);
+            Material mat = p.GetComponent<MeshRenderer>().sharedMaterial;
+            DestroyImmediate(p);
+            r.material = mat;
+        }
+        //r.material.color = Definiton.BoatMapColour;
+        r.material.SetColor("_BaseColor", Definiton.BoatMapColour); //please note for later. this was frustrating.
+
+        //snippet taken from https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
+        //as setting transparency at runtime is a nightmare it seems
+        r.material.SetFloat("_Surface", 1.0f);
+        r.material.SetOverrideTag("RenderType", "Transparent");
+        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        r.material.SetInt("_ZWrite", 0);
+        r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        r.material.SetShaderPassEnabled("ShadowCaster", false);
+
     }
 
     private void SpawnText()
@@ -159,6 +195,7 @@ public class BiomeInstance : MonoBehaviour
             {
                 GameObject g = possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
                 g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
+                g.transform.Rotate(Vector3.up, UnityEngine.Random.rotation.y);
                 SpawningTweaks.AdjustForBottom(g);
                 return true;
             }
@@ -192,7 +229,6 @@ public class BiomeInstance : MonoBehaviour
     public static Vector3 FindValidPosition(MeshCollider biome)
     {
         Bounds b = biome.bounds;
-
         bool validPos = false;
 
         Vector3 pos = Vector3.zero;
@@ -201,17 +237,26 @@ public class BiomeInstance : MonoBehaviour
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
             pos.y = UnityEngine.Random.Range(b.min.y, b.max.y);
             pos.z = UnityEngine.Random.Range(b.min.z, b.max.z);
-            if (IsInside(biome, pos))
+            if (IsInside(biome, pos, !biome.convex))
                 validPos = true;
         }
         return pos;
     }
 
-    public static bool IsInside(Collider c, Vector3 point)
+    public static bool IsInside(Collider c, Vector3 point, bool concalve)
     {
         // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
-        if (c.bounds.ClosestPoint(point) == point)
-            return true;
+        if(concalve)
+        {
+            if (c.bounds.ClosestPoint(point) == point)
+                return true;
+        }
+        else
+        {
+            if (c.ClosestPoint(point) == point)
+                return true;
+        }
+        
         return false;
         //return c.ClosestPoint(point) == point;
     }

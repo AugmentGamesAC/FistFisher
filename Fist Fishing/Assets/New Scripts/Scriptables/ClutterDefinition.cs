@@ -26,7 +26,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
         Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
         if (p == Vector3.zero)
         {
-            pos.y = m.bounds.max.y;
+            pos.y = m.bounds.max.y - m.bounds.extents.y;
             p = BiomeInstance.GetSeafloorPosition(pos);
         }
         //Debug.Log(p);

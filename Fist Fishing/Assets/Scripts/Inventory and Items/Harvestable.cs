@@ -16,6 +16,8 @@ public class Harvestable : MonoBehaviour, IItem
 
     public bool TransferProperties(AItem from)
     {
+        if(from == null)
+            return false;
         m_stackSize = from.StackSize;
         m_iD  = from.ID;
         m_worthInCurrency = from.m_worthInCurrency;
