@@ -79,7 +79,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
 
 
-    public GameObject Instatiate(MeshCollider m)
+    public GameObject Spawn(MeshCollider m)
     {
         if (m == null)
             return null;
@@ -142,4 +142,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return true;
     }
 
+    public new GameObject Instantiate(MeshCollider m)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public new GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation)
+    {
+        throw new System.NotImplementedException();
+    }
 }

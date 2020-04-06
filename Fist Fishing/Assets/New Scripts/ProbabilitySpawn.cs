@@ -10,9 +10,12 @@ public interface IObject<T>
 
 public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
 {
-    public GameObject Instatiate(MeshCollider m) { return m_spawnReference.Instatiate(m); }
+    public GameObject Spawn(MeshCollider m) { return m_spawnReference.Spawn(m); }
+    public GameObject Instantiate(MeshCollider m) { return m_spawnReference.Instantiate(m); }
+    public GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation) { return m_spawnReference.Instantiate(m,position,rotation); }
 
     public new V MemberwiseClone() => (V)base.MemberwiseClone();
+
     [SerializeField]
     protected float m_weightedChance;
     public float WeightedChance => m_weightedChance;

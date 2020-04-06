@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using System.Linq;
 using TMPro;
 
 public delegate void Death();
@@ -156,7 +156,7 @@ public class BiomeInstance : MonoBehaviour
         foreach (ISpawnable possibbleSpawn in list)
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
-                GameObject g = possibbleSpawn.Instatiate((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
+                GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
                 g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
                 SpawningTweaks.AdjustForBottom(g);
                 return true;

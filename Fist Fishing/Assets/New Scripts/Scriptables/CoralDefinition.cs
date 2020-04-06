@@ -24,7 +24,7 @@ public class CoralDefinition : CollectableDefinition//ScriptableObject, ISpawnab
 
     //public MeshCollider MeshOverRide => throw new System.NotImplementedException();
 
-    public override GameObject Instatiate(MeshCollider m) 
+    public override GameObject Spawn(MeshCollider m) 
     {
         if (m == null)
             return null;

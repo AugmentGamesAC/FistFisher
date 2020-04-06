@@ -55,12 +55,8 @@ public class GenericObjectPool : MonoBehaviour
         if (m_Unused.Count > 0)
             return m_Unused.Dequeue().gameObject.GetComponent<T>();
 
-        returnVal = GameObject.Instantiate(preFab).GetComponent<T>();
-        returnVal.gameObject.AddComponent<PoolingScript>();
-        ObjectCount++;
-        return returnVal;
-
-
+        returnVal = spawnable.Instantiate(m).GetComponent<T>();
+        return HandleNew<T>(returnVal.gameObject);
     }
     public T GetObject<T>(ISpawnable spawnable, MeshCollider m, Vector3 position, Quaternion rotation) where T : Component
     {
@@ -72,10 +68,8 @@ public class GenericObjectPool : MonoBehaviour
             return returnVal;
         }
 
-        returnVal = GameObject.Instantiate(preFab).GetComponent<T>();
-        returnVal.gameObject.AddComponent<PoolingScript>();
-        ObjectCount++;
-        return returnVal;
+        returnVal = spawnable.Instantiate(m, position, rotation).GetComponent<T>();
+        return HandleNew<T>(returnVal.gameObject);
     }
 
     public void Deactivated(PoolingScript deactivated)
@@ -83,4 +77,8 @@ public class GenericObjectPool : MonoBehaviour
         m_Unused.Enqueue(deactivated);
     }
 
+    public void Destroyed(PoolingScript destroyed)
+    {
+        ObjectCount--;
+    }
 }
