@@ -22,7 +22,7 @@ public abstract class CameraBehaviour
         m_targetController = m_player.GetComponent<TargetController>();
 
         //this is important so you don't snap camera pos to player. Set these in inspector.
-        m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water");
+        m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly");
     }
 
     public virtual void Activate()

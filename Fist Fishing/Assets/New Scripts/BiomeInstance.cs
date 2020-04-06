@@ -29,11 +29,14 @@ public class BiomeInstance : MonoBehaviour
     protected IEnumerable<ISpawnable> m_mehProbSpawn;
     protected IEnumerable<ISpawnable> m_preyProbSpawn;
     protected IEnumerable<ISpawnable> m_collectablesProbSpawn;
-    protected IEnumerable<ISpawnable> m_cluterProbSpawn;
+    protected IEnumerable<ISpawnable> m_clutterProbSpawn;
 
     protected bool m_areThereAnyFish = false;
     protected bool m_areThereAnyCollectables = false;
     protected int m_totalFishCount;
+
+    [SerializeField]
+    protected bool m_showDebugSpawnCountMessages = false;
 
     public void Start()
     {
@@ -50,7 +53,7 @@ public class BiomeInstance : MonoBehaviour
             {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
             {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
             {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
-            {m_cluterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()        , 0}
+            {m_clutterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()        , 0}
         };
 
         if ((m_myInstructions.ClutterList.Count > 0))
@@ -127,6 +130,17 @@ public class BiomeInstance : MonoBehaviour
             currentCooldown = m_myInstructions.TimeBetweenSpawns;
         }
         currentCooldown -= Time.deltaTime;
+
+
+
+        if(m_showDebugSpawnCountMessages)
+        Debug.Log(  "Biome: "           + Definiton.Name    +
+                    "   Clutter: "      + m_memberCount[m_clutterProbSpawn] +
+                    "   Collectables: " + m_memberCount[m_collectablesProbSpawn] +
+                    "   Aggressive: "   + m_memberCount[m_aggressiveProbSpawn] +
+                    "   Meh: "          + m_memberCount[m_mehProbSpawn] +
+                    "   Prey: "         + m_memberCount[m_preyProbSpawn]
+            );
     }
 
     protected void ResolveSpawning()
@@ -135,7 +149,7 @@ public class BiomeInstance : MonoBehaviour
             return;
         if (!m_areThereAnyCollectables && !m_areThereAnyFish) //the above list includes clutter. this handles clutter-only biome
             return;
-        if (m_memberCount.Values.Sum() >= m_myInstructions.MaxNumberOfSpawns)
+        if ((m_memberCount.Values.Sum() - m_memberCount[m_clutterProbSpawn]) >= m_myInstructions.MaxNumberOfSpawns) //it was counting clutter in spawns... not originally intended
             return;
 
 
@@ -183,6 +197,8 @@ public class BiomeInstance : MonoBehaviour
             m_memberCount[m_aggressiveProbSpawn] += (SpawnFromWeightedList(m_aggressiveProbSpawn)) ? 1 : 0;
             return;
         }
+
+
     }
 
 
@@ -212,11 +228,11 @@ public class BiomeInstance : MonoBehaviour
         if (!(m_myInstructions.ClutterList.Count() > 0))
             return;
 
-        m_memberCount[m_cluterProbSpawn] = (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+        m_memberCount[m_clutterProbSpawn] = (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
 
-        while (m_memberCount[m_cluterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
+        while (m_memberCount[m_clutterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
         {
-            m_memberCount[m_cluterProbSpawn] += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+            m_memberCount[m_clutterProbSpawn] += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
         }
     }
 
@@ -237,16 +253,16 @@ public class BiomeInstance : MonoBehaviour
             pos.x = UnityEngine.Random.Range(b.min.x, b.max.x);
             pos.y = UnityEngine.Random.Range(b.min.y, b.max.y);
             pos.z = UnityEngine.Random.Range(b.min.z, b.max.z);
-            if (IsInside(biome, pos, !biome.convex))
+            if (IsInside(biome, pos, biome.convex))
                 validPos = true;
         }
         return pos;
     }
 
-    public static bool IsInside(Collider c, Vector3 point, bool concalve)
+    public static bool IsInside(Collider c, Vector3 point, bool convex)
     {
         // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
-        if(concalve)
+        if(!convex)
         {
             if (c.bounds.ClosestPoint(point) == point)
                 return true;
@@ -269,7 +285,7 @@ public class BiomeInstance : MonoBehaviour
     /// <returns></returns>
     public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
-        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
+        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
     }
 
     /// <summary>
@@ -280,7 +296,7 @@ public class BiomeInstance : MonoBehaviour
     public static Vector3 GetSeafloorPosition(Vector3 pos)
     {
         RaycastHit hit;
-        Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water"));
+        Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
         return hit.point;
     }
 
