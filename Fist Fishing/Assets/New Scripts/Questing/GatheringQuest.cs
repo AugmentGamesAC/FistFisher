@@ -2,22 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatheringQuest : Quest
+[System.Serializable]
+public class GatheringQuest<T> : Quest where T: IItem
 {
-    protected int m_tasksLeft;
-    protected IItem m_itemType;
+    [SerializeField]
+    protected T m_itemType;
 
-    public GatheringQuest(QuestDefinition def, IItem itemType) : base(def)
+    public GatheringQuest(QuestDefinition def, T itemType) : base(def)
     {
-        throw new System.NotImplementedException();
+        m_itemType = itemType;
     }
-    protected bool ItemGathered(IItem item)
+    public GatheringQuest(T itemType) : base()
     {
-        throw new System.NotImplementedException();
+        m_itemType = itemType;
     }
+    public GatheringQuest() : base() { }
+
     //returns true if the item is what we are looking for.
-    protected void TaskCompleted()
+    public bool ItemGathered(T item)
     {
-        throw new System.NotImplementedException();
+        if (item.Name != m_itemType.Name)
+            return false;
+
+        m_tasksLeft.SetValue(m_tasksLeft - 1);
+
+        if (CheckTaskCompleted())
+            return false;
+
+        return true;
+    }
+    
+    //check if we have met the requirements, if so, call resolve completed.
+    protected bool CheckTaskCompleted()
+    {
+        if (m_tasksLeft > 0)
+            return false;
+
+        ResolveCompletedQuest();
+
+        return true;
     }
 }

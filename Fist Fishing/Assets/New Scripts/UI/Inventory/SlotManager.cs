@@ -68,6 +68,7 @@ public class SlotManager : MonoBehaviour
     /// <returns></returns>
     public virtual bool AddItem(IItem item, int count)
     {
+        OnGatheringProgress?.Invoke(item, count);
         ///eventually add code to limitObjects. 
         HashSet<int> usedSlots = new HashSet<int>();
         int myCount = count;
@@ -86,6 +87,9 @@ public class SlotManager : MonoBehaviour
         }
         return true;
     }
+
+    public delegate bool QuestTrigger(IItem item, int count);
+    public event QuestTrigger OnGatheringProgress;
 
     public void Awake()
     {

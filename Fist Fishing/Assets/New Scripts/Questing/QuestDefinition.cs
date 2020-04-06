@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestDefinition : ScriptableObject
+[System.Serializable]
+public class QuestDefinition
 {
     [SerializeField]
-    protected Sprite m_icon { get; private set; }
+    protected ImageTracker m_icon;
+    public ImageTracker Icon => m_icon;
 
     [SerializeField]
-    public string Description { get; private set; }
+    protected TextTracker m_description;
+    public TextTracker Description => m_description;
 
     [SerializeField]
-    public Reward Loot { get; private set; }
+    protected Reward m_loot;
+    public Reward LootGrab => m_loot;
+
+    public QuestDefinition()
+    {
+        m_loot = new Reward();
+    }
 
     [SerializeField]
-    public QuestTypes QuestType { get; private set; }
-
-    [SerializeField]
-    public int TaskAmount { get; private set; }
+    protected int m_taskAmount;
+    public int TaskAmount => m_taskAmount;
 }
