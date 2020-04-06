@@ -98,8 +98,8 @@ public class BiomeInstance : MonoBehaviour
         //as setting transparency at runtime is a nightmare it seems
         r.material.SetFloat("_Surface", 1.0f);
         r.material.SetOverrideTag("RenderType", "Transparent");
-        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
+        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
         r.material.SetInt("_ZWrite", 0);
         r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
