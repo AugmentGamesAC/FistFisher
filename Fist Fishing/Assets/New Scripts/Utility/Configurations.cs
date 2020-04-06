@@ -103,7 +103,7 @@ public class Configurations : MonoBehaviour
 
     void Update()
     {
-        if (ALInput.GetKeyDown(ALInput.MenuButton))
+        if (ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))
         {
             if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
             {
@@ -155,7 +155,7 @@ public class Configurations : MonoBehaviour
             //Print names of all conected joysticks
             Debug.Log("Controller found: " + item);
             //Check all controllers for usability based on brand. Wireless refers to PS4
-            if (item.Contains("XBOX") || item.Contains("Wireless"))
+            if (item.Contains("XBOX") || item.Contains("Wireless") || item.Contains("Xbox"))
                 usableJoystick = true;
         }
         if (!usableJoystick)

@@ -71,7 +71,7 @@ public class PlayerMotion : MonoBehaviour
         if (!m_CanMove)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.Switch))
+        if (ALInput.GetKeyDown(ALInput.Inventory))
             ToggleInventoryDisplay();
 
         if (ALInput.GetKeyDown(ALInput.AltAction))
@@ -130,7 +130,7 @@ public class PlayerMotion : MonoBehaviour
         // Left Right
         desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) > 0 ? 0.4f : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) < 0 ? 0.4f : 0));
         // ascend descend Not setup on controller just yet.
-        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.CancleKey) ? 0.5f : 0));
+        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Cancel) ? 0.5f : 0));
 
         //apply movement vector
         if (!PlayerInstance.Instance.Oxygen.m_isUnderWater)
