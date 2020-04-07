@@ -21,17 +21,6 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
         m_Instance = new FishInstance(fishDefinition, prompt);
         m_defintion = fishDefinition;
-
-        //mesh = GetComponent<SkinnedMeshRenderer>();
-        //if ((mesh == default) || (mesh.sharedMesh != fishDefinition.SkinedMesh.sharedMesh))
-        //{
-        //    if (mesh = default)
-        //        mesh = gameObject.AddComponent<SkinnedMeshRenderer>();
-        //    mesh.sharedMesh = fishDefinition.SkinedMesh.sharedMesh;
-        //    mesh.bones = fishDefinition.SkinedMesh.bones;
-        //    mesh.rootBone = fishDefinition.SkinedMesh.rootBone;
-        //    mesh.material = fishDefinition.Skin;
-        //}
     }
 
     public event Death Death

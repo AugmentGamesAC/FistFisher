@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 
 public class CollectableDefinition : ScriptableObject, ISpawnable
-{
-    public Type SpawnableType => m_BasicCollectable.GetType();
+{
+    public Type SpawnableType => m_BasicCollectable.GetType();
     public String SpawnableName => m_BasicCollectable.name;
     #region ModelReferences
     /*[SerializeField]
@@ -19,17 +19,17 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
 
     public float WeightedChance => throw new System.NotImplementedException();
 
-    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
-
-    public GameObject Instantiate()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public GameObject Instantiate(Vector3 position, Quaternion rotation)
-    {
-        throw new System.NotImplementedException();
-    }
+    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
+
+    public GameObject Instantiate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public GameObject Instantiate(Vector3 position, Quaternion rotation)
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
     public virtual GameObject Spawn(MeshCollider m)
     {

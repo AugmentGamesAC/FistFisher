@@ -23,12 +23,6 @@ public class CoralBudNew : MonoBehaviour, IDyingThing
         Die();
     }
 
-
-
-
-
-
-
     public event Death Death;
     public void Die()
     {

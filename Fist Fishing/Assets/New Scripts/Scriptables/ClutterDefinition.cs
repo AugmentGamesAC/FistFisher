@@ -17,6 +17,7 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicClutter;
+    #endregion
 
     public GameObject Instantiate()
     {
@@ -27,7 +28,8 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     {
         throw new System.NotImplementedException();
     }
-    #endregion
+
+
     public GameObject Spawn(MeshCollider m)
     {
         if (m == null)
