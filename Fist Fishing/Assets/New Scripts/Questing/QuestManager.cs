@@ -12,12 +12,6 @@ public class QuestManager : UITracker<QuestManager>
     protected int m_selectedQuestIndex = 0;
     public FishGatheringQuest CurrentQuest => m_questLine[m_selectedQuestIndex];
 
-    //public QuestManager()
-    //{
-    //    CurrentQuest.Activate();
-    //    UpdateState();
-    //}
-
     public void NextQuest()
     {
         m_selectedQuestIndex++;

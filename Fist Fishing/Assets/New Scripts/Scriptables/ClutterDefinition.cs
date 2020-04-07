@@ -17,33 +17,19 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
     protected GameObject m_BasicClutter;
+    #endregion
 
     public GameObject Instantiate()
-    [SerializeField]
-    protected GameObject m_BasicClutter;
-
-    #endregion
     {
-        if (m == null)
-            return null;
-
-        Vector3 pos = BiomeInstance.FindValidPosition(m);
-        //Debug.Log(pos);
-        Vector3 p = BiomeInstance.GetSeafloorPosition(pos);
-        if (p == Vector3.zero)
-        {
-            pos.y = m.bounds.max.y - m.bounds.extents.y;
-            p = BiomeInstance.GetSeafloorPosition(pos);
-        }
-        //Debug.Log(p);
-        return ObjectPoolManager.Get(m_BasicClutter, p, Quaternion.identity);
+        throw new System.NotImplementedException();
     }
 
     public GameObject Instantiate(Vector3 position, Quaternion rotation)
     {
         throw new System.NotImplementedException();
     }
-    #endregion
+
+
     public GameObject Spawn(MeshCollider m)
     {
         if (m == null)

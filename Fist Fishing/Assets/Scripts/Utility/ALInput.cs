@@ -34,41 +34,40 @@ public class ALInput : MonoBehaviour
     /// <summary>
     /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
     /// </summary>
-    public static KeyCode Action { get { hasInstance(); return Instance.m_currentKeyCodes[0]; } private set { Instance.m_currentKeyCodes[0] = value; } }
+    public static KeyCode Action { get { hasInstance(); return Instance.m_currentKeyCodes[0]; } }
     /// <summary>
     /// Covers Canceling Menus, Quick Buy, Quick Sell, Ascending, Combat: Item Action
     /// </summary>
-    public static KeyCode AltAction { get { hasInstance(); return Instance.m_currentKeyCodes[1]; } private set { Instance.m_currentKeyCodes[1] = value; } }
+    public static KeyCode AltAction { get { hasInstance(); return Instance.m_currentKeyCodes[1]; }  }
     /// <summary>
     /// Button for exiting menus, decsending, and Combat: using item
     /// </summary>
-    public static KeyCode Cancel { get { hasInstance(); return Instance.m_currentKeyCodes[2]; } private set { Instance.m_currentKeyCodes[2] = value; } }
+    public static KeyCode Cancel { get { hasInstance(); return Instance.m_currentKeyCodes[2]; } }
     /// <summary>
     /// Toggles screens, camera mode, quips?
     /// </summary>
-    public static KeyCode Toggle { get { hasInstance(); return Instance.m_currentKeyCodes[3]; } private set { Instance.m_currentKeyCodes[3] = value; } }
+    public static KeyCode Toggle { get { hasInstance(); return Instance.m_currentKeyCodes[3]; } }
     /// <summary>
     /// Opens Menu
     /// </summary>
-    public static KeyCode Menu { get { hasInstance(); return Instance.m_currentKeyCodes[4]; } private set { Instance.m_currentKeyCodes[4] = value; } }
+    public static KeyCode Menu { get { hasInstance(); return Instance.m_currentKeyCodes[4]; } }
     /// <summary>
     /// Opening player inventory
     /// </summary>
-    public static KeyCode Inventory { get { hasInstance(); return Instance.m_currentKeyCodes[5]; } private set { Instance.m_currentKeyCodes[5] = value; } }
-    protected KeyCode m_menuKeyboard;
-    /// <summary>
-    /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
-    /// </summary>
-    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_menuKeyboard; } }
+    public static KeyCode Inventory { get { hasInstance(); return Instance.m_currentKeyCodes[5]; } }
     /// <summary>
     /// Make selections with the LMB, acts as a second action button for prompts. Only for keyboard & mouse.
     /// </summary>
-    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_currentKeyCodes[6]; } private set { Instance.m_currentKeyCodes[6] = value; } }
+    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_currentKeyCodes[6]; } }
     /// <summary>
     /// Cancel prompts and things with RMB. Only for keyboard & mouse.
     /// </summary>
-    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_currentKeyCodes[7]; } private set { Instance.m_currentKeyCodes[7] = value; } }
-    
+    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_currentKeyCodes[7]; } }
+
+    /// <summary>
+    /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
+    /// </summary>
+    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_currentKeyCodes[8]; } }
     #endregion keycodes
 
 
@@ -182,17 +181,8 @@ public class ALInput : MonoBehaviour
     public static void ToggleController()
     {
         Instance.m_controllerToggle = !ControllerToggle;
-
-        
-
         //Swap controls
-        {
-            for (int i = 0; i < Instance.m_currentKeyCodes.Length; i++)
-            {
-                Instance.m_currentKeyCodes[i] = (ControllerToggle ? 
-                    Instance.m_controllerKeyCodes[i] : Instance.m_keyboardKeyCodes[i]);
-            }
-        }
+        Instance.m_currentKeyCodes = ControllerToggle ? Instance.m_controllerKeyCodes : Instance.m_keyboardKeyCodes;
     }
 
     public static void InvertLookYAxis()
