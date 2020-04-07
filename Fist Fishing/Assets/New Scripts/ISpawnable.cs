@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
+/// <summary>
+/// interface for all spawnable objects
+/// </summary>
 public interface ISpawnable
 {
     Type SpawnableType { get; }

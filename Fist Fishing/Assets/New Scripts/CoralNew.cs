@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// new script to apply to coral
+/// this handles bud spawning and coral death when all coral it can spawn is gone
+/// </summary>
 [System.Serializable]
 public class CoralNew : MonoBehaviour, IDyingThing 
 {
@@ -19,6 +23,9 @@ public class CoralNew : MonoBehaviour, IDyingThing
     protected float m_currentTimeToSpawn;
     protected bool m_isThisStillAbleToSpawnbuds = true;
 
+    /// <summary>
+    /// increments the number of buds that have been taken from this coral
+    /// </summary>
     public void BudDied()
     {
         m_numberOfBudsDied++;
@@ -39,13 +46,12 @@ public class CoralNew : MonoBehaviour, IDyingThing
         return true;
     }
 
+    /// <summary>
+    /// gets list of positions on coral model to spawn coral at, figures out if it's used
+    /// </summary>
+    /// <returns></returns>
     protected int SelectSpawnNode()
     {
-        /*Debug.Log(m_hashForTrackingWhichOfTheseHasBeenUsed);
-        Debug.Log(m_hashForTrackingWhichOfTheseHasBeenUsed.Count);
-        Debug.Log(m_definitionForThis);
-        Debug.Log(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt);
-        Debug.Log(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count);*/
         if (m_hashForTrackingWhichOfTheseHasBeenUsed.Count >= m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count)
             return -1;
         int returnval;
@@ -59,6 +65,10 @@ public class CoralNew : MonoBehaviour, IDyingThing
         return returnval;
     }
 
+    /// <summary>
+    /// spawns a coral bud and sets up its components
+    /// </summary>
+    /// <returns></returns>
     protected GameObject SpawnBud()
     {
         int i = SelectSpawnNode();
@@ -66,12 +76,11 @@ public class CoralNew : MonoBehaviour, IDyingThing
             return null;
 
         GameObject g = gameObject.transform.Find(m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt[i]).gameObject;
-        //Debug.Log(g);
         Vector3 pos = g.transform.position;
-        /*Debug.Log(m_definitionForThis);
-        Debug.Log(m_definitionForThis.CoralBudDefinition);
-        Debug.Log(m_definitionForThis.CoralBudDefinition.ItemData);*/
         GameObject o = m_definitionForThis.CoralBudDefinition.Instantiate(pos);
+
+        CoralBudNew c = o.GetComponent<CoralBudNew>();
+        c.SetParent(this);
 
         Harvestable h; 
         if (o.gameObject.TryGetComponent<Harvestable>(out h))
@@ -84,6 +93,9 @@ public class CoralNew : MonoBehaviour, IDyingThing
         return o;
     }
 
+    /// <summary>
+    /// countdown for bud spawning, and kills self if all out of buds
+    /// </summary>
     public void Update()
     {
         if(m_numberOfBudsDied >= m_definitionForThis.NamedModelComponentsForLocationsToSpawnCoralBudsAt.Count)
@@ -104,6 +116,8 @@ public class CoralNew : MonoBehaviour, IDyingThing
         }
         m_currentTimeToSpawn -= Time.deltaTime;
     }
+
+
     public void Start()
     {
         m_currentTimeToSpawn = m_timeBetweenSpawns;

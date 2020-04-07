@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// interface to allow for cloning
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public interface IObject<T>
 {
     T MemberwiseClone();
