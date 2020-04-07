@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
+    public Type SpawnableType => m_BaseModelReference.GetType();
+    public String SpawnableName => m_BaseModelReference.name;
     #region IFishData
     public IItem Item => this;
     [SerializeField]
@@ -66,13 +69,15 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected SkinnedMeshRenderer m_BaseModelReference;
-    public SkinnedMeshRenderer SkinedMesh => m_BaseModelReference;
+    protected GameObject m_BaseModelReference;
     [SerializeField]
     protected GameObject m_BasicFish;
     [SerializeField]
     protected Material m_Skin;
     public Material Skin => m_Skin;
+    [SerializeField]
+    protected RuntimeAnimatorController m_AnimatorController;
+    public RuntimeAnimatorController AnimationController => m_AnimatorController;
 
     //private GameObject m_thisObject = null;
     #endregion
@@ -84,14 +89,22 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         if (m == null)
             return null;
 
+        Transform pos = m_BaseModelReference.transform;
+        float rad = m_BaseModelReference.GetComponent<Collider>().bounds.size.x / 2.0f;
+        RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
-        GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
+
+        do
+        {
+            pos.position = BiomeInstance.FindValidPosition(m);
+
+        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
 
 
         /**********************************************************************************************/
         /**********************************NEW FISH STUFF NEEDED HERE**********************************/
         /**********************************************************************************************/
-        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
+        //CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
         //coreFish.Init(this, this);
         //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
         //GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
@@ -105,22 +118,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         if (m == null)
             return null;
 
-        Transform pos = FishRoot.transform;
-        float rad = FishRoot.GetComponent<Collider>().bounds.size.x / 2.0f;
-        RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
 
-        do
-        {
-            pos.position = BiomeInstance.FindValidPosition(m);
 
-        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
+       // coreFish.Init(this, m);
 
 
-        coreFish.Init(this, m);
-
-
-        return FishRoot;
+        return default;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
@@ -142,12 +146,12 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return true;
     }
 
-    public new GameObject Instantiate(MeshCollider m)
+    public GameObject Instantiate()
     {
         throw new System.NotImplementedException();
     }
 
-    public new GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation)
+    public GameObject Instantiate(Vector3 position, Quaternion rotation)
     {
         throw new System.NotImplementedException();
     }
