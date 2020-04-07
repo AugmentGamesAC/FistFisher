@@ -4,7 +4,9 @@ using UnityEngine;
 
 public interface ISpawnable
 {
-    GameObject Instatiate(MeshCollider m);
+    GameObject Spawn(MeshCollider m);
+    GameObject Instantiate(MeshCollider m);
+    GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation);
     float WeightedChance { get; }
     MeshCollider MeshOverRide { get; }
 }

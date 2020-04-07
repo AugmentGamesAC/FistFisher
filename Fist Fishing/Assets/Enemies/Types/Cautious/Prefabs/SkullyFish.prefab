@@ -484,6 +484,37 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1458635688627383659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 6292548357797277327}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5383892480871129230}
+  m_Layer: 0
+  m_Name: SkullyFish_FBX_V1 (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5383892480871129230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 6292548357797277327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458635688627383659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1308625179628324245}
+  m_Father: {fileID: 4896005792019608336}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742912676678994544
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +761,37 @@ Transform:
   m_Father: {fileID: 4896005792019608336}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6546923916990955624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 6292548357797277327}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308625179628324245}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1308625179628324245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e0e411b8d73d3994aab671827c8141ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 6292548357797277327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546923916990955624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5383892480871129230}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7424311146307238979
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +827,7 @@ Transform:
   - {fileID: 7330948179792871702}
   - {fileID: 565319299}
   - {fileID: 5103083702298749847}
-  - {fileID: 1308625179628324245}
+  - {fileID: 5383892480871129230}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -782,23 +844,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fishHitboxList:
-    keys:
-    - {fileID: 1059438132783223882}
-    - {fileID: 8009581915198579566}
-    - {fileID: 2874807257306346250}
-    values:
-    - 1
-    - 0.75
-    - 0.5
+    keys: []
+    values: []
   m_fishDef: {fileID: 11400000, guid: a6c39374b75b9884a9cfff4bd2e44c89, type: 2}
   m_personalSpaceRadius: 1
-  Speed: 2
-  TurnSpeed: 50
+  Speed: 0
+  TurnSpeed: 0
   m_fishClass: 4
-  LookFrom: {fileID: 5103083702298749847}
+  LookFrom: {fileID: 0}
   Spawner: {fileID: 0}
   m_inBaitZone: 0
-  m_fishArchetype: 2
+  m_fishArchetype: 0
   promptPrefab: {fileID: 0}
 --- !u!114 &7027024320410773115
 MonoBehaviour:
@@ -828,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1c475c36c03dd419f0f9c3d28d45b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 565319296}
+  HUD: {fileID: 0}
   m_deactivateDelay: 3
 --- !u!114 &768204416
 MonoBehaviour:
@@ -848,7 +904,7 @@ MonoBehaviour:
   m_regenTimer: 0
   m_regenDelay: 3
   m_regenRate: 5
-  m_HealthSlider: {fileID: 698346547}
+  m_HealthSlider: {fileID: 0}
 --- !u!1 &8567224104664165731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,9 +1083,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0e411b8d73d3994aab671827c8141ad, type: 3}
---- !u!4 &1308625179628324245 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e0e411b8d73d3994aab671827c8141ad,
-    type: 3}
-  m_PrefabInstance: {fileID: 6292548357797277327}
-  m_PrefabAsset: {fileID: 0}

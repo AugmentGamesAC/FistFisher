@@ -167,8 +167,8 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        //can switch targets even when fish are attacking.
-        ChangeSelectedFish((ALInput.GetKeyDown(KeyCode.O) ? 1 : 0) - (ALInput.GetKeyDown(KeyCode.P) ? 1 : 0));
+        //can switch targets even when fish are attacking.                if (ALInput.GetAxisPress(ALInput.AxisType.Switch))
+        ChangeSelectedFish((ALInput.GetAxis(ALInput.AxisType.Switch)));
 
         if (m_keypressTimeout > 0)
             m_keypressTimeout -= Time.deltaTime;
@@ -179,35 +179,46 @@ public class CombatManager : MonoBehaviour
         //listen for input cases. Spacebar to finalize player turn - 0 - 8 to hotkey an action - Flee key
 
         //Spacebar input will resolves whatever action is currently selected
-        if (ALInput.GetKeyDown(KeyCode.Space))
-        {
+        if (ALInput.GetKeyDown(ALInput.Toggle))
             ResolvePlayerAction();
-        }
+        
 
-        //Old attack key
-        {
-            //if (ALInput.GetKeyDown(KeyCode.F))
-            //    PlayerAttack();
-
-        }
+        //Attack use hotkey
+            if (ALInput.GetKeyDown(ALInput.Action))
+                PlayerAttack();
+        
         //Hotkeys for placing a bait
-        {
             if (!m_isItemActive)
-                if (ALInput.GetKeyDown(KeyCode.Alpha0) || ALInput.GetKeyDown(KeyCode.Keypad0))
+                if (ALInput.GetKeyDown(ALInput.AltAction))
                 {
                     PlayerItem();
                 }
-        }
+        
 
-        if (ALInput.GetKeyDown(ALInput.Flee))
+        if (ALInput.GetKeyDown(ALInput.Cancel))
             PlayerFlee();
         
-        //Uncomment for WASD controls on attack pinwheel
+        
         {
-            //int newselection = PinWheel<CombatMoveInfo>.TwoDToSelectionKeyboard(
-            //(ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0),
-            //(ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
+            int newselection = PinWheel<CombatMoveInfo>.TwoDToSelectionKeyboard(
+            (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) > 0 ? 1 : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) < 0 ? 1 : 0),
+            (ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0 ? 1 : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveVertical) < 0 ? 1 : 0));
+            if (newselection != 0 && m_keypressTimeout <= 0)
+
+            {
+
+                m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(newselection);
+
+                if (m_puchingUI != default)
+
+                    m_puchingUI.WasKeyed();
+
+                m_keypressTimeout = m_keypressTimeoutDuration;
+
+            }
+
         }
+    
         //Selection hotkeys for attacks. By using these you do not need to open the pinwheel
         {
 
@@ -586,6 +597,12 @@ public class CombatManager : MonoBehaviour
         if ((leftRight == 0) || (m_FishSelection.Count == 0))
             return;
 
+        if (leftRight > 0)
+            leftRight = 1;
+        else if (leftRight < 0)
+            leftRight = -1;
+
+        
         m_FishSelection.IncrementSelection((int)leftRight);
     }
 

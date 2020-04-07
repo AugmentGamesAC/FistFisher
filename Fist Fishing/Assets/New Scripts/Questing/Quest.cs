@@ -8,29 +8,44 @@ public enum QuestTypes
     Punching
 }
 
+[System.Serializable]
 public class Quest
 {
+    [SerializeField]
     protected bool m_IsActive;
+    public bool IsActive => m_IsActive;
 
-    protected QuestDefinition m_def;
+    [SerializeField]
+    protected FloatTracker m_tasksLeft;
+    public FloatTracker TaskLeft => m_tasksLeft;
 
-    public delegate void QuestFinished();
-    public event QuestFinished OnQuestSatisfied;
+    [SerializeField]
+    protected QuestDefinition m_def = new QuestDefinition();
+    public QuestDefinition QuestDef => m_def;
 
     public Quest(QuestDefinition def)
     {
-        throw new System.NotImplementedException();
+        if (def == default)
+            throw new System.EntryPointNotFoundException("Quest definition was default");
+
+        m_def = def;
     }
+    public Quest() { }
     public virtual void Activate()
     {
-        throw new System.NotImplementedException();
+        m_IsActive = true;
+        m_tasksLeft.SetValue(m_def.TaskAmount);
     }
     public virtual void Deactivate()
     {
-        throw new System.NotImplementedException();
+        m_IsActive = false;
+        PlayerInstance.Instance.QuestManager.NextQuest();
     }
-    public virtual void ApplyReward()
+    public virtual void ResolveCompletedQuest()
     {
-        throw new System.NotImplementedException();
+        //add clams to player's inventory from the reward.
+        PlayerInstance.Instance.Clams.SetValue(PlayerInstance.Instance.Clams + m_def.LootGrab.Clams);
+
+        Deactivate();
     }
 }

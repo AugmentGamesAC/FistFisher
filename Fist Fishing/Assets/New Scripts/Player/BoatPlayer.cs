@@ -10,7 +10,6 @@ public class BoatPlayer : MonoBehaviour
     [SerializeField]
     protected Transform m_dismountTransform;
 
-
     [SerializeField]
     public bool m_CanMove;
     protected StatTracker turningSpeedRef = new StatTracker();
@@ -51,13 +50,16 @@ public class BoatPlayer : MonoBehaviour
 
     public void Update()
     {
-        if ((ALInput.GetKeyDown(ALInput.Start)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
+        if ((ALInput.GetKeyDown(ALInput.Action)) && (NewMenuManager.CurrentMenu == MenuScreens.MainMenu))
             SwapUI();
 
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
+        if (m_validPlayer == default) // no player around no action
+            return;
+
+        if (ALInput.GetKeyDown(ALInput.Action) ||(!m_isMounted && ALInput.GetKeyDown(ALInput.MouseAction))) //handle mounting
             MountAction();
 
         if (m_validPlayer == default) // no player around no action
@@ -66,8 +68,9 @@ public class BoatPlayer : MonoBehaviour
         if (!m_isMounted)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.Toggle))
             ToggleMapInventoryDisplays();
+        
     }
 
     private void FixedUpdate()
@@ -78,15 +81,17 @@ public class BoatPlayer : MonoBehaviour
         //Mounted Context actions
         ResolveRotation();
 
-        if (ALInput.GetKey(ALInput.Forward))
+        if (ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0.2f)
             transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
 
     void ResolveRotation()
     {
-        float horizontalWeight = ALInput.GetAxis(ALInput.AxisCode.Horizontal);
+        //Changed for testing
+        float horizontalWeight;
 
+        horizontalWeight = ALInput.GetAxis(ALInput.AxisType.MoveHorizontal);
         Vector3 desiredDirection = new Vector3
         (
             0,

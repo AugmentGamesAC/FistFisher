@@ -12,8 +12,8 @@ public class LockedCameraBehaviour : CameraBehavior
     public override void ResolveInput(float orbitX, float orbitY, float lookatX, float lookatY)
     {
         //apply input values to orbit points
-        if (ALInput.GetKey(ALInput.ManualCamera))
-            m_cameraPoint.Increment(orbitX, orbitY);
+        //if (ALInput.GetKey(ALInput.ManualCamera))
+        //    m_cameraPoint.Increment(orbitX, orbitY);
 
         //offset and position camera around followObject(Player)
         Vector3 CameraWantsToMoveHere = m_followObject.transform.position + (Vector3)(m_followObject.transform.localToWorldMatrix * m_cameraPoint.ReturnTargetPoint());

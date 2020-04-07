@@ -103,15 +103,15 @@ public class Configurations : MonoBehaviour
 
     void Update()
     {
-        if (ALInput.GetKeyDown(ALInput.ShowOptionsPause))
+        if (ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))
         {
-            if(NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
+            if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
             {
                 NewMenuManager.DisplayMenuScreen(m_lastMenuShownBeforeShowingOptionsPauseScreen);
             }
             else
             {
-                m_lastMenuShownBeforeShowingOptionsPauseScreen=NewMenuManager.CurrentMenu;
+                m_lastMenuShownBeforeShowingOptionsPauseScreen = NewMenuManager.CurrentMenu;
                 NewMenuManager.DisplayMenuScreen(MenuScreens.OptionsMenu);
             }
         }
@@ -135,7 +135,7 @@ public class Configurations : MonoBehaviour
     {
         throw new System.NotImplementedException("Not Implemented");
     }
-    
+
 
     public void ExitGame()
     {
@@ -144,6 +144,31 @@ public class Configurations : MonoBehaviour
 #else
          Application.Quit();
 #endif
+    }
+    [SerializeField]
+    public void ToggleController()
+    {
+        string[] joysticks = Input.GetJoystickNames();
+        bool usableJoystick = false;
+        foreach (string item in joysticks)
+        {
+            //Print names of all conected joysticks
+            Debug.Log("Controller found: " + item);
+            //Check all controllers for usability based on brand. Wireless refers to PS4
+            if (item.Contains("XBOX") || item.Contains("Wireless") || item.Contains("Xbox"))
+                usableJoystick = true;
+        }
+        if (!usableJoystick)
+        {
+            Debug.Log("No useable controller detected");
+            return;
+        }
+        ALInput.ToggleController();
+    }
+    [SerializeField]
+    public void ToggleInvertYAxis()
+    {
+        ALInput.InvertLookYAxis();
     }
 
     /*public static bool IsThisPressed(ActionID actionID)

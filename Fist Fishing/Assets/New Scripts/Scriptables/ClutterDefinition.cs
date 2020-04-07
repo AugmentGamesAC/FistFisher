@@ -15,8 +15,18 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     public float WeightedChance => throw new System.NotImplementedException();
 
     public MeshCollider MeshOverRide => throw new System.NotImplementedException();
+
+    public new GameObject Instantiate(MeshCollider m)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public new GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation)
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
-    public GameObject Instatiate(MeshCollider m)
+    public GameObject Spawn(MeshCollider m)
     {
         if (m == null)
             return null;
