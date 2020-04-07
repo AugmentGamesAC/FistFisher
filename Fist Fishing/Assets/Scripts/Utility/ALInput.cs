@@ -1,17 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// This is our "abstract layer for input"
+/// it's purpose was to allow us to easily change the keys associated to axis/key inputs, 
+/// and to allow us to just ask this for is that associated input was active
+/// </summary>
 public class ALInput : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// checks that we actually have an instance of ALInput running
     /// </summary>
     private static void hasInstance()
     {
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
+
+
+    #region keycodes keycodes
     /// <summary>
     /// Action, AltAction, Cancel, Toggle, Menu, Inventory, MouseAction, MouseCancel. 8 elements - In that order please.
     /// </summary>
@@ -27,10 +34,6 @@ public class ALInput : MonoBehaviour
     /// </summary>
     [SerializeField]
     protected KeyCode[] m_controllerKeyCodes;
-
-    #region keycodes keycodes
-    [SerializeField]
-    //List<KeyCode> m_action;
     /// <summary>
     /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
     /// </summary>
@@ -174,11 +177,17 @@ public class ALInput : MonoBehaviour
 
         return (ControllerToggle ? Input.GetButtonDown("Joystick" + type.ToString()) : Input.GetButtonDown(type.ToString()));
     }
+    /// <summary>
+    /// gets if it is the keyboard or controller inputs used
+    /// </summary>
+    /// <returns></returns>
     public static bool IsControllerToggled()
     {
         return (Instance.m_controllerToggle ? true : false);
     }
-
+    /// <summary>
+    /// toggles if controller is being used or keyboard
+    /// </summary>
     public static void ToggleController()
     {
         Instance.m_controllerToggle = !ControllerToggle;
@@ -195,10 +204,12 @@ public class ALInput : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When looking, allows for axis direction inversion
+    /// </summary>
     public static void InvertLookYAxis()
     {
         Instance.m_invertToggle = !InvertToggle;
-
     }
     /// <summary>
     /// this function checks our registered direction codes and supples a vec3 as desired 
@@ -241,16 +252,10 @@ public class ALInput : MonoBehaviour
 
 
     /// <summary>
-    /// at some point this will load configuration from file, right now just applies defaults
+    /// at some point this will load configuration from file
     /// </summary>
     private void LoadFromFile()
     {
-        //m_action = KeyCode.F;
-        //m_altAction = KeyCode.R;
-        //m_toggle = KeyCode.Space;
-        //m_menuKey = KeyCode.Escape;
-        //m_cancleKey = KeyCode.E;
-
     }
 
     [SerializeField]

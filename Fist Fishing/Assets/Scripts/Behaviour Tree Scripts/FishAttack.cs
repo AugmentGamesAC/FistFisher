@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// tasks for aggressive fish to try to attack something
+/// </summary>
 public class FishAttack : FishTask
 {
     public override NodeResult Execute()
@@ -22,6 +25,9 @@ public class FishAttack : FishTask
         m_tree.SetValue(FishBrain.BiteCooldownName, m_biteCooldown);
     }
 
+    /// <summary>
+    /// figures out if it can bite something, and starts combat if it can
+    /// </summary>
     public void PlayerInMouthCheck()
     {
         if (m_biteCooldown > 0)

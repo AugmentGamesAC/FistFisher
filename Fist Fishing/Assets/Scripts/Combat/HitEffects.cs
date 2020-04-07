@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// when combat was going to be in-world, this was a way to show effects when a fish was hit
+/// </summary>
 [System.Serializable]
 public class HitEffects : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class HitEffects : MonoBehaviour
 
     Quaternion m_startRot;
 
+    /// <summary>
+    /// when fish is hit, pick random effect texture from list and apply it to plane
+    /// </summary>
     public void Hit()
     {
         m_timeToStopShowing = m_timeToShowHitEffect;

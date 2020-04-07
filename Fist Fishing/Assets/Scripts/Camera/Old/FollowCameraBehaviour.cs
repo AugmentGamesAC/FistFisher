@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// old camera code
+/// this handled the camera behaviour that just followed behind player
+/// allowed for some rotation and obstacle handling
+/// </summary>
 [System.Serializable]
 public class FollowCameraBehaviour : CameraBehaviour
 {

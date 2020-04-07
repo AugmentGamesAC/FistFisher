@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// when combat was going to be in-world, this was going to be a way to show attack ranges for the player
+/// </summary>
 public class Shoulder : MonoBehaviour
 {
     public float m_smallZoneRange = 5.0f;

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attached to a model to make it spin and face the camera
+/// </summary>
 public class TargetingReticle : MonoBehaviour
 {
     private Camera m_camera;

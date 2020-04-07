@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// old camera code
+/// this handled the camera behaviour when player was locked into facing a specific object
+/// </summary>
 [System.Serializable]
 public class OldLockedCameraBehaviour : CameraBehaviour
 {

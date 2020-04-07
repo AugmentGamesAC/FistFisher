@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// used to apply to a sphere around player to apply influence to any fish within it
+/// </summary>
 public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehaviour
 {
     protected InfluenceFish m_influenceFish;

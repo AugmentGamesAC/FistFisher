@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// tracker for mouse position relative to inventory objects
+/// </summary>
 public class MouseItem : MonoBehaviour
 {
     public GameObject obj;

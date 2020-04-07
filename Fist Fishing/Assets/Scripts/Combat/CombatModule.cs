@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// when combat was going to be in-world, this handled the players shoulders and zones, 
+/// and handles what happens when fish is targetted and a punch is thrown
+/// </summary>
 public class CombatModule : MonoBehaviour
 {
     //(float Range, float ModifierPercent).

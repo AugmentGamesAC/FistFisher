@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// old camera code
+/// this is the base for all old camera behaviours 
+/// set base values, default behaviour for obstacles, abstract functions
+/// </summary>
 [System.Serializable]
 public abstract class CameraBehaviour
 {

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// meant to allow for air pockets or caves
+/// when applied to object, overrides water to allow player oxygen to regen
+/// </summary>
 public class AirPocket : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

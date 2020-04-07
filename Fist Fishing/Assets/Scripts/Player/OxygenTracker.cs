@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// tracker for oxygen value 
+/// </summary>
 [System.Serializable]
 public class OxygenTracker
 {

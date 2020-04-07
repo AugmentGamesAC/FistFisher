@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// FishBrain 
+/// base for fish AI
 /// </summary>
 public class FishBrain : BehaviorTree
 {
@@ -15,7 +16,7 @@ public class FishBrain : BehaviorTree
     public enum FishClassification
     {
         Passive             = 0x000001,
-        Aggressive           = 0x000002,
+        Aggressive          = 0x000002,
         Fearful             = 0x000004,    
         Player              = 0x000008,
 
@@ -78,7 +79,7 @@ public class FishBrain : BehaviorTree
             return;
         }
 
-        m_fishMood[triggeringObject] = new FishReaction() {m_fishReconition = FishType,m_intensity = intensity };
+        m_fishMood[triggeringObject] = new FishReaction() {m_fishRecognition = FishType,m_intensity = intensity };
     }
 
 

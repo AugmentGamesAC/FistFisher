@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// scriptable object that handles the shop window inventory
+/// </summary>
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/ShopMenuInventory")]
 public class ShopMenuDisplayInventory : InventoryObject
 {
@@ -9,6 +12,10 @@ public class ShopMenuDisplayInventory : InventoryObject
     public int m_spendAmount;
     public Inventory m_playerInventory;
 
+    /// <summary>
+    /// figures out how much the things are worth and adds that value to player clams
+    /// </summary>
+    /// <param name="inventorySlot"></param>
     public void OnSell(InventorySlot inventorySlot)
     {
         if (!EnsureInventory())
@@ -20,7 +27,10 @@ public class ShopMenuDisplayInventory : InventoryObject
         m_playerInventory.GainMoney(m_sellAmount);
     }
 
-
+    /// <summary>
+    /// ensure there is a valid inventory
+    /// </summary>
+    /// <returns>true if valid transaction</returns>
     protected bool EnsureInventory()
     {
 
@@ -36,7 +46,11 @@ public class ShopMenuDisplayInventory : InventoryObject
 
         return true;
     }
-
+    /// <summary>
+    /// figures out how much things bought are worth and tries to remove that from player
+    /// </summary>
+    /// <param name="Slot"></param>
+    /// <returns>true if valid transaction</returns>
     public bool OnBuy(InventorySlot Slot)
     {
         if (!EnsureInventory())

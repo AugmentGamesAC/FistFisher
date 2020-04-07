@@ -6,6 +6,12 @@ using System.Linq;
 
 
 
+
+
+/// <summary>
+/// Object pool manager code taken from class
+/// allows the creation and cleanup of objects in instances of a pool
+/// </summary>
 public class ObjectPool
 {
     public Type PoolType;

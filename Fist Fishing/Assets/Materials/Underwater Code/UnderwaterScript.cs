@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// figures out if player is under the water, and applies a fog effect
+/// </summary>
 public class UnderwaterScript : MonoBehaviour
 {
 

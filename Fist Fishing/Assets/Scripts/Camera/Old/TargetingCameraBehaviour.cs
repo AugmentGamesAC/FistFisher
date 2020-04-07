@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// old camera code
+/// this handled the camera bahaviour when a fish was targetted
+/// </summary>
 public class TargetingCameraBehaviour : CameraBehaviour
 {
     public float m_cameraHorizPosEaseSpeed = 5.0f;
