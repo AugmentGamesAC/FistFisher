@@ -41,4 +41,5 @@ public interface IPlayerData
 
     PromptManager PromptManager { get; }
 
+    QuestManager QuestManager { get; }
 }
