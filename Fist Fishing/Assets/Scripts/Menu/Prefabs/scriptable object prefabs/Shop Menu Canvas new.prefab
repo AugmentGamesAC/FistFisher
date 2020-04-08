@@ -224,8 +224,8 @@ GameObject:
   - component: {fileID: 3830811507919535053}
   - component: {fileID: 3830811507919535041}
   - component: {fileID: 3830811507919535052}
-  - component: {fileID: 7570391305109195628}
   - component: {fileID: 7570391305109195624}
+  - component: {fileID: 7570391305109195628}
   m_Layer: 5
   m_Name: Upgrade Market
   m_TagString: Untagged
@@ -272,27 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b729e228e8140b14eaf16b570d8bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7570391305109195628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3830811507919535054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecd92034be90354d8d3a5659a2bb647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_xStartPos: -180
-  m_yStartPos: 50
-  m_xSpaceBetweenItems: 31
-  m_ySpaceBetweenItems: 31
-  m_numberOfColumns: 7
-  m_slotCount: 42
-  m_boxScale: 29
-  m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
-    type: 3}
 --- !u!114 &7570391305109195624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +294,27 @@ MonoBehaviour:
   ArmUpgradeDescription: damage
   LegUpgradeDescription: pure speed
   TorsoUpgradeDescription: lungs, health
+--- !u!114 &7570391305109195628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830811507919535054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecd92034be90354d8d3a5659a2bb647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_xStartPos: -180
+  m_yStartPos: 50
+  m_xSpaceBetweenItems: 31
+  m_ySpaceBetweenItems: 31
+  m_numberOfColumns: 7
+  m_slotCount: 42
+  m_boxScale: 29
+  m_inventoryPrefab: {fileID: 8525292041771331796, guid: 1c6b687eac9b8774a833a0f970f462ef,
+    type: 3}
 --- !u!1 &5027012326306880240
 GameObject:
   m_ObjectHideFlags: 0

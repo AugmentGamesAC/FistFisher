@@ -1581,6 +1581,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryPrefab1 new
       objectReference: {fileID: 0}
+    - target: {fileID: 7063690981058070138, guid: 6b2fa82ac89dedd439350cb141427ed6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7063690981058070142, guid: 6b2fa82ac89dedd439350cb141427ed6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4775,6 +4780,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274976389}
   m_CullTransparentMesh: 0
+--- !u!114 &277321386 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8816750989116851472, guid: 6b2fa82ac89dedd439350cb141427ed6,
+    type: 3}
+  m_PrefabInstance: {fileID: 81209041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b729e228e8140b14eaf16b570d8bca76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &281551393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1399349492036743577, guid: 29c9bca9523a4254aad0f1c82373f6ba,
@@ -33167,7 +33184,7 @@ MonoBehaviour:
       m_gamePaused: 1
       m_mouseActive: 1
     - m_menuList:
-      - {fileID: 0}
+      - {fileID: 277321386}
       - {fileID: 2701002129062428306}
       m_gamePaused: 0
       m_mouseActive: 1
@@ -33182,7 +33199,7 @@ MonoBehaviour:
       m_mouseActive: 0
     - m_menuList:
       - {fileID: 2701002129062428306}
-      - {fileID: 0}
+      - {fileID: 277321386}
       - {fileID: 7221549719139818300}
       - {fileID: 1024370003}
       m_gamePaused: 1
