@@ -11,8 +11,8 @@ public interface ISpawnable
     Type SpawnableType { get; }
     String SpawnableName { get; }
     GameObject Spawn(MeshCollider m);
-    GameObject Instantiate();
-    GameObject Instantiate(Vector3 position, Quaternion rotation);
+    GameObject Instantiate(MeshCollider m);
+    GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation);
     float WeightedChance { get; }
     MeshCollider MeshOverRide { get; }
 }
