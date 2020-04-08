@@ -49,7 +49,6 @@ public class BasicFish : MonoBehaviour
 
     //behaviour
     protected BehaviorTree m_behaviour;
-    protected HealthModule m_healthModule;
 
     [SerializeField]
     protected CombatPrompt promptPrefab;
