@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: Coral1
   m_EditorClassIdentifier: 
   m_BasicCollectable: {fileID: 0}
+  m_collectableItemData: {fileID: 0}
   m_coralBudDefinition: {fileID: 11400000, guid: f05f837a6c1b38f4ba0e1b6be47130b5,
     type: 2}
-  m_modelOfCoral: {fileID: 0}
-  m_timeBetweenBudSpawns: 0
+  m_modelOfCoral: {fileID: 3165254914154240844, guid: 70bf47ef417c52243b64960306e264a6,
+    type: 3}
+  m_timeBetweenBudSpawns: 20
   m_materialOverride: {fileID: 0}
-  m_namedModelComponentsForLocationsToSpawnCoralBudsAt: []
+  m_namedModelComponentsForLocationsToSpawnCoralBudsAt:
+  - BudSpawn0
+  - BudSpawn1
+  - BudSpawn2
+  - BudSpawn3
+  - BudSpawn4
+  - BudSpawn5
