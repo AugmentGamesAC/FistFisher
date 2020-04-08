@@ -89,11 +89,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     {
         Vector3 pos = m_BaseModelReference.transform.position;
         Debug.Log(m_BaseModelReference);
-        SkinnedMeshRenderer myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
-
-        Debug.Log(myRef);
-        if (myRef == null)
-            myRef = m_BaseModelReference.GetComponentInChildren<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer myRef = m_BaseModelReference.GetComponentInChildren<SkinnedMeshRenderer>();
         Debug.Log(myRef);
 
         float rad = myRef.bounds.size.x / 2.0f;
@@ -102,6 +98,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         do
         {
             pos = BiomeInstance.FindValidPosition(m);
+            Debug.Log(pos);
         } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
         return pos;
     }
