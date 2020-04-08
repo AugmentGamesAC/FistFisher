@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// old camera code
+/// this handled which camera bahaviour was active and called thier relevent functionality
+/// </summary>
 [System.Serializable]
 public class ThirdPersonCamera : MonoBehaviour
 {

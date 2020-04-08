@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+/// <summary>
+/// manager for all prompts
+/// figuring out the active prompts and their priority and display
+/// </summary>
 public class PromptManager : UITracker<PromptManager>
 {
     [SerializeField]

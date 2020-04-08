@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attached to player, handles the harvestable target object and adds harvestables to inventory when harvesting
+/// </summary>
 public class Harvester : MonoBehaviour
 {
     public GameObject m_targetPrefab;

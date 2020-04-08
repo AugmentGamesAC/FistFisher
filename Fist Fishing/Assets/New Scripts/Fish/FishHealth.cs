@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// health tracker for fishes
+/// </summary>
 [System.Serializable]
 public class FishHealth
 {

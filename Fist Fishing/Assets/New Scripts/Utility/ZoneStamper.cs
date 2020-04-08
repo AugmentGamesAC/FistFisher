@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// allows for the duplication of biome instances and their definitions
+/// </summary>
 [RequireComponent(typeof(BiomeInstance))]
 public class ZoneStamper : MonoBehaviour
 {

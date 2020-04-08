@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+/// <summary>
+/// has been replaced in biome instance
+/// was used to create overhead-map-visible-only spheres and text for fish spawners
+/// </summary>
 public class FishSpawnerMapVisibility : MonoBehaviour
 {
     public Material m_boatMapMaterial;
@@ -17,15 +22,18 @@ public class FishSpawnerMapVisibility : MonoBehaviour
 
     private void Awake()
     {
+        //scale the sphere
         if (m_radiusWeAreUsingForThisObject != null)
         {
             Vector3 scl = gameObject.transform.localScale;
             scl *= m_radiusWeAreUsingForThisObject.radius;
             gameObject.transform.localScale = scl;
         }
-
+        //apply colour/meterial to sphere
         if(m_boatMapMaterial!=null)
             gameObject.GetComponent<Renderer>().material = m_boatMapMaterial;
+
+        //position and scale text label
         if(m_Text!=null)
         {
             /*FishSpawner fsp = GetComponentInParent<FishSpawner>();

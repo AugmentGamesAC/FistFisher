@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// this class is a list of all the inputs as action definitions and their associated buttons
+/// obsolete as controls have undergone yet more changes
 /// </summary>
 public class KeyConfiguration : MonoBehaviour
 {

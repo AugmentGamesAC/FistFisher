@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+
+/// <summary>
+/// base script to attach to fish
+/// refs to fish definition and the biome it lives in
+/// </summary>
 public class CoreFish: MonoBehaviour, IDyingThing
 {
     [SerializeField]
@@ -12,11 +17,6 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider biome)
     {
-
-        /**********************************************************************************************/
-        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
-        /**********************************************************************************************/
-        //m_Instance = new FishInstance(fishDefinition);
         m_biome = biome;
 
         Prompt prompt = GetComponent<CombatPrompt>();
@@ -26,17 +26,6 @@ public class CoreFish: MonoBehaviour, IDyingThing
 
         m_Instance = new FishInstance(fishDefinition, prompt);
         m_defintion = fishDefinition;
-
-        mesh = GetComponent<SkinnedMeshRenderer>();
-        if ((mesh == default) || (mesh.sharedMesh != fishDefinition.SkinedMesh.sharedMesh))
-        {
-            if (mesh = default)
-                mesh = gameObject.AddComponent<SkinnedMeshRenderer>();
-            mesh.sharedMesh = fishDefinition.SkinedMesh.sharedMesh;
-            mesh.bones = fishDefinition.SkinedMesh.bones;
-            mesh.rootBone = fishDefinition.SkinedMesh.rootBone;
-            mesh.material = fishDefinition.Skin;
-        }
     }
 
     public event Death Death

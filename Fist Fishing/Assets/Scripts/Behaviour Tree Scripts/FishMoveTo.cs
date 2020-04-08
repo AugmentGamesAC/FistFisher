@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// basic behaviour for fish that just told it where it was to go and moved there 
+/// </summary>
 [System.Serializable]
 public class FishMoveTo : FishTask
 {
@@ -22,6 +25,10 @@ public class FishMoveTo : FishTask
         return NodeResult.SUCCESS;
     }
 
+    /// <summary>
+    /// handles all influences on a fish to determine points of interest while moving
+    /// </summary>
+    /// <returns></returns>
     protected Dictionary<GameObject, FishReaction> RemeberHistory()
     {
         Dictionary<GameObject, FishReaction> myHistory = (Dictionary<GameObject, FishReaction>)m_tree.GetValue(FishBrain.MoodName);
@@ -42,6 +49,9 @@ public class FishMoveTo : FishTask
         return myHistory;
     }
 
+    /// <summary>
+    /// figures out next direction to apply transform to based on influences and target
+    /// </summary>
     protected void ResolveAwareness()
     {
         m_direction = m_target.transform.position - m_me.transform.position;
@@ -61,6 +71,11 @@ public class FishMoveTo : FishTask
 
         m_direction = averageGoal - m_me.transform.position;
     }
+
+    /// <summary>
+    /// Influences change by type of influence and fish type. 
+    /// This enum determines what this fishes response is
+    /// </summary>
     public enum FishResponse
     {
         /// <summary>
@@ -77,6 +92,10 @@ public class FishMoveTo : FishTask
         Indifferent
     }
 
+
+    /// <summary>
+    /// a dictionary of responses based on fish types
+    /// </summary>
     public static Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, FishResponse>> awayReactionDirection =
         new Dictionary<FishBrain.FishClassification, Dictionary<FishBrain.FishClassification, FishResponse>>()
         {
@@ -113,6 +132,7 @@ public class FishMoveTo : FishTask
                 }
             }
         };
+
     /// <summary>
     /// for averaging it should ignore indifferent intensities
     /// </summary>
@@ -124,7 +144,7 @@ public class FishMoveTo : FishTask
         Dictionary<FishBrain.FishClassification, FishResponse> myMood;
         FishResponse response;
         if ((awayReactionDirection.TryGetValue(myfish.FishClass, out myMood)) &&
-           (myMood.TryGetValue(reaction.m_fishReconition, out response)) &&
+           (myMood.TryGetValue(reaction.m_fishRecognition, out response)) &&
             (response == FishResponse.Indifferent))
         {
             return 0;
@@ -132,23 +152,32 @@ public class FishMoveTo : FishTask
         return reaction.m_intensity;
     }
 
-    protected Vector3 CalculateDirectionWeight(Vector3 pointOfIntrest, FishReaction reaction)
+    /// <summary>
+    /// given all weights and intensities of influences/reaction, figures out direction for fish to move
+    /// </summary>
+    /// <param name="pointOfInterest"></param>
+    /// <param name="reaction"></param>
+    /// <returns></returns>
+    protected Vector3 CalculateDirectionWeight(Vector3 pointOfInterest, FishReaction reaction)
     {
         BasicFish myfish = m_me.GetComponent<BasicFish>();
-        Vector3 directionOfIntrest = pointOfIntrest;
+        Vector3 directionOfInterest = pointOfInterest;
         Dictionary<FishBrain.FishClassification, FishResponse> myMood;
         FishResponse response;
         if ((awayReactionDirection.TryGetValue(myfish.FishClass, out myMood))&&
-           (myMood.TryGetValue(reaction.m_fishReconition, out response)))
+           (myMood.TryGetValue(reaction.m_fishRecognition, out response)))
         {
             if (response == FishResponse.Avoid)
-                directionOfIntrest = Vector3.Reflect(directionOfIntrest, m_direction);
+                directionOfInterest = Vector3.Reflect(directionOfInterest, m_direction);
             if (response == FishResponse.Indifferent)
-                directionOfIntrest = Vector3.zero;
+                directionOfInterest = Vector3.zero;
         }
-        return directionOfIntrest * reaction.m_intensity; 
+        return directionOfInterest * reaction.m_intensity; 
     }
 
+    /// <summary>
+    /// raycasts forwards to ensure fish does not collide with something
+    /// </summary>
     protected void CollisionAvoidance()
     {
 
@@ -161,6 +190,9 @@ public class FishMoveTo : FishTask
         m_direction = Vector3.Reflect(m_direction, hit.normal);
     }
 
+    /// <summary>
+    /// given direction, rotates then applies forwards transform
+    /// </summary>
     protected void MoveToward()
     {
         Quaternion turnDirection = Quaternion.FromToRotation(Vector3.forward, m_direction);

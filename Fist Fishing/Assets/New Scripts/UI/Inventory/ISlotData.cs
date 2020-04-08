@@ -1,4 +1,8 @@
-﻿public interface ISlotData
+﻿
+/// <summary>
+///interface for slots and their data storage and handling
+/// </summary>
+public interface ISlotData
 {
     int Count { get; }
     int Index { get; }

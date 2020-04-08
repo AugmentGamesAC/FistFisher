@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles if player cn mount the boat or not, forces boat to a specified height
+/// </summary>
 public class Boat : MonoBehaviour
 {
     protected Vector3 m_boatHeight = Vector3.zero;

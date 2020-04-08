@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// tracker for player health
+/// </summary>
 [System.Serializable]
 public class PlayerHealth
 {

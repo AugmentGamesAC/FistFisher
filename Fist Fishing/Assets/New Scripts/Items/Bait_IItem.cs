@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// scriptable object for bait items
+/// </summary>
 [CreateAssetMenu(fileName = "BaitData", menuName = "ScriptableObjects/Bait", order = 1)]
 public class Bait_IItem : ScriptableObject, IItem
 {

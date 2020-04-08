@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// told the fish AI about an object applying influence to it and how strong the influence was
+/// used for bait attraction, player swimming near, and being hit
+/// </summary>
 public class InfluenceFish : MonoBehaviour
 {
     [SerializeField]

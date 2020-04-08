@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// determines what is bitable and how much damage bites do
+/// allows hostile fish to attack in world
+/// replaced with new combat system
+/// </summary>
 public class BiteManager : MonoBehaviour
 {
     [SerializeField]

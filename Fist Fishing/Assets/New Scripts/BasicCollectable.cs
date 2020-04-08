@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base collectable type with no additional behaviours
+/// just allows for item to be spawned, harvested, and added to inventory
+/// </summary>
 public class BasicCollectable : MonoBehaviour, IDyingThing
 {
     [SerializeField]

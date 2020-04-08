@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// basic behaviour for fish that picked a random valid position to swim to and did so
+/// </summary>
 public class FishWander : FishTask
 {
     public void Start()

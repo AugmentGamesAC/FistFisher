@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script that allowed bait to apply influence to fish to draw them in, and would have modified pond spawning behaviour
+/// </summary>
 [RequireComponent(typeof(InfluenceFish))]
 public class Bait : MonoBehaviour
 {

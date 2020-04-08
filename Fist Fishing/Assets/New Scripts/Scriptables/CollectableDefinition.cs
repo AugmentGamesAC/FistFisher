@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+/// <summary>
+/// base definition for all collectable scriptable objects
+/// </summary>
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
+    public Type SpawnableType => m_BasicCollectable.GetType();
+    public String SpawnableName => m_BasicCollectable.name;
     #region ModelReferences
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
@@ -18,12 +24,12 @@ public class CollectableDefinition : ScriptableObject, ISpawnable
 
     public MeshCollider MeshOverRide => throw new System.NotImplementedException();
 
-    public new GameObject Instantiate(MeshCollider m)
+    public GameObject Instantiate()
     {
         throw new System.NotImplementedException();
     }
 
-    public new GameObject Instantiate(MeshCollider m, Vector3 position, Quaternion rotation)
+    public GameObject Instantiate(Vector3 position, Quaternion rotation)
     {
         throw new System.NotImplementedException();
     }

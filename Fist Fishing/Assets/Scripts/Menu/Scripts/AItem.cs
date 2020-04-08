@@ -17,6 +17,10 @@ public enum ItemType
     Upgrade
 }
 
+/// <summary>
+/// abstract for all items
+/// handles type, worth, stack size, icon, description, etc
+/// </summary>
 public abstract class AItem : ScriptableObject
 {
     public int StackSize;

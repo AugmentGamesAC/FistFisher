@@ -11,6 +11,10 @@ public enum HarvestableType
     Coral1,
     Coral2,
 }
+/// <summary>
+/// attached to any collectable/coral/etc
+/// handles item data to attach to the GameObject
+/// </summary>
 public class Harvestable : MonoBehaviour, IItem
 {
 

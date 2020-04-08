@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// handles visual part of inventory and mouse interactions
+/// </summary>
 public class DisplayInventory : MonoBehaviour
 {
     //item that follows after you click.

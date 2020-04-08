@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// original inventory script
+/// handles currency changes, counts and stores items
+/// </summary>
 public class Inventory : MonoBehaviour
 {
     public int m_fishCount = 0;

@@ -100,10 +100,12 @@ public class Configurations : MonoBehaviour
         m_gammaSlider.value = m_gamma;
     }
 
-
+    /// <summary>
+    /// just listens to if it can be opened or closed and toggle accordingly
+    /// </summary>
     void Update()
     {
-        if (ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))
+        if ((ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))&& NewMenuManager.CurrentMenu!=MenuScreens.MainMenu)
         {
             if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
             {
@@ -136,7 +138,10 @@ public class Configurations : MonoBehaviour
         throw new System.NotImplementedException("Not Implemented");
     }
 
-
+    /// <summary>
+    /// called on button press
+    /// stops the game in editor and engine
+    /// </summary>
     public void ExitGame()
     {
 #if UNITY_EDITOR
@@ -145,6 +150,11 @@ public class Configurations : MonoBehaviour
          Application.Quit();
 #endif
     }
+
+
+    /// <summary>
+    /// toggles between KBM and controller (if valid controller found)
+    /// </summary>
     [SerializeField]
     public void ToggleController()
     {
@@ -160,11 +170,15 @@ public class Configurations : MonoBehaviour
         }
         if (!usableJoystick)
         {
-            Debug.Log("No useable controller detected");
+            Debug.Log("No usable controller detected");
             return;
         }
         ALInput.ToggleController();
     }
+
+    /// <summary>
+    /// allows for axis inversion for look direction
+    /// </summary>
     [SerializeField]
     public void ToggleInvertYAxis()
     {

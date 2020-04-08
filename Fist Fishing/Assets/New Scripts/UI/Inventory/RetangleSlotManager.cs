@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// slot manager that is specifically a rectangular grid
+/// </summary>
 public class RetangleSlotManager : SlotManager
 {
     public int m_xStartPos;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This was here to just update a count of item types to display.
+/// </summary>
 public class InventoryCount : MonoBehaviour
 {
 

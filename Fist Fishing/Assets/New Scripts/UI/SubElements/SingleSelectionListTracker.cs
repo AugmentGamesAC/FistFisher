@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// tracker for things with single item selection lists
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class SingleSelectionListTracker<T> : UITracker<ISingleSelectionList<T>>, ISingleSelectionList<T>
 {

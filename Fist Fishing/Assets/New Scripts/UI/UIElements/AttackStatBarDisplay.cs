@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// progress bar updaters for combat moves
+/// </summary>
 public class AttackStatBarDisplay : MonoBehaviour
 {
     public ProgressBarUpdater PowerStatBar;

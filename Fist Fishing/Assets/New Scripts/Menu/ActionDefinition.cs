@@ -12,6 +12,10 @@ using UnityEngine;
 /// 		detailed discription (yet another string), 
 /// 		ActionType (2axis,1axis,button,page), 
 /// 		ContextGroup as field (Boat Travel,inventoryshop,swiminventoy,Battle,Swimming,Menu Navigation)
+/// 		
+/// 
+/// 
+/// Now unused as we've again switched control logics
 ///
 /// </summary>
 public class ActionDefinition : MonoBehaviour

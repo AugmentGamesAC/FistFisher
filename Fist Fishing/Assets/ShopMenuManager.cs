@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// accessor for shop, and setup functionality to add bait
+/// </summary>
 public class ShopMenuManager : MonoBehaviour
 {
     public ShopMenuDisplayInventory m_shopMenuDisplayInventory;

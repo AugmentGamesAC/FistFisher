@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// our first-person camera behaviour 
+/// </summary>
 [System.Serializable]
 public class FirstPersonCameraBehaviour : CameraBehavior
 {

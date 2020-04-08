@@ -1,17 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// This is our "abstract layer for input"
+/// it's purpose was to allow us to easily change the keys associated to axis/key inputs, 
+/// and to allow us to just ask this for is that associated input was active
+/// </summary>
 public class ALInput : MonoBehaviour
 {
     /// <summary>
-    /// 
+    /// checks that we actually have an instance of ALInput running
     /// </summary>
     private static void hasInstance()
     {
         if (Instance == default)
             throw new System.InvalidOperationException("ALInput not Initilized");
     }
+
+
+    #region keycodes keycodes
     /// <summary>
     /// Action, AltAction, Cancel, Toggle, Menu, Inventory, MouseAction, MouseCancel. 8 elements - In that order please.
     /// </summary>
@@ -27,48 +34,43 @@ public class ALInput : MonoBehaviour
     /// </summary>
     [SerializeField]
     protected KeyCode[] m_controllerKeyCodes;
-
-    #region keycodes keycodes
-    [SerializeField]
-    //List<KeyCode> m_action;
     /// <summary>
     /// Covers Selecting/Starting, Quick Buy, Quick Sell, Attacking, Mounting, Dismounting, and Gathering, Combat: Attack Action
     /// </summary>
-    public static KeyCode Action { get { hasInstance(); return Instance.m_currentKeyCodes[0]; } private set { Instance.m_currentKeyCodes[0] = value; } }
+    public static KeyCode Action { get { hasInstance(); return Instance.m_currentKeyCodes[0]; } }
     /// <summary>
     /// Covers Canceling Menus, Quick Buy, Quick Sell, Ascending, Combat: Item Action
     /// </summary>
-    public static KeyCode AltAction { get { hasInstance(); return Instance.m_currentKeyCodes[1]; } private set { Instance.m_currentKeyCodes[1] = value; } }
+    public static KeyCode AltAction { get { hasInstance(); return Instance.m_currentKeyCodes[1]; }  }
     /// <summary>
     /// Button for exiting menus, decsending, and Combat: using item
     /// </summary>
-    public static KeyCode Cancel { get { hasInstance(); return Instance.m_currentKeyCodes[2]; } private set { Instance.m_currentKeyCodes[2] = value; } }
+    public static KeyCode Cancel { get { hasInstance(); return Instance.m_currentKeyCodes[2]; } }
     /// <summary>
     /// Toggles screens, camera mode, quips?
     /// </summary>
-    public static KeyCode Toggle { get { hasInstance(); return Instance.m_currentKeyCodes[3]; } private set { Instance.m_currentKeyCodes[3] = value; } }
+    public static KeyCode Toggle { get { hasInstance(); return Instance.m_currentKeyCodes[3]; } }
     /// <summary>
     /// Opens Menu
     /// </summary>
-    public static KeyCode Menu { get { hasInstance(); return Instance.m_currentKeyCodes[4]; } private set { Instance.m_currentKeyCodes[4] = value; } }
+    public static KeyCode Menu { get { hasInstance(); return Instance.m_currentKeyCodes[4]; } }
     /// <summary>
     /// Opening player inventory
     /// </summary>
-    public static KeyCode Inventory { get { hasInstance(); return Instance.m_currentKeyCodes[5]; } private set { Instance.m_currentKeyCodes[5] = value; } }
-    protected KeyCode m_menuKeyboard;
-    /// <summary>
-    /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
-    /// </summary>
-    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_menuKeyboard; } }
+    public static KeyCode Inventory { get { hasInstance(); return Instance.m_currentKeyCodes[5]; } }
     /// <summary>
     /// Make selections with the LMB, acts as a second action button for prompts. Only for keyboard & mouse.
     /// </summary>
-    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_currentKeyCodes[6]; } private set { Instance.m_currentKeyCodes[6] = value; } }
+    public static KeyCode MouseAction { get { hasInstance(); return Instance.m_currentKeyCodes[6]; } }
     /// <summary>
     /// Cancel prompts and things with RMB. Only for keyboard & mouse.
     /// </summary>
-    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_currentKeyCodes[7]; } private set { Instance.m_currentKeyCodes[7] = value; } }
-    
+    public static KeyCode MouseCancel { get { hasInstance(); return Instance.m_currentKeyCodes[7]; } }
+
+    /// <summary>
+    /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
+    /// </summary>
+    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_currentKeyCodes[8]; } }
     #endregion keycodes
 
 
@@ -174,31 +176,30 @@ public class ALInput : MonoBehaviour
 
         return (ControllerToggle ? Input.GetButtonDown("Joystick" + type.ToString()) : Input.GetButtonDown(type.ToString()));
     }
+    /// <summary>
+    /// gets if it is the keyboard or controller inputs used
+    /// </summary>
+    /// <returns></returns>
     public static bool IsControllerToggled()
     {
         return (Instance.m_controllerToggle ? true : false);
     }
-
+    /// <summary>
+    /// toggles if controller is being used or keyboard
+    /// </summary>
     public static void ToggleController()
     {
         Instance.m_controllerToggle = !ControllerToggle;
-
-        
-
         //Swap controls
-        {
-            for (int i = 0; i < Instance.m_currentKeyCodes.Length; i++)
-            {
-                Instance.m_currentKeyCodes[i] = (ControllerToggle ? 
-                    Instance.m_controllerKeyCodes[i] : Instance.m_keyboardKeyCodes[i]);
-            }
-        }
+        Instance.m_currentKeyCodes = ControllerToggle ? Instance.m_controllerKeyCodes : Instance.m_keyboardKeyCodes;
     }
 
+    /// <summary>
+    /// When looking, allows for axis direction inversion
+    /// </summary>
     public static void InvertLookYAxis()
     {
         Instance.m_invertToggle = !InvertToggle;
-
     }
     /// <summary>
     /// this function checks our registered direction codes and supples a vec3 as desired 
@@ -241,16 +242,10 @@ public class ALInput : MonoBehaviour
 
 
     /// <summary>
-    /// at some point this will load configuration from file, right now just applies defaults
+    /// at some point this will load configuration from file
     /// </summary>
     private void LoadFromFile()
     {
-        //m_action = KeyCode.F;
-        //m_altAction = KeyCode.R;
-        //m_toggle = KeyCode.Space;
-        //m_menuKey = KeyCode.Escape;
-        //m_cancleKey = KeyCode.E;
-
     }
 
     [SerializeField]

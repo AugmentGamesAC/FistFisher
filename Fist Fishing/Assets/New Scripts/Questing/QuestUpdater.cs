@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Tracker updater for the current quest
+/// </summary>
 [RequireComponent(typeof(CurrentQuestUI))]
 public class QuestUpdater : CoreUIUpdater<UITracker<QuestManager>, CurrentQuestUI, QuestManager>
 {

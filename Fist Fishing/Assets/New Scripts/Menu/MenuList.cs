@@ -8,6 +8,10 @@ Shows and hides.
 knows if mouse is available
 knows if menu pauses game
 */
+
+/// <summary>
+/// a list of all active menus and their game-relevent states/data
+/// </summary>
 [System.Serializable]
 public class MenuList
 {

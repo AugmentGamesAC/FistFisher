@@ -4,13 +4,22 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 
+/// <summary>
+/// the death event exists to despawn items and remove them from biome list
+/// </summary>
+#region death event
 public delegate void Death();
 public interface IDyingThing
 {
     event Death Death;
 }
+#endregion
+
+
+
 /// <summary>
-/// This class exists to handle all the biomes in scene
+/// This class exists to handle a biomes in scene
+/// Deals with what it contains and what it can spawn
 /// </summary>
 [System.Serializable, RequireComponent(typeof(MeshCollider))]
 public class BiomeInstance : MonoBehaviour
@@ -33,10 +42,16 @@ public class BiomeInstance : MonoBehaviour
     protected bool m_areThereAnyFish = false;
     protected bool m_areThereAnyCollectables = false;
     protected int m_totalFishCount;
+    protected float currentCooldown;
 
     [SerializeField]
     protected bool m_showDebugSpawnCountMessages = false;
 
+    /// <summary>
+    /// sets up a dictionary of all the spawnables the scene contains, 
+    /// sets up whe map visibility and label stuff,
+    /// then spawns in all the clutter
+    /// </summary>
     public void Start()
     {
         m_MeshCollider = GetComponent<MeshCollider>();
@@ -48,10 +63,10 @@ public class BiomeInstance : MonoBehaviour
 
         m_memberCount = new Dictionary<IEnumerable<ISpawnable>, int>()
         {
-            {m_aggressiveProbSpawn  = m_myInstructions.AggressiveFishList.Cast<ISpawnable>() , 0},
-            {m_mehProbSpawn         = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
-            {m_preyProbSpawn        = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
-            {m_collectablesProbSpawn= m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
+            {m_aggressiveProbSpawn   = m_myInstructions.AggressiveFishList.Cast<ISpawnable>() , 0},
+            {m_mehProbSpawn          = m_myInstructions.MehFishList.Cast<ISpawnable>()        , 0},
+            {m_preyProbSpawn         = m_myInstructions.PreyFishList.Cast<ISpawnable>()       , 0},
+            {m_collectablesProbSpawn = m_myInstructions.CollectablesList.Cast<ISpawnable>()   , 0},
             {m_clutterProbSpawn      = m_myInstructions.ClutterList.Cast<ISpawnable>()        , 0}
         };
 
@@ -70,6 +85,10 @@ public class BiomeInstance : MonoBehaviour
             m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
     }
 
+    /// <summary>
+    /// gets the mesh of the biome (or adds it if it was removed)
+    /// changes the mesh to be seethrough and of the specified biome colour
+    /// </summary>
     private void ResolveBiomeMeshRendering()
     {
         //m_MeshCollider
@@ -106,6 +125,9 @@ public class BiomeInstance : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// gets the text prefab, sets up the transform and text
+    /// </summary>
     private void SpawnText()
     {
         Vector3 v = gameObject.transform.position;
@@ -118,8 +140,9 @@ public class BiomeInstance : MonoBehaviour
         m_biomeText.gameObject.transform.localScale = Vector3.one * Definiton.TextScale;
     }
 
-    protected float currentCooldown;
-
+    /// <summary>
+    /// countdown to spawn, then attempts to spawn
+    /// </summary>
     public void Update()
     {
         //Debug.Log("Biome update: " + currentCooldown);
@@ -143,7 +166,10 @@ public class BiomeInstance : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// used locally for determining fish type to spawn. 
+    /// could prolly repurpose one of several other fish type enums, but this is specific and controlled here
+    /// </summary>
     private enum FishTypeToSpawn
     {
         prey,
@@ -151,6 +177,12 @@ public class BiomeInstance : MonoBehaviour
         pred,
         error
     }
+
+    /// <summary>
+    /// logic for determining which type of fish to spawn if it is to spawn a fish
+    /// a lot lengthier now that we are allowing there to be empty lists of fish types
+    /// </summary>
+    /// <returns></returns>
     private FishTypeToSpawn DetermineFishTypeToSpawn()
     {
         //prey
@@ -219,6 +251,10 @@ public class BiomeInstance : MonoBehaviour
         return FishTypeToSpawn.error;
     }
 
+    /// <summary>
+    /// turns the above enum into a spawn and add to biome member list
+    /// </summary>
+    /// <param name="ft"></param>
     private void SpawnFishFromType(FishTypeToSpawn ft)
     {
         switch (ft)
@@ -235,7 +271,10 @@ public class BiomeInstance : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// if we are allowed to spawn something in biome based on timer,
+    /// figure out what to spawn and do so
+    /// </summary>
     protected void ResolveSpawning()
     {
         if (m_memberCount == default) //nothing in any list to spawn
@@ -270,7 +309,12 @@ public class BiomeInstance : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// given the list of a type, use the associated weights to randomly pick one of the options
+    /// then tell it to set up itself, apply a death event so this biome can track it, rotate 
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
     protected bool SpawnFromWeightedList(IEnumerable<ISpawnable> list)
     {
         float rand = UnityEngine.Random.Range(0, 1.0f);
@@ -280,12 +324,34 @@ public class BiomeInstance : MonoBehaviour
                 GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
                 g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
                 g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
-                SpawningTweaks.AdjustForBottom(g);
+                BottomAdjust(g, possibbleSpawn);
                 return true;
             }
         return false;
     }
 
+    /// <summary>
+    /// tries to make the spawnable a probabilityspawn, then check if the object is set to span from bottom
+    /// if so, adjust the gameobject up
+    /// this is a prime example of something that should be redesigned
+    /// </summary>
+    private void BottomAdjust(GameObject g, ISpawnable possibbleSpawn)
+    {
+        ProbabilitySpawnFish f = possibbleSpawn as ProbabilitySpawnFish;
+        ProbabilitySpawnClutter c = possibbleSpawn as ProbabilitySpawnClutter;
+        ProbabilitySpawnCollectable e = possibbleSpawn as ProbabilitySpawnCollectable;
+        bool bottom = false;
+
+        if (f != null)
+            bottom = f.SpawnFromBottom;
+        else if (c != null)
+            bottom = c.SpawnFromBottom;
+        else if (e != null)
+            bottom = e.SpawnFromBottom;
+
+        if(bottom)
+            SpawningTweaks.AdjustForBottom(g);
+    }
 
     /// <summary>
     /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
@@ -327,6 +393,11 @@ public class BiomeInstance : MonoBehaviour
         return pos;
     }
 
+    /// <summary>
+    /// figures out if the object is inside the biome. 
+    /// Unity hates trying to do this for concave mesh colliders, 
+    /// so it is currently using bounding boxes if concave until much more lengthy complex maths can be added
+    /// </summary>
     public static bool IsInside(Collider c, Vector3 point, bool convex)
     {
         // Because ClosestPoint(point)=point if point is inside - not clear from docs I feel
@@ -348,9 +419,6 @@ public class BiomeInstance : MonoBehaviour
     /// <summary>
     /// this takes the size of the fish and position it is trying to span in to ensure it has room
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="radius"></param>
-    /// <returns></returns>
     public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
         return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
@@ -359,8 +427,6 @@ public class BiomeInstance : MonoBehaviour
     /// <summary>
     /// this takes in a position in world and raycasts down and returns where it hit the floor
     /// </summary>
-    /// <param name="pos"></param>
-    /// <returns></returns>
     public static Vector3 GetSeafloorPosition(Vector3 pos)
     {
         RaycastHit hit;

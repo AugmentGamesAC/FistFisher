@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// interface for all items
+/// </summary>
 public interface IItem
 {
     int StackSize { get; }

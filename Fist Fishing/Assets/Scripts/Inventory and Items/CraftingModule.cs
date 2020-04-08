@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// old script that allowed player to turn coral into bait back when crafting was a planned feature
+/// </summary>
 public class CraftingModule : MonoBehaviour
 {
 

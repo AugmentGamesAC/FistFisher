@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// slices of a pinwheel that check if they're the activating one
+/// </summary>
 [RequireComponent(typeof(Image))]
 public class PinwheelTab : MonoBehaviour, IPointerClickHandler
 {

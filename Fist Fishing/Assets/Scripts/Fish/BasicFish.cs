@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script for all fishes
+/// contains references to all fishy things
+/// </summary>
 [System.Serializable]
 public class BasicFish : MonoBehaviour
 {

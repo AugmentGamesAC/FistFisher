@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// data and processing for quest rewards
+/// </summary>
 [System.Serializable]
 public class Reward
 {

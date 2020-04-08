@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// takes a tracker with float values, 
+/// turns value into string when updating a TextMeshProUGUI UI element
+/// </summary>
 [System.Serializable]
 public class FloatTextProUpdater : CoreUIUpdater<FloatTracker, TextMeshProUGUI, float>
 {

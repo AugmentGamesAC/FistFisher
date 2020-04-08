@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// generic tracker for all UI updating types
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class UITracker<T> : ISerializationCallbackReceiver
 {

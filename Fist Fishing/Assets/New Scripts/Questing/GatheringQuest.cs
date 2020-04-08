@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// generic for quests that track items of a type collected
+/// </summary>
 [System.Serializable]
 public class GatheringQuest<T> : Quest where T: IItem
 {

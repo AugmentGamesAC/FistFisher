@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// manager for quests
+/// handles updates and current quest
+/// </summary>
 [System.Serializable]
 public class QuestManager : UITracker<QuestManager>
 {
@@ -11,12 +15,6 @@ public class QuestManager : UITracker<QuestManager>
     [SerializeField]
     protected int m_selectedQuestIndex = 0;
     public FishGatheringQuest CurrentQuest => m_questLine[m_selectedQuestIndex];
-
-    //public QuestManager()
-    //{
-    //    CurrentQuest.Activate();
-    //    UpdateState();
-    //}
 
     public void NextQuest()
     {

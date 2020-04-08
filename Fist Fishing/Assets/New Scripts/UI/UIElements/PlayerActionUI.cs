@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// combat UI updaters
+/// </summary>
 public class PlayerActionUI : MonoBehaviour
 {
     [SerializeField]

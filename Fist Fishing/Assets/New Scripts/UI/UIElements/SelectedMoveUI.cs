@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI updaters for move selection
+/// </summary>
 public class SelectedMoveUI : CoreUIElement<CombatMoveInfo>
 {
 

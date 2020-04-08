@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base class for all tasks for fish AI
+/// contains some data about the fish that child tasks may make use of
+/// </summary>
 public class FishTask : Node
 {
     protected float m_speed;

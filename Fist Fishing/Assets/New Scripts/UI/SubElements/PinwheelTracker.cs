@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// tracker for pinwheels
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class PinwheelTracker<T> : UITracker<IPinWheel<T>>, IPinWheel<T>
 {

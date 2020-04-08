@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// updater for fish not currently selected
+/// </summary>
 public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
 {
 

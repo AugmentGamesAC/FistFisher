@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// tracker for things with int values
+/// </summary>
 [System.Serializable]
 public class IntTracker : UITracker<int>
 {

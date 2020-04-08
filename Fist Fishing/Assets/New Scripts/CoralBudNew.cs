@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// new script to apply to coral buds to handle their harvesting
+/// </summary>
 public class CoralBudNew : MonoBehaviour, IDyingThing
 {
     protected CoralBudDefinition m_definitionForThis;
+    protected CoralNew m_parent;
+    public void SetParent(CoralNew coral)
+    {
+        m_parent = coral;
+    }
+
     public bool SetDefinition(CoralBudDefinition def)
     {
         if (def == null)
@@ -20,14 +29,9 @@ public class CoralBudNew : MonoBehaviour, IDyingThing
     {
         Harvestable h = gameObject.GetComponent<Harvestable>();
         PlayerInstance.Instance.PlayerInventory.AddItem(h, 1);
+        m_parent.BudDied();
         Die();
     }
-
-
-
-
-
-
 
     public event Death Death;
     public void Die()
