@@ -83,17 +83,17 @@ public class GenericObjectPool : MonoBehaviour
         return HandleNew<T>(returnVal.gameObject);
     }
 
-    public T GetSpawn<T>(ISpawnable spawnable) where T : Component
+    public T GetSpawn<T>(ISpawnable spawnable, MeshCollider m) where T : Component
     {
         T returnVal;
         if (m_Unused.Count > 0)
             return FromPool().GetComponent<T>();
 
-        returnVal = spawnable.Instantiate().GetComponent<T>();
+        returnVal = spawnable.Instantiate(m).GetComponent<T>();
         return HandleNew<T>(returnVal.gameObject);
     }
 
-    public T GetSpawn<T>(ISpawnable spawnable, Vector3 position, Quaternion rotation) where T : Component
+    public T GetSpawn<T>(ISpawnable spawnable, MeshCollider m, Vector3 position, Quaternion rotation) where T : Component
     {
         T returnVal;
         if (m_Unused.Count > 0)
@@ -103,7 +103,7 @@ public class GenericObjectPool : MonoBehaviour
             return returnVal;
         }
 
-        returnVal = spawnable.Instantiate(position, rotation).GetComponent<T>();
+        returnVal = spawnable.Instantiate(m, position, rotation).GetComponent<T>();
         return HandleNew<T>(returnVal.gameObject);
     }
 

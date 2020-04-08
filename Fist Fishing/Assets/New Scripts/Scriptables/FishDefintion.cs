@@ -101,7 +101,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
             pos = BiomeInstance.FindValidPosition(m);
         } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
 
-        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, pos, Quaternion.identity);
+        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this,m, pos, Quaternion.identity);
 
         return default;
     }
@@ -125,28 +125,29 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return true;
     }
 
-    public GameObject Instantiate()
+    public GameObject Instantiate(MeshCollider m)
     {
         GameObject returnVal;
 
         returnVal = Instantiate(m_BasicFish);
 
-        AttachParts(returnVal);
+        AttachParts(returnVal,m);
         return returnVal;
     }
 
-    public GameObject Instantiate(Vector3 position, Quaternion rotation)
+    public GameObject Instantiate(MeshCollider m,Vector3 position, Quaternion rotation)
     {
         GameObject returnVal;
 
         returnVal = Instantiate(m_BasicFish, position, rotation);
 
-        AttachParts(returnVal);
+        AttachParts(returnVal,m);
         return returnVal;
     }
 
-    protected void AttachParts(GameObject newInstance)
+    protected void AttachParts(GameObject newInstance, MeshCollider m)
     {
+        newInstance.GetComponent<CoreFish>().Init(this, m);
         newInstance.GetComponent<SkinnedMeshRenderer>().material = Skin;
         var animationBlock = Instantiate(m_BaseModelReference, newInstance.transform);
         Animator swimcontroler = animationBlock.GetComponent<Animator>();
