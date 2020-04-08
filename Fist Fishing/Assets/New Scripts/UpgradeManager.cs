@@ -39,6 +39,8 @@ public class UpgradeManager : MonoBehaviour
         Legendary
     }
 
+
+
     protected static int m_appliedUpgrades;
 
     [SerializeField]
@@ -73,7 +75,22 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     protected string TorsoUpgradeDescription;
 
+    public static UpgradeManager Instance { get; private set; }
+
     public void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+
+        Init();
+    }
+
+    public void Init()
     {
         m_currentUpgradesCost = BaseUpgradesCost;
 

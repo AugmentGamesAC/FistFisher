@@ -15,7 +15,7 @@ public class UITracker<T> : ISerializationCallbackReceiver
 
     protected void UpdateState()
     {
-        if (m_value == default)
+        if (m_value == null)
             return;
         OnStateChange?.Invoke(m_value);
     }

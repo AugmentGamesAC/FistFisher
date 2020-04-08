@@ -29,6 +29,7 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
         m_health = new PlayerHealth(PlayerInstance.Instance.PlayerStatMan[Stats.MaxHealth]);
 
         m_promptManager = new PromptManager();
+        //m_questManager = new QuestManager();
 
         m_clamsUpdater.UpdateTracker(m_clams);
 
@@ -92,11 +93,13 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     public static void RegisterPlayerInventory(SlotManager newInventory)
     {
         MyInstance.m_playerInventory = newInventory;
+        MyInstance.m_playerInventory.OnGatheringProgress += PlayerInstance.Instance.QuestManager.CheckGatheringProgress;
     }
 
     public static void RegisterItemInventory(SlotManager newInventory)
     {
         MyInstance.m_itemInventory = newInventory;
+        MyInstance.m_itemInventory.OnGatheringProgress += PlayerInstance.Instance.QuestManager.CheckGatheringProgress;
     }
 
     public static void RegisterPlayerMotion(PlayerMotion playerMotion)
@@ -117,4 +120,8 @@ public class PlayerInstance : MonoBehaviour, IPlayerData
     [SerializeField]
     protected PromptManager m_promptManager;
     public PromptManager PromptManager => m_promptManager;
+
+    [SerializeField]
+    protected QuestManager m_questManager;
+    public QuestManager QuestManager => m_questManager;
 }
