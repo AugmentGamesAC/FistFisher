@@ -105,6 +105,9 @@ public class Configurations : MonoBehaviour
     /// </summary>
     void Update()
     {
+
+        Time.timeScale = (!NewMenuManager.PausedActiveState) ? 1 : 0;
+
         if (ALInput.GetKeyDown(ALInput.Menu) && NewMenuManager.CurrentMenu!=MenuScreens.MainMenu)
         {
             if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
