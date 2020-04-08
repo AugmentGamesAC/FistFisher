@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// base for prompts
+/// contextually visible UI elements
+/// </summary>
 [System.Serializable]
 public class Prompt : MonoBehaviour
 {

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI updaters for noise indication
+/// </summary>
 public class NoiseIndicatorUI : MonoBehaviour
 {
     [SerializeField]

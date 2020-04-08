@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// this class exists to instantiate a list of prefabs into a scrollable list
+/// great proof of concept, but unused
+/// was going to be used for runtime controls modification
 /// </summary>
 public class ActionDefinitionListController : MonoBehaviour
 {

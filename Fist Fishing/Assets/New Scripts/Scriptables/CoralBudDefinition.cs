@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base definition for all coral bud scriptable objects
+/// </summary>
 [System.Serializable]
 [CreateAssetMenu(fileName = "New Coral Bud Object", menuName = "Coral/Coral Bud Definition")]
 public class CoralBudDefinition : ScriptableObject

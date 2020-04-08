@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 
+/// <summary>
+/// interface for lists of things in which only one thing can be the selected/active
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public interface ISingleSelectionList<T> : System.Collections.Generic.IEnumerable<T>
 {
     T this[int value] { get; }

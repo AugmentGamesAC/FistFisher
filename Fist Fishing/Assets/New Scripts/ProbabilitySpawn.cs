@@ -12,6 +12,9 @@ public interface IObject<T>
     T MemberwiseClone();
 }
 
+/// <summary>
+/// Generic class for spawnables with a weight
+/// </summary>
 public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ ISpawnable, IObject<V> where T:ISpawnable where V: IObject<V>,ISpawnable
 {
     public Type SpawnableType => m_spawnReference.GetType();
@@ -33,4 +36,5 @@ public class ProbabilitySpawn<T,V>: ScriptableObject, /*UnityEngine.Object,*/ IS
 
     [SerializeField]
     protected bool m_spawnFromBottom;
+    public bool SpawnFromBottom => m_spawnFromBottom;
 }

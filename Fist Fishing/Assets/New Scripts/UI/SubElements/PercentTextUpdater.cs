@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// updater for text based on percentages
+/// </summary>
 [System.Serializable]
 public class PercentTextUpdater : CoreUIUpdater<PercentageTracker,Text,IPercentage>
 {

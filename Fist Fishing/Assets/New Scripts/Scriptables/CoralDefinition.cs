@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base definition for all coral scriptable objects
+/// </summary>
 [System.Serializable]
 [CreateAssetMenu(fileName = "New Coral Object", menuName = "Coral/Coral Definition")]
 public class CoralDefinition : CollectableDefinition//ScriptableObject, ISpawnable

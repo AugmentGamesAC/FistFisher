@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// all the types of moves that can be made in combat
+/// </summary>
 public enum MoveType
 {
     Regular,
@@ -13,6 +16,9 @@ public enum MoveType
     Funeral
 }
 
+/// <summary>
+/// ranges for attacks
+/// </summary>
 public enum SweetSpotRange
 {
     Close, 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// slot manager for upgrade shop
+/// </summary>
 public class UpgradeSlotManager : RetangleSlotManager
 {
     protected override void Init()

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// the boat and behaviours if player is mounted
+/// </summary>
 [System.Serializable]
 public class BoatPlayer : MonoBehaviour
 {

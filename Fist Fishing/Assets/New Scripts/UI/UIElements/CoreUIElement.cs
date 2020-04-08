@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// base UI element class that handles UI Updates
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class CoreUIElement<T> : MonoBehaviour
 {
     /// <summary>

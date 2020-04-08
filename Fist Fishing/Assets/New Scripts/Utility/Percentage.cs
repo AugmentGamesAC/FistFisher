@@ -1,5 +1,9 @@
 ﻿using System;
 using UnityEngine;
+
+/// <summary>
+/// class for all things percentagy
+/// </summary>
 [Serializable]
 public class Percentage : IPercentage
 {

@@ -3,6 +3,10 @@ using System;
 using System.Runtime.Serialization;
 using System.IO;
 
+/// <summary>
+/// functionality to help with saving and loading
+/// Currently unused
+/// </summary>
 public class SaveUtils
 {
     public static void SerializeVector3(Stream stream, IFormatter formatter, Vector3 value)

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// interfact to store data about all fish
+/// </summary>
 public interface IFishData 
 {
     float Damage { get; }
@@ -18,6 +21,9 @@ public interface IFishData
     FishBrain.FishClassification FishClassification { get; }
 }
 
+/// <summary>
+/// interface to store player data
+/// </summary>
 public interface IPlayerData
 {
     float AttackRange { get; }

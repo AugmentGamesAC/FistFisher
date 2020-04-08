@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// UI updater for inventory slots
+/// </summary>
 [RequireComponent(typeof(ASlotRender))]
 public class SlotUI : CoreUIElement<ISlotData>
 {

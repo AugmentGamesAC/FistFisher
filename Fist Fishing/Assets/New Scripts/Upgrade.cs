@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// items that apply stats to the player
+/// </summary>
 public class Upgrade : IItem
 {
     protected Dictionary<Stats, float> m_statsModifier;
@@ -43,6 +46,9 @@ public class Upgrade : IItem
         m_worth = calculateNewCost(m_statsModifier);
     }
 
+    /// <summary>
+    /// takes all the data to create a new upgrade
+    /// </summary>
     public Upgrade(string name, Sprite icon, string description, int worth, Dictionary<Stats, float> statsModifier, ItemType itemType = ItemType.Upgrade, int id = (int)ItemType.Upgrade, int stackSize = 1)
     {
         m_name = name;
@@ -65,6 +71,7 @@ public class Upgrade : IItem
 
     /// <summary>
     /// Called when you buy
+    /// applies the stats of the upgrade
     /// </summary>
     public void ApplyUpgrade()
     {
@@ -86,6 +93,9 @@ public class Upgrade : IItem
         return false;
     }
 
+    /// <summary>
+    /// handles being dropped after being picked up from a slot
+    /// </summary>
     public bool ResolveDropCase(ISlotData newSlot, ISlotData oldSlot)
     {
         if (!(newSlot.Manager is PlayerSlotManager))

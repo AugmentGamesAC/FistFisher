@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// specific slot manager for the player inventory
+/// </summary>
 public class PlayerSlotManager : RetangleSlotManager
 {
     public override void HandleSlotDrop(PointerEventData eventData, ISlotData droppedOn)

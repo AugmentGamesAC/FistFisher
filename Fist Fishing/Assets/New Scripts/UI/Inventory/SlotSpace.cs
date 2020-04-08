@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// handles drop events for slots
+/// </summary>
 public class SlotSpace :MonoBehaviour, IDropHandler
 {
     protected SlotManager m_SlotManager;

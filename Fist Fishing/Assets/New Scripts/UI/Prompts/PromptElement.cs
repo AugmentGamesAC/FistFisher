@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI elements for prompts
+/// </summary>
 public class PromptElement : CoreUIElement<PromptManager>
 {
     [SerializeField]

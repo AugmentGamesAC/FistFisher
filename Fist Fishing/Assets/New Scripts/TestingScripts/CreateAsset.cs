@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// tests for how to spawn items in editor
+/// </summary>
 [System.Serializable]
 public class CreateAsset : MonoBehaviour
 {

@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// slot manager for the shops
+/// </summary>
 public class ShopSlotManager : RetangleSlotManager
 {
     [System.Serializable]

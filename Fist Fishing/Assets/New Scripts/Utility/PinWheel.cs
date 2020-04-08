@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// class for pinwheels to expand upon interface
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class PinWheel<T> : IPinWheel<T>
 {
     [SerializeField]

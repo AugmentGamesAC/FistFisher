@@ -5,6 +5,9 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// applies and generates upgrades
+/// </summary>
 public class UpgradeManager : MonoBehaviour
 {
     //int appliedUpgrades;

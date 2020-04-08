@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// our third-person camera behaviour
+/// </summary>
 [System.Serializable]
 public class WarthogCameraBehaviour : CameraBehavior
 {

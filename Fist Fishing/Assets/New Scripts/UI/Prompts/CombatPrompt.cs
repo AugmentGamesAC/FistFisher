@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// specific prompt indicating combat possibility
+/// </summary>
 [System.Serializable]
 public class CombatPrompt : Prompt
 {

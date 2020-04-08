@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// stores info of items being dragged between slots
+/// </summary>
 public class DragTracker : MonoBehaviour
 {
     public PointerEventData eventData;

@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// parent class for all trackers
+/// has a max and an event to watch for changes
+/// </summary>
 [System.Serializable]
 public class StatTracker
 {

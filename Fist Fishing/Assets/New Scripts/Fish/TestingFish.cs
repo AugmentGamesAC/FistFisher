@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// class used for testing fish data
+/// </summary>
 [System.Serializable]
 public class TestingFish : IFishData
 {

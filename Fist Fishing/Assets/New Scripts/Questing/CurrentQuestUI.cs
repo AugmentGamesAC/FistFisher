@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI updater for the current quest elements
+/// </summary>
 public class CurrentQuestUI : CoreUIElement<QuestManager>
 {
     [SerializeField]

@@ -12,6 +12,9 @@ using UnityEngine.UI;
 /// </summary>
 public class CombatManager : MonoBehaviour
 {
+    /// <summary>
+    /// which stage of combat is currently processing
+    /// </summary>
     public enum CombatStates
     {
         OutofCombat,
@@ -22,6 +25,9 @@ public class CombatManager : MonoBehaviour
         CombatFinished
     }
 
+    /// <summary>
+    /// figuring out how much noise is present for additional fish spawning during combat
+    /// </summary>
     public enum noiseThreshold
     {
         Quiet,
@@ -101,6 +107,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// sets up turn orders and combatants and UI elements
+    /// </summary>
     public void StartCombat(bool didPlayerStartIt, IEnumerable<FishInstance> fishes, PlayerMotion player = default(PlayerMotion))
     {
         //Set any items from prior combat to false
@@ -167,12 +176,17 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        //can switch targets even when fish are attacking.                if (ALInput.GetAxisPress(ALInput.AxisType.Switch))
+        //can switch targets even when fish are attacking.
+
+        
+        if (ALInput.GetAxisPress(ALInput.AxisType.Switch))
         ChangeSelectedFish((ALInput.GetAxis(ALInput.AxisType.Switch)));
 
         if (m_keypressTimeout > 0)
-            m_keypressTimeout -= Time.deltaTime;
-        //listen to inputs only during AwaitingPlayerRound.
+            m_keypressTimeout -= Time.deltaTime;
+
+        //listen to inputs only during AwaitingPlayerRound.
+
         if (m_currentCombatState != CombatStates.AwaitingPlayerRound)
             return;
 
@@ -333,10 +347,13 @@ public class CombatManager : MonoBehaviour
     protected void MoveFishes(float distance)
     {
         //Increase distance to other fish.
-        for (int i = 0; i < m_FishSelection.Count; i++)
+        for (int i = 0; i < m_FishSelection.Count; i++)
+
         {
-            bool isTheSelectedOne = (i == m_FishSelection.Selection);
-            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
+            bool isTheSelectedOne = (i == m_FishSelection.Selection);
+
+            float value = Mathf.Max(0, m_FishSelection[i].CombatDistance + (isTheSelectedOne ? -distance : distance));
+
             m_FishSelection[i].CombatDistance.SetValue(value);
         }
     }
@@ -584,7 +601,8 @@ public class CombatManager : MonoBehaviour
     {
         m_currentCombatState = CombatStates.CombatFinished;
 
-        m_FishSelection.Clear();
+        m_FishSelection.Clear();
+
         m_roundQueue.Clear();
     }
 

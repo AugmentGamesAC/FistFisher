@@ -14,6 +14,11 @@ public enum Stats
     MovementSpeed,
     TurnSpeed
 }
+
+/// <summary>
+/// manager for all player stats,
+/// upgradable/modifiable
+/// </summary>
 [System.Serializable]
 public class PlayerStatManager
 {

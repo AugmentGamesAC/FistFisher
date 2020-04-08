@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// holds all core gameplay data other than Combat Information.
+/// holds all core gameplay data for fish other than Combat Information.
 /// </summary>
 [System.Serializable]
 public class FishInstance

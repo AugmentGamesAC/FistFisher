@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UI updaters for the selected fish in combat
+/// </summary>
 public class SelectedFishUI : CoreUIElement<FishCombatInfo>
 {
     [SerializeField]

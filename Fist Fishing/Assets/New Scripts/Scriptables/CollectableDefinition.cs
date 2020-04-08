@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// base definition for all collectable scriptable objects
+/// </summary>
 public class CollectableDefinition : ScriptableObject, ISpawnable
 {
     public Type SpawnableType => m_BasicCollectable.GetType();

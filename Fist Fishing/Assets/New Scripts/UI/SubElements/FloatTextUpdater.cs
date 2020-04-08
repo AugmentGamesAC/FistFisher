@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// takes a tracker with float values, 
+/// turns value into string when updating a text UI element
+/// </summary>
 [System.Serializable]
 public class FloatTextUpdater : CoreUIUpdater<FloatTracker,Text,float>
 {

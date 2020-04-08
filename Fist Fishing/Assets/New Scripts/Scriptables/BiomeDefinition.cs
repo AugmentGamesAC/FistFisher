@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// this class stores the data needed to instantiate it as an object from biome manager and then spawn stuff
+/// base definition for all biome scriptable objects
 /// </summary>
 [CreateAssetMenu(fileName = "New Biome Object", menuName = "Biome/Biome Definition")]
 public class BiomeDefinition : ScriptableObject

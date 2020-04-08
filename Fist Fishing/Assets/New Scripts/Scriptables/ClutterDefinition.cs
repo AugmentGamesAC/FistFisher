@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// base definition for all clutter scriptable objects
+/// </summary>
 [CreateAssetMenu(fileName = "New Clutter Object", menuName = "Clutter/Clutter Definition")]
 public class ClutterDefinition : ScriptableObject, ISpawnable
 {

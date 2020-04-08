@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script for all player data 
+/// </summary>
 [System.Serializable]
 public class PlayerInstance : MonoBehaviour, IPlayerData
 {

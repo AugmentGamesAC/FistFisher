@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
+/// <summary>
+/// player movement and camera interactions
+/// </summary>
 [System.Serializable]
 public class PlayerMotion : MonoBehaviour
 {

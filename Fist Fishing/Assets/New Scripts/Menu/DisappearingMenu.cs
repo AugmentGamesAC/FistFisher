@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// a menu that displays for a set duration before deactivating itself
+/// </summary>
 public class DisappearingMenu : Menu, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]

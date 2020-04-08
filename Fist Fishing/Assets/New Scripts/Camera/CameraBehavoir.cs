@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base for camera logic
+/// contains orbit points, refs to focus and camera, handles movement and rotation
+/// </summary>
 [System.Serializable]
 public class CameraBehavior
 {

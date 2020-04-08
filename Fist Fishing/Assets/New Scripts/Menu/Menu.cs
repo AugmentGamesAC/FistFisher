@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
+/// <summary>
+/// base class for all menus
+/// </summary>
 public class Menu : MonoBehaviour
 {
     /// <summary>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// base definition for all fish scriptable objects
+/// </summary>
 [CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {

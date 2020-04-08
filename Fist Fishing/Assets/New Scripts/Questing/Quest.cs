@@ -8,6 +8,10 @@ public enum QuestTypes
     Punching
 }
 
+/// <summary>
+/// base for all quests
+/// tracks if active and what task(s) is/are required for completion
+/// </summary>
 [System.Serializable]
 public class Quest
 {

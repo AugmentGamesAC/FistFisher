@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// manager for quests
+/// handles updates and current quest
+/// </summary>
 [System.Serializable]
 public class QuestManager : UITracker<QuestManager>
 {

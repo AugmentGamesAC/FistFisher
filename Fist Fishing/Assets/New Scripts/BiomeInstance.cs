@@ -311,7 +311,7 @@ public class BiomeInstance : MonoBehaviour
 
     /// <summary>
     /// given the list of a type, use the associated weights to randomly pick one of the options
-    /// then tell it to set up itself, apply a death event so this biome can track it, rotate, and reposition if needed
+    /// then tell it to set up itself, apply a death event so this biome can track it, rotate 
     /// </summary>
     /// <param name="list"></param>
     /// <returns></returns>
@@ -324,12 +324,34 @@ public class BiomeInstance : MonoBehaviour
                 GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
                 g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
                 g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
-                SpawningTweaks.AdjustForBottom(g);
+                BottomAdjust(g, possibbleSpawn);
                 return true;
             }
         return false;
     }
 
+    /// <summary>
+    /// tries to make the spawnable a probabilityspawn, then check if the object is set to span from bottom
+    /// if so, adjust the gameobject up
+    /// this is a prime example of something that should be redesigned
+    /// </summary>
+    private void BottomAdjust(GameObject g, ISpawnable possibbleSpawn)
+    {
+        ProbabilitySpawnFish f = possibbleSpawn as ProbabilitySpawnFish;
+        ProbabilitySpawnClutter c = possibbleSpawn as ProbabilitySpawnClutter;
+        ProbabilitySpawnCollectable e = possibbleSpawn as ProbabilitySpawnCollectable;
+        bool bottom = false;
+
+        if (f != null)
+            bottom = f.SpawnFromBottom;
+        else if (c != null)
+            bottom = c.SpawnFromBottom;
+        else if (e != null)
+            bottom = e.SpawnFromBottom;
+
+        if(bottom)
+            SpawningTweaks.AdjustForBottom(g);
+    }
 
     /// <summary>
     /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity

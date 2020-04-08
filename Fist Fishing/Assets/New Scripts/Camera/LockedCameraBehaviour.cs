@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// unused camera mode
+/// used for testing various camera controls
+/// </summary>
 public class LockedCameraBehaviour : CameraBehavior
 {
     //LookAt Point doesn't move

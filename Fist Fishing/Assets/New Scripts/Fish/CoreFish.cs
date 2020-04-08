@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+
+/// <summary>
+/// base script to attach to fish
+/// refs to fish definition and the biome it lives in
+/// </summary>
 public class CoreFish: MonoBehaviour, IDyingThing
 {
     [SerializeField]

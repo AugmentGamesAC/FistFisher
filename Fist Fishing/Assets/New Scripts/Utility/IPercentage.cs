@@ -1,4 +1,7 @@
-﻿public interface IPercentage
+﻿/// <summary>
+/// interface for all things percentagy
+/// </summary>
+public interface IPercentage
 {
     float Current { get; }
     StatTracker Max { get; }

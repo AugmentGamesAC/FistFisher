@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base implementation of slot data
+/// </summary>
 [System.Serializable]
 public class SlotData : UITracker<ISlotData> , ISlotData
 {

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// base definition for all collectable scriptable objects
+/// builds on CollectableDefinition by allowing actual harvesting
+/// </summary>
 [System.Serializable]
 [CreateAssetMenu(fileName = "New Collectables Object", menuName = "Collectables/Collectable Definition")]
 public class BasicCollectableDefinition : CollectableDefinition

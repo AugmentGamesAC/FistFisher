@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// combat data for fish
+/// </summary>
 [System.Serializable]
 public class FishCombatInfo : CombatInfo
 {

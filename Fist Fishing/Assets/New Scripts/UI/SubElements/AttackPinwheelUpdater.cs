@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// specific pinwheel updater for combat moves
+/// </summary>
 [RequireComponent(typeof(SelectedMoveUI))]
 public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
 {

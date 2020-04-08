@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// manager for all slots and logic for dragging stuff around or hovering
+/// </summary>
 public class SlotManager : MonoBehaviour
 {
     /// <summary>

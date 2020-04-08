@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// tracker for things with percentages
+/// </summary>
 [System.Serializable]
 public class PercentageTracker : UITracker<IPercentage>, IPercentage
 {

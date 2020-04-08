@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// definition for quests
+/// UI/Description/Rewards
+/// </summary>
 [System.Serializable]
 public class QuestDefinition
 {
