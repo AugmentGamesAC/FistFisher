@@ -3636,7 +3636,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 497687152}
 --- !u!114 &497687152
@@ -4879,7 +4880,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 663622157}
 --- !u!1 &674886782
@@ -5317,7 +5319,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 724232419}
 --- !u!1 &726410591 stripped
@@ -5640,7 +5643,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 0}
   m_textInput: '{0}/{1}'
@@ -6330,7 +6334,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 832352641}
 --- !u!114 &832352641
@@ -6985,7 +6990,6 @@ MonoBehaviour:
     values: []
   m_currentNoiseState: 0
   m_isItemActive: 0
-  m_item: {fileID: 0}
   m_aggressiveFishToSpawn: []
   m_deadFishPile: []
   ScriptablePlayerMoves:
@@ -6998,6 +7002,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7a3595cdeba20d44ad6c83323eef695, type: 2}
   - {fileID: 11400000, guid: 5e8e05d40a5a6d84a83bf01e14c5400e, type: 2}
   ScriptableItems: []
+  m_ActionButtons: []
   m_currentCombatState: 0
   m_puchingUI: {fileID: 518438521}
   m_keypressTimeout: 0
@@ -11693,7 +11698,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 1437159516}
 --- !u!1 &1458658045
@@ -13005,7 +13011,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 1626660637}
 --- !u!1 &1628317584
@@ -14788,23 +14795,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_clamsUpdater: {fileID: 741054170}
-  m_maxHealth: 500
-  m_maxOxygen: 200
   m_health:
     m_percent:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 500
+        m_max:
+          m_maxValue: 100
         m_current: 500
   m_oxygen:
     m_oxy:
       SerializeInvokes: 0
       displayPercentage:
-        m_max: 200
+        m_max:
+          m_maxValue: 100
         m_current: 100
     m_isUnderWater: 0
-    m_OxygenRegeneration: 20
-    m_OxygenDegeneration: 3
+    m_oxygenRegeneration:
+      m_maxValue: 0
+    m_oxygenConsumption:
+      m_maxValue: 0
     m_noOxygenDamage: 5
     m_OxygenTickFrequency: 1
     m_OxygenTickTimer: 1
@@ -14815,7 +14824,47 @@ MonoBehaviour:
   m_clams:
     m_value: 0
     SerializeInvokes: 0
+  m_playerStatManager:
+    m_baseMaxHealth: 0
+    m_baseStealth: 0
+    m_basePower: 0
+    m_baseMaxAir: 0
+    m_baseAirConsumption: 0
+    m_baseAirRestoration: 0
+    m_baseMoveSpeed: 0
+    m_baseTurnSpeed: 0
   m_playerMotion: {fileID: 2487089619964385255}
+  m_questManager:
+    m_value:
+      m_value:
+        m_value:
+          m_value:
+            m_value:
+              m_value:
+                m_value:
+                  SerializeInvokes: 0
+                  m_selectedQuestIndex: 0
+                SerializeInvokes: 0
+                m_questLine: []
+                m_selectedQuestIndex: 0
+              SerializeInvokes: 0
+              m_questLine: []
+              m_selectedQuestIndex: 0
+            SerializeInvokes: 0
+            m_questLine: []
+            m_selectedQuestIndex: 0
+          SerializeInvokes: 0
+          m_questLine: []
+          m_selectedQuestIndex: 0
+        SerializeInvokes: 0
+        m_questLine: []
+        m_selectedQuestIndex: 0
+      SerializeInvokes: 0
+      m_questLine: []
+      m_selectedQuestIndex: 0
+    SerializeInvokes: 0
+    m_questLine: []
+    m_selectedQuestIndex: 0
 --- !u!114 &2055129974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15119,6 +15168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a691aaaaec911a4d939e531951723ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_controllerToggle: 0
   FollowObject: {fileID: 2487089619964385254}
   CameraObject: {fileID: 2138587749}
   _currentState: 2
@@ -15228,7 +15278,8 @@ MonoBehaviour:
   m_tracker:
     SerializeInvokes: 0
     displayPercentage:
-      m_max: 0
+      m_max:
+        m_maxValue: 100
       m_current: 0
   m_UIElement: {fileID: 2143321836}
 --- !u!114 &2143321836
@@ -15365,6 +15416,7 @@ GameObject:
   - component: {fileID: 3675946901298371465}
   - component: {fileID: 3531480646582117909}
   - component: {fileID: 1011930940}
+  - component: {fileID: 48771811858106902}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start005
   m_TagString: Untagged
@@ -15372,6 +15424,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &48771811858106902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48771811858106901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: c4576cba799f005488e80f8c5da03b31, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &89283445228713289
 GameObject:
   m_ObjectHideFlags: 0
@@ -15401,6 +15467,7 @@ GameObject:
   - component: {fileID: 2401998437461682441}
   - component: {fileID: 7265233963908911438}
   - component: {fileID: 1011930927}
+  - component: {fileID: 163960900078040831}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northwest of Start_Deep Sea Biome002
   m_TagString: Untagged
@@ -15408,6 +15475,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &163960900078040831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163960900078040830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 142c636e389f5ef48886136b46e12e45, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &219708118249176761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15467,6 +15548,7 @@ GameObject:
   - component: {fileID: 9020520320313578298}
   - component: {fileID: 8028218786477044141}
   - component: {fileID: 1011930936}
+  - component: {fileID: 282469372424387852}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Start002
   m_TagString: Untagged
@@ -15474,6 +15556,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &282469372424387852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282469372424387851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 42d3abad2cba0be44ae0b0f252a065e6, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &298434609563273333
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15510,6 +15606,7 @@ GameObject:
   - component: {fileID: 787800714896106852}
   - component: {fileID: 6178472745315788697}
   - component: {fileID: 1011930921}
+  - component: {fileID: 340187292989369069}
   m_Layer: 0
   m_Name: Biome Trigger Box_Southwest of Start001
   m_TagString: Untagged
@@ -15517,6 +15614,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &340187292989369069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340187292989369068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 3b6ff5110cbdd5a4a84bf5463f2a41e0, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &396757996742749048
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15620,6 +15731,7 @@ GameObject:
   - component: {fileID: 6355501349920446898}
   - component: {fileID: 5226165446032294829}
   - component: {fileID: 1011930915}
+  - component: {fileID: 799844103723826102}
   m_Layer: 0
   m_Name: Biome Trigger Box_West of Start003
   m_TagString: Untagged
@@ -15627,6 +15739,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &799844103723826102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799844103723826101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 6273ddc551a3df746b98295e8d2b69e7, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &852961200986067042
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15661,6 +15787,7 @@ GameObject:
   - component: {fileID: 4730751208130346830}
   - component: {fileID: 5085802011610698538}
   - component: {fileID: 1011930932}
+  - component: {fileID: 911739378406356103}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northeast of Start
   m_TagString: Untagged
@@ -15668,6 +15795,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &911739378406356103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911739378406356102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: a5fd191b3dfe1094d8bcfac437a06efc, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &979890906240767202
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15696,7 +15837,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2965866820982932255}
-  m_RootOrder: 25
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1038570554445855687
 RectTransform:
@@ -15745,6 +15886,7 @@ GameObject:
   - component: {fileID: 8574950390340676407}
   - component: {fileID: 5393084635485292471}
   - component: {fileID: 1011930944}
+  - component: {fileID: 1171250653435051544}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start
   m_TagString: Untagged
@@ -15752,6 +15894,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1171250653435051544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171250653435051543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: fc36f550d234f74419d7536ea76d0b6b, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!4 &1237274580888824470
 Transform:
   m_ObjectHideFlags: 0
@@ -15778,6 +15934,7 @@ GameObject:
   - component: {fileID: 3314739141465853743}
   - component: {fileID: 8872856084509182409}
   - component: {fileID: 1011930933}
+  - component: {fileID: 1296705665938912368}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Starting Sea Floor002
   m_TagString: Untagged
@@ -15785,6 +15942,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1296705665938912368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296705665938912367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 0d97ac8003436eb45be3c755f09a2fcb, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &1373824704044807242
 GameObject:
   m_ObjectHideFlags: 0
@@ -16229,6 +16400,7 @@ GameObject:
   - component: {fileID: 252733661044649343}
   - component: {fileID: 8024677590203735467}
   - component: {fileID: 1011930943}
+  - component: {fileID: 2244515769977636544}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start002
   m_TagString: Untagged
@@ -16236,6 +16408,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2244515769977636544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244515769977636543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: a610d6322de547e45a618e34a5d654c9, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!114 &2264765215594626236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16342,10 +16528,10 @@ MonoBehaviour:
   m_sphereCastRadius: 10
   m_closestFish:
     m_fishData: {fileID: 0}
-  turningSpeedRef:
-    Value: 5
-  movementSpeedRef:
-    Value: 5
+  m_turningSpeedRef:
+    m_maxValue: 0
+  m_movementSpeedRef:
+    m_maxValue: 0
 --- !u!4 &2487089619964385272
 Transform:
   m_ObjectHideFlags: 0
@@ -16748,6 +16934,7 @@ GameObject:
   - component: {fileID: 6919760743688389179}
   - component: {fileID: 1513342622079017781}
   - component: {fileID: 1011930931}
+  - component: {fileID: 2686258369020170302}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northeast of Start001
   m_TagString: Untagged
@@ -16755,6 +16942,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2686258369020170302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686258369020170301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 740e543cf18e525498f95c4cde355d53, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!114 &2701002129062428306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1308089185585411890, guid: ab35b0a157a83cc4c9630b9011137d99,
@@ -16836,6 +17037,7 @@ GameObject:
   - component: {fileID: 6171856381711076826}
   - component: {fileID: 9081754976134549816}
   - component: {fileID: 1011930916}
+  - component: {fileID: 2832894019823518047}
   m_Layer: 0
   m_Name: Biome Trigger Box_West of Start002
   m_TagString: Untagged
@@ -16843,6 +17045,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2832894019823518047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832894019823518046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 0757e3bd0a534d144acf789d50c9b464, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &2878978454124459574
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16926,11 +17142,11 @@ Transform:
   - {fileID: 6541735948634879845}
   - {fileID: 1636939766157530687}
   - {fileID: 2662570040385548890}
-  - {fileID: 1024370601251252511}
   - {fileID: 7402986748806596258}
   - {fileID: 8410976247875850188}
   - {fileID: 8735634214924900589}
   - {fileID: 8592742351185380559}
+  - {fileID: 1024370601251252511}
   - {fileID: 4942914736387956993}
   - {fileID: 1883661104474619676}
   m_Father: {fileID: 5006512735816088970}
@@ -16956,6 +17172,7 @@ GameObject:
   - component: {fileID: 2369931023554126198}
   - component: {fileID: 219708118249176761}
   - component: {fileID: 1011930934}
+  - component: {fileID: 3113132436259359023}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Starting Sea Floor001
   m_TagString: Untagged
@@ -16963,6 +17180,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3113132436259359023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3113132436259359022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 439b831e76d793446abfe8ba3ce25a0b, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &3237883661975131459
 GameObject:
   m_ObjectHideFlags: 0
@@ -16993,6 +17224,7 @@ GameObject:
   - component: {fileID: 852961200986067042}
   - component: {fileID: 2680225578354894868}
   - component: {fileID: 1011930930}
+  - component: {fileID: 3291353411669209928}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northeast of Start002
   m_TagString: Untagged
@@ -17000,6 +17232,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3291353411669209928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291353411669209927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 142c636e389f5ef48886136b46e12e45, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &3314739141465853743
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17153,6 +17399,7 @@ GameObject:
   - component: {fileID: 1019442630058481199}
   - component: {fileID: 396757996742749048}
   - component: {fileID: 1011930913}
+  - component: {fileID: 3564260723554034016}
   m_Layer: 0
   m_Name: Deep Sea Biome Trigger Box002
   m_TagString: Untagged
@@ -17160,6 +17407,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3564260723554034016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564260723554034015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 5b4ae34bc674b6e41957f04846f99d01, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &3675946901298371465
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17233,6 +17494,7 @@ GameObject:
   - component: {fileID: 7822150556775904553}
   - component: {fileID: 8654226903137270006}
   - component: {fileID: 1011930924}
+  - component: {fileID: 3768072060262771079}
   m_Layer: 0
   m_Name: Biome Trigger Box_South of Start002
   m_TagString: Untagged
@@ -17240,6 +17502,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3768072060262771079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768072060262771078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 165883f6abcd5ed4bbd1d03e5c3d7647, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &3814119711430502930
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17369,6 +17645,7 @@ GameObject:
   - component: {fileID: 8488496275673527859}
   - component: {fileID: 2551546368688315786}
   - component: {fileID: 1011930942}
+  - component: {fileID: 3941035009414402715}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start003
   m_TagString: Untagged
@@ -17376,6 +17653,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3941035009414402715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941035009414402714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: e882246b88484b343ba6b508c676cee7, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!4 &3952367764940332310
 Transform:
   m_ObjectHideFlags: 0
@@ -17698,6 +17989,7 @@ GameObject:
   - component: {fileID: 298434609563273333}
   - component: {fileID: 7191457174299605059}
   - component: {fileID: 1011930926}
+  - component: {fileID: 4023500657848029997}
   m_Layer: 0
   m_Name: Biome Trigger Box_South of Start
   m_TagString: Untagged
@@ -17705,6 +17997,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4023500657848029997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4023500657848029996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 92415e1797c12a84ab7f96851098a6be, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!114 &4039770581331531723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17749,6 +18055,7 @@ GameObject:
   - component: {fileID: 1869536582039824695}
   - component: {fileID: 1717486987896823404}
   - component: {fileID: 1011930938}
+  - component: {fileID: 4142676635937699106}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Start
   m_TagString: Untagged
@@ -17756,6 +18063,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4142676635937699106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142676635937699105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: be062993616f8b4479269e92bf9364a5, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &4156432703145222679
 GameObject:
   m_ObjectHideFlags: 0
@@ -17802,6 +18123,7 @@ GameObject:
   - component: {fileID: 979890906240767202}
   - component: {fileID: 1784964128055996838}
   - component: {fileID: 1011930918}
+  - component: {fileID: 4226430825559332975}
   m_Layer: 0
   m_Name: Biome Trigger Box_West of Start
   m_TagString: Untagged
@@ -17809,6 +18131,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4226430825559332975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4226430825559332974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: d72027f82bfd0234da26571f3794a5c1, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &4262431059120432497
 GameObject:
   m_ObjectHideFlags: 0
@@ -17821,6 +18157,7 @@ GameObject:
   - component: {fileID: 8445269053784576077}
   - component: {fileID: 5691770636793078949}
   - component: {fileID: 1011930919}
+  - component: {fileID: 4262431059120432498}
   m_Layer: 0
   m_Name: Biome Trigger Box_West of Start004
   m_TagString: Untagged
@@ -17828,6 +18165,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4262431059120432498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4262431059120432497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: ee9180da390de7b4ab0815feca7bfe92, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &4301287502324987390
 GameObject:
   m_ObjectHideFlags: 0
@@ -17840,6 +18191,7 @@ GameObject:
   - component: {fileID: 4537417809169217003}
   - component: {fileID: 2878978454124459574}
   - component: {fileID: 1011930939}
+  - component: {fileID: 4301287502324987391}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start006
   m_TagString: Untagged
@@ -17847,6 +18199,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4301287502324987391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301287502324987390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 4d26902bb01fea749b9f58777a50cb36, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!4 &4306789639523555965
 Transform:
   m_ObjectHideFlags: 0
@@ -17892,35 +18258,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c4032c4df22eb44a51bc53cb227a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_forward: 119
-  m_backward: 0
-  m_goRight: 97
-  m_goLeft: 100
-  m_descend: 306
-  m_ascend: 0
-  m_sprint: 304
-  m_manualCamera: 0
-  m_rotateForward: 0
-  m_rotateBackwards: 0
-  m_rotateRight: 0
-  m_rotateLeft: 0
-  m_keyTarget: 122
-  m_forgetTarget: 120
-  m_punch: 113
-  m_mountBoat: 109
-  m_dismountBoat: 110
-  m_harvest: 101
-  m_throwBait: 112
-  m_craftBait: 98
-  m_toggleInventory: 105
-  m_toggleShop: 111
-  m_start: 32
-  m_attack: 0
-  m_item: 0
-  m_flee: 0
-  m_showOptionsPause: 27
-  m_cameraSwap: 0
-  m_playerLateralMovement: 1
+  m_currentKeyCodes: 
+  m_keyboardKeyCodes: 
+  m_controllerKeyCodes: 
+  m_controllerToggle: 0
+  m_invertToggle: 0
 --- !u!4 &4317289871419914990
 Transform:
   m_ObjectHideFlags: 0
@@ -18000,6 +18342,7 @@ GameObject:
   - component: {fileID: 4518960266620643582}
   - component: {fileID: 2509427596029800466}
   - component: {fileID: 1011930925}
+  - component: {fileID: 4482047530338872416}
   m_Layer: 0
   m_Name: Biome Trigger Box_South of Start001
   m_TagString: Untagged
@@ -18007,6 +18350,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4482047530338872416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482047530338872415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: c41f9cb3596ae174a920c46e410e6b5b, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!33 &4518960266620643582
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18243,6 +18600,7 @@ GameObject:
   - component: {fileID: 7337151575172961837}
   - component: {fileID: 8425782193105075974}
   - component: {fileID: 1011930920}
+  - component: {fileID: 4804420750974104288}
   m_Layer: 0
   m_Name: Biome Trigger Box_Starting Sea Floor
   m_TagString: Untagged
@@ -18250,6 +18608,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4804420750974104288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4804420750974104287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 301e5783ff572174ca144a57ed95316e, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!4 &4865424683049474776
 Transform:
   m_ObjectHideFlags: 0
@@ -18503,6 +18875,7 @@ GameObject:
   - component: {fileID: 5665774941988652586}
   - component: {fileID: 5722400996432297530}
   - component: {fileID: 1011930914}
+  - component: {fileID: 5158583973487192298}
   m_Layer: 0
   m_Name: Deep Sea Biome Trigger Box
   m_TagString: Untagged
@@ -18510,6 +18883,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5158583973487192298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5158583973487192297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: ff589e739ede7e640ac1f5963f8fc4a6, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &5167398436973512361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18706,6 +19093,7 @@ GameObject:
   - component: {fileID: 2813870642764013801}
   - component: {fileID: 3814119711430502930}
   - component: {fileID: 1011930929}
+  - component: {fileID: 5356395827626438060}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northwest of Start_Deep Sea Biome
   m_TagString: Untagged
@@ -18713,6 +19101,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5356395827626438060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356395827626438059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 4d5ad75808ceb9f47b54e4b2120c71ce, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &5393084635485292471
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18915,7 +19317,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.9000244
+      value: -6.899994
       objectReference: {fileID: 0}
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
@@ -19356,6 +19758,7 @@ GameObject:
   - component: {fileID: 1840656254865249892}
   - component: {fileID: 8926037462700472599}
   - component: {fileID: 1011930941}
+  - component: {fileID: 6188846903904256327}
   m_Layer: 0
   m_Name: Biome Trigger Box_East of Start004
   m_TagString: Untagged
@@ -19363,6 +19766,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6188846903904256327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188846903904256326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: ad6d2125bd4e363468fcbefb18eee4bd, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &6332739849364150393
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19576,6 +19993,7 @@ GameObject:
   - component: {fileID: 1398949737741044729}
   - component: {fileID: 6332739849364150393}
   - component: {fileID: 1011930917}
+  - component: {fileID: 6613498160362271050}
   m_Layer: 0
   m_Name: Biome Trigger Box_West of Start001
   m_TagString: Untagged
@@ -19583,6 +20001,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6613498160362271050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613498160362271049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 2158290067856ec4f9cecfc2a4bfa0b1, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1 &6803499017893601996
 GameObject:
   m_ObjectHideFlags: 0
@@ -19595,6 +20027,7 @@ GameObject:
   - component: {fileID: 7753846406450953262}
   - component: {fileID: 3680304536062982843}
   - component: {fileID: 1011930928}
+  - component: {fileID: 6803499017893601997}
   m_Layer: 0
   m_Name: Biome Trigger Box_Northwest of Start_Deep Sea Biome001
   m_TagString: Untagged
@@ -19602,6 +20035,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6803499017893601997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803499017893601996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 22d82d75ffdb9d04abc7fd1c7f6a3fa6, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!224 &6880655647181436953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19818,6 +20265,7 @@ GameObject:
   - component: {fileID: 2561899735432802267}
   - component: {fileID: 3323659667038142866}
   - component: {fileID: 1011930935}
+  - component: {fileID: 7305342222893228977}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Starting Sea Floor
   m_TagString: Untagged
@@ -19825,6 +20273,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7305342222893228977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7305342222893228976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 89dd814386d423449a65fbe22cab57a2, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1001 &7321673373289557121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19936,7 +20398,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2965866820982932255}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7468491206326078308
 Transform:
@@ -21392,6 +21854,7 @@ GameObject:
   - component: {fileID: 2318594582375062742}
   - component: {fileID: 5327403360574175007}
   - component: {fileID: 1011930922}
+  - component: {fileID: 8336115127169376146}
   m_Layer: 0
   m_Name: Biome Trigger Box_Southwest of Start
   m_TagString: Untagged
@@ -21399,6 +21862,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8336115127169376146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8336115127169376145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: bf78b7b43ee1bb249b4bbc2d13b9f701, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!1001 &8391428359960292422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21592,7 +22069,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2965866820982932255}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &8425782193105075974
 MeshRenderer:
@@ -21959,7 +22436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2965866820982932255}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &8654226903137270006
 MeshRenderer:
@@ -22030,7 +22507,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2965866820982932255}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8804532372034756917
 GameObject:
@@ -22062,6 +22539,7 @@ GameObject:
   - component: {fileID: 6103393585187650726}
   - component: {fileID: 2157744523621627252}
   - component: {fileID: 1011930937}
+  - component: {fileID: 8851095172566139980}
   m_Layer: 0
   m_Name: Biome Trigger Box_North of Start001
   m_TagString: Untagged
@@ -22069,6 +22547,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8851095172566139980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851095172566139979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: ed6a8194f16a3f7479e193b3600d9cb6, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &8872856084509182409
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22223,6 +22715,7 @@ GameObject:
   - component: {fileID: 5016359020638136156}
   - component: {fileID: 8565449779619200320}
   - component: {fileID: 1011930923}
+  - component: {fileID: 9034069826910610880}
   m_Layer: 0
   m_Name: Biome Trigger Box_Southeast of Start
   m_TagString: Untagged
@@ -22230,6 +22723,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9034069826910610880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9034069826910610879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 1e09a281cc29d5147819a8a1e7f0c6b9, type: 2}
+  m_showDebugSpawnCountMessages: 0
 --- !u!23 &9081754976134549816
 MeshRenderer:
   m_ObjectHideFlags: 0
