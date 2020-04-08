@@ -11,6 +11,7 @@ public class CoreFish: MonoBehaviour, IDyingThing
     public FishDefintion Defintion => m_defintion;
 
     protected MeshCollider m_biome;
+    public MeshCollider Home => m_biome;
     protected SkinnedMeshRenderer mesh;
 
     protected FishInstance m_Instance;

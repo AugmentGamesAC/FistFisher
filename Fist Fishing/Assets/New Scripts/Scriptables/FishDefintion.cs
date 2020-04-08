@@ -85,13 +85,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     //private GameObject m_thisObject = null;
     #endregion
 
-
-
-    public GameObject Spawn(MeshCollider m)
+    public Vector3 FindNewSpot(MeshCollider m)
     {
-        if (m == null)
-            return null;
-
         Vector3 pos = m_BaseModelReference.transform.position;
         float rad = m_BaseModelReference.GetComponent<Collider>().bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
@@ -100,8 +95,17 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         {
             pos = BiomeInstance.FindValidPosition(m);
         } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
+        return pos;
+    }
 
-        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this,m, pos, Quaternion.identity);
+    public GameObject Spawn(MeshCollider m)
+    {
+        if (m == null)
+            return null;
+
+        Vector3 pos = FindNewSpot(m);
+
+        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, m, pos, Quaternion.identity);
 
         return default;
     }
