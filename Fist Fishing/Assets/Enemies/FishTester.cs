@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class FishTester : MonoBehaviour
 {
+    [SerializeField]
     FishDefintion fishDefintion;
+    [SerializeField]
     MeshCollider targetMesh;
     // Start is called before the first frame update
     void Start()

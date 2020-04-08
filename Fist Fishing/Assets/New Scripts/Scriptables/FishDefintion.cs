@@ -88,7 +88,9 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     public Vector3 FindNewSpot(MeshCollider m)
     {
         Vector3 pos = m_BaseModelReference.transform.position;
-        float rad = m_BaseModelReference.GetComponent<Collider>().bounds.size.x / 2.0f;
+        var myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
+
+        float rad = myRef.bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
         do
