@@ -40,7 +40,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     #region IItem
 
     [SerializeField]
-    protected int m_stackSize; 
+    protected int m_stackSize;
     public int StackSize => m_stackSize;
     [SerializeField]
     protected int m_iD;
@@ -92,40 +92,16 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         if (m == null)
             return null;
 
-        Transform pos = m_BaseModelReference.transform;
+        Vector3 pos = m_BaseModelReference.transform.position;
         float rad = m_BaseModelReference.GetComponent<Collider>().bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
-
         do
         {
-            pos.position = BiomeInstance.FindValidPosition(m);
+            pos = BiomeInstance.FindValidPosition(m);
+        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
 
-        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos.position, rad, out hit));
-
-
-        /**********************************************************************************************/
-        /**********************************NEW FISH STUFF NEEDED HERE**********************************/
-        /**********************************************************************************************/
-        //CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
-        //coreFish.Init(this, this);
-        //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        //GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayReference);
-        //HPRoot.transform.SetParent(FishRoot.transform);
-
-
-        /**********************************************************************************************/
-        /**********************************************************************************************/
-        /**********************************************************************************************/
-
-        if (m == null)
-            return null;
-
-
-
-
-       // coreFish.Init(this, m);
-
+        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, pos, Quaternion.identity);
 
         return default;
     }
@@ -151,11 +127,29 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     public GameObject Instantiate()
     {
-        throw new System.NotImplementedException();
+        GameObject returnVal;
+
+        returnVal = Instantiate(m_BasicFish);
+
+        AttachParts(returnVal);
+        return returnVal;
     }
 
     public GameObject Instantiate(Vector3 position, Quaternion rotation)
     {
-        throw new System.NotImplementedException();
+        GameObject returnVal;
+
+        returnVal = Instantiate(m_BasicFish, position, rotation);
+
+        AttachParts(returnVal);
+        return returnVal;
+    }
+
+    protected void AttachParts(GameObject newInstance)
+    {
+        newInstance.GetComponent<SkinnedMeshRenderer>().material = Skin;
+        var animationBlock = Instantiate(m_BaseModelReference, newInstance.transform);
+        Animator swimcontroler = animationBlock.GetComponent<Animator>();
+        swimcontroler.runtimeAnimatorController = m_AnimatorController;
     }
 }

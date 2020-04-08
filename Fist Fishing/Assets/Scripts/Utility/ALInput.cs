@@ -70,7 +70,7 @@ public class ALInput : MonoBehaviour
     /// <summary>
     /// Opens Menu with keyboard (This is always an option because it's jarring otherwise)
     /// </summary>
-    public static KeyCode MenuKeyboard { get { hasInstance(); return Instance.m_currentKeyCodes[8]; } }
+    //public static KeyCode MenuKeyboard { get { hasInstance(); Debug.Log(Instance.m_currentKeyCodes.Length);  return Instance.m_currentKeyCodes[8]; } }
     #endregion keycodes
 
 
