@@ -88,7 +88,13 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     public Vector3 FindNewSpot(MeshCollider m)
     {
         Vector3 pos = m_BaseModelReference.transform.position;
-        var myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
+        Debug.Log(m_BaseModelReference);
+        SkinnedMeshRenderer myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
+
+        Debug.Log(myRef);
+        if (myRef == null)
+            myRef = m_BaseModelReference.GetComponentInChildren<SkinnedMeshRenderer>();
+        Debug.Log(myRef);
 
         float rad = myRef.bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
@@ -105,9 +111,12 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         if (m == null)
             return null;
 
-        Vector3 pos = FindNewSpot(m);
+        Vector3 pos = m.gameObject.transform.position;
 
         CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, m, pos, Quaternion.identity);
+        Debug.Log(coreFish);
+        pos = FindNewSpot(m);
+        coreFish.transform.position = pos;
 
         return default;
     }
