@@ -105,7 +105,7 @@ public class Configurations : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if ((ALInput.GetKeyDown(ALInput.Menu) || ALInput.GetKeyDown(ALInput.MenuKeyboard))&& NewMenuManager.CurrentMenu!=MenuScreens.MainMenu)
+        if (ALInput.GetKeyDown(ALInput.Menu) && NewMenuManager.CurrentMenu!=MenuScreens.MainMenu)
         {
             if (NewMenuManager.CurrentMenu == MenuScreens.OptionsMenu)
             {
