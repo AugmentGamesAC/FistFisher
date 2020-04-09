@@ -83,6 +83,8 @@ public class BiomeInstance : MonoBehaviour
             m_areThereAnyFish = true;
         if (m_areThereAnyFish)
             m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
+
+        Debug.Log(m_myInstructions.Name + ": Fish: " + m_areThereAnyFish + " - Collectables: " + m_areThereAnyCollectables);
     }
 
     /// <summary>
@@ -319,39 +321,47 @@ public class BiomeInstance : MonoBehaviour
         if ((m_memberCount.Values.Sum() - m_memberCount[m_clutterProbSpawn]) >= m_myInstructions.MaxNumberOfSpawns) //it was counting clutter in spawns... not originally intended
             return;
 
-        Debug.Log(m_areThereAnyCollectables + " - " + m_areThereAnyFish);
+        //Debug.Log(m_areThereAnyCollectables + " - " + m_areThereAnyFish);
 
         if (m_areThereAnyCollectables && !m_areThereAnyFish) //only collectables
         {
-            if (Configurations.Instance.TurnOffBiomeCollectablesEntirely)
-                return;
-            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            //Debug.Log("collectables");
+            if (!Configurations.Instance.TurnOffBiomeCollectablesEntirely)
+            { 
+                m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+                Debug.Log("collectables spawn attempt");
+            }
             return;
         }
 
         FishTypeToSpawn ft = DetermineFishTypeToSpawn();
         if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
         {
-
-            if (Configurations.Instance.TurnOffBiomeFishEntirely)
+            //Debug.Log("fish");
+            if (!Configurations.Instance.TurnOffBiomeFishEntirely)
+            {
+                SpawnFishFromType(ft);
+                Debug.Log("fish spawn attempt");
+            }
                 return;
-            SpawnFishFromType(ft);
-            return;
         }
 
         if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
         {
-            if (m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn]))
+            //Debug.Log("collectables+fish");
+            if (m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn])
+                && (!Configurations.Instance.TurnOffBiomeCollectablesEntirely))
             {
-                if (Configurations.Instance.TurnOffBiomeCollectablesEntirely)
-                    return;
+                Debug.Log("collectables spawn attempt");
                 m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
             }
             else
             {
-                if (Configurations.Instance.TurnOffBiomeFishEntirely)
-                    return;
-                SpawnFishFromType(ft);
+                if (!Configurations.Instance.TurnOffBiomeFishEntirely)
+                {
+                    Debug.Log("fish spawn attempt");
+                    SpawnFishFromType(ft);
+                }
             }
             return;
         }
@@ -371,7 +381,7 @@ public class BiomeInstance : MonoBehaviour
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
                 GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
-                Debug.Log(g);
+                //Debug.Log(g);
                 g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
                 BottomAdjust(g, possibbleSpawn);
                 IDyingThing d = g.GetComponent<IDyingThing>();

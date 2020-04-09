@@ -19,10 +19,14 @@ MonoBehaviour:
   m_collectables:
   - {fileID: 11400000, guid: 654983e6e533b2f42ac5f9a00ebb70d0, type: 2}
   m_aggressiveFish: []
-  m_mehFish: []
-  m_preyFish: []
+  m_mehFish:
+  - {fileID: 11400000, guid: d3102c29a0f9f514cae64ed4c9018a36, type: 2}
+  - {fileID: 11400000, guid: 2e7548d213fa89c408d258c73180d805, type: 2}
+  m_preyFish:
+  - {fileID: 11400000, guid: 00ad33132ca61144f8609b37395ff403, type: 2}
   m_name: test biome
-  m_boatMapColour: {r: 0, g: 0, b: 0, a: 0}
+  m_boatMapColourOverride: {r: 0, g: 0, b: 0, a: 0}
+  m_boatMapMaterial: {fileID: 2100000, guid: 114e002a9815c0c4ea3c6ce1ae2ab043, type: 2}
   m_timeBetweenSpawns: 2
   m_textScale: 1
   m_textHeight: 10
