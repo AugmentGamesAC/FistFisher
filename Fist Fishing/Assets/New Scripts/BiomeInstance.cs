@@ -103,34 +103,50 @@ public class BiomeInstance : MonoBehaviour
         {
             r = gameObject.AddComponent<MeshRenderer>();
 
-            GameObject p = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            p.SetActive(false);
-            Material mat = p.GetComponent<MeshRenderer>().sharedMaterial;
-            DestroyImmediate(p);
-            r.material = mat;
+            if (Definiton.BoatMapMaterial == null)
+            {
+                GameObject p = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                p.SetActive(false);
+                Material mat = p.GetComponent<MeshRenderer>().sharedMaterial;
+                DestroyImmediate(p);
+                r.material = mat;
+            }
+            else
+            {
+                r.material = Definiton.BoatMapMaterial;
+            }
+        }
+        else
+        {
+            r.material = Definiton.BoatMapMaterial;
         }
         //r.material.color = Definiton.BoatMapColour;
-        r.material.SetColor("_BaseColor", Definiton.BoatMapColour); //please note for later. this was frustrating.
+        //r.material.SetColor("_BaseColor", Definiton.BoatMapColourOverride); //please note for later. this was frustrating.
 
         //snippet taken from https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
         //as setting transparency at runtime is a nightmare it seems
-        /*r.material.SetFloat("_Surface", 1.0f);
-        r.material.SetOverrideTag("RenderType", "Transparent");
-        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
-        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-        r.material.SetInt("_ZWrite", 0);
-        r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-        r.material.SetShaderPassEnabled("ShadowCaster", false);*/
-        r.material.SetFloat("_Surface", 0.0f);
-        r.material.SetOverrideTag("RenderType", "");
-        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-        r.material.SetInt("_ZWrite", 1);
-        r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        r.material.renderQueue = -1;
-        r.material.SetShaderPassEnabled("ShadowCaster", true);
-
+        /*if (!Definiton.BoatMapOpaque)
+        {
+            r.material.SetFloat("_Surface", 1.0f);
+            r.material.SetOverrideTag("RenderType", "Transparent");
+            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
+            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            r.material.SetInt("_ZWrite", 0);
+            r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            r.material.SetShaderPassEnabled("ShadowCaster", false);
+        }
+        else
+        {
+            r.material.SetFloat("_Surface", 0.0f);
+            r.material.SetOverrideTag("RenderType", "");
+            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            r.material.SetInt("_ZWrite", 1);
+            r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            r.material.renderQueue = -1;
+            r.material.SetShaderPassEnabled("ShadowCaster", true);
+        }*/
         r.enabled = true;
     }
 

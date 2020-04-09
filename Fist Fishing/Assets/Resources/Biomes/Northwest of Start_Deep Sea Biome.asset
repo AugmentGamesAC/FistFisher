@@ -28,7 +28,9 @@ MonoBehaviour:
   m_preyFish:
   - {fileID: 11400000, guid: 7a6ee5eb7d51d804d9925c911221c0cf, type: 2}
   m_name: Deep Sea
-  m_boatMapColour: {r: 0.5019608, g: 0, b: 0.5019608, a: 0}
+  m_boatMapColourOverride: {r: 0.5019608, g: 0, b: 0.5019608, a: 0}
+  m_boatMapMaterial: {fileID: 2100000, guid: aab16de71e2b1af418fa7e438c731e85, type: 2}
+  m_boatMapOpaque: 1
   m_timeBetweenSpawns: 2
   m_textScale: 2
   m_textHeight: 50
