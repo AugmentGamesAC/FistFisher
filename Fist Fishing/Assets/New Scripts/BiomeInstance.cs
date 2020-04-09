@@ -452,7 +452,8 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
-        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+        Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+        return (hit.point != Vector3.zero);
     }
 
     /// <summary>
