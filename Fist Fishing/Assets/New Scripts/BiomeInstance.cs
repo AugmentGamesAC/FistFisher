@@ -145,6 +145,9 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     public void Update()
     {
+
+        if (NewMenuManager.PausedActiveState)
+            return;
         //Debug.Log("Biome update: " + currentCooldown);
         if (currentCooldown < 0)
         {

@@ -92,16 +92,10 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void Update()
     {
-        /*if (ALInput.GetKeyDown(ALInput.Abzu))
-            SwitchState(CameraState.Abzu);
-        else if (ALInput.GetKeyDown(ALInput.Locked))
-            SwitchState(CameraState.Locked);
-        else*//* if (ALInput.GetKeyDown(ALInput.Warthog))
-            SwitchState(CameraState.Warthog);
-        else if (ALInput.GetKeyDown(ALInput.FirstPerson))
-            SwitchState(CameraState.FirstPerson);*/
+        if (NewMenuManager.PausedActiveState)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace))
             m_controllerToggle = !m_controllerToggle;
 
         if (ALInput.GetKeyDown(ALInput.Toggle))
