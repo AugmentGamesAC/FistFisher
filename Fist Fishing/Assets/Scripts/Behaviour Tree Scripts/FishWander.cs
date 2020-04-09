@@ -24,7 +24,7 @@ public class FishWander : FishTask
 
     public void ChooseRandomLocation()
     {
-        CoreFish me = m_me.GetComponent<CoreFish>();
+        BasicFish2 me = m_me.GetComponent<BasicFish2>();
         if (me == default)
         {
             m_target.transform.position = Vector3.zero;
