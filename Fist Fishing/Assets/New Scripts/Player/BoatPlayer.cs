@@ -88,10 +88,10 @@ public class BoatPlayer : MonoBehaviour
         ResolveRotation();
         if (ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0.2f)
         {
-            RaycastHit hit;
+            //RaycastHit hit;
             Vector3 forwardmovement = transform.forward * Time.deltaTime * movementSpeedRef;
-            Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
-            if(hit.distance > forwardmovement.magnitude)
+            //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+            //if(hit.distance > forwardmovement.magnitude)
                 transform.position += forwardmovement;
         }
     }
