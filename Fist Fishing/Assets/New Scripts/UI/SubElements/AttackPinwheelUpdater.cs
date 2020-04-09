@@ -27,8 +27,10 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
     {
         if (index < 1 || index > m_tabs.Count)
             return;
-       
-        m_tracker.SetSelectedOption(index);
+        if (m_tracker == null)
+            Debug.Log("Tracker not set");
+        else
+            m_tracker.SetSelectedOption(index);
     }
 
 
