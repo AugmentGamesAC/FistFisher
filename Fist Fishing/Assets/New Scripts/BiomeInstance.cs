@@ -111,7 +111,7 @@ public class BiomeInstance : MonoBehaviour
         }
         //r.material.color = Definiton.BoatMapColour;
         r.material.SetColor("_BaseColor", Definiton.BoatMapColour); //please note for later. this was frustrating.
-
+        r.enabled = true;
         //snippet taken from https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
         //as setting transparency at runtime is a nightmare it seems
         r.material.SetFloat("_Surface", 1.0f);
