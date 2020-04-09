@@ -23,6 +23,8 @@ public class BoatPlayer : MonoBehaviour
     [SerializeField]
     protected PlayerMotion m_validPlayer;
 
+    protected float m_dismountcooldown = 1.0f;
+
     #region controlsValidPlayerRef;
     protected void OnTriggerEnter(Collider other)
     {
@@ -58,11 +60,12 @@ public class BoatPlayer : MonoBehaviour
 
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
-
+        else if (m_dismountcooldown > 0)
+            m_dismountcooldown -= Time.deltaTime;
         /*if (m_validPlayer == default) // no player around no action
             return;*/
 
-        if (ALInput.GetKeyDown(ALInput.Action) /*||(!m_isMounted && ALInput.GetKeyDown(ALInput.MouseAction))*/) //handle mounting
+        if (ALInput.GetKeyDown(ALInput.Action) && m_dismountcooldown <=0 /*||(!m_isMounted && ALInput.GetKeyDown(ALInput.MouseAction))*/) //handle mounting
             MountAction();
 
         if (m_validPlayer == default) // no player around no action
