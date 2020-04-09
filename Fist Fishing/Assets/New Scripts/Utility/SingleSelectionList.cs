@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// class to expand and implement single selection list
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class SingleSelectionList<T> : ISingleSelectionList<T>
 {
     protected List<T> m_Items = new List<T>();

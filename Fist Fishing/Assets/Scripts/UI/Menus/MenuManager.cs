@@ -213,7 +213,7 @@ public class MenuManager : MonoBehaviour
 
         if (m_currentMenus == Menus.MainMenu)
         {
-            if (ALInput.GetKeyDown(ALInput.Start))
+            if (ALInput.GetKeyDown(ALInput.Action))
             {
                 /*if (!(m_currentMenus == Menus.MainMenu))
                     ActivateMenu(Menus.ShopMenu);
@@ -224,7 +224,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+            if (ALInput.GetKeyDown(ALInput.Inventory))
             {
                 if (!(m_currentMenus == Menus.SwimmingInventory))
                 {
@@ -235,7 +235,7 @@ public class MenuManager : MonoBehaviour
                     ActivateMenu(Menus.NotSet);
             }
 
-            if (ALInput.GetKeyDown(ALInput.MountBoat))
+            if (ALInput.GetKeyDown(ALInput.Action))
             {
                 if (m_player.GetComponent<PlayerMovement>().m_isMounted)
                 {
@@ -247,7 +247,7 @@ public class MenuManager : MonoBehaviour
                         ActivateMenu(Menus.NotSet);
                 }
             }
-            else if (ALInput.GetKeyDown(ALInput.DismountBoat))
+            else if (ALInput.GetKeyDown(ALInput.Action))
             {
                 if (!m_player.GetComponent<PlayerMovement>().m_isMounted)
                 {
@@ -261,7 +261,7 @@ public class MenuManager : MonoBehaviour
             }
 
 
-            if (ALInput.GetKeyDown(ALInput.ToggleShop))
+            if (ALInput.GetKeyDown(ALInput.Toggle))
             {
                 if (!(m_currentMenus == Menus.ShopMenu))
                 {

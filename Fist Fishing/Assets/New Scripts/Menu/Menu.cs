@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
+/// <summary>
+/// base class for all menus
+/// </summary>
 public class Menu : MonoBehaviour
 {
     /// <summary>
@@ -13,7 +15,7 @@ public class Menu : MonoBehaviour
     public void Show(bool activeState)
     {
         gameObject.SetActive(activeState);
-        var something = GetComponentsInChildren<DisapearingMenu>().Select(x => { x.Show(false); return 1; });
+        var something = GetComponentsInChildren<DisappearingMenu>().Select(x => { x.Show(false); return 1; });
     }
     
 }

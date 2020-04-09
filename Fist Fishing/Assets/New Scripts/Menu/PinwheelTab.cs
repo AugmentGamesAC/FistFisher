@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// slices of a pinwheel that check if they're the activating one
+/// </summary>
 [RequireComponent(typeof(Image))]
 public class PinwheelTab : MonoBehaviour, IPointerClickHandler
 {
@@ -15,6 +18,7 @@ public class PinwheelTab : MonoBehaviour, IPointerClickHandler
     Color defaultColor = Color.white;
     Color selectedColor = Color.grey;
     bool m_isSelected;
+   
     AttackPinwheelUpdater m_manager;
 
     public void SetSelected(bool isSelected)
@@ -37,4 +41,5 @@ public class PinwheelTab : MonoBehaviour, IPointerClickHandler
         if (m_manager != null)
             m_manager.SetValue(ID);
     }
+   
 }

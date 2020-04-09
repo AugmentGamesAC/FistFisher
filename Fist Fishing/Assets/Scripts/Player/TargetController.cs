@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this is applied to player and allows for targetting of other objects in world to then apply actions to them
+/// </summary>
 public class TargetController : MonoBehaviour
 {
     public List<GameObject> m_fishInViewList;
@@ -10,7 +13,7 @@ public class TargetController : MonoBehaviour
 
     public GameObject m_targetPrefab;
 
-    public Player m_playerRef;
+    public PlayerMotion m_playerRef;
 
     public ThirdPersonCamera m_camera;
 
@@ -38,7 +41,7 @@ public class TargetController : MonoBehaviour
         m_targetPrefab.SetActive(false);
     }
 
-    // Update is called once per frame
+    // Update is called once per frame. This creates a list of fish in view and figures out the closest one to then targets
     void Update()
     {
         m_fishInViewCount = m_fishInViewList.Count;
@@ -51,11 +54,11 @@ public class TargetController : MonoBehaviour
             return;
         }
 
-        if (ALInput.GetKeyDown(ALInput.KeyTarget))
-            ToggleTargeting();
+        //if (ALInput.GetKeyDown(ALInput.KeyTarget))
+        //    ToggleTargeting();
 
-        if (ALInput.GetKeyDown(ALInput.ForgetTarget))
-            SelectNextTarget();
+        //if (ALInput.GetKeyDown(ALInput.ForgetTarget))
+        //    SelectNextTarget();
 
 
         if (m_targetedFish == null)
@@ -71,6 +74,7 @@ public class TargetController : MonoBehaviour
         LockOn();
     }
 
+    //once targeting closest fish in code, apply game behaviour 
     private void LateUpdate()
     {
         if(m_targetedFish == null)

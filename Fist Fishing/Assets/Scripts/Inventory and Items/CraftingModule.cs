@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
+/// <summary>
+/// old script that allowed player to turn coral into bait back when crafting was a planned feature
+/// </summary>
 public class CraftingModule : MonoBehaviour
 {
 
     [SerializeField]
-    protected Player m_playerRef;
-    public Player PlayerRef { get { return m_playerRef; } }
+    protected PlayerMotion m_playerRef;
+    public PlayerMotion PlayerRef { get { return m_playerRef; } }
 
     [SerializeField]
     protected Inventory m_inventoryRef;
@@ -25,7 +27,7 @@ public class CraftingModule : MonoBehaviour
     void Start()
     {
         if (m_playerRef == null)
-            m_playerRef = gameObject.GetComponent<Player>();
+            m_playerRef = gameObject.GetComponent<PlayerMotion>();
         if (m_inventoryRef == null)
             m_inventoryRef = gameObject.GetComponent<Inventory>();
         if (m_playerMovementRef == null)
@@ -36,11 +38,11 @@ public class CraftingModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (ALInput.GetKeyDown(ALInput.CraftBait) && m_playerMovementRef.m_isMounted==true) //can craft if mounted
-        {
-            CraftBait();
-        }
+        //Old code
+        //if (ALInput.GetKeyDown(ALInput.CraftBait) && m_playerMovementRef.m_isMounted==true) //can craft if mounted
+        //{
+        //    CraftBait();
+        //}
     }
 
     public void CraftBait()

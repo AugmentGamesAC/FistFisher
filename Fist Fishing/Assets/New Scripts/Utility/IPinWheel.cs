@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
-
+/// <summary>
+/// interface for pinwheels (circular multi-option selectable things)
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public interface IPinWheel<T>
 {
     int SelectedSlot { get; }

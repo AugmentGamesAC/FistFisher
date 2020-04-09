@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
-[RequireComponent(typeof(Inventory))]
+/// <summary>
+/// attached to player, handles the harvestable target object and adds harvestables to inventory when harvesting
+/// </summary>
 public class Harvester : MonoBehaviour
 {
-    private Inventory m_invRef;
-
-
     public GameObject m_targetPrefab;
     public float m_targetCloseness = 0.9f;
 
@@ -21,7 +19,6 @@ public class Harvester : MonoBehaviour
     protected List<GameObject> m_harvestablesInView = new List<GameObject>();
     public List<GameObject> HarvestablesInView { get { return m_harvestablesInView; } }
 
-    //public GameObject m_targetted;
     public bool m_targetingIsActive;
 
     [SerializeField]
@@ -32,7 +29,6 @@ public class Harvester : MonoBehaviour
     void Start()
     {
         m_targetingIsActive = false;
-        m_invRef = gameObject.GetComponent<Inventory>();
         m_targetPrefab = Instantiate(m_targetPrefab, new Vector3(0, -99.9f, 0), Quaternion.identity);
         m_targetPrefab.SetActive(false);
 
@@ -59,15 +55,13 @@ public class Harvester : MonoBehaviour
             {
                 Vector3 harvestablePosition = Camera.main.WorldToViewportPoint(hits[i].gameObject.transform.position);
                 bool onScreen = harvestablePosition.z > 0 && harvestablePosition.x > 0 && harvestablePosition.x < 1 && harvestablePosition.y > 0 && harvestablePosition.y < 1;
-                if(onScreen)
+                if (onScreen)
                 {
                     HarvestablesInView.Add(hits[i].gameObject);
                 }
             }
             i++;
         }
-
-
     }
 
     /// <summary>
@@ -82,7 +76,7 @@ public class Harvester : MonoBehaviour
 
         GameObject g = null;
 
-        foreach(GameObject h in m_harvestablesInView)
+        foreach (GameObject h in m_harvestablesInView)
         {
             float distH = (h.transform.position - gameObject.transform.position).sqrMagnitude;
             if (distH <= dist)
@@ -119,9 +113,9 @@ public class Harvester : MonoBehaviour
 
             m_targetPrefab.gameObject.transform.position = newPos;
         }
-        
 
-        if (m_toHarvest!=null && ALInput.GetKeyDown(ALInput.Harvest))
+
+        if (m_toHarvest != null && ( ALInput.GetKeyDown(ALInput.Action) || ALInput.GetKeyDown(ALInput.MouseAction)))
         {
             Harvest();
         }
@@ -136,8 +130,15 @@ public class Harvester : MonoBehaviour
 
         float sqrLen = offsetPlayer.sqrMagnitude;
 
-        if (diffAngle <= m_angleToHarvest && sqrLen < (m_rangeToHarvest * m_rangeToHarvest))
-            m_invRef.AddToInventory(m_toHarvest);
-    }
+        Harvestable harvestable = m_toHarvest.GetComponent<Harvestable>();
 
+        if (harvestable == default)
+            return;
+
+        if (!(diffAngle <= m_angleToHarvest && sqrLen < (m_rangeToHarvest * m_rangeToHarvest)))
+            return;
+
+       // m_toHarvest.SetActive(false);
+        PlayerInstance.Instance.PlayerInventory.AddItem(harvestable, 1);
+    }
 }

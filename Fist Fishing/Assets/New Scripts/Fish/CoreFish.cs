@@ -1,39 +1,37 @@
 ﻿using UnityEngine;
-public class CoreFish: MonoBehaviour, IFishData
+
+/// <summary>
+/// base script to attach to fish
+/// refs to fish definition and the biome it lives in
+/// </summary>
+public class CoreFish: MonoBehaviour, IDyingThing
 {
-    #region IFishData
     [SerializeField]
-    protected float m_damage;
-    public float Damage => m_damage;
+    protected FishDefintion m_defintion;
+    public FishDefintion Defintion => m_defintion;
 
-    [SerializeField]
-    protected float m_combatSpeed;
-    public float CombatSpeed => m_combatSpeed;
-    [SerializeField]
-    protected float m_attackRange;
-    public float AttackRange => m_attackRange;
+    protected MeshCollider m_biome;
+    public MeshCollider Home => m_biome;
+    protected SkinnedMeshRenderer mesh;
 
-    [SerializeField]
-    protected FishHealth m_Health;
-    public FishHealth Health => m_Health;
+    protected FishInstance m_Instance;
 
-    [SerializeField]
-    protected FishBrain.FishClassification m_fishClassification;
-    public FishBrain.FishClassification FishClassification => m_fishClassification;
-    #endregion
-    #region IFishData IItem Overlap
-    public Sprite IconDisplay => m_item.IconDisplay;
-
-    public IItem Item => m_item;
-
-    public float MaxHealth => throw new System.NotImplementedException();
-    #endregion
-    protected IItem m_item;
-    
-    public void Init(IFishData fishData, IItem item)
+    public void Init(FishDefintion fishDefinition, MeshCollider biome)
     {
-        m_item = item;
-        throw new System.NotImplementedException();
+        m_biome = biome;
+
+        Prompt prompt = GetComponent<CombatPrompt>();
+        if (prompt == default)
+            prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(fishDefinition.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_Instance = new FishInstance(fishDefinition, prompt);
+        m_defintion = fishDefinition;
     }
 
+    public event Death Death
+    {
+        add { m_Instance.Health.OnMinimumHealthReached += value; }
+        remove { m_Instance.Health.OnMinimumHealthReached -= value; }
+    }
 }

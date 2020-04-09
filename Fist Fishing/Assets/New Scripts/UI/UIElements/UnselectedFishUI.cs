@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// updater for fish not currently selected
+/// </summary>
 public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
 {
 
@@ -29,10 +32,10 @@ public class UnselectedFishUI : CoreUIElement<FishCombatInfo>
         ProgressBar.UpdateTracker(newData.FishInstance.Health.PercentTracker);
         EnemyNameDisplay.ForceUpdate(newData.FishInstance.FishData.Item.Name);
         EnemyIconDisplay.ForceUpdate(newData.FishInstance.FishData.IconDisplay);
-        EnemyAction.ForceUpdate(newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) ? 1 : 0);
+        EnemyAction.ForceUpdate(newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive) ? 1 : 0);
         EnemyTypeImageDisplay.ForceUpdate(
             newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Passive) ? 0 :
-                        newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Agressive) ? 1 : 2);
+                        newData.FishInstance.FishData.FishClassification.HasFlag(FishBrain.FishClassification.Aggressive) ? 1 : 2);
     }
 }
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// updater for images with int tracker
+/// </summary>
 [System.Serializable]
 public class IntImageUpdater : CoreUIUpdater<IntTracker, Image, int>
 {

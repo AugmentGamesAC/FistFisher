@@ -11,7 +11,7 @@ public class NoiseTracker : StatTracker
 {
     public NoiseTracker(float startingAmount)
     {
-        m_currentAmount = startingAmount;
+        //m_currentAmount = startingAmount;
     }
 
     public NoiseTracker() { }

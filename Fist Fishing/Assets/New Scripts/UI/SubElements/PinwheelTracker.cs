@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// tracker for pinwheels
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class PinwheelTracker<T> : UITracker<IPinWheel<T>>, IPinWheel<T>
 {
@@ -38,7 +42,7 @@ public class PinwheelTracker<T> : UITracker<IPinWheel<T>>, IPinWheel<T>
     public T SetSelectedOption(int index)
     {
         T returnVal = m_value.SetSelectedOption(index);
-        if (returnVal != default)
+        if (returnVal != null)
             UpdateState();
         return returnVal;
     }

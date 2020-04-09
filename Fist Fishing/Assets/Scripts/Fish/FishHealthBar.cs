@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// visible health bar for fish
+/// interacts with a health module
+/// </summary>
 public class FishHealthBar : MonoBehaviour
 {
     private HealthModule m_healthModule;

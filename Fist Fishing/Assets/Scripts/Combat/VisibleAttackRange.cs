@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// when combat was going to be in-world, this was going to be a way to show attack ranges for the player
+/// </summary>
 public class VisibleAttackRange : MonoBehaviour
 {
     public Shoulder m_currentShoulder;

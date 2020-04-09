@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// handles visual part of inventory and mouse interactions
+/// </summary>
 public class DisplayInventory : MonoBehaviour
 {
     //item that follows after you click.
@@ -183,11 +186,6 @@ public class DisplayInventory : MonoBehaviour
 
     void OnGUI()
     {
-        //if (m_playerInventory != null)
-        //{
-        //    Vector2 boxpos = new Vector2(325, 100);
-        //    GUI.Label(new Rect(boxpos.x, boxpos.y, 200, 200), m_playerInventory.CurrentCurrency.ToString("n0"));
-        //}
 
         if (!this.gameObject.activeSelf)
             return;
@@ -206,6 +204,18 @@ public class DisplayInventory : MonoBehaviour
         GUI.Box(new Rect(DescriptionBoxPos.x, DescriptionBoxPos.y, 250, 250), "Description");
 
         GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), m_mouseItem.hoverSlot.m_item.description);
+
+    }
+    public void CreateDescBox(Vector2 startingPos, Vector2 textOffset, string detailedDescription )
+    {
+        //create position Vector2 for box.
+
+        //create offset that is Vector2 + offset for Label position.
+        Vector2 DescriptionTextPos = startingPos + textOffset;
+        // Make a background box
+        GUI.Box(new Rect(startingPos.x, startingPos.y, 250, 250), "Description");
+
+        GUI.Label(new Rect(DescriptionTextPos.x, DescriptionTextPos.y, 200, 200), detailedDescription);
     }
 }
 

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// combat data for fish
+/// </summary>
 [System.Serializable]
 public class FishCombatInfo : CombatInfo
 {
@@ -25,8 +28,8 @@ public class FishCombatInfo : CombatInfo
     {
         m_fish = fish;
         Speed.SetValue(fish.FishData.CombatSpeed);
-        CombatDistance.SetValue(0);
-        Direction.SetValue(fish.FishData.FishClassification == FishBrain.FishClassification.Agressive ? 1 : -1);
+        CombatDistance.SetValue(15);
+        Direction.SetValue(fish.FishData.FishClassification == FishBrain.FishClassification.Aggressive ? 1 : -1);
     }
 
     /// <summary>
@@ -43,5 +46,15 @@ public class FishCombatInfo : CombatInfo
     public void ResetMoveSpeed()
     {
         Speed.SetValue(m_fish.FishData.CombatSpeed);
+    }
+    /// <summary>
+    /// Changes the fish's direction
+    /// </summary>
+    /// <param name="direction">Either 1 or -1 </param>
+    public void ChangeDirection(int direction)
+    {
+        if (direction == -1 || direction == 1)
+             Direction.SetValue(direction);
+        return;
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
 using UnityEngine;
+
+/// <summary>
+/// class for all things percentagy
+/// </summary>
 [Serializable]
 public class Percentage : IPercentage
 {
     [SerializeField]
-    protected float m_max;
-    public float Max => m_max;
+    protected StatTracker m_max = new StatTracker();
+    public StatTracker Max => m_max;
     [SerializeField]
     protected float m_current;
     public float Current => m_current;
@@ -28,12 +32,15 @@ public class Percentage : IPercentage
         SetCurrent(m_current + increment);
     }
 
-    public void SetMax(float max)
+    public void SetMax(StatTracker newMax)
     {
-        m_max = max;
+        m_max = newMax;
         updatePercentage();
     }
 
-
-
+    public void SetMax(float max)
+    {
+        m_max.SetValue(max);
+        updatePercentage();
+    }
 }

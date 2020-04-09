@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// specific pinwheel updater for combat moves
+/// </summary>
 [RequireComponent(typeof(SelectedMoveUI))]
 public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
 {
@@ -24,8 +27,10 @@ public class AttackPinwheelUpdater : PinwheelUpdater<CombatMoveInfo>
     {
         if (index < 1 || index > m_tabs.Count)
             return;
-       
-        m_tracker.SetSelectedOption(index);
+        if (m_tracker == null)
+            Debug.Log("Tracker not set");
+        else
+            m_tracker.SetSelectedOption(index);
     }
 
 

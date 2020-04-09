@@ -24,15 +24,9 @@ public class TestingCombatManager : CombatManager
 
     private void Start()
     {
-        //List<CombatMoveInfo> moves = new List<CombatMoveInfo>
-        //{
-        //    new CombatMoveInfo(10, 0.5f, 30, 2, 25),
-        //    new CombatMoveInfo(5, 0, 2, 3, 12),
-        //    new CombatMoveInfo(45, 0, 0, 10, 10)
-        //};
-
-        //m_playerCombatInfo.m_attackPinwheel = new PinwheelTracker<CombatMoveInfo>(1, moves);
         m_playerCombatInfo = new PlayerCombatInfo(ScriptablePlayerMoves);
+        if (m_playerCombatInfo == null)
+            throw new System.InvalidOperationException();
 
         m_attackPinwheelUpdater = GetComponentInChildren<AttackPinwheelUpdater>();
 
@@ -43,7 +37,6 @@ public class TestingCombatManager : CombatManager
         m_playerCombatInfo.m_attackPinwheel.SetSelectedOption(1);
 
        m_showThemALl.UpdateTracker(m_FishSelection);
-       // m_lessshowyFish.UpdateUI(default);
     }
 
     [ContextMenu("CombatYeast/Player Started F5 Fish battle")]
@@ -60,9 +53,9 @@ public class TestingCombatManager : CombatManager
     public void newFishF7False() { AddFishTest(m_f7Fish ); }
 
 
-    protected void AddFishTest(FishDefintion fish)
-    {
-        ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
+    protected void AddFishTest(FishDefintion fish)
+    {
+        //ResolveAddFish(new FishCombatInfo(new FishInstance(fish)));
     }
 
     protected void StartCombatTest(IEnumerable<FishDefintion> fishDefs, bool wasPlayer)
@@ -70,7 +63,7 @@ public class TestingCombatManager : CombatManager
         NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
 
 
-        base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
+        //base.StartCombat(wasPlayer, fishDefs.Select(X => new FishInstance(X)) );
     }
 
 
@@ -94,9 +87,5 @@ public class TestingCombatManager : CombatManager
 
         if (NewMenuManager.CurrentMenu != MenuScreens.Combat)
             return;
-
-        //if ((ALInput.GetKeyDown(ALInput.Punch)))
-        //    PlayerAttack();
     }
-    // m_fishInCombatInfo[0].TakeDamage(10);
 }

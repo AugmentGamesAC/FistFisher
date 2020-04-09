@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// our first-person camera behaviour 
+/// </summary>
 [System.Serializable]
-public class FirstPersonCameraBehaviour : CameraBehavoir
+public class FirstPersonCameraBehaviour : CameraBehavior
 {
     //Same as Warthog but the cameraPoint Distance is right in front of followObject(Set in the inspector)
     //camera also does not need to take input, but only needs to looktowards lookatpoint if camera is at 0 distance.

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// health tracker for fishes
+/// </summary>
 [System.Serializable]
 public class FishHealth
 {
     public FishHealth(float max)
     {
-        m_percTracker = new PercentageTracker(max);
+        m_percTracker = new PercentageTracker(new StatTracker(max));
         ResetCurrentAmount();
     }
 
@@ -16,6 +19,9 @@ public class FishHealth
 
     protected PercentageTracker m_percTracker;
     public PercentageTracker PercentTracker => m_percTracker;
+
+
+    public event Death OnMinimumHealthReached;
 
     /// <summary>
     /// Can consider FishHealth as a float with this.
@@ -30,6 +36,9 @@ public class FishHealth
     public void Change(float changeAmount)
     {
         m_percTracker.IncrementCurrent(changeAmount);
+
+        if (CurrentAmount <= 0)
+            OnMinimumHealthReached?.Invoke();
     }
 
     public void ResetCurrentAmount()

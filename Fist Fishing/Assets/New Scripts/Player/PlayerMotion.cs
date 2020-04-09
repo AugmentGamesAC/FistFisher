@@ -4,20 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 /// <summary>
-/// this class appears to be a placeholder to store a float value and get it.
-/// thing replacing this has more functionality that gives reason for it to exist
-/// </summary>
-public class statclassPlaceholder
-{
-    public float Value = 30;
-    public static implicit operator float(statclassPlaceholder reference)
-    {
-        return reference.Value;
-    }
-}
-/// <summary>
-/// Camera manager is to have a list of behaviors
-/// we are using input controls to switch states
+/// player movement and camera interactions
 /// </summary>
 [System.Serializable]
 public class PlayerMotion : MonoBehaviour
@@ -36,11 +23,16 @@ public class PlayerMotion : MonoBehaviour
     [SerializeField]
     protected FishInstance m_closestFish;
 
-    protected statclassPlaceholder turningSpeedRef = new statclassPlaceholder();
-    protected statclassPlaceholder movementSpeedRef = new statclassPlaceholder();
+    [SerializeField]
+    protected StatTracker m_turningSpeedRef;
+    public StatTracker TurnSpeed => m_turningSpeedRef;
+    [SerializeField]
+    protected StatTracker m_movementSpeedRef;
+    public StatTracker MoveSpeed => m_movementSpeedRef;
 
     protected Dictionary<CameraManager.CameraState, System.Action> m_movementResoultion;
 
+    protected bool m_displayInventory;
 
     /// <summary>
     /// gets the camera manager on the main camera, then sets up a dictionary of all the possible camera states paired to movement resolution functions
@@ -50,12 +42,14 @@ public class PlayerMotion : MonoBehaviour
         m_vision = Camera.main.GetComponent<CameraManager>();
         m_movementResoultion = new Dictionary<CameraManager.CameraState, System.Action>()
         {
-           {CameraManager.CameraState.Abzu, AbzuMovement },
+           //{CameraManager.CameraState.Abzu, AbzuMovement },
            {CameraManager.CameraState.FirstPerson, FirstPersonMovement },
-           {CameraManager.CameraState.Locked, LockedMovement },
+           //{CameraManager.CameraState.Locked, LockedMovement },
            {CameraManager.CameraState.Warthog, WarthogMovement },
         };
-        turningSpeedRef.Value = 180.0f;
+        m_turningSpeedRef.SetValue(180.0f);
+
+        PlayerInstance.RegisterPlayerMotion(this);
     }
     /// <summary>
     /// creates a system.action (essentiually function with no in/out - funct ptr) 
@@ -74,61 +68,44 @@ public class PlayerMotion : MonoBehaviour
         MoveResolution();
     }
 
-
     public void Update()
     {
         if (!m_CanMove)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.ToggleInventory))
+        if (ALInput.GetKeyDown(ALInput.Inventory))
             ToggleInventoryDisplay();
 
-        if (ALInput.GetKeyDown(ALInput.Punch))
+        if (ALInput.GetKeyDown(ALInput.AltAction))
         {
             List<FishInstance> resultingFish = SurroundingFish;
             if (resultingFish.Count == 0)
                 return;
             m_CanMove = false;
-            NewMenuManager.DisplayMenuScreen(MenuScreens.Combat);
             CombatManager.Instance.StartCombat(true, resultingFish, this);
         }
     }
 
-    protected bool m_displayInventory;
+    public void SetMoveSpeedTracker(StatTracker tracker)
+    {
+        m_movementSpeedRef = tracker;
+    }
+
+    public void SetTurnSpeedTracker(StatTracker tracker)
+    {
+        m_turningSpeedRef = tracker;
+    }
 
     protected void ToggleInventoryDisplay()
     {
         m_displayInventory = !m_displayInventory;
         SwapUI();
     }
+
     protected void SwapUI()
     {
         MenuScreens desiredMenu = (m_displayInventory) ? MenuScreens.SwimmingInventory : MenuScreens.NormalHUD;
         NewMenuManager.DisplayMenuScreen(desiredMenu);
-    }
-    protected void AbzuMovement()
-    {
-        Vector3 desiredDirection = new Vector3
-        (
-             ((ALInput.GetKey(ALInput.Descend) ? 1 : 0) - (ALInput.GetKey(ALInput.Ascend) ? 1 : 0)),
-            ((ALInput.GetKey(ALInput.GoRight) ? 1 : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 1 : 0)),
-            0
-        ) * turningSpeedRef * Time.deltaTime;
-
-
-        if (desiredDirection.sqrMagnitude > 0.000001)
-            transform.Rotate(desiredDirection, Space.Self);
-
-        //motion
-        transform.position += transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 1 : 0));
-    }
-    protected void LockedMovement()
-    {
-        if (!ALInput.GetKey(ALInput.ManualCamera))
-            ResolveSwimRotation();
-
-        if (ALInput.GetKey(ALInput.Forward))
-            transform.position += transform.forward * Time.deltaTime * movementSpeedRef;
     }
 
     protected void WarthogMovement()
@@ -147,33 +124,26 @@ public class PlayerMotion : MonoBehaviour
         XZDirectional();
     }
 
-
     protected void XZDirectional()
     {
-        //Forward movement
-        Vector3 desiredMovement = transform.forward * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Forward) ? 1 : 0) - (ALInput.GetKey(ALInput.Backward) ? 0.2f : 0));
-
-        //Left Right
-        desiredMovement += transform.right * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.GoRight) ? 0.2f : 0) - (ALInput.GetKey(ALInput.GoLeft) ? 0.2f : 0));
-
-        //ascend descend.
-        desiredMovement += Vector3.up * Time.deltaTime * movementSpeedRef * ((ALInput.GetKey(ALInput.Ascend) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Descend) ? 0.5f : 0));
+        Vector3 desiredMovement;
+        //Move forward
+        desiredMovement = transform.forward * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetAxis(ALInput.AxisType.MoveVertical) > 0 ? 1: 0) - (ALInput.GetAxis(ALInput.AxisType.MoveVertical) < 0 ? 0.2f : 0));
+        // Left Right
+        desiredMovement += transform.right * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) > 0 ? 0.4f : 0) - (ALInput.GetAxis(ALInput.AxisType.MoveHorizontal) < 0 ? 0.4f : 0));
+        // ascend descend Not setup on controller just yet.
+        desiredMovement += Vector3.up * Time.deltaTime * m_movementSpeedRef * ((ALInput.GetKey(ALInput.AltAction) ? 0.5f : 0) - (ALInput.GetKey(ALInput.Cancel) ? 0.5f : 0));
 
         //apply movement vector
+        if (!PlayerInstance.Instance.Oxygen.m_isUnderWater)
+            desiredMovement.y = Mathf.Min(0, desiredMovement.y);
 
         transform.position += desiredMovement;
     }
 
-
-
     void ResolveSwimRotation()
     {
-        Vector3 desiredDirection = new Vector3
-        (
-            ALInput.GetAxis(ALInput.AxisCode.MouseY),
-            ALInput.GetAxis(ALInput.AxisCode.MouseX),
-            0
-        ) * turningSpeedRef * Time.deltaTime;
+        Vector3 desiredDirection = ALInput.GetDirection(ALInput.DirectionCode.LookInput) * m_turningSpeedRef * Time.deltaTime;
 
         if (desiredDirection.sqrMagnitude > 0.000001)
             transform.Rotate(desiredDirection, Space.Self);

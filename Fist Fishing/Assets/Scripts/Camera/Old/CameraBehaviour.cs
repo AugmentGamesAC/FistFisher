@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// old camera code
+/// this is the base for all old camera behaviours 
+/// set base values, default behaviour for obstacles, abstract functions
+/// </summary>
 [System.Serializable]
 public abstract class CameraBehaviour
 {
@@ -22,7 +27,7 @@ public abstract class CameraBehaviour
         m_targetController = m_player.GetComponent<TargetController>();
 
         //this is important so you don't snap camera pos to player. Set these in inspector.
-        m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water");
+        m_raycastHitMask = ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly");
     }
 
     public virtual void Activate()

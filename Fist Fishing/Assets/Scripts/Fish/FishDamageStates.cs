@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// allows for a list of damaged states (models) and at which percentage value they change
+/// </summary>
 public class FishDamageStates : MonoBehaviour
 {
     public HealthModule m_healthModule;

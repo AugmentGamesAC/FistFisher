@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// rotatable points used to orbit around a target for camera position and focus
+/// </summary>
 [System.Serializable]
 public class OrbitPoint
 {

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// our third-person camera behaviour
+/// </summary>
 [System.Serializable]
-public class WarthogCameraBehaviour : CameraBehavoir
+public class WarthogCameraBehaviour : CameraBehavior
 {
     //Same as abzu but the camera rotates following object
     public WarthogCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) { }

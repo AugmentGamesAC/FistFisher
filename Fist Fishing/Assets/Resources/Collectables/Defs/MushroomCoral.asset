@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fd02ff7fbef0241a1382912537e7e4, type: 3}
+  m_Name: MushroomCoral
+  m_EditorClassIdentifier: 
+  m_BasicCollectable: {fileID: 0}
+  m_collectableItemData: {fileID: 0}
+  m_coralBudDefinition: {fileID: 11400000, guid: 8028496084823bd479b7fbde7d1d5ae7,
+    type: 2}
+  m_modelOfCoral: {fileID: 7196137854255828882, guid: 6bb09b18e256c9d45b773eb887fdc6cc,
+    type: 3}
+  m_timeBetweenBudSpawns: 20
+  m_materialOverride: {fileID: 0}
+  m_namedModelComponentsForLocationsToSpawnCoralBudsAt:
+  - SpawnPoint_01
+  - SpawnPoint_02
+  - SpawnPoint_03
+  - SpawnPoint_04
+  - SpawnPoint_05
+  - SpawnPoint_06
+  - SpawnPoint_07
+  - SpawnPoint_08
+  - SpawnPoint_09
+  - SpawnPoint_10
+  - SpawnPoint_11
+  - SpawnPoint_12

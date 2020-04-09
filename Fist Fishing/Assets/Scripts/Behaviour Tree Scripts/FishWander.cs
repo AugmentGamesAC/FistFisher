@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// basic behaviour for fish that picked a random valid position to swim to and did so
+/// </summary>
 public class FishWander : FishTask
 {
     public void Start()
@@ -22,13 +24,13 @@ public class FishWander : FishTask
 
     public void ChooseRandomLocation()
     {
-        BasicFish me = m_me.GetComponent<BasicFish>();
+        BasicFish2 me = m_me.GetComponent<BasicFish2>();
         if (me == default)
         {
             m_target.transform.position = Vector3.zero;
             return;
         }
 
-        m_target.transform.position = me.Spawner.transform.position + Random.insideUnitSphere * me.Spawner.m_spawnRadius;
+        m_target.transform.position = me.Defintion.FindNewSpot(me.Home);
     }
 }

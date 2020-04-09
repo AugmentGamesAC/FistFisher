@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class FishDefintion : ScriptableObject, IFishData, IItem
+/// <summary>
+/// base definition for all fish scriptable objects
+/// </summary>
+[CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
+public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
+    public Type SpawnableType => typeof(FishDefintion);
+    public String SpawnableName => m_name;
     #region IFishData
     public IItem Item => this;
     [SerializeField]
@@ -33,7 +40,7 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     #region IItem
 
     [SerializeField]
-    protected int m_stackSize; 
+    protected int m_stackSize;
     public int StackSize => m_stackSize;
     [SerializeField]
     protected int m_iD;
@@ -50,31 +57,55 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
     [SerializeField]
     protected string m_name;
     public string Name => m_name;
+
+    public float WeightedChance => throw new System.NotImplementedException();
+
+    public MeshCollider MeshOverRide => throw new System.NotImplementedException();
+
+    public bool CanMerge(IItem newItem)
+    {
+        return false;
+    }
     #endregion
 
     #region ModelReferences
+    /*[SerializeField]
+    protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected Mesh m_BaseModelRefence;
+    protected GameObject m_BasicFish;
     [SerializeField]
-    protected GameObject m_BasicFish; 
-    [SerializeField]
-    protected GameObject m_swimingHPDisplayRefence;
+    protected Material m_Skin;
+    public Material Skin => m_Skin;
+
+    //private GameObject m_thisObject = null;
     #endregion
 
-    public GameObject InstatiateFish()
+
+    public Vector3 FindNewSpot(MeshCollider m)
     {
-        GameObject FishRoot = ObjectPoolManager.Get(m_BasicFish);
-        CoreFish coreFish = FishRoot.GetComponent<CoreFish>();
-        coreFish.Init(this, this);
-        //TODO: set fishproperites NoteNewFishClass will need to set the required values and support the same interface
-        GameObject HPRoot = ObjectPoolManager.Get(m_swimingHPDisplayRefence);
-        HPRoot.transform.SetParent(FishRoot.transform);
+        Vector3 pos = m_BasicFish.transform.position;
+        var myRef = m_BasicFish.GetComponentInChildren<SkinnedMeshRenderer>();
+        float rad = myRef.bounds.size.x / 2.0f;
+        RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
-        //HPRoot.GetComponentInChildren<ProgressBarUpdater>().UpdateTracker(coreFish.Health.PercentTracker);
+        do
+        {
+            pos = BiomeInstance.FindValidPosition(m);
+        } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
+        return pos;
+    }
 
 
+    public GameObject Spawn(MeshCollider m)
+    {
+        if (m == null)
+            return null;
 
-        throw new System.NotImplementedException();
+        Vector3 pos = FindNewSpot(m);
+        BasicFish2 coreFish = ObjectPoolManager.Get(m_BasicFish, pos, Quaternion.identity).GetComponent<BasicFish2>();
+        coreFish.Init(this, m);
+
+        return coreFish.gameObject;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
@@ -84,5 +115,40 @@ public class FishDefintion : ScriptableObject, IFishData, IItem
         m_Description = "Funny not Found";
         m_worthInCurrency = 100;
         m_combatSpeed = 4;
+    }
+
+    public bool ResolveDropCase(ISlotData slot, ISlotData oldSlot)
+    {
+        if (!(slot.Manager is ShopSlotManager))
+            return false;
+        oldSlot.RemoveItem();
+        slot.RemoveItem();
+
+        return true;
+    }
+
+    public GameObject Instantiate(MeshCollider m)
+    {
+        GameObject returnVal;
+
+        returnVal = Instantiate(m_BasicFish);
+
+        AttachParts(returnVal,m);
+        return returnVal;
+    }
+
+    public GameObject Instantiate(MeshCollider m,Vector3 position, Quaternion rotation)
+    {
+        GameObject returnVal;
+
+        returnVal = Instantiate(m_BasicFish, position, rotation);
+
+        AttachParts(returnVal,m);
+        return returnVal;
+    }
+
+    protected void AttachParts(GameObject newInstance, MeshCollider m)
+    {
+
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// used to apply to a sphere around player to apply influence to any fish within it
+/// </summary>
 public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehaviour
 {
     protected InfluenceFish m_influenceFish;
-    private Player m_player;
+    private PlayerMotion m_player;
     public Vector3 m_playerPosition;
     public Quaternion m_playerRotation;
 
@@ -17,7 +19,7 @@ public class FishReactingToPlayerSwimmingInAnAreaNearThemOrSomething : MonoBehav
         m_influenceFish = GetComponent<InfluenceFish>();
 
         if (m_player == null)
-            m_player = gameObject.GetComponentInChildren<Player>();
+            m_player = gameObject.GetComponent<PlayerMotion>();
         if (m_playerPosition == null)
             m_playerPosition = m_player.gameObject.transform.position;
     }

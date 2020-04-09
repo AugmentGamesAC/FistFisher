@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// holds all core gameplay data other than Combat Information.
+/// holds all core gameplay data for fish other than Combat Information.
 /// </summary>
 [System.Serializable]
 public class FishInstance
@@ -17,9 +17,14 @@ public class FishInstance
     protected FishHealth m_health;
     public FishHealth Health => m_health;
 
-    public FishInstance(FishDefintion fishDef)
+
+    protected Prompt m_fishPrompt;
+    public Prompt FishPrompt => m_fishPrompt;
+
+    public FishInstance(FishDefintion fishDef, Prompt prompt)
     {
         m_fishData = fishDef;
         m_health = new FishHealth(m_fishData.MaxHealth);
+        m_fishPrompt = prompt;
     }
 }

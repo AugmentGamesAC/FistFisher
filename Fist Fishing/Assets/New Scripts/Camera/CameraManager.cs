@@ -21,6 +21,9 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         FirstPerson,
     }
 
+    //For testing only
+    public bool m_controllerToggle = false;
+
     [SerializeField]
     protected GameObject FollowObject;
     [SerializeField]
@@ -30,27 +33,27 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
     public CameraState CurrentState { get { return _currentState; } }
 
     [SerializeField]
-    protected CameraBehavoir currentBehavoir;
+    protected CameraBehavior currentBehavior;
 
     [SerializeField]
-    protected CameraBehavoir m_abzu = new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    protected CameraBehavior m_abzu = new AbzuCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
     [SerializeField]
-    protected CameraBehavoir m_locked = new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    protected CameraBehavior m_locked = new LockedCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
     [SerializeField]
-    protected CameraBehavoir m_warthog = new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    protected CameraBehavior m_warthog = new WarthogCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
     [SerializeField]
-    protected CameraBehavoir m_firstPerson = new FirstPersonCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
+    protected CameraBehavior m_firstPerson = new FirstPersonCameraBehaviour(new OrbitPoint(0f, -90f, 10f, 180f, -180f, 180f, -180f), new OrbitPoint(0f, 110f, 10f, 180f, -180f, 360f, -360f));
 
 
-    Dictionary<CameraState, CameraBehavoir> StateHolder; 
+    Dictionary<CameraState, CameraBehavior> StateHolder; 
 
     public void OnBeforeSerialize()
     {
         SwitchState(_currentState);
     }
 
-    public Vector3 LookAtWorldTransform { get { return FollowObject.transform.position +  currentBehavoir.GetCameraLookatPos; } }
-    public Vector3 CameraPos { get { return FollowObject.transform.position + currentBehavoir.GetCameraPos; } }
+    public Vector3 LookAtWorldTransform { get { return FollowObject.transform.position +  currentBehavior.GetCameraLookatPos; } }
+    public Vector3 CameraPos { get { return FollowObject.transform.position + currentBehavior.GetCameraPos; } }
 
 
     protected void InitStateHolderIfNeeded()
@@ -59,7 +62,7 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
             return;
 
         //Setup Dictionary while setting their values
-        StateHolder = new Dictionary<CameraState, CameraBehavoir>()
+        StateHolder = new Dictionary<CameraState, CameraBehavior>()
         {
             {CameraState.Abzu, m_abzu.SetCamBehavObjects(FollowObject, CameraObject) },
             {CameraState.Locked, m_locked.SetCamBehavObjects(FollowObject, CameraObject) },
@@ -76,7 +79,7 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         InitStateHolderIfNeeded();
 
         _currentState = newState;
-        if (!StateHolder.TryGetValue(_currentState, out currentBehavoir))
+        if (!StateHolder.TryGetValue(_currentState, out currentBehavior))
             throw new System.InvalidOperationException("state not found in StateHolder ");
     }
 
@@ -98,21 +101,23 @@ public class CameraManager : MonoBehaviour, ISerializationCallbackReceiver
         else if (ALInput.GetKeyDown(ALInput.FirstPerson))
             SwitchState(CameraState.FirstPerson);*/
 
-        if (ALInput.GetKeyDown(ALInput.CameraSwap))
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            m_controllerToggle = !m_controllerToggle;
+
+        if (ALInput.GetKeyDown(ALInput.Toggle))
         {
             if (CurrentState == CameraState.FirstPerson)
                 SwitchState(CameraState.Warthog);
             else
                 SwitchState(CameraState.FirstPerson);
         }
-
-        Vector3 LookInputVec = ALInput.GetDirection(ALInput.DirectionCode.LookInput);//place holder
-
-        currentBehavoir.ResolveInput
-            (LookInputVec.x,
-            LookInputVec.y,
-            LookInputVec.x,
-           LookInputVec.y);
+        Vector2 lookInputVec = new Vector2(ALInput.GetAxis(ALInput.AxisType.LookHorizontal), ALInput.GetAxis(ALInput.AxisType.LookVertical));
+        
+        currentBehavior.ResolveInput
+            (lookInputVec.x,
+            lookInputVec.y,
+            lookInputVec.x,
+           lookInputVec.y);
     }
 
 }

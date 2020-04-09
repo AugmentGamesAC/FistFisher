@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// stores max and current health
+/// deals with regen and being damaged and a death event for <=0hp
+/// </summary>
 public class HealthModule : MonoBehaviour
 {
     [SerializeField]

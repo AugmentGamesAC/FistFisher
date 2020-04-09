@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// applied to water object
+/// tells us if player is in the water or not
+/// </summary>
 public class Water : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

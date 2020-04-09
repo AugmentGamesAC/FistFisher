@@ -11,6 +11,7 @@ public enum PondBehaviour
 }
 
 /// <summary>
+/// replaced with new biome code
 /// mamanges all contained spawners
 /// </summary>
 public class PondManager : MonoBehaviour

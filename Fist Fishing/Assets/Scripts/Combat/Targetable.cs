@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attached to anything that could be targetted to check if the player _could_ target them
+/// </summary>
 public class Targetable : MonoBehaviour
 {
     private Camera m_camera;

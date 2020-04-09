@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// unused camera mode
+/// used for testing various camera controls
+/// </summary>
 [System.Serializable]
-public class AbzuCameraBehaviour : CameraBehavoir
+public class AbzuCameraBehaviour : CameraBehavior
 {
     public AbzuCameraBehaviour(OrbitPoint lookAtPoint, OrbitPoint cameraPoint) : base(lookAtPoint, cameraPoint) {}
 

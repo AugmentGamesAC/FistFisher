@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UI updater for images
+/// </summary>
 public class ImageUpdater : CoreUIUpdater<ImageTracker, Image, Sprite>
 {
     protected override void UpdateState(Sprite value)

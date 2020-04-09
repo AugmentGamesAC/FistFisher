@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// obsolete controller class
+/// </summary>
 public class LayerBetweenGameAndALInput : MonoBehaviour
 {
 

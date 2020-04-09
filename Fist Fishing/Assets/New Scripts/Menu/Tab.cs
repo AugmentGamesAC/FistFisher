@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// allows for sub-menus to be accessed/toggled by clicking on button/tab within a tab manager on one menu
+/// </summary>
 [RequireComponent(typeof(Image))]
 public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {

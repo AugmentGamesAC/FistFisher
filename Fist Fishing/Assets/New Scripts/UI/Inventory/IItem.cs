@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// interface for all items
+/// </summary>
 public interface IItem
 {
     int StackSize { get; }
@@ -11,4 +14,13 @@ public interface IItem
     string Description { get; }
     Sprite IconDisplay { get; }
     string Name { get; }
+
+    bool CanMerge(IItem newItem);
+
+    /// <summary>
+    /// Handles resolution of the drop.
+    /// </summary>
+    /// <param name="slot"></param>
+    /// <returns>true when drop logic handled otherwise false.</returns>
+    bool ResolveDropCase(ISlotData newSlot, ISlotData oldSlot);
 }

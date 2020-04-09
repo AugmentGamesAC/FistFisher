@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// test code for newest menu manager setup
+/// </summary>
 public class TestMenuManager : NewMenuManager, ISerializationCallbackReceiver
 {
     [SerializeField]

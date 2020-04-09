@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UI Updater for all fist (selected or not)
+/// </summary>
 [RequireComponent(typeof(CoreUIElement<FishCombatInfo>))]
 public class AllFishUIUpdater : CoreUIUpdater<SingleSelectionListTracker<FishCombatInfo>, CoreUIElement<FishCombatInfo>, ISingleSelectionList<FishCombatInfo>>
 {

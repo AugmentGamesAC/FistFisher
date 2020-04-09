@@ -69,7 +69,11 @@ public enum MenuScreens
     /// </summary>
     MountBoat,
 
-    Combat
+    Combat,
+    /// <summary>
+    /// ItemPinwheel will not be called by the newmenumanger but is registered hear for conviences
+    /// </summary>
+    ItemPinwheel
 }
 
 /// <summary>
@@ -109,8 +113,6 @@ public class NewMenuManager : MonoBehaviour
             return Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
         }
     }
-
-    //Instance.m_menuConfigurations[Instance.m_currentSelectedMenu].Paused;
 
     #region singletonification
     /// <summary>
@@ -155,7 +157,7 @@ public class NewMenuManager : MonoBehaviour
     {
         foreach (var menuList in Instance.m_menuConfigurations)
             menuList.Value.ShowActive(false);
-
+        Instance.DisplayMenu(MenuScreens.NormalHUD);
         Instance.DisplayMenu(MenuScreens.MainMenu);
     }
 
@@ -164,7 +166,6 @@ public class NewMenuManager : MonoBehaviour
         //Don't change if argument is same as current.
         if (Instance.m_currentSelectedMenu == newMenu)
             return;
-
 
         MenuList resultList;
 
@@ -176,8 +177,9 @@ public class NewMenuManager : MonoBehaviour
 
         if (Instance.m_menuConfigurations.TryGetValue(Instance.m_currentSelectedMenu, out resultList))
             SetMenuListActiveState(resultList, true);
-    }
 
+        SwapMouseLock();
+    }
 
     /// <summary>
     /// Set the visibility of the menu items within a menu
@@ -192,5 +194,14 @@ public class NewMenuManager : MonoBehaviour
         list.ShowActive(activeState);
     }
 
+    protected void SwapMouseLock()
+    {
+        if(MouseActiveState)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
 
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }

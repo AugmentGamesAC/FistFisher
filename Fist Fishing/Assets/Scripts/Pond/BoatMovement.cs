@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// movement handler for when player is mounted to boat
+/// </summary>
 public class BoatMovement : MonoBehaviour
 {
     public Vector3 m_centerOfMass;

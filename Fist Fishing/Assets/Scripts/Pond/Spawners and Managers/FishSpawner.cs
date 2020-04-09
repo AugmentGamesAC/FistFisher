@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// replaced with new biome code
+/// handled spawning of fish prefabs within an aboct with this scipt applied
+/// </summary>
 public class FishSpawner : MonoBehaviour
 {
     public TargetController m_targetController; 

@@ -4,34 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// tracker for oxygen value 
+/// </summary>
 [System.Serializable]
-public class OxygenTracker 
+public class OxygenTracker
 {
-    public OxygenTracker(float max)
+    public OxygenTracker(StatTracker max)
     {
         m_oxy = new PercentageTracker(max);
         ResetOxygen();
         m_OxygenTickTimer = m_OxygenTickFrequency;
+
+
+        m_oxygenRegeneration = PlayerInstance.Instance.PlayerStatMan[Stats.AirRestoration];
+        m_oxygenConsumption = PlayerInstance.Instance.PlayerStatMan[Stats.AirConsumption];
+
+        MaxValue.OnChange += ResetOxygen;
     }
 
     [SerializeField]
     protected PercentageTracker m_oxy;
     public PercentageTracker Tracker => m_oxy;
 
-    public delegate void OnLowOxygenEvent();
+    [SerializeField]
+    public bool m_isUnderWater = false;
+    public bool IsUnderWater => m_isUnderWater;
+
+    public delegate void OnLowOxygenEvent(float change);
     public event OnLowOxygenEvent OnLowOxygen;
 
-    public float m_OxygenRegeneration = 20.0f;
-    public float m_OxygenDegeneration = 5.0f;
+    [SerializeField]
+    protected StatTracker m_oxygenRegeneration;
+    public StatTracker OxygenRegeneration => m_oxygenRegeneration;
+
+    [SerializeField]
+    protected StatTracker m_oxygenConsumption;
+    public StatTracker OxygenConsumption => m_oxygenConsumption;
+
     public float m_noOxygenDamage = 5.0f;
+
 
     public float m_OxygenTickFrequency = 1.0f;
     public float m_OxygenTickTimer = 0.0f;
 
-    public bool m_isUnderWater = false;
+    public StatTracker MaxValue => m_oxy.Max;
 
-
-    private void Update()
+    public void Update()
     {
         //don't update if game is paused
         if (NewMenuManager.PausedActiveState)
@@ -41,26 +60,24 @@ public class OxygenTracker
         if (m_OxygenTickTimer > 0)
             return;
 
-        ModifyOxygen(m_isUnderWater ? -m_OxygenDegeneration: m_OxygenRegeneration);
+        Change(m_isUnderWater ? -OxygenConsumption: m_oxygenRegeneration);
 
         m_OxygenTickTimer = m_OxygenTickFrequency;
-
-        NoOxygenCheck();
     }
 
-    public void ModifyOxygen(float changeAmount)
+    public void Change(float changeAmount)
     {
+        if (NoOxygenCheck(changeAmount))
+            return;
         m_oxy.IncrementCurrent(changeAmount);
     }
 
-
-    protected void NoOxygenCheck()
+    protected bool NoOxygenCheck(float change)
     {
-        if (m_oxy.Current > 0)
-            return;
-        //trigger anything that needs to happen when we have no oxygen. Make sure we subscribe this event to something before invoke().
-        if (OnLowOxygen != null)
-            OnLowOxygen.Invoke();
+        if (m_oxy.Current > 0 || !m_isUnderWater)
+            return false;
+        OnLowOxygen?.Invoke(change*2);
+        return true;
     }
 
     public void ResetOxygen()
@@ -68,4 +85,8 @@ public class OxygenTracker
         m_oxy.SetCurrent(m_oxy.Max);
     }
 
+    public void SetMax(float max)
+    {
+        m_oxy.SetMax(max);
+    }
 }

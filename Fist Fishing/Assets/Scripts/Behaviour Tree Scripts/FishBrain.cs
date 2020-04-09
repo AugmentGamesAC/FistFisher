@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// FishBrain 
+/// base for fish AI
 /// </summary>
 public class FishBrain : BehaviorTree
 {
@@ -15,11 +16,31 @@ public class FishBrain : BehaviorTree
     public enum FishClassification
     {
         Passive             = 0x000001,
-        Agressive           = 0x000002,
+        Aggressive          = 0x000002,
         Fearful             = 0x000004,    
         Player              = 0x000008,
+
+
+        FishMask = FishBrain.FishClassification.Aggressive | FishBrain.FishClassification.Fearful | FishBrain.FishClassification.Passive,
+
         BaitSensitive1      = 0x000100,
-        FavoredPlant1       = 0x010000
+        BaitSensitive2      = 0x000200,
+        BaitSensitive3      = 0x000400,
+        BaitSensitive4      = 0x000800,
+        IsBait              = BaitSensitive1 | BaitSensitive2 | BaitSensitive3 | BaitSensitive4,
+        BaitRepel1          = 0x001000,
+        BaitRepel2          = 0x002000,
+        BaitRepel3          = 0x004000,
+        BaitRepel4          = 0x008000,
+        IsRepellent         = BaitRepel1 | BaitRepel2 | BaitRepel3 | BaitRepel4,
+
+        RepellentStrength1  = 0x000010,
+        RepellentStrength2  = 0x000020,
+        RepellentStrength3  = 0x000040,
+        RepellentStrength4  = 0x000080,
+       
+
+        FavoredPlant1 = 0x010000
     }
 
     static public string TargetName  = "defaultGoal";
@@ -49,7 +70,7 @@ public class FishBrain : BehaviorTree
     public void ApplyImpulse(GameObject triggeringObject, float intensity, FishClassification FishType)
     {
         if (m_fishMood == default)
-            m_fishMood = (Dictionary < GameObject, FishReaction > ) GetValue(MoodName);
+            m_fishMood = (Dictionary <GameObject, FishReaction>) GetValue(MoodName);
 
         FishReaction reaction;
         if (m_fishMood.TryGetValue(triggeringObject, out reaction))
@@ -58,7 +79,7 @@ public class FishBrain : BehaviorTree
             return;
         }
 
-        m_fishMood[triggeringObject] = new FishReaction() {m_fishReconition = FishType,m_intensity = intensity };
+        m_fishMood[triggeringObject] = new FishReaction() {m_fishRecognition = FishType,m_intensity = intensity };
     }
 
 

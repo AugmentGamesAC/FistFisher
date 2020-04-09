@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
+/// <summary>
+/// Object pool manager code taken from class
+/// allows the creation and cleanup of object pools
+/// </summary>
 public class ObjectPoolManager : MonoBehaviour
 {
     static List<ObjectPool> m_Pools = new List<ObjectPool>();

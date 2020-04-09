@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// class for pinwheels to expand upon interface
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class PinWheel<T> : IPinWheel<T>
 {
     [SerializeField]
@@ -80,8 +84,13 @@ public class PinWheel<T> : IPinWheel<T>
         return false;
     }
 
-
-    public static int TwoDToSelection(float x, float y)
+    /// <summary>
+    /// 2 Axis selection with keyboard. WASD
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public static int TwoDToSelectionKeyboard(float x, float y)
     {
  
         if (x < 0)
