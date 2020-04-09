@@ -37,4 +37,6 @@ public class BasicFish2 : BasicFish, IDyingThing
         m_biome = biome;
         m_fishDef = fishDefinition;
     }
+
+    public new FishBrain.FishClassification FishClass { get { return m_fishDef.FishClassification; } }
 }
