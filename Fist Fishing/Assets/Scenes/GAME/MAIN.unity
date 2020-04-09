@@ -985,6 +985,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3568817683113631587, guid: f53f1ab8264ac254b9cf87793e344ffb, type: 3}
+--- !u!114 &514226140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8961425572736843716, guid: 0b4508e38bd3dba44825182aef372393,
+    type: 3}
+  m_PrefabInstance: {fileID: 7321673373289557121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d076fa43f48a85244a8c3a7c329c68cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &538206067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9349,6 +9361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 514226140}
+    - target: {fileID: 295394374414773983, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetGamma
       objectReference: {fileID: 0}
     - target: {fileID: 521221407055521263, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
@@ -9384,6 +9401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 514226140}
+    - target: {fileID: 3105584864846595238, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 5005335724762558819, guid: 4857ef58d29c63e45979bbfbd7d11a6c,
         type: 3}
