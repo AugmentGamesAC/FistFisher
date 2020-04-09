@@ -9,8 +9,8 @@ using System;
 [CreateAssetMenu(fileName = "New Fish Object", menuName = "Fish/Fish Definition")]
 public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 {
-    public Type SpawnableType => m_BaseModelReference.GetType();
-    public String SpawnableName => m_BaseModelReference.name;
+    public Type SpawnableType => typeof(FishDefintion);
+    public String SpawnableName => m_name;
     #region IFishData
     public IItem Item => this;
     [SerializeField]
@@ -72,24 +72,19 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     /*[SerializeField]
     protected Mesh m_BaseModelReference;*/
     [SerializeField]
-    protected GameObject m_BaseModelReference;
-    [SerializeField]
     protected GameObject m_BasicFish;
     [SerializeField]
     protected Material m_Skin;
     public Material Skin => m_Skin;
-    [SerializeField]
-    protected RuntimeAnimatorController m_AnimatorController;
-    public RuntimeAnimatorController AnimationController => m_AnimatorController;
 
     //private GameObject m_thisObject = null;
     #endregion
 
+
     public Vector3 FindNewSpot(MeshCollider m)
     {
-        Vector3 pos = m_BaseModelReference.transform.position;
-        var myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
-
+        Vector3 pos = m_BasicFish.transform.position;
+        var myRef = m_BasicFish.GetComponentInChildren<SkinnedMeshRenderer>();
         float rad = myRef.bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
@@ -100,16 +95,17 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return pos;
     }
 
+
     public GameObject Spawn(MeshCollider m)
     {
         if (m == null)
             return null;
 
         Vector3 pos = FindNewSpot(m);
+        BasicFish2 coreFish = ObjectPoolManager.Get(m_BasicFish, pos, Quaternion.identity).GetComponent<BasicFish2>();
+        coreFish.Init(this, m);
 
-        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, m, pos, Quaternion.identity);
-
-        return default;
+        return coreFish.gameObject;
     }
 
     public void ConfigFish(FishBrain.FishClassification classification)
@@ -153,10 +149,6 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
     protected void AttachParts(GameObject newInstance, MeshCollider m)
     {
-        newInstance.GetComponent<CoreFish>().Init(this, m);
-        newInstance.GetComponent<SkinnedMeshRenderer>().material = Skin;
-        var animationBlock = Instantiate(m_BaseModelReference, newInstance.transform);
-        Animator swimcontroler = animationBlock.GetComponent<Animator>();
-        swimcontroler.runtimeAnimatorController = m_AnimatorController;
+
     }
 }

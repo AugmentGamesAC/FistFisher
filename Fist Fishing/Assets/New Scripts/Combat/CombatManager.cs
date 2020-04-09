@@ -116,9 +116,9 @@ public class CombatManager : MonoBehaviour
         m_isItemActive = false;
 
         //Add listner to buttons
-        m_ActionButtons[0].onClick.AddListener(OpenPinwheel); //Button 0: Attack
-        m_ActionButtons[1].onClick.AddListener(OnClickItem); //Button 1: Item
-        m_ActionButtons[2].onClick.AddListener(PlayerFlee); //Button 2: Flee
+        //m_ActionButtons[0].onClick.AddListener(OpenPinwheel); //Button 0: Attack
+        //m_ActionButtons[1].onClick.AddListener(OnClickItem); //Button 1: Item
+        //m_ActionButtons[2].onClick.AddListener(PlayerFlee); //Button 2: Flee
 
         PlayerInstance.Instance.PromptManager.HideCurrentPrompt();
         //getDepending on biome, fill aggressive fish dictionary with different fishCombatInfo.
@@ -555,17 +555,17 @@ public class CombatManager : MonoBehaviour
             if (m_isItemActive)
                 m_isItemActive = m_Baititem.IsStillActive();
             //Set buttons interactables
-            m_ActionButtons[0].interactable = true;
-            m_ActionButtons[1].interactable = true;
-            m_ActionButtons[2].interactable = true;
+            //m_ActionButtons[0].interactable = true;
+            //m_ActionButtons[1].interactable = true;
+            //m_ActionButtons[2].interactable = true;
             return;
         }
 
         m_currentCombatState = CombatStates.AwaitingFishRound;
         //Remove buttons interactables
-        m_ActionButtons[0].interactable = false;
-        m_ActionButtons[1].interactable = false;
-        m_ActionButtons[2].interactable = false;
+        //m_ActionButtons[0].interactable = false;
+        //m_ActionButtons[1].interactable = false;
+        //m_ActionButtons[2].interactable = false;
 
         ResolveFishCombatant(nextCombatant as FishCombatInfo);
     }

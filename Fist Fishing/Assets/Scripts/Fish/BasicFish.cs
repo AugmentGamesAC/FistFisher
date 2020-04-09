@@ -49,7 +49,6 @@ public class BasicFish : MonoBehaviour
 
     //behaviour
     protected BehaviorTree m_behaviour;
-    protected HealthModule m_healthModule;
 
     [SerializeField]
     protected CombatPrompt promptPrefab;
@@ -58,7 +57,7 @@ public class BasicFish : MonoBehaviour
     void Start()
     {
         Prompt prompt = gameObject.AddComponent<CombatPrompt>();
-        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
+        prompt.Init(m_fishDef.IconDisplay, "Alt Action Button to Fight {0} Fish!", 1);
 
         m_fish = new FishInstance(m_fishDef, prompt);
         m_fish.Health.OnMinimumHealthReached += HandleDeath;
