@@ -138,6 +138,10 @@ public class BiomeInstance : MonoBehaviour
         m_biomeText.text = Definiton.Name;
         m_biomeText.gameObject.transform.position = v;
         m_biomeText.gameObject.transform.localScale = Vector3.one * Definiton.TextScale;
+        /*if(Definiton.TextRotation != Quaternion.identity)
+        {
+            m_biomeText.gameObject.transform.rotation = Definiton.TextRotation;
+        }*/
     }
 
     /// <summary>

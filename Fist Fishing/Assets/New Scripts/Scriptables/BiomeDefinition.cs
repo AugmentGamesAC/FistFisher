@@ -55,13 +55,17 @@ public class BiomeDefinition : ScriptableObject
     protected float m_textHeight;
     public float TextHeight => m_textHeight;
 
-    [SerializeField]
-    protected float m_textRotation;
-    public float TextRotation => m_textRotation;
 
     [SerializeField]
     protected GameObject m_baseTextTemplate;
     public GameObject BaseTextTemplate => m_baseTextTemplate;
+
+    /*[SerializeField]
+    protected Quaternion m_textRotation;
+    public Quaternion TextRotation => m_textRotation;
+
+    [SerializeField]
+    protected float nullforspacing;*/
     #endregion variables
     protected BiomeDefinition CloneSelf(string NewCloneName, BiomeDefinition biome)
     {
