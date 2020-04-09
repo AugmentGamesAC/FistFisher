@@ -208,7 +208,7 @@ public class UpgradeManager : MonoBehaviour
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
-            { Stats.MovementSpeed , MoveSpeedMod },
+            { Stats.MovementSpeed , MoveSpeedMod/3 },
             { Stats.Stealth, StealthMod },
             { Stats.TurnSpeed, TurnSpeedMod }
         };//MovementSpeed, stealth, turnSpeed
@@ -232,9 +232,9 @@ public class UpgradeManager : MonoBehaviour
 
         Dictionary<Stats, float> modifiers = new Dictionary<Stats, float>()
         {
-            { Stats.MaxAir , MaxAirMod },
-            { Stats.AirRestoration, AirRestoreMod },
-            { Stats.MaxHealth, MaxHealthMod }
+            { Stats.MaxAir , MaxAirMod/5 },
+            { Stats.AirRestoration, AirRestoreMod/3 },
+            { Stats.MaxHealth, MaxHealthMod/3 }
         };
 
         return new Upgrade(string.Format("{0} Iron Lungs", GetRarity(level)), TorsoIcon, TorsoUpgradeDescription, BaseTorsoWorth, modifiers);
@@ -262,6 +262,6 @@ public class UpgradeManager : MonoBehaviour
             totalCost += CostMultiplierPerLevel[modifier.Key]  * modifier.Value / StatMultiplierPerLevel[modifier.Key];
         }
 
-        return (int)(m_appliedUpgrades * totalCost * m_currentUpgradesCost);
+        return (int)(m_appliedUpgrades * totalCost * (m_currentUpgradesCost/10));
     }
 }
