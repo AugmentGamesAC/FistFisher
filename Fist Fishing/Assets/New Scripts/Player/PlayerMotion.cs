@@ -74,7 +74,7 @@ public class PlayerMotion : MonoBehaviour
         if (ALInput.GetKeyDown(ALInput.Inventory))
             ToggleInventoryDisplay();
 
-        if (ALInput.GetKeyDown(ALInput.AltAction))
+        if (ALInput.GetKeyDown(ALInput.AltAction) || ALInput.GetKeyDown(ALInput.MouseAction))
         {
             List<FishInstance> resultingFish = SurroundingFish;
             if (resultingFish.Count == 0)
