@@ -318,14 +318,19 @@ public class BiomeInstance : MonoBehaviour
     /// <returns></returns>
     protected bool SpawnFromWeightedList(IEnumerable<ISpawnable> list)
     {
+        Debug.Log(list + ": " + list.Count());
+        Debug.Log(m_MeshCollider);
         float rand = UnityEngine.Random.Range(0, 1.0f);
         foreach (ISpawnable possibbleSpawn in list)
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
                 GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
-                g.GetComponent<IDyingThing>().Death += () => { m_memberCount[list]--; };
+                Debug.Log(g);
                 g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
                 BottomAdjust(g, possibbleSpawn);
+                IDyingThing d = g.GetComponent<IDyingThing>();
+                if(d!=null)
+                    d.Death += () => { m_memberCount[list]--; };
                 return true;
             }
         return false;
@@ -360,10 +365,14 @@ public class BiomeInstance : MonoBehaviour
     /// <param name="bd"></param>
     protected void SpawnClutter()
     {
-        if (!(m_myInstructions.ClutterList.Count() > 0))
+        if (!(m_myInstructions.ClutterList.Count() > 0) || m_myInstructions.AmountOfClutterToSpawn == 0)
             return;
+        /*Debug.Log(m_myInstructions);
+        Debug.Log(m_myInstructions.ClutterList);
+        Debug.Log(m_memberCount[m_clutterProbSpawn]);*/
 
         m_memberCount[m_clutterProbSpawn] = (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+        //Debug.Log(m_memberCount[m_clutterProbSpawn]);
 
         while (m_memberCount[m_clutterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
         {
