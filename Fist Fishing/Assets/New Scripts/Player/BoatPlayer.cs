@@ -56,7 +56,7 @@ public class BoatPlayer : MonoBehaviour
         if (NewMenuManager.CurrentMenu == MenuScreens.MainMenu)
             return;
 
-        if (ALInput.GetKeyDown(ALInput.MountBoat)) //handle mounting
+        if (ALInput.GetKeyDown(ALInput.Action)) //handle mounting
             MountAction();
 
         if (m_validPlayer == default) // no player around no action
