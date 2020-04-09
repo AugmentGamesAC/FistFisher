@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: South of Start
   m_EditorClassIdentifier: 
   m_maximumNumberOfSpawns: 60
-  m_amountOfClutterToSpawn: 50
+  m_amountOfClutterToSpawn: 150
   m_clutter:
   - {fileID: 11400000, guid: 791c765afc4aaf447b333f22aa5a9524, type: 2}
   - {fileID: 11400000, guid: a876048ed0d84c34681723f68fd26757, type: 2}
@@ -27,9 +27,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ccaf1ef0506a754688b4ae61554b6b4, type: 2}
   - {fileID: 11400000, guid: 9a559c7e234e2404b8a091cdadc642b3, type: 2}
   m_name: Generic
-  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
-  m_timeBetweenSpawns: 2
-  m_textScale: 1
-  m_textHeight: 10
+  m_boatMapColourOverride: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
+  m_boatMapMaterial: {fileID: 2100000, guid: c352436412b1174458617ad828b1d6da, type: 2}
+  m_timeBetweenSpawns: 10
+  m_textScale: 2
+  m_textHeight: 50
   m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
     type: 3}

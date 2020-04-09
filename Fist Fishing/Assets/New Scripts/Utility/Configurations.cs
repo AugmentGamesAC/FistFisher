@@ -52,7 +52,18 @@ public class Configurations : MonoBehaviour
     protected bool m_invertXAxis;
     [SerializeField]
     protected bool m_invertYAxis;
-
+    [SerializeField]
+    protected bool m_turnOffBiomeClutterEntirely;
+    public bool TurnOffBiomeClutterEntirely => m_turnOffBiomeClutterEntirely;
+    [SerializeField]
+    protected bool m_turnOffBiomeFishEntirely;
+    public bool TurnOffBiomeFishEntirely => m_turnOffBiomeFishEntirely;
+    [SerializeField]
+    protected bool m_turnOffBiomeCollectablesEntirely;
+    public bool TurnOffBiomeCollectablesEntirely => m_turnOffBiomeCollectablesEntirely;
+    [SerializeField]
+    protected bool m_turnOffBiomeSpawningEntirely;
+    public bool TurnOffBiomeSpawningEntirely => m_turnOffBiomeSpawningEntirely;
 
 
     /******************************************************************************************************************************************/

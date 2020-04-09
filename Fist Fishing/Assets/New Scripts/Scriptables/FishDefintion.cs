@@ -103,6 +103,8 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
 
         Vector3 pos = FindNewSpot(m);
         BasicFish2 coreFish = ObjectPoolManager.Get(m_BasicFish, pos, Quaternion.identity).GetComponent<BasicFish2>();
+        if (coreFish == null)
+            Debug.LogError(pos + " " + m + " " + m_BasicFish);
         coreFish.Init(this, m);
 
         return coreFish.gameObject;

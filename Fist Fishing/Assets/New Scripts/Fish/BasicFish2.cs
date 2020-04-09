@@ -34,6 +34,8 @@ public class BasicFish2 : BasicFish, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider biome)
     {
+        m_fishDef = fishDefinition;
+
         Prompt prompt = gameObject.AddComponent<CombatPrompt>();
         prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
 
@@ -42,7 +44,6 @@ public class BasicFish2 : BasicFish, IDyingThing
         //TODO: clean
         m_behaviour = GetComponent<BehaviorTree>();
         m_biome = biome;
-        m_fishDef = fishDefinition;
     }
 
     public new FishBrain.FishClassification FishClass { get { return m_fishDef.FishClassification; } }

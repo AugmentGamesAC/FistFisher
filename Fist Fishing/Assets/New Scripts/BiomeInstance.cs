@@ -71,7 +71,7 @@ public class BiomeInstance : MonoBehaviour
         };
         //Debug.Log(m_myInstructions.AggressiveFishList.Count);
         if ((m_myInstructions.ClutterList.Count > 0))
-            SpawnClutter();
+           StartCoroutine(SpawnClutter());
         SpawnText();
         ResolveBiomeMeshRendering();
 
@@ -83,6 +83,8 @@ public class BiomeInstance : MonoBehaviour
             m_areThereAnyFish = true;
         if (m_areThereAnyFish)
             m_totalFishCount = m_myInstructions.AggressiveFishList.Count + m_myInstructions.MehFishList.Count + m_myInstructions.PreyFishList.Count;
+
+        Debug.Log(m_myInstructions.Name + ": Fish: " + m_areThereAnyFish + " - Collectables: " + m_areThereAnyCollectables);
     }
 
     /// <summary>
@@ -103,26 +105,51 @@ public class BiomeInstance : MonoBehaviour
         {
             r = gameObject.AddComponent<MeshRenderer>();
 
-            GameObject p = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            p.SetActive(false);
-            Material mat = p.GetComponent<MeshRenderer>().sharedMaterial;
-            DestroyImmediate(p);
-            r.material = mat;
+            if (Definiton.BoatMapMaterial == null)
+            {
+                GameObject p = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                p.SetActive(false);
+                Material mat = p.GetComponent<MeshRenderer>().sharedMaterial;
+                DestroyImmediate(p);
+                r.material = mat;
+            }
+            else
+            {
+                r.material = Definiton.BoatMapMaterial;
+            }
+        }
+        else
+        {
+            r.material = Definiton.BoatMapMaterial;
         }
         //r.material.color = Definiton.BoatMapColour;
-        r.material.SetColor("_BaseColor", Definiton.BoatMapColour); //please note for later. this was frustrating.
+        //r.material.SetColor("_BaseColor", Definiton.BoatMapColourOverride); //please note for later. this was frustrating.
 
         //snippet taken from https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
         //as setting transparency at runtime is a nightmare it seems
-        r.material.SetFloat("_Surface", 1.0f);
-        r.material.SetOverrideTag("RenderType", "Transparent");
-        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
-        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-        r.material.SetInt("_ZWrite", 0);
-        r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-        r.material.SetShaderPassEnabled("ShadowCaster", false);
-
+        /*if (!Definiton.BoatMapOpaque)
+        {
+            r.material.SetFloat("_Surface", 1.0f);
+            r.material.SetOverrideTag("RenderType", "Transparent");
+            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
+            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            r.material.SetInt("_ZWrite", 0);
+            r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            r.material.SetShaderPassEnabled("ShadowCaster", false);
+        }
+        else
+        {
+            r.material.SetFloat("_Surface", 0.0f);
+            r.material.SetOverrideTag("RenderType", "");
+            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            r.material.SetInt("_ZWrite", 1);
+            r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            r.material.renderQueue = -1;
+            r.material.SetShaderPassEnabled("ShadowCaster", true);
+        }*/
+        r.enabled = true;
     }
 
     /// <summary>
@@ -138,6 +165,10 @@ public class BiomeInstance : MonoBehaviour
         m_biomeText.text = Definiton.Name;
         m_biomeText.gameObject.transform.position = v;
         m_biomeText.gameObject.transform.localScale = Vector3.one * Definiton.TextScale;
+        /*if(Definiton.TextRotation != Quaternion.identity)
+        {
+            m_biomeText.gameObject.transform.rotation = Definiton.TextRotation;
+        }*/
     }
 
     /// <summary>
@@ -145,6 +176,12 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     public void Update()
     {
+
+        if (NewMenuManager.PausedActiveState)
+            return;
+
+        if (Configurations.Instance.TurnOffBiomeSpawningEntirely)
+            return;
         //Debug.Log("Biome update: " + currentCooldown);
         if (currentCooldown < 0)
         {
@@ -284,27 +321,48 @@ public class BiomeInstance : MonoBehaviour
         if ((m_memberCount.Values.Sum() - m_memberCount[m_clutterProbSpawn]) >= m_myInstructions.MaxNumberOfSpawns) //it was counting clutter in spawns... not originally intended
             return;
 
-        Debug.Log(m_areThereAnyCollectables + " - " + m_areThereAnyFish);
+        //Debug.Log(m_areThereAnyCollectables + " - " + m_areThereAnyFish);
 
         if (m_areThereAnyCollectables && !m_areThereAnyFish) //only collectables
         {
-            m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            //Debug.Log("collectables");
+            if (!Configurations.Instance.TurnOffBiomeCollectablesEntirely)
+            { 
+                m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+                Debug.Log("collectables spawn attempt");
+            }
             return;
         }
 
         FishTypeToSpawn ft = DetermineFishTypeToSpawn();
         if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
         {
-            SpawnFishFromType(ft);
-            return;
+            //Debug.Log("fish");
+            if (!Configurations.Instance.TurnOffBiomeFishEntirely)
+            {
+                SpawnFishFromType(ft);
+                Debug.Log("fish spawn attempt");
+            }
+                return;
         }
 
         if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
         {
-            if(m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn]))
+            //Debug.Log("collectables+fish");
+            if (m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn])
+                && (!Configurations.Instance.TurnOffBiomeCollectablesEntirely))
+            {
+                Debug.Log("collectables spawn attempt");
                 m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            }
             else
-                SpawnFishFromType(ft);
+            {
+                if (!Configurations.Instance.TurnOffBiomeFishEntirely)
+                {
+                    Debug.Log("fish spawn attempt");
+                    SpawnFishFromType(ft);
+                }
+            }
             return;
         }
     }
@@ -318,14 +376,12 @@ public class BiomeInstance : MonoBehaviour
     /// <returns></returns>
     protected bool SpawnFromWeightedList(IEnumerable<ISpawnable> list)
     {
-        Debug.Log(list + ": " + list.Count());
-        Debug.Log(m_MeshCollider);
         float rand = UnityEngine.Random.Range(0, 1.0f);
         foreach (ISpawnable possibbleSpawn in list)
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
             {
                 GameObject g = possibbleSpawn.Spawn((possibbleSpawn.MeshOverRide == default) ? m_MeshCollider : possibbleSpawn.MeshOverRide);
-                Debug.Log(g);
+                //Debug.Log(g);
                 g.transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360.0f));
                 BottomAdjust(g, possibbleSpawn);
                 IDyingThing d = g.GetComponent<IDyingThing>();
@@ -363,10 +419,13 @@ public class BiomeInstance : MonoBehaviour
     /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
     /// </summary>
     /// <param name="bd"></param>
-    protected void SpawnClutter()
+    protected IEnumerator SpawnClutter()
     {
+        if (Configurations.Instance.TurnOffBiomeClutterEntirely)
+            yield return default;
+
         if (!(m_myInstructions.ClutterList.Count() > 0) || m_myInstructions.AmountOfClutterToSpawn == 0)
-            return;
+            yield return default;
         /*Debug.Log(m_myInstructions);
         Debug.Log(m_myInstructions.ClutterList);
         Debug.Log(m_memberCount[m_clutterProbSpawn]);*/
@@ -377,6 +436,7 @@ public class BiomeInstance : MonoBehaviour
         while (m_memberCount[m_clutterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
         {
             m_memberCount[m_clutterProbSpawn] += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -431,7 +491,10 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
-        return Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+        Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+
+        return (hit.point == Vector3.zero);
+
     }
 
     /// <summary>

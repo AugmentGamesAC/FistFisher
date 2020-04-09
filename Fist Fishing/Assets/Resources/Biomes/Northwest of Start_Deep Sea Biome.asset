@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Northwest of Start_Deep Sea Biome
   m_EditorClassIdentifier: 
   m_maximumNumberOfSpawns: 100
-  m_amountOfClutterToSpawn: 25
+  m_amountOfClutterToSpawn: 100
   m_clutter:
   - {fileID: 11400000, guid: ec7c5fcdc14ad6f44b7e2966a47b76dc, type: 2}
   - {fileID: 11400000, guid: 25411a58642c2ca43be0b1676e67baa6, type: 2}
@@ -28,9 +28,10 @@ MonoBehaviour:
   m_preyFish:
   - {fileID: 11400000, guid: 7a6ee5eb7d51d804d9925c911221c0cf, type: 2}
   m_name: Deep Sea
-  m_boatMapColour: {r: 0.5019608, g: 0, b: 0.5019608, a: 0}
-  m_timeBetweenSpawns: 2
-  m_textScale: 1
-  m_textHeight: 10
+  m_boatMapColourOverride: {r: 0.5019608, g: 0, b: 0.5019608, a: 0}
+  m_boatMapMaterial: {fileID: 2100000, guid: aab16de71e2b1af418fa7e438c731e85, type: 2}
+  m_timeBetweenSpawns: 10
+  m_textScale: 2
+  m_textHeight: 50
   m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
     type: 3}

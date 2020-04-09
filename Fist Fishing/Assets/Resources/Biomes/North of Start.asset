@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: North of Start
   m_EditorClassIdentifier: 
   m_maximumNumberOfSpawns: 40
-  m_amountOfClutterToSpawn: 20
+  m_amountOfClutterToSpawn: 80
   m_clutter:
   - {fileID: 11400000, guid: fda147b5e5fa471489cf14804718df37, type: 2}
   - {fileID: 11400000, guid: 8b2a3677455d4aa4eba8b613ae42fe41, type: 2}
@@ -24,9 +24,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf04e1da0dddd6a40b52d677bae71403, type: 2}
   - {fileID: 11400000, guid: 2e7548d213fa89c408d258c73180d805, type: 2}
   m_name: Generic
-  m_boatMapColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
-  m_timeBetweenSpawns: 2
-  m_textScale: 1
-  m_textHeight: 10
+  m_boatMapColourOverride: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
+  m_boatMapMaterial: {fileID: 2100000, guid: c352436412b1174458617ad828b1d6da, type: 2}
+  m_timeBetweenSpawns: 10
+  m_textScale: 2
+  m_textHeight: 50
   m_baseTextTemplate: {fileID: 5496551950212390330, guid: e9c8e4cfa5deada4f9c046d58b85ae41,
     type: 3}
