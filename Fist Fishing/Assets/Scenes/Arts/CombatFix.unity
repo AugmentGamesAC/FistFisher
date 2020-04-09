@@ -21030,7 +21030,7 @@ MonoBehaviour:
     m_value: {fileID: 21300000, guid: 67d121138464d2e40aa59064c535efd8, type: 3}
     SerializeInvokes: 0
   m_clams:
-    m_value: 50
+    m_value: 10000
     SerializeInvokes: 0
   m_playerStatManager:
     m_baseMaxHealth: 500
@@ -21072,14 +21072,14 @@ MonoBehaviour:
       m_questLine:
       - m_IsActive: 0
         m_tasksLeft:
-          m_value: 1
+          m_value: 4
           SerializeInvokes: 0
         m_def:
           m_icon:
             m_value: {fileID: 21300000, guid: 96202c234be17f649a03b622271bef3f, type: 3}
             SerializeInvokes: 0
           m_description:
-            m_value: find chicken
+            m_value: find a chicken
             SerializeInvokes: 0
           m_loot:
             m_fish: []
@@ -21092,14 +21092,14 @@ MonoBehaviour:
         m_itemType: {fileID: 11400000, guid: 1121a201c7a810240be7660c3d4546f6, type: 2}
       - m_IsActive: 0
         m_tasksLeft:
-          m_value: 2
+          m_value: 4
           SerializeInvokes: 0
         m_def:
           m_icon:
             m_value: {fileID: 21300000, guid: 083556c149d0d3b4fb257cd5b7f2fa6d, type: 3}
             SerializeInvokes: 0
           m_description:
-            m_value: find predator
+            m_value: find a shark
             SerializeInvokes: 0
           m_loot:
             m_fish: []
@@ -21110,19 +21110,39 @@ MonoBehaviour:
               SerializeInvokes: 0
           m_taskAmount: 2
         m_itemType: {fileID: 11400000, guid: 5f14130d82a381a45a25a564c58b9203, type: 2}
+      - m_IsActive: 0
+        m_tasksLeft:
+          m_value: 3
+          SerializeInvokes: 0
+        m_def:
+          m_icon:
+            m_value: {fileID: 21300000, guid: 581e00b0339ff1746bc56bf1bf80692d, type: 3}
+            SerializeInvokes: 0
+          m_description:
+            m_value: find an Angler
+            SerializeInvokes: 0
+          m_loot:
+            m_fish: []
+            m_baits: []
+            m_upgradeAmount: 0
+            m_clams:
+              m_value: 1500
+              SerializeInvokes: 0
+          m_taskAmount: 3
+        m_itemType: {fileID: 11400000, guid: c6ebb17d564d97b48b43082b393c3b73, type: 2}
       m_selectedQuestIndex: 0
     SerializeInvokes: 0
     m_questLine:
     - m_IsActive: 0
       m_tasksLeft:
-        m_value: 1
+        m_value: 4
         SerializeInvokes: 0
       m_def:
         m_icon:
           m_value: {fileID: 21300000, guid: 96202c234be17f649a03b622271bef3f, type: 3}
           SerializeInvokes: 0
         m_description:
-          m_value: find chicken
+          m_value: find a chicken
           SerializeInvokes: 0
         m_loot:
           m_fish: []
@@ -21142,17 +21162,37 @@ MonoBehaviour:
           m_value: {fileID: 21300000, guid: 083556c149d0d3b4fb257cd5b7f2fa6d, type: 3}
           SerializeInvokes: 0
         m_description:
-          m_value: find shark
+          m_value: find a shark
           SerializeInvokes: 0
         m_loot:
           m_fish: []
           m_baits: []
           m_upgradeAmount: 0
           m_clams:
-            m_value: 405
+            m_value: 1000
             SerializeInvokes: 0
         m_taskAmount: 1
       m_itemType: {fileID: 11400000, guid: 5f14130d82a381a45a25a564c58b9203, type: 2}
+    - m_IsActive: 0
+      m_tasksLeft:
+        m_value: 3
+        SerializeInvokes: 0
+      m_def:
+        m_icon:
+          m_value: {fileID: 21300000, guid: 581e00b0339ff1746bc56bf1bf80692d, type: 3}
+          SerializeInvokes: 0
+        m_description:
+          m_value: find an Angler
+          SerializeInvokes: 0
+        m_loot:
+          m_fish: []
+          m_baits: []
+          m_upgradeAmount: 0
+          m_clams:
+            m_value: 1500
+            SerializeInvokes: 0
+        m_taskAmount: 3
+      m_itemType: {fileID: 11400000, guid: c6ebb17d564d97b48b43082b393c3b73, type: 2}
     m_selectedQuestIndex: 0
 --- !u!114 &2055129974
 MonoBehaviour:
@@ -23917,8 +23957,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_priority: 1
-  m_display: {fileID: 21300000, guid: ce9cacfe8802fca43b18cc4421beb830, type: 3}
-  m_description: m for Mount {0}
+  m_display: {fileID: 21300000, guid: 94f6dac0328e40a4ab1019cfcc8be333, type: 3}
+  m_description: M for Mount {0}
 --- !u!1001 &7321673373289557121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24746,6 +24786,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -60.599976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434932034002702312, guid: a311b86e9bd622740902e2c1d36fe1d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649645138700293037, guid: a311b86e9bd622740902e2c1d36fe1d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a311b86e9bd622740902e2c1d36fe1d9, type: 3}
