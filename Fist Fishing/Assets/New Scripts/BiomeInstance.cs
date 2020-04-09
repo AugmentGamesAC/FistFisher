@@ -148,6 +148,9 @@ public class BiomeInstance : MonoBehaviour
 
         if (NewMenuManager.PausedActiveState)
             return;
+
+        if (Configurations.Instance.TurnOffBiomeSpawningEntirely)
+            return;
         //Debug.Log("Biome update: " + currentCooldown);
         if (currentCooldown < 0)
         {
@@ -321,8 +324,6 @@ public class BiomeInstance : MonoBehaviour
     /// <returns></returns>
     protected bool SpawnFromWeightedList(IEnumerable<ISpawnable> list)
     {
-        Debug.Log(list + ": " + list.Count());
-        Debug.Log(m_MeshCollider);
         float rand = UnityEngine.Random.Range(0, 1.0f);
         foreach (ISpawnable possibbleSpawn in list)
             if ((rand -= possibbleSpawn.WeightedChance) < 0)
@@ -368,6 +369,9 @@ public class BiomeInstance : MonoBehaviour
     /// <param name="bd"></param>
     protected IEnumerator SpawnClutter()
     {
+        if (Configurations.Instance.TurnOffBiomeClutterEntirely)
+            yield return default;
+
         if (!(m_myInstructions.ClutterList.Count() > 0) || m_myInstructions.AmountOfClutterToSpawn == 0)
             yield return default;
         /*Debug.Log(m_myInstructions);
