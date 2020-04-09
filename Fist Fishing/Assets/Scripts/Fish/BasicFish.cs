@@ -9,19 +9,6 @@ using UnityEngine;
 [System.Serializable]
 public class BasicFish : MonoBehaviour
 {
-    #region working inspector dictionary
-    /// <summary>
-    /// this is the mess required to make dictionaries with  list as a value work in inspector
-    /// used in this case to pair enum of menu enum with a list of menu objects
-    /// </summary>
-    [System.Serializable]
-    public class ListOfFishHitboxes : InspectorDictionary<Collider, float> { }
-    [SerializeField]
-    protected ListOfFishHitboxes m_fishHitboxList = new ListOfFishHitboxes();
-    public ListOfFishHitboxes FishHitboxList { get { return m_fishHitboxList; } }
-
-
-    #endregion working inspector dictionary
 
     [SerializeField]
     protected FishDefintion m_fishDef;
