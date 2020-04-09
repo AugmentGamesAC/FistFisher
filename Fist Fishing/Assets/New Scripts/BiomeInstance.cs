@@ -111,18 +111,27 @@ public class BiomeInstance : MonoBehaviour
         }
         //r.material.color = Definiton.BoatMapColour;
         r.material.SetColor("_BaseColor", Definiton.BoatMapColour); //please note for later. this was frustrating.
-        r.enabled = true;
+
         //snippet taken from https://answers.unity.com/questions/1608815/change-surface-type-with-lwrp.html
         //as setting transparency at runtime is a nightmare it seems
-        r.material.SetFloat("_Surface", 1.0f);
+        /*r.material.SetFloat("_Surface", 1.0f);
         r.material.SetOverrideTag("RenderType", "Transparent");
         r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
         r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
         r.material.SetInt("_ZWrite", 0);
         r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         r.material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-        r.material.SetShaderPassEnabled("ShadowCaster", false);
+        r.material.SetShaderPassEnabled("ShadowCaster", false);*/
+        r.material.SetFloat("_Surface", 0.0f);
+        r.material.SetOverrideTag("RenderType", "");
+        r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        r.material.SetInt("_ZWrite", 1);
+        r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        r.material.renderQueue = -1;
+        r.material.SetShaderPassEnabled("ShadowCaster", true);
 
+        r.enabled = true;
     }
 
     /// <summary>
@@ -456,8 +465,10 @@ public class BiomeInstance : MonoBehaviour
     /// </summary>
     public static bool SpherecastToEnsureItHasRoom(Vector3 pos, float radius, out RaycastHit hit)
     {
-        Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
-        return (hit.point == Vector3.zero);
+        Physics.SphereCast(pos, radius, Vector3.down, out hit, Mathf.Infinity, ~LayerMask.GetMask("Player", "Ignore Raycast", "Water", "BoatMapOnly"));
+
+        return (hit.point == Vector3.zero);
+
     }
 
     /// <summary>
