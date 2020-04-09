@@ -71,7 +71,7 @@ public class BiomeInstance : MonoBehaviour
         };
         //Debug.Log(m_myInstructions.AggressiveFishList.Count);
         if ((m_myInstructions.ClutterList.Count > 0))
-            SpawnClutter();
+           StartCoroutine(SpawnClutter());
         SpawnText();
         ResolveBiomeMeshRendering();
 
@@ -366,10 +366,10 @@ public class BiomeInstance : MonoBehaviour
     /// this takes the list of clutter and amount of clutter, and spawns random clutter of that quantity
     /// </summary>
     /// <param name="bd"></param>
-    protected void SpawnClutter()
+    protected IEnumerator SpawnClutter()
     {
         if (!(m_myInstructions.ClutterList.Count() > 0) || m_myInstructions.AmountOfClutterToSpawn == 0)
-            return;
+            yield return default;
         /*Debug.Log(m_myInstructions);
         Debug.Log(m_myInstructions.ClutterList);
         Debug.Log(m_memberCount[m_clutterProbSpawn]);*/
@@ -380,6 +380,7 @@ public class BiomeInstance : MonoBehaviour
         while (m_memberCount[m_clutterProbSpawn] < m_myInstructions.AmountOfClutterToSpawn)
         {
             m_memberCount[m_clutterProbSpawn] += (SpawnFromWeightedList(m_myInstructions.ClutterList)) ? 1 : 0;
+            yield return new WaitForEndOfFrame();
         }
     }
 
