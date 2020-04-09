@@ -17,13 +17,13 @@ public class BasicFish2 : BasicFish, IDyingThing
 
     void Start()
     {
-        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        /*Prompt prompt = gameObject.AddComponent<CombatPrompt>();
         prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
 
         m_fish = new FishInstance(m_fishDef, prompt);
         m_fish.Health.OnMinimumHealthReached += HandleDeath;
         //TODO: clean
-        m_behaviour = GetComponent<BehaviorTree>();
+        m_behaviour = GetComponent<BehaviorTree>();*/
     }
 
     public event Death Death
@@ -34,6 +34,13 @@ public class BasicFish2 : BasicFish, IDyingThing
 
     public void Init(FishDefintion fishDefinition, MeshCollider biome)
     {
+        Prompt prompt = gameObject.AddComponent<CombatPrompt>();
+        prompt.Init(m_fishDef.IconDisplay, "P to Fight {0} Fish!", 1);
+
+        m_fish = new FishInstance(m_fishDef, prompt);
+        m_fish.Health.OnMinimumHealthReached += HandleDeath;
+        //TODO: clean
+        m_behaviour = GetComponent<BehaviorTree>();
         m_biome = biome;
         m_fishDef = fishDefinition;
     }
