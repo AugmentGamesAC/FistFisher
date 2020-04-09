@@ -13332,8 +13332,9 @@ GameObject:
   - component: {fileID: 2123074267}
   - component: {fileID: 2123074266}
   - component: {fileID: 2123074265}
+  - component: {fileID: 2123074268}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: biometest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13360,7 +13361,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123074264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5157409b3f527c4d8a6bebf845d5726, type: 3}
   m_Name: 
@@ -13381,6 +13382,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123074268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123074264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd81dff072320e44a121887d8f31d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_myInstructions: {fileID: 11400000, guid: 57c37b2fe9b3f054b86e812bc812c7f3, type: 2}
+  m_showDebugSpawnCountMessages: 1
 --- !u!1001 &2126756914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15656,7 +15671,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.9000244
+      value: -6.899994
       objectReference: {fileID: 0}
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
