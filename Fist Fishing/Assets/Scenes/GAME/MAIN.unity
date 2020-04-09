@@ -3636,6 +3636,7 @@ GameObject:
   - component: {fileID: 1516281869}
   - component: {fileID: 1516281868}
   - component: {fileID: 1516281867}
+  - component: {fileID: 1516281870}
   m_Layer: 5
   m_Name: Minimap Image (1)
   m_TagString: Untagged
@@ -3716,6 +3717,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516281865}
   m_CullTransparentMesh: 0
+--- !u!225 &1516281870
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516281865}
+  m_Enabled: 1
+  m_Alpha: 0.5
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1521028148
 PrefabInstance:
   m_ObjectHideFlags: 0
