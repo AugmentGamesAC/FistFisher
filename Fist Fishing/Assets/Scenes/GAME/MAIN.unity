@@ -3136,11 +3136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1692238282, guid: e5badc9afc3d3884bac54a6d3c0f52f6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -37.99994
+      value: -38
       objectReference: {fileID: 0}
     - target: {fileID: 1692238282, guid: e5badc9afc3d3884bac54a6d3c0f52f6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.50006104
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1692238283, guid: e5badc9afc3d3884bac54a6d3c0f52f6, type: 3}
       propertyPath: m_Enabled
@@ -8054,7 +8054,7 @@ PrefabInstance:
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.9000854
+      value: -6.9001465
       objectReference: {fileID: 0}
     - target: {fileID: 5072303289950425719, guid: b7f3ba7d7af806a4ab86bd2bbd7f2005,
         type: 3}
@@ -8824,6 +8824,16 @@ PrefabInstance:
     - target: {fileID: 8961425572736843716, guid: 0b4508e38bd3dba44825182aef372393,
         type: 3}
       propertyPath: m_turnOffBiomeSpawningEntirely
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961425572736843716, guid: 0b4508e38bd3dba44825182aef372393,
+        type: 3}
+      propertyPath: m_turnOffBiomeFishEntirely
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961425572736843716, guid: 0b4508e38bd3dba44825182aef372393,
+        type: 3}
+      propertyPath: m_turnOffBiomeCollectablesEntirely
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

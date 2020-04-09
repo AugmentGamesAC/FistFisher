@@ -294,6 +294,8 @@ public class BiomeInstance : MonoBehaviour
 
         if (m_areThereAnyCollectables && !m_areThereAnyFish) //only collectables
         {
+            if (Configurations.Instance.TurnOffBiomeCollectablesEntirely)
+                return;
             m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
             return;
         }
@@ -301,16 +303,27 @@ public class BiomeInstance : MonoBehaviour
         FishTypeToSpawn ft = DetermineFishTypeToSpawn();
         if (!m_areThereAnyCollectables && m_areThereAnyFish) //only fish
         {
+
+            if (Configurations.Instance.TurnOffBiomeFishEntirely)
+                return;
             SpawnFishFromType(ft);
             return;
         }
 
         if (m_areThereAnyCollectables && m_areThereAnyFish) //both fish and collectables
         {
-            if(m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn]))
+            if (m_memberCount[m_collectablesProbSpawn] < (m_memberCount[m_mehProbSpawn] + m_memberCount[m_preyProbSpawn]))
+            {
+                if (Configurations.Instance.TurnOffBiomeCollectablesEntirely)
+                    return;
                 m_memberCount[m_collectablesProbSpawn] += (SpawnFromWeightedList(m_collectablesProbSpawn)) ? 1 : 0;
+            }
             else
+            {
+                if (Configurations.Instance.TurnOffBiomeFishEntirely)
+                    return;
                 SpawnFishFromType(ft);
+            }
             return;
         }
     }
