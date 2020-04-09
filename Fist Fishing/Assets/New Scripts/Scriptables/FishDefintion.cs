@@ -85,23 +85,29 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
     //private GameObject m_thisObject = null;
     #endregion
 
-
-
-    public GameObject Spawn(MeshCollider m)
+    public Vector3 FindNewSpot(MeshCollider m)
     {
-        if (m == null)
-            return null;
-
         Vector3 pos = m_BaseModelReference.transform.position;
-        float rad = m_BaseModelReference.GetComponent<Collider>().bounds.size.x / 2.0f;
+        var myRef = m_BaseModelReference.GetComponent<SkinnedMeshRenderer>();
+
+        float rad = myRef.bounds.size.x / 2.0f;
         RaycastHit hit; //ignored as FindValidPosition doesn't allow for overrides yet
 
         do
         {
             pos = BiomeInstance.FindValidPosition(m);
         } while (!BiomeInstance.SpherecastToEnsureItHasRoom(pos, rad, out hit));
+        return pos;
+    }
 
-        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, pos, Quaternion.identity);
+    public GameObject Spawn(MeshCollider m)
+    {
+        if (m == null)
+            return null;
+
+        Vector3 pos = FindNewSpot(m);
+
+        CoreFish coreFish = GenericPoolManager.Get<CoreFish>(this, m, pos, Quaternion.identity);
 
         return default;
     }
@@ -125,28 +131,29 @@ public class FishDefintion : ScriptableObject, IFishData, IItem, ISpawnable
         return true;
     }
 
-    public GameObject Instantiate()
+    public GameObject Instantiate(MeshCollider m)
     {
         GameObject returnVal;
 
         returnVal = Instantiate(m_BasicFish);
 
-        AttachParts(returnVal);
+        AttachParts(returnVal,m);
         return returnVal;
     }
 
-    public GameObject Instantiate(Vector3 position, Quaternion rotation)
+    public GameObject Instantiate(MeshCollider m,Vector3 position, Quaternion rotation)
     {
         GameObject returnVal;
 
         returnVal = Instantiate(m_BasicFish, position, rotation);
 
-        AttachParts(returnVal);
+        AttachParts(returnVal,m);
         return returnVal;
     }
 
-    protected void AttachParts(GameObject newInstance)
+    protected void AttachParts(GameObject newInstance, MeshCollider m)
     {
+        newInstance.GetComponent<CoreFish>().Init(this, m);
         newInstance.GetComponent<SkinnedMeshRenderer>().material = Skin;
         var animationBlock = Instantiate(m_BaseModelReference, newInstance.transform);
         Animator swimcontroler = animationBlock.GetComponent<Animator>();

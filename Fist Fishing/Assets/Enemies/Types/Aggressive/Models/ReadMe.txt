@@ -1,1 +1,0 @@
-This is an Art Folder. Details to follow.

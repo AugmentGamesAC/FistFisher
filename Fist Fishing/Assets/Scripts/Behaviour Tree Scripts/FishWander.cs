@@ -24,13 +24,13 @@ public class FishWander : FishTask
 
     public void ChooseRandomLocation()
     {
-        BasicFish me = m_me.GetComponent<BasicFish>();
+        CoreFish me = m_me.GetComponent<CoreFish>();
         if (me == default)
         {
             m_target.transform.position = Vector3.zero;
             return;
         }
 
-        m_target.transform.position = me.Spawner.transform.position + Random.insideUnitSphere * me.Spawner.m_spawnRadius;
+        m_target.transform.position = me.Defintion.FindNewSpot(me.Home);
     }
 }

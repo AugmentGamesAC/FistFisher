@@ -22,12 +22,12 @@ public class ClutterDefinition : ScriptableObject, ISpawnable
     protected GameObject m_BasicClutter;
     #endregion
 
-    public GameObject Instantiate()
+    public GameObject Instantiate(MeshCollider m)
     {
         throw new System.NotImplementedException();
     }
 
-    public GameObject Instantiate(Vector3 position, Quaternion rotation)
+    public GameObject Instantiate(MeshCollider m,Vector3 position, Quaternion rotation)
     {
         throw new System.NotImplementedException();
     }

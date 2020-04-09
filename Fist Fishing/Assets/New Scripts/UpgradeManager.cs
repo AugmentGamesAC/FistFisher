@@ -90,6 +90,11 @@ public class UpgradeManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
 
+        Init();
+    }
+
+    public void Init()
+    {
         m_currentUpgradesCost = BaseUpgradesCost;
 
         actionList = new List<Func<Upgrade>>()

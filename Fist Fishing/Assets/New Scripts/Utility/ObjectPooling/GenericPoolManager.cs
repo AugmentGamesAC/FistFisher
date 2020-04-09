@@ -87,10 +87,10 @@ public class GenericPoolManager : MonoBehaviour
         return objPool.GetObject<T>(prefab);
     }
 
-    public static T Get<T>(ISpawnable spawnable) where T: Component
+    public static T Get<T>(ISpawnable spawnable, MeshCollider m) where T: Component
     {
         GenericObjectPool objPool = GetPool(spawnable);
-        return objPool.GetSpawn<T>(spawnable);
+        return objPool.GetSpawn<T>(spawnable, m);
     }
 
     public static GameObject Get(GameObject prefab, Vector3 pos, Quaternion rot)
@@ -105,9 +105,9 @@ public class GenericPoolManager : MonoBehaviour
         return objPool.GetObject<T>(prefab, pos, rot);
     }
 
-    public static T Get<T>(ISpawnable prefab, Vector3 pos, Quaternion rot) where T : Component
+    public static T Get<T>(ISpawnable prefab,MeshCollider m, Vector3 pos, Quaternion rot) where T : Component
     {
         GenericObjectPool objPool = GetPool(prefab);
-        return objPool.GetSpawn<T>(prefab, pos, rot);
+        return objPool.GetSpawn<T>(prefab,m, pos, rot);
     }
 }

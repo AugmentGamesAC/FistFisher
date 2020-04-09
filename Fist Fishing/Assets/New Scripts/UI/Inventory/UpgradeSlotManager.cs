@@ -14,6 +14,8 @@ public class UpgradeSlotManager : RetangleSlotManager
         if (upgradeMaker == default)
             throw new System.Exception("UpgradeMaker was not found on this object!!");
 
+        upgradeMaker.Init();
+
         for (int i = 0; i < m_slotCount; i++)
         {
             var obj = Instantiate(m_inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
