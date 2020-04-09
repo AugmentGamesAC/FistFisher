@@ -38,7 +38,7 @@ public class PinwheelTracker<T> : UITracker<IPinWheel<T>>, IPinWheel<T>
     public T SetSelectedOption(int index)
     {
         T returnVal = m_value.SetSelectedOption(index);
-        if (returnVal != default)
+        if (returnVal != null)
             UpdateState();
         return returnVal;
     }
