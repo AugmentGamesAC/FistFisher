@@ -3,7 +3,9 @@
 ##### A Capstone Project for Algonquin College Game Development Program 2019-2020 Using Unity 2019.3.0f6
 
 
-###Credits/Team: 
+---------------  
+Credits/Team: 
+---------------  
 Jason Allen - Project Manager
 Brian Anderson - Programmer/Design Lead.
 Eric Krushelniski - Programming Lead/Writer.
