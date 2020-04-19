@@ -6,12 +6,12 @@
 ---------------  
 ##### Credits/Team: 
 ---------------  
-*Jason Allen - Project Manager.
-*Brian Anderson - Programmer/Design Lead.
-*Eric Krushelniski - Programming Lead/Writer.
-*Sam Paquette - Programmer/Sound Designer. 
-*Ben Allain - Blueprintist. 
-*Thomas Jarret - Artist Lead/Environmental Artist. 
-*Neal MacFarlane - 3D Modeler. 
-*Dan Polan - Concept Artist. 
-*Richard Leung - Level Designer. 
+* Jason Allen - Project Manager.
+* Brian Anderson - Programmer/Design Lead.
+* Eric Krushelniski - Programming Lead/Writer.
+* Sam Paquette - Programmer/Sound Designer. 
+* Ben Allain - Blueprintist. 
+* Thomas Jarret - Artist Lead/Environmental Artist. 
+* Neal MacFarlane - 3D Modeler. 
+* Dan Polan - Concept Artist. 
+* Richard Leung - Level Designer. 
